@@ -1,0 +1,32 @@
+
+```mermaid
+flowchart TD
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> games.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> players.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> plays.csv"]
+    A4["<img src='icons/file.svg' width=100 height=100/> <br/> week1.csv"]
+    A5["<img src='icons/file.svg' width=100 height=100/> <br/> targetedReceiver.csv"]
+    A6["<img src='icons/file.svg' width=100 height=100/> <br/> coverages_week1.csv"]
+
+    B1["<img src='icons/table.svg' width=100 height=100/> <br/> df_games"]
+    B2["<img src='icons/table.svg' width=100 height=100/> <br/> df_players"]
+    B3["<img src='icons/table.svg' width=100 height=100/> <br/> df_plays"]
+    B4["<img src='icons/table.svg' width=100 height=100/> <br/> df_week1"]
+    B5["<img src='icons/table.svg' width=100 height=100/> <br/> df_targets"]
+    B6["<img src='icons/table.svg' width=100 height=100/> <br/> df_covers"]
+    B7["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+    B8["<img src='icons/brain.svg' width=100 height=100/> <br/> z"]
+
+    A1 --> B1
+    A2 --> B2
+    A3 --> B3
+    A4 --> B4
+    A5 --> B5
+    A6 --> B6
+
+    B4 -->|Merge with| B7
+    B5 -->|df_targets used to| B7
+    B7 --> C["<img src='icons/brain.svg' width=100 height=100/> <br/> Random Forest Classifier Model"]
+    B8 --> C
+
+    C -->|Trained Features: xmod, y, z| D["<img src='icons/image.svg' width=100 height=100/> <br/> Predicted Results"]

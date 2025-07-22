@@ -1,0 +1,14 @@
+graph TD;
+    A["📁 Load Data <img src='file.svg'/> <br/> df = pd.read_csv('../input/train.csv')"] --> B["👀 Preview Data <img src='table.svg'/> <br/> df.head()"];
+    B --> C["🧹 Preprocess Data <img src='column_split.svg'/> <br/> Handle missing values, encode categorical features"];
+    C --> D["↕️ Train-Test Split <img src='row_split.svg'/> <br/> train, test = df[:700], df[700:]"];
+    D --> E["🔧 Prepare Data for Keras <img src='table.svg'/> <br/> train_keras, test_keras = prepare_data(train_X), prepare_data(test_X)"];
+    E --> F["🧠 Create Model <img src='brain.svg'/>"];
+    F --> G["🔍 Model Summary"];
+    G --> H["📝 Compile Model <img src='brain.svg'/>"];
+    H --> I["📊 Train Model <img src='brain.svg'/> <br/> model.fit()"];
+    I --> J["🔮 Predict Test Data <img src='brain.svg'/>"];
+    J --> K["📈 Evaluate Model <img src='brain.svg'/> <br/> mean_squared_error, accuracy_score"];
+    K --> L["🔄 Reload Weights <img src='brain.svg'/>"];
+    L --> M["🔮 Predict Again"];
+    M --> N["📈 Re-evaluate Model"];

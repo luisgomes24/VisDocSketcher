@@ -1,0 +1,111 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for prediction, including features like Pclass, Sex, Age, and the target label Survived."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for prediction, with similar features as the training set but missing the target label Survived."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame for training data after preprocessing."
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame for testing data after preprocessing."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Features extracted from df_train for training the models."
+    },
+    {
+      "variable_name": "Y_train",
+      "description": "Target variable (Survived) extracted from df_train."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Features extracted from df_test for making predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "Read from train.csv using pd.read_csv()",
+      "flow": "Used in model training and evaluation"
+    },
+    {
+      "variable": "df_test",
+      "creation": "Read from test.csv using pd.read_csv()",
+      "flow": "Used for prediction and submission"
+    },
+    {
+      "variable": "X_train",
+      "creation": "Dropped Survived from df_train",
+      "flow": "Input features for model training"
+    },
+    {
+      "variable": "Y_train",
+      "creation": "Extracted Survived column from df_train",
+      "flow": "Target variable for model training"
+    },
+    {
+      "variable": "X_test",
+      "creation": "Dropped PassengerId from df_test",
+      "flow": "Input features for making predictions"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Support Vector Classifier (SVC)",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "K-Nearest Neighbors (KNN)",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {"n_neighbors": 3}
+    },
+    {
+      "model_name": "Gaussian Naive Bayes",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Perceptron",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Stochastic Gradient Descent (SGD) Classifier",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Decision Tree Classifier",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {"n_estimators": 100}
+    }
+  ]
+}

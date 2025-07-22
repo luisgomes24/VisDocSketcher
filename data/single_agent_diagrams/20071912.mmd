@@ -1,0 +1,28 @@
+```
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🔍 Data Overview"];
+    B --> C["🧹 Data Preprocessing"];
+    C --> D["🚿 Drop Unnecessary Columns"];
+    C --> E["❌ Handle Missing Values"];
+    C --> F["📅 Feature Extraction"];
+    C --> G["🔀 Data Transformation"];
+    C --> H["📊 Distribution Check"];
+    C --> I["🔄 Log Transformation"];
+    C --> J["📦 Final dataset"];
+    
+    J --> K["📊 Visualization"];
+    K --> L["🕵️‍♂️ Correlation Heatmap <img src='dummy_plots/heatmap_template.svg' />"];
+    K --> M["📊 Monthly Barplot <img src='dummy_plots/barplot_template.svg' />"];
+    K --> N["📊 Daily Barplot <img src='dummy_plots/barplot_template.svg' />"];
+    
+    N --> O["🔁 Split Datasets"];
+    O --> P["🧠 Define Features and Labels"];
+    O --> Q["🚧 Split Train/Test"];
+
+    Q --> R["📈 Modeling"];
+    R --> S["🔄 Logistic Regression"];
+    R --> T["🏗️ Various Estimators"];
+    T --> U["📊 Feature Importances <img src='dummy_plots/barplot_template.svg' />"];
+    
+    U --> V["🔍 Community Impact"];
+    V --> W["📊 Age Impact Analysis"];

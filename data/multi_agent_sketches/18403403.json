@@ -1,0 +1,7 @@
+{
+  "sketch": [
+    "1. Setup: Connect to BigQuery and fetch the chicago_crime dataset",
+    "2. Data Exploration: Count tables, explore data schema and identify mapping fields",
+    "3. Expected Outputs: Print table names and schema information"
+  ]
+}

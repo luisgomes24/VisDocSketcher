@@ -1,0 +1,37 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/iit-admissions-dataset/student_data.csv",
+      "description": "Contains details of students, including admission year, fees, and date of birth."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the student data loaded from the CSV file."
+    },
+    {
+      "name": "duplicate",
+      "description": "Series indicating the presence of duplicate rows in the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Loaded from CSV using pd.read_csv",
+      "flows_to": [
+        "Data inspection and cleaning operations (head, tail, info, describe)",
+        "Renaming columns and dropping columns",
+        "Creating new columns and changing data types"
+      ]
+    },
+    {
+      "variable": "duplicate",
+      "creation": "Created using df.duplicated()",
+      "flows_to": [
+        "Used for checking and analyzing duplicate data in the DataFrame"
+      ]
+    }
+  ],
+  "models": []
+}

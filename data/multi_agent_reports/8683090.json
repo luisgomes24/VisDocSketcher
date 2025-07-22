@@ -1,0 +1,17 @@
+{"data_sources": [
+    {"file_name": "covid_us_county.csv", "description": "Contains COVID-19 data by county including demographics, cases, and deaths."}
+],
+"data_variables": [
+    {"name": "df", "description": "Initial DataFrame loaded from the CSV file containing COVID-19 data."},
+    {"name": "df_reg", "description": "Aggregated DataFrame with total cases and deaths summed by county."},
+    {"name": "df_county", "description": "DataFrame grouped by date and county, summing total cases and deaths."},
+    {"name": "dfd", "description": "DataFrame with aggregated total cases and deaths over time."}
+],
+"data_flow": [
+    {"variable": "df", "creation_method": "read_csv", "flow": "Used for initial data manipulation and analysis."},
+    {"variable": "df_reg", "creation_method": "groupby and agg", "flow": "Used for visualization of data through plots and tables."},
+    {"variable": "df_county", "creation_method": "groupby and agg", "flow": "Essential for analyzing cases and deaths over time."},
+    {"variable": "dfd", "creation_method": "groupby and sum", "flow": "Used for visualizing trends over time in cases and deaths."}
+],
+"models": []
+}

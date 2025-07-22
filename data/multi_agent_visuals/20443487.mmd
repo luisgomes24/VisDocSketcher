@@ -1,0 +1,23 @@
+flowchart TD;
+    %% This node represents the CSV file containing notebook rankings and medal counts
+    NotebookRankingsCSV["NotebookRankings.csv"]
+    
+    %% This node represents the data variable `data0` created by reading the CSV file
+    data0[("Data0")]
+    NotebookRankingsCSV -->|read_csv| data0
+    
+    %% This node represents the total medals calculated
+    TotalMedals["TotalMedals"]
+    data0 -->|Calculation of TotalGold + TotalSilver + TotalBronze| TotalMedals
+    
+    %% Scatter plot analysis using CurrentRanking vs Points
+    ScatterPlotCRP["Current Ranking vs Points"]
+    data0 -->|scatter plot| ScatterPlotCRP
+    
+    %% Scatter plot analysis using CurrentRanking vs TotalMedals
+    ScatterPlotCRT["Current Ranking vs Total Medals"]
+    data0 -->|scatter plot| ScatterPlotCRT
+    
+    %% Scatter plot analysis using Points vs TotalMedals
+    ScatterPlotPTM["Points vs Total Medals"]
+    TotalMedals -->|scatter plot| ScatterPlotPTM

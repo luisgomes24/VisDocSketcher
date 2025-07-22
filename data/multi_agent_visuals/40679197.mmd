@@ -1,0 +1,8 @@
+graph TD;
+    A["<img src='file.svg' width=100 height=100/> <br/> Data Source - Results"] --> D["<img src='table.svg' width=100 height=100/> <br/> df_results <br/> <img src='dummy_plots/lineplot_template.svg'/> <br/> Benchmark Results"];
+    B["<img src='file.svg' width=100 height=100/> <br/> Data Source - Benchmark Infer"] --> E["<img src='table.svg' width=100 height=100/> <br/> df <br/> <img src='dummy_plots/barplot_template.svg'/> <br/> Inference Results"];
+    C["<img src='file.svg' width=100 height=100/> <br/> Data Source - Benchmark Train"] --> F["<img src='table.svg' width=100 height=100/> <br/> tdf <br/> <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Training Results"];
+    D --> G["<img src='column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    G --> H["<img src='brain.svg' width=100 height=100/> <br/> ML Models"];
+    E --> H;
+    F --> H;

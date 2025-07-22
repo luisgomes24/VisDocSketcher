@@ -1,0 +1,110 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/the-ultimate-halloween-candy-power-ranking/candy-data.csv",
+      "description": "Contains Halloween candy data, including various features related to candy."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the candy dataset."
+    },
+    {
+      "name": "names",
+      "description": "Series containing the names of the competitors extracted from the dataset."
+    },
+    {
+      "name": "y",
+      "description": "Target variable 'bar' indicating the rating of candy."
+    },
+    {
+      "name": "X",
+      "description": "DataFrame containing features, with 'bar' removed."
+    },
+    {
+      "name": "scaler",
+      "description": "MinMaxScaler object for normalizing feature values."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features after normalization."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features after normalization."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set target variable."
+    },
+    {
+      "name": "y_test",
+      "description": "Test set target variable."
+    },
+    {
+      "name": "model",
+      "description": "Logistic Regression model for predicting the target variable."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Loaded from CSV file using `pd.read_csv`.",
+      "flow": "Used to create variables 'names', 'y', and 'X'."
+    },
+    {
+      "variable": "names",
+      "creation": "Extracted from 'data' DataFrame.",
+      "flow": "Not used further."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from 'data' DataFrame.",
+      "flow": "Used in training the model."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping 'bar' from 'data'.",
+      "flow": "Normalized and split into training and test sets."
+    },
+    {
+      "variable": "scaler",
+      "creation": "Initialized with `MinMaxScaler`.",
+      "flow": "Used to normalize the 'X' DataFrame."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Created from `train_test_split` on normalized 'X'.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Created from `train_test_split` on normalized 'X'.",
+      "flow": "Used in model evaluation."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Created from `train_test_split` on 'y'.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "y_test",
+      "creation": "Created from `train_test_split` on 'y'.",
+      "flow": "Used in model evaluation."
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized `LogisticRegression`.",
+      "flow": "Trained using `fit` with `X_train` and `y_train`. Evaluated with `score` on `X_test` and `y_test`."
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "X_train (features used for training)",
+      "target_variable": "y_train (target variable)",
+      "hyperparameters": "Default parameters of LogisticRegression."
+    }
+  ]
+}

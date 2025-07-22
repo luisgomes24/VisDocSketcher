@@ -1,0 +1,30 @@
+flowchart TD
+    subgraph Data_Flow
+        direction TB
+        A1["graph"]
+        A2["sample"]
+        A3["full_dataset"]
+        A4["hand_1"]
+        A5["hand_2"]
+    end
+
+    subgraph Processes
+        direction TB
+        P1["get_graph"]
+        P2["prettify_graph"]
+        P3["best_items"]
+        P4["blackjack_hand_greater_than"]
+    end
+
+    %% Comment: Graph creation and processing
+    A1 --> P1
+    P1 --> P2
+    P2 -->|"Display graph"| A1
+
+    %% Comment: Sample data and analysis
+    A2 -->|"Input to best_items"| P3
+    A3 -->|"Input to best_items"| P3
+
+    %% Comment: Hands comparison
+    A4 -->|"Input to blackjack_hand_greater_than"| P4
+    A5 -->|"Input to blackjack_hand_greater_than"| P4

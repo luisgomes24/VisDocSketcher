@@ -1,0 +1,38 @@
+flowchart TD
+    subgraph Data_Sources
+        direction LR
+        DS1["Peru Text File"]
+        DS2["Tuberculosis Estimates CSV"]
+        DS3["COVID-19 Data CSV"]
+    end
+
+    subgraph Data_Variables
+        direction TB
+        V1["text"]
+        V2["df1"]
+        V3["df"]
+        V4["peru"]
+    end
+
+    DS1 -->|Read content| V1
+    DS2 -->|Read CSV| V2
+    DS3 -->|Read CSV| V3
+
+    V1 -->|Display text excerpts| V1["text"]
+    V2 -->|Generate profile report| V2["df1"]
+    V3 -->|Filter for Peru| V4["peru"]
+
+    subgraph Visualizations
+        V4 -->|Bar Plots| VP1["Bar Plot"]
+        V4 -->|Violin Plots| VP2["Violin Plot"]
+        V4 -->|Line Plots| VP3["Line Plot"]
+        V4 -->|Distributions| VP4["Distribution Analysis"]
+        V4 -->|Box Plots| VP5["Box Plot"]
+    end
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    class DS1,DS2,DS3 source;
+    class V1,V2,V3,V4 variable;
+    class VP1,VP2,VP3,VP4,VP5 process;

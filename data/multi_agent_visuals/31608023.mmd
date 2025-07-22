@@ -1,0 +1,42 @@
+flowchart TD
+    %% Data Sources
+    subgraph Data Sources
+        train_csv["<img src='file.svg' width=100 height=100/> <br/> train.csv"]
+        test_csv["<img src='file.svg' width=100 height=100/> <br/> test.csv"]
+        sample_submission_csv["<img src='file.svg' width=100 height=100/> <br/> sample_submission.csv"]
+    end
+
+    %% Data Variables
+    subgraph Data Preparation
+        train["<img src='table.svg' width=100 height=100/> <br/> Train DataFrame"]
+        test["<img src='table.svg' width=100 height=100/> <br/> Test DataFrame"]
+        sample_submission["<img src='table.svg' width=100 height=100/> <br/> Sample Submission DataFrame"]
+        texts["<img src='column_split.svg' width=100 height=100/> <br/> Tokenized Texts"]
+        text_sequences["<img src='column_split.svg' width=100 height=100/> <br/> Text Sequences"]
+        cat_labels["<img src='row_split.svg' width=100 height=100/> <br/> Categorical Labels"]
+        E["<img src='column_split.svg' width=100 height=100/> <br/> Embedding Matrix"]
+        test_text_sequences["<img src='column_split.svg' width=100 height=100/> <br/> Test Text Sequences"]
+        test_cat_labels["<img src='brain.svg' width=100 height=100/> <br/> Predicted Test Labels"]
+        test_labels["<img src='brain.svg' width=100 height=100/> <br/> Test Labels"]
+    end
+
+    %% Data Flow
+    train_csv -->|pd.read_csv| train
+    test_csv -->|pd.read_csv| test
+    sample_submission_csv -->|pd.read_csv| sample_submission
+    train -->|Tokenization + Lemmatization| texts
+    texts -->|Tokenizer + Padding| text_sequences
+    text_sequences -->|Embedding Matrix| E
+    train -->|to_categorical| cat_labels
+    test -->|Tokenization + Padding| test_text_sequences
+    test_text_sequences -->|Model Prediction| test_cat_labels
+    test_cat_labels -->|argmax| test_labels
+
+    %% Model Training
+    subgraph Model Training
+        E -->|"Embedding Layer"| model["<img src='brain.svg' width=100 height=100/> <br/> CNN Model"]
+        cat_labels -->|"Training"| model
+        model -->|"Fitting"| model
+    end
+
+    model -->|"Predict"| test_cat_labels

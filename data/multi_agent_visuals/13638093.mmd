@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|load| B["<img src='icons/table.svg' width=100 height=100/> <br/> alp_train DataFrame"]
+    A -->|load| C["<img src='icons/table.svg' width=100 height=100/> <br/> alp_test DataFrame"]
+
+    %% Data Processing
+    B -->|value counts| D["<img src='dummy_plots/barplot_template.svg'/> <br/> train value counts"]
+    C -->|value counts| E["<img src='dummy_plots/barplot_template.svg'/> <br/> test value counts"]
+
+    %% Visualizations
+    D -->|visualize| F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Training Data Distribution Plots"]
+    E -->|visualize| G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Testing Data Distribution Plots"]
+
+    %% Model Training and Prediction
+    B -->|features: ClaimNumber, DateTimeOfAccident,
+    DateReported, WeeklyWages, ClaimDescription| H["<img src='icons/brain.svg' width=100 height=100/> <br/> Model: Prediction of UltimateIncurredClaimCost"]
+

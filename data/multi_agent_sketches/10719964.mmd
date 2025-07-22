@@ -1,0 +1,13 @@
+flowchart TD
+  %% Node for Data Source
+d1["sb_blog.csv"]
+  %% Node for Initial Data Load
+  d1 --> |"Load data"| v1["blog_details"]
+  %% Node for Sorted Data
+d1 --> |"Sort by claps"| v2["sorted_blog_details"]
+  %% Node for Script and Intro Processing
+v1 --> |"Preprocess transcript"| v3["script"]
+v1 --> |"Preprocess intro"| v4["intro"]
+  %% Nodes for Length Calculation
+v3 --> |"Calculate length"| v5["script_len"]
+v4 --> |"Calculate length"| v6["intro_len"]

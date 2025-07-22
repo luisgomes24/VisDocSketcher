@@ -1,3 +1,76 @@
-# VisDocSketcher
+# VisDocSketcher: Visual Document Generation
 
-Visual documentation is an effective tool for reducing the cognitive barrier developers face when understanding unfamiliar code, enabling more intuitive comprehension. Compared to textual documentation, it provides a higher-level understanding of the system structure and data flow. Developers usually prefer visual representations over lengthy textual descriptions for large software systems. Visual documentation is both difficult to produce and challenging to evaluate. Manually creating it is time-consuming, and currently, no existing approach can automatically generate high-level visual documentation directly from code. Its evaluation is often subjective, making it difficult to standardize and automate. To address these challenges, this paper presents the first exploration of using agentic LLM systems to automatically generate visual documentation. We introduce VisDocSketcher, the first agent-based approach that combines static analysis with LLM agents to identify key elements in the code and produce corresponding visual representations. We propose a novel evaluation framework, AutoSketchEval, for assessing the quality of generated visual documentation using code-level metrics. The experimental results show that our approach can generate valid visual documentation for 74.4% of the samples. It shows an improvement of 17.9% over a simple template-based baseline. Our evaluation framework can reliably distinguish high-quality (code-aligned) visual documentation from low-quality (non-aligned) ones, achieving an AUC exceeding 0.87. Our work lays the foundation for future research on automated visual documentation by introducing practical tools that not only generate valid visual representations but also reliably assess their quality.
+This project provides tools for generating visual representations of Jupyter notebooks using both single-agent and multi-agent approaches. The system is designed to help understand and visualize data science workflows in Python.
+
+## Features
+
+- **Single-Agent Mode**: A single AI agent generates visualizations of notebook workflows
+- **Multi-Agent Mode**: Multiple specialized agents collaborate to analyze and visualize notebook structures
+- **Mermaid Diagram Generation**: Produces flowcharts of notebook workflows
+- **Intermediate Artifacts**: Generates both visual diagrams as an output and structured reports
+
+## Prerequisites
+
+- OpenAI API key
+- LangChain API key (for multi-agent mode)
+- Use `environment.yml` to create a conda environment
+
+## Installation
+
+1. Create and activate the conda environment:
+   ```bash
+   conda env create -f environment.yml
+   conda activate visdocsketcher_env
+   ```
+
+2. Set up your environment variables:
+   - Open the `.env` file in the `src` directory
+   - Add your API keys to the `.env` file
+
+## Usage
+
+### Single-Agent Mode
+
+To generate visualizations using the single-agent approach:
+
+```bash
+python src/single_agent.py <path_to_notebooks_directory> <output_directory>
+```
+
+Example:
+```bash
+python src/single_agent.py data/notebooks data/output/single_agent
+```
+
+### Multi-Agent Mode
+
+To use the multi-agent workflow:
+
+```bash
+python src/multi_agent.py
+```
+
+### Configuration
+
+Modify the following paths in `src/multi_agent.py` according to your setup:
+
+```python
+BASE_DIR = Path("../")
+DATA_DIR = BASE_DIR / "data/Distill1000"
+NOTEBOOKS_DIR = DATA_DIR / "notebooks"
+SKETCHER_DIR = DATA_DIR / "multi_agent_sketches"
+REPAIR_DIR = DATA_DIR / "multi_agent_repairs"
+VISUALS_DIR = DATA_DIR / "multi_agent_visuals"
+REPORTS_DIR = DATA_DIR / "multi_agent_reports"
+```
+
+## Output
+
+- **Single-Agent**: Generates Mermaid diagrams (`.mmd` files) and corresponding visualizations (`.svg` or `.png`)
+- **Multi-Agent**: Produces multiple outputs including sketches, repairs, and final visualizations in their respective directories
+
+## Troubleshooting
+
+1. **API Key Issues**: Ensure your API keys are correctly set in `src/.env`
+2. **Path Errors**: Verify that all directory paths in the configuration match your local setup. Some prompts will need to be modified to match your local setup (e.g. image paths and file paths to the visuals agent).
+3. **Dependency Issues**: Make sure all required packages are installed from `environment.yml`

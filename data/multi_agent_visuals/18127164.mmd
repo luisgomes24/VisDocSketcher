@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    A[Train Data CSV] --> |Load data| B[df_train]
+    A1[Test Data CSV] --> |Load data| C[df_test]
+
+    %% Data Preparation
+    B --> |Drop 'id' column| B1([Prepare Train Data])
+    C --> |Drop 'id' column| C1([Prepare Test Data])
+    B1 --> D[train_features]
+    C1 --> D[train_features]
+
+    %% Feature Extraction
+    B1 -->|Extract features| E[x_train]
+    B1 -->|Extract target| F[y_train]
+    C1 -->|Extract features| G[x_test]
+
+    %% Model Training
+    E --> |Train| H[Logistic Regression Model]
+    F --> |Train| H
+
+    %% Model Prediction
+    G --> |Predict| H --> I[Test Predictions]
+
+    %% Save Model
+    H --> |Save| J[Pickle File]
+
+    %% Comments
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:1px;
+    class A,A1,B,C,B1,C1,D,E,F,G,H,I,J dataNode;
+    %% A & A1 are the train and test CSV files used as data sources.
+    %% B & C represent loaded DataFrames after reading CSVs.
+    %% B1, C1 are prepared DataFrames after dropping unnecessary columns.
+    %% D is the list of features used across train & test sets.
+    %% E, F, G represents the train features, train target, and test features.
+    %% H is the trained Logistic Regression model.
+    %% I represents the predictions made by the model.
+    %% J shows the model being saved as a Pickle file.

@@ -1,0 +1,22 @@
+flowchart TD
+    %% Node for Data Source (none in this case)
+    A((Start)) --> B[a] 
+    A((Start)) --> C[b]
+    %% Node for Variable a
+    B[a] --> D[add]
+    %% Node for Variable b
+    C[b] --> D[add]
+    %% Operation: Adding a and b
+    D[add] --> E((Print add))
+    %% Operation: Subtracting b from a
+    C[b] --> F[sub] 
+    B[a] --> F[sub]
+    F[sub] --> G((Print sub))
+    %% Operation: Multiplying a and b
+    C[b] --> H[multi]
+    B[a] --> H[multi] 
+    H[multi] --> I((Print multi))
+    %% Operation: Dividing a by b
+    B[a] --> J[div]
+    C[b] --> J[div] 
+    J[div] --> K((Print div))

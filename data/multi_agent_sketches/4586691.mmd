@@ -1,0 +1,23 @@
+flowchart TD
+
+%% Data Sources
+A[Train CSV]:::dataSource -->|Load Data| B[train DataFrame]:::dataVariable
+A[Train CSV]:::dataSource -->|Load Data| C[test DataFrame]:::dataVariable
+
+%% Data Processing
+B --> D[train_generator]:::dataVariable
+B --> E[valid_generator]:::dataVariable
+C --> F[test_generator]:::dataVariable
+
+%% Model Creation and Training
+D & E --> G[ResNet50 Model]:::model
+G --> H[history]:::dataVariable
+
+%% Model Evaluation
+G --> I[train_preds]:::dataVariable
+G --> J[predictions]:::dataVariable
+
+%% Styling
+classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#9f6,stroke:#333,stroke-width:2px;

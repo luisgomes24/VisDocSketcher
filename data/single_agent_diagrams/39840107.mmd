@@ -1,0 +1,13 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Inspect Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Preprocess Data"]
+    C --> D["<img src='table.svg'/> <br/> Feature Engineering"]
+    D --> E["<img src='row_split.svg'/> <br/> Train-Test Split"]
+    E --> F["<img src='brain.svg'/> <br/> Train Model"]
+    F --> G["<img src='brain.svg'/> <br/> Evaluate Model"]
+    G --> H["<img src='scatter_plot_template.svg'/> <br/> Visualization"]
+    
+    C --> |"Check Nulls"| B
+    F --> |"Linear Regression"| E
+    F --> |"Ridge Regression"| E
+    F --> |"Lasso Regression"| E

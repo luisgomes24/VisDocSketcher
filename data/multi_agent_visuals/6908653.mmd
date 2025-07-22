@@ -1,0 +1,38 @@
+flowchart TD
+
+%% Node for CSV Data Source
+A["<img src='icons/file.svg' width=100 height=100/> <br/> time_series_new-3000.csv"]
+%% Description for CSV File
+description1["A CSV file containing time series data"]
+A --> description1
+
+%% Node for df1 DataFrame
+B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df1"]
+%% Description of df1 Creation
+A -- "Read 1000 rows into" --> B
+note1["Created by reading the CSV file using pd.read_csv"]
+B --> note1
+
+%% Nodes for row and column counts
+C["<img src='icons/column_split.svg' width=100 height=100/> <br/> nRowsRead"]
+nRowsRead_desc["Number of rows to read"]
+C --> nRowsRead_desc
+C -- "Defines how many rows to read from CSV" --> A
+
+D["<img src='icons/row_split.svg' width=100 height=100/> <br/> nRow"]
+B --> D
+D_desc["Number of rows in DataFrame"]
+D --> D_desc
+
+E["<img src='icons/column_split.svg' width=100 height=100/> <br/> nCol"]
+B --> E
+E_desc["Number of columns in DataFrame"]
+E --> E_desc
+
+%% Data flow nodes for visualization
+F["<img src='dummy_plots/barplot_template.svg'/> <br/> plotPerColumnDistribution"]
+G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotCorrelationMatrix"]
+H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotScatterMatrix"]
+B -- "Used in" --> F
+B -- "Used in" --> G
+B -- "Used in" --> H

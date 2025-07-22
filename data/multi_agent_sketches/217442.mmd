@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data source node
+    A["lab_petct_vox_5.00mm.h5"]
+    click A href "#" "HDF5 file containing CT, PET, and label data."
+
+    %% Data loading nodes
+    B["ct_image"]
+    C["pet_image"]
+    D["label_image"]
+    click B href "#" "CT image data loaded from the HDF5 file."
+    click C href "#" "PET image data loaded from the HDF5 file."
+    click D href "#" "Label data loaded from the HDF5 file."
+
+    %% Data processing nodes
+    E["petct_vol"]
+    F["petct_segs"]
+    G["bright_segs"]
+    click E href "#" "Stacked volume of CT and PET data."
+    click F href "#" "Superpixel segmentation of the combined PET/CT volume."
+    click G href "#" "Superpixels filtered by brightness from the PET image."
+
+    %% Model used
+    M["SLIC Algorithm\n(n_segments=2000, compactness=0.1)"]
+    click M href "#" "Model for superpixel classification."
+
+    %% Workflow connections
+    A -->|h5py load| B
+    A -->|h5py load| C
+    A -->|h5py load| D
+    B -->|Stack CT and PET| E
+    C -->|Stack CT and PET| E
+    E -->|Apply SLIC| F
+    F -->|Filter by brightness| G
+    F -->|Validation| D

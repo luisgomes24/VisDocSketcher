@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    A[reddit_wsb.csv] -->|Load| B[DataFrame df]
+    C[nyse-listed_csv.csv] -->|Load| D[nyse_tickers_list]
+    E[other-listed_csv.csv] -->|Load| F[other_tickers_list]
+    
+    %% Data Cleaning and Feature Engineering
+    B -->|Extract Titles & Bodies| G(blob_text)
+    G -->|Remove Stopwords| H(filtered_sentence)
+    
+    %% Word Analysis
+    G -->|Create Counter| I(counts)
+    I -->|Analyze| J{Most Common Words}
+
+    %% Comments
+    %% - A, C, E: Files with data sources for different analyses
+    %% - B: Main DataFrame containing Reddit post data
+    %% - D, F: Lists of stock tickers
+    %% - G: Text data for word analysis
+    %% - H: Text data after removing stopwords
+    %% - I: Frequency count of words
+    %% - J: Analysis of frequent terms for insights
+
+    %% Data Usage
+    B -.->|Cleaning| B
+    B -.->|Feature Engineering| B

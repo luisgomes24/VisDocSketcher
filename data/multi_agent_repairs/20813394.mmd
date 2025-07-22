@@ -1,0 +1,47 @@
+```mermaid
+flowchart TD
+    %% Data sources
+    A["../input/covid19-india-news-headlines-for-nlp/raw_data.csv"] -->|Load data| B["df"]
+    
+    %% Data variables
+    B -->|Drop 'Sentiment' column| C["X"]
+    B -->|Extract 'Sentiment' column| D["y"]
+    C -->|Clean and preprocess text| E["corpus"]
+    E -->|One-hot encoding| F["onehot_repr"]
+    F -->|Pad sequences| G["embedded_docs"]
+    G -->|Convert to Numpy array| H["X_final"]
+    D -->|Convert to Numpy array| I["y_final"]
+    
+    %% Train/Test split
+    H -->|train_test_split| J["X_train"]
+    H -->|train_test_split| K["X_test"]
+    I -->|train_test_split| L["y_train"]
+    I -->|train_test_split| M["y_test"]
+    
+    %% Model Training
+    J -->|Training data| N["LSTM"]
+    L -->|Training labels| N
+    
+    %% Model Prediction
+    N -->|Predict| O["y_pred"]
+    
+    %% Evaluation
+    O -->|Compare with| M
+
+    %% Comments explaining nodes
+    click A href "https://github.com/center-for-object-cognizance/sketch-creator" "Node represents the raw data CSV file."
+    click B href "https://github.com/center-for-object-cognizance/sketch-creator" "DataFrame holding raw data loaded from CSV."
+    click C href "https://github.com/center-for-object-cognizance/sketch-creator" "Independent variable: headlines."
+    click D href "https://github.com/center-for-object-cognizance/sketch-creator" "Dependent variable: sentiment labels."
+    click E href "https://github.com/center-for-object-cognizance/sketch-creator" "Cleaned and preprocessed headlines."
+    click F href "https://github.com/center-for-object-cognizance/sketch-creator" "One-hot encoded representation."
+    click G href "https://github.com/center-for-object-cognizance/sketch-creator" "Padded sequences for LSTM input."
+    click H href "https://github.com/center-for-object-cognizance/sketch-creator" "Final feature array for model training/testing."
+    click I href "https://github.com/center-for-object-cognizance/sketch-creator" "Final label array for model training/testing."
+    click J href "https://github.com/center-for-object-cognizance/sketch-creator" "Training set of features."
+    click K href "https://github.com/center-for-object-cognizance/sketch-creator" "Testing set of features."
+    click L href "https://github.com/center-for-object-cognizance/sketch-creator" "Training set of labels."
+    click M href "https://github.com/center-for-object-cognizance/sketch-creator" "Testing set of labels."
+    click N href "https://github.com/center-for-object-cognizance/sketch-creator" "LSTM model with specified parameters."
+    click O href "https://github.com/center-for-object-cognizance/sketch-creator" "Predictions made by the model."
+```

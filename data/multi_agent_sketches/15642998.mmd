@@ -1,0 +1,47 @@
+flowchart TD
+    subgraph DataSources
+        DS1["../input/ddsm-mammography/training10_0/training10_0.tfrecords"]:::source
+        DS2["../input/ddsm-mammography/training10_1/training10_1.tfrecords"]:::source
+        DS3["../input/ddsm-mammography/training10_2/training10_2.tfrecords"]:::source
+        DS4["../input/ddsm-mammography/training10_3/training10_3.tfrecords"]:::source
+        DS5["../input/ddsm-mammography/training10_4/training10_4.tfrecords"]:::source
+    end
+    
+    subgraph Preparation
+        images["images"]:::variable
+        labels["labels"]:::variable
+        X["X"]:::variable
+        y["y"]:::variable
+        split_data["x_train, x_val, x_test, y_train, y_val, y_test"]:::variable
+    end
+
+    subgraph Models
+        ANN["Artificial Neural Network (ANN)"]:::model
+        KNC["KNeighborsClassifier"]:::model
+        SVC["SVC"]:::model
+        RFC["RandomForestClassifier"]:::model
+        ABC["AdaBoostClassifier"]:::model
+        XGBC["XGBClassifier"]:::model
+    end
+
+    DS1 -->|Read and Append| images & labels
+    DS2 -->|Read and Append| images & labels
+    DS3 -->|Read and Append| images & labels
+    DS4 -->|Read and Append| images & labels
+    DS5 -->|Read and Append| images & labels
+    
+    images -->|Convert to Numpy Array| X
+    labels -->|Convert to Numpy Array| y
+    X -->|Split using train_test_split| split_data
+    y -->|Split using train_test_split| split_data
+
+    split_data -->|Train| ANN
+    split_data -->|Train| KNC
+    split_data -->|Train| SVC
+    split_data -->|Train| RFC
+    split_data -->|Train| ABC
+    split_data -->|Train| XGBC
+    
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

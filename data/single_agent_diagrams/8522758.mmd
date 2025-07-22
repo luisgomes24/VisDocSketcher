@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Preview Data"]
+    A --> C["📂 Load Data 1"]
+    A --> D["📂 Load Data 2"]
+    A --> E["📂 Load Data 3"]
+    
+    C --> F["<img src='dummy_plots/hist_template.svg' /> <br/> 📊 Distribution Graphs"]
+    D --> G["<img src='dummy_plots/hist_template.svg' /> <br/> 📊 Distribution Graphs"]
+    E --> H["<img src='dummy_plots/hist_template.svg' /> <br/> 📊 Distribution Graphs"]
+
+    B --> I["📈 Plot Per Column Distribution"]
+    I -->|Data Analysis| F
+    I -->|Data Analysis| G
+    I -->|Data Analysis| H
+    
+    F --> J["✅ End Analysis"]
+    G --> J
+    H --> J

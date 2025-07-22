@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/digit-recognizer/train.csv",
+      "description": "Training dataset containing images of handwritten digits and their corresponding labels."
+    },
+    {
+      "file": "/kaggle/input/digit-recognizer/test.csv",
+      "description": "Test dataset containing images of handwritten digits without labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "x_train",
+      "description": "DataFrame containing image pixel values of the training data."
+    },
+    {
+      "variable": "x_test",
+      "description": "DataFrame containing image pixel values of the test data."
+    },
+    {
+      "variable": "y_train",
+      "description": "Series containing labels corresponding to the training images."
+    },
+    {
+      "variable": "y_categ_train",
+      "description": "One-hot encoded matrix of labels for training images."
+    },
+    {
+      "variable": "x_val",
+      "description": "Validation dataset created from the training data."
+    },
+    {
+      "variable": "y_val",
+      "description": "Labels for the validation dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "x_train",
+      "creation": "Read from train.csv",
+      "flow": "Used as input for model training"
+    },
+    {
+      "variable": "x_test",
+      "creation": "Read from test.csv",
+      "flow": "Used for making predictions and generating submission file"
+    },
+    {
+      "variable": "y_train",
+      "creation": "Extracted from x_train",
+      "flow": "One-hot encoded to y_categ_train, then used for training"
+    },
+    {
+      "variable": "y_categ_train",
+      "creation": "One-hot encoding of y_train",
+      "flow": "Used as target variable during model training"
+    },
+    {
+      "variable": "x_val",
+      "creation": "Split from x_train",
+      "flow": "Used for validating model performance"
+    },
+    {
+      "variable": "y_val",
+      "creation": "Split from y_categ_train",
+      "flow": "Used for validating model performance"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential CNN",
+      "input_features": ["x_train"],
+      "target_variable": "y_categ_train",
+      "layers": [
+        {"type": "Conv2D", "parameters": {"filters": 32, "kernel_size": [4, 4], "activation": "relu"}},
+        {"type": "MaxPool2D", "parameters": {"pool_size": [2, 2]}},
+        {"type": "Flatten", "parameters": {}},
+        {"type": "Dense", "parameters": {"units": 128, "activation": "relu"}},
+        {"type": "Dense", "parameters": {"units": 10, "activation": "softmax"}}
+      ],
+      "compile_parameters": {
+        "loss": "categorical_crossentropy",
+        "optimizer": "rmsprop",
+        "metrics": ["accuracy"]
+      }
+    }
+  ]
+}

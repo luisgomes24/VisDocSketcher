@@ -1,0 +1,13 @@
+graph TD;
+    A[Database] --> B[File Data];
+    B --> C[Tabular Data];
+    C --> D[Feature Selection];
+    D --> E[Train-Test Split];
+    E --> F[ML Model];
+    F --> G[Predictions];
+    classDef data_node fill:#87CEEB;
+    classDef model_node fill:#C6F4D6;
+    classDef output_node fill:#F2C464;
+    class data_node A,B,C,D,E;
+    class model_node F;
+    class output_node G;

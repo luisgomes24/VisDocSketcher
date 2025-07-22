@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file": "acc.csv",
+      "description": "Data contains information about accidents."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "acc",
+      "description": "DataFrame that holds the loaded accidents data."
+    },
+    {
+      "variable": "df",
+      "description": "DataFrame with null columns removed and categorical month converted to string."
+    },
+    {
+      "variable": "MonthDict",
+      "description": "Dictionary mapping month numbers to month names."
+    },
+    {
+      "variable": "obj_cols_index_no",
+      "description": "Index of object type columns for clustering."
+    },
+    {
+      "variable": "clusters",
+      "description": "Output from KPrototypes clustering algorithm indicating the cluster for each record."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "acc",
+      "creation": "pd.read_csv",
+      "flow": "Used for filtering and visualizations."
+    },
+    {
+      "variable": "df",
+      "creation": "DataFrame transformation (dropna, map)",
+      "flow": "Used for clustering and analysis."
+    },
+    {
+      "variable": "clusters",
+      "creation": "KPrototypes model fitting",
+      "flow": "Added as 'cluster_id' to 'acc' DataFrame and used for visualization."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KPrototypes",
+      "input_features": "df DataFrame with relevant features.",
+      "target_variable": null,
+      "hyperparameters": {
+        "n_clusters": 4,
+        "n_init": 5,
+        "random_state": 50,
+        "n_jobs": -1
+      }
+    }
+  ]
+}

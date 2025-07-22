@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Train Data <img src='file.svg'/> <br/> train.csv"] --> B["📂 Load Test Data <img src='file.svg'/> <br/> test.csv"]
+    B --> C["🔍 Inspect Train Data"]
+    C --> D["🛠️ Preprocess Data"]
+    D --> E["🧪 Setup Model"]
+    E --> F["🤖 Create Model"]
+    F --> G["📊 Plot Confusion Matrix <img src='dummy_plots/confusion_matrix_template.svg'/> <br/>"]
+    G --> H["📊 Plot AUC Curve <img src='dummy_plots/auc_template.svg'/> <br/>"]
+    H --> I["🔮 Make Predictions"]
+    I --> J["📋 Prepare Submission <img src='file.svg'/>"]
+    J --> K["💾 Save Submission"]

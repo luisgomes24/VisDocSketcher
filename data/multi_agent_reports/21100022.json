@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file": "train_transaction.csv",
+      "description": "Contains transaction data including indicators of fraud."
+    },
+    {
+      "file": "train_identity.csv",
+      "description": "Contains identity data that may include user information linked to transactions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_transaction",
+      "description": "DataFrame containing transaction information."
+    },
+    {
+      "name": "train_id",
+      "description": "DataFrame containing identity information linked to transaction data."
+    },
+    {
+      "name": "final_data",
+      "description": "Merged DataFrame containing both transaction and identity information."
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame excluding the target variable 'isFraud'."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing whether a transaction is fraudulent."
+    },
+    {
+      "name": "X_train",
+      "description": "Training feature set."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing feature set."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target variable."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing target variable."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_transaction",
+      "created_by": "pd.read_csv",
+      "flows_to": "train_id and final_data"
+    },
+    {
+      "variable": "train_id",
+      "created_by": "pd.read_csv",
+      "flows_to": "final_data"
+    },
+    {
+      "variable": "final_data",
+      "created_by": "pd.merge",
+      "flows_to": "X and y"
+    },
+    {
+      "variable": "X",
+      "created_by": "final_data.drop",
+      "flows_to": "X_train, X_test"
+    },
+    {
+      "variable": "y",
+      "created_by": "final_data['isFraud']",
+      "flows_to": "y_train, y_test"
+    }
+  ],
+  "models": [
+    {
+      "model": "XGBClassifier",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

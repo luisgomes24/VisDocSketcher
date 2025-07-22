@@ -1,0 +1,9 @@
+flowchart TD
+    %% Node for data source
+    A["train.csv"] -->|"Read CSV"| B["train DataFrame"]
+    
+    %% Data processing and usage
+    B --> |"Plot each continuous feature loss"| C["plot_feature_loss function"]
+    
+    %% Plotting results
+    C --> |"Generate Plot"| D["Loss plots for continuous features"]

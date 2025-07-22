@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "file_name": "tiger.jfif",
+      "description": "An image of a tiger used for prediction"
+    },
+    {
+      "file_name": "glasses.jfif",
+      "description": "An image of glasses for classification"
+    },
+    {
+      "file_name": "nature1.jfif",
+      "description": "An image of natural scenery for classification"
+    },
+    {
+      "file_name": "viratkohli.jfif",
+      "description": "An image of Virat Kohli for classification"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "model",
+      "description": "A pretrained ResNet50 model for image classification"
+    },
+    {
+      "variable_name": "pred",
+      "description": "Predictions output from the model for input images"
+    },
+    {
+      "variable_name": "img",
+      "description": "Images loaded using PIL for prediction"
+    },
+    {
+      "variable_name": "x",
+      "description": "Preprocessed image array to feed into the model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "img",
+      "creation_method": "image.load_img",
+      "flow": "Processed into array x, Predicting class labels"
+    },
+    {
+      "variable": "x",
+      "creation_method": "np.expand_dims and preprocess_input",
+      "flow": "Used for prediction in model"
+    },
+    {
+      "variable": "pred",
+      "creation_method": "model.predict",
+      "flow": "Contains prediction results, then decoded for output"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNet50",
+      "input_features": "Image arrays of size (224, 224)",
+      "target_variable": "Predicted labels",
+      "hyperparameters": "Pretrained weights='imagenet'"
+    }
+  ]
+}

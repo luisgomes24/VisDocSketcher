@@ -1,0 +1,31 @@
+%% This is a Mermaid.js flowchart illustrating the workflow of the Jupyter Notebook 6863827.ipynb
+
+flowchart TD
+
+    subgraph DataSource
+        DS1["../input/candy.csv"]:::dataSource
+    end
+
+    subgraph DataProcessing
+        DP1["Load candy_data"]:::process
+    end
+
+    subgraph DataInsights
+        DI1["more_popular = '3 Musketeers'"]:::insight
+        DI2["more_sugar = 'Air Heads'"]:::insight
+    end
+
+    %% Data Source (CSV file)
+    DS1 -->|load| DP1
+
+    %% Data Processing
+    DP1 -->|used for plotting and analysis| DI1
+    DP1 -->|used for plotting and analysis| DI2
+
+    %% Insights derived
+    DI1 -->|Answer question about popularity| DP1
+    DI2 -->|Answer question about sugar content| DP1
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#888,stroke-width:2px;
+    classDef insight fill:#dfd,stroke:#080,stroke-width:2px;

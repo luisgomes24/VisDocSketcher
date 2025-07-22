@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv] --> B[DataFrame: train]
+    A[train.csv] --> E[DataFrame: X, Feature set]
+    A[train.csv] --> F[DataFrame: y, Target variable]
+    C[test.csv] --> D[DataFrame: test]
+    C[test.csv] --> G[DataFrame: X_test, Feature set]
+
+    %% Data Processing and Model Training
+    B --> E
+    B --> F
+    E --> I([LGBMClassifier \n Model Training])
+    F --> I
+    I --> J[Best Params: best_params]
+
+    %% Model Optimization and Prediction
+    J --> K([LGBMClassifier \n Predict X_test])
+    K --> L[DataFrame: submission]
+    L --> M[submit.csv]
+
+    %% Comments for each node
+    %% A: CSV file containing the training data features and target
+    %% B: DataFrame containing the loaded training data
+    %% C: CSV file containing the test data features
+    %% D: DataFrame containing the loaded test data
+    %% E: Feature set extracted from the training DataFrame
+    %% F: Target variable extracted from the training DataFrame
+    %% G: Feature set extracted for testing
+    %% I: Model training for LGBMClassifier using features X and target y
+    %% J: Dictionary of best hyperparameters from optimization
+    %% K: Predictions made by the trained model on X_test
+    %% L: Constructed DataFrame for the submission file
+    %% M: Submission file generated as CSV containing predictions

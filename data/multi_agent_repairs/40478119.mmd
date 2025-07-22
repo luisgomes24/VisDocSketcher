@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Data Source Node
+    A["shakespeare.txt"] --> |Read contents into| B["text"]
+    
+    %% Text Processing
+    B --> |Extract unique characters| C["vocab"]
+    C --> |Create character IDs| D["ids_from_chars"]
+    C --> |Invert character IDs| E["chars_from_ids"]
+    
+    %% Dataset Preparation
+    D --> |Convert char to ID| F["Character IDs"]
+    F --> |Create sequences| G["dataset"]
+    
+    %% Model Training
+    G --> |Train| H["RNN Model"]
+    H --> |Generate text| I["one_step_model"]
+    
+    %% Training Output
+    H --> J["history"]
+    
+    %% Model Details
+    subgraph Model_Details
+    I["RNN Model"] --> |Embedding Dim: 256| K["Embedding Layer"]
+    I --> |RNN Units: 1024| L["RNN Layer"]
+    end
+
+    %% Text Generation
+    I --> |Generate text| M["Output Text"]
+```

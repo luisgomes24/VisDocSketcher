@@ -1,0 +1,6 @@
+flowchart TD
+A["Train CSV"]:::dataSource -->|Load Data| B["train DataFrame"]:::dataVariable
+A["Train CSV"]:::dataSource -->|Load Data| C["test DataFrame"]:::dataVariable
+
+classDef dataSource fill:#87CEEB;
+classDef dataVariable fill:#C6F4D6;

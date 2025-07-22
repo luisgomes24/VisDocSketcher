@@ -1,0 +1,107 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "color",
+      "description": "A string variable representing the user's favorite color."
+    },
+    {
+      "name": "pi",
+      "description": "A float variable representing the approximate value of pi (3.14159)."
+    },
+    {
+      "name": "diameter",
+      "description": "An integer variable representing the diameter of a circle."
+    },
+    {
+      "name": "radius",
+      "description": "A float variable representing the radius of a circle, calculated as half of the diameter."
+    },
+    {
+      "name": "area",
+      "description": "A float variable representing the area of a circle, calculated using the formula pi times radius squared."
+    },
+    {
+      "name": "a",
+      "description": "A list variable storing integer values [1, 2, 3]."
+    },
+    {
+      "name": "b",
+      "description": "A list variable storing integer values [3, 2, 1]."
+    },
+    {
+      "name": "to_smash",
+      "description": "An integer variable representing the number of candies that will be smashed based on the total candies collected."
+    },
+    {
+      "name": "alice_candies",
+      "description": "An integer variable representing the number of candies collected by Alice."
+    },
+    {
+      "name": "bob_candies",
+      "description": "An integer variable representing the number of candies collected by Bob."
+    },
+    {
+      "name": "carol_candies",
+      "description": "An integer variable representing the number of candies collected by Carol."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "color",
+      "creation": "User-defined string variable.",
+      "flow": "Used for checking user's response."
+    },
+    {
+      "variable": "pi",
+      "creation": "Direct assignment with the approximate value.",
+      "flow": "Used in the calculation of the area."
+    },
+    {
+      "variable": "diameter",
+      "creation": "Direct assignment with a fixed value.",
+      "flow": "Used in calculating the radius."
+    },
+    {
+      "variable": "radius",
+      "creation": "Calculated as diameter/2.",
+      "flow": "Used in calculating the area."
+    },
+    {
+      "variable": "area",
+      "creation": "Calculated using the formula pi * radius^2.",
+      "flow": "Checked with q1.check() for correctness."
+    },
+    {
+      "variable": "a",
+      "creation": "Direct assignment with a list.",
+      "flow": "Used in swapping values with b."
+    },
+    {
+      "variable": "b",
+      "creation": "Direct assignment with a list.",
+      "flow": "Used in swapping values with a."
+    },
+    {
+      "variable": "to_smash",
+      "creation": "Calculated with the modulo operation on total candies.",
+      "flow": "Checked with q4.check() to verify correctness."
+    },
+    {
+      "variable": "alice_candies",
+      "creation": "Direct assignment with a fixed value.",
+      "flow": "Part of the calculation for to_smash."
+    },
+    {
+      "variable": "bob_candies",
+      "creation": "Direct assignment with a fixed value.",
+      "flow": "Part of the calculation for to_smash."
+    },
+    {
+      "variable": "carol_candies",
+      "creation": "Direct assignment with a fixed value.",
+      "flow": "Part of the calculation for to_smash."
+    }
+  ],
+  "models": []
+}

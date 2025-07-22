@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "/kaggle/input/wrangledfinal.csv",
+      "description": "Contains processed data ready for analysis."
+    },
+    {
+      "file_name": "/kaggle/input/Raw scraped datasets/4. IMDB_socio_demographic_ratings.csv",
+      "description": "Contains socio-demographic ratings from IMDB."
+    },
+    {
+      "file_name": "/kaggle/input/Raw scraped datasets/3. IMDB_general_ratings.csv",
+      "description": "Contains general ratings from IMDB."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing data from wrangledfinal.csv."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing data from IMDB_socio_demographic_ratings.csv."
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame containing data from IMDB_general_ratings.csv."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

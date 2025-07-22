@@ -1,0 +1,15 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Loading"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]
+    E["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    F["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"]
+    G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Output Plot"];
+
+    A --> |"Load Data"| B
+    B --> |"Process Data"| C
+    C --> |"Select Features"| D
+    D --> |"Train Model"| E
+    E --> |"Make Predictions"| F
+    F --> |"Visualize Results"| G;

@@ -1,0 +1,28 @@
+flowchart TD
+    %% Load Dataset
+    DS1["Data Source: Initial Dataset"] -->|Load Data| op1
+    click DS1 "path/to/data.csv" "Open Data Source"
+
+    %% Data Preparation
+    op1["Operation: Clean Data"] -->|Cleaned Data| dv1["Data Variable: cleaned_data"]
+
+    %% Feature Engineering
+    dv1 -->|Transformation| op2["Operation: Feature Engineering"]
+    op2 --> dv2["Data Variable: features"]
+
+    %% Split Data
+    dv2 -->|Split| op3["Operation: Train-Test Split"]
+    op3 --> dv3["Data Variable: train_data"]
+    op3 --> dv4["Data Variable: test_data"]
+
+    %% Initialize Model
+    dv3 -->|Data for Training| model1["Model: RandomForestClassifier"]
+    click model1 "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html" "Open RandomForestClassifier Documentation"
+
+    %% Train Model
+    model1 -->|Training| op4["Operation: Train Model"]
+    op4 --> dv5["Data Variable: trained_model"]
+
+    %% Evaluate Model
+    dv5 -->|Evaluate using Test Data| op5["Operation: Evaluate Model"]
+    op5 --> dv6["Data Variable: evaluation_results"]

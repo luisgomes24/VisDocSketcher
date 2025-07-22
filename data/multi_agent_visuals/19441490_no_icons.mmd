@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1["/products_info.csv/"]:::dataSource --> B1["Read csv"]:::process
+    A2["/5404.csv/"]:::dataSource --> C1["Read csv"]:::process
+
+    %% DataFrames
+    B1 --> D1["df"]:::dataFrame
+    C1 --> E1["df1"]:::dataFrame
+
+    %% Data Cleaning
+    D1 --> F1["klib.data_cleaning(df)"]:::process
+    E1 --> F2["klib.data_cleaning(df1)"]:::process
+
+    %% Cleaned DataFrames
+    F1 --> G1["df_cleaned"]:::dataFrame
+    F2 --> H1["df1_cleaned"]:::dataFrame
+
+    %% DataFlow - Plotting
+    G1 --> J1["Plot Distribution"]
+    H1 --> J1
+
+    E1 --> I1["Generate Correlation Matrix"]
+    I1 --> J2["Plot Correlation"]
+
+    %% Style Definitions
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#F2C464,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    classDef default fill:#FFCDD2,stroke:#333,stroke-width:2px;

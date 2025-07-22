@@ -1,0 +1,36 @@
+flowchart TD
+
+%% Data Source Nodes
+A1["train_terms.tsv"]:::dataSource
+A2["train_ids.npy"]:::dataSource
+A3["train_embeds.npy"]:::dataSource
+A4["test_embeds.npy"]:::dataSource
+A5["test_ids.npy"]:::dataSource
+
+%% Data Variable Nodes
+B1["trainTerms"]:::dataVar
+B2["vec_train_protein_ids"]:::dataVar
+B3["Y"]:::dataVar
+B4["X"]:::dataVar
+B5["IX_train"]:::dataVar
+B6["Y_submit"]:::dataVar
+B7["df_finalSubmission"]:::dataVar
+
+%% Model Node
+C1["RidgeCV Model"]:::model
+
+%% Data Flow
+A1 --> |"Load train terms"| B1
+A2 --> |"Load training IDs"| B2
+A3 --> |"Load training embeddings"| B4
+B1 --> |"Create labels_to_consider"| B3
+B2 --> |"Map to entries in Y"| B3
+B3 --> |"Use as target variable"| C1
+B4 --> |"Use as features"| C1
+C1 --> |"Predict Y_submit"| B6
+B6 --> |"Create submission DataFrame"| B7
+
+%% Style Definitions
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#f66,stroke:#333,stroke-width:2px;

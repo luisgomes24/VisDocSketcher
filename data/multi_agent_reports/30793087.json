@@ -1,0 +1,129 @@
+{
+    "data_sources": [
+        {
+            "source": "train.csv",
+            "description": "Contains image IDs and their corresponding labels for apple tree diseases (healthy, multiple diseases, rust, scab)."
+        },
+        {
+            "source": "images",
+            "description": "Folder containing image files of apple trees for model training."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "datasetObject",
+            "description": "DataFrame containing the training dataset information (image_id, healthy, multiple_diseases, rust, scab)."
+        },
+        {
+            "name": "images_id_csv",
+            "description": "List of image IDs from the dataset."
+        },
+        {
+            "name": "healthy_csv",
+            "description": "Labels corresponding to healthy apple trees."
+        },
+        {
+            "name": "multiple_diseases_csv",
+            "description": "Labels corresponding to multiple diseases in apple trees."
+        },
+        {
+            "name": "rust_csv",
+            "description": "Labels corresponding to rust disease in apple trees."
+        },
+        {
+            "name": "scab_csv",
+            "description": "Labels corresponding to scab disease in apple trees."
+        },
+        {
+            "name": "images",
+            "description": "Array of images resized and normalized for model training."
+        },
+        {
+            "name": "labels",
+            "description": "Array of labels corresponding to the images, indicating the disease present."
+        },
+        {
+            "name": "x_train",
+            "description": "Training set of image data."
+        },
+        {
+            "name": "x_test",
+            "description": "Test set of image data."
+        },
+        {
+            "name": "y_train",
+            "description": "Training set of labels."
+        },
+        {
+            "name": "y_test",
+            "description": "Test set of labels."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "datasetObject",
+            "creation_method": "pd.read_csv",
+            "usage": "Contains dataset information for reading image paths and labels."
+        },
+        {
+            "variable": "images",
+            "creation_method": "cv2.imread and resizing",
+            "usage": "Used as input data for model training after loading and preprocessing."
+        },
+        {
+            "variable": "labels",
+            "creation_method": "List of labels compiled during image loading.",
+            "usage": "Target variable used in model training."
+        },
+        {
+            "variable": "x_train",
+            "creation_method": "train_test_split",
+            "usage": "Input for model training."
+        },
+        {
+            "variable": "x_test",
+            "creation_method": "train_test_split",
+            "usage": "Input for model evaluation."
+        }
+    ],
+    "models": [
+        {
+            "model_type": "DenseNet CNN",
+            "input_features": "Resized and normalized images.",
+            "target_variable": "Labels of diseases.",
+            "hyperparameters": {
+                "optimizer": "Adam(0.001)",
+                "loss_function": "categorical_crossentropy",
+                "epochs": 30,
+                "batch_size": 32,
+                "metrics": ["accuracy", "precision", "recall"]
+            }
+        },
+        {
+            "model_type": "XGBClassifier",
+            "input_features": "Scaled CNN features.",
+            "target_variable": "Labels of diseases.",
+            "hyperparameters": {
+                "max_depth": 50,
+                "n_estimators": 500
+            }
+        },
+        {
+            "model_type": "RandomForestClassifier",
+            "input_features": "Scaled CNN features.",
+            "target_variable": "Labels of diseases.",
+            "hyperparameters": {
+                "max_depth": 50,
+                "n_estimators": 500
+            }
+        },
+        {
+            "model_type": "Support Vector Machine (SVM)",
+            "input_features": "Scaled CNN features.",
+            "target_variable": "Labels of diseases.",
+            "hyperparameters": {
+                "decision_function_shape": "ovo"
+            }
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/BBAS3.SA.csv",
+      "description": "CSV file containing stock price data for BBAS3 (Banco do Brasil)"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing the stock price data for BBAS3, loaded from the CSV file"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv()",
+      "flow": ["used in plots for distribution, correlation matrix, scatter matrix"]
+    }
+  ],
+  "models": []
+}

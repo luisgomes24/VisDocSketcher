@@ -1,0 +1,27 @@
+flowchart TD
+    %% Nodes representing data sources
+    DS1["bigquery-public-data.openaq.global_air_quality"]
+    
+    %% Nodes representing data variables
+    VAR0["open_aq"]
+    VAR1["us_cities"]
+    VAR2["unit_countries"]
+    VAR3["zero_pollutant"]
+    VAR4["query"]
+    VAR5["query_1"]
+    VAR6["query_2"]
+
+    %% Data source to variable relations
+    DS1 --> VAR0  %% open_aq is created using the global_air_quality data source
+
+    %% Data transformations and flow
+    VAR0 --> VAR4  %% query is formed using open_aq
+    VAR0 --> VAR5  %% query_1 is formed using open_aq
+    VAR0 --> VAR6  %% query_2 is formed using open_aq
+
+    VAR4 --> VAR1  %% us_cities is the result of executing query
+    VAR5 --> VAR2  %% unit_countries is the result of executing query_1
+    VAR6 --> VAR3  %% zero_pollutant is the result of executing query_2
+
+    %% Comments for ML models
+    %% No ML models are used in this notebook

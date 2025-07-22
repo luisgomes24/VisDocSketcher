@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources Nodes
+    A[Train Data] -->|pd.read_csv| B[df_train] %% Train Dataset
+    A[Train Data]:::source
+    C[Test Data] -->|pd.read_csv| D[df_test] %% Test Dataset
+    C[Test Data]:::source
+
+    %% Data Preparation Nodes
+    B -->|df_train.loc| E[train_X] %% Features for training
+    B -->|df_train.loc| F[train_y] %% Target for training
+    D -->|df_test.loc| G[test_X] %% Features for testing
+
+    %% ML Models
+    E --> |train_X| H[RandomForestRegressor] %% Model Training - RF
+    F --> |train_y| H
+    H --> |rf.predict| I[pred] %% Prediction using Random Forest
+    
+    E --> |train_X| J[LinearRegression] %% Model Training - LR
+    F --> |train_y| J
+    J --> |lr.predict| I %% Prediction using Linear Regression
+
+    %% Styling
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;

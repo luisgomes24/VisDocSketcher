@@ -1,0 +1,100 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Medal_Standings.csv",
+      "description": "Contains medal standings for various countries at the 2022 Commonwealth Games."
+    },
+    {
+      "file_name": "athlete_count.csv",
+      "description": "Contains the count of athletes participating in the 2022 Commonwealth Games."
+    },
+    {
+      "file_name": "Schedule.csv",
+      "description": "Contains the event schedule for the 2022 Commonwealth Games."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "countries",
+      "description": "List of country names participating in the Commonwealth Games."
+    },
+    {
+      "name": "men_gold",
+      "description": "List of gold medals won by men from each country."
+    },
+    {
+      "name": "men_silver",
+      "description": "List of silver medals won by men from each country."
+    },
+    {
+      "name": "men_bronze",
+      "description": "List of bronze medals won by men from each country."
+    },
+    {
+      "name": "women_gold",
+      "description": "List of gold medals won by women from each country."
+    },
+    {
+      "name": "women_silver",
+      "description": "List of silver medals won by women from each country."
+    },
+    {
+      "name": "women_bronze",
+      "description": "List of bronze medals won by women from each country."
+    },
+    {
+      "name": "mixed_gold",
+      "description": "List of gold medals won in mixed events."
+    },
+    {
+      "name": "mixed_silver",
+      "description": "List of silver medals won in mixed events."
+    },
+    {
+      "name": "mixed_bronze",
+      "description": "List of bronze medals won in mixed events."
+    },
+    {
+      "name": "total_gold",
+      "description": "Total gold medals won by each country."
+    },
+    {
+      "name": "total_silver",
+      "description": "Total silver medals won by each country."
+    },
+    {
+      "name": "total_bronze",
+      "description": "Total bronze medals won by each country."
+    },
+    {
+      "name": "total",
+      "description": "Total medals won by each country."
+    },
+    {
+      "name": "athlete_count",
+      "description": "DataFrame containing counts of athletes from the 2022 Commonwealth Games."
+    },
+    {
+      "name": "event_schedule",
+      "description": "DataFrame containing the schedule of events for the 2022 Commonwealth Games."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created using pd.DataFrame with various medal data lists.",
+      "flow": "Saved to 'Medal_Standings.csv'."
+    },
+    {
+      "variable": "athlete_count",
+      "creation": "Created using pd.read_html to scrape data from Wikipedia.",
+      "flow": "Saved to 'athlete_count.csv'."
+    },
+    {
+      "variable": "event_schedule",
+      "creation": "Created using pd.read_html to scrape data from Wikipedia.",
+      "flow": "Saved to 'Schedule.csv'."
+    }
+  ],
+  "models": []
+}

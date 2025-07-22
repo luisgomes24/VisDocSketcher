@@ -1,0 +1,7 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Data Loading"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> Data Preprocessing"]
+    B --> |"Preprocessed Data"| C["Feature Selection"]
+    C --> D["<img src='dummy_plots/lineplot_template.svg'/> <br/> Performance Metrics"]
+    C --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Training"]
+    E --> F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Predictions"]
+    D --> |"Evaluation"| G["<img src='icons/image.svg' width=100 height=100/> <br/> Model Evaluation"]

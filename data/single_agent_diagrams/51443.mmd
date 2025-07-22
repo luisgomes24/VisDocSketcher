@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["🎯 Train-Test Split"]
+    C --> D["📊 Evaluate Single Features AUC"]
+    D --> E["📈 Sort Single Features by AUC"]
+    E --> F["🔍 Generate Feature Combinations"]
+    F --> G["📊 Calculate Combined AUC for Features"]
+    G --> H["📈 Sort Feature Combinations by AUC"]
+    H --> I["🔄 Visualize Overlap with Pairwise Matrix"]
+    I --> J["🧠 Perform K-Means Clustering"]
+    J --> K["📊 Reorder Overlap Matrix"]
+    K --> L["🏆 Show Best Feature Combinations"]

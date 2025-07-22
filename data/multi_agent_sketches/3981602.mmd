@@ -1,0 +1,16 @@
+flowchart TD
+    %% Data Source Node
+    A[CSV File: ../input/BBAS3.SA.csv] 
+    %% Data Reading & Initial Transformation
+    A -->|pd.read_csv| B[DataFrame: df1]
+    %% Data Visualization Steps
+    B -->|Distribution Plots| C[Plot Per Column Distribution]
+    B -->|Correlation Matrix| D[Plot Correlation Matrix]
+    B -->|Scatter & Density Plots| E[Plot Scatter Matrix]
+
+    %% Comments
+    %% A: Represents the location from where the stock price data is loaded
+    %% B: DataFrame 'df1' where the CSV data is loaded into
+    %% C: Function to plot distribution per column in df1
+    %% D: Function to plot the correlation matrix of the data in df1
+    %% E: Function to generate scatter and density plots from df1

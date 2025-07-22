@@ -1,0 +1,21 @@
+flowchart TD
+    A["📁 Load Packages"] --> B["📊 Load Data"]
+    B --> C["📊 Explore Data"]
+    C --> D["🔍 Data Insight and Visualization"]
+    D --> E["📉 Correlation Analysis"]
+    E --> F["🤖 Model Development"]
+    F --> G["📊 Model Evaluation"]
+
+    %% Load Data Step
+    B --> |"train_features.csv" <img src='icons/file.svg'/> <br/> "Training Features"| H["<img src='icons/file.svg'/> <br/> Train Data"]
+    B --> |"test_features.csv" <img src='icons/file.svg'/> <br/> "Test Features"| I["<img src='icons/file.svg'/> <br/> Test Data"]
+    B --> |"train_targets_scored.csv" <img src='icons/file.svg'/> <br/> "Scored Targets"| J["<img src='icons/table.svg'/> <br/> Train Targets Got Scored"]
+    B --> |"train_targets_nonscored.csv" <img src='icons/file.svg'/> <br/> "Unscored Targets"| K["<img src='icons/table.svg'/> <br/> Train Targets Not Scored"]
+
+    %% Explore Data Step
+    C --> L["🔍 Data Summary"]
+    C --> M["🔍 Data Info"]
+    C --> N["📝 Column List"]
+    
+    %% Correlation Analysis Step
+    D --> |"Heatmap of Correlation" <img src='dummy_plots/heatmap_template.svg'/> <br/> "Correlation Heatmap"| O["<img src='dummy_plots/heatmap_template.svg'/> <br/> Heatmap Results"]

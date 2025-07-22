@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Source Node
+    A[("co2_emission.csv")]:::dataSource --> B
+    
+    %% Data Loading Node
+    B[/"Load Data with pd.read_csv"/]:::process --> C
+    
+    %% Main Data Variable Node
+    C[["df: Emission Data"]]:::data
+    C -->|Visualisation| D
+    
+    %% Visualization Node
+    D[/Visualize Emissions Data for Countries/]:::process
+    D -->|Summary Statistics| E
+    D -->|For Specific Country| F
+    
+    %% Summary Statistics Node
+    E[/"Print Summary Statistics"/]:::process
+    
+    %% Temp DataFrame for Visualization Node
+    F[/"Create df_vis for Specific Country"/]:::create
+    F --> G
+    
+    %% Country Visualization Node
+    G[/Visualisation for Specific Country/]:::process
+
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#9f6,stroke:#333,stroke-width:2px;
+    classDef data fill:#6cf,stroke:#333,stroke-width:2px;
+    classDef create fill:#fc9,stroke:#333,stroke-width:2px;

@@ -1,0 +1,162 @@
+{
+  "data_sources": [
+    {
+      "filename": "circuits.csv",
+      "description": "Circuit details including location and name"
+    },
+    {
+      "filename": "constructorResults.csv",
+      "description": "Results of constructors in races"
+    },
+    {
+      "filename": "constructors.csv",
+      "description": "Teams participating in the season"
+    },
+    {
+      "filename": "constructorStandings.csv",
+      "description": "Standings of constructors over the season"
+    },
+    {
+      "filename": "drivers.csv",
+      "description": "List of drivers participating in the season"
+    },
+    {
+      "filename": "driverStandings.csv",
+      "description": "Standings of drivers over the season"
+    },
+    {
+      "filename": "lapTimes.csv",
+      "description": "Lap time records for each driver"
+    },
+    {
+      "filename": "pitStops.csv",
+      "description": "Details of pit stops for each driver"
+    },
+    {
+      "filename": "qualifying.csv",
+      "description": "Qualifying results for each race"
+    },
+    {
+      "filename": "races.csv",
+      "description": "Details of races, including dates and circuit IDs"
+    },
+    {
+      "filename": "results.csv",
+      "description": "Final results of each race"
+    },
+    {
+      "filename": "seasons.csv",
+      "description": "Yearly seasons of F1 races"
+    },
+    {
+      "filename": "status.csv",
+      "description": "Status of drivers (finished, retired, etc.)"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "YEAR",
+      "description": "The year of the championship (set to 2011)"
+    },
+    {
+      "name": "DRIVER_LS",
+      "description": "Driver line styles based on team assignments"
+    },
+    {
+      "name": "DRIVER_C",
+      "description": "Dictionary mapping driver IDs to their color codes"
+    },
+    {
+      "name": "TEAM_C",
+      "description": "Dictionary mapping team IDs to their color codes"
+    },
+    {
+      "name": "LINESTYLES",
+      "description": "Styles for different lines in plots"
+    },
+    {
+      "name": "LapTimes",
+      "description": "DataFrame holding lap times for each driver"
+    },
+    {
+      "name": "Results",
+      "description": "DataFrame holding results for each race"
+    },
+    {
+      "name": "Drivers",
+      "description": "DataFrame containing details of all drivers"
+    },
+    {
+      "name": "Races",
+      "description": "DataFrame with details about each race"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "circuits",
+      "creation": "read_csv",
+      "flow": "Used for accessing circuit names and locations"
+    },
+    {
+      "variable": "constructorResults",
+      "creation": "read_csv",
+      "flow": "Used for linking constructors with results"
+    },
+    {
+      "variable": "constructors",
+      "creation": "read_csv",
+      "flow": "Used to get constructors' names and URLs"
+    },
+    {
+      "variable": "constructorStandings",
+      "creation": "read_csv",
+      "flow": "Used to fetch standings based on constructors"
+    },
+    {
+      "variable": "drivers",
+      "creation": "read_csv",
+      "flow": "Used to provide details of drivers in the plots"
+    },
+    {
+      "variable": "driverStandings",
+      "creation": "read_csv",
+      "flow": "Subset for the year 2011 for standings"
+    },
+    {
+      "variable": "lapTimes",
+      "creation": "read_csv and merge",
+      "flow": "Contains lap times and is used in race trace plotting"
+    },
+    {
+      "variable": "pitStops",
+      "creation": "read_csv",
+      "flow": "Mentioned for pit-stop details in other analyses"
+    },
+    {
+      "variable": "qualifying",
+      "creation": "read_csv",
+      "flow": "Used to derive qualifying results for races"
+    },
+    {
+      "variable": "races",
+      "creation": "read_csv",
+      "flow": "Used to identify individual races and to filter data"
+    },
+    {
+      "variable": "results",
+      "creation": "read_csv",
+      "flow": "Provides overall race results for drivers and constructors"
+    },
+    {
+      "variable": "seasons",
+      "creation": "read_csv",
+      "flow": "Not specifically used in final plots but defines the scope"
+    },
+    {
+      "variable": "status",
+      "creation": "read_csv",
+      "flow": "Helps to define the outcomes of race participants"
+    }
+  ],
+  "models": []
+}

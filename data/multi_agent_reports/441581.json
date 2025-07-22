@@ -1,0 +1,78 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/xgb-valid-preds-public/xgb_valid.csv",
+      "description": "Contains OOF predictions for the validation set."
+    },
+    {
+      "file": "../input/porto-seguro-safe-driver-prediction/train.csv",
+      "description": "Contains the training dataset with IDs and target labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "oof_preds",
+      "description": "DataFrame containing the OOF predictions from the xgboost model."
+    },
+    {
+      "variable": "y",
+      "description": "DataFrame containing the training target variable (labels) and IDs."
+    },
+    {
+      "variable": "gini_public",
+      "description": "List to store Gini scores from public splits during the 10,000 trials."
+    },
+    {
+      "variable": "gini_private",
+      "description": "List to store Gini scores from private splits during the 10,000 trials."
+    },
+    {
+      "variable": "gini_public_arr",
+      "description": "Numpy array of Gini scores from public splits."
+    },
+    {
+      "variable": "gini_private_arr",
+      "description": "Numpy array of Gini scores from private splits."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "oof_preds",
+      "created_by": "pd.read_csv",
+      "flows_to": "Used in train_test_split to create public and private predictions."
+    },
+    {
+      "variable": "y",
+      "created_by": "pd.read_csv",
+      "flows_to": "Used in train_test_split to create the ground truth for comparisons."
+    },
+    {
+      "variable": "gini_public",
+      "created_by": "List initialization",
+      "flows_to": "Stores Gini scores for public splits during the loop."
+    },
+    {
+      "variable": "gini_private",
+      "created_by": "List initialization",
+      "flows_to": "Stores Gini scores for private splits during the loop."
+    },
+    {
+      "variable": "gini_public_arr",
+      "created_by": "np.array(gini_public)",
+      "flows_to": "Used for analytical comparisons and to plot histograms."
+    },
+    {
+      "variable": "gini_private_arr",
+      "created_by": "np.array(gini_private)",
+      "flows_to": "Used for analytical comparisons and to plot histograms."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBoost",
+      "input_features": "Features from the training data that were used to generate OOF predictions.",
+      "target_variable": "target",
+      "hyperparameters": "Default parameters used in the model as specified in the provided kernel."
+    }
+  ]
+}

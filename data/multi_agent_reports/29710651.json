@@ -1,0 +1,17 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "potential_leakage_feature",
+      "description": "The feature being analyzed for potential leakage in housing price prediction."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "potential_leakage_feature",
+      "created_by": "Assigned a value based on analysis.",
+      "flows_to": "Used in the answer check for identifying leakage in feature selection."
+    }
+  ],
+  "models": []
+}

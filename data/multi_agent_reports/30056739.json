@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/tps092022-time-series-conversation/train_Belgium_KaggleMart_Kaggle Getting Started.csv",
+      "description": "Training dataset containing historical sales data with a date column."
+    },
+    {
+      "file_path": "../input/tps092022-time-series-conversation/test_Belgium_KaggleMart_Kaggle Getting Started.csv",
+      "description": "Test dataset for predictions compatible with the train dataset format."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data with historical sales information."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test data for which predictions will be made."
+    },
+    {
+      "variable_name": "y_predict",
+      "description": "Predicted sales data using the initial model."
+    },
+    {
+      "variable_name": "tuned_model",
+      "description": "Model after hyperparameter tuning for improved performance."
+    },
+    {
+      "variable_name": "final_model",
+      "description": "Finalized model used for predictions on the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to set up the model and predictions."
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to store predictions for final output."
+    },
+    {
+      "variable_name": "y_predict",
+      "creation_method": "time.predict_model",
+      "flow": "Initial predictions made from the initial model."
+    },
+    {
+      "variable_name": "tuned_model",
+      "creation_method": "time.tune_model",
+      "flow": "Hyperparameter tuning is applied, leading to an improved model."
+    },
+    {
+      "variable_name": "final_model",
+      "creation_method": "time.finalize_model",
+      "flow": "Final model to be used for making future predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "AutoML Time Series Model",
+      "input_features": "Historical sales data",
+      "target_variable": "num_sold",
+      "hyperparameters": "Optimized for SMAPE"
+    }
+  ]
+}

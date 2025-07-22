@@ -1,0 +1,30 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Data Review"]
+    B --> C["🖼️ Data Preview <img src='dummy_plots/barplot_template.svg' /> <br/> FLower Samples"]
+    A --> D["🔄 Data Augmentation"]
+    D --> E["🧠 Model Creation"]
+    E --> F["⚙️ Compilation"]
+    F --> G["🚀 Training"]
+    G --> H["📈 Model Training History <img src='dummy_plots/lineplot_template.svg' /> <br/> Loss & Accuracy"]
+    H --> I["💾 Saving Model"]
+    I --> J["📥 Loading Model"]
+    J --> K["🧪 Testing Predictions <img src='dummy_plots/scatter_plot_template.svg' /> <br/> Pred vs Reality"]
+
+    subgraph Data_Pipeline[Data Pipeline]
+        A
+        B
+        C
+        D
+    end
+    
+    subgraph Model_Training[Model Training]
+        E
+        F
+        G
+        H
+        I
+        J
+        K
+    end
+    
+    Data_Pipeline --> Model_Training

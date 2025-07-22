@@ -1,0 +1,16 @@
+{"data_sources": [
+    { "file_name": "Dataset1_train.csv", "description": "Contains train dataset for expenses with columns Date and Value." },
+    { "file_name": "Dataset3_train.csv", "description": "Contains train dataset for returns with columns Date and Value." },
+    { "file_name": "Dataset2_train.csv", "description": "Contains train dataset for supplies with columns Date and Value." }
+],
+"data_variables": [
+    { "name": "dfA1", "description": "DataFrame containing values for PrimaryKey A1 filtered from the main dataset." },
+    { "name": "dfA2", "description": "DataFrame containing values for PrimaryKey A2 or A4 filtered from the main dataset." },
+    { "name": "df3", "description": "Merged DataFrame combining dfA1 and dfA2 on Date for plotting purposes." }
+],
+"data_flow": [
+    { "variable": "dfA1", "created_by": "Filtering from main DataFrame df based on 'PrimaryKey'", "used_for": "Merged into df3 and plotted." },
+    { "variable": "dfA2", "created_by": "Filtering from main DataFrame df based on 'PrimaryKey'", "used_for": "Merged into df3 and plotted." },
+    { "variable": "df3", "created_by": "Merge operation on dfA1 and dfA2", "used_for": "Plotted against Date for A1 and A2/A4." }
+],
+"models": []}

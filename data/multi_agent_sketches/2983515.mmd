@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A1["../input/wine-reviews/winemag-data-130k-v2.csv"]
+    A2["../input/things-on-reddit/top-things/top-things/reddits/g/gaming.csv"]
+    A3["../input/things-on-reddit/top-things/top-things/reddits/m/movies.csv"]
+    A4["../input/powerlifting-database/meets.csv"]
+    A5["../input/powerlifting-database/openpowerlifting.csv"]
+
+    %% Data Variables
+    B1["reviews"]
+    B2["renamed"]
+    B3["reindexed"]
+    B4["gaming_products"]
+    B5["movie_products"]
+    B6["combined_products"]
+    B7["powerlifting_meets"]
+    B8["powerlifting_competitors"]
+    B9["powerlifting_combined"]
+
+    %% Data Flow
+    A1 -->|read_csv| B1
+    B1 -->|rename columns| B2
+    B1 -->|rename_axis| B3
+    A2 -->|read_csv| B4
+    A3 -->|read_csv| B5
+    B4 & B5 -->|pd.concat| B6
+    A4 -->|read_csv| B7
+    A5 -->|read_csv| B8
+    B7 & B8 -->|join on MeetID| B9

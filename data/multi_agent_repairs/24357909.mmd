@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    A["Train CSV File"] -->|Read CSV| B["train_data"]
+    %% A: Represents the training CSV data source
+    B -->|Drop target column| C["X"]
+    B -->|Extract target column| D["y"]
+    %% B: Represents train_data DataFrame with features and target
+
+    E["Test CSV File"] -->|Read CSV| F["test_data"]
+    %% E: Represents the test data CSV source
+    
+    G["Sample Submission CSV File"] --> H["submission"]
+    %% G: Represents the sample submission CSV format
+
+    C -->|Input Features| I["RandomForestClassifier Model"]
+    D -->|Target Variable| I
+    %% I: Represents the RandomForestClassifier Model
+    I -->|Hyperparameters: max_samples=(0.5, 0.9), max_features=(0.5, 0.9), n_estimators=300, random_state=42| I
+
+    F -->|Make Predictions| J["submission with predictions"]
+    I -->|Generate Predictions| J
+    %% J: Represents the submission DataFrame containing predictions
+
+    H --> J
+```

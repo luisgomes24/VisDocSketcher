@@ -1,0 +1,32 @@
+%% This Mermaid diagram displays the workflow of a data science project using the Starbucks dataset
+flowchart TD
+
+    %% Define data sources
+    A["starbucks.csv"]
+    %% This node represents the input data source, a CSV file with Starbucks menu nutritional data
+    
+    %% Define data variables and their transformations
+    A -->|Read CSV| B(["DataFrame: data"])
+    %% 'data' DataFrame created from the CSV file
+    
+    B -->|Drop 'calories' column| C(["Features: X"])
+    %% 'X' is the features DataFrame, excluding the target variable 'calories'
+    B -->|Extract 'calories' column| D(["Target: y"])
+    %% 'y' is the target variable, representing calorie content
+    
+    C -->|train_test_split| E["X_train"]
+    D -->|train_test_split| F["y_train"]
+    C -->|train_test_split| G["X_test"]
+    D -->|train_test_split| H["y_test"]
+    %% Split data into training and testing sets for model training and evaluation
+
+    %% Define machine learning model and predictions
+    E -->|Train| I["RandomForestRegressor: Model"]
+    F -->|Train| I
+    %% RandomForestRegressor model trained with default hyperparameters
+
+    I -->|Predict| J["Predictions: y_pred"]
+    %% 'y_pred' holds the predicted calorie values
+
+    J -->|Compare with| H
+    %% Predicted 'y_pred' compared with 'y_test' for evaluation

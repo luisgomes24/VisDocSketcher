@@ -1,0 +1,133 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/playground-series-s3e16/train.csv",
+      "description": "Training dataset containing features and labels for the age prediction.
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e16/test.csv",
+      "description": "Test dataset containing features without labels for age prediction.
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e16/sample_submission.csv",
+      "description": "Sample submission file for format reference.
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing the training dataset after preprocessing."
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame containing the test dataset after preprocessing."
+    },
+    {
+      "variable_name": "df_sample_submission",
+      "description": "DataFrame containing the sample submission structure."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature matrix used for model training excluding 'id' and 'Age' columns."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing 'Age' for model training."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training subset of the feature matrix split from the main dataset."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing subset of the feature matrix split from the main dataset."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training subset of the target variable split from the main dataset."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing subset of the target variable split from the main dataset."
+    },
+    {
+      "variable_name": "solution",
+      "description": "DataFrame containing the predicted ages, paired with the corresponding ids."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_method": "read_csv",
+      "flow": "Used for train/test split and model training."
+    },
+    {
+      "variable_name": "df_test",
+      "creation_method": "read_csv",
+      "flow": "Used for predictions after model training."
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "drop and get dummies",
+      "flow": "Used as input for model training and predictions."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "target extraction",
+      "flow": "Used as the target for model training."
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Used for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "train_test_split",
+      "flow": "Used for model evaluation."
+    },
+    {
+      "variable_name": "solution",
+      "creation_method": "join predictions with sample submission",
+      "flow": "Written to CSV as output."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "None"
+    },
+    {
+      "model_name": "Ridge",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "alpha: [0.001, 0.01, 0.1, 1, 10]"
+    },
+    {
+      "model_name": "Lasso",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "alpha: [0.001, 0.01, 0.1, 1, 10]"
+    },
+    {
+      "model_name": "Random Forest",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "n_estimators: [10, 50, 100, 200]"
+    },
+    {
+      "model_name": "K-Nearest Neighbors",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "n_neighbors: [3, 5, 7]"
+    },
+    {
+      "model_name": "XGBoost",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "learning_rate: 0.1, max_depth: 6"
+    }
+  ]
+}

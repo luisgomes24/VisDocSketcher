@@ -1,0 +1,15 @@
+graph TD;
+  A[Data Identification] --> B[Load Data];
+  B --> C[Process Data];
+  C --> D[Train Model];
+  D --> E[Evaluate Model];
+  E --> F[Make Predictions];
+  F --> G[Generate Submission];
+
+  A --> |"<img src='icons/file.svg' width=100 height=100/> <br/> Submission File"| submission;
+  B --> |"<img src='icons/table.svg' width=100 height=100/> <br/> Training Data"| train;
+  B --> |"<img src='icons/database.svg' width=100 height=100/> <br/> Taxonomy"| taxonomy;
+  C --> |"<img src='dummy_plots/barplot_template.svg'/> <br/> Counts of Labels"| counts_labels;
+  C --> |"<img src='dummy_plots/barplot_template.svg'/> <br/> Counts of Family"| counts_family;
+  C --> |"<img src='icons/column_split.svg' width=100 height=100/> <br/> Secondary Labels"| sec_labels;
+  C --> |"<img src='icons/column_split.svg' width=100 height=100/> <br/> Song Types"| song_types;

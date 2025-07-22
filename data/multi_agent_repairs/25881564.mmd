@@ -1,0 +1,35 @@
+flowchart TD
+    A["googleplaystore.csv"] -->|Read CSV| B["apps"]
+
+    %% Data Cleaning and Transformation
+    B["apps"] --> |Drop nulls, map types/sizes| C["Cleaned apps"]
+    
+    %% Preparing Features and Target
+    C --> |Extract Ratings| D["y"]
+    C --> |Drop Ratings & Irrelevant columns| E["X"]
+
+    %% PCA Transformation
+    E["X"] --> |Fit transform| F["pca_fit"]
+
+    %% Model Training
+    F --> |Train with target y| G["RandomForestRegressor"]
+    
+    %% Model Evaluation
+    G --> |Evaluate Accuracy| H["random_model_accuracy"]
+    G --> |Evaluate Test Accuracy| I["random_model_accuracy1"]
+
+    %% Model Deployment
+    G --> |Save Model| J["saved_model"]
+
+    %% Comments
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J comment;
+    click A href "googleplaystore.csv" "This is the source file containing app data from the Google Play Store."
+    click B href "" "Data is read into a DataFrame and cleaned up for analysis."
+    click D href "" "Ratings extracted as target variable y for model training."
+    click E href "" "Feature set X is derived excluding the target and some irrelevant columns."
+    click F href "" "PCA is applied to reduce the feature set to 5 principal components."
+    click G href "" "Random Forest Regressor, a ML model, is trained on transformed features."
+    click H href "" "The accuracy of the trained model is computed for the training set."
+    click I href "" "The accuracy of the model is computed for the test set as well."
+    click J href "" "The trained model is serialized and saved as a pickle file for later use."

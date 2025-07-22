@@ -1,0 +1,15 @@
+flowchart TD
+    %% DataFrame Node
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame"] --> |"Used in plots"| nunique["<img src='icons/column_split.svg' width=100 height=100/> <br/> Unique Count"]
+    df --> |"Correlation"| corr["<img src='icons/column_split.svg' width=100 height=100/> <br/> Correlation Matrix"]
+    df --> |"Column Names"| columnNames["<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Names"]
+
+    %% Data Variable Nodes
+    nunique --> |"Filter for plot"| plotPerColumnDistribution["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Plot Per Column Distribution"]
+    corr --> |"Used in"| plotCorrelationMatrix["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Plot Correlation Matrix"]
+    columnNames --> |"Used in plots"| plotScatterMatrix["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Plot Scatter Matrix"]
+
+    %% Plot Nodes
+    plotPerColumnDistribution
+    plotCorrelationMatrix
+    plotScatterMatrix

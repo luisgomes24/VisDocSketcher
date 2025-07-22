@@ -1,0 +1,7 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> Check available files"] --> B["🔍 Exploratory Analysis"]
+    B --> C["📊 Distribution Plots <img src='hist_template.svg' /> <br/> plotPerColumnDistribution"]
+    B --> D["📊 Correlation Matrix <img src='scatter_plot_template.svg' /> <br/> plotCorrelationMatrix"]
+    B --> E["📊 Scatter & Density Plots <img src='scatter_plot_template.svg' /> <br/> plotScatterMatrix"]
+    C --> F["✔️ Data Insights Not Available"]
+    E --> G["📋 Conclusion"]

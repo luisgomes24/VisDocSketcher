@@ -1,0 +1,41 @@
+```mermaid
+flowchart TD
+    subgraph Data_Input
+        A["Summary of Weather.csv"]
+    %% Data source for initial weather data
+    end
+    
+    subgraph Data_Preparation
+        B["dataset"]
+        C["X"]
+        D["y"]
+        E["X_train, X_test, y_train, y_test"]
+    %% Variables for data transformation and train-test split
+    end
+    
+    subgraph Model_Training
+        F["Linear Regression"]
+    %% Linear Regression model used for prediction
+    end
+    
+    subgraph Prediction
+        G["y_pred"]
+        H["df"]
+    %% Dataset for prediction results and comparison
+    end
+    
+    subgraph Visualization
+        I["df1"]
+    %% Table for visualizing first 25 predictions
+    end
+    
+    A -->|"load data"| B
+    B -->|"prepare MinTemp as X and MaxTemp as y"| C
+    B -->|"prepare MaxTemp as y"| D
+    C -->|"reshape MinTemp"| E
+    D -->|"reshape MaxTemp"| E
+    E -->|"split data"| F
+    F -->|"fit model"| G
+    G -->|"predict MaxTemp"| H
+    H -->|"compare actual and predicted"| I
+```

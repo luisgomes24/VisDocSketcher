@@ -1,0 +1,110 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/real-life-industrial-dataset-of-casting-product/casting_data/casting_data/train",
+            "description": "Training data directory containing images for two classes: ok_front and def_front."
+        },
+        {
+            "file_path": "../input/real-life-industrial-dataset-of-casting-product/casting_data/casting_data/test",
+            "description": "Testing data directory containing images for two classes: ok_front and def_front."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train_data",
+            "description": "Training dataset generated from the training images using ImageDataGenerator with data augmentation."
+        },
+        {
+            "name": "test_data",
+            "description": "Testing dataset generated from the testing images using ImageDataGenerator."
+        },
+        {
+            "name": "classes_count",
+            "description": "Dictionary containing the count of images for each class in the training dataset."
+        },
+        {
+            "name": "classes_labels",
+            "description": "Dictionary mapping class indices to their respective class names."
+        },
+        {
+            "name": "vgg",
+            "description": "Sequential model built on top of VGG16, modified to classify images into two categories."
+        },
+        {
+            "name": "y_prediction",
+            "description": "Predicted class labels for the test dataset."
+        },
+        {
+            "name": "y_true",
+            "description": "Actual class labels for the test dataset."
+        },
+        {
+            "name": "y_pred",
+            "description": "Predicted class labels aggregated from the test dataset over multiple batches."
+        },
+        {
+            "name": "cm",
+            "description": "Confusion matrix to evaluate the performance of the model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_data",
+            "creation": "Generated using ImageDataGenerator from training image directory.",
+            "flow": "Used for model fitting (training)."
+        },
+        {
+            "variable": "test_data",
+            "creation": "Generated using ImageDataGenerator from testing image directory.",
+            "flow": "Used for model evaluation and prediction."
+        },
+        {
+            "variable": "classes_count",
+            "creation": "Dictionary defined manually.",
+            "flow": "Used for visualization of class counts."
+        },
+        {
+            "variable": "classes_labels",
+            "creation": "Dictionary defined manually.",
+            "flow": "Used to map predicted indices to labels."
+        },
+        {
+            "variable": "vgg",
+            "creation": "Built using VGG16 model with modifications for output layer.",
+            "flow": "Used for training with train_data, evaluated with test_data, and for predictions."
+        },
+        {
+            "variable": "y_prediction",
+            "creation": "Generated from model predictions on test_data.",
+            "flow": "Used for comparison against true labels."
+        },
+        {
+            "variable": "y_true",
+            "creation": "Extracted from test_data during evaluation loop.",
+            "flow": "Used for confusion matrix calculations."
+        },
+        {
+            "variable": "y_pred",
+            "creation": "Aggregated predictions from multiple batches during evaluation.",
+            "flow": "Used to generate confusion matrix."
+        },
+        {
+            "variable": "cm",
+            "creation": "Generated from sklearn's confusion_matrix function.",
+            "flow": "Used for visual representation in a heatmap."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "VGG16",
+            "input_features": "Images resized to (244, 244) and augmented.",
+            "target_variable": "Two classes: ok_front (0) and def_front (1).",
+            "hyperparameters": {
+                "optimizer": "Adam",
+                "learning_rate": 0.001,
+                "loss_function": "sparse_categorical_crossentropy",
+                "epochs": 10
+            }
+        }
+    ]
+}

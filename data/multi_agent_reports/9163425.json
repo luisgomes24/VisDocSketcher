@@ -1,0 +1,23 @@
+{
+  "data_sources": [
+    {"source": "GCS Paths", "description": "Different paths for training, validation, and test datasets in TensorFlow records format."}
+  ],
+  "data_variables": [
+    {"variable": "GCS_BASE_PATH", "description": "Base path for accessing data on Google Cloud Storage."},
+    {"variable": "IMG_SIZE", "description": "Size of the images for model input."},
+    {"variable": "BATCH_SIZE", "description": "Size of the batches of data used in training."},
+    {"variable": "TRAINING_FILENAMES", "description": "List of filenames for the training dataset."},
+    {"variable": "VALIDATION_FILENAMES", "description": "List of filenames for the validation dataset."},
+    {"variable": "TEST_FILENAMES", "description": "List of filenames for the test dataset."},
+    {"variable": "CLASSES", "description": "List of flower classes to classify the images."}
+  ],
+  "data_flow": [
+    {"variable": "training_dataset", "creation": "get_batched_dataset(TRAINING_FILENAMES, labeled=True, train=True)", "usage": "Used for model training."},
+    {"variable": "validation_dataset", "creation": "get_batched_dataset(VALIDATION_FILENAMES, labeled=True)", "usage": "Used for validating the model during training."},
+    {"variable": "test_dataset", "creation": "get_batched_dataset(TEST_FILENAMES, labeled=False)", "usage": "Used for evaluating the model accuracy post-training."},
+    {"variable": "model", "creation": "Constructed using EfficientNetB0 and additional layers.", "usage": "Compiled and trained for classification of flower images."}
+  ],
+  "models": [
+    {"model_type": "EfficientNetB0", "input_features": "flower images", "target_variable": "species of flower", "hyperparameters": {"epochs": 20, "batch_size": "dependant on device", "learning_rate": {"start": 0.00001, "max": "0.0002 or defined by device", "min": 0.00001}}}
+  ]
+}

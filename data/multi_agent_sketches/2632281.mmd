@@ -1,0 +1,40 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources[Data Sources]
+        A1["train_V2.csv"]
+        A2["submission_adjusted.csv"]
+        A3["submission_v8.csv"]
+        A4["submission_nn_ensamble_v5.csv"]
+        A5["test_V2.csv"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables[Data Variables]
+        B1["train"]
+        B2["df_sub"]
+        B3["df_test"]
+        B4["df_sub_group"]
+    end
+
+    %% Models
+    subgraph Models[Models]
+        C1["LightGBM"]
+        C2["Neural Network"]
+    end
+
+    %% Data Flow
+    A1 --> B1
+    A2 --> B2
+    A3 --> B2
+    A4 --> B2
+    A5 --> B3
+
+    B1 --> C1
+    B1 --> C2
+    C1 -->|"Predictions"| B2
+    C2 -->|"Predictions"| B2
+
+    B2 --> B4
+    B4 -->|"Adjusted winPlacePerc"| B2
+
+    B2 -->|"Final Predictions"| D1["submission_ensemble_lvl2_v4.csv"]

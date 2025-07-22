@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> petrol_data.csv"] --> B["🔍 Data Overview <img src='table.svg'/>"]
+    B --> C["📊 Data Inspection <img src='table.svg'/> <br/> unique values, info, describe"]
+    C --> D["🔍 Filter City Data <img src='table.svg'/> <br/> Selected city"]
+    D --> E["🗂️ Preprocess Data <img src='column_split.svg'/> <br/> Reset index, Select Columns"]
+    E --> F["🛠️ Handle Missing Data <img src='column_split.svg'/> <br/> Fill NaN"]
+    F --> G["⏳ Visualize Time Series <img src='lineplot_template.svg'/> <br/> Rate over time"]
+    G --> H["🧠 Setup Experiment <img src='brain.svg'/> <br/> TimeSeriesExperiment"]
+    H --> I["📈 Compare Models <img src='brain.svg'/>"]

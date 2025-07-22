@@ -1,0 +1,23 @@
+flowchart TD
+    %% Nodes representing data sources
+    A["Data Source: sample_commits"] 
+    B["Data Source: languages"] 
+
+    %% Nodes representing data variables
+    C["Data Table: sample_commits_table"] 
+    D["Data Table: languages_table"] 
+    E["SQL Query: max_commits_query"] 
+    F["SQL Query: pop_lang_query"] 
+    G["SQL Query: all_langs_query"]
+
+    %% Data flow connections
+    A --> C  %% sample_commits_table is created from sample_commits data
+    B --> D  %% languages_table is created from languages data
+
+    %% Usage of data in queries
+    C --> E  %% max_commits_query uses sample_commits_table
+    D --> F  %% pop_lang_query uses languages_table
+
+    %% Queries execution flow
+    E --> |"Execute"| H["Result: Max Commits Analysis"]
+    F --> |"Execute"| I["Result: Popular Languages"]

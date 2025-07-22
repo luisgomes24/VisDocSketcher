@@ -1,0 +1,20 @@
+%% This is a flowchart diagram generated for the Jupyter Notebook analysis.
+flowchart TD
+    %% Data source for the workflow
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> books.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df1"]
+    click A href ""%% Node A represents the CSV file containing book data.
+    
+    %% Data loading step
+    B -->|Loaded using pd.read_csv| C["<img src='icons/brain.svg' width=100 height=100/> <br/> Data Analysis"]
+    click B href ""%% Node B represents the DataFrame "df1" that contains the loaded data.
+
+    %% Data analysis step
+    C -->|Data used for plotting distributions| D["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution Plots"]
+    C -->|Data used for correlation matrix| E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Correlation Matrix"]
+    C -->|Data used for scatter plots| F["<img src='dummy_plots/boxplot_template.svg'/> <br/> Scatter Plots"]
+    click C href ""%% Node C represents the step where data is analyzed and plotted.
+
+    %% Analysis plot nodes
+    click D href ""%% Node D represents the distribution plots generated from df1.
+    click E href ""%% Node E represents the correlation matrix generated from df1.
+    click F href ""%% Node F represents the scatter plots generated from df1.

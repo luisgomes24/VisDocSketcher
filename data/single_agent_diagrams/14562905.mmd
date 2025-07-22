@@ -1,0 +1,13 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🔍 Data Overview <img src='table.svg'/> <br/> df.head()"]
+    B --> C["🔎 Check for Missing Values <img src='table.svg'/> <br/> df.isnull().sum()"]
+    C --> D["🗑️ Drop Duplicates <img src='table.svg'/> <br/> df.drop_duplicates(...)"]
+    D --> E["✂️ Preprocess Text <img src='column_split.svg'/> <br/> df['text_length'] = df.text.apply(...)"]
+    E --> F["📊 Visualize Device Usage <img src='hist_template.svg'/> <br/> px.histogram(df, x='device')"]
+    F --> G["📈 Topic Modeling <img src='brain.svg'/> <br/> LDA Model Creation"]
+    G --> H["🌍 LDA Results Visualization <img src='scatter_plot_template.svg'/> <br/> pyLDAvis.display(vis)"]
+    H --> I["🖼️ Generate Word Cloud <img src='wordcloud.svg'/> <br/> showWordCloud(df['text_without_stopwords'])"]
+    I --> J["💬 Sentiment Analysis <img src='boxplot_template.svg'/> <br/> df['sentiment'] = TextBlob(text).sentiment"]
+    J --> K["📊 Distribution of Sentiment <img src='hist_template.svg'/> <br/> fig = px.histogram(df, x='sentiment')"]
+    K --> L["🖊️ Adding Sentiment Labels <img src='column_split.svg'/> <br/> df['sentimentLabel'] = df['sentiment'].apply(label)"]
+    L --> M["🌀 t-SNE Visualization <img src='scatter_plot_template.svg'/> <br/> plot_tsne.circle('x', 'y')"]

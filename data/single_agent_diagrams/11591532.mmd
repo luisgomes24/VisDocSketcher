@@ -1,0 +1,10 @@
+flowchart TD
+    A["💾 Load Image <img src='file.svg'/>"] --> B["🔄 Preprocess Image <img src='barplot_template.svg'/>"]
+    B --> C["🔍 Load Content & Style Images"]
+    C --> D["👀 Display Images <img src='scatter_plot_template.svg'/>"]
+    D --> E["🧠 Initialize VGG Model"]
+    E --> F["📦 Extract Features"]
+    F --> G["📊 Compute Gram Matrix"]
+    G --> H["⚙️ Set Style & Content Weights"]
+    H --> I["🔄 Optimize Target Image"]
+    I --> J["🖼️ Display Final Image <img src='lineplot_template.svg'/>"]

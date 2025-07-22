@@ -1,0 +1,31 @@
+%% Mermaid Diagram for Jupyter Notebook Workflow
+flowchart TD
+    %% Data Source
+    A["../input/ballon-dor-2021-images"] -->|Load images and labels| B
+    
+    %% DataLoading Process
+    B["dls"] -->|Create DataLoaders| C
+    
+    %% Model Creation
+    C["learn"] -->|Use cnn_learner with ResNet34| D
+    
+    %% Model Training
+    D["Learn (Model)"] -->|Train the model| E
+    
+    %% Model Interpretation
+    E["interp"] -->|from_learner| F
+    
+    %% Visualization and Evaluation
+    F["Model Performance Visualization"] -->|Plot top losses| G
+
+    %% Final Model Storage
+    D -->|Save model as 'model.pkl'| H["Model File"]
+
+    %% Comments for clarification
+    %% A: Represents the source of the data - Images for classification.
+    %% B: Represents DataLoader with training and validation datasets.
+    %% C: Learner object - It abstracts the model details and training methods.
+    %% D: The training model based on ResNet34 architecture.
+    %% E: Interpretation of model results, accuracy, losses.
+    %% F: Visualization of the learned model's predictions.
+    %% H: Final output model stored for future inference.

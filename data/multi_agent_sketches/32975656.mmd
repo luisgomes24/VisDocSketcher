@@ -1,0 +1,34 @@
+%% The diagram corresponds to a Jupyter Notebook workflow for feature extraction and classification
+
+flowchart TD
+    %% Data source: Image file
+    A[Image File: car_illus.jpg] -->|Read and decode| B[Variable: image]
+    %% Data read and preprocessing
+    B -->|Convolution + ReLU| C[Variable: image_detect]
+    C -->|Max Pooling| D[Variable: image_condense]
+    D -->|Visualization| E[Translated Features]
+    
+    %% Data source: Pre-trained VGG16 Model
+    F[VGG16 Model] --> |Feature Extraction| G[Variable: car_tf]
+    G --> |Global Avg Pooling| H[Variable: car_features]
+    H --> |Visualization| I[Pooled Feature Maps]
+    
+    %% External Dataset
+    J[Dataset: Car or Truck] -->|Load and Resize| F
+    
+    %% Machine Learning Model Details
+    subgraph ML Model
+        direction TB
+        K[VGG16]
+        K -->|GlobalAvgPool2D| L[Feature Map Averaging]
+    end
+
+    G --> ML Model
+    L --> I
+
+    %% Description comments
+    %% A: Initial input image from file for convolutional operations
+    %% B: Processed image variable for convolution and max pooling
+    %% F: Pre-trained VGG16 model used for feature extraction
+    %% J: Dataset with car and truck images
+    %% ML Model: VGG16 with Global Average Pooling for classification

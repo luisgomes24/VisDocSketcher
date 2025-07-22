@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::dataSource -->|pd.read_csv| B["train DataFrame"]:::dataVariable
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]:::dataSource -->|pd.read_csv| D["test DataFrame"]:::dataVariable
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]:::dataSource -->|Reference| F["Sample Format"]:::dataVariable
+
+    %% Model Training
+    B -->|Contains images and labels| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Custom CNN Model"]:::model
+    G -->|Predict| H["<img src='icons/table.svg' width=100 height=100/> <br/> anss Array"]:::dataVariable
+
+    %% Submission Preparation
+    H -->|Create DataFrame| I["<img src='icons/table.svg' width=100 height=100/> <br/> submission DataFrame"]:::dataVariable
+    I -->|Write to CSV| J["Submission File"]:::output
+
+    %% Style Section
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef model fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef output fill:#FFCDD2,stroke:#333,stroke-width:2px;
+    
+    %% Comments
+    class A,C,E fill:#87CEEB; %% Training, test, and sample files as data sources
+    class B,D,H fill:#C6F4D6; %% Processed data held in data variables
+    class G fill:#F2C464; %% Model used for predictions
+    class J fill:#FFCDD2; %% Final submission output

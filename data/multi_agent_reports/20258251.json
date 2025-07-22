@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/social-network-analysis/us_edgelist.csv",
+      "description": "An edge list representing relationships in the US social network"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the edge list data imported from the CSV file"
+    },
+    {
+      "name": "us_graph",
+      "description": "NetworkX graph constructed from the edge list DataFrame"
+    },
+    {
+      "name": "most_inf",
+      "description": "Dictionary of nodes with degree centrality indicating their influence"
+    },
+    {
+      "name": "mil",
+      "description": "Dictionary of nodes with eigenvector centrality indicating their importance"
+    },
+    {
+      "name": "best_conn",
+      "description": "Dictionary of nodes with betweenness centrality indicating their bridging capability"
+    },
+    {
+      "name": "group1, group2, group3",
+      "description": "Subgraphs representing the connections of the nodes Obama, Bush, and Hillary respectively"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_from": "pd.read_csv",
+      "flows_to": "us_graph"
+    },
+    {
+      "variable": "us_graph",
+      "created_from": "nx.from_pandas_edgelist",
+      "flows_to": "Plotting (nx.draw), Degree Analysis, Centrality Measures"
+    },
+    {
+      "variable": "most_inf",
+      "created_from": "nx.degree_centrality",
+      "flows_to": "Output (printed results)"
+    },
+    {
+      "variable": "mil",
+      "created_from": "nx.eigenvector_centrality",
+      "flows_to": "Output (printed results)"
+    },
+    {
+      "variable": "best_conn",
+      "created_from": "nx.betweenness_centrality",
+      "flows_to": "Output (printed results)"
+    },
+    {
+      "variable": "group1, group2, group3",
+      "created_from": "nx.bfs_tree",
+      "flows_to": "Plotting (nx.draw_networkx)"
+    }
+  ],
+  "models": []
+}

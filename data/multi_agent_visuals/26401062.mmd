@@ -1,0 +1,9 @@
+%%{init: {'theme': 'default'}}%%
+
+graph TD;
+    A["<img src='icons/image.svg' width=100 height=100/> <br/> Start"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Process"];
+    B --> C["<img src='icons/brain.svg' width=100 height=100/> <br/> Decision"];
+    C -->|"Yes"| D["<img src='dummy_plots/barplot_template.svg'/> <br/> End"];
+    C -->|"No"| B;
+    A --> E["<img src='icons/database.svg' width=100 height=100/> <br/> Another Process"];
+    E --> F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> End"];

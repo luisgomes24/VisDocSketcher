@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/cities.csv",
+      "description": "A CSV file containing the coordinates of cities, used for the traveling salesman problem, limited to the first 5000 cities."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "cities",
+      "description": "A DataFrame with city coordinates loaded from the CSV file."
+    },
+    {
+      "name": "coords",
+      "description": "A numpy array containing city coordinates extracted from the 'cities' DataFrame."
+    },
+    {
+      "name": "tour",
+      "description": "A numpy array representing a tour order of cities, initialized as a range of city indices."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "cities",
+      "creation": "pd.read_csv('../input/cities.csv', nrows=5000, index_col=['CityId'])",
+      "flow": "Used to create 'coords' and doesn't flow anywhere else."
+    },
+    {
+      "variable": "coords",
+      "creation": "cities.values",
+      "flow": "Used in 'dist' function for distance calculations in both 'two_opt_python' and 'two_opt_cython' functions."
+    },
+    {
+      "variable": "tour",
+      "creation": "np.array([i for i in range(5000)])",
+      "flow": "Passed to 'two_opt_python' and 'two_opt_cython' functions and modified within those functions during optimization."
+    }
+  ],
+  "models": [
+    {
+      "name": "Two-Opt Algorithm",
+      "type": "Optimization Heuristic",
+      "input_features": ["tour", "coords"],
+      "target_variable": "Optimized tour order",
+      "hyperparameters": {}
+    }
+  ]
+}

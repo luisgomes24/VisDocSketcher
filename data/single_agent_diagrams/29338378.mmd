@@ -1,0 +1,18 @@
+graph TD;
+    A["📂 Load Data"] --> B["📊 Data Preprocessing"];
+    B --> C["🌅 Sample Images"];
+    C --> D["🧠 Modeling"];
+    D --> E["⚙️ Training"];
+    E --> F["🧪 Evaluation"];
+    F --> G["📈 Visualize Results"];
+    G --> H["🔍 Prediction"];
+    
+    B -->|Load Train Data| B1["<img src='dummy_plots/barplot_template.svg'/> <br/> Prepare Training Data"];
+    B -->|Load Validation Data| B2["<img src='dummy_plots/barplot_template.svg'/> <br/> Prepare Validation Data"];
+    B -->|Load Test Data| B3["<img src='dummy_plots/barplot_template.svg'/> <br/> Prepare Test Data"];
+    
+    E --> I["<img src='dummy_plots/lineplot_template.svg'/> <br/> Plot Training Loss & Accuracy"];
+    E --> J["<img src='dummy_plots/lineplot_template.svg'/> <br/> Plot Validation Loss & Accuracy"];
+    
+    F --> K["📊 Confusion Matrix"];
+    F --> L["📈 Classification Report"];

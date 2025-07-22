@@ -1,0 +1,24 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["chicago_crime dataset"]
+    
+    %% Data Variables
+    B["client"] --> C["dataset_ref"]
+    C --> D["dataset"]
+    D --> E["tables"]
+    E --> F["num_tables"]
+    C --> G["table_ref"]
+    G --> H["table"]
+    H --> I["fields_for_plotting"]
+    
+    %% Data Flow
+    B -->|"bigquery.Client()"| C
+    C -->|"client.dataset('chicago_crime', project='bigquery-public-data')"| D
+    D -->|"client.get_dataset(dataset_ref)"| E
+    E -->|"list(client.list_tables(dataset))"| F
+    F -->|"[table.table_id for table in tables]"| G
+    G -->|"dataset_ref.table('crime')"| H
+    H -->|"client.get_table(table_ref)"| I
+    I -->|"['latitude', 'longitude']"| F  
+```

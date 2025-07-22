@@ -1,0 +1,20 @@
+graph TD;
+    A["📂 Load Data"] --> B["🗃️ Data Preparation"];
+    B --> C["🔍 Feature Selection"];
+    C --> D["🚿 Handle Missing Values"];
+    D --> E["📊 Data Splitting"];
+    E --> F["🧠 Modeling"];
+    F --> G["📊 Evaluate AUC"];
+    G --> H["📈 Plot ROC Curve"];
+    H --> I["📦 Submission"];
+    
+    A --> |"train, test data"| B;
+    B --> |"Selected features"| C;
+    C --> |"Prepared Data"| D;
+    D --> |"Data ready for modeling"| E;
+    E --> |"Train & Validation Sets"| F;
+    F --> |"Trained Models"| G;
+    G --> |"Validation Score"| H;
+    I["📦 Submission"] --> |"Predictions written"| J["📂 Check Submission Format"];
+    H --> |"ROC curve for evaluation"| K["<img src='dummy_plots/roc_curve_template.svg'/> <br/> ROC Curve"];
+    J --> K;

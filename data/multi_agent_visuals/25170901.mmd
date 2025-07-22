@@ -1,0 +1,17 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] -- Process --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Import"]; 
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]; 
+    C --> D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]; 
+    D -->|"Training Data"| E["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Training"];  
+    E --> F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Evaluation"]; 
+    F -->|"Predictions"| G["<img src='icons/image.svg' width=100 height=100/> <br/> Result Visualization"]; 
+    G --> H["<img src='icons/column_split.svg' width=100 height=100/> <br/> Output"]; 
+
+    classDef data fill:#87CEEB;
+    classDef model fill:#C6F4D6;
+    classDef output fill:#F2C464;
+    classDef plot fill:#FFCDD2;
+    class A,B,C,D data;
+    class E model;
+    class F plot;
+    class G,H output;

@@ -1,0 +1,33 @@
+flowchart TD
+  %% Data Sources
+  A1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::ds -->|pd.read_csv| B1["<img src='icons/table.svg' width=100 height=100/> <br/> train DataFrame"]
+  A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]:::ds -->|pd.read_csv| B2["<img src='icons/table.svg' width=100 height=100/> <br/> test DataFrame"]
+  A3["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]:::ds -->|pd.read_csv| B3["<img src='icons/table.svg' width=100 height=100/> <br/> sample submission DataFrame"]
+
+  %% Data Preparation
+  subgraph Preparation
+    B1 -->|train_test_split| C1["<img src='icons/column_split.svg' width=100 height=100/> <br/> x_train, x_val, y_train, y_val"]
+    C1 -->|pd.concat| D1["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_data"]
+    C1 -->|pd.concat| D2["<img src='icons/row_split.svg' width=100 height=100/> <br/> val_data"]
+  end
+
+  %% Image Data Generators
+  D1 -->|flow_from_dataframe| E1["<img src='icons/image.svg' width=100 height=100/> <br/> train_img_gen"]
+  D2 -->|flow_from_dataframe| E2["<img src='icons/image.svg' width=100 height=100/> <br/> val_img_gen"]
+
+  %% Model Creation
+  subgraph Model
+      E1 -->|fit_generator| F1["<img src='icons/brain.svg' width=100 height=100/> <br/> ResNet101 CNN Model"]:::ml
+      E2 -->|validation| F1
+  end
+
+  %% Styles
+  classDef ds fill:#87CEEB,stroke:#333,stroke-width:2px;
+  classDef ml fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+
+  %% Model Details
+  subgraph Model Details
+    F1 -->|ResNet101 with seeds defined| G1["<img src='icons/image.svg' width=100 height=100/> <br/> Input: Resized images"]
+    G1 --> H1["focal_loss, Adam optimizer"]:::ml
+  end

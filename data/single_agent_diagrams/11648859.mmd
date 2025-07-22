@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["📂 Load Users Data <img src='dummy_plots/hist_template.svg'/> <br/>"] --> B["📂 Load Books Data <img src='dummy_plots/hist_template.svg'/> <br/>"];
+    B --> C["📂 Load Ratings Data <img src='dummy_plots/hist_template.svg'/> <br/>"];
+    C --> D["🔗 Merge Datasets"];
+    D --> E["🌍 Split Location"];
+    E --> F["🗃️ Preprocess Data"];
+    F --> G["📊 Visualize Data <img src='dummy_plots/pairplot_template.svg'/> <br/>"];
+    G --> H["🧠 Train Model"];
+    H --> I["📊 Evaluate Model"];
+    I --> J["📊 Frequency of Good Remarks <img src='dummy_plots/lineplot_template.svg'/> <br/>"];
+    J --> K["📊 Frequency of Not Good Remarks <img src='dummy_plots/lineplot_template.svg'/> <br/>"];

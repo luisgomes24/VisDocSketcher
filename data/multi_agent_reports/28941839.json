@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Contains sample submission structure for predictions."
+    },
+    {
+      "file_name": "sample_submission_v2.csv",
+      "description": "Another version of sample submission structure for predictions."
+    },
+    {
+      "file_name": "train_v2.csv",
+      "description": "Training dataset containing historical data for revenue prediction."
+    },
+    {
+      "file_name": "test_v2.csv",
+      "description": "Testing dataset containing data to evaluate predictions."
+    },
+    {
+      "file_name": "train_df.csv",
+      "description": "Processed version of the training data with unnested JSON columns."
+    },
+    {
+      "file_name": "test_df.csv",
+      "description": "Processed version of the testing data with unnested JSON columns."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_df",
+      "description": "DataFrame containing training data for the revenue predictions."
+    },
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame containing test data for the revenue predictions."
+    },
+    {
+      "variable_name": "sub",
+      "description": "DataFrame containing sample submission structure."
+    },
+    {
+      "variable_name": "sub2",
+      "description": "DataFrame containing another version of sample submission structure."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_df",
+      "creation_method": "load_df",
+      "flow": "Used for model training and evaluation."
+    },
+    {
+      "variable_name": "test_df",
+      "creation_method": "load_df",
+      "flow": "Used for making predictions."
+    },
+    {
+      "variable_name": "sub",
+      "creation_method": "pd.read_csv",
+      "flow": "Displayed for submission formatting."
+    },
+    {
+      "variable_name": "sub2",
+      "creation_method": "pd.read_csv",
+      "flow": "Displayed for another submission formatting."
+    }
+  ],
+  "models": []
+}

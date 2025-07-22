@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "App_reviews.csv",
+      "description": "Contains app review data, possibly with various columns detailing user reviews."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first 1000 rows of app review data from App_reviews.csv."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "usage": "Used in plotting functions (plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix) and shows the first few rows of the data."
+    }
+  ],
+  "models": []
+}

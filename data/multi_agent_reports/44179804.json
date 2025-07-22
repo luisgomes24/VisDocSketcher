@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/housesalesprediction/kc_house_data.csv",
+      "description": "Contains housing sales data including features like price, number of bedrooms, bathrooms, and amenities."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame holding the housing sales data."
+    },
+    {
+      "name": "fig1",
+      "description": "Plotly figure for visualizing the distribution of the number of bedrooms."
+    },
+    {
+      "name": "fig2",
+      "description": "Plotly figure for visualizing the distribution of the number of bathrooms."
+    },
+    {
+      "name": "fig3",
+      "description": "Plotly figure for visualizing the distribution of square footage of living area."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created using pd.read_csv by importing the dataset.",
+      "flow": "Used for cleaning, feature engineering, and creating various visualizations."
+    },
+    {
+      "variable": "fig1",
+      "creation": "Created using plotly express to visualize the distribution of bedrooms.",
+      "flow": "Displayed as a histogram."
+    },
+    {
+      "variable": "fig2",
+      "creation": "Created using plotly express to visualize the distribution of bathrooms.",
+      "flow": "Displayed as a histogram."
+    },
+    {
+      "variable": "fig3",
+      "creation": "Created using plotly express to visualize the distribution of square footage.",
+      "flow": "Displayed as a histogram."
+    }
+  ],
+  "models": []
+}

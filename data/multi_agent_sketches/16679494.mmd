@@ -1,0 +1,33 @@
+%% Mermaid Diagram for Data Science Project Workflow
+flowchart TD
+    subgraph Load_Data
+        A1["df_train"]
+        A2["df_test"]
+        A3["df_sensor"]
+    end
+    
+    A1 -->|"Create X_train"| B1["X_train"]
+    A1 -->|"Encode to y_train"| B2["y_train"]
+    A2 -->|"Create X_test"| B3["X_test"]
+    A3 -->|"Transform sensor data"| B1
+    
+    subgraph Process_Data
+        B1 --> C1["training_generator"]
+        B2 --> C1
+    end
+    
+    subgraph Model_Training
+        C1 --> D1["EskinGenerator"]
+    end
+    
+    D1 -->|"Train model with batches of augmented data"| E1["Trained Model"]
+    B3 -->|"Evaluate model"| E1
+
+    %% Comments for each block
+    %% A1: Load training dataset
+    %% A2: Load testing dataset
+    %% A3: Load sensor data for transformations
+    %% B1, B2, B3: Processed input features and targets
+    %% C1: Data generator for training
+    %% D1: ML model specific training process
+    %% E1: Output trained model with evaluation

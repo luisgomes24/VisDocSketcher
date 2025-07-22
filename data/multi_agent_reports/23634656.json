@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "file_name": "none",
+      "description": "No external data files utilized. The data is generated programmatically."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "year",
+      "description": "Input year for which the Easter date is calculated."
+    },
+    {
+      "name": "d1",
+      "description": "Date string representing March 21 of the input year."
+    },
+    {
+      "name": "d2",
+      "description": "Date of the first full moon after the date in d1."
+    },
+    {
+      "name": "d3",
+      "description": "Date object created from the full moon date (d2)."
+    },
+    {
+      "name": "d4",
+      "description": "Date of the first Sunday following the full moon date, representing the Gregorian Easter date."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "year",
+      "creation": "Input variable, assigned a string value.",
+      "flow": "Used to generate d1."
+    },
+    {
+      "variable": "d1",
+      "creation": "Concatenation to create a date string.",
+      "flow": "Used as input to calculate d2."
+    },
+    {
+      "variable": "d2",
+      "creation": "Calculated using ephem.next_full_moon() with d1 as an argument.",
+      "flow": "Used to create d3."
+    },
+    {
+      "variable": "d3",
+      "creation": "Created from the d2 tuple.",
+      "flow": "Used to generate d4."
+    },
+    {
+      "variable": "d4",
+      "creation": "Calculated based on the date in d3.",
+      "flow": "Final output representing the Gregorian Easter date."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "none",
+      "description": "No predictive models are used in this notebook as it focuses on date calculations."
+    }
+  ]
+}

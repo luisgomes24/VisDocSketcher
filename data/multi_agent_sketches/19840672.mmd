@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Source Nodes
+    Rainfall_Raw["Rainfall_Data_LL.csv"]
+    %% Represents the CSV file containing rainfall data from 1901 to 2017 in India
+
+    %% Data Variables
+    df["DataFrame df"]
+    %% Initial DataFrame containing the rainfall data
+    andaman["DataFrame andaman"]
+    %% DataFrame containing rainfall data specific to Andaman & Nicobar Islands
+    df1["DataFrame df1"]
+    %% Melted DataFrame for time series analysis of rainfall
+
+    %% Machine Learning Models
+    lr["Linear Regression Model"]
+    %% Linear regression model for predicting rainfall
+    kmeans["KMeans Model"]
+    %% KMeans clustering model for clustering rainfall data
+
+    %% Data Flow
+    Rainfall_Raw -->|"load csv"| df
+    %% Load raw data into DataFrame
+    df -->|"filter"| andaman
+    %% Filter data for Andaman & Nicobar Islands
+    df -->|"melt for time series"| df1
+    %% Melt DataFrame for time series analysis
+
+    %% Linear Regression Model Flow
+    df1 -->|"train features"| lr
+    %% Input features for Linear Regression
+    df1 -->|"train targets"| lr
+    %% Target rainfall for Linear Regression
+
+    %% KMeans Model Flow
+    df1 -->|"features for clustering"| kmeans
+    %% Features used for KMeans clustering

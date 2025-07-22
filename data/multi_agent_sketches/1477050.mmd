@@ -1,0 +1,44 @@
+%%{init: {"theme": "default", "themeVariables": {"primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#fff"}}}%%
+flowchart TD
+    subgraph Data_Sources
+        A1[Train Data\ntrain.csv]
+        A2[Test Data\ntest.csv]
+    end
+
+    subgraph Data_Preparation
+        B1[train_df\nDataFrame from A1] 
+        B2[test_df\nDataFrame from A2]
+        B3[X\nFeature set from train_df]
+        B4[y\nTarget from train_df]
+        B5[X_train] 
+        B6[X_test]
+        B7[y_train]
+        B8[y_test]
+    end
+    
+    subgraph Model_Training
+        C1[XGBoost\nModel Training]
+        C2[xgbm\nTrained XGBoost Model]
+    end
+
+    subgraph Prediction
+        D1[submission\nPredicted fare_amount]
+    end
+    
+    A1 --> B1
+    A2 --> B2
+    
+    B1 -->|Extract Features| B3
+    B1 -->|Extract Target| B4
+
+    B3 -->|Split| B5
+    B3 -->|Split| B6
+    B4 -->|Split| B7
+    B4 -->|Split| B8
+    
+    B5 --> C1
+    B7 --> C1
+    C1 --> C2
+    
+    B2 -->|Predict| D1
+    C2 -->|Predict| D1

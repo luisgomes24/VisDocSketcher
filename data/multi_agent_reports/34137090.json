@@ -1,0 +1,183 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/heart-attack-analysis-prediction-dataset/heart.csv",
+      "description": "Contains data related to heart attack prediction, including various health metrics and a target variable indicating the occurrence of a heart attack."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the loaded heart attack dataset."
+    },
+    {
+      "name": "target",
+      "description": "String variable that stores the name of the target column ('output') for prediction purposes."
+    },
+    {
+      "name": "X",
+      "description": "Feature DataFrame containing all predictor variables, excluding the 'output' target variable."
+    },
+    {
+      "name": "y",
+      "description": "DataFrame containing the target variable ('output') for classification."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features after preprocessing."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features after preprocessing."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set target variable."
+    },
+    {
+      "name": "y_test",
+      "description": "Test set target variable."
+    },
+    {
+      "name": "score_dict",
+      "description": "Dictionary used to collect performance metrics of various models."
+    },
+    {
+      "name": "score_pd",
+      "description": "DataFrame containing performance scores of all models, facilitating comparison."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "read_csv from CSV file",
+      "flow": "Used for exploratory data analysis (EDA), feature extraction and to separate input features and target variable."
+    },
+    {
+      "variable": "X",
+      "creation": "DataFrame.drop to exclude target variable from df",
+      "flow": "Preprocessed and split into training and testing datasets."
+    },
+    {
+      "variable": "y",
+      "creation": "DataFrame containing the 'output' variable",
+      "flow": "Used in model fitting and evaluation."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split from X",
+      "flow": "Used for fitting models."
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split from X",
+      "flow": "Used to evaluate the fitted models."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split from y",
+      "flow": "Used for fitting models."
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split from y",
+      "flow": "Used to evaluate the fitted models."
+    },
+    {
+      "variable": "score_dict",
+      "creation": "Empty dictionary initialized for collecting scores.",
+      "flow": "Populated with performance metrics from model predictions."
+    },
+    {
+      "variable": "score_pd",
+      "creation": "DataFrame created from score_dict",
+      "flow": "Used for visualizing model performance comparisons."
+    }
+  ],
+  "models": [
+    {
+      "model": "LogisticRegressionCV",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_jobs": -1,
+        "cv": 5,
+        "max_iter": 3000
+      }
+    },
+    {
+      "model": "SGDClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "max_iter": 3000
+      }
+    },
+    {
+      "model": "SVC",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model": "DecisionTreeClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model": "ExtraTreeClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {}
+    },
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "n_jobs": -1
+      }
+    },
+    {
+      "model": "GradientBoostingClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "learning_rate": 0.01
+      }
+    },
+    {
+      "model": "AdaBoostClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "base_estimator": "RandomForestClassifier(n_jobs=-1)",
+        "n_estimators": 1000,
+        "learning_rate": 0.01
+      }
+    },
+    {
+      "model": "XGBClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "n_jobs": -1,
+        "learning_rate": 0.01
+      }
+    },
+    {
+      "model": "LGBMClassifier",
+      "input_features": "All features in X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "n_jobs": -1,
+        "learning_rate": 0.01
+      }
+    }
+  ]
+}

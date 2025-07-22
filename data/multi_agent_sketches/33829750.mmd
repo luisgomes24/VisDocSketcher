@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data Sources
+    A1[train.csv]:::dataSource -->|Loaded into| B1[train]:::dataVar
+    A2[test.csv]:::dataSource -->|Loaded into| B2[test]:::dataVar
+    A3[sample_submission.csv]:::dataSource
+
+    %% Data Preprocessing
+    B1 --> |Extracts| C1[trn_months & val_months]:::dataVar
+    
+    %% Model Training
+    C2[Linear Regression Model]:::model
+    B1 --> |Training with x_train and target: microbusiness_density| C2
+    C2 --> |Predict| D1[linear_preds]:::dataVar
+
+    %% Predictions and Processing
+    B2 --> |Process based on model| D1
+    B2 --> |Uses last known values| D2[last_preds]:::dataVar
+    B2 --> |Trend analysis for cfips| D3[seasonal_preds]:::dataVar
+
+    %% Final Predictions
+    D1 --> |Averaging| E1[final_preds]:::dataVar
+    D2 --> |Averaging| E1
+    D3 --> |Averaging| E1
+
+    %% Output Generation
+    E1 --> |Generate Submission| A3
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+    %% Comments for clarity
+    class A1,A2,A3 dataSource; %% These are the data sources
+    class B1,B2,C1,D1,D2,D3,E1 dataVar; %% Data variables
+    class C2 model; %% Machine learning model node

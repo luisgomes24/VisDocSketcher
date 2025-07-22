@@ -1,0 +1,12 @@
+```
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🔍 Data Overview"]
+    B --> C["📑 Data Profiling"]
+    B --> D["🧹 Data Preprocessing"]
+    D --> E["👥 Train-Test Split"]
+    E --> F["🧠 Model Training"]
+    F --> G["📊 Random Forest Evaluation"]
+    F --> H["📊 XGBoost Evaluation"]
+    G --> I["📈 Display Results"]
+    H --> I
+    I --> J["📊 Confusion Matrix <img src='confusion_matrix_template.svg'/>"]

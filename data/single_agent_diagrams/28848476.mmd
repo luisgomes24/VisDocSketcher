@@ -1,0 +1,10 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Data Preprocessing"]
+    B --> C["<img src='table.svg'/> <br/> Data Overview"]
+    C --> D["<img src='table.svg'/> <br/> Correlation Analysis"]
+    D --> E["<img src='scatter_plot_template.svg'/> <br/> 📊 Pairplot (CO2 vs Volume)"]
+    D --> F["<img src='scatter_plot_template.svg'/> <br/> 📊 Pairplot (CO2 vs Weight)"]
+    F --> G["<img src='column_split.svg'/> <br/> Feature Selection"]
+    G --> H["<img src='brain.svg'/> <br/> Train Model"]
+    H --> I["<img src='brain.svg'/> <br/> Predict CO2"]
+    I --> J["<img src='image.svg'/> <br/> 📈 Output Prediction"]

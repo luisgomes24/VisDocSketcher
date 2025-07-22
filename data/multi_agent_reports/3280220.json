@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file_name": "creditcard.csv",
+      "description": "Credit card transaction data, including features and class label (0=normal, 1=fraud)."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "cfd",
+      "description": "DataFrame containing credit card transactions loaded from the CSV file."
+    },
+    {
+      "variable_name": "cfd1",
+      "description": "Cleaned DataFrame after removing outliers based on IQR."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set features for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test set features for model evaluation."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set target variable (class labels)."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set target variable (class labels)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "cfd",
+      "created_by": "pd.read_csv",
+      "flow": "Used for data cleaning, outlier detection, and feature analysis."
+    },
+    {
+      "variable_name": "cfd1",
+      "created_by": "Outlier removal step", 
+      "flow": "Used for further analysis and model training."
+    },
+    {
+      "variable_name": "X_train",
+      "created_by": "train_test_split",
+      "flow": "Used to train the Logistic Regression model."
+    },
+    {
+      "variable_name": "X_test",
+      "created_by": "train_test_split",
+      "flow": "Used to evaluate the Logistic Regression model."
+    },
+    {
+      "variable_name": "y_train",
+      "created_by": "train_test_split",
+      "flow": "Used to train the Logistic Regression model."
+    },
+    {
+      "variable_name": "y_test",
+      "created_by": "train_test_split",
+      "flow": "Used to evaluate the Logistic Regression model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default settings used."
+    }
+  ]
+}

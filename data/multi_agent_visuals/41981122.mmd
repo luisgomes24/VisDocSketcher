@@ -1,0 +1,6 @@
+flowchart TD
+    DataSource["<img src='icons/file.svg' width=100 height=100/> <br/> geonames-postal-code.csv"]
+    ReadCSV["<img src='icons/table.svg' width=100 height=100/> <br/> read_csv()"]
+    DataFrame["<img src='icons/table.svg' width=100 height=100/> <br/> df <br/> <img src='dummy_plots/lineplot_template.svg'/> "] 
+    DataSource -->|Read Data| ReadCSV
+    ReadCSV -->|Output DataFrame| DataFrame

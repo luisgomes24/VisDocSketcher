@@ -1,0 +1,14 @@
+flowchart TD
+A1["<img src='path/to/file.svg' width=100 height=100/> <br/> Civilian Employment Level.csv"]
+A2["<img src='path/to/file.svg' width=100 height=100/> <br/> Civilian Employment Level_1.csv"]
+
+A1 --> A2
+
+A3["<img src='path/to/column_split.svg' width=100 height=100/> <br/> Split Features"]
+A2 --> A3
+
+B1["<img src='path/to/brain.svg' width=100 height=100/> <br/> ML Model"]
+A3 --> B1
+
+C1["<img src='path/to/hist_template.svg'/> <br/> Output Plot"]
+B1 --> C1

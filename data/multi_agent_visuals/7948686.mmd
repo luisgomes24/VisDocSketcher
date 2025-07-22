@@ -1,0 +1,5 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> db_books.csv"]:::dataSource --> |"pd.read_csv"| B["<img src='icons/table.svg' width=100 height=100/> <br/> df1<br/><img src='dummy_plots/barplot_template.svg'/> "]:::dataVariable
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> stories.csv"]:::dataSource --> |"pd.read_csv"| D["<img src='icons/table.svg' width=100 height=100/> <br/> df2<br/><img src='dummy_plots/barplot_template.svg'/> "]:::dataVariable
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

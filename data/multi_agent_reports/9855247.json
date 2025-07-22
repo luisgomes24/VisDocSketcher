@@ -1,0 +1,51 @@
+{
+    "data_sources": [
+        {
+            "file_name": "corona_morocco.csv",
+            "description": "CSV file containing COVID-19 statistics for Morocco including columns for confirmed, recovered, deaths, excluded cases, etc."
+        }
+    ],
+    "data_variables": [
+        {"name": "my_data", "description": "DataFrame containing the COVID-19 data with dates set as index and additional calculated columns for active cases and total tests."},
+        {"name": "actif_column", "description": "Column calculated for active cases by subtracting recovered and deaths from confirmed cases."},
+        {"name": "total_Deaths", "description": "Series of total deaths over the date period."},
+        {"name": "total_Confirmed", "description": "Series of total confirmed cases over the date period."},
+        {"name": "total_Recovered", "description": "Series of total recovered cases over the date period."},
+        {"name": "mortaloty_rate", "description": "Series showcasing the mortality rate calculated from total deaths and confirmed cases."},
+        {"name": "new_cases", "description": "Array representing daily new cases calculated by differentiating confirmed cases."}
+    ],
+    "data_flow": [
+        {
+            "variable": "my_data",
+            "creation_method": "pd.read_csv",
+            "flow": ["Data cleaning (fillna, drop, set index)", "Graphing (confirmed and recovered cases)", "Analytical visualizations", "Forecasting using Prophet"]
+        },
+        {
+            "variable": "actif_column",
+            "creation_method": "my_data['Confirmed'] - my_data['Recovered'] - my_data['Deaths']",
+            "flow": ["Added to my_data DataFrame"]
+        },
+        {
+            "variable": "total_Deaths",
+            "creation_method": "my_data['Deaths']",
+            "flow": ["Used in forecasting models"]
+        },
+        {
+            "variable": "total_Confirmed",
+            "creation_method": "my_data['Confirmed']",
+            "flow": ["Used in forecasting models"]
+        },
+        {
+            "variable": "new_cases",
+            "creation_method": "calculated from total_Confirmed",
+            "flow": ["Used for visualizations and new cases forecasting"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Prophet",
+            "input_features": "Total confirmed cases, New cases, Total deaths",
+            "hyperparameters": "interval_width=0.95"
+        }
+    ]
+}

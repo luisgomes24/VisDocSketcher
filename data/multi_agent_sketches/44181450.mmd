@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data Source Node
+    A["Tropical Cyclone CSV"]
+    %% df0 Node
+    B[
+    "df0: DataFrame with cyclone data from CSV\nColumns: Time, Cyclone Number, Latitude, Longitude, Wind Speed, Pressure"
+    ]
+    %% df Node
+    C[
+    "df: Filtered DataFrame by Year (2015 and 2016)\nUsed for plotting"
+    ]
+    %% gdf Node
+    D[
+    "gdf: GeoDataFrame with cyclone locations\nCreated for mapping purposes"
+    ]
+    %% dfi Node
+    E[
+    "dfi: DataFrame with Cyclone Number 1631 data\nUsed for specific cyclone plots"
+    ]
+    %% loci Node
+    F[
+    "loci: Latitude and Longitude for Cyclone 1631\nUsed in Heatmap"
+    ]
+
+    %% Define connections
+    A -->|"Load CSV"| B
+    B -->|"Filter by 2015, 2016"| C
+    C -->|"Create GeoDataFrame"| D
+    B -->|"Filter by Cyclone Number 1631"| E
+    E -->|"Select Lat/Long"| F
+
+    %% Usage Nodes
+    D -->|"Plot cyclone on map"| G["World Map Plot"]
+    E -->|"Plot graphs"| H["Pressure/Wind Speed Graphs"]
+    F -->|"Generate heatmap"| I["Folium Heatmap"]

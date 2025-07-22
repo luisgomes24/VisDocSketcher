@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A1["../input/train.csv"] -->|Read CSV, parse dates| B1["train DataFrame"]
+    A2["../input/test.csv"] -->|Read CSV, parse dates| B2["test DataFrame"]
+    A3["../input/sampleSubmission.csv"] -->|Read CSV| F1["submission DataFrame"]
+
+    %% Data Preparation
+    B1 -->|Extract features| C1["X_train"]
+    B2 -->|Extract features| C2["X_test"]
+    B1 -->|Extract target| D1["Y_train"]
+
+    %% Model Training
+    D1 -->|Target for training| E1["RandomForestRegressor"]
+    C1 -->|Features for training| E1
+    E1 -->|Fit model| E2["Trained RandomForestRegressor"]
+
+    %% Prediction
+    E2 -->|Predict with X_test| G1["Predictions"]
+
+    %% Submission Preparation
+    F1 -->|Prepare submission| G2["submission with Predictions"]
+    G1 -->|Add predictions to submission| G2
+    G2 -->|Save submission| H1["submission.csv"]
+
+    %% Comments
+    classDef default fill:#f9f,stroke:#333,stroke-width:1px;
+    class A1,A2,A3,B1,B2,F1 gray;
+    class C1,C2,D1,E1,E2,G1,G2 gray;

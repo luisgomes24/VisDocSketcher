@@ -1,0 +1,53 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "A",
+      "description": "Weight for four in a row score."
+    },
+    {
+      "name": "B",
+      "description": "Weight for three in a row score."
+    },
+    {
+      "name": "C",
+      "description": "Weight for two in a row score."
+    },
+    {
+      "name": "D",
+      "description": "Weight for opposing two in a row score."
+    },
+    {
+      "name": "E",
+      "description": "Weight for opposing three in a row score."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "A",
+      "creation": "Assigned a value of 5.",
+      "flows_to": "Used in the heuristic calculation for scoring."
+    },
+    {
+      "variable": "B",
+      "creation": "Assigned a value of 2.",
+      "flows_to": "Used in the heuristic calculation for scoring."
+    },
+    {
+      "variable": "C",
+      "creation": "Assigned a value of 1.",
+      "flows_to": "Used in the heuristic calculation for scoring."
+    },
+    {
+      "variable": "D",
+      "creation": "Assigned a value of -2.",
+      "flows_to": "Used in the heuristic calculation for scoring."
+    },
+    {
+      "variable": "E",
+      "creation": "Assigned a value of -5.",
+      "flows_to": "Used in the heuristic calculation for scoring."
+    }
+  ],
+  "models": []
+}

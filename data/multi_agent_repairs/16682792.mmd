@@ -1,0 +1,46 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A1["train.json"]
+    A2["dev.json"]
+    A3["dev_cv0_predictions_best.json"]
+    A4["dev_cv1_predictions_best.json"]
+    A5["dev_cv2_predictions_best.json"]
+    A6["dev_cv3_predictions_best.json"]
+    A7["test1_predictions_detail.pkl"]
+
+    %% Data Variables
+    B1["train_fileJson"]
+    B2["dev_outcome_merged"]
+    B3["test_iter"]
+    B4["tokenizer"]
+
+    %% Model
+    C1["MRC_model"]
+
+    %% Data Flow
+    %% train_fileJson is created from train.json and dev.json merging
+    A1 -->|"json.load & merge"| B1
+    A2 -->|"json.load & merge"| B1
+    
+    %% dev_outcome_merged is created by merging predictions from different folds
+    A3 -->|"merge"| B2
+    A4 -->|"merge"| B2
+    A5 -->|"merge"| B2
+    A6 -->|"merge"| B2
+
+    %% MRC_model uses train data
+    B1 -->|"Use for training"| C1
+
+    %% Test data with detailed predictions
+    A7 -->|"load for evaluation"| B3
+
+    %% tokenizer is used for preprocessing
+    B4 -->|"Preprocess text"| C1
+
+    %% Model evaluation with test_iter
+    B3 -->|"Evaluate model"| C1
+
+    %% Outputs
+    C1 -->|"Generate predictions"| D["Predictions on test data"]
+```

@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Preprocess Data"];
+    B --> C["🔍 Filter 4th Down Plays"];
+    C --> D["📊 Create Separate Dataframes"];
+    D --> E["📊 Analyze Distribution of Play Type"];
+    E --> F["📊 Distribution by Distance to Goal <img src='hist_template.svg' />"];
+    F --> G["📊 Distribution by Time Left <img src='hist_template.svg' />"];
+    G --> H["📊 Distribution by Yards to Go <img src='hist_template.svg' />"];
+    H --> I["📊 Analyze Relation: Wins vs 4th Down Attempts"];
+    I --> J["📊 Model Evaluation"];
+    J --> K["📊 Point Spread Analysis"];
+    K --> L["📊 Play Type: Pass vs Run"];

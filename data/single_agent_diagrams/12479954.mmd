@@ -1,0 +1,7 @@
+flowchart TD
+    A["📁 Load Dataset <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🛠️ Preprocess Data <img src='column_split.svg' /> <br/> apply_text_profiling"]
+    B --> C["📝 Profile Data"]
+    C --> D["📊 Sentiment Polarity Histogram <img src='hist_template.svg' />"]
+    D --> E["📊 Sentiment Subjectivity Histogram <img src='hist_template.svg' />"]
+    E --> F["🔍 Calculate Average Stop Words"]
+    F --> G["📈 Correlation Heatmap <img src='heatmap_template.svg' />"]

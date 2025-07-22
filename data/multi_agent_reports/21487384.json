@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/pokeman/pokemon.csv",
+      "description": "This CSV file contains data on different Pokémon, including their characteristics and types."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "pokeman",
+      "description": "A DataFrame that holds the data loaded from the CSV file, which includes attributes like Generation, Type, etc."
+    },
+    {
+      "name": "bar_color",
+      "description": "A variable that sets a specific color for the bar plots used in visualizations."
+    },
+    {
+      "name": "pokemon_sort",
+      "description": "A variable that stores the ordered index of the Generation counts to sort the bar chart."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "pokeman",
+      "creation": "Read from CSV using pd.read_csv",
+      "flow": "Used for plotting visualizations and statistical analysis."
+    },
+    {
+      "variable": "bar_color",
+      "creation": "Set as a color from seaborn's color palette",
+      "flow": "Used in the countplot visualization to enhance readability."
+    },
+    {
+      "variable": "pokemon_sort",
+      "creation": "Created by extracting the index from the value counts of the Generation column in the DataFrame",
+      "flow": "Used to sort the Generation bars in the countplot visualization."
+    }
+  ],
+  "models": []
+}

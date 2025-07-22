@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file": "codes4.db",
+      "description": "Contains HS (Harmonized System) codes and corresponding country codes for imports and exports."
+    },
+    {
+      "file": "ym_2019_2021.db",
+      "description": "Contains trade data regarding imports and exports between 2019 to 2021."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "country_eng_df",
+      "description": "Dataframe containing English names of countries."
+    },
+    {
+      "variable_name": "country_jpn_df",
+      "description": "Dataframe containing Japanese names of countries."
+    },
+    {
+      "variable_name": "df",
+      "description": "Dataframe containing trade values grouped by country."
+    },
+    {
+      "variable_name": "ut",
+      "description": "Utility object for HS code functionalities and visualizations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "country_eng_df",
+      "creation_method": "pd.read_sql",
+      "usage": "Merged with df to get country names."
+    },
+    {
+      "variable": "country_jpn_df",
+      "creation_method": "pd.read_sql",
+      "usage": "Not used directly in calculations but included for country visualizations."
+    },
+    {
+      "variable": "df",
+      "creation_method": "pd.read_sql",
+      "usage": "Used for generating bar charts and scatter plots."
+    },
+    {
+      "variable": "ut",
+      "creation_method": "util class instantiation",
+      "usage": "Used for helper functions that assist in plotting and other data manipulations."
+    }
+  ],
+  "models": []
+}

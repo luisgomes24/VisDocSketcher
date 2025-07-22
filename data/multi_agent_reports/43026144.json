@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file": "Preprocessed World University Rankings 2023 Dataset.csv",
+      "description": "Contains data on university rankings and various features related to universities."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the entire dataset loaded from the CSV file."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable representing the 'University Rank' that we want to predict."
+    },
+    {
+      "variable": "x",
+      "description": "Features DataFrame containing all columns except the target variable 'University Rank'."
+    },
+    {
+      "variable": "x_train",
+      "description": "Training subset of features used for training the model."
+    },
+    {
+      "variable": "x_test",
+      "description": "Testing subset of features used to validate the model."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training subset of target variable used for training the model."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing subset of target variable used to validate the model."
+    },
+    {
+      "variable": "model",
+      "description": "Random Forest Classifier model fitted on the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "flows_to": ["y", "x"]
+    },
+    {
+      "variable": "y",
+      "creation_method": "extraction from df",
+      "flows_to": ["model", "model scoring"]
+    },
+    {
+      "variable": "x",
+      "creation_method": "drop columns from df",
+      "flows_to": ["x_train", "x_test"]
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "train_test_split",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "train_test_split",
+      "flows_to": ["model scoring"]
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flows_to": ["model scoring"]
+    },
+    {
+      "variable": "model",
+      "creation_method": "RandomForestClassifier.fit()",
+      "flows_to": ["model scoring"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "RandomForestClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "criterion": "entropy",
+        "n_estimators": 200
+      }
+    }
+  ]
+}

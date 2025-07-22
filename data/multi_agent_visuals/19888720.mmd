@@ -1,0 +1,32 @@
+flowchart TD
+
+    %% Data Sources
+    A1[train_labels.csv]:::dataSource
+    A2[sample_submission.csv]:::dataSource
+    A3[train/idx.npy]:::dataSource
+    A4[test/idx.npy]:::dataSource
+
+    %% Data Variables
+    B1[df_train]:::dataVariable
+    B2[df_subm]:::dataVariable
+    B3[df_train_pos]:::dataVariable
+    B4[x0]:::dataVariable
+    B5[xn0]:::dataVariable
+    B6[csm]:::dataVariable
+
+    %% Data Flows
+    A1 -->|pd.read_csv| B1
+    A2 -->|pd.read_csv| B2
+    B1 -->|Filtering| B3
+    B3 -->|load_example| B4
+    B4 -->|column_norm| B5
+    B5 -->|find_similar_column| B6
+
+    %% Machine Learning Models
+    C1[2-layer MLP]:::model
+    B5 -->|Input| C1
+
+    %% Legend 
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#9f6,stroke:#333,stroke-width:2px;

@@ -1,0 +1,34 @@
+flowchart TD
+    %% Nodes for data sources
+    DS1["Data Source 1: Model Configuration & Checkpoint"]
+    DS2["Data Source 2: Chart Image Files"]
+
+    %% Initialization Node
+    INIT["Initialize Model"]
+    DS1 --> INIT
+
+    %% Processing Node
+    FILENAMES["Load Image Filenames"]
+    DS2 --> FILENAMES
+
+    %% Inference Node
+    INFERENCE["Model Inference"]
+    INIT --> INFERENCE
+    FILENAMES --> INFERENCE
+
+    %% Result Handling Node
+    RESULT["Handle Inference Results"]
+    INFERENCE --> RESULT
+
+    %% Visualization and Output
+    VISUALIZE["Visualize and Save Results"]
+    RESULT --> VISUALIZE
+
+    %% Descriptions
+    %% DS1: Data Source of model config and weights
+    %% DS2: Images to analyse
+    %% INIT: Model is initialized from config and weights
+    %% FILENAMES: Image files are gathered
+    %% INFERENCE: Model performs inference on images
+    %% RESULT: Model outputs are prepared
+    %% VISUALIZE: Outputs are visualized and saved

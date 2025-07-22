@@ -1,0 +1,12 @@
+%%{init: {"theme": "default"}}%%
+%% Diagram showing the data workflow in the Jupyter Notebook 29029043.ipynb
+
+flowchart TD
+    A[indian population new.csv] -->|Read CSV| B(df)
+    B -->|Used in| C{Analysis & Visualization}
+    C --> D[Plotting Trends]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px;
+    style C fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    style D fill:#FFCDD2,stroke:#333,stroke-width:2px;

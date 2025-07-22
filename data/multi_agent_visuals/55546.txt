@@ -1,0 +1,1 @@
+The diagram visually represents the flow of data through different stages including Data Intake, Data Cleaning, and various output plots. Each node is clearly labelled and includes visual elements.

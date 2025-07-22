@@ -1,0 +1,19 @@
+graph TD;
+    A["📁 Load Data"] --> B["✏️ Inspect Data"];
+    B --> C["🔍 Check Null Values"];
+    B --> D["🔍 Data Info & Description"];
+    C --> E["🧹 Data Cleaning & Preprocessing"];
+    E --> F["📊 EDA - Survival Rates"];
+    F --> G["📈 Visualization"];
+    G --> H["🛠️ Feature Engineering"];
+    H --> I["🧠 Modeling - Random Forest"];
+    I --> J["🔍 Evaluate Model"];
+    J --> K["📈 Save Predictions"];
+    
+    E --> L["🔍 Examine Duplicates & Relations"];
+    L --> M["🧠 Create Connected Survival Feature"];
+    M --> N["🛠️ Fill Missing Values"];
+    N --> H;
+    
+    H --> O["🚀 Modeling - XGBClassifier"];
+    O --> P["📈 Evaluate & Save Predictions"];

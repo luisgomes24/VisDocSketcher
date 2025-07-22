@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/nflplaybyplay2009to2016/NFL Play by Play 2009-2017 (v4).csv",
+      "description": "Dataset of events that occurred in American Football games."
+    },
+    {
+      "file_path": "../input/building-permit-applications-data/Building_Permits.csv",
+      "description": "Dataset of building permits issued in San Francisco."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "nfl_data",
+      "description": "DataFrame containing American Football game events."
+    },
+    {
+      "name": "sf_permits",
+      "description": "DataFrame containing building permit applications from San Francisco."
+    },
+    {
+      "name": "missing_values_count",
+      "description": "Stores the count of missing values for each column in nfl_data."
+    },
+    {
+      "name": "total_cells",
+      "description": "Total number of cells in nfl_data."
+    },
+    {
+      "name": "total_missing",
+      "description": "Total count of missing values in nfl_data."
+    },
+    {
+      "name": "sf_missing_values_count",
+      "description": "Stores the count of missing values for each column in sf_permits."
+    },
+    {
+      "name": "sf_total_cells",
+      "description": "Total number of cells in sf_permits."
+    },
+    {
+      "name": "sf_total_missing",
+      "description": "Total count of missing values in sf_permits."
+    },
+    {
+      "name": "columns_with_na_dropped",
+      "description": "DataFrame created after dropping all columns with at least one missing value from nfl_data."
+    },
+    {
+      "name": "sf_columns_with_na_dropped",
+      "description": "DataFrame created after dropping all columns with at least one missing value from sf_permits."
+    },
+    {
+      "name": "subset_nfl_data",
+      "description": "Subset of nfl_data containing specific columns for imputation demonstration."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "nfl_data",
+      "created_by": "pd.read_csv",
+      "flow": "Used to analyze missing values and perform data cleaning."
+    },
+    {
+      "variable": "sf_permits",
+      "created_by": "pd.read_csv",
+      "flow": "Used to analyze missing values and perform data cleaning."
+    },
+    {
+      "variable": "missing_values_count",
+      "created_by": "nfl_data.isnull().sum()",
+      "flow": "Used to determine the number of missing values in nfl_data."
+    },
+    {
+      "variable": "total_missing",
+      "created_by": "missing_values_count.sum()",
+      "flow": "Used to calculate the total missing data percentage in nfl_data."
+    },
+    {
+      "variable": "sf_missing_values_count",
+      "created_by": "sf_permits.isnull().sum()",
+      "flow": "Used to determine the number of missing values in sf_permits."
+    },
+    {
+      "variable": "sf_total_missing",
+      "created_by": "sf_missing_values_count.sum()",
+      "flow": "Used to calculate the total missing data percentage in sf_permits."
+    },
+    {
+      "variable": "columns_with_na_dropped",
+      "created_by": "nfl_data.dropna(axis=1)",
+      "flow": "Created after dropping columns with missing values; further analysis performed."
+    },
+    {
+      "variable": "sf_columns_with_na_dropped",
+      "created_by": "sf_permits.dropna(axis=1)",
+      "flow": "Created after dropping columns with missing values; further analysis performed."
+    },
+    {
+      "variable": "subset_nfl_data",
+      "created_by": "nfl_data.loc[:, 'EPA':'Season'].head()",
+      "flow": "Used for demonstration of filling missing values."
+    }
+  ],
+  "models": []
+}

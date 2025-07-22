@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file": "MNIST Dataset",
+      "description": "The MNIST dataset contains handwritten digits from 0 to 9, split into training and test sets."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "X_train",
+      "description": "Training data consisting of images reshaped into 784-dimensional vectors."
+    },
+    {
+      "name": "y_train",
+      "description": "Labels for the training data, representing the digit in each image."
+    },
+    {
+      "name": "X_test",
+      "description": "Test data consisting of images reshaped into 784-dimensional vectors."
+    },
+    {
+      "name": "y_test",
+      "description": "Labels for the test data, representing the digit in each image."
+    },
+    {
+      "name": "transformed_x",
+      "description": "Data after PCA transformation, reduced to 3 dimensions for visualization."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X_train",
+      "created_by": "mnist.load_data()",
+      "flows_to": "pca.fit() and pca.transform()"
+    },
+    {
+      "variable": "y_train",
+      "created_by": "mnist.load_data()",
+      "flows_to": "visualization plots"
+    },
+    {
+      "variable": "transformed_x",
+      "created_by": "pca.transform(X_train)",
+      "flows_to": "2D and 3D plotting"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "PCA",
+      "input_features": "X_train (original image data)",
+      "target_variable": "none",
+      "hyperparameters": {
+        "n_components": 3
+      }
+    }
+  ]
+}

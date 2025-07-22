@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv]:::dataSource %% Represents the training data source file
+
+    %% Data Variables
+    B[train]:::dataVariable %% DataFrame containing the training data
+    C[Age]:::dataVariable %% Age of passengers extracted from the DataFrame
+    D[Age_Cut]:::dataVariable %% Categorical age variable using bins
+    E[Age_QCut]:::dataVariable %% Categorical age variable using quantiles
+    F[Age_Generation]:::dataVariable %% Categorical age groups
+
+    %% Data Flow
+    A -->|Read using pd.read_csv| B
+    B -->|Extract age| C
+    C -->|Create using pd.cut| D
+    C -->|Create using pd.qcut| E
+    C -->|Create using age_group_function| F
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

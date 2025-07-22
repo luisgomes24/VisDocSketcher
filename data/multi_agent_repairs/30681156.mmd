@@ -1,0 +1,26 @@
+```mermaid
+flowchart TD
+    %% Define the data sources
+    A1["Top 10 Annual Best Selling Albums by Track Data CSV"]
+    A2["Top 10 Annual Best Selling Albums by Length Data CSV"]
+
+    %% Define initial data variable loading
+    B1["Load track details into dataset_track"]
+    B2["Load album details into dataset_length"]
+
+    %% Data transformation and processing
+    C1["Group by Year and Summarize Sales into df1"]
+    C2["Group by Artist for Top Album Count df"]
+
+    %% Visualization and Usage
+    D1["Plot Year vs. Worldwide Sales"]
+    D2["Plot Artist Top Album Appearances"]
+
+    %% Linking the nodes
+    A1 --> B1
+    A2 --> B2
+    B2 --> C1
+    B2 --> C2
+    C1 --> D1
+    C2 --> D2
+```

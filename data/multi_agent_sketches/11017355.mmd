@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data sources
+    A1["/kaggle/input/wineQualityReds.csv"]
+    A2["/kaggle/input/wineQualityWhites.csv"]
+    
+    %% Data variables
+    B1["df1\nRed Wine DataFrame"]
+    B2["df2\nWhite Wine DataFrame"]
+    
+    %% Data source to variable relationships
+    A1 -->|"Load CSV"| B1
+    A2 -->|"Load CSV"| B2
+    
+    %% Data flow
+    B1 -->|"Visualizations"| C1["Red Wine Distribution Plots"]
+    B1 -->|"Visualizations"| C2["Red Wine Correlation Plots"]
+    B1 -->|"Visualizations"| C3["Red Wine Scatter Plots"]
+    
+    B2 -->|"Visualizations"| D1["White Wine Distribution Plots"]
+    B2 -->|"Visualizations"| D2["White Wine Correlation Plots"]
+    B2 -->|"Visualizations"| D3["White Wine Scatter Plots"]
+    
+    %% Comments to explain each node
+    %% A1 and A2 are data source nodes representing the input CSV files.
+    %% B1 and B2 are data transformation nodes that represent loading data into DataFrames.
+    %% C1, C2, C3, D1, D2, and D3 are visualization nodes that represent different types of plots.

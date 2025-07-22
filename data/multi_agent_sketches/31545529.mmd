@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph DataSources[Data Sources]
+        A["/kaggle/input/coursera-free-courses-dataset/courserafree.csv"]
+    end
+    
+    subgraph DataPreparation[Data Preparation]
+        B["Load and preprocess data"]
+        C["Define main label 'ratings'"]
+    end
+    
+    subgraph FeatureEngineering[Feature Engineering]
+        D["Create feature set X"]
+        E["Create target array y"]
+    end
+
+    subgraph ModelTraining[Model Training & Evaluation]
+        F["Create CatBoost Pools for train and test"]
+        G["Train CatBoost Regressor"]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    D --> F
+    E --> F
+    F --> G
+
+    %% Comments
+    %% A: Source data containing course details
+    %% B: Loading and initial preprocessing of data
+    %% C: Identification of label for predictions
+    %% D: Feature set used for training models
+    %% E: Target variable (ratings) for predictions
+    %% F: Data split into pools for training and testing
+    %% G: Training process of CatBoost Regressor model with specified hyperparameters

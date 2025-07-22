@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "blackjack simulator",
+      "description": "Simulates a simplified version of blackjack to analyze player's decision-making." 
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "player_total",
+      "description": "The total value of the player's cards, considering Aces as either 1 or 11."
+    },
+    {
+      "variable_name": "dealer_card_val",
+      "description": "The value of the dealer's visible card, used to inform the player's decision."
+    },
+    {
+      "variable_name": "player_aces",
+      "description": "The number of Aces the player has in their hand, affecting the total value."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "should_hit",
+      "creation_method": "Defined by the user to determine whether to hit or stay based on game state.",
+      "flow": "Used in blackjack.simulate() to evaluate player behavior across multiple games."
+    },
+    {
+      "variable": "blackjack.simulate",
+      "creation_method": "Called with the number of games to simulate the outcomes based on player decisions.",
+      "flow": "Evaluates and averages player's performance over 50,000 games."
+    }
+  ],
+  "models": []
+}

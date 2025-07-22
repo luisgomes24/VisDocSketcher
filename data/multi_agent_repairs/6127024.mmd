@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+    %% Note: Start of the flowchart
+    A["Start"] --> B["Import Libraries"]
+    
+    %% Libraries import node
+    B --> |Import| C{{"numpy, matplotlib, pandas, sklearn"}}
+    
+    %% Initial exploration node
+    C --> D["Explore Data Structure"]
+    D -->|List Directories| E["Display file paths"]
+    
+    %% Functions for Plotting
+    E --> F["Define Plotting Functions"]
+    F --> |Function| F1["plotPerColumnDistribution"]
+    F --> |Function| F2["plotCorrelationMatrix"]
+    F --> |Function| F3["plotScatterMatrix"]
+    
+    %% Plotting Data
+    F1 --> G["Plot Column Distributions"]
+    F2 --> H["Plot Correlation Matrix"]
+    F3 --> I["Plot Scatter and Density"]
+    
+    classDef neural fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#000,stroke-width:2px;
+    classDef process fill:#9f6,stroke:#333,stroke-width:2px;
+    
+    class B,C,E,F1,F2,F3,G,H,I process;
+```

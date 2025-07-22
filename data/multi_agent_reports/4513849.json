@@ -1,0 +1,75 @@
+{
+  "data_sources": [
+    {
+      "file_name": "chennai_reservoir_levels.csv",
+      "description": "Contains reservoir levels in Chennai over time"
+    },
+    {
+      "file_name": "chennai_reservoir_rainfall.csv",
+      "description": "Contains rainfall data for reservoirs in Chennai over time"
+    },
+    {
+      "file_name": "chennai_population.csv",
+      "description": "Population data for Chennai over the years"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_water",
+      "description": "DataFrame containing total water reservoir levels in Chennai"
+    },
+    {
+      "name": "df_rainfall",
+      "description": "DataFrame containing average rainfall data for Chennai reservoirs"
+    },
+    {
+      "name": "df_population",
+      "description": "DataFrame containing population data of Chennai"
+    },
+    {
+      "name": "df",
+      "description": "Merged DataFrame of water and rainfall data by date"
+    },
+    {
+      "name": "df_agg",
+      "description": "Aggregated DataFrame with annual average of total reservoir"
+    },
+    {
+      "name": "df_year",
+      "description": "DataFrame combining average reservoir and population data by year"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_water",
+      "created_by": "pd.read_csv",
+      "flows_to": "Used in merging with df_rainfall to create df"
+    },
+    {
+      "variable": "df_rainfall",
+      "created_by": "pd.read_csv",
+      "flows_to": "Used in merging with df_water to create df"
+    },
+    {
+      "variable": "df_population",
+      "created_by": "pd.read_csv",
+      "flows_to": "Merged with df_agg to create df_year"
+    },
+    {
+      "variable": "df",
+      "created_by": "pd.merge",
+      "flows_to": "Used for plotting reservoir and rainfall data"
+    },
+    {
+      "variable": "df_agg",
+      "created_by": "pd.DataFrame(df.groupby(...))",
+      "flows_to": "Merged with df_population to create df_year"
+    },
+    {
+      "variable": "df_year",
+      "created_by": "pd.merge",
+      "flows_to": "Data for visualization of population and liters per person"
+    }
+  ],
+  "models": []
+}

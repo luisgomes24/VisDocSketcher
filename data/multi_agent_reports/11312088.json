@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "source": "burden.csv",
+      "description": "Contains data for exploratory analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df1",
+      "description": "DataFrame containing the first 1000 rows of burden data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in plotPerColumnDistribution()", "used in plotCorrelationMatrix()", "used in plotScatterMatrix()"]
+    }
+  ],
+  "models": []
+}

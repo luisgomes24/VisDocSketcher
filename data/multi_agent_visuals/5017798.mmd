@@ -1,0 +1,12 @@
+%% The following code shows the data flow and process for the Jupyter Notebook.
+flowchart TD
+    %% Node representing the CSV data source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> blockbusters.csv"]
+    %% Node representing reading the CSV into a DataFrame
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> df1: DataFrame loaded from blockbusters.csv"]
+    %% Edge showing reading of CSV to DataFrame
+    A --> B
+    %% Node representing usage of df1 in plotting
+    C["Visualizations using df1"]
+    %% Edge showing usage of df1 in plotting
+    B --> C

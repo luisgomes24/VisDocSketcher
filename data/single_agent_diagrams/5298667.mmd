@@ -1,0 +1,19 @@
+```
+graph TD;
+    A["📥 Load Data"] --> B["📊 Inspect Data"];
+    B --> C["📈 Distribution Graphs"];
+    C --> D["📊 Plot - <img src='dummy_plots/hist_template.svg' /> <br/> Per Column Distribution"];
+
+    A1["📥 Load 1st file"] --> A2["📊 Inspect 1st file"];
+    A1 --> A2;
+    A2 --> B;
+    
+    A1b["📥 Load 2nd file"] --> A2b["📊 Inspect 2nd file"];
+    A1b --> A2b;
+    A2b --> B;
+
+    A1c["📥 Load 3rd file"] --> A2c["📊 Inspect 3rd file"];
+    A1c --> A2c;
+    A2c --> B;
+
+    D --> E["🧾 Conclusion"];

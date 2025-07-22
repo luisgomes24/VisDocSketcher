@@ -1,0 +1,34 @@
+graph TD;
+    A[Data Source] --> B[Data Preparation];
+    B --> C{Train-Test Split};
+    C -->|80%| D[Training Set];
+    C -->|20%| E[Testing Set];
+    D --> F[Model Building];
+    F --> G[Model Evaluation];
+    G --> H[Results Visualization];
+    E --> G;
+
+    subgraph Data Preprocessing
+        B -->|Omitting Nulls| I[Null Handling];
+        I --> J[Normalization];
+        J --> K[Feature Selection];
+    end
+
+    subgraph ML Models
+        F --> L[Train Decision Tree];
+        F --> M[Train SVM];
+    end
+
+    subgraph Outputs
+        H --> N[Results Summary];
+        H --> O[Performance Metrics];
+    end
+    
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;
+    
+    class A,B,I,L,M data;
+    class C,D,E,F,G,H,N,O model;
+    class J,K plot;

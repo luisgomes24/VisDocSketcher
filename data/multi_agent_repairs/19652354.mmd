@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    data_source_1["Year 2010-2011.csv"]
+    
+    %% Data Variables
+    InvoiceNo["InvoiceNo"]
+    StockCode["StockCode"]
+    Description["Description"]
+    Quantity["Quantity"]
+    InvoiceDate["InvoiceDate"]
+    UnitPrice["UnitPrice"]
+    CustomerID["CustomerID"]
+    Country["Country"]
+    TotalPrice["TotalPrice"]
+    recency["recency"]
+    frequency["frequency"]
+    monetary["monetary"]
+    RFM_SCORE["RFM_SCORE"]
+    Segment["Segment"]
+
+    %% Data Flow
+    data_source_1 -->|"Loaded into DataFrame df"| df["DataFrame df"]
+    df -->|"Used in EDA, Cleaned, and Transformed"| rfm_df["DataFrame rfm_df"]
+    df -->|"Calculate TotalPrice"| TotalPrice
+    rfm_df -->|"Calculate recency, frequency, monetary"| recency
+    rfm_df --> frequency
+    rfm_df --> monetary
+    rfm_df -->|"Calculate RFM Score"| RFM_SCORE
+    RFM_SCORE -->|"Segment Customers"| Segment
+
+    %% Comments for clarity
+    %% data_source_1: Source of the sales data
+    %% df: Initial dataframe created from the CSV file
+    %% rfm_df: DataFrame used for RFM analysis
+    %% TotalPrice: Calculated field for total price per invoice
+    %% recency, frequency, monetary: RFM metrics
+    %% RFM_SCORE: Combined RFM score
+    %% Segment: Customer segmentation based on the RFM score
+```

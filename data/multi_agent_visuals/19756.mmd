@@ -1,0 +1,21 @@
+%% Mermaid.js enhanced workflow diagram for 19756.ipynb
+
+```mermaid
+flowchart TD
+  %% Data flow node enhancements
+  A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> File Input"];
+  C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table"] --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Selection"];
+
+  subgraph DataFlow [Data Flow]
+    direction TB
+    D --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Row Filtering"];
+  end
+
+  subgraph Models [Models]
+    direction TB
+    F["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"];
+  end
+
+  E --> F;
+  F --> G["<img src='icons/image.svg' width=100 height=100/> <br/> Model Output"];
+  G["<img src='icons/image.svg' width=100 height=100/> <br/> Model Output"] --> H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Visualization"];

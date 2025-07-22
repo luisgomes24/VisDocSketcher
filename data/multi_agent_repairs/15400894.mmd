@@ -1,0 +1,19 @@
+```mermaid
+flowchart TD
+    %% Node for the data source
+    trends_csv(["trends.csv"]) -->|Data loaded into| df
+    
+    %% Nodes for data variables
+    df -->|Filtered for US, from 2012| category
+    category -->|Top 8 categories selected| button_dict
+    df -->|Data used to create| fig
+    fig -->|Visualized using| fig_show
+    fig_show(["fig.show()"])
+    
+    %% Nodes for sliders
+    steps -->|Defines update steps| sliders
+    sliders -->|Configured for| fig
+    
+    %% Links demonstrating flow and relationships
+    button_dict -->|Used to create buttons on| fig
+```

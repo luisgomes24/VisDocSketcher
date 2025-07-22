@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "early-senate-polls.csv",
+      "description": "This CSV file contains polling data regarding early Senate polls."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing the early Senate polls data loaded from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "uses": ["data visualization functions"]
+    }
+  ],
+  "models": []
+}

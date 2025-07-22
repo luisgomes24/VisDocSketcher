@@ -1,0 +1,18 @@
+flowchart TD
+    %% Data Source Node
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> house_train"]
+    %% house_train Node
+    B -->|Sampling| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> sample <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    %% sample Node
+    C -->|Create Cross Table| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> cross_table <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    
+    %% Chi-Square Model
+    C -->|Input to Chi-Square Test| E["<img src='icons/brain.svg' width=100 height=100/> <br/> Chi-Square Test"]
+    D -->|Used in Chi-Square Test| E
+    
+    %% Comments
+    %% A: CSV file containing housing data
+    %% B: DataFrame loaded with housing data
+    %% C: Random sample of 300 entries from house_train
+    %% D: Contingency table showing relationship between HeatingQC and BldgType
+    %% E: Statistical test to assess independence between HeatingQC and BldgType

@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A["apps.csv"] -->|"Load and clean data"| B["DataFrame apps_with_duplicates"]
+    B -->|"Remove duplicates"| C["DataFrame apps"]
+    A2["user_reviews.csv"] -->|"Load data"| D["DataFrame reviews_df"]
+    
+    %% Data Merging
+    C -->|"Merge with reviews"| E["DataFrame merged_df"]
+    D -->|"Merge with apps"| E
+    
+    %% Data Analysis
+    E -->|"Sentiment polarity analysis"| F["Sentiment Analysis Model"]
+    C -->|"Calculate average rating"| G["avg_app_rating"]
+    C -->|"Count apps by category"| H["num_apps_in_category"]
+    H -->|"Filter large categories"| I["large_categories"]
+    
+    %% Visualizations
+    G -->|"Used in histogram plot"| J["Histogram of Average Ratings"]
+    E -->|"Boxplot for sentiment polarity"| K["Boxplot of Sentiment Polarity"]
+    H -->|"Bar plot by category"| L["Bar Plot of App Counts"]
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#fc9,stroke:#333,stroke-width:2px;
+    class A,A2 class dataSource;
+    class B,C,D,E,G,H,I class dataVariable;
+    class F,J,K,L class process;

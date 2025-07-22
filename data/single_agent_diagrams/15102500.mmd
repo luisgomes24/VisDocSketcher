@@ -1,0 +1,23 @@
+flowchart TD
+    A["📁 Load Data"]
+    B["📊 Data Exploration"]
+    C["🧹 Data Preprocessing"]
+    D["📈 Data Visualization"]
+    E["🧠 Modeling"]
+    F["📊 Evaluate & Submit"]
+
+    A -->|Train Data| B
+    A -->|Test Data| B
+    A -->|Sample Submission| B
+    B -->|Check Shapes| C
+    C -->|Check Nulls| C
+    C -->|Feature Engineering| C
+    C -->|Prepare Training Data| E
+    D -->|Plots of Item Categories| D
+    D -->|Busiest Days| D
+    D -->|Busiest Months| D
+    D -->|Wordcloud for Item Names| D
+    D -->|Wordcloud for Shop Names| D
+    E -->|Fit Model| E
+    E -->|Make Predictions| F
+    F -->|Create Submission File| F

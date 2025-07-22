@@ -1,0 +1,31 @@
+flowchart TD
+    %% Nodes representing the import statements
+    A[Start] --> B[Import Libraries]
+    B --> C[Generate x: linspace(0,1,20)] 
+
+    %% Define function g(x)
+    C --> D[Define g(x): y = sin(2*pi*x) + 0.1*20]
+
+    %% Iteratively calculate y-values
+    D --> E[Iterate and Compute y for each x] 
+    E --> F[Populate y_values and x_values] 
+
+    %% Store data in a list of tuples
+    F --> G[Store data as list of tuples] 
+
+    %% Create a DataFrame from the data
+    G --> H[Create DataFrame from data] 
+
+    %% Visualization nodes
+    H --> I[Visualize with scatter plot]
+    H --> J[Visualize DataFrame with scatter plot]
+    H --> K[Visualize DataFrame with line plot]
+
+    %% End Node
+    I --> L[End]
+    J --> L
+    K --> L
+
+    %% Node Descriptions
+    classDef nodeDescription fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L nodeDescription;

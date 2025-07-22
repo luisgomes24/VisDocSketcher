@@ -1,0 +1,10 @@
+%% This Mermaid diagram visualizes the data workflow for the Jupyter Notebook 11156323.ipynb
+flowchart TD
+    %% Data Source Node
+    A["train.csv"] --> |"Read CSV"| B["df1"]
+    
+    %% Data Variables and Transformations
+    B --> |"Used for exploratory data analysis and visualizations"| C("Exploratory Data Analysis")
+
+    %% Since the models array is empty, we know there are no ML models involved
+    %% Add more nodes and edges as needed for clarity

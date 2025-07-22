@@ -1,0 +1,108 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/heart-disease-prediction-using-logistic-regression/framingham.csv",
+            "description": "This CSV file contains data regarding heart disease risk factors used for prediction."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "data",
+            "description": "A DataFrame containing the heart disease dataset after reading from the CSV."
+        },
+        {
+            "name": "X",
+            "description": "A DataFrame containing the feature variables used for model training."
+        },
+        {
+            "name": "y",
+            "description": "A Series representing the target variable (TenYearCHD) to predict."
+        },
+        {
+            "name": "x_train",
+            "description": "Feature training set after splitting the data."
+        },
+        {
+            "name": "x_test",
+            "description": "Feature testing set after splitting the data."
+        },
+        {
+            "name": "y_train",
+            "description": "Target training set after splitting the data."
+        },
+        {
+            "name": "y_test",
+            "description": "Target testing set after splitting the data."
+        },
+        {
+            "name": "model",
+            "description": "An instance of the Logistic Regression model."
+        },
+        {
+            "name": "labels",
+            "description": "Predicted labels for the test set."
+        },
+        {
+            "name": "logit_roc_auc",
+            "description": "Area under the ROC curve score for the model."
+        },
+        {
+            "name": "fpr, tpr, thresholds",
+            "description": "Values for the ROC curve."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "data",
+            "creation": "Read from CSV using pd.read_csv",
+            "flow": "Processed to clean data and remove null values."
+        },
+        {
+            "variable": "data",
+            "creation": "Data cleaning which involves filling missing values and dropping non-informative columns.",
+            "flow": "Serves as the input to create X and y before splitting."
+        },
+        {
+            "variable": "X",
+            "creation": "Selected feature columns from the cleaned DataFrame.",
+            "flow": "Used to train the model."
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted target variable (TenYearCHD) from the cleaned DataFrame.",
+            "flow": "Used to train the model."
+        },
+        {
+            "variable": "x_train, x_test, y_train, y_test",
+            "creation": "Created using train_test_split to separate data into training and testing sets.",
+            "flow": "x_train and y_train are used for training the model while x_test is used for predictions."
+        },
+        {
+            "variable": "model",
+            "creation": "Initialized LogisticRegression model.",
+            "flow": "Fitted with X_train and y_train data."
+        },
+        {
+            "variable": "labels",
+            "creation": "Predicted using model.predict on x_test.",
+            "flow": "Used to evaluate the model performance."
+        },
+        {
+            "variable": "logit_roc_auc",
+            "creation": "Calculated using roc_auc_score on y_test and predictions.",
+            "flow": "Used to assess model performance."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": [
+                "male", "age", "education", "cigsPerDay", "BPMeds",
+                "prevalentStroke", "prevalentHyp", "diabetes",
+                "totChol", "sysBP", "diaBP", "BMI", "heartRate", "glucose"
+            ],
+            "target_variable": "TenYearCHD",
+            "hyperparameters": {}
+        }
+    ]
+}

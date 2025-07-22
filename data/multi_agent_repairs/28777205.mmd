@@ -1,0 +1,5 @@
+flowchart TD
+    A["flavors_of_cacao.csv"] -->|Load data| B["DataFrame df"]
+    B -->|Feature and Target Split| C["Features X"]
+    C -->|Train Model| D["Trained Model"]
+    D -->|Make Predictions| E["Predictions"]

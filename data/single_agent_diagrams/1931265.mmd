@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data\n<img src='file.svg' /> <br/> from CSV"] --> B["🔍 Explore Data"]
+    B --> C["⚙️ Preprocess Data"]
+    C --> D["🔷 Train-Test Split"]
+    D --> E["🧠 Build Model"]
+    E --> F["🔄 Train Model"]
+    F --> G["📊 Evaluate Model"]
+    G --> H["🔍 Visualize Results"]
+    H --> I["❌ Check Misclassifications"]
+    
+    A -->|Input| F
+    C -->|Requires| A
+    G -->|Requires| F
+    F -->|Outputs| G
+    I -->|Uses| G

@@ -1,0 +1,16 @@
+flowchart TD
+    A["embold_train.json"] --> |Read JSON| B["DataFrame: df"]
+    
+    B --> |Filter Bugs| C["df_bug"]
+    B --> |Filter Features| D["df_feature"]
+    B --> |Filter Questions| E["df_question"]
+    
+    B --> |Create Train Data Loader| F["train_data_loader"]
+    B --> |Create Test Data Loader| G["testing_data_loader"]
+    B --> |Create Validation Data Loader| H["val_data_loader"]
+    
+    I["BERT Model\nInput: commit_message\nOutput: label\nParams: dropout=0.3, lr=2e-5, epochs=5"]
+    
+    F --> |Train Model| I
+    G --> |Test Model| I
+    H --> |Validate Model| I

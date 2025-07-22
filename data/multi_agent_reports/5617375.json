@@ -1,0 +1,92 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training comments and targets for classification"
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test comments to classify"
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission format for predictions"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data"
+    },
+    {
+      "variable_name": "sub",
+      "description": "DataFrame for sample submission"
+    },
+    {
+      "variable_name": "Y",
+      "description": "Binary target variable derived from train['target']"
+    },
+    {
+      "variable_name": "tokenizer",
+      "description": "Tokenizer for text processing and encoding"
+    },
+    {
+      "variable_name": "predictions",
+      "description": "Predictions made by the model"
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame for final predictions to save to CSV"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow_usage": "Used for training data in model training"
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "flow_usage": "Used for generating predictions"
+    },
+    {
+      "variable_name": "Y",
+      "creation_method": "np.where",
+      "flow_usage": "Used as target variable in model training"
+    },
+    {
+      "variable_name": "tokenizer",
+      "creation_method": "Tokenizer.fit_on_texts",
+      "flow_usage": "Used to preprocess comments into sequences"
+    },
+    {
+      "variable_name": "predictions",
+      "creation_method": "model.predict",
+      "flow_usage": "Used to store model predictions on test data"
+    },
+    {
+      "variable_name": "submission",
+      "creation_method": "pd.concat",
+      "flow_usage": "Final DataFrame saved to CSV for submission"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LSTM",
+      "input_features": "Processed comment sequences",
+      "target_variable": "Binary outcome from Y",
+      "hyperparameters": {
+        "embedding_size": 256,
+        "dropout_rates": [0.25, 0.2],
+        "lstm_units": 128,
+        "epochs": 3,
+        "batch_size": 1024
+      }
+    }
+  ]
+}

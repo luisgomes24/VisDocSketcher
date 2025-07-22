@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains information about the Titanic passengers, including their survival status."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains information about the Titanic passengers for whom predictions of survival are to be made."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "titanic_df",
+      "description": "DataFrame containing the training data for the Titanic passengers."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the test data for evaluation."
+    },
+    {
+      "name": "X_train",
+      "description": "Training features DataFrame excluding the Survived column."
+    },
+    {
+      "name": "Y_train",
+      "description": "Target variable Series containing the Survived status."
+    },
+    {
+      "name": "X_test",
+      "description": "Test features DataFrame excluding PassengerId."
+    },
+    {
+      "name": "Y_pred",
+      "description": "Predicted survival status for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "titanic_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X_train", "Y_train"]
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X_test"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "drop the Survived column from titanic_df",
+      "flows_to": ["logreg", "random_forest"]
+    },
+    {
+      "variable": "Y_train",
+      "created_by": "extract Survived column from titanic_df",
+      "flows_to": ["logreg", "random_forest"]
+    },
+    {
+      "variable": "Y_pred",
+      "created_by": "logreg.predict() or random_forest.predict()",
+      "flows_to": ["submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None"
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "n_estimators=100"
+    }
+  ]
+}

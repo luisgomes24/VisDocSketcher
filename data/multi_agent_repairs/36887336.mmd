@@ -1,0 +1,40 @@
+```mermaid
+%% This is a Mermaid.js flowchart diagram representing the data workflow.
+flowchart TD
+
+    %% Data Sources
+    A1["train.csv"] --> |Read Data| B1["df"]
+    A2["test.csv"] --> |Read Data| B2["df_test"]
+
+    %% Data Preprocessing
+    B1 --> C1["X"] %% Features extraction
+    B1 --> C2["y"] %% Target variable extraction
+
+    %% Machine Learning Models
+    %% XGBClassifier
+    C1 --> |Features| D1("XGBClassifier")
+    C2 --> |Target| D1
+
+    %% Predictions from XGBClassifier
+    D1 --> |Predict Proba| E1["valid_preds_1"]
+    D1 --> |Predict Proba| E2["test_preds_1"]
+
+    %% Loss Calculation
+    E1 --> |Validation| L1["losses"]
+
+    %% Logistic Regression for Stacking
+    %% Uses predictions from different models as features
+    F1["preds_1"] --> D2("LogisticRegression")
+    F2["preds_2"] --> D2
+    F3["preds_3"] --> D2
+    C2 --> |Target| D2
+
+    %% Final Predictions
+    D2 --> |Final Output| G["Final Predictions"]
+
+    %% Description of some nodes:
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;
+    class A1,A2 dataSource;
+    class D1,D2 model;
+```

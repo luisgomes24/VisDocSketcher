@@ -1,0 +1,21 @@
+flowchart TD
+    %%% Data Sources %%%
+    A["Video File\n019d5b34_1.mp4"]:::dataSource -->|Input Frames| B["YOLOv5 Model\nyolov5l6_trained_600images.pt"]
+    B-->C["BOX DataFrame"]:::dataVariable
+
+    %%% Data Variables %%%
+    C-->D["Filter Confidence\n>0.65"]:::process
+    D-->E["data0 DataFrame"]:::dataVariable
+    
+    A-->F["Extract Frames"]:::process
+    F-->G["image_dir"]:::dataVariable
+
+    %%% Processes and Visualization %%%
+    G-->H["Read Images for Visualization"]:::process
+    E-->H
+    C-.->I["Visualize Detection Information"]:::process
+    
+    %%% Styles and Classes %%%
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bfb,stroke:#333,stroke-width:2px;

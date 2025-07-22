@@ -1,0 +1,32 @@
+flowchart TD
+    %% Reading the data source
+    A[train.csv] --> |Load CSV| B[home_data]
+    %% Creation of target and features
+    B --> |Extract SalePrice| C[y]  %% Target Variable
+    B --> |Extract Features| D[X]  %% Feature Set
+    %% Splitting the data
+    D --> |train_test_split| E[train_X]
+    D --> |train_test_split| F[val_X]
+    C --> |train_test_split| G[train_y]
+    C --> |train_test_split| H[val_y]
+    %% Model Initialization
+    I[DecisionTreeRegressor]:::model --> |Initialize| J[iowa_model]
+    %% Model Training
+    J --> |Fit on Training Data| K[iowa_model Trained]
+    E --> K
+    G --> K
+    %% Model Prediction
+    K --> |Predict on Validation| L[val_predictions]
+    F --> L
+    %% Model Evaluation
+    L --> |Calculate MAE| M[val_mae]
+    H --> M
+    %% Hyperparameter Tuning Data Flow
+    N[candidate_max_leaf_nodes] ---> |Find Optimal Size| O[best_tree_size]
+    O --> |Set Optimal Size| J
+    %% Final Model Training
+    P[final_model]:::model --> |Train on Complete Data| Q[final_model Trained]
+    D --> Q
+    C --> Q
+
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;

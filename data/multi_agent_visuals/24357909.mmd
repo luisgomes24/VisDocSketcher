@@ -1,0 +1,23 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Train CSV File"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_data"]
+    %% A: Represents the training CSV data source
+    B -->|Drop target column| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]
+    B -->|Extract target column| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    %% B: Represents train_data DataFrame with features and target
+
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> Test CSV File"] -->|Read CSV| F["<img src='icons/table.svg' width=100 height=100/> <br/> test_data"]
+    %% E: Represents the test data CSV source    
+    
+    G["<img src='icons/file.svg' width=100 height=100/> <br/> Sample Submission CSV File"] --> H["<img src='icons/table.svg' width=100 height=100/> <br/> submission"]
+    %% G: Represents the sample submission CSV format
+
+    C -->|Input Features| I["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestClassifier Model"]
+    D -->|Target Variable| I
+    %% I: Represents the RandomForestClassifier Model
+    I -->|Hyperparameters: max_samples=(0.5, 0.9), max_features=(0.5, 0.9), n_estimators=300, random_state=42| I
+
+    F -->|Make Predictions| J["<img src='icons/table.svg' width=100 height=100/> <br/> submission with predictions"]
+    I -->|Generate Predictions| J
+    %% J: Represents the submission DataFrame containing predictions
+
+    H --> J

@@ -1,0 +1,72 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/train.csv",
+      "description": "Contains training data for housing prices including features and SalePrice target variable."
+    },
+    {
+      "source": "../input/test.csv",
+      "description": "Contains test dataset for housing prices with features only."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame containing the training data after removing rows with missing SalePrice."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame that holds the test data for prediction."
+    },
+    {
+      "name": "X",
+      "description": "DataFrame of features (numeric columns) used for training the model."
+    },
+    {
+      "name": "y",
+      "description": "Series containing the target variable SalePrice from the training data."
+    },
+    {
+      "name": "results",
+      "description": "Dictionary storing average MAE values corresponding to different n_estimators values in Random Forest."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Processed to create variables X and y."
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for testing predictions but not altered."
+    },
+    {
+      "variable": "X",
+      "creation_method": "Derived from train_data by selecting numeric columns.",
+      "flow": "Used in fitting the model and in cross-validation."
+    },
+    {
+      "variable": "y",
+      "creation_method": "Extracted from train_data.",
+      "flow": "Used as the target variable in model training."
+    },
+    {
+      "variable": "results",
+      "creation_method": "Loop through n_estimators calls to get_score().",
+      "flow": "Visualized to assess performance across different n_estimators."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "n_estimators": "varies from 50 to 400 in steps of 50",
+        "random_state": "0"
+      }
+    }
+  ]
+}

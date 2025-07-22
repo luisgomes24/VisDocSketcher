@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+flowchart TD
+    md["<img src='icons/table.svg' width=100 height=100/> <br/> md"]:::dataNode
+    dataset["<img src='icons/file.svg' width=100 height=100/> <br/> dataset.csv"]:::dataSource -->|"load CSV"| md
+    players["<img src='icons/table.svg' width=100 height=100/> <br/> players"]:::processNode
+    md -.->|"filter"| players
+    X["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]:::processNode
+    players -->|"select features"| X
+    X_foot["<img src='icons/column_split.svg' width=100 height=100/> <br/> X_foot"]:::processNode
+    players -->|"select foot features"| X_foot
+    y["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]:::processNode
+    players -->|"select target"| y
+    X_normalized["<img src='icons/column_split.svg' width=100 height=100/> <br/> X_normalized"]:::processNode
+    X -->|"normalize"| X_normalized
+    XGRegModel["<img src='icons/brain.svg' width=100 height=100/> <br/> XGRegModel"]:::modelNode
+    X & y -->|"train XGBoost"| XGRegModel
+    NNetModel["<img src='icons/brain.svg' width=100 height=100/> <br/> NNetModel"]:::modelNode
+    X & y -->|"train keras model"| NNetModel
+
+    classDef dataNode fill:#87CEEB,stroke:#000,color:#000;
+    classDef processNode fill:#C6F4D6,stroke:#000,color:#000;
+    classDef modelNode fill:#F2C464,stroke:#000,color:#000;
+    classDef dataSource fill:#FFCDD2,stroke:#000,color:#000;

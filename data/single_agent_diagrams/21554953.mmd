@@ -1,0 +1,7 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train, test"] --> B["🧪 Preprocessing <img src='table.svg'/> <br/> Add Features"]
+    B --> C["🔧 Feature Scaling <img src='column_split.svg'/> <br/> RobustScaler"]
+    C --> D["📈 Reshape Data <img src='boxplot_template.svg'/> <br/> train, test"]
+    D --> E["🧠 Model Training <img src='brain.svg'/> <br/> K-Fold Cross Validation"]
+    E --> F["📊 Evaluate Model <img src='hist_template.svg'/> <br/> Learning Curve"]
+    F --> G["📤 Prepare Submission <img src='file.svg'/> <br/> Save to CSV"]

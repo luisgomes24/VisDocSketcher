@@ -1,0 +1,56 @@
+{"data_sources": [
+    {
+        "file_path": "/kaggle/input/palestine-body-count/Palestine Body Count.csv",
+        "description": "Data containing the statistics of casualties related to the Israel-Palestine conflict"
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "df",
+        "description": "DataFrame containing the body count data of Palestinians and Israelis"
+    },
+    {
+        "variable_name": "p_injured",
+        "description": "Total number of Palestinians Injured"
+    },
+    {
+        "variable_name": "i_injured",
+        "description": "Total number of Israelis Injured"
+    },
+    {
+        "variable_name": "p_killed",
+        "description": "Total number of Palestinians Killed"
+    },
+    {
+        "variable_name": "i_killed",
+        "description": "Total number of Israelis Killed"
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "df",
+        "created_by": "pd.read_csv",
+        "flows_to": ["Data Cleaning", "Visualization", "Analysis"]
+    },
+    {
+        "variable_name": "p_injured",
+        "created_by": "df['Palestinians Injuries'].sum()",
+        "flows_to": ["Print Output", "Visualization"]
+    },
+    {
+        "variable_name": "p_killed",
+        "created_by": "df['Palestinians Killed'].sum()",
+        "flows_to": ["Print Output", "Visualization"]
+    },
+    {
+        "variable_name": "i_injured",
+        "created_by": "df['Israelis Injuries'].sum()",
+        "flows_to": ["Print Output", "Visualization"]
+    },
+    {
+        "variable_name": "i_killed",
+        "created_by": "df['Israelis Killed'].sum()",
+        "flows_to": ["Print Output", "Visualization"]
+    }
+],
+"models": []}

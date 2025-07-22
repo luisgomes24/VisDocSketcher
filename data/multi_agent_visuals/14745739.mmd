@@ -1,0 +1,8 @@
+graph TD;
+    A[<img src='icons/database.svg' width=100 height=100/> <br/> Load Training Data] --> B[<img src='icons/database.svg' width=100 height=100/> <br/> Load Test Data];
+    A -->|"df_train"| C[<img src='dummy_plots/barplot_template.svg' /> <br/> Tokenization];
+    B --> C;
+    C -->|"input_ids"| D[<img src='icons/column_split.svg' width=100 height=100/> <br/> Create Attention Masks];
+    D -->|"train_inputs, validation_inputs"| E[<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model];
+    E --> F[<img src='icons/file.svg' width=100 height=100/> <br/> Predictions];
+    F -->|"Output"| G[<img src='icons/table.svg' width=100 height=100/> <br/> Save Result];

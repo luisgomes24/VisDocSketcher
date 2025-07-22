@@ -1,0 +1,1 @@
+Diagram sketch for the workflow of the Jupyter Notebook covering data sources, variables, data flow, and models involved.

@@ -1,0 +1,12 @@
+graph TD
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> /heart_failure_clinical_records_dataset.csv/"] -->|Load Data| B1["<img src='icons/table.svg' width=100 height=100/> <br/> /dataset/"]
+    %% A1: Load the data from CSV file into a DataFrame
+    B1 -->|Extract Features and Target| C1["<img src='icons/column_split.svg' width=100 height=100/> <br/> /x/"] & C2["<img src='icons/column_split.svg' width=100 height=100/> <br/> /y/"]
+    %% B1: DataFrame containing data from CSV, split into features (x) and target (y)
+    C1 -->|SMOTE Resampling| D1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> /x_data/"]
+    %% C1: Feature matrix used for model training, resampled using SMOTE
+    C2 -->|SMOTE Resampling| D2["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> /y_data/"]
+    %% C2: Target variable used for model training, resampled using SMOTE
+    D1 -->|Train Model| E1["<img src='icons/brain.svg' width=100 height=100/> <br/> /Logistic Regression Model/"]
+    D2 -->|Train Model| E1
+    %% D1 & D2: Resampled features and target used to train Logistic Regression model

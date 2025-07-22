@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Source Node
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> embold_train.json"] --> |Read JSON| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df"]
+    
+    %% Data Processing Nodes
+    B --> |Filter Bugs| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> df_bug"]
+    B --> |Filter Features| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_feature"]
+    B --> |Filter Questions| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> df_question"]
+    
+    %% Data Loader Nodes
+    B --> |Create Train Data Loader| F["<img src='icons/database.svg' width=100 height=100/> <br/> train_data_loader"]
+    B --> |Create Test Data Loader| G["<img src='icons/database.svg' width=100 height=100/> <br/> testing_data_loader"]
+    B --> |Create Validation Data Loader| H["<img src='icons/database.svg' width=100 height=100/> <br/> val_data_loader"]
+    
+    %% Model Node
+    I["<img src='icons/brain.svg' width=100 height=100/> <br/> BERT Model\nInput: commit_message\nOutput: label\nParams: dropout=0.3, lr=2e-5, epochs=5"]
+    
+    %% DataFlow to Model
+    F --> |Train Model| I
+    G --> |Test Model| I
+    H --> |Validate Model| I
+    
+    %% Explanation Nodes
+    %% A: This node represents the data source file that feeds the initial data.
+    %% B: This node is the DataFrame that includes the commit messages and their labels.
+    %% C, D, E: These nodes represent filtered subsets of the data for specific labels.
+    %% F, G, H: These nodes represent different data loaders used for training, testing, and validation respectively.
+    %% I: This node is the BERT-based machine learning model used for classifying commit messages.

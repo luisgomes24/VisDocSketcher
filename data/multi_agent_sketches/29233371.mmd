@@ -1,0 +1,29 @@
+flowchart TD
+    %% Node for data source
+    A["train.csv"] --> |"Load CSV"| B["data_frame"]
+    click A href "../input/hubmap-organ-segmentation/train.csv" "description"
+    
+    %% Node for data_frame variable
+    B["data_frame"] --> |"Extract image identifiers"| C["Image Identifiers"]
+    B --> |"Generate Base Mask"| D["mask0"]
+    
+    %% Node for image blending process
+    C --> |"Load Images and Masks"| E["Images/Masks"]
+    D --> |"Define Blend Area"| F["Blend Area"]
+    
+    %% Gaussian-Laplacian Pyramid Blending Model
+    E --> |"Input Images A and B"| G["Gaussian-Laplacian Pyramid Blending"]
+    F --> |"Blend using Mask"| G
+    
+    %% Output of the blending
+    G --> |"Output"| H["Blended Image"]
+
+    %% Comments explaining nodes
+    %% A: Represents the CSV data source being used.
+    %% B: Represents the main DataFrame created from the CSV source.
+    %% C: Represents extraction of identifiers to load necessary images and masks.
+    %% D: Represents the mask creation for blending process - mask0.
+    %% E: Represents actual images and masks loaded for blending.
+    %% F: Represents setting up the blend area using the mask0.
+    %% G: Represents the ML model used for blending - Gaussian-Laplacian Pyramid Blending.
+    %% H: Represents the final output of blending process.

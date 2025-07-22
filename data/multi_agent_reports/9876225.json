@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Airplane_Crashes_and_Fatalities_Since_1908.csv",
+      "description": "Dataset containing various details about airplane crashes since 1908, including date, time, location, operator, fatalities, and more."
+    },
+    {
+      "file_name": "API_IS.AIR.PSGR_DS2_en_csv_v2.csv",
+      "description": "World Bank dataset containing the total number of air passengers from 1970 to 2008."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "Data",
+      "description": "Primary DataFrame containing the airplane crash data."
+    },
+    {
+      "variable_name": "Temp",
+      "description": "Temporary DataFrame for aggregating data by year and count of crashes."
+    },
+    {
+      "variable_name": "Fatalities",
+      "description": "DataFrame summarizing fatalities from the crashes grouped by year."
+    },
+    {
+      "variable_name": "Totals",
+      "description": "DataFrame combining air passengers data and fatalities data to calculate ratios."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "Data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data analysis, manipulation, and visualization throughout the notebook."
+    },
+    {
+      "variable_name": "Temp",
+      "creation_method": "GroupBy and count",
+      "flow": "Used to visualize total accidents by year and month."
+    },
+    {
+      "variable_name": "Fatalities",
+      "creation_method": "GroupBy and sum",
+      "flow": "Used to visualize total fatalities and their ratio to total passengers."
+    },
+    {
+      "variable_name": "Totals",
+      "creation_method": "pd.concat",
+      "flow": "Used to visualize the relationship between fatalities and total passengers."
+    }
+  ],
+  "models": []
+}

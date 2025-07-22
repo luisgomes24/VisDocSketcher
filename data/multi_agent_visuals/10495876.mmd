@@ -1,0 +1,48 @@
+flowchart TD
+    %% Data Source
+    A["Kaggle_Sirio_Libanes_ICU_Prediction.xlsx"] -->|Load Data| B["df"]
+    
+    %% Data Preparation
+    B -->|Drop & Fill NaN| C["x"]
+    B -->|Extract Target| D["y"]
+    
+    %% Training Classifiers
+    C -->|Used by Models| E["train_clfs"]
+    D -->|Used by Models| E["train_clfs"]
+    C -->|Used by XGBoost| F["train_xgb"]
+    D -->|Used by XGBoost| F["train_xgb"]
+    
+    %% Classifiers
+    subgraph Classifiers
+        direction TB
+        E1["Decision Tree"] --> G["df_results_test"]
+        E2["Logistic Regression"] --> G
+        E3["KNeighbors"] --> G
+        E4["Random Forest"] --> G
+        E5["AdaBoost"] --> G
+        E6["SVM"] --> G
+    end
+
+    %% XGBoost
+    F --> H["df_results_xgb"]
+
+    %% Results Concatenation
+    G -->|Combine Results| I["df_results"]
+    H -->|Combine XGBoost Results| I["df_results"]
+    
+    %% Plotting
+    I -->|Prepare Data for Plotting| J["df_plot"]
+    J -->|Plot Results| K["plot_test"]
+
+    %% Comments
+    %% Kaggle_Sirio_Libanes_ICU_Prediction.xlsx: Raw data source file
+    %% df: DataFrame with all dataset entries
+    %% x: Features for model training, nulls handled
+    %% y: Target variable indicating ICU requirement
+    %% train_clfs: Trains various classifiers
+    %% train_xgb: Trains XGBoost model with tuning
+    %% df_results_test: Contains test results of classifiers
+    %% df_results_xgb: Contains results of XGBoost
+    %% df_results: Combined results DataFrame
+    %% df_plot: Data ready for visualization
+    %% plot_test: Final step for plotting performance

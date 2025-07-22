@@ -1,0 +1,27 @@
+flowchart TD
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> ratings.csv"] --> B1
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> books.csv"] --> B1
+    B1["Merge Ratings and Books"] --> C1
+    %% C1 is 'train' DataFrame after merging ratings and books
+    C1["train DataFrame"] --> D1
+    C1 --> D2
+    D1["Pivot into userRatings"] --> E1
+    D2["Create Surprise Dataset"] --> F1
+    E1["userRatings DataFrame"] --> F2
+    F1["Prepare Train/Test Split"]
+    F1 --> G1
+    G1["KNN User-based Model"] --> H1
+    G1 --> H2
+    H1["Train User-based Model"]
+    H1 --> I1
+    I1(["Predict & Evaluate User-based"])
+    E1 --> J1
+    J1["Compute Pearson Similarity"] --> K1
+    K1["item_similarity_pearson DataFrame"] --> L1
+    L1["Generate Recommendations"]
+    F2["Use userRatings for Item Model"] --> M1
+    G1 --> N1
+    N1["KNN Item-based Model"] --> O1
+    O1["Train Item-based Model"]
+    O1 --> P1
+    P1(["Predict & Evaluate Item-based"])

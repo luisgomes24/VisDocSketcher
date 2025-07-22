@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "Contains training data for cryptocurrency prediction, including asset prices and target values."
+    },
+    {
+      "file": "asset_details.csv",
+      "description": "Contains details of each cryptocurrency asset including Asset_ID and Asset_Name."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training data loaded from train.csv."
+    },
+    {
+      "name": "df_asset_details",
+      "description": "DataFrame containing details of the assets loaded from asset_details.csv."
+    },
+    {
+      "name": "Xs",
+      "description": "Dictionary storing feature DataFrames for each asset during model training."
+    },
+    {
+      "name": "ys",
+      "description": "Dictionary storing target values for each asset during model training."
+    },
+    {
+      "name": "models",
+      "description": "Dictionary storing trained models for each asset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "Created by reading train.csv using pandas read_csv.",
+      "flow": "Used to train models for each asset."
+    },
+    {
+      "variable": "df_asset_details",
+      "creation": "Created by reading asset_details.csv using pandas read_csv.",
+      "flow": "Used to loop over all assets and train individual models."
+    },
+    {
+      "variable": "Xs",
+      "creation": "Populated in the training loop for each asset using get_features function.",
+      "flow": "Used during model fitting to train models."
+    },
+    {
+      "variable": "ys",
+      "creation": "Populated in the training loop for each asset using get_features function.",
+      "flow": "Used as target variable during model fitting."
+    },
+    {
+      "variable": "models",
+      "creation": "Populated in the training loop for each asset by fitting LGBMRegressor.",
+      "flow": "Used to make predictions on test data."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LGBMRegressor",
+      "input_features": "Features constructed from the training data including high_div_low, open_sub_close, Upper_Shadow, Lower_Shadow, and time-based features.",
+      "target_variable": "y (the target price value for the asset)",
+      "hyperparameters": {
+        "n_estimators": 1200
+      }
+    }
+  ]
+}

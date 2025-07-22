@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_name": "USD_BRL_1994_2021_ANO_MES_DIA.csv",
+      "description": "Historical exchange rate data of USD to BRL from 1994 to 2021."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the full exchange rate dataset."
+    },
+    {
+      "variable_name": "df2",
+      "description": "Filtered DataFrame including only the years before 2021 and specific columns: Year, Month, Day, and PTAX_VENDA."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "usage": ["Filtered into df2", "Used for plotting in seaborn"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "df[df['Year']<2021]",
+      "usage": ["Plotted using seaborn relplot"]
+    }
+  ],
+  "models": []
+}

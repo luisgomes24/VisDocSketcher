@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv('Drug.csv')"] --> B["🔍 Data Exploration <img src='table.svg' /> <br/> df.head(), df.describe()"]
+    B --> C["🧹 Data Cleaning <img src='column_split.svg' /> <br/> Handle Missing Values"]
+    C --> D["🔍 Data Transformation <img src='column_split.svg' /> <br/> Categorize Effectiveness"]
+    D --> E["📊 Data Visualization <img src='barplot_template.svg' /> <br/> sns.barplot(Trending Medications)"]
+    E --> F["📊 Summary Visuals <img src='heatmap_template.svg' /> <br/> sns.heatmap(df.corr())"]
+    F --> G["🧠 Model Creation <img src='brain.svg' /> <br/> Model Logic"]
+    G --> H["✅ Model Evaluation <img src='table.svg' /> <br/> Outcome Assessment"]

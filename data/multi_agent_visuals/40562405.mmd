@@ -1,0 +1,12 @@
+flowchart TD
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/asl-fingerspelling/supplemental_metadata.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/asl-fingerspelling/train.csv"]
+    A3["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame containing landmarks data loaded from Parquet files."]
+    A4["<img src='icons/column_split.svg' width=100 height=100/> <br/> Sample dataset for exploratory data analysis."]
+    A5["<img src='icons/row_split.svg' width=100 height=100/> <br/> Correlation matrix among selected columns."]
+
+    A1 -->|"pd.read_csv"| C[df_meta]
+    A2 -->|"pd.read_csv"| C[df_train]
+    A3 -->|"pd.read_parquet"| C[df]
+    C[df] -->|"df.sample()"| C[df_sample]
+    C[df] -->|"df.corr()"| C[correlation_matrix]

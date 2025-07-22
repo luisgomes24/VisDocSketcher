@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with image IDs and corresponding mask encodings."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "tr",
+      "description": "DataFrame containing the initial training data read from 'train.csv'."
+    },
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing only the data where masks are present, filtered from 'tr'."
+    },
+    {
+      "variable_name": "train_data",
+      "description": "Instance of the ImageData class to load training images and masks."
+    },
+    {
+      "variable_name": "model_ft",
+      "description": "The DeepLabV3 model initialized with ResNet-101 as backbone for semantic segmentation."
+    },
+    {
+      "variable_name": "optimizer",
+      "description": "Stochastic Gradient Descent (SGD) optimizer for training the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "tr",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used to filter and create 'df_train'."
+    },
+    {
+      "variable_name": "df_train",
+      "creation_method": "Filtering on 'tr' DataFrame",
+      "flow": "Used in 'ImageData' class as input to create 'train_data'."
+    },
+    {
+      "variable_name": "train_data",
+      "creation_method": "ImageData class instantiation",
+      "flow": "Used as input to DataLoader for training the model."
+    },
+    {
+      "variable_name": "model_ft",
+      "creation_method": "torchvision.models.segmentation.deeplabv3_resnet101()",
+      "flow": "Trained using the 'train_one_epoch' function with 'data_loader'."
+    },
+    {
+      "variable_name": "optimizer",
+      "creation_method": "torch.optim.SGD()",
+      "flow": "Used during training to update model parameters."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DeepLabV3",
+      "features": "Uses pretrained ResNet-101 as the backbone.",
+      "input_features": "Training images from 'train_data'.",
+      "target_variable": "Image masks for segmentation.",
+      "hyperparameters": {
+        "learning_rate": 0.0001,
+        "momentum": 0.9,
+        "weight_decay": 0.0005
+      }
+    }
+  ]
+}

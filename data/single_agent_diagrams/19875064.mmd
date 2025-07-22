@@ -1,0 +1,14 @@
+graph TD;
+    A["📥 Load Data <img src='file.svg'/> <br/> Train and Test Data"] --> B["🔍 Check for Missing Values"];
+    B --> C["🎚️ Data Preprocessing <img src='column_split.svg'/> <br/> Split Features from Labels"];
+    C --> D["📊 Visualization <img src='barplot_template.svg'/> <br/> Count Plot of Labels"];
+    D --> E["📸 Sample Images <img src='image.svg'/> <br/> Random Sample of Images"];
+    E --> F["📊 Train-Test Split"];
+    F --> G["🧠 Build Model <img src='brain.svg'/>"];
+    G --> H["🏋️‍♂️ Train Model"];
+    H --> I["📈 Evaluate Model <img src='scatter_plot_template.svg'/> <br/> Plot Accuracy"];
+    I --> J["📉 Evaluate Model <img src='scatter_plot_template.svg'/> <br/> Plot Loss"];
+    J --> K["🔮 Make Predictions"];
+    K --> L["📊 Confusion Matrix <img src='boxplot_template.svg'/>"];
+    L --> M["💾 Save Model"];
+    M --> N["📤 Prepare Submission <img src='file.svg'/>"];

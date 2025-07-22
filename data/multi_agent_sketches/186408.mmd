@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph DataSources
+        DS1["impacts.csv"]:::dataSource
+        %% This node represents the CSV file containing astroid impact data.
+    end
+    
+    subgraph DataVariables
+        DV1["astroids DataFrame"]:::dataVariable
+        %% This node represents the DataFrame that holds the astroid impact data.
+    end
+    
+    subgraph Models
+        M1[SVM Model]:::model
+        %% This node represents the Support Vector Machine model that is used in the analysis.
+    end
+
+    %% Data Sources
+    DS1 -->|Read using pd.read_csv| DV1
+    
+    %% Data Flow: Data Processing and Usage
+    DV1 -->|Used for analysis and processing| M1
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

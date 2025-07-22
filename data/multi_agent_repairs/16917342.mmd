@@ -1,0 +1,28 @@
+```mermaid
+flowchart TD
+    subgraph Input
+        A1["Dataset1_train.csv"]
+        A2["Dataset2_train.csv"]
+        A3["Dataset3_train.csv"]
+    end
+    subgraph Processing
+        B1["Read CSV: Dataset1_train.csv"]
+        B2["Read CSV: Dataset2_train.csv"]
+        B3["Read CSV: Dataset3_train.csv"]
+        C1["Filter: dfA1 (PrimaryKey == 'A1')"]
+        C2["Filter: dfA2 (PrimaryKey == 'A2' or 'A4')"]
+        D1["Merge: df3 (dfA1 and dfA2)"]
+    end
+    subgraph Output
+        E1["Plot: dfA1"]
+        E2["Plot: dfA2"]
+        E3["Plot: df3"]
+    end
+
+    A1 --> B1 --> C1 --> D1
+    A2 --> B2 --> C2 --> D1
+    A3 --> B3
+    C1 --> E1
+    C2 --> E2
+    D1 --> E3
+```

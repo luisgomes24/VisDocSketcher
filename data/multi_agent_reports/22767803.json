@@ -1,0 +1,47 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart.csv",
+      "description": "Heart failure prediction dataset containing patient features and target variable"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the heart failure dataset"
+    },
+    {
+      "name": "group1",
+      "description": "DataFrame containing patients with heart disease"
+    },
+    {
+      "name": "group0",
+      "description": "DataFrame containing patients without heart disease"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "usage": ["data analysis", "visualization"]
+    },
+    {
+      "variable": "group1",
+      "creation": "df.groupby(by='HeartDisease').get_group(1)",
+      "usage": ["data analysis", "visualization"]
+    },
+    {
+      "variable": "group0",
+      "creation": "df.groupby(by='HeartDisease').get_group(0)",
+      "usage": ["data analysis", "visualization"]
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestClassifier",
+      "input_features": ["Age", "Sex", "ChestPainType", "RestingBP", "Cholesterol", "FastingBS", "RestingECG", "MaxHR", "ExerciseAngina", "Oldpeak", "ST_Slope"],
+      "target_variable": "HeartDisease",
+      "hyperparameters": {}
+    }
+  ]
+}

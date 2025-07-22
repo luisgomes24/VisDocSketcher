@@ -1,0 +1,114 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains historical data of customers including demographics, vehicle details, and insurance response."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame that contains the input data read from the CSV file."
+    },
+    {
+      "variable_name": "df",
+      "description": "A copy of the train DataFrame for processing."
+    },
+    {
+      "variable_name": "X",
+      "description": "Independent features DataFrame after dropping the target variable ('Response')."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable (Response) representing whether the customer is interested in vehicle insurance."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set of independent features after splitting the data."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing set of independent features after splitting the data."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for the target variable after splitting the data."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing set for the target variable after splitting the data."
+    },
+    {
+      "variable_name": "model",
+      "description": "Instance of RandomForestClassifier used for training on the training set."
+    },
+    {
+      "variable_name": "model1",
+      "description": "Instance of XGBClassifier used for training on the training set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation": "pd.read_csv('../input/health-insurance-cross-sell-prediction/train.csv')",
+      "flow": "Copied to df and then analyzed for preprocessing."
+    },
+    {
+      "variable_name": "df",
+      "creation": "train.copy()",
+      "flow": "Used for performing various operations such as EDA and preprocessing."
+    },
+    {
+      "variable_name": "X",
+      "creation": "train.drop(['Response'], axis=1)",
+      "flow": "Used for model training."
+    },
+    {
+      "variable_name": "y",
+      "creation": "train['Response']",
+      "flow": "Used for model training."
+    },
+    {
+      "variable_name": "X_train",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable_name": "X_test",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flow": "Used for testing the model."
+    },
+    {
+      "variable_name": "model",
+      "creation": "RandomForestClassifier()",
+      "flow": "Trained on X_train and y_train and evaluated on X_test and y_test."
+    },
+    {
+      "variable_name": "model1",
+      "creation": "XGBClassifier()",
+      "flow": "Trained on X_train and y_train and evaluated on X_test and y_test."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": null,
+        "max_depth": null,
+        "min_samples_split": null
+      }
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": null,
+        "learning_rate": null,
+        "max_depth": null
+      }
+    }
+  ]
+}

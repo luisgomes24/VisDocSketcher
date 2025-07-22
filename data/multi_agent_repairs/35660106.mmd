@@ -1,0 +1,4 @@
+%%{init: {'theme': 'default'}}%%
+flowchart TD
+  A["train_metadata.csv"] -->|"Load with pandas"| B["DataFrame: train_metadata"]
+  B -->|"Extract unique labels"| C["List: competition_classes"]

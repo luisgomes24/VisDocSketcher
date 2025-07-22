@@ -1,0 +1,44 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "num",
+      "description": "A number to be rounded to two decimal places in the round_to_two_places function."
+    },
+    {
+      "name": "total_candies",
+      "description": "Total number of candies to be distributed that will be smashed if not evenly divisible by the number of friends."
+    },
+    {
+      "name": "no_frnds",
+      "description": "Number of friends sharing the candies, with a default value of 3."
+    },
+    {
+      "name": "smallest_abs",
+      "description": "The smallest absolute value between two variables x and y."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "num",
+      "creation": "Passed as an argument to round_to_two_places",
+      "flow": "Used in the rounding operation."
+    },
+    {
+      "variable": "total_candies",
+      "creation": "Passed as an argument to to_smash",
+      "flow": "Used to determine how many candies must be smashed as a result of the distribution."
+    },
+    {
+      "variable": "no_frnds",
+      "creation": "Passed as a second argument to to_smash, defaults to 3",
+      "flow": "Used to calculate the distribution of candies."
+    },
+    {
+      "variable": "smallest_abs",
+      "creation": "Calculated using the min() function on abs(x) and abs(y)",
+      "flow": "Contains the smallest absolute value between x and y."
+    }
+  ],
+  "models": []
+}

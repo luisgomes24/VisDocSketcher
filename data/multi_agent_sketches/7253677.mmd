@@ -1,0 +1,18 @@
+flowchart TD
+
+%% Node for the data source
+A["/Weather Data in India from 1901 to 2017.csv/"] %% CSV data source
+
+%% Node for loading data into DataFrame
+B[df1] %% DataFrame variable df1
+
+%% Nodes for data analysis steps
+C[plotPerColumnDistribution] %% Function to plot column distribution
+D[plotCorrelationMatrix] %% Function to plot correlation matrix
+E[plotScatterMatrix] %% Function to plot scatter matrix
+
+%% Data flow connections
+A -->|load data| B
+B -->|used for analysis| C
+B -->|used for analysis| D
+B -->|used for analysis| E

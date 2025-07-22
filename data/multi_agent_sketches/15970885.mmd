@@ -1,0 +1,13 @@
+flowchart TD
+
+%% Input Data Source
+A["../input/"]:::start -->|Load data| B[d]
+
+%% Data Variable Creation
+B[d] -->|Create Drawing| C["draw.Drawing"]
+
+%% Data Flow within the Drawing
+C -->|Add Shapes| D["Polygons, Rectangles, etc."]
+
+%% Styles
+classDef start fill:#f9f,stroke:#333,stroke-width:2px;

@@ -1,0 +1,14 @@
+# Workflow Diagram Placeholder
+
+1. Setup
+   - Bind global functions
+
+2. Exercise Definitions
+   - Define functions for rounding numbers, smashing candies, timing function calls.
+
+3. Function Execution
+   - Execute functions interacting with inputs.
+   - Analysis on candy distribution and rounding issues.
+
+4. Final Thoughts
+   - Importance of error handling and understanding function behaviors.

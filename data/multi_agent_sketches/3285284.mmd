@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Source
+    A[Parking Violations CSV] -->|read_csv| B[df2017]
+    
+    %% Data Sampling
+    B[df2017] -->|sample 10%| C[mini2017]
+    
+    %% Date Extraction
+    B[df2017] -->|extract month| D[month]
+    
+    %% Data Transformations
+    C[mini2017] -->|count by Violation Code| E[violation_code]
+    C[mini2017] -->|count by Vehicle Make| F[vehicle_make]
+    C[mini2017] -->|count by Violation County| G[violation_county]
+    
+    %% Visualizations
+    D[month] -->|visualize| H[Month Barplot]
+    E[violation_code] -->|visualize| I[Violation Code Barplot]
+    F[vehicle_make] -->|visualize| J[Vehicle Make Barplot]
+    G[violation_county] -->|visualize| K[Violation County Barplot]

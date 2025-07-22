@@ -1,0 +1,27 @@
+{
+  "data_sources": [
+    {
+      "file_name": "imagelist.csv",
+      "description": "This CSV file contains image data with at least 30,000 rows. The notebook reads only the first 1000 rows for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame created from 'imagelist.csv' containing image data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "used in plotPerColumnDistribution",
+        "used in plotCorrelationMatrix",
+        "used in plotScatterMatrix",
+        "displayed in a head preview"
+      ]
+    }
+  ],
+  "models": []
+}

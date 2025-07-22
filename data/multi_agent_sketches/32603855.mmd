@@ -1,0 +1,40 @@
+flowchart TD
+    %% Data Sources
+    train_csv["train.csv"]
+    test_csv["test.csv"]
+
+    %% Data preparation
+    train["train DataFrame"]
+    test["test DataFrame"]
+    X["X - Features from train"]
+    y["y - Target variable (Survived)"]
+    X_train["X_train - Training features"]
+    X_cv["X_cv - CV features"]
+    y_train["y_train - Training target"]
+    y_cv["y_cv - CV target"]
+
+    %% ML Models
+    model_XGB["XGBClassifier"]
+    models["Various Models (LazyClassifier)"]
+
+    %% Output
+    submission["Submission DataFrame"]
+
+    %% Flow
+    train_csv --> |"Read CSV"| train
+    test_csv --> |"Read CSV"| test
+    train --> |"Select Features"| X
+    train --> |"Select Target"| y
+    X --> |"train_test_split"| X_train
+    X --> |"train_test_split"| X_cv
+    y --> |"train_test_split"| y_train
+    y --> |"train_test_split"| y_cv
+    X_train --> |"Train Model"| model_XGB
+    y_train --> |"Train Model"| model_XGB
+    X_train --> |"Evaluate Models"| models
+    X_cv --> |"Evaluate Models"| models
+    y_train --> |"Evaluate Models"| models
+    y_cv --> |"Evaluate Models"| models
+    models --> |"Select Best Model"| model_XGB
+    test --> |"Predict with Model"| submission
+    model_XGB --> |"Predict"| submission

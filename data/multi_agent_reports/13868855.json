@@ -1,0 +1,113 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/audio-detection-soliset-201/submission.csv",
+      "description": "Submission data for the kernel 'SoliSet'."
+    },
+    {
+      "file_path": "../input/inference-resnest-rfcx-audio-detection/submission.csv",
+      "description": "Submission data for the kernel '[Inference] ResNest RFCX Audio Detection'."
+    },
+    {
+      "file_path": "../input/minimal-fastai-solution-score-0-61/submission.csv",
+      "description": "Submission data for the kernel 'notebookba481ef16a'."
+    },
+    {
+      "file_path": "../input/all-in-one-rfcx-baseline-for-beginners/submission.csv",
+      "description": "Submission data for the kernel 'All-in-one RFCX baseline for beginners'."
+    },
+    {
+      "file_path": "../input/rfcx-train-resnet50-with-tpu/submission.csv",
+      "description": "Submission data for the kernel 'RFCX: train resnet50 with TPU'."
+    },
+    {
+      "file_path": "../input/rfcx-resnet50-tpu/submission.csv",
+      "description": "Submission data for the kernel 'RFCX Resnet50 TPU'."
+    },
+    {
+      "file_path": "../input/resnet34-more-augmentations-mixup-tta-inference/submission.csv",
+      "description": "Submission data for the kernel 'ResNet34 More Augmentations+Mixup+TTA (Inference)'."
+    },
+    {
+      "file_path": "../input/inference-tpu-rfcx-audio-detection-fast/submission.csv",
+      "description": "Submission data for the kernel '[Inference][TPU] RFCX Audio Detection Fast++'."
+    },
+    {
+      "file_path": "../input/rfcx-bagging-with-different-weights-0871-score/submission.csv",
+      "description": "Submission data for the kernel 'RFCX Bagging'."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "ked",
+      "description": "A DataFrame that holds kernel information including IDs, symbols, scores, and file paths."
+    },
+    {
+      "name": "Kernel",
+      "description": "A class that represents a kernel with attributes for symbol, score, and file path including methods for data handling."
+    },
+    {
+      "name": "g1, g2, g3, g4",
+      "description": "Variables that result from generative functions that combine the data of two kernels."
+    },
+    {
+      "name": "main",
+      "description": "The primary kernel data used for analysis and generation."
+    },
+    {
+      "name": "support",
+      "description": "The supporting kernel data used to generate improved results."
+    },
+    {
+      "name": "X, Y1, Y2",
+      "description": "Variables used for visualizations, representing columns of data from main and supporting kernels."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ked",
+      "creation": "Created from a dictionary containing kernel data.",
+      "flow": "Used to initialize the Kernel class instances."
+    },
+    {
+      "variable": "main",
+      "creation": "Extracted from ked.iloc[x, 0].sub based on the selected kernel.",
+      "flow": "Used for performance generation in the generate function."
+    },
+    {
+      "variable": "support",
+      "creation": "Extracted from a supporting kernel.",
+      "flow": "Used for performance generation in the generate function."
+    },
+    {
+      "variable": "g1, g2, g3, g4",
+      "creation": "Generated from the generate function.",
+      "flow": "Used to create various improvements from kernel data."
+    },
+    {
+      "variable": "sub",
+      "creation": "Result of generative functions and transformations.",
+      "flow": "Saved as 'submission.csv' and other CSV files."
+    }
+  ],
+  "models": [
+    {
+      "model": "XGBoost",
+      "input_features": "Kernel outputs",
+      "target_variable": "Kernel scores",
+      "hyperparameters": "Not explicitly stated."
+    },
+    {
+      "model": "ResNet & other Torch-based models",
+      "input_features": "Audio features in submissions",
+      "target_variable": "Kernel scores",
+      "hyperparameters": "Not explicitly stated."
+    },
+    {
+      "model": "TensorFlow & tf.keras.Sequential",
+      "input_features": "Various audio features.",
+      "target_variable": "Kernel scores.",
+      "hyperparameters": "Not explicitly stated."
+    }
+  ]
+}

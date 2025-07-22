@@ -1,0 +1,113 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart.csv",
+      "description": "Contains data relevant for heart disease prediction with 14 columns including age, gender, cholesterol, and type of chest pain."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "A DataFrame containing the dataset read from the CSV file."
+    },
+    {
+      "variable_name": "x",
+      "description": "Features excluding the target variable from the dataset."
+    },
+    {
+      "variable_name": "y",
+      "description": "The target variable indicating presence or absence of heart disease."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training set features."
+    },
+    {
+      "variable_name": "x_val",
+      "description": "Validation set features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set target variable."
+    },
+    {
+      "variable_name": "y_val",
+      "description": "Validation set target variable."
+    },
+    {
+      "variable_name": "tunedParams",
+      "description": "Hyperparameter settings for tuning the classifiers.
+      "
+    },
+    {
+      "variable_name": "scores",
+      "description": "Metrics for evaluating the models, including accuracy, precision, and recall."
+    },
+    {
+      "variable_name": "model",
+      "description": "Final XGBoost model trained on the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "pd.read_csv",
+      "flow": "Used to create x and y variables, visualizations, and model training."
+    },
+    {
+      "variable": "x",
+      "creation": "data.drop(['target'], axis=1)",
+      "flow": "Used for model training and validation."
+    },
+    {
+      "variable": "y",
+      "creation": "data['target']",
+      "flow": "Used for model training and validation."
+    },
+    {
+      "variable": "x_train",
+      "creation": "train_test_split",
+      "flow": "Used for training models."
+    },
+    {
+      "variable": "x_val",
+      "creation": "train_test_split",
+      "flow": "Used for validation of models."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split",
+      "flow": "Used for training models."
+    },
+    {
+      "variable": "y_val",
+      "creation": "train_test_split",
+      "flow": "Used for validation of models."
+    },
+    {
+      "variable": "model",
+      "creation": "XGBClassifier.fit",
+      "flow": "Final model to evaluate on test data."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "K-Neighbors Classifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": "n_neighbors, weights, p"
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": "n_estimators, criterion, max_features"
+    },
+    {
+      "model_name": "XGBoost Classifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": "colsample_bytree, min_child_weight"
+    }
+  ]
+}

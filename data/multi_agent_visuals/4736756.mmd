@@ -1,0 +1,30 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00'}}}%%
+%%{init: {'logLevel': 'debug'}}%%
+
+```mermaid
+flowchart TD
+    %% The DataFrame node below represents the dataset that is used throughout the notebook.
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]
+    %% This node represents the column used for counting unique values. 
+    nunique["<img src='icons/column_split.svg' width=100 height=100/> <br/> nunique"]
+    %% This node represents the column names used for analysis.
+    columnNames["<img src='icons/column_split.svg' width=100 height=100/> <br/> columnNames"]
+    
+    %% Edge description that we assume the DataFrame is prepared/existing
+    df -- "Data reference" --> nunique
+    df --> columnNames
+    
+    %% These functions are defined and used on the DataFrame for analysis.
+    subgraph Analysis_Functions
+        direction LR
+        A1["<img src='icons/brain.svg' width=100 height=100/> <br/> plotPerColumnDistribution"]
+        A2["<img src='icons/brain.svg' width=100 height=100/> <br/> plotCorrelationMatrix"]
+        A3["<img src='icons/brain.svg' width=100 height=100/> <br/> plotScatterMatrix"]
+    end
+
+    %% Show that these functions are applied to the df
+    df --> |"Analyzed and visualized in"| Analysis_Functions
+
+    %% Highlight the auxiliary state klaxons discovered in analysis.
+    nunique --> A1
+    columnNames --> A1

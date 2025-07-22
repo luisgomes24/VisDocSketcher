@@ -1,0 +1,24 @@
+flowchart TD
+  A["housetrain.csv"] %% This node represents the input CSV data source containing house attributes.
+  B["df"] %% This node represents the loaded DataFrame containing all the house attributes.
+  C["df_float"] %% This node represents a DataFrame filtered to include only floating-point attributes.
+  D["lotFrontage"] %% This node represents the LotFrontage attribute extracted as a feature.
+  E["masVnrAre"] %% This node represents the MasVnrArea attribute extracted as a feature.
+  F["garageYrBlt"] %% This node represents the GarageYrBlt attribute extracted as a feature.
+  G["salePrice"] %% This node represents the target variable SalePrice.
+  H["lr1"] %% This node represents the Linear Regression model trained with LotFrontage.
+  I["lr2"] %% This node represents the Linear Regression model trained with MasVnrArea.
+  J["lr3"] %% This node represents the Linear Regression model trained with GarageYrBlt.
+
+  A -->|read_csv| B
+  B -->|select_dtypes| C
+  C -->|Extract LotFrontage| D
+  C -->|Extract MasVnrArea| E
+  C -->|Extract GarageYrBlt| F
+  B -->|Extract SalePrice| G
+  D -->|fit| H
+  E -->|fit| I
+  F -->|fit| J
+  G -->|fit| H
+  G -->|fit| I
+  G -->|fit| J

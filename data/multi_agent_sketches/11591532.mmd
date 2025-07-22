@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data sources
+    A1[("Content Image")]:::source
+    A2[("Style Image")]:::source
+
+    %% Data variables
+    B1[/"content"/]:::variable
+    B2[/"style"/]:::variable
+    B3[/"target"/]:::variable
+    B4[/"content_features"/]:::variable
+    B5[/"style_features"/]:::variable
+    B6[/"style_grams"/]:::variable
+
+    %% Models
+    M1(["VGG19 Model"]):::model
+
+    %% Data flow
+    A1 --> B1 %% Content image loaded into content tensor
+    A2 --> B2 %% Style image loaded into style tensor
+    B1 --> M1 %% Content features extracted using VGG19
+    B2 --> M1 %% Style features extracted using VGG19
+    M1 --> B4 %% Output content_features from VGG19
+    M1 --> B5 %% Output style_features from VGG19
+    B5 --> B6 %% Gram matrices calculated for style features
+    B1 --> B3 %% Target initialized with content image
+    B3 -->|Used for| M1 %% Target used for style transfer model training
+    B4 -->|Used in loss computation| M1
+    B6 -->|Used in loss computation| M1
+
+    %% Styling
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;

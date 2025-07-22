@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/news-headlines-dataset-for-sarcasm-detection/Sarcasm_Headlines_Dataset_v2.json",
+      "description": "Dataset containing approximately 28000 text data points classified as Sarcastic or Not Sarcastic"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the loaded dataset with headlines and their respective sarcasm labels"
+    },
+    {
+      "variable": "x_train",
+      "description": "Training data input after tokenization and padding"
+    },
+    {
+      "variable": "x_test",
+      "description": "Test data input after tokenization and padding"
+    },
+    {
+      "variable": "y_train",
+      "description": "Training labels for sarcasm detection"
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing labels for sarcasm detection"
+    },
+    {
+      "variable": "pred",
+      "description": "Predictions generated from the trained model on test data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_json",
+      "usage": ["cleaned for analysis", "visualization"]
+    },
+    {
+      "variable": "x_train",
+      "creation": "sequence.pad_sequences(tokenizer.texts_to_sequences)",
+      "usage": ["input to LSTM model"]
+    },
+    {
+      "variable": "x_test",
+      "creation": "sequence.pad_sequences(tokenizer.texts_to_sequences)",
+      "usage": ["input to LSTM model"]
+    },
+    {
+      "variable": "pred",
+      "creation": "model.predict_classes",
+      "usage": ["used for confusion matrix and evaluation"]
+    }
+  ],
+  "models": [
+    {
+      "model": "Word2Vec",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"embedding_dim": 200, "epochs": 3}
+    },
+    {
+      "model": "GloVe",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"embedding_dim": 200, "epochs": 2}
+    }
+  ]
+}

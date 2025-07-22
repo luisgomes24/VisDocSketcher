@@ -1,0 +1,28 @@
+flowchart TD
+    %% Node for data source
+    A["cbb.csv"] -->|Read CSV| B["df"]
+    %% Nodes for data manipulation
+    B["df"] -->|Select Columns| C["df_ff"]
+    %% Nodes for correlation analysis
+    C["df_ff"] -->|Correlation with 'W'| D{"Check Correlation"}
+    %% Nodes for creating training data
+    C["df_ff"] -->|Split Train/Test| E["X_train"]
+    C["df_ff"] -->|Split Train/Test| F["y_train"]
+    %% Nodes for training the model
+    E["X_train"] -->|Train Linear Regression| G["Linear Regression Model"]
+    F["y_train"] -->|Train Model| G["Linear Regression Model"]
+    %% Nodes for making predictions
+    G["Linear Regression Model"] -->|Predict on Test| H["y_pred"]
+    %% Nodes for evaluation
+    H["y_pred"] -->|Evaluate Model| I{"Evaluation Metrics"}
+    F["y_train"] -->|Compare| J["dfd"]
+
+    %% Annotations
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef evalNode fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class A dataNode;
+    class B,C,E,F,J dataNode;
+    class G modelNode;
+    class H,I evalNode;

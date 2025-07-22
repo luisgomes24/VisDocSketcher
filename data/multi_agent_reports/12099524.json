@@ -1,0 +1,72 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training feature dataset for models."
+    },
+    {
+      "file_name": "train_metadf_part{i}.pqt",
+      "description": "Two metadata part files containing various attributes related to images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "embspath",
+      "description": "Path to the embedding data files."
+    },
+    {
+      "name": "train_feat_df",
+      "description": "DataFrame that contains training features loaded from CSV."
+    },
+    {
+      "name": "train_metadf",
+      "description": "DataFrame that combines metadata read from parquet files."
+    },
+    {
+      "name": "files_dict",
+      "description": "A dictionary mapping study instance IDs to respective entries in training feature dataset."
+    },
+    {
+      "name": "unique_pids",
+      "description": "Unique study instance IDs from training features."
+    },
+    {
+      "name": "nvalid",
+      "description": "Count of validation instances calculated as 5% of unique_pids."
+    },
+    {
+      "name": "data",
+      "description": "DataBlock structure that organizes inputs and targets from data loading framework."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_feat_df",
+      "creation_method": "pd.read_csv",
+      "usage": "Used for creating input features for training the model."
+    },
+    {
+      "variable_name": "train_metadf",
+      "creation_method": "pd.concat() on parquet files",
+      "usage": "Combined for adding metadata features."
+    },
+    {
+      "variable_name": "files_dict",
+      "creation_method": "defaultdict(list)",
+      "usage": "Holds organized training files data for model input preparation."
+    },
+    {
+      "variable_name": "data",
+      "creation_method": "DataBlock",
+      "usage": "Manages the training and validation data."
+    }
+  ],
+  "models": [
+    {
+      "name": "MultiHeadedSequenceClassifier",
+      "input_features": "Combined embeddings from different sources, including LSTM."
+      "target_variable": "Multiple target variables for prediction based on medical imaging data.",
+      "hyperparameters": "LSTM layers, dimensionality settings, and head configurations for classification."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+```
+graph TD
+    A["📥 Load Data"] --> B["🗃️ Load TRAIN and TEST Data"]
+    B --> C["🔄 Preprocess Data"]
+    C --> D["📊 Compare Distributions"]
+    D --> E["🔍 Generate Compare Plot for CountryIdentifier"]
+    E --> F["🪄 Random Validation Set vs. Train Subset"]
+    F --> G["⏳ Time Split Validation Set vs. Train Subset"]
+    G --> H["🧠 Model Training"]
+    H --> I["📈 Model Evaluation"]
+    I --> J["⚖️ Compare LB Score vs. CV Score"]
+    J --> K["📊 Plot Results"]
+    K --> L["🏁 Conclusion"]
+    L --> M["🚀 Adversarial Validation"]
+    
+    D --> N["<img src='dummy_plots/hist_template.svg' /> <br/> Distribution Comparison"]
+    F --> O["<img src='dummy_plots/hist_template.svg' /> <br/> Random Validation vs. Train"]
+    G --> P["<img src='dummy_plots/hist_template.svg' /> <br/> Time Split Validation vs. Train"]
+    H --> Q["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Model Performance"]
+    I --> R["📝 Model Submission"]

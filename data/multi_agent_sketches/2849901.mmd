@@ -1,0 +1,17 @@
+flowchart TD
+    A1["legislatives.csv"] --> B1["df1"]
+    B1 --> C1["plotPerColumnDistribution"]
+    B1 --> D1["plotCorrelationMatrix"]
+    B1 --> E1["plotScatterMatrix"]
+    
+    %% Nodes
+    %% A1
+    %% A1: CSV data file used as the main input source
+    %% B1
+    %% B1: DataFrame created by reading in the data from CSV
+    %% C1
+    %% C1: Function to plot the distribution graphs for data visualization
+    %% D1
+    %% D1: Function to plot the correlation matrix among columns
+    %% E1
+    %% E1: Function to plot scatter and density plots for data visualization

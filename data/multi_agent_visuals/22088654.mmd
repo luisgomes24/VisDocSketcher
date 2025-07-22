@@ -1,0 +1,10 @@
+graph TD; 
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] -->|"Imports data"| B["Data Load"];
+    B --> C["<img src='icons/file.svg' width=100 height=100/> <br/> Data Preprocessing"];
+    C -->|"Clean data"| D["<img src='icons/table.svg' width=100 height=100/> <br/> Feature Selection"];
+    D -->|"Select features"| E["Model Preparation"];
+    E -->|"Prepare model"| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    F -->|"Split data for training"| G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Model Training"];
+    G -->|"Train the model"| H["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Evaluation"];
+    H -->|"Evaluate performance"| I["Output Results"];
+    I -->|"Generate output"| J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Result Plot"];

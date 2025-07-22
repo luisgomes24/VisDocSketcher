@@ -1,0 +1,19 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train_features.csv"] --> C["DataFrame of training features"]
+    B["train_targets_scored.csv"] --> D["DataFrame of target labels"]
+    
+    %% Data Flow
+    D --> E["Melted labels for plotting"]
+    
+    %% Plotting and Exploration
+    C -->| "Used for exploration and stats" | I["Big Count Plotter"]
+    C -->| "Rank Correlations" | J["Rank Correlations"]
+    E -->| "Used for plotting" | K["Count Plot"]
+
+    %% Visualizations
+    I --> L["Plots"]
+    J --> M["Correlation Plots"]
+    K --> N["Label Count Plot"]
+```

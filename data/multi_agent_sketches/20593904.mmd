@@ -1,0 +1,41 @@
+flowchart TD
+    %% Read training data
+    subgraph DS1 [Data Source: Training Data]
+        A1[train.csv] -->|read_csv| B1[df_train]
+    end
+    subgraph DS2 [Data Source: Test Data]
+        A2[test.csv] -->|read_csv| B2[df_test]
+    end
+
+    %% Process Training Data
+    B1 -->|Extract features| C1[X]
+    B1 -->|Extract target| C2[y]
+    B1 -->|Identify categorical features| C3[categorical_features]
+
+    %% Process Test Data
+    B2 -->|Extract features| D1[X_test]
+
+    %% Feature Engineering
+    C1 -->|Aggregate categorical means| E1[df_temp]
+    E1 -->|Concatenate with features| F1[enhanced_X]
+
+    %% Model Training
+    subgraph M1 [Model: CatBoostClassifier]
+        F1 -->|train| G1[Trained Model]
+        C2 -->|train| G1
+    end
+
+    %% Predictions
+    G1 -->|predict| H1[Predictions]
+    D1 -->|features for prediction| H1
+
+    %% Annotations
+    classDef dataSource fill:#f3f4f6,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#d1e7dd,stroke:#333,stroke-width:2px;
+    classDef model fill:#fee2e2,stroke:#333,stroke-width:2px;
+    classDef prediction fill:#fde68a,stroke:#333,stroke-width:2px;
+
+    class DS1,DS2 dataSource;
+    class C1,C2,C3,D1,E1,F1 dataProcess;
+    class M1,G1 model;
+    class H1 prediction;

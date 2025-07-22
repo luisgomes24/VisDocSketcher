@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "leaderboard.csv",
+      "description": "Contains the leaderboard for the Efficiency Prize track of a competition, including ranking of teams based on their efficiency."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "leaderboard",
+      "description": "DataFrame containing the leaderboard data read from the CSV file, indexed by 'EfficiencyRank'."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "leaderboard",
+      "creation_method": "pd.read_csv",
+      "flow": "The leaderboard DataFrame is created by reading the leaderboard.csv file and is saved as full_leaderboard.csv."
+    }
+  ],
+  "models": []
+}

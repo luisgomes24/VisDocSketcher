@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Explore Data"]
+    B --> C["🔍 Check for Missing Values"]
+    B --> D["💾 Data Types"]
+    B --> E["📊 Feature Visualization"]
+    E --> F["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg' /> <br/>"]
+    
+    A --> G["🧹 Preprocess Data"]
+    G --> H["🌀 Encode Categorical Data"]
+    G --> I["⚖️ Balance Classes"]
+    
+    H --> J["🧠 Train Model"]
+    J --> K["📈 Feature Importance <img src='dummy_plots/barplot_template.svg' /> <br/>"]
+    
+    J --> L["🏆 Evaluate Models"]
+    L --> M["📊 Accuracy Scores"]
+    
+    M --> N["✨ Save Submission File"]

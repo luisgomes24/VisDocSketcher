@@ -1,0 +1,28 @@
+flowchart TD
+    A["IPL Matches 2008-2020.csv"] -->|Load data| B["df"]
+    B["df"] -->|Filter matches 2018-2020| C["dx"]
+    C["dx"] -->|Create pivot table| D["dy"]
+    D["dy"] -->|Chi-square test input| E{"Chi-square Test of Independence"}
+    E -->|Calculate statistic| F["stat"]
+    E -->|Calculate p-value| G["p"]
+    F -->|Chi-square result| H["Decision"]
+    G -->|Chi-square result| H["Decision"]
+
+    %% Data Source
+    A:::source
+    
+    %% Data Variables
+    B:::variable
+    C:::variable
+    D:::variable
+    F:::variable
+    G:::variable
+
+    %% Processes
+    E:::process
+
+    %% Styles for clarity
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef var fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef variable fill:#99f,stroke:#333,stroke-width:2px;
+    classDef process fill:#9f9,stroke:#333,stroke-width:2px;

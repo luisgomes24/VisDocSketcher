@@ -1,0 +1,9 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Data Overview"]
+    B --> C["<img src='column_split.svg'/> <br/> Data Preprocessing"]
+    C --> D["<img src='column_split.svg'/> <br/> Handling Missing Values"]
+    D --> E["<img src='column_split.svg'/> <br/> Encoding Categorical Variables"]
+    C --> F["<img src='table.svg'/> <br/> Preprocessed Data"]
+    F --> G["<img src='brain.svg'/> <br/> Build Model"]
+    G --> H["<img src='brain.svg'/> <br/> Predict"]
+    H --> I["<img src='file.svg'/> <br/> Save Submission"]

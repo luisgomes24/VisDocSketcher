@@ -1,0 +1,3 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> CSV Data Source: ks-projects-201801.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: kickstarters_2017 <img src='dummy_plots/barplot_template.svg'/> "]
+    B -->|Extract Column: usd_goal_real| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Variable: usd_goal <img src='dummy_plots/scatter_plot_template.svg'/> "]

@@ -1,0 +1,18 @@
+flowchart TD
+    %% Node representing the data source
+    A[Salary_Data.csv]:::data_source -- "Load CSV" --> B(df)
+
+    %% Node for initial data stored in DataFrame
+    B(df):::data_variable -- "Extract Features" --> C(X)
+    B(df):::data_variable -- "Extract Target" --> D(y)
+
+    %% Nodes for the variables used for ML model
+    C(X):::data_variable -- "Used as Input Features" --> E[Linear Regression Model]
+    D(y):::data_variable -- "Used as Target Variable" --> E[Linear Regression Model]
+    
+    %% Node representing the ML model
+    E[Linear Regression Model]
+    
+    %% Classes for styling
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;

@@ -1,0 +1,3 @@
+flowchart TD
+    DS["<img src='icons/file.svg' width=100 height=100/> <br/> Order Data\n(GP Orders - 4.csv)"] -->|Load| DF["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df\nContains book orders"]
+    DF -->|Extract & Count Books| BC["<img src='icons/column_split.svg' width=100 height=100/> <br/> book_counts\nCount of each book"]

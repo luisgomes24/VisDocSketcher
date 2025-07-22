@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        DS1["ratings.csv"]
+        DS1:::source
+        DS2["books.csv"]
+        DS2:::source
+    end
+
+    subgraph Processing
+        DS1 -->|Load Data| Ratings["ratings DataFrame"]
+        DS2 -->|Load Data| Books["books DataFrame"]
+
+        Ratings -->|Merge| Train["Train DataFrame"]
+        Books -->|Merge| Train
+
+        Train -->|Pivot Table| UserRatings["User Ratings Pivot Table"]
+        UserRatings -->|Pearson Correlation| ItemSim["Item Similarity Pearson"]
+    end
+
+    subgraph ModelTraining
+        Ratings -->|Dataset Creation| Dataset1["Surprise Dataset"]
+        Dataset1 -->|Split| Train1["Train Set"]
+        Dataset1 --> Test1["Test Set"]
+
+        Train1 -->|Train| UserBasedKNN["KNNBasic User-based"]
+        UserBasedKNN:::model
+        Train1 -->|Train| ItemBasedKNN["KNNBasic Item-based"]
+        ItemBasedKNN:::model
+    end
+
+    subgraph Recommendations
+        UserRatings -->|Get User Input| User1["Sample User Ratings"]
+        User1 -->|Calculate Scores| RecPearson["User-based Recommendations"]
+        ItemSim -->|Calculate Scores| RecPearsonItem["Item-based Recommendations"]
+    end
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;
+```

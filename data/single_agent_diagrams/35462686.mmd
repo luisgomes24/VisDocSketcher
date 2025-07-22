@@ -1,0 +1,15 @@
+flowchart TD;
+    A["📁 Load Data <img src='icons/file.svg'/>"] --> B["📊 Explore Data"];
+    B --> C["🗂️ Remove Duplicates"];
+    C --> D["📊 Data Description"];
+    D --> E["🔢 Encode 'cut', 'clarity', and 'color'"];
+    E --> F["📊 Visualize Data <img src='dummy_plots/pairplot_template.svg'/>"];
+    F --> G["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg'/>"];
+    G --> H["🛠️ Prepare Data for ML"];
+    H --> I["🛠️ Train/Test Split"];
+    I --> J["🔄 Scale Features"];
+    J --> K["🧠 Model Exploration"];
+    K --> L["📈 Model Comparison"];
+    L --> M["🤖 Train Final Model"];
+    M --> N["🔍 Validate with Test Data"];
+    N --> O["📊 Evaluate Results"];

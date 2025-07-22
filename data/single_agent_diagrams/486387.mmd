@@ -1,0 +1,6 @@
+flowchart TD
+    A["📂 Load Data\n<img src='icons/file.svg' /> <br/> Image Files"] --> B["🔄 Preprocess Images\n<img src='icons/table.svg' /> <br/> Image Array Generation"]
+    B --> C["🌳 Build Annoy Model\n<img src='icons/brain.svg' /> <br/> Train Model"]
+    C --> D["🔍 Query Model\n<img src='icons/image.svg' /> <br/> Retrieve Neighbors"]
+    D --> E["📈 Visualize Results\n<img src='dummy_plots/plotdicetiling.svg' /> <br/> Display Neighbors"]
+    E --> F["📊 Evaluate Performance\n<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Analyze Results"]

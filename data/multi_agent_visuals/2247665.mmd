@@ -1,0 +1,8 @@
+flowchart TD
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> train.csv] --> |Load CSV| B[<img src='icons/table.svg' width=100 height=100/> <br/> home_data]
+    B --> |Extract SalePrice| C[y]
+    C --> D[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> y]
+    D --> |Model Train| E[<img src='icons/brain.svg' width=100 height=100/> <br/> Model]
+    E --> |Predict| F[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Predictions]
+    F --> |Evaluate| G[<img src='icons/table.svg' width=100 height=100/> <br/> Evaluation Metrics] 
+    G --> |Results| H[<img src='icons/table.svg' width=100 height=100/> <br/> Results Summary]

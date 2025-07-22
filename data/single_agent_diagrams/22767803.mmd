@@ -1,0 +1,38 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["🔍 Data Overview"]
+    B --> C["🧹 Data Cleaning"]
+    C --> D["📊 Data Visualization"]
+    D --> E["🧠 Model Training"]
+    E --> F["📈 Model Evaluation"]
+    F --> G["📊 Insights & Conclusions"]
+    
+    A --> B
+    B -->|Check Shape| H["📏 Dataset Shape"]
+    B -->|Check Duplicates| I["🔎 Duplicate Counts"]
+    B -->|Check Correlation| J["🔗 Correlation Matrix"]
+    B -->|Check Info| K["ℹ️ Data Info"]
+    H --> C
+    I --> C
+    J --> C
+    K --> C
+    
+    C -->|Check Missing Values| L["❓ Missing Values"]
+    C -->|Feature Analysis| M["📊 Feature Analysis"]
+    L --> M
+    M --> D
+    
+    D -->|Age Distribution| N["<img src='dummy_plots/hist_template.svg' /> <br/> Age Analysis"]
+    D -->|Sex Distribution| O["<img src='dummy_plots/pie_template.svg' /> <br/> Gender Analysis"]
+    D -->|Chest Pain Type| P["<img src='dummy_plots/boxplot_template.svg' /> <br/> Chest Pain Analysis"]
+    D -->|Resting BP| Q["<img src='dummy_plots/hist_template.svg' /> <br/> BP Analysis"]
+    D -->|Cholesterol| R["<img src='dummy_plots/hist_template.svg' /> <br/> Cholesterol Analysis"]
+    D -->|Fasting Blood Sugar| S["<img src='dummy_plots/boxplot_template.svg' /> <br/> FBS Analysis"]
+    D -->|Resting ECG| T["<img src='dummy_plots/boxplot_template.svg' /> <br/> ECG Analysis"]
+    D -->|Max HR| U["<img src='dummy_plots/hist_template.svg' /> <br/> Max HR Analysis"]
+    D -->|Exercise Angina| V["<img src='dummy_plots/boxplot_template.svg' /> <br/> Angina Analysis"]
+    D -->|Oldpeak| W["<img src='dummy_plots/hist_template.svg' /> <br/> Oldpeak Analysis"]
+    D -->|ST Slope| X["<img src='dummy_plots/boxplot_template.svg' /> <br/> ST Slope Analysis"]
+    D -->|Heat Map| Y["<img src='dummy_plots/heatmap_template.svg' /> <br/> Correlation Heat Map"]
+
+    E -->|Train Model| Z["🛠️ Random Forest Classifier"]
+    F -->|Evaluate Model| AA["📊 Model Metrics"]

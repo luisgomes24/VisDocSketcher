@@ -1,0 +1,6 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source"] --> |Loads| B["<img src='dummy_plots/barplot_template.svg'/> <br/> Training Set"];
+    B --> |Trains| C["<img src='icons/brain.svg' width=100 height=100/> <br/> CNN Model"];
+    C --> |Predicts| D["<img src='icons/image.svg' width=100 height=100/> <br/> Test Image"];
+    D --> |Outputs| E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Result"];
+    F --> |Visualizes| G["<img src='dummy_plots/boxplot_template.svg'/> <br/> Result Visualization"].;

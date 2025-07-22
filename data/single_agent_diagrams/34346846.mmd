@@ -1,0 +1,16 @@
+```
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/> <br/> US Crime Data"] --> B["🧹 Preprocess Data"]
+    B --> C["🧹 Clean Text"]
+    C --> D["🗣️ Tokenize Text"]
+    D --> E["🔄 Create Input/Output Data"]
+    E --> F["📏 Pad Sequences"]
+    F --> G["👥 Prepare Target Data"]
+    G --> H["📊 Vocab Size"]
+    H --> I["🧠 Build LSTM Model"]
+    I --> J["⚙️ Compile Model"]
+    J --> K["📈 Train Model"]
+    K --> L["💾 Save Model"]
+    L --> M["📜 Create Vocab Array"]
+    M --> N["🔮 Final Function for Predictions"]
+    N --> O["🧪 Test Model"]

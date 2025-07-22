@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "path": "../input/gufhtugu-publications-dataset-challenge/GP Orders - 4.csv",
+      "description": "Contains data about book orders, including book names and order status."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the ordered book data."
+    },
+    {
+      "name": "book_counts",
+      "description": "Dictionary of the count of each book sold."
+    },
+    {
+      "name": "top",
+      "description": "Top 5 sold books extracted from book_counts."
+    },
+    {
+      "name": "least",
+      "description": "Least 5 sold books extracted from book_counts."
+    },
+    {
+      "name": "os",
+      "description": "Order status counts from the orders in the dataset."
+    },
+    {
+      "name": "df_new",
+      "description": "DataFrame containing only returned orders."
+    },
+    {
+      "name": "returned_counts",
+      "description": "Dictionary of the count of returned books."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "flow": "Used for data preprocessing and reporting on order statuses."
+    },
+    {
+      "variable": "book_counts",
+      "creation_method": "Computed from df['Book Name']",
+      "flow": "Used to identify top and least selling books."
+    },
+    {
+      "variable": "top",
+      "creation_method": "Sorted from book_counts",
+      "flow": "Used to generate visualization of top selling books."
+    },
+    {
+      "variable": "least",
+      "creation_method": "Sorted from book_counts",
+      "flow": "Used to generate visualization of least selling books."
+    },
+    {
+      "variable": "os",
+      "creation_method": "value_counts from df['Order Status']",
+      "flow": "Used to generate visualization of order statuses."
+    },
+    {
+      "variable": "df_new",
+      "creation_method": "Filtered from df where 'Order Status' == 'Returned'",
+      "flow": "Used for further analysis on returned orders."
+    },
+    {
+      "variable": "returned_counts",
+      "creation_method": "Computed from df_new['Book Name']",
+      "flow": "Used to generate findings on returned orders."
+    }
+  ],
+  "models": []
+}

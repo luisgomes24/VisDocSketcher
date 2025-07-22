@@ -1,0 +1,119 @@
+{
+    "data_sources": [
+        {
+            "file_name": "input_file.csv",
+            "description": "Contains data related to tumor diagnosis, including various features and a diagnosis column."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "data",
+            "description": "DataFrame containing initial data loaded from the CSV file."
+        },
+        {
+            "variable_name": "malign",
+            "description": "Dummy variable indicating malignant tumors from the diagnosis column."
+        },
+        {
+            "variable_name": "df",
+            "description": "DataFrame after replacing the diagnosis column with the dummy variable and dropping unnecessary columns."
+        },
+        {
+            "variable_name": "final_df",
+            "description": "Final DataFrame with irrelevant features removed for model training."
+        },
+        {
+            "variable_name": "X",
+            "description": "Feature set (DataFrame) used for model training, excluding the target variable."
+        },
+        {
+            "variable_name": "y",
+            "description": "Target variable (Series) indicating whether tumors are malignant or benign."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Training feature set after splitting and scaling."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Test feature set after splitting and scaling."
+        },
+        {
+            "variable_name": "lg",
+            "description": "Logistic Regression model instance used for training and prediction."
+        },
+        {
+            "variable_name": "test_pred",
+            "description": "Predicted values for the test set using the Logistic Regression model."
+        },
+        {
+            "variable_name": "train_pred",
+            "description": "Predicted values for the training set using the Logistic Regression model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "data",
+            "creation_method": "pd.read_csv",
+            "flow": "Used to create malign and df, subsequently used for analysis and visualization."
+        },
+        {
+            "variable": "malign",
+            "creation_method": "pd.get_dummies",
+            "flow": "Replaced in df and then contributes to final_df."
+        },
+        {
+            "variable": "df",
+            "creation_method": "pd.concat",
+            "flow": "Used for visualization and analysis (correlation heatmap, pie chart)."
+        },
+        {
+            "variable": "final_df",
+            "creation_method": "df.drop",
+            "flow": "Used to generate feature set (X) and target variable (y) for model training."
+        },
+        {
+            "variable": "X",
+            "creation_method": "final_df.drop",
+            "flow": "Used to train the Logistic Regression model."
+        },
+        {
+            "variable": "y",
+            "creation_method": "final_df",
+            "flow": "Used as target for training Logistic Regression model."
+        },
+        {
+            "variable": "X_train",
+            "creation_method": "train_test_split",
+            "flow": "Used to train the Logistic Regression model."
+        },
+        {
+            "variable": "X_test",
+            "creation_method": "train_test_split",
+            "flow": "Used to evaluate the Logistic Regression model."
+        },
+        {
+            "variable": "lg",
+            "creation_method": "LogisticRegression()",
+            "flow": "Trained on X_train and y_train, then used to make predictions."
+        },
+        {
+            "variable": "test_pred",
+            "creation_method": "lg.predict",
+            "flow": "Used to evaluate model performance on test data."
+        },
+        {
+            "variable": "train_pred",
+            "creation_method": "lg.predict",
+            "flow": "Used to evaluate model performance on training data."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": "All features except the target variable (malign).",
+            "target_variable": "malign",
+            "hyperparameters": {}  
+        }
+    ]
+}

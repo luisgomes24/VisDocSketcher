@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A[train_scores.csv]:::source -->|load & preprocess| B[train]
+    C[loading.csv]:::source -->|load & merge| B
+    D[fnc.csv]:::source -->|load & merge| B
+    E[sample_submission.csv]:::source -->|prepare test cases| F[test]
+
+    %% Data Preparation
+    B -->|extract features| G[X_train]
+    B -->|extract target| H[y_train]
+    F -->|prepare features| I[X_test]
+
+    %% Model Training
+    G -->|train model| M[Sequential Neural Network]
+    H -->|train model| M
+
+    %% Model Prediction
+    M -->|predict| J[prediction_dict]
+
+    %% Final Submission
+    J -->|merge predictions| K[submission]
+    K -->|save CSV| L[submission.csv]
+    
+    %% Classes
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;

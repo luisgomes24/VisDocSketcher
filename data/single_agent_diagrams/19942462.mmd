@@ -1,0 +1,11 @@
+flowchart TD
+    A["🗂️ Load Data <img src='icons/file.svg' /> <br/> X_train, X_valid, y_train, y_valid"] --> B["🔧 Preprocess Data <img src='icons/table.svg' /> <br/> Clean & One-hot encode"]
+    B --> C["📈 Build Model 1 <img src='icons/brain.svg' /> <br/> XGBoost"]
+    C --> D["🔮 Make Predictions 1 <img src='icons/brain.svg' /> <br/> Validate on X_valid"]
+    D --> E["⚡ Evaluate Model 1 <img src='icons/brain.svg' /> <br/> MAE Calculation"]
+    E --> F["📈 Build Model 2 <img src='icons/brain.svg' /> <br/> XGBoost with Tuning"]
+    F --> G["🔮 Make Predictions 2 <img src='icons/brain.svg' /> <br/> Validate on X_valid"]
+    G --> H["⚡ Evaluate Model 2 <img src='icons/brain.svg' /> <br/> MAE Calculation"]
+    H --> I["📈 Build Model 3 <img src='icons/brain.svg' /> <br/> XGBoost with Poor Parameters"]
+    I --> J["🔮 Make Predictions 3 <img src='icons/brain.svg' /> <br/> Validate on X_valid"]
+    J --> K["⚡ Evaluate Model 3 <img src='icons/brain.svg' /> <br/> MAE Calculation"]

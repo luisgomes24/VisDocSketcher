@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_name": "monthly_sale_data.csv",
+      "description": "Contains monthly sales data for the year."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the monthly sales data."
+    },
+    {
+      "variable_name": "model",
+      "description": "Prophet model used for forecasting."
+    },
+    {
+      "variable_name": "forecast",
+      "description": "DataFrame containing the forecasted values such as yhat, yhat_lower, and yhat_upper."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv",
+      "flow": "Used to fit the Prophet model and generate forecasts."
+    },
+    {
+      "variable": "model",
+      "creation": "Prophet() and model.fit(df)",
+      "flow": "Used to create forecasts for historical and future data."
+    },
+    {
+      "variable": "last_1year",
+      "creation": "Created manually",
+      "flow": "Used as input for forecasting the last year."
+    },
+    {
+      "variable": "next_year",
+      "creation": "Created manually",
+      "flow": "Used as input for forecasting the next year."
+    },
+    {
+      "variable": "forecast",
+      "creation": "model.predict(last_1year) and model.predict(next_year)",
+      "flow": "Contains predicted values for the last and next years. Used for plotting."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Prophet",
+      "input_features": ["ds"],
+      "target_variable": "y",
+      "hyperparameters": {}
+    }
+  ]
+}

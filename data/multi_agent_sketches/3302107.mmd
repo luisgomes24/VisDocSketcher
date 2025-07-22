@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data source node
+    A[winemag-data-130k-v2.csv] -->|Read CSV| B[reviews]
+    
+    %% Nodes for data transformation and analysis
+    B -->|GroupBy and count| C[reviews_written]
+    B -->|Aggregation based on price| D[best_rating_per_price]
+    B -->|GroupBy and min/max| E[price_extremes]
+    B -->|GroupBy and mean| F[reviewer_mean_ratings]
+    B -->|MultiIndex creation and count| G[country_variety_counts]
+
+    %% Further processing
+    E -->|Sort by prices| H[sorted_varieties]
+
+    %% Comments for clarity
+    classDef nodeClass fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H nodeClass;

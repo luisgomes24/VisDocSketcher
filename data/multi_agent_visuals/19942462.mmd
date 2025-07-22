@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] --> |"Load Training Data"| B["X"]
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] --> |"Load Test Data"| K["X_test"]
+
+    %% Data Preprocessing
+    B --> |"Extract Target: SalePrice"| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    B --> |"Split Data into Train/Valid"| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_train"]
+    B --> |"Split Data into Train/Valid"| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_valid"]
+
+    %% Transformation
+    D --> |"One-Hot Encoding and Alignment"| F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Processed X_train"]
+    E --> |"One-Hot Encoding and Alignment"| G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Processed X_valid"]
+
+    %% Model Training
+    M1["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBRegressor"]
+    F --> |"Fit Model 1"| M1
+    M2["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBRegressor (Tuned)"]
+    F --> |"Fit Model 2"| M2
+    M3["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBRegressor (Poor Params)"]
+    F --> |"Fit Model 3"| M3
+
+    %% Predictions
+    G --> |"Predict with Model 1"| H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> predictions_1"]
+    G --> |"Predict with Model 2"| I["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> predictions_2"]
+    G --> |"Predict with Model 3"| J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> predictions_3"]
+
+    %% Evaluation
+    H --> |"Calculate MAE Model 1"| N["mae_1"]
+    I --> |"Calculate MAE Model 2"| O["mae_2"]
+    J --> |"Calculate MAE Model 3"| P["mae_3"]

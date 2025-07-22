@@ -1,0 +1,46 @@
+flowchart TD
+  %% Nodes
+  A[train.csv] -->|Load Data| B[train_df]
+  B[train_df] -->|Preprocessing| C[train, test]
+  C[train] -->|Create Examples| D[train_examples]
+  C[test] -->|Create Examples| E[predict_examples]
+  D[train_examples] -->|Convert to Features| F[BERT Model]
+  F[BERT Model] -->|Make Predictions| G[PREDICTIONS]
+  
+  %% Test Data
+  H[test.csv] -->|Load Data| I[test_df]
+  I[test_df] -->|Evaluation| G[PREDICTIONS]
+  
+  %% Comments
+  
+  %% Data Sources
+  A:::source
+  H:::source
+  
+  %% Data Variables
+  B:::variable
+  C:::variable
+  D:::variable
+  E:::variable
+  G:::variable
+  I:::variable
+  
+  %% Data Transformation
+  F:::model
+  
+  %% Styles
+  classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+  %% Comments for Nodes
+  class B, I, E, D, F, G, C, A, H explanation;
+  click B "DataFrame containing training data with author labels after data preprocessing."
+  click I "DataFrame containing test data without labels for evaluation purposes."
+  click D "List of InputExample objects for training data used in BERT model."
+  click E "List of InputExample objects for test data used in predictions."
+  click G "Numpy array containing binary predictions from the model (0 or 1 based on the author classification)."
+  click C "Split data for training and evaluation"
+  click F "BERT Model used for author classification"
+  click A "Training data containing text and corresponding author labels."
+  click H "Test data for evaluating the model's performance, containing text without author labels."

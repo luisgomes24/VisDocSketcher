@@ -1,0 +1,19 @@
+```mermaid
+flowchart TD
+    %%% Data Sources %%%
+    A["Home Data CSV"] -->|Load Data| B["home_data DataFrame"]
+    
+    %%% Data Preparation %%%
+    B -->|Select Features| C["X: Features"]
+    B -->|Select Target| D["y: Target Variable"]
+    
+    %%% Model Training %%%
+    C -->|Train Model| E["DecisionTreeRegressor"]
+    D -->|Train Model| E
+    
+    %%% Predictions %%%
+    E -->|Generate Predictions| F["predictions"]
+    
+    %%% Model Evaluation %%%
+    F -->|Compare with Actual Prices| G["Evaluation"]
+```

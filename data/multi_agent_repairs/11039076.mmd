@@ -1,0 +1,10 @@
+graph TD;
+    A["DataFrame"] -->|"df.nunique()"| B["nunique"];
+    B -->|"Filtering Columns"| C["plotPerColumnDistribution()"];
+    A -->|"Multiple Monthly Functions"| D["plotDistribution()"];
+    A -->|"Correlation"| E["Correlation Matrix"];
+    A -->|"Scatter Matrix"| F["scatterMatrix()"];
+    C -->|"Visualization"| G["Distribution Visualization"];
+    D -->|"Visualization"| H["Distribution Visualization"];
+    E -->|"Visualization"| I["Correlation Visualization"];
+    F -->|"Visualization"| J["Scatter Visualization"];

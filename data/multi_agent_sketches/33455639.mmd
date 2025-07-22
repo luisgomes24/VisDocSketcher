@@ -1,0 +1,13 @@
+%% Data processing and transformations
+flowchart TD
+    A["sample_submission.csv"] -->|"Load Data"| B["sub_df"]
+    B -->|"Add content_ids column"| C["submission.csv"]
+
+    D["topics.csv"] -->|"Load Data"| E["topics_df"]
+    E -->|"Retrieve titles for topic IDs"| F["Process titles"]
+
+    G["content.csv"] -->|"Load Data"| H["content_df"]
+    H -->|"Find matching titles from topics_df"| I["Process content IDs"]
+
+    I -->|"Add to predicts list"| J["predicts"]
+    J -->|"Update sub_df with content_ids"| B

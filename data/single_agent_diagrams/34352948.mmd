@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg'/>"] --> B["📊 Data Overview<br/>Images with Tumor: {len(yes_files)}<br/>Images without Tumor: {len(no_files)}"]
+    B --> C["🖼️ Image Visualization"]
+    C --> D["🧩 Data Preprocessing"]
+    D --> E["🔄 Train-Test Split"]
+    E --> F["🧠 Create Model"]
+    F --> G["📈 Train Model"]
+    G --> H["📊 Evaluate Model Performance<br/><img src='dummy_plots/lineplot_template.svg'/>"]

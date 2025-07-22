@@ -1,0 +1,23 @@
+flowchart TD
+    A["SolarPrediction.csv"]-->B["DataFrame data"]
+    %% B node represents the DataFrame created from the CSV file
+    B --> C["ProfileReport(data)"]
+    %% C node represents profiling of the data
+    B --> D["Datetime Feature Engineering"]
+    %% D node represents feature engineering
+    D --> E["Data with Engineered Features"]
+    %% E node represents data with new time features
+    E --> F["X, y"]
+    %% F node shows splitting into features and target
+    F --> G["train_test_split"]
+    %% G node represents splitting data into training and testing sets
+    G --> H["X_train, X_test, y_train, y_test"]
+    H --> I["RandomForestRegressor"]
+    %% I node represents the initialization of RandomForestRegressor
+    I --> J["Model Fitted with X_train, y_train"]
+    J --> K["Model Scoring"]
+    K --> L["Training Score"]
+    K --> M["Testing Score"]
+```
+
+%% This diagram visualizes the flow of data through a data science project involving reading, profiling, feature engineering, modeling, and evaluation.

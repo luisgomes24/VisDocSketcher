@@ -1,0 +1,66 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "obs",
+      "description": "An observation object containing the state of the game board and the agent's mark."
+    },
+    {
+      "name": "config",
+      "description": "Configuration object that holds game parameters such as rows, columns, and in-a-row count needed to win."
+    },
+    {
+      "name": "valid_moves",
+      "description": "List of valid moves (columns) where a piece can be dropped in the current game state."
+    },
+    {
+      "name": "next_grid",
+      "description": "Represents the game board after a piece has been dropped in a specified column."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "obs",
+      "creation": "Passed as an argument to functions.",
+      "flow": "Used to assess the game state and the legality of moves."
+    },
+    {
+      "variable": "config",
+      "creation": "Passed as an argument to functions.",
+      "flow": "Used to determine valid moves and check winning conditions."
+    },
+    {
+      "variable": "valid_moves",
+      "creation": "Created by filtering through the columns in `obs.board`.",
+      "flow": "Used to check possible winning moves and to block the opponent's potential win."
+    },
+    {
+      "variable": "next_grid",
+      "creation": "Created within `drop_piece()` function.",
+      "flow": "Used within `check_winning_move()` function to determine winning and blocking moves."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Agent Q1",
+      "description": "An agent that selects a winning move when available, or a random move otherwise.",
+      "input_features": ["obs", "config"],
+      "target_variable": "column (selected move)",
+      "hyperparameters": null
+    },
+    {
+      "model_name": "Agent Q2",
+      "description": "An enhanced agent that selects a winning move, blocks the opponent from winning, or chooses randomly.",
+      "input_features": ["obs", "config"],
+      "target_variable": "column (selected move)",
+      "hyperparameters": null
+    },
+    {
+      "model_name": "My Agent",
+      "description": "A user-defined agent that selects a random valid move.",
+      "input_features": ["obs", "config"],
+      "target_variable": "column (selected move)",
+      "hyperparameters": null
+    }
+  ]
+}

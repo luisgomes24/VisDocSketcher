@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A["Train Data CSV"] %% Represents training data file
+        B["Test Data CSV"]  %% Represents test data file
+    end
+
+    %% Variables
+    subgraph Variables
+        C["train DataFrame"] %% DataFrame containing training data
+        D["test DataFrame"]  %% DataFrame containing test data
+        E["y_predict"]      %% Initial predictions using the model
+        F["tuned_model"]     %% Model after hyperparameter tuning
+        G["final_model"]     %% Finalized model for predictions
+    end
+
+    %% Models
+    subgraph Models
+        H["AutoML Time Series Model"] %% AutoML model for time series data
+    end
+
+    %% Data Flow
+    A -->|read_csv| C 
+    B -->|read_csv| D
+    C -->|use for training| H 
+
+    H -->|initial predictions| E
+    E -->|evaluate & tune| F
+    F -->|finalize the model| G
+
+    G -->|predict using final model| D

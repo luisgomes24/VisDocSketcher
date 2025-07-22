@@ -1,0 +1,11 @@
+%%{init: {'themeVariables': { 'nodeTextFill': '#000' }}}%%
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Load Data"]
+        -->  B["<img src='icons/column_split.svg' width=100 height=100/> <br/> Prepare Data"];
+    B --> C["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Exploratory Data Analysis"];
+    C --> D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> KMeans Model"];
+    E --> F["<br/> Training the Model"];
+    F --> G["<img src='icons/file.svg' width=100 height=100/> <br/> Save Model"];
+    G --> H["<img src='icons/table.svg' width=100 height=100/> <br/> Model Results"];
+    H --> I["<br/> End Process"];

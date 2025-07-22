@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["📁 Load Data"] --> B["📊 Load & Preview Data"];
+    B --> C["🖼️ Save Images from Train Data"];
+    C --> D["🖼️ Save Images from Test Data"];
+    D --> E["🗃️ Create Data Loaders"];
+    E --> F["🧠 Initialize Model"];
+    F --> G["🛠️ Find Learning Rate"];
+    G --> H["📈 Fine-tune Model"];
+    H --> I["📊 Evaluate Model"];
+    I --> J["📤 Prepare Test Data for Submission"];
+    J --> K["📄 Create Submission File"];

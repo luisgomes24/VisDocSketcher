@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Read CSV to DataFrame"]
+    B --> C["🔍 Check for NaN Values"]
+    C --> D["🔎 Check Data Types"]
+    D --> E["📅 Change Date Object Type"]
+    E --> F["📈 Extract Year/Month for Analysis"]
+    F --> G["📈 Stocks Prices Each Year <img src='lineplot_template.svg' />"]
+    G --> H["📊 Compare Open, High, Low, Close Prices by Year <img src='barplot_template.svg' />"]
+    H --> I["📅 Compare Open, High, Low, Close Prices by Month <img src='barplot_template.svg' />"]
+    I --> J["📊 Analyze Open vs Close Price Changes <img src='barplot_template.svg' />"]
+    J --> K["📉 Investigate Changes in 2020 <img src='barplot_template.svg' />"]
+    K --> L["📈 Volume Changes <img src='lineplot_template.svg' />"]
+    L --> M["📊 Highest and Lowest Prices by Year <img src='barplot_template.svg' />"]

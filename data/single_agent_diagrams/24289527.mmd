@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["🔍 Preprocess Data"]
+    B --> C["🗂️ Create Dataset Class <img src='table.svg' />"]
+    C --> D["📝 Train-Validation Split <img src='row_split.svg' />"]
+    D --> E["🧠 Build Model <img src='brain.svg' />"]
+    E --> F["🔄 Train Model"]
+    F --> G["📊 Plot Training Loss <img src='hist_template.svg' />"]
+    G --> H["📊 Plot Training Accuracy <img src='hist_template.svg' />"]
+    H --> I["✅ Final Labels"]

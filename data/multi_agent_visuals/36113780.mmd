@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    A["/train.csv/"] --> B["train_df"]
+    A["/train.csv/"] --> E["Feature Engineering & Outlier Capping"]
+    B --> D[X]
+    B --> F[y]
+    
+    C["/test.csv/"] --> G["test_df"]
+    G --> E
+    
+    D --> H["XGBRegressor"]
+    F --> H
+    D --> I["LGBMRegressor"]
+    F --> I
+    D --> J["CatBoostRegressor"]
+    F --> J
+
+    E --> K["Predictions"]
+    
+    K --> L["submission"]
+    M["/sample_submission.csv/"] --> L
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef process fill:#fbb,stroke:#333,stroke-width:2px;
+    
+    class A,C,M dataSource;
+    class B,D,E,F,G,L dataVariable;
+    class H,I,J model;
+    class K process;

@@ -1,0 +1,13 @@
+```
+graph TD
+    A["<img src='icons/file.svg'/> <br/> Load Sitemap Data"] --> B["<img src='icons/table.svg'/> <br/> Preprocess Data"]
+    B --> C["<img src='icons/column_split.svg'/> <br/> Extract URL Components"]
+    C --> D["<img src='icons/column_split.svg'/> <br/> Analyze URLs"]
+    D --> E["<img src='icons/column_split.svg'/> <br/> Visualize URL Structure"]
+    E --> F["<img src='icons/column_split.svg'/> <br/> Explore Directory Structure"]
+    F --> G["<img src='icons/column_split.svg'/> <br/> Analyze Page Frequencies"]
+    G --> H["<img src='icons/column_split.svg'/> <br/> Count Most Used Words"]
+    
+    D --> I["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Histogram of URLs per Country"]
+    I --> J["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Histogram of Unique Words"]
+    J --> K["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Histogram of Uni-grams & Bigrams"]

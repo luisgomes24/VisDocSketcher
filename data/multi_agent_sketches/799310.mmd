@@ -1,0 +1,26 @@
+flowchart TD
+    %% Nodes
+    A[("PakistanSuicideAttacks Ver 11 (30-November-2017).csv")] 
+    %% Represents the original data source file
+    
+    B[("suicide_attacks")]
+    %% DataFrame containing the loaded dataset of suicide attacks
+
+    C[("cities")]
+    %% Array of unique city names extracted from the 'City' column in the dataset
+    
+    D[("province")]
+    %% Array of unique province names extracted from the 'Province' column in the dataset
+    
+    %% Edges
+    A -->|Read with pd.read_csv| B
+    %% DataSource to DataFrame creation
+    
+    B -->|Extract unique 'City'| C
+    %% Extract city names to cities array
+    
+    B -->|Extract unique 'Province'| D
+    %% Extract province names to province array
+    
+    B -->|Text cleaning and fuzzy matching correction| B
+    %% Internal processing within suicide_attacks for cleaning and correcting data

@@ -1,0 +1,32 @@
+%% The main data source: CSV file containing annotations for bounding boxes
+flowchart TD
+    A[Train CSV File] -->|read_csv| B[DataFrame: train]
+    %% B[DataFrame: train] represents the loaded data into a pandas DataFrame
+    B -->|apply annotation processing| C[Column: n_bbox]
+    %% C[Column: n_bbox] contains the number of bounding boxes per frame
+    C --> D[Summary of Bounding Boxes]
+    %% D summarizes the total number of bounding boxes available
+    B --> E[Annotated Frame Count]
+    %% E gives the number of frames that contain annotations
+
+    %% Image path used for display and testing GAN results
+    F[Input Image Path] -->|Load Image| G[Display Original Image]
+    %% G is the visualization of the original input image
+
+    %% ML Model: PS-GAN
+    subgraph ML_Model
+        H[Pedestrian-Synthesis-GAN]
+        %% Pedestrian-Synthesis-GAN is used for image generation
+    end
+
+    F -->|Input to| H
+    B -->|Training Data| H
+    %% The model takes images with noisy bounding boxes and generates synthesized images
+
+    H --> I[Generated Images]
+    %% I[Generated Images] are the output from the PS-GAN model
+    I --> |Results Saved To| J[Results Directory]
+    %% J[Results Directory] stores the synthesized images
+
+    J --> K[Display Synthesized Results]
+    %% K visualizes the real, synthesized, and input images side by side

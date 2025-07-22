@@ -1,0 +1,34 @@
+flowchart TD
+    subgraph DataSources
+        A1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+        A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]
+        A3["<img src='icons/file.svg' width=100 height=100/> <br/> AvSigVersionTimestamps.npy"]
+        A4["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]
+    end
+    
+    subgraph DataVariables
+        B1["<img src='icons/table.svg' width=100 height=100/> <br/> df_train"]
+        B2["<img src='icons/table.svg' width=100 height=100/> <br/> df_test"]
+        B3["<img src='icons/column_split.svg' width=100 height=100/> <br/> AvSigVersion"]
+        B4["<img src='icons/row_split.svg' width=100 height=100/> <br/> CountryIdentifier"]
+    end
+
+    subgraph DataFlow
+        C1["df_train (read_csv)"] -->|"EDA, Train-Test Validation, Model Training"| B1
+        C2["df_test (read_csv)"] -->|"EDA, Predictions"| B2
+        C3["comparePlot (Defined Function)"] -->|"Analyze distributions of TRAIN and TEST datasets"| B4
+    end
+    
+    subgraph Models
+        D1["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Classifier"]
+        D2["<img src='icons/brain.svg' width=100 height=100/> <br/> Decision Tree Classifier"]
+    end
+    
+    A1 --> C1
+    A2 --> C2
+    A3 --> B3
+    A4 -->|"submission format"| B2
+    B1 --> D1
+    B2 --> D1
+    B1 --> D2
+    B2 --> D2

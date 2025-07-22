@@ -1,0 +1,35 @@
+```mermaid
+flowchart TD
+    subgraph DataLoading
+        D1["wikia_edits2018-11-06.csv"] -->|"Load CSV"| df1["DataFrame df1"]
+    end
+    subgraph DataExploration
+        df1 -->|"Display Head"| A1["df1.head()"]
+        df1 -->|"Plot Distribution"| A2["plotPerColumnDistribution"]
+    end
+    subgraph DataVisualization
+        df1 -->|"Plot Scatter Matrix"| B1["Scatter Matrix"]
+        df1 -->|"Plot Correlation Matrix"| B2["Correlation Matrix"]
+    end
+
+    %% Comments for each of the main sections
+    D1:::comment
+    D1 -- This node represents the initial CSV file data source.
+    
+    df1:::comment
+    df1 -- This node represents the DataFrame loaded from the CSV.
+    
+    A1:::comment
+    A1 -- This node represents displaying the head of the DataFrame for initial data inspection.
+    
+    A2:::comment
+    A2 -- This node represents generating distribution plots for columns in the DataFrame.
+    
+    B1:::comment
+    B1 -- This node represents generating a scatter matrix for the data.
+    
+    B2:::comment
+    B2 -- This node represents generating a correlation matrix for the data.
+
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+```

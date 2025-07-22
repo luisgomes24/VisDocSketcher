@@ -1,0 +1,29 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Dataset from images from Star Wars movies",
+      "description": "Contains images from various Star Wars movies grouped by episode"
+    }
+  ],
+  "data_variables": [
+    {"name": "path", "description": "Path to the directory containing the image datasets"},
+    {"name": "data", "description": "ImageDataLoaders object containing training and validation sets of images"},
+    {"name": "data2", "description": "ImageDataLoaders object for a specific subset of images (Episode VI - Return of the Jedi)"},
+    {"name": "fns", "description": "List of image file names in the specified directory"},
+    {"name": "failed", "description": "List of images that failed verification"}
+  ],
+  "data_flow": [
+    {"variable": "fns", "creation": "get_image_files(path)", "flow": "used to verify images and create ImageDataLoaders"},
+    {"variable": "failed", "creation": "verify_images(fns)", "flow": "provides input for cleaning up the dataset by removing invalid images"},
+    {"variable": "data", "creation": "ImageDataLoaders.from_folder(path, ...)" , "flow": "used for batch processing and transformation of the image dataset for training and validation"},
+    {"variable": "data2", "creation": "ImageDataLoaders.from_folder(path2, ...)" , "flow": "also used for processing the second dataset"}
+  ],
+  "models": [
+    {
+      "model_name": "fastai vision model",
+      "input_features": "Images",
+      "target_variables": "Categories representing different images",
+      "hyperparameters": {"batch_size": 32, "item_transformations": "Resize(224)", "batch_transformations": "aug_transforms(size=256, max_warp=0)"}
+    }
+  ]
+}

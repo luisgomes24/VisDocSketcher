@@ -1,0 +1,15 @@
+flowchart TD
+    %% Node for BigQuery Dataset
+    A[BigQuery Dataset] -->|Query using SQL| B(Country Spend Percent Query)
+    A -->|Query using SQL| C(Code Count Query)
+    
+    %% Nodes for SQL queries being executed
+    B -->|Execute Query| D[Country Spending Results]
+    C -->|Execute Query| E[Code Count Results]
+    
+    %% Descriptions of each data processing step
+    subgraph Processing Steps
+        direction TB
+        D -->|Analyze| F[Analyze Avg Edu Spending by Country]
+        E -->|Identify| G[Identify Indicator Codes >= 175 Entries for 2016]
+    end

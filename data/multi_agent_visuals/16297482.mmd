@@ -1,0 +1,11 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Groceries_dataset.csv"]:::dataNode
+    B["<img src='icons/database.svg' width=100 height=100/> <br/> SQL Database"]:::dataNode
+    C["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame"]:::dataNode
+    D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Feature Distribution"]:::plotNode
+    A --> B
+    B --> C
+    C --> D
+
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef plotNode fill:#FFCDD2,stroke:#333,stroke-width:2px;

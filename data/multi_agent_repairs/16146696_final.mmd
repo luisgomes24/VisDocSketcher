@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+
+    %% Data source nodes
+    A1["tiger.jfif"]:::dataSource
+    A2["glasses.jfif"]:::dataSource
+    A3["nature1.jfif"]:::dataSource
+    A4["viratkohli.jfif"]:::dataSource
+    
+    %% Data processing nodes
+    B1["img"]:::dataVariable
+    B2["x"]:::dataVariable
+
+    %% Model node
+    C1["ResNet50 Model"]:::model
+
+    %% Prediction node
+    D1["pred"]:::dataVariable
+
+    %% Data flow connections
+    A1 -->|load_img & used in| B1
+    A2 -->|load_img & used in| B1
+    A3 -->|load_img & used in| B1
+    A4 -->|load_img & used in| B1
+
+    B1 -->|processed into array using np.expand_dims & preprocess_input| B2
+    B2 -->|input for prediction| C1
+    C1 -->|model.predict| D1
+    
+    %% Decorations and styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+```

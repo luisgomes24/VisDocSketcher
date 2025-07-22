@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Train and Test"] --> B["🔍 Explore Data <img src='barplot_template.svg'/> <br/> Distribution of SalePrice"]
+    B --> C["🧹 Preprocess Data"]
+    C --> D["🧮 Handle Missing Values"]
+    D --> E["📊 Visualize Correlation <img src='heatmap_template.svg'/>"]
+    E --> F["🗑️ Drop Unwanted Features"]
+    F --> G["⚙️ Transform Features"]
+    G --> H["🔖 Encode Categorical Variables"]
+    H --> I["📚 Split Features and Target"]
+    I --> J["🧠 Train Model <img src='brain.svg'/> <br/> Linear Regression"]
+    J --> K["📈 Evaluate Model Performance"]
+    K --> L["🔮 Make Predictions"]
+    L --> M["📋 Prepare Submission <img src='file.svg'/> <br/> Save to CSV"]

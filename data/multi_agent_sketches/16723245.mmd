@@ -1,0 +1,31 @@
+flowchart TD
+  %% Data Sources
+  T[("train.csv")] -->|pd.read_csv| train_{{train}}:::data_var
+  Test[("test.csv")] -->|pd.read_csv| test_{{test}}:::data_var
+  Sub[("sample_submission.csv")]
+
+  %% Data Preparation
+  train_ -->|drop target column| X_{{X}}:::data_var
+  train_ -->|Label Encode target| y_{{y}}:::data_var
+
+  %% Splitting Data
+  X_ -->|train_test_split| X_train_{{X_train}}:::data_var & X_test_{{X_test}}:::data_var
+  y_ -->|train_test_split| y_train_{{y_train}}:::data_var & y_test_{{y_test}}:::data_var
+
+  %% Encoding
+  y_train_ -->|to_categorical| y_train_hot{{"y_train (one-hot)"}}:::data_var
+  y_test_ -->|to_categorical| y_test_hot{{"y_test (one-hot)"}}:::data_var
+
+  %% Model Training
+  X_train_ & y_train_hot -->|fit| Model((Sequential Model)):::model
+  X_test_ & y_test_hot -->|evaluate| Model
+
+  %% Prediction
+  X_test_ -->|predict| preds_{{preds}}:::data_var
+  preds_ -->|format for submission| predictions_df(("predictions_df")):::data_var
+
+  %% Final output
+  predictions_df -->|output| Sub
+
+  classDef data_var fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef model fill:#bbf,stroke:#f66,stroke-width:2px;

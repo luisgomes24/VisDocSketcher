@@ -1,0 +1,6 @@
+flowchart TD
+    A[("co2_emission.csv")]:::dataSource --> B
+    B[/"Load Data with pd.read_csv"/]:::process --> C
+
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef process fill:#bbf,stroke:#333,stroke-width:2px;

@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data<br/><img src='file.svg'/>"] --> B["📊 Inspect Data<br/><img src='table.svg'/>"]
+    B --> C["🔍 Check for Missing Values"]
+    B --> D["📈 Explore DEATH_EVENT Counts"]
+    C --> E["📊 Preprocess Data<br/><img src='column_split.svg'/>"]
+    E --> F["📊 Apply SMOTE for Balancing<br/><img src='brain.svg'/>"]
+    F --> G["🧠 Model Training<br/><img src='brain.svg'/>"]
+    G --> H["📊 Evaluate Model using Cross-Validation<br/><img src='column_split.svg'/>"]
+    H --> I["📊 Detailed Results with Stratified K-Fold<br/><img src='column_split.svg'/>"]

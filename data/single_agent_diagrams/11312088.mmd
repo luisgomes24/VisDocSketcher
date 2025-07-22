@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["🔍 Explore Data <img src='table.svg' />"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg' />"]
+    B --> D["🔗 Correlation Matrix <img src='barplot_template.svg' />"]
+    B --> E["📈 Scatter/Density Plots <img src='scatter_plot_template.svg' />"]
+
+    A -->|Read CSV| F["<img src='path/to/burden.csv'/> <br/> 'burden.csv'"]
+    F --> B

@@ -1,0 +1,32 @@
+%% This flowchart describes the workflow for a digit recognition task using a Keras Sequential model
+
+flowchart TD
+    %% Data sources
+    A[train.csv] -->|Load data| B[Train Data]
+    C[test.csv] -->|Load data| D[Test Data]
+
+    %% Data Preparation
+    B -->|Extract Features| E[X_train]
+    B -->|Extract Labels| F[y_train]
+    E -->|Normalize| G[Xs_train]
+    D -->|Extract Features| H[X_test]
+
+    %% Data Splitting
+    E -->|Train/Validation Split| I[X_valid]
+    F -->|Train/Validation Split| J[y_valid]
+    I -->|Normalize| K[Xs_valid]
+
+    %% Model Definition
+    G -->|Input| L[Sequential Model]
+    F -->|Labels| L
+    L -->|Compile & Train| M[Fitted Model]
+
+    %% Model Prediction
+    M -->|Predict| N[Predictions on X_test]
+
+    %% Model Specification
+    subgraph L[Sequential Model]
+        direction TB
+        a[Input Layer: Dense (64, relu, input_shape=(784,))]
+        b[Output Layer: Dense (10, softmax)]
+    end

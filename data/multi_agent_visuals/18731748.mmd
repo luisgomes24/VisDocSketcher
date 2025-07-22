@@ -1,0 +1,32 @@
+stateDiagram-v2
+    %% Data Source Node
+    state "<img src='icons/file.svg' width=100 height=100/> <br/> Loan Application Data (CSV)" as csv
+    %% Data Loading Node
+    state "<img src='table.svg' width=100 height=100/> <br/> Load DataFrame: loans" as loans
+    %% Data Cleaning Node
+    state "<img src='table.svg' width=100 height=100/> <br/> Data Cleaning & Transformation" as cleaning
+    %% Feature and Target Selection Nodes
+    state "<img src='column_split.svg' width=100 height=100/> <br/> Select Features: x" as x
+    state "<img src='column_split.svg' width=100 height=100/> <br/> Select Target: y" as y
+    
+    %% Machine Learning Models Nodes
+    state "<img src='brain.svg' width=100 height=100/> <br/> RandomForest Classifier" as rf
+    state "<img src='brain.svg' width=100 height=100/> <br/> DecisionTree Classifier" as dt
+    state "<img src='brain.svg' width=100 height=100/> <br/> Gaussian Naive Bayes" as gnb
+    state "<img src='brain.svg' width=100 height=100/> <br/> KNeighbors Classifier" as knn
+    
+    %% Process Flow
+    csv --> loans : "pd.read_csv"
+    loans --> cleaning : "Data Cleaning"
+    cleaning --> x : "Drop 'Loan_Status'"
+    cleaning --> y : "Select 'Loan_Status'"
+    
+    %% Models Training
+    x --> rf : "Train Model"
+    y --> rf
+    x --> dt : "Train Model"
+    y --> dt
+    x --> gnb : "Train Model"
+    y --> gnb
+    x --> knn : "Train Model"
+    y --> knn

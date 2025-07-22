@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "googleplaystore.csv",
+      "description": "Contains information about apps on Google Play Store including app features, ratings, genres, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "apps",
+      "description": "DataFrame containing the data imported from the CSV, representing apps and their metadata."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing the Rating of apps."
+    },
+    {
+      "name": "X",
+      "description": "Feature set containing various app attributes excluding the target variable and certain columns like Last Updated and Reviews."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "apps",
+      "creation": "pd.read_csv",
+      "flow": "Used for data preprocessing, feature extraction, and for splitting into features (X) and target (y)."
+    },
+    {
+      "variable": "y",
+      "creation": "apps['Rating']",
+      "flow": "Used as the target variable for training the ML model."
+    },
+    {
+      "variable": "X",
+      "creation": "apps.drop",
+      "flow": "Features are used to train RandomForestRegressor model after PCA dimensionality reduction."
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestRegressor",
+      "input_features": "X (processed features)",
+      "target_variable": "y (Rating)",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "n_jobs": -1,
+        "random_state": 42
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["🔎 Data Inspection"]
+    C --> D["🗺️ Visualize Correlations <img src='dummy_plots/heatmap_template.svg'/>"]
+    D --> E["📊 Analyze Factors Influencing Happiness"]
+    E --> F["⚙️ Modeling Phase"]
+    F --> G["📈 Evaluation"]
+    G --> H["📊 Predictions <img src='dummy_plots/lineplot_template.svg'/>"]
+    
+    %% Sub-factors visualization for Happiness Analysis
+    subgraph Factors_Analysis["📈 Factors Analysis"]
+        direction TB
+        FA1["💰 GDP Influence <img src='dummy_plots/scatter_plot_template.svg'/>"]
+        FA2["❤️ Family Influence <img src='dummy_plots/barplot_template.svg'/>"]
+        FA3["🌿 Life Expectancy <img src='dummy_plots/scatter_plot_template.svg'/>"]
+        FA4["🗽 Freedom <img src='dummy_plots/scatter_plot_template.svg'/>"]
+        FA5["💰 Corruption Influence <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    end
+
+    E --> Factors_Analysis
+    Factors_Analysis --> FA1
+    Factors_Analysis --> FA2
+    Factors_Analysis --> FA3
+    Factors_Analysis --> FA4
+    Factors_Analysis --> FA5

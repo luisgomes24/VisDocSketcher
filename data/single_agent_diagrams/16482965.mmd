@@ -1,0 +1,17 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["📝 Preview Train Data"]
+    A --> C["📝 Preview Test Data"]
+    B --> D["🔍 Unique Value Counts"]
+    C --> D
+    D --> E["🗑️ Drop Unnecessary Columns"]
+    E --> F["🔍 Split Features and Target"]
+    F --> G["📏 Check Shapes"]
+    G --> H["🔄 Convert to Numeric"]
+    H --> I["📊 Encode Categorical Variables"]
+    I --> J["🔍 Visualize Distributions <img src='hist_template.svg' />"]
+    J --> K["⚙️ Scale Features"]
+    K --> L["📈 Train Model"]
+    L --> M["🔍 Predictions"]
+    M --> N["📑 Prepare Submission"]
+    N --> O["🗳️ Finalize Prediction"]
+    O --> P["⬇️ Save Submission"]

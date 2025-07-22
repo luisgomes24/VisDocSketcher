@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/shark-attack-dataset/attacks.csv",
+      "description": "Dataset containing shark attack incidents including details like species, activity, and outcomes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "shark",
+      "description": "Pandas DataFrame populated with the shark attack dataset."
+    },
+    {
+      "variable": "sharka",
+      "description": "DataFrame summarizing counts of fatal and non-fatal attacks by sex."
+    },
+    {
+      "variable": "sharkb",
+      "description": "DataFrame summarizing counts of shark attacks by country."
+    },
+    {
+      "variable": "sharkc",
+      "description": "DataFrame summarizing counts of shark attacks by species."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "shark",
+      "creation_method": "pd.read_csv",
+      "flow": ["Data analysis, visualizations"]
+    },
+    {
+      "variable": "sharka",
+      "creation_method": "shark.groupby and sort",
+      "flow": ["Used for pie charts (fatal/non-fatal by sex)"]
+    },
+    {
+      "variable": "sharkb",
+      "creation_method": "shark.groupby and sort",
+      "flow": ["Used for choropleth map and bar plot"]
+    },
+    {
+      "variable": "sharkc",
+      "creation_method": "shark.groupby and sort",
+      "flow": ["Used for pie charts (most dangerous sharks)"]
+    }
+  ],
+  "models": []
+}

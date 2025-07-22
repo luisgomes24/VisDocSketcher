@@ -1,0 +1,10 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> Read Excel File"] --> B["🤖 Preprocess Data"];
+    B --> C["🔍 Classify Porosity"];
+    C --> D["🧪 Train CNN Model"];
+    D --> E["📈 Evaluate Model"];
+    E --> F["📊 Plot Training History <img src='hist_template.svg' /> <br/> Loss vs Epochs"];
+    E --> G["📊 Plot Accuracy <img src='hist_template.svg' /> <br/> Accuracy vs Epochs"];
+    F --> H["📜 Conclusion"];
+    G --> H;

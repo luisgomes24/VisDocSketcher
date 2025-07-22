@@ -1,0 +1,84 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "n",
+      "description": "An instance of the NormalDistribution class."
+    },
+    {
+      "name": "r",
+      "description": "An instance of the RectangularDistribution class."
+    },
+    {
+      "name": "t",
+      "description": "An instance of the TriangularDistribution class."
+    },
+    {
+      "name": "st",
+      "description": "An instance of the SymmetricTriangularDistribution class."
+    },
+    {
+      "name": "e",
+      "description": "An instance of the ExponentialDistribution class."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "n",
+      "creation": "n = ND(1, 4)",
+      "flows": "Used for plotting and generating random samples."
+    },
+    {
+      "variable": "r",
+      "creation": "r = RD(-1, 3)",
+      "flows": "Used for plotting."
+    },
+    {
+      "variable": "t",
+      "creation": "t = TD(-1, 3)",
+      "flows": "Used for plotting."
+    },
+    {
+      "variable": "st",
+      "creation": "st = STD(1, 2)",
+      "flows": "Used for plotting."
+    },
+    {
+      "variable": "e",
+      "creation": "e = ED(0.6415005278451494)",
+      "flows": "Detailed statistical summary generated, plotted, and its cumulative distribution function is calculated."
+    }
+  ],
+  "models": [
+    {
+      "model": "NormalDistribution",
+      "input_features": "Parameters of Normal Distribution",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    },
+    {
+      "model": "RectangularDistribution",
+      "input_features": "Parameters of Rectangular Distribution",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    },
+    {
+      "model": "TriangularDistribution",
+      "input_features": "Parameters of Triangular Distribution",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    },
+    {
+      "model": "SymmetricTriangularDistribution",
+      "input_features": "Parameters of Symmetric Triangular Distribution",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    },
+    {
+      "model": "ExponentialDistribution",
+      "input_features": "Parameters of Exponential Distribution",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

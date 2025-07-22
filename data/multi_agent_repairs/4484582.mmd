@@ -1,0 +1,8 @@
+graph TD;
+    A["Load CSV Data"] --> B["Data Pre-processing"];
+    B --> C["Load DICOM Images"];
+    C --> D["Mask Annotations"];
+    D --> E["ANALYZE: check masks"];
+    D --> F["Visualization"];
+    F --> G["Display Results"];
+    G --> H["Finalize Report"];

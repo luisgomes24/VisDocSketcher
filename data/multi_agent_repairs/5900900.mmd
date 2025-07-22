@@ -1,0 +1,28 @@
+```mermaid
+flowchart TD
+
+subgraph "setup"
+    A1["Import Libraries"] -->|"matplotlib, pandas, numpy, os"| A["Environment Setup"]
+end
+
+subgraph "dataLoading"
+    B1["Load DataFrame\n test_lAUu6dG.csv"]
+    B2["Load DataFrame\n train_ctrUa4K.csv"]
+    B3["Convert to DataFrame df1 and df2"]
+    B1 --> B3
+    B2 --> B3
+end
+
+subgraph "exploratoryAnalysis"
+    C1["Plot Distribution for df1 and df2"]
+    C2["Plot Correlation Matrix for df1 and df2"]
+    C3["Plot Scatter Matrix for df1 and df2"]
+    B3 --> C1
+    B3 --> C2
+    B3 --> C3
+end
+
+style "setup" fill:#f9f,stroke:#333,stroke-width:1px;
+style "dataLoading" fill:#bbf,stroke:#333,stroke-width:1px;
+style "exploratoryAnalysis" fill:#ccf,stroke:#333,stroke-width:1px;
+```

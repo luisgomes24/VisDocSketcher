@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Nodes
+    A["train.csv"] -->|Read CSV| B["train"]
+    B -->|Sampling| C["new_train"]
+    A2["test.csv"] -->|Read CSV| D["test"]
+    C -->|Train Multiple Models| E["Multiple Classifiers"]
+    E -->|Select Best Model| F["RandomForestClassifier"]
+    F -->|Predict on Test| G["pred"]
+    A3["sample_submission.csv"] -.->|Example Format| H["Submission"]
+
+    %% Links with comments
+    B -->|Training and Feature Importance| E
+    D -->|Make Predictions| G
+    G -->|Output Submission| H
+
+    %% Comments explaining nodes
+    A:::source
+    B:::variable
+    C:::variable
+    D:::variable
+    E:::model
+    F:::model
+    G:::variable
+    H:::output
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#faa,stroke:#333,stroke-width:2px;
+    classDef output fill:#bfb,stroke:#333,stroke-width:2px;
+```

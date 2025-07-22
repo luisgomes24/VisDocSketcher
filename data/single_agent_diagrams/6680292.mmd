@@ -1,0 +1,22 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Preprocess Data"]
+    B --> C["🔍 Merge Data"]
+    C --> D["🚫 Remove Useless Buildings"]
+    D --> E["🤔 Analyze Unassociated Buildings"]
+    E --> F["🔄 Map Building IDs"]
+    F --> G["💻 Scrap Utility Data"]
+    G --> H["🏢 Load Specific Building Data"]
+    H --> I["🔄 Match ASU Data with Meter Reading"]
+    I --> J["📊 EDA"]
+    J --> K["📈 Visualize Meters"]
+    
+    A -->|CSV Files| B
+    B -->|Merging on square_feet| C
+    C -->|Dropping Index| D
+    D -->|Checking Nulls| E
+    E -->|Creating Mapping| F
+    G -->|Scraping via Requests| G
+    H -->|JSON to DataFrame| H
+    I -->|Proportional Analysis| I
+    J -->|Datetime Conversion| J
+    K -->|Loop through Buildings| K

@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with columns such as Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Dataframe containing preprocessed training data."
+    },
+    {
+      "variable_name": "train",
+      "description": "Training subset of the data."
+    },
+    {
+      "variable_name": "test",
+      "description": "Testing subset of the data."
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Labels for the training data (Survived column)."
+    },
+    {
+      "variable_name": "train_X",
+      "description": "Features for the training data (all columns except Survived)."
+    },
+    {
+      "variable_name": "test_y",
+      "description": "Labels for the testing data (Survived column)."
+    },
+    {
+      "variable_name": "test_X",
+      "description": "Features for the testing data (all columns except Survived)."
+    },
+    {
+      "variable_name": "train_keras",
+      "description": "Prepared data structure for training compatible with Keras."
+    },
+    {
+      "variable_name": "test_keras",
+      "description": "Prepared data structure for testing compatible with Keras."
+    },
+    {
+      "variable_name": "model",
+      "description": "Keras model architecture for classification."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "created_by": "read_csv",
+      "flows_to": ["train", "test", "train_X", "test_X", "train_keras", "test_keras"]
+    },
+    {
+      "variable_name": "train",
+      "created_by": "df slicing",
+      "flows_to": ["train_y", "train_X"]
+    },
+    {
+      "variable_name": "test",
+      "created_by": "df slicing",
+      "flows_to": ["test_y", "test_X"]
+    },
+    {
+      "variable_name": "train_keras",
+      "created_by": "prepare_data",
+      "flows_to": ["model_fit"]
+    },
+    {
+      "variable_name": "test_keras",
+      "created_by": "prepare_data",
+      "flows_to": ["model_predict"]
+    },
+    {
+      "variable_name": "model",
+      "created_by": "create_model",
+      "flows_to": ["model_fit", "model_predict"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Keras Model",
+      "input_features": ["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "optimizer": "SGD",
+        "loss": "mse",
+        "metrics": ["accuracy"],
+        "epochs": 10000000,
+        "batch_size": 32
+      }
+    }
+  ]
+}

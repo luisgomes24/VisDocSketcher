@@ -1,0 +1,28 @@
+```
+graph TD;
+    A["🗄️ Load Data"] -->|read csv| B["📊 Analyze Data"];
+    B --> C["👁️‍🗨️ View Data Shape"];
+    B --> D["👁️‍🗨️ First Rows"];
+    B --> E["📈 Data Info"];
+    B --> F["📊 Statistical Summary"];
+    B --> G["🔍 Features"];
+    A --> H["🚧 Preprocess Data"];
+    H --> I["📊 Unique Value Counts"];
+    H --> J["❓ Missing Values"];
+    H --> K["📊 Fraud Counts"];
+    H --> L["📊 Flagged Fraud Counts"];
+    H --> M["🗞️ Filter Out Merchants"];
+    M --> N["🔍 Analyze EDA"];
+    N --> O["📊 Categorical Summary"];
+    N --> P["🔁 Convert Categorical to Numerical"];
+    N --> Q["🔍 Data Overview"];
+    N --> R["📊 Correlation Heatmap"];
+    R --> S["📉 Boxplots for Outliers"];
+    S --> T["🧠 Build Model"];
+    T --> U["🔑 Define Features and Target"];
+    T --> V["⚖️ Handle Imbalance"];
+    V --> W["🛠️ Train/Test Split"];
+    W --> X["🛠️ Create and Train Model"];
+    X --> Y["🔍 Validate Model"];
+    Y --> Z["📊 Test Predictions"];
+    Z --> AA["📊 Evaluate Model Performance"];

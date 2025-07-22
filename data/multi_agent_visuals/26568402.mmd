@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/gtsrb-german-traffic-sign/Train/"] %% Training images directory
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/gtsrb-german-traffic-sign/Test/"] %% Test images directory
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/gtsrb-german-traffic-sign/Test.csv"] %% Test images CSV
+
+    %% Data Preparation
+    B1["<img src='icons/table.svg' width=100 height=100/> <br/> train_dataset"] %% Training dataset variable
+    B2["<img src='icons/table.svg' width=100 height=100/> <br/> test_dataset"] %% Test dataset variable
+    B3["<img src='icons/table.svg' width=100 height=100/> <br/> X_test"] %% Preprocessed test images
+
+    %% Models
+    C1["<img src='icons/brain.svg' width=100 height=100/> <br/> Custom CNN"] %% Custom CNN Model
+    C2["<img src='icons/brain.svg' width=100 height=100/> <br/> MobileNetV2"] %% MobileNetV2 Model
+    C3["<img src='icons/brain.svg' width=100 height=100/> <br/> VGG19"] %% VGG19 Model
+
+    %% Training Histories
+    D1["<img src='dummy_plots/hist_template.svg'/> <br/> history"] %% History of Custom CNN
+    D2["<img src='dummy_plots/hist_template.svg'/> <br/> mob_history"] %% History of MobileNetV2
+    D3["<img src='dummy_plots/hist_template.svg'/> <br/> vgg_history"] %% History of VGG19
+
+    %% Data Flow
+    A1 -->|flow_from_directory| B1
+    A2 -->|flow_from_directory| B2
+    A3 -->|preprocessing (cv2, PIL)| B3
+
+    B1 -->|Training| C1
+    B1 -->|Training| C2
+    B1 -->|Training| C3
+
+    B2 -->|Validation| C1
+    B2 -->|Validation| C2
+    B2 -->|Validation| C3
+
+    %% Model Training and Results
+    C1 -->|Produces| D1
+    C2 -->|Produces| D2
+    C3 -->|Produces| D3
+
+    %% Visualization
+    D1 -->|Plotting and Visualization| E1["Performance Analysis"]
+    D2 -->|Plotting and Visualization| E1
+    D3 -->|Plotting and Visualization| E1

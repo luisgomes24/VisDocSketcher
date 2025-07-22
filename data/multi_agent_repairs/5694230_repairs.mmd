@@ -1,0 +1,20 @@
+flowchart TD
+    %% Node for the data source
+    A["specialized_bikes_2019.csv"]
+    %% Node for reading the data into a DataFrame
+    B["df1"]
+    %% Arrow indicating data is read from the CSV into a DataFrame
+    A -->|Reads data| B
+    %% Processing: Displaying statistics
+    C["plotPerColumnDistribution"]
+    %% Displaying data structure
+    D["df1.head()"]
+    %% Arrows indicating the use of the DataFrame
+    B -->|Data used| C
+    B -->|Data used| D
+
+    %% Additional comments for each node
+    %% A: This represents the CSV file, which is the data source.
+    %% B: This node represents the DataFrame that contains the data read from the CSV.
+    %% C: This involves plotting the distribution of data in each column.
+    %% D: This shows the head of the DataFrame, used for quick visualization of data structure.

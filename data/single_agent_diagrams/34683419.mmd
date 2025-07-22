@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Data Loading"] --> B["📁 Load Train Data"]
+    B --> C["📁 Load Test Data"]
+    C --> D["📁 Load Submission Data"]
+    D --> E["🔧 Feature Engineering"]
+    E --> F["🧪 Data Preprocessing"]
+    F --> G["🎯 Task Definition"]
+    G --> H["🧠 Model Creation"]
+    H --> I["⏳ AutoML Training"]
+    I --> J["📊 Feature Importance Visualization"]
+    J --> K["📈 Predictions Generation"]
+    K --> L["📤 Save Submissions"]

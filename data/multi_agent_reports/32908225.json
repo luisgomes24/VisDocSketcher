@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/india-gdp-rate-19602022/India GDP 1960-2022.csv",
+      "description": "This CSV file contains India GDP data from 1960 to 2022 including GDP, per capita income, and growth rate."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Main DataFrame containing the cleaned GDP data of India."
+    },
+    {
+      "name": "YEAR",
+      "description": "Year of the recorded GDP data."
+    },
+    {
+      "name": "GDP ($,B)",
+      "description": "Gross Domestic Product valued in billions of dollars after conversion."
+    },
+    {
+      "name": "Per Capita ($)",
+      "description": "Income earned per person in dollars."
+    },
+    {
+      "name": "Growth (%)",
+      "description": "Percentage growth of GDP."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flows": ["cleaning", "visualization"]
+    },
+    {
+      "variable": "YEAR",
+      "created_by": "Renamed from 'India GDP - Historical Data' in df",
+      "flows": ["visualization"]
+    },
+    {
+      "variable": "GDP ($,B)",
+      "created_by": "Data cleaning procedures for GDP",
+      "flows": ["visualization"]
+    },
+    {
+      "variable": "Per Capita ($)",
+      "created_by": "Data cleaning procedures for Per Capita",
+      "flows": ["visualization"]
+    },
+    {
+      "variable": "Growth (%)",
+      "created_by": "Data cleaning procedures for Growth",
+      "flows": ["visualization"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,15 @@
+graph TD;
+    A["📂 Load Data"] --> B["📥 Read Public LB"];
+    B --> C["📊 Clean Public LB"];
+    A --> D["📥 Read Private LB"];
+    D --> E["📊 Clean Private LB"];
+    C --> F["✅ Assertions on Shapes"];
+    E --> F;
+    F --> G["📈 Analyze Shake-Up"];
+    G --> H["📊 Plot Histogram"];
+    G --> I["📈 Plot Candle"];
+    H --> J["📊 Results Summary"];
+    I --> J;
+    J --> K["🏆 Display Rankings & Medals"];
+    K --> L["📊 Compare with Recent Competitions"];
+    L --> M["📊 Scatter Plot Competitions"];

@@ -1,0 +1,10 @@
+flowchart TD
+    A["car_price_prediction.csv"] -->|"load data"| B[data]
+    B -->|"drop ID column"| C["data without ID"]
+    C -->|"process data"| D[data_cleaned]
+    D -->|"exploratory data analysis"| E["EDA"] 
+    E -->|"feature selection"| F[Feature Selection]
+    F -->|"train-test split"| G["train set & test set"]
+    G -->|"train model"| H[Model Training]
+    H -->|"evaluate model"| I[Model Evaluation]
+    I -->|"final results"| J[Final Output]

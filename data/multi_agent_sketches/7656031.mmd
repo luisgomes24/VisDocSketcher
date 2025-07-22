@@ -1,0 +1,32 @@
+flowchart TD
+    %% Node for data source
+    A["train.csv"]:::datasource --> B["train"]:::variable
+    
+    %% Train DataFrame to Cars and Angles Extraction
+    B --> C["cars"]:::variable
+    B --> D["angles"]:::variable
+    
+    %% Cars and Angles used for Clustering
+    C --> E["Clustering"]:::process
+    D --> E
+    
+    %% Clustering results in centroids
+    E --> F["centroids"]:::variable
+    
+    %% Centroids to cars mapping
+    F --> G["centroid_id_to_cars"]:::variable
+    
+    %% KMeans model specifics
+    subgraph KMeans_Cluster["KMeans Clustering Model"]
+        direction TB
+        H["Input: angles"]
+        I["Output: cluster assignments"]
+        J["Hyperparameters: k=32, max_iter=10"]
+    end
+    
+    D --> H
+    I --> G
+
+    classDef datasource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef process fill:#ff9,stroke:#333,stroke-width:2px;

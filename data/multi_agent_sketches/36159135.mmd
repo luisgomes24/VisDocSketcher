@@ -1,0 +1,31 @@
+%% Sketch for Irish Whiskey Sales Analysis Workflow
+flowchart TD
+    %% Data Source Node
+    A[/irish.csv/] --> B
+    
+    %% Data Reading and Variable Creation Nodes
+    B["/Read CSV file into DataFrame 'df'/"] 
+    B --> C
+    
+    %% Data Variables and Flow
+    C["DataFrame 'df'"] --> D["Column 'year'"]
+    C --> E["Column 'cases'"]
+    C --> F["Column 'country'"]
+    C --> G["Column 'quality'"]
+    
+    %% Data Usage Nodes
+    D --> H["Grouped and plotted yearly sales data"]
+    E --> I["Visualized whiskey sales over the years in a line plot"]
+    F --> J["Analyzed and visualized whiskey sales by country in bar charts"]
+    G --> K["Visualized the distribution of whiskey quality"]
+
+    %% Comments
+    subgraph Comments
+    A["Data Source: Irish whiskey sales dataset"]
+    B["Data Read: The CSV file is read into a pandas DataFrame"]
+    C["Data Variables: df holds columns such as year, cases, country, quality"]
+    D["Year: Used for grouping and plotting"]
+    E["Cases: Target variable for sales visualization"]
+    F["Country: Analyzes sales geographically"]
+    G["Quality: Distribution visualization"]
+    end

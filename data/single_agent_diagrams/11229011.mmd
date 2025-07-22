@@ -1,0 +1,33 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/> "] --> B["🖼️ Preprocess Images"]
+    B --> C["🔀 Shuffle Data"]
+    C --> D["🤖 Train-Test Split"]
+    D --> E["💡 Build Model"]
+    E --> F["📈 Train Model"]
+    F --> G["💾 Save Model"]
+    
+    subgraph Image Processing
+        B1["🚪 Load Cat Images"]
+        B2["🚪 Load Dog Images"]
+        B3["🖼️ Resize Images"]
+    end
+
+    B --> B1
+    B --> B2
+    B --> B3
+    
+    subgraph Training
+        E1["🧠 Define Model Architecture"]
+        E2["🛠️ Compile Model"]
+    end
+
+    E --> E1
+    E --> E2
+    
+    subgraph Model Training
+        F1["🕒 Fit Model"]
+        F2["🔍 Validate Model"]
+    end
+
+    F --> F1
+    F --> F2

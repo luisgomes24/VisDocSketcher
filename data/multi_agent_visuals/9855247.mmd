@@ -1,0 +1,12 @@
+graph TD
+    A["corona_morocco.csv"] -->|Load data| B["my_data"]
+    B -->|Calculate active cases - actif_column| C["actif_column"]
+    B -->|Extract total deaths| D["total_Deaths"]
+    B -->|Extract total confirmed cases| E["total_Confirmed"]
+    E -->|Differentiate| F["new_cases"]
+    D -->|Forecasting| G["Prophet model"]
+    E -->|Forecasting| G
+    F -->|Visualizations and Forecasting| G
+    G -->|Uses features: Total confirmed, New cases, Total deaths| H["Forecasting Results"]
+    classDef nodeClass fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H nodeClass;

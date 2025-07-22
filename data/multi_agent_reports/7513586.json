@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/netflix-shows/netflix_titles_nov_2019.csv",
+      "description": "Contains information about Netflix shows including title, release date, genre, and ratings."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "netdata",
+      "description": "DataFrame containing Netflix shows details loaded from the CSV file."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing the counts of each rating type for visualization."
+    },
+    {
+      "name": "df1",
+      "description": "DataFrame containing the counts of unique TV shows, grouped by date added."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame containing the counts of unique movies, grouped by date added."
+    },
+    {
+      "name": "filterdata",
+      "description": "DataFrame created after processing to include cleaned up metadata for recommendations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "netdata",
+      "creation": "pd.read_csv",
+      "usage": "Processed for extracting features, visualizations, and recommendation systems"
+    },
+    {
+      "variable": "df",
+      "creation": "pd.DataFrame",
+      "usage": "Used to create a pie chart of ratings distribution"
+    },
+    {
+      "variable": "df1",
+      "creation": "netdata[netdata['type']=='TV Show']",
+      "usage": "Used in visualizing the trend of TV shows released over years"
+    },
+    {
+      "variable": "df2",
+      "creation": "netdata[netdata['type']=='Movie']",
+      "usage": "Used in visualizing the trend of Movies released over years"
+    },
+    {
+      "variable": "filterdata",
+      "creation": "pd.concat",
+      "usage": "Used in the recommendation system for filtering and creating meta features"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Content based filtering using TF-IDF",
+      "input_features": "description of shows",
+      "target_variable": "recommended movies",
+      "hyperparameters": "stop_words='english' in TfidfVectorizer"
+    },
+    {
+      "model_name": "Collaborative filtering using CountVectorizer",
+      "input_features": "meta description combining cast, director, country",
+      "target_variable": "recommended movies",
+      "hyperparameters": "stop_words='english' in CountVectorizer"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+flowchart TD
+    %% Data Sources
+    A["Data_Train.xlsx"] -->|Read with pandas| B["train"]
+    C["Data_Test.xlsx"] -->|Read with pandas| D["test"]
+    E["Sample_Submission.xlsx"] -->|Read with pandas| F["sample"]
+
+    %% Data Variables
+    B -- Preprocess --> G["X_train"]
+    B -- Preprocess --> H["y_train"]
+    D -- Preprocess --> I["X_test"]
+
+    %% Preprocessing Steps
+    B -- One-hot encoding for locations --> J["train_location_df"]
+    B -- One-hot encoding for cuisines --> K["train_cuisines_df"]
+    J & K -->|Merge| L["scaled training features"]
+
+    %% Model Training
+    G -->|Train| M["Logistic Regression"]
+    G -->|Train| N["XGBoost"]
+    G -->|Train| O["Decision Tree"]
+    G -->|Train| P["KNeighbors"]
+    G -->|Train| Q["Support Vector Machine"]
+    G -->|Train| R["Random Forest"]
+    G -->|Train| S["AdaBoost"]
+    G -->|Train| T["Bagging"]
+    G -->|Train| U["Extra Trees"]
+
+    %% Model Evaluation and Prediction
+    I -->|Predict| V["Predictions"]
+
+    %% Comments
+    subgraph explanation [Explanation]
+        A:::data_source --> "Data source for training"
+        C:::data_source --> "Data source for test"
+        E:::data_source --> "Sample submission format"
+        B:::data_variable --> "Training DataFrame"
+        D:::data_variable --> "Test DataFrame"
+        F:::data_variable --> "Sample Submission DataFrame"
+        G:::data_variable --> "Feature set from training"
+        H:::data_variable --> "Target variable from training"
+        I:::data_variable --> "Feature set from test"
+    end
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;

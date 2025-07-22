@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["Train CSV"] --> |load data| B["x_train"]
+    A --> |extract labels| C["y_train"]
+    C --> |one-hot encode| D["y_categ_train"]
+    B --> |split for validation| E["x_val"]
+    D --> |split for validation| F["y_val"]
+    
+    %% Model Training
+    subgraph ModelTraining[ ]
+        direction TB
+        B --> |input features| G["Sequential CNN"]
+        D --> |target variables| G
+        G --> |evaluate| E["x_val"]
+        G --> |validate| F["y_val"]
+        
+        subgraph G["Sequential CNN"]
+            direction TB
+            G1["Conv2D: 32, (4,4), relu"] --> G2["MaxPool2D: (2,2)"]
+            G2 --> G3["Flatten"]
+            G3 --> G4["Dense: 128, relu"]
+            G4 --> G5["Dense: 10, softmax"]
+        end
+    end
+
+    %% Test Data
+    H["Test CSV"] --> |load data| I["x_test"]
+    I --> |predict| G5
+```

@@ -1,0 +1,13 @@
+flowchart TD
+    A["🔄 Load Data <img src='../path/to/icons/file.svg' /> <br/> df = pd.read_csv('../input/train_labels.csv')"] --> B["🧹 Preprocess Data <img src='../path/to/icons/table.svg' /> <br/> data = ImageItemList.from_csv(...)"]
+    B --> C["👁️‍🗨️ Show Sample <img src='../path/to/dummy_plots/barplot_template.svg' /> <br/> data.show_batch(3)"]
+    C --> D["🧠 Create Model <img src='../path/to/icons/brain.svg' /> <br/> learn = create_cnn(...)"]
+    D --> E["🔍 Find Learning Rate <img src='../path/to/icons/lineplot_template.svg' /> <br/> learn.lr_find()"]
+    E --> F["📈 Train Model <img src='../path/to/icons/lineplot_template.svg' /> <br/> learn.fit_one_cycle(1, 1e-3)"]
+    F --> G["🔓 Unfreeze Model <img src='../path/to/icons/brain.svg' />"]
+    G --> H["📈 Train Further <img src='../path/to/icons/lineplot_template.svg' /> <br/> learn.fit_one_cycle(4, slice(1e-6, 1e-4))"]
+    H --> I["🔄 Update Data <img src='../path/to/icons/file.svg' /> <br/> learn.data = data"]
+    I --> J["🧠 Freeze Model <img src='../path/to/icons/brain.svg' />"]
+    J --> K["📈 Train Again <img src='../path/to/icons/lineplot_template.svg' /> <br/> learn.fit_one_cycle(1, 1e-3/2)"]
+    K --> L["🔍 Get Predictions <img src='../path/to/icons/lineplot_template.svg' /> <br/> preds = learn.get_preds(...)"]
+    L --> M["📊 Prepare Submission <img src='../path/to/icons/file.svg' /> <br/> df_sub.to_csv('sub.csv')"]

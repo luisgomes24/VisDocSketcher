@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Check Data Types"]
+    B --> C["<img src='column_split.svg'/> <br/> Handle Missing Values"]
+    C --> D["<img src='table.svg'/> <br/> EDA Report"]
+    D --> E["<img src='table.svg'/> <br/> Identify Categorical Features"]
+    E --> F["<img src='brain.svg'/> <br/> Data Preparation"]
+    F --> G["<img src='brain.svg'/> <br/> Create Model"]
+    G --> H["<img src='brain.svg'/> <br/> Tune Model"]
+    H --> I["<img src='scatter_plot_template.svg'/> <br/> Evaluate Model"]
+    I --> J["<img src='scatter_plot_template.svg'/> <br/> Predict Model"]
+    J --> K["<img src='brain.svg'/> <br/> Finalize Model"]
+    K --> L["<img src='scatter_plot_template.svg'/> <br/> Final Prediction"]

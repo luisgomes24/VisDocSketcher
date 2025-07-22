@@ -1,0 +1,140 @@
+{
+"data_sources": [
+    {
+        "file_name": "train_transaction.csv",
+        "description": "Contains transaction details for training.",
+        "size_MB": "Large"
+    },
+    {
+        "file_name": "test_transaction.csv",
+        "description": "Contains transaction details for testing.",
+        "size_MB": "Large"
+    },
+    {
+        "file_name": "train_identity.csv",
+        "description": "Contains identity details for training transactions.",
+        "size_MB": "Large"
+    },
+    {
+        "file_name": "test_identity.csv",
+        "description": "Contains identity details for testing transactions.",
+        "size_MB": "Large"
+    }
+],
+"data_variables": [
+    {
+        "variable": "train_transaction",
+        "description": "DataFrame containing transaction details for training."
+    },
+    {
+        "variable": "test_transaction",
+        "description": "DataFrame containing transaction details for testing."
+    },
+    {
+        "variable": "train_identity",
+        "description": "DataFrame containing identity features related to training transactions."
+    },
+    {
+        "variable": "test_identity",
+        "description": "DataFrame containing identity features related to testing transactions."
+    },
+    {
+        "variable": "train_df",
+        "description": "Merged DataFrame of training transactions and identities."
+    },
+    {
+        "variable": "test_df",
+        "description": "Merged DataFrame of test transactions and identities."
+    },
+    {
+        "variable": "X_train",
+        "description": "Feature DataFrame for training after dropping target and nuisance columns."
+    },
+    {
+        "variable": "X_val",
+        "description": "Validation feature set."
+    },
+    {
+        "variable": "y_train",
+        "description": "Target variable for training DataFrame."
+    },
+    {
+        "variable": "y_val",
+        "description": "Target variable for validation set."
+    }
+],
+"data_flow": [
+    {
+        "variable": "train_df",
+        "creation": "Loaded from train_transaction.csv and train_identity.csv",
+        "flow": "Used for training various models within StackNet."
+    },
+    {
+        "variable": "test_df",
+        "creation": "Loaded from test_transaction.csv and test_identity.csv",
+        "flow": "Used for predictions at the end of the notebook."
+    },
+    {
+        "variable": "X_train",
+        "creation": "Derived from train_df",
+        "flow": "Used as input features for model training."
+    },
+    {
+        "variable": "X_val",
+        "creation": "Derived from X_train by splitting dataset",
+        "flow": "Used to validate the model's performance."
+    },
+    {
+        "variable": "target",
+        "creation": "Extracted from train_df",
+        "flow": "Used to train and validate the models."
+    }
+],
+"models": [
+    {
+        "model_name": "GradientBoostingRegressor",
+        "input_features": "X_train",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "n_estimators": 400,
+            "learning_rate": 0.006,
+            "min_samples_leaf": 10,
+            "max_depth": 15,
+            "max_features": "sqrt",
+            "subsample": 0.85
+        }
+    },
+    {
+        "model_name": "LGBMRegressor",
+        "input_features": "X_train",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "learning_rate": 0.0045,
+            "num_leaves": 491,
+            "max_depth": 20,
+            "min_child_weight": 0.035
+        }
+    },
+    {
+        "model_name": "CatBoostRegressor",
+        "input_features": "X_train",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "learning_rate": 0.2,
+            "depth": 12,
+            "max_bin": 255,
+            "iterations": 100
+        }
+    },
+    {
+        "model_name": "RandomForestRegressor",
+        "input_features": "Predictions of level 1 models",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "n_estimators": 250,
+            "max_depth": 5,
+            "max_features": "sqrt"
+        }
+    }
+]
+}

@@ -1,0 +1,31 @@
+%% Mermaid.js Flowchart for Data Science Project from Notebook 43026144
+
+flowchart TD
+    %% Data Sources
+    A["Preprocessed World University Rankings 2023 Dataset"] -->|load| B[df]
+
+    %% Data Preprocessing
+    B -->|extract target| C[y]
+    B -->|drop target column| D[x]
+
+    %% Train-Test Split
+    D -->|train_test_split| E[x_train]
+    D -->|train_test_split| F[x_test]
+    C -->|train_test_split| G[y_train]
+    C -->|train_test_split| H[y_test]
+
+    %% Model Training
+    E -->|train model| I["RandomForestClassifier"]
+    G -->|train model| I
+
+    %% Model Details
+    subgraph Random Forest Classifier Details
+        I
+        J["Criterion: entropy"]
+        K["Num Estimators: 200"]
+    end
+
+    %% Model Scoring
+    F -->|predict| L[[model scoring]]
+    H -->|predict| L
+    I -->|predict| L

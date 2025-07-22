@@ -1,0 +1,20 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> pd.read_csv('Salary.csv')"] --> B["🔍 Data Exploration"]
+    B --> C["🗃️ View Data <img src='table.svg'/> <br/> data.head()"]
+    B --> D["📊 Data Summary <img src='barplot_template.svg'/> <br/> data.describe()"]
+    B --> E["❓ Check Missing Values <img src='column_split.svg'/> <br/> data.isnull().sum()"]
+    
+    F["📊 Data Visualization"] --> G["📈 Visualize Relationships <img src='scatter_plot_template.svg'/> <br/> plt.plot(data['Salary'], data['YearsExperience'])"]
+    G --> H["📉 Distribution of Years of Experience <img src='hist_template.svg'/> <br/> sns.displot(data, x='YearsExperience')"]
+    G --> I["📉 Distribution of Salary <img src='hist_template.svg'/> <br/> sns.displot(data, x='Salary')"]
+    G --> J["📈 Salary by Years of Experience <img src='scatter_plot_template.svg'/> <br/> sns.displot(data, x='Salary', hue='YearsExperience')"]
+    
+    K["🔄 Train-Test Split"] --> L["✂️ Split Features and Target <img src='column_split.svg'/>"]
+    L --> M["✅ Feature Set x, Target Set y"]
+    K --> N["🔍 Split Data <img src='row_split.svg'/> <br/> train_test_split(x, y)"]
+
+    O["🧠 Linear Regression Model"] --> P["🎓 Fit Model <img src='brain.svg'/> <br/> L.fit(xtrain, ytrain)"]
+    O --> Q["📊 Predict and Evaluate <img src='barplot_template.svg'/> <br/> y_pred = L.predict(xtest)"]
+
+    A --> F
+    P --> R["📈 Model Performance <img src='barplot_template.svg'/> <br/> print(L.score(xtest, ytest))"]

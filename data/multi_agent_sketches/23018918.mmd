@@ -1,0 +1,44 @@
+%%{ init : { 'theme' : 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#F0F0F0'}}}%%
+flowchart TD
+    %% Data Sources %%
+    data1[CIFAR-10 Dataset]
+    
+    %% Data Variables %%
+    X_train([X_train Images])
+    y_train([y_train Labels])
+    X_test([X_test Images])
+    y_test([y_test Labels])
+    pred([Predictions ANN])
+    res([Predictions CNN])
+
+    %% Models %%
+    ann_model[ANN Model]
+    cnn_model[CNN Model]
+
+    %% Data Flow %%
+    data1 -->|Load images| X_train
+    data1 -->|Load labels| y_train
+    data1 -->|Load images| X_test
+    data1 -->|Load labels| y_test
+
+    X_train -->|Train| ann_model
+    y_train -->|Train| ann_model
+    X_train -->|Train| cnn_model
+    y_train -->|Train| cnn_model
+
+    ann_model -->|Predict| pred
+    cnn_model -->|Predict| res
+    
+    pred -->|Evaluate| y_test
+    res -->|Evaluate| y_test
+
+    %% Comments describing each node
+    click data1 "Load CIFAR-10 Dataset" "This is the source of data."
+    click X_train "Training Data" "Features loaded from CIFAR-10."
+    click y_train "Training Labels" "Target variable loaded from CIFAR-10."
+    click X_test "Testing Data" "Features for model testing."
+    click y_test "Testing Labels" "Actual labels for testing data."
+    click pred "ANN Predictions" "Predictions made by ANN model."
+    click res "CNN Predictions" "Predictions made by CNN model."
+    click ann_model "ANN Model Details" "Trained using dense layers with SGD optimizer."
+    click cnn_model "CNN Model Details" "Trained using CNN layers with Adam optimizer."

@@ -1,0 +1,58 @@
+{
+    "data_sources": [
+        {
+            "source": "../input/wine-reviews/winemag-data_first150k.csv",
+            "description": "CSV file containing wine reviews, including details such as country, description, variety, and winery."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "fruits",
+            "description": "DataFrame containing the count of Apples and Bananas."
+        },
+        {
+            "variable": "fruit_sales",
+            "description": "DataFrame representing sales figures for Apples and Bananas over two years."
+        },
+        {
+            "variable": "ingredients",
+            "description": "A Series containing the ingredients for a dinner with quantities."
+        },
+        {
+            "variable": "reviews",
+            "description": "DataFrame containing wine reviews with various attributes."
+        },
+        {
+            "variable": "animals",
+            "description": "DataFrame containing count of Cows and Goats over two years."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "fruits",
+            "created_by": "pd.DataFrame()",
+            "flows_to": "Used for initial demonstration of DataFrame creation."
+        },
+        {
+            "variable": "fruit_sales",
+            "created_by": "pd.DataFrame()",
+            "flows_to": "Used for demonstrating multiple index DataFrames."
+        },
+        {
+            "variable": "ingredients",
+            "created_by": "pd.Series()",
+            "flows_to": "Used to demonstrate creating a Series."
+        },
+        {
+            "variable": "reviews",
+            "created_by": "pd.read_csv()",
+            "flows_to": "Used for analysis, not directly shown in output."
+        },
+        {
+            "variable": "animals",
+            "created_by": "pd.DataFrame()",
+            "flows_to": "Saved as a CSV file named cows_and_goats.csv."
+        }
+    ],
+    "models": []
+}

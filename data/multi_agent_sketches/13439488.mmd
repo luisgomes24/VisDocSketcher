@@ -1,0 +1,19 @@
+%% This is a workflow diagram for the Jupyter Notebook with file name 13439488.ipynb
+flowchart TD
+    A[M2SLMoneyStock.csv] -->|Read CSV| B[df]
+    %% Node A represents the source CSV file for M2 Money Stock data
+    C[PCEPersonalSpending.csv] -->|Read CSV| D[sp]
+    %% Node C represents the source CSV file for Personal Consumption Expenditures data
+    D -->|Merge| B[df]
+    %% Node D represents the DataFrame holding the Personal Consumption Expenditures data being merged into df
+    B -->|Second-order differencing| E[df_transformed]
+    %% Node B is the merged DataFrame df
+    E -->|Split into train/test| F[train]
+    E --> F[test]
+    %% Node E represents the DataFrame containing second-order differenced data
+    F -->|Fit VARMAX model| G[VARMAX Model]
+    %% Node F represents the training dataset
+    G -->|Forecasting| H[df_forecast]
+    %% Node G represents the VARMAX Model being trained and forecasting values
+    H -->|Evaluate & Plot| I[Result Evaluation]
+    %% Node H represents the forecasted values for Money and Spending

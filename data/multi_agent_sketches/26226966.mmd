@@ -1,0 +1,28 @@
+    graph TD;
+    %% Data Sources
+    A1["train.csv"]:::data_source -->|Read csv| B1["train"]:::data;
+    A2["test.csv"]:::data_source -->|Read csv| B2["test"]:::data;
+    
+    %% Data Variables and Processes
+    B1 -->|Preprocess| C1["Indoor_temperature_room (y)"]:::data;
+    B1 -->|Remove target| C2["X (Features)"]:::data;
+    C2 -->|Split| D1["X_train"]:::data;
+    C2 -->|Split| D2["X_test"]:::data;
+    C1 -->|Split| D3["y_train"]:::data;
+    C1 -->|Split| D4["y_test"]:::data;
+    D1 --> E1["AutoML"]:::model;
+    D3 --> E1;
+    
+    %% Model and Predictions
+    E1 -->|Predict| F1["y_pred"]:::data;
+    B2 -->|Preprocess| F1
+    
+    %% Output Preparation
+    F1 -->|Structure predictions| G1["df"]:::data;
+    G1 --> H1["sol (Sample Submission)"]:::output;
+    
+    %% Styling
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef model fill:#cfc,stroke:#333,stroke-width:2px;
+    classDef output fill:#ffc,stroke:#333,stroke-width:2px;

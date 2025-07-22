@@ -1,0 +1,107 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/porto-seguro-data-challenge/train.csv",
+      "description": "Training data containing features and target variable."
+    },
+    {
+      "file": "../input/porto-seguro-data-challenge/test.csv",
+      "description": "Testing data containing features but no target variable."
+    },
+    {
+      "file": "../input/porto-seguro-data-challenge/submission_sample.csv",
+      "description": "Sample submission file format to guide the submission."
+    },
+    {
+      "file": "../input/porto-seguro-data-challenge/metadata.csv",
+      "description": "Metadata describing the features in the datasets."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing the training dataset without the 'id' column."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing the testing dataset without the 'id' column."
+    },
+    {
+      "variable": "sample_submission",
+      "description": "DataFrame that showcases how to format the submission."
+    },
+    {
+      "variable": "meta",
+      "description": "DataFrame containing metadata for features along with their types."
+    },
+    {
+      "variable": "X",
+      "description": "Feature set extracted from the training data."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable from the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv()",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv()",
+      "flows_to": ["X_test"]
+    },
+    {
+      "variable": "meta",
+      "creation": "pd.read_csv()",
+      "flows_to": ["cat_nom", "cat_ord", "num_dis", "num_con"]
+    },
+    {
+      "variable": "X",
+      "creation": "Extracted from 'train'",
+      "flows_to": ["var_imp", "mutual_info", "pzeros", "pnull", "feature selection"]
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from 'train'",
+      "flows_to": ["model training"]
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": 2,
+        "random_state": 314
+      }
+    },
+    {
+      "model": "LogisticRegression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "C": 1,
+        "penalty": "l2",
+        "solver": "sag",
+        "tol": 0.1,
+        "random_state": 314
+      }
+    },
+    {
+      "model": "LogisticRegression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "C": 1,
+        "penalty": "l1",
+        "solver": "liblinear",
+        "random_state": 314
+      }
+    }
+  ]
+}

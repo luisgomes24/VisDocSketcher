@@ -1,0 +1,10 @@
+graph TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Structured Data"] --> |"load"| B["<img src='icons/file.svg' width=100 height=100/> <br/> File Data"]
+    B --> |"load"| C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table"]
+    C --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    C --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train/Test Split"]
+    D --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    E --> F
+    F --> H["<img src='icons/image.svg' width=100 height=100/> <br/> Prediction"]
+    H --> |"results"| O["<img src='dummy_plots/barplot_template.svg'/> <br/> Output Plot"]
+    H --> |"accuracy"| P["<img src='dummy_plots/lineplot_template.svg'/> <br/> Accuracy Plot"];

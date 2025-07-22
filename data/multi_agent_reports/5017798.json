@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "blockbusters.csv",
+      "description": "Contains data about blockbuster movies"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the data from the CSV file blockbusters.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for plotting (distribution, correlation, scatter matrix)", "Visualizations generated"]
+    }
+  ],
+  "models": []
+}

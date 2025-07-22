@@ -1,0 +1,23 @@
+{
+  "data_sources": [
+    {
+      "file_name": "data.csv",
+      "description": "Contains the dataset with 18207 rows, of which 1000 are loaded for this analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing loaded data from data.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "created_by": "pd.read_csv",
+      "used_in": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"],
+      "saved": false
+    }
+  ],
+  "models": []
+}

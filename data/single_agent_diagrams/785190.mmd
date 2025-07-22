@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🔍 Check Date Column <img src='icons/table.svg' />"]
+    B --> C["📅 Convert to Datetime <img src='icons/brain.svg' />"]
+    C --> D["📊 Plot Date Parsing <img src='dummy_plots/hist_template.svg' />"]
+    D --> E["📆 Select Day of Month <img src='icons/column_split.svg' />"]
+    E --> F["📉 Visualize Day Distribution <img src='dummy_plots/hist_template.svg' />"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#ffeb3b,stroke:#333,stroke-width:4px
+    style C fill:#4caf50,stroke:#333,stroke-width:4px
+    style D fill:#2196f3,stroke:#333,stroke-width:4px
+    style E fill:#ff9800,stroke:#333,stroke-width:4px
+    style F fill:#9c27b0,stroke:#333,stroke-width:4px

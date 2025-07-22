@@ -1,0 +1,20 @@
+{ "data_sources": [
+    {"file_name": "ks-projects-201801.csv", "description": "A dataset containing information about Kickstarter projects including financial goals and amounts pledged."}
+], 
+"data_variables": [
+    {"variable_name": "kickstarters_2017", "description": "DataFrame containing all the Kickstarter project data."},
+    {"variable_name": "usd_goal", "description": "The original funding goal in USD for each project."},
+    {"variable_name": "scaled_data", "description": "The funding goal after being min-max scaled between 0 and 1."},
+    {"variable_name": "positive_pledges", "description": "Pledges greater than 0 extracted from the dataset for normalization purposes."},
+    {"variable_name": "normalized_pledges", "description": "Pledges normalized using the Box-Cox transformation."},
+    {"variable_name": "index_of_positive_pledges", "description": "Boolean index for filtering only positive pledge values."}
+],
+"data_flow": [
+    {"variable_name": "kickstarters_2017", "creation_method": "pd.read_csv", "flow": "used for scaling and normalization tasks"},
+    {"variable_name": "usd_goal", "creation_method": "kickstarters_2017.usd_goal_real", "flow": "scaled using minmax_scaling"},
+    {"variable_name": "scaled_data", "creation_method": "minmax_scaling", "flow": "used for plotting and comparison"},
+    {"variable_name": "positive_pledges", "creation_method": "kickstarters_2017.usd_pledged_real.loc[index_of_positive_pledges]", "flow": "normalized and plotted"},
+    {"variable_name": "normalized_pledges", "creation_method": "stats.boxcox", "flow": "used for plotting and comparison"}
+], 
+"models": []
+}

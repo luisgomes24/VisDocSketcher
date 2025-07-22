@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Source Node
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Crypto Bitcoin Transactions"] -->|Source\n(bigquery-public-data)| B["<img src='icons/brain.svg' width=100 height=100/> <br/> BigQuery Client"]
+
+    %% BigQuery Client Initialization
+    B -->|Creates| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Dataset Ref: crypto_bitcoin"]
+
+    %% Dataset Reference Node
+    C -->|Fetched| D["Dataset: crypto_bitcoin"]
+
+    %% Dataset Node
+    D -->|Contains| E["<img src='icons/table.svg' width=100 height=100/> <br/> Table Ref: transactions"]
+
+    %% Table Reference Node
+    E -->|Fetched| F["Table: transactions"]
+
+    %% Table Node
+    F -->|Queried into| G["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> DataFrame: Transactions by Date"]
+
+    %% DataFrame Node
+    %% Comments explaining each step
+    %% A - Represents the initial data source node from BigQuery
+    %% B - The initialization step of BigQuery client to interact with datasets
+    %% C - Reference node for the dataset within BigQuery
+    %% D - Represents the dataset object holding transaction information
+    %% E - Reference node for the specific transactions table
+    %% F - The fetched table object containing transaction records
+    %% G - Final DataFrame where transactions are collected and organized by date

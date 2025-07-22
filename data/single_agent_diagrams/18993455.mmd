@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🗄️ Preprocess Data"]
+    B --> C["🧮 Train Model"]
+    C --> D["📊 Predict on Test Data"]
+    D --> E["💾 Save Submission File"]
+
+    A -->|Uses| F["<img src='icons/file.svg'/> <br/> train.csv"]
+    A -->|Uses| G["<img src='icons/file.svg'/> <br/> test.csv"]
+    B -->|Log Transformation| H["<img src='icons/column_split.svg'/> <br/> Transform Large Values"]
+    C --> I["<img src='icons/brain.svg'/> <br/> Train Predictor"]
+    D --> J["<img src='icons/table.svg'/> <br/> Predictions"]
+    E --> K["<img src='icons/file.svg'/> <br/> submit.csv"]

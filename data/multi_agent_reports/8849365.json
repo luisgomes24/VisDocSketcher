@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "SARS.csv",
+      "description": "Contains data related to SARS for exploratory analysis"
+    },
+    {
+      "file_name": "SARSFLU.csv",
+      "description": "Contains data related to SARS influenza for exploratory analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame for the first dataset (SARS.csv) containing the first 1000 rows from the file"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame for the second dataset (SARSFLU.csv) containing the first 1000 rows from the file"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv('/kaggle/input/SARS.csv', nrows=1000)",
+      "uses": ["plotPerColumnDistribution(df1, 10, 5)", "plotCorrelationMatrix(df1, 8)", "plotScatterMatrix(df1, 15, 10)"]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv('/kaggle/input/SARSFLU.csv', nrows=1000)",
+      "uses": ["plotPerColumnDistribution(df2, 10, 5)", "plotCorrelationMatrix(df2, 8)", "plotScatterMatrix(df2, 15, 10)"]
+    }
+  ],
+  "models": []
+}

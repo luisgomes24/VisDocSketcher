@@ -1,0 +1,37 @@
+```mermaid
+graph TD
+    A["Dataset Load"] -->|Load CSV| B["DataFrame df"]
+    B -->|Drop target variable 'heart disease'| C["Features X"]
+    B -->|Select target variable 'heart disease'| D["Target y"]
+    C -->|Split into train and test sets| E["X_train, X_test"]
+    D -->|Split into train and test sets| F["y_train, y_test"]
+    E -->|Train model| G["RandomForestClassifier model"]
+    F -->|Train model| G
+    G -->|Predict| H["Predictions y_pred"]
+    H -->|Evaluate accuracy| I["Accuracy"]
+    H -->|Evaluate with confusion matrix| J["Confusion Matrix"]
+    H -->|Generate classification report| K["Classification Report"]
+    G -->|Estimate probabilities| L["Probabilities probas"]
+    L -->|Compute ROC curve| M["ROC Curve fpr, tpr"]
+    M -->|Compute AUC| N["AUC roc_auc"]
+    L -->|Compute Precision-Recall curve| O["Precision-Recall Curve precision, recall"]
+    G -->|Cross-validation| P["Cross-validation Scores cv_scores"]
+
+    %% Comments for each node
+    %% A: Load input data from CSV file
+    %% B: DataFrame containing all dataset info
+    %% C: Features used for the model, excluding target
+    %% D: Target variable indicating heart disease presence
+    %% E: Training and testing split for model features
+    %% F: Training and testing split for target variable
+    %% G: ML model used for prediction
+    %% H: Results of the prediction on the test set
+    %% I: Accuracy metric for predictions
+    %% J: Confusion matrix for classification evaluation
+    %% K: Report detailing precision, recall, F1-score
+    %% L: Probability estimates for ROC computation
+    %% M: True/False positive rates for ROC
+    %% N: AUC metric for ROC
+    %% O: Precision and recall values for curve
+    %% P: CV scores for model assessment
+```

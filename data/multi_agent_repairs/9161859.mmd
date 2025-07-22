@@ -1,0 +1,26 @@
+%%{ init : { 'theme' : 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'nodeBorder':'#000000', 'mainBkg':'#cdeccc' }}}%%
+flowchart TD
+    %% Node Definitions and Descriptions
+    num["num"] --> |"used in"| S["sign"]:::function
+    click S "" ""
+    total_candies["total_candies"] --> |"used in"| TS["to_smash"]:::function
+    click TS "" ""
+    have_umbrella["have_umbrella"] --> |"used in"| PW["prepared_for_weather"]:::function
+    rain_level["rain_level"] --> |"used in"| PW
+    have_hood["have_hood"] --> |"used in"| PW
+    is_workday["is_workday"] --> |"used in"| PW
+    click PW "" ""
+    number["number"] --> |"used in"| IN["is_negative"]:::function
+    click IN "" ""
+    ketchup["ketchup"] --> |"used in"| WT["wants_all_toppings"]:::function
+    mustard["mustard"] --> |"used in"| WT
+    onion["onion"] --> |"used in"| WT
+    click WT "" ""
+    player_total["player_total"] --> |"used in"| SH["should_hit"]:::function
+    dealer_total["dealer_total"] --> |"used in"| SH
+    player_low_aces["player_low_aces"] --> |"used in"| SH
+    player_high_aces["player_high_aces"] --> |"used in"| SH
+    click SH "" ""
+    %% Class Definitions
+    classDef function fill:#ffeecc,stroke:#2f4f4f,stroke-width:2px;
+    %% Additional Styling Options Can Be Added Here

@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/fifa-2022-all-players-image-dataset/Images/Images/Group G/Brazil Players",
+      "description": "Directory containing images of Brazil's football players."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "DATA_DIR",
+      "description": "Root directory for player images."
+    },
+    {
+      "variable_name": "DATA_PATH",
+      "description": "Path to find image files for Brazil players."
+    },
+    {
+      "variable_name": "docs",
+      "description": "A DocumentArray containing image documents loaded from the dataset."
+    },
+    {
+      "variable_name": "query_doc",
+      "description": "A Document representing the query image for similarity search."
+    },
+    {
+      "variable_name": "query_docs",
+      "description": "DocumentArray containing the query document to be matched against the dataset documents."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "DATA_PATH",
+      "created_by": "Constructed using DATA_DIR.",
+      "flows_to": "docs"
+    },
+    {
+      "variable_name": "docs",
+      "created_by": "DocumentArray.from_files(DATA_PATH, size=MAX_DOCS)",
+      "flows_to": ["preproc", "model embedding", "plot_image_sprites"]
+    },
+    {
+      "variable_name": "query_doc",
+      "created_by": "Document(uri=QUERY_IMAGE)",
+      "flows_to": ["query_docs", "matching process"]
+    },
+    {
+      "variable_name": "query_docs",
+      "created_by": "DocumentArray([query_doc])",
+      "flows_to": ["preproc", "embed", "match"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNet50",
+      "input_features": "Image tensors after preprocessing.",
+      "target_variable": "Embeddings produced for each document.",
+      "hyperparameters": "Pretrained model, using GPU if available."
+    }
+  ]
+}

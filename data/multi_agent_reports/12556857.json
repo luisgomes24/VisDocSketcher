@@ -1,0 +1,87 @@
+{
+  "data_sources": [
+    {
+      "file_name": "2017.csv",
+      "description": "World happiness data for the year 2017. Contains variables such as Happiness Score, GDP per capita, Life Expectancy, Family, Freedom, and Corruption Trust indices."
+    },
+    {
+      "file_name": "2019.csv",
+      "description": "World happiness data for the year 2019, used for testing the model based on 2017 data. Contains additional features such as Social Support."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing happiness data from 2017, including multiple factors influencing happiness levels."
+    },
+    {
+      "variable_name": "x",
+      "description": "Features used for training the model, including Economy, Family, Health, Freedom, Generosity, Trust in Government, and Dystopia Residual."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing the Happiness Score of each country."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training set of the feature variables."
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Test set of the feature variables used to evaluate the model."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set of the target variable."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set of the target variable used to evaluate the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.concat(map(pd.read_csv, ['/kaggle/input/world-happiness/2017.csv']))",
+      "flow": "Used throughout the notebook for analysis, visualization, and training the model."
+    },
+    {
+      "variable_name": "x",
+      "creation_method": "Set from df[['Economy..GDP.per.Capita.', 'Family', 'Health..Life.Expectancy.', 'Freedom', 'Generosity', 'Trust..Government.Corruption.', 'Dystopia.Residual']]",
+      "flow": "Used for training and testing the linear regression model."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "Set from df['Happiness.Score']",
+      "flow": "Used as the target variable for training and testing the linear regression model."
+    },
+    {
+      "variable_name": "x_train",
+      "creation_method": "train_test_split(x,y,test_size=0.3, random_state=38)",
+      "flow": "Input to the model training."
+    },
+    {
+      "variable_name": "x_test",
+      "creation_method": "train_test_split(x,y,test_size=0.3, random_state=38)",
+      "flow": "Used to evaluate the trained model's performance."
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train_test_split(x,y,test_size=0.3, random_state=38)",
+      "flow": "Input to the model training."
+    },
+    {
+      "variable_name": "y_test",
+      "creation_method": "train_test_split(x,y,test_size=0.3, random_state=38)",
+      "flow": "Used to evaluate the model's performance."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "Economy..GDP.per.Capita., Family, Health..Life.Expectancy., Freedom, Generosity, Trust..Government.Corruption., Dystopia.Residual",
+      "target_variable": "Happiness.Score",
+      "hyperparameters": "None (default parameters used)"
+    }
+  ]
+}

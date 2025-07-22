@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "/kaggle/input/sl_districts_coronavirus.csv",
+      "description": "COVID-19 related data for different districts"
+    },
+    {
+      "file_name": "/kaggle/input/sl_districts_demographics.csv",
+      "description": "Demographic information by district"
+    },
+    {
+      "file_name": "/kaggle/input/sl_districts_info_sources.csv",
+      "description": "Information sources for the districts"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame for coronavirus data"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame for demographic data"
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame for information sources"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv('/kaggle/input/sl_districts_coronavirus.csv', nrows = 1000)",
+      "flow": ["Used for plotting distributions", "Used for correlation matrix", "Used for scatter matrix"]
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv('/kaggle/input/sl_districts_demographics.csv', nrows = 1000)",
+      "flow": ["Used for plotting distributions", "Used for correlation matrix", "Used for scatter matrix"]
+    },
+    {
+      "variable": "df3",
+      "creation": "pd.read_csv('/kaggle/input/sl_districts_info_sources.csv', nrows = 1000)",
+      "flow": ["Used for plotting distributions", "Used for correlation matrix", "Used for scatter matrix"]
+    }
+  ],
+  "models": []
+}

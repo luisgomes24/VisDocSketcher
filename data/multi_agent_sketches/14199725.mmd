@@ -1,0 +1,39 @@
+flowchart TD
+    subgraph DataSources
+        A[("train.csv" - Contains features and response variables)] 
+    end
+    A --> |"load data"| B[("df" - DataFrame with dataset)] 
+    B --> |"derive features"| C[("features" - List of features for training)]
+    
+    subgraph EnvironmentSetup
+        B --> D[("env" - Simulated market environment)]
+    end
+
+    subgraph Config
+        E[("config" - Hyperparameters for DuelingDDQN)] 
+    end
+
+    subgraph AgentSetup
+        F[("memory" - Experience replay memory)]
+        G[("agent" - DuelingDDQN Model)]
+    end
+    E --> |"initialize agent"| G
+    F --> |"store transitions"| H[TrainingLoop]
+    G --> |"act and learn"| H
+    
+    subgraph Training
+        H --> I(("Calculate Rewards"))
+        I --> |"append rewards"| J[("rewards" - Rewards List)]
+    end
+
+    subgraph Results
+        J --> |"plotting"| K[("Plot Rewards Over Episodes")]
+    end
+
+    %% Comments explaining components
+    %% DataSources: Initial loading of data from CSV
+    %% EnvironmentSetup: Creating market environment
+    %% AgentSetup: Setting up experience replay and agent model
+    %% Training: Loop to interact with environment, update replay memory, and train agent
+    %% Results: Subsequent use of gathered data for plotting
+

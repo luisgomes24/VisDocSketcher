@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["🗃️ View Train Data <img src='table.svg' />"]
+    B --> C["🔍 Shape of Data"]
+    A --> D["📂 Load Test Data <img src='file.svg' />"]
+    D --> E["🔍 Shape of Test Data"]
+    
+    C --> F["📊 Train-Test Split"]
+    F --> G["📈 Data Preprocessing"]
+    
+    G --> H["🧑‍🏫 Build Model"]
+    H --> I["🚀 Compile Model"]
+    
+    I --> J["📈 Train Model"]
+    J --> K["📊 Training & Validation Accuracy <img src='lineplot_template.svg' />"]
+    
+    K --> L["📊 Training & Validation Loss <img src='lineplot_template.svg' />"]

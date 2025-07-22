@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/pythr-2021-08-nba-players-2015/nba_players_2015.csv",
+      "description": "Data set of NBA players from 2015."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "players",
+      "description": "DataFrame containing the NBA players data loaded from the CSV file."
+    },
+    {
+      "name": "guards",
+      "description": "DataFrame containing players filtered to those playing as Guard positions."
+    },
+    {
+      "name": "forwards",
+      "description": "DataFrame containing players filtered to those playing as Forward positions."
+    },
+    {
+      "name": "centers",
+      "description": "DataFrame containing players filtered to those playing as Center positions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "players",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for filtering into guards, forwards, centers", "Descriptive statistics and head displayed"]
+    },
+    {
+      "variable": "guards",
+      "creation_method": "players[players.pos == 'G'].copy()",
+      "flow": ["Descriptive statistics are generated"]
+    },
+    {
+      "variable": "forwards",
+      "creation_method": "players[players.pos == 'F'].copy()",
+      "flow": ["Descriptive statistics are generated"]
+    },
+    {
+      "variable": "centers",
+      "creation_method": "players[players.pos == 'C'].copy()",
+      "flow": ["Descriptive statistics are generated"]
+    }
+  ],
+  "models": [] 
+}

@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "kc_house_data.csv",
+      "description": "Contains housing sale data including features like bedrooms, bathrooms, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "hs",
+      "description": "DataFrame containing housing sale data loaded from kc_house_data.csv"
+    },
+    {
+      "name": "bedrooms",
+      "description": "Column in hs DataFrame representing the number of bedrooms"
+    },
+    {
+      "name": "bathrooms",
+      "description": "Column in hs DataFrame representing the number of bathrooms"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "hs",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in visualizations"]
+    },
+    {
+      "variable": "bedrooms",
+      "creation_method": "from hs DataFrame",
+      "flow": ["used in line plot", "used in histograms", "used in kde plots"]
+    },
+    {
+      "variable": "bathrooms",
+      "creation_method": "from hs DataFrame",
+      "flow": ["used in line plot", "used in histograms", "used in kde plots"]
+    }
+  ],
+  "models": []
+}

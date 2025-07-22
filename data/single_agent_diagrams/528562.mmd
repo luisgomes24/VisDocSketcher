@@ -1,0 +1,19 @@
+flowchart TD
+    A["📁 Load Train Data <img src='file.svg' />"] --> B["📁 Load Test Data <img src='file.svg' />"]
+    B --> C["🔄 Preprocess Train Data"]
+    C --> D["🔄 Preprocess Test Data"]
+    D --> E["🖼️ Display Sample Image <img src='dummy_plots/scatter_plot_template.svg' />"]
+    E --> F["🧠 Initialize GAN Model"]
+    F --> G["⚙️ Train GAN"]
+    G --> H["📊 Display Training Loss <img src='dummy_plots/lineplot_template.svg' />"]
+    H --> I["🖼️ Generate Digits <img src='dummy_plots/scatter_plot_template.svg' />"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#f9f,stroke:#333,stroke-width:4px
+    style C fill:#ffcc00,stroke:#333,stroke-width:4px
+    style D fill:#ffcc00,stroke:#333,stroke-width:4px
+    style E fill:#ccffcc,stroke:#333,stroke-width:4px
+    style F fill:#ff99cc,stroke:#333,stroke-width:4px
+    style G fill:#ff99cc,stroke:#333,stroke-width:4px
+    style H fill:#ccffcc,stroke:#333,stroke-width:4px
+    style I fill:#ccffcc,stroke:#333,stroke-width:4px

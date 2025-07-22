@@ -1,0 +1,43 @@
+{
+  "data_sources": [
+    {"file": "../input/nfl-big-data-bowl-2021/games.csv", "description": "Game metadata including teams, game dates, etc."},
+    {"file": "../input/nfl-big-data-bowl-2021/players.csv", "description": "Player information such as player positions and identifiers."},
+    {"file": "../input/nfl-big-data-bowl-2021/plays.csv", "description": "Details of plays in the game including outcomes and yard lines."},
+    {"file": "../input/nfl-big-data-bowl-2021/week1.csv", "description": "Tracking data for week 1 containing player positions during the plays."},
+    {"file": "../input/nfl-big-data-bowl-2021-bonus/targetedReceiver.csv", "description": "Information about the targeted receivers during the plays."},
+    {"file": "../input/nfl-big-data-bowl-2021-bonus/coverages_week1.csv", "description": "Defensive coverage data for each play in week 1."}
+  ],
+  "data_variables": [
+    {"variable": "df_games", "description": "DataFrame containing game metadata."},
+    {"variable": "df_players", "description": "DataFrame containing player metadata."},
+    {"variable": "df_plays", "description": "DataFrame containing play details."},
+    {"variable": "df_week1", "description": "DataFrame containing tracking data for players during week 1."},
+    {"variable": "df_targets", "description": "DataFrame containing information about targeted receivers during passes."},
+    {"variable": "df_covers", "description": "DataFrame containing the defensive coverage for each play during week 1."}
+  ],
+  "data_flow": [
+    {
+      "variable": "df_week1",
+      "creation_method": "Merged from games, plays, and tracking data.",
+      "usage": "Used to calculate ball influence and model predictions."
+    },
+    {
+      "variable": "data",
+      "creation_method": "Merged from df_week1 and target data.",
+      "usage": "Used as input for the model to predict pass outcomes."
+    },
+    {
+      "variable": "z",
+      "creation_method": "Calculated using a custom function to represent ball influence.",
+      "usage": "Used as a feature in the Random Forest Classifier model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["xmod", "y", "z"],
+      "target_variable": "result",
+      "hyperparameters": {"random_state": 19}
+    }
+  ]
+}

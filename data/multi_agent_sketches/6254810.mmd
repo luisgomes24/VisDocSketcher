@@ -1,0 +1,12 @@
+flowchart TD
+    A[diamonds.csv]
+    %% A node representing the diamonds.csv data source, which contains diamond data.
+    B[dpath]
+    %% B node represents the variable dpath, the file path to the dataset.
+    C[diamonddf]
+    %% C node represents the DataFrame diamonddf created from diamonds.csv
+
+    A --> B
+    %% Transition indicating diamonds.csv is loaded into path variable dpath.
+    B -->|Read CSV| C
+    %% Transition showing dpath is used to read the CSV into the diamonddf DataFrame.

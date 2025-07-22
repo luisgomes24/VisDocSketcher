@@ -1,0 +1,16 @@
+flowchart TD
+  %% Iris CSV Data Source
+  A["IRIS.csv"] -->|Load Data| B["iris_df DataFrame"]
+  
+  %% Data Preparation
+  B --> |Extract Features| C["X (features)"]
+  B --> |Extract Target| D["y (target)"]
+  
+  %% Dummy Classifier
+  C --> |Features Input| E["DummyClassifier"]
+  D --> |Target Input| E
+  
+  %% Evaluation and Visualization
+  E --> |Generate Classification Report| F["clf_report Visualization"]
+  E --> |Generate Classification Error| G["clf_error Visualization"]
+  E --> |Evaluate AUC| H["AUC Metric"]

@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🔄 Data Processing"]
+    B --> C["📅 Create Date-Time Features"]
+    B --> D["🌊 Spline Feature Engineering"]
+    B --> E["🔤 Encode Categorical Variables"]
+    B --> F["📊 Prepare Train-Test Sets"]
+    F --> G["🧠 Define Model"]
+    G --> H["🚀 Train Model"]
+    H --> I["📊 Evaluate Model <img src='dummy_plots/lineplot_template.svg' />"]
+    I --> J["📤 Prepare Submission"]

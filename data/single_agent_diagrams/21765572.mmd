@@ -1,0 +1,15 @@
+```
+flowchart TD
+    A["🗄️ Load Data"] --> B["📂 Read CSVs <img src='dummy_plots/table.svg' /> <br/> train.csv, test.csv, sample_submission.csv"]
+    B --> C["🔍 Data Sanity Check"]
+    C --> D["🧮 Check Nulls"]
+    C --> E["🔍 Check Duplicates"]
+    C --> F["📊 EDA <img src='dummy_plots/barplot_template.svg' /> <br/> Plot Target Distributions"]
+    F --> G["📈 Data Preprocessing"]
+    G --> H["🤖 Model Building"]
+    H --> I["🎯 Objective Function"]
+    I --> J["📚 Hyperparameter Tuning"]
+    J --> K["🏋️ Train-Test Split"]
+    K --> L["📊 Evaluate Model"]
+    L --> M["📝 Prepare Submission"]
+    M --> N["📤 Save Submission <img src='icons/file.svg' /> <br/> submission.csv"]

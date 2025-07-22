@@ -1,0 +1,54 @@
+%%{init: {"theme": "default", "themeVariables": {"edgeLabelBackground":"white"}}}%%
+flowchart TD
+    %% Nodes %%
+    A[train.csv]:::dataSource
+    B[home_data]:::dataVariable
+    C[y (Target Variable)]:::dataVariable
+    D[X (Features)]:::dataVariable
+    E[train_X]:::dataVariable
+    F[val_X]:::dataVariable
+    G[train_y]:::dataVariable
+    H[val_y]:::dataVariable
+    I[iowa_model (DecisionTreeRegressor)]:::model
+    J[val_predictions]:::dataVariable
+    K[val_mae]:::dataVariable
+    L[my_mae]:::dataVariable
+    M[best_tree_size]:::dataVariable
+    N[final_model (DecisionTreeRegressor)]:::model
+
+    %% Styles %%
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+    %% Connections %%
+    A --> B
+    B -->|Extract SalePrice| C
+    B -->|Extract Features| D
+    D -->|train_test_split| E
+    D -->|train_test_split| F
+    C -->|train_test_split| G
+    C -->|train_test_split| H
+    E & G -->|Fit Model| I
+    F -->|Predict| J
+    J -->|Calculate MAE| K
+    K --> L
+    L -->|Optimize| M
+    M --> N
+    E & G -->|Fit Final Model| N
+    
+    %% Comments %%
+    A:::dataSource -- Contains home data including features and target variable.
+    B:::dataVariable -- DataFrame loaded from CSV file.
+    C:::dataVariable -- Target variable representing Sale Price.
+    D:::dataVariable -- Features used for prediction.
+    E:::dataVariable -- Training set features.
+    F:::dataVariable -- Validation set features.
+    G:::dataVariable -- Training set target variable.
+    H:::dataVariable -- Validation set target variable.
+    I:::model -- Initial DecisionTreeRegressor model.
+    J:::dataVariable -- Predictions on validation set.
+    K:::dataVariable -- Mean Absolute Error for validation.
+    L:::dataVariable -- MAE for different tree sizes.
+    M:::dataVariable -- Optimal tree size for final model.
+    N:::model -- Final DecisionTreeRegressor model.

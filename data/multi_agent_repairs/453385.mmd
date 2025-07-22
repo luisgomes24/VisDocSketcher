@@ -1,0 +1,28 @@
+%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#fff3dd" }}}%%
+flowchart TD
+    %% Define data sources
+    A["train.csv"]:::file -->|Read into| B["df_train"]
+    C["test.csv"]:::file -->|Read into| D["df_test"]
+
+    %% Data preprocessing
+    B -->|Extract Features| E["X_train"]
+    B -->|Extract Target| F["Y_train"]
+    D -->|Extract Features| G["X_test"]
+
+    %% Models used
+    E & F -->|Train| H["Logistic Regression"]
+    E & F -->|Train| I["Support Vector Classifier (SVC)"]
+    E & F -->|Train| J["K-Nearest Neighbors (KNN)"]
+    E & F -->|Train| K["Gaussian Naive Bayes"]
+    E & F -->|Train| L["Perceptron"]
+    E & F -->|Train| M["Stochastic Gradient Descent (SGD) Classifier"]
+    E & F -->|Train| N["Decision Tree Classifier"]
+    E & F -->|Train| O["Random Forest Classifier"]
+
+    %% Prediction
+    G -->|Predict| P["Make predictions"]
+
+    %% Styling for the diagram
+    classDef file fill:#ffcc00,stroke:#333,stroke-width:2px;
+    classDef processing fill:#b3e5fc,stroke:#333,stroke-width:2px;
+    classDef model fill:#c5e1a5,stroke:#333,stroke-width:2px;

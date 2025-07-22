@@ -1,0 +1,23 @@
+flowchart TD
+    %% Node definitions and descriptions
+    A[CSV File: PakistanSuicideAttacks Ver 11] -->|Read CSV| B[DataFrame: suicide_attacks]
+    B -->|Extract Unique Cities| C[Array: cities]
+    B -->|Extract Unique Provinces| D[Array: prov]
+    C -->|Cleaning: lowercase & strip| E[Cleaned Cities]
+    D -->|Cleaning: lowercase| F[Cleaned Provinces]
+    B -->|Data Processing: Fuzzy Matching| G[Corrected DataFrame]
+    
+    %% Comments to describe each node
+    %% A: Represents the CSV file being read into the notebook
+    %% B: DataFrame created by reading the CSV file into pandas
+    %% C: Unique city names extracted before cleaning
+    %% D: Unique province names extracted before cleaning
+    %% E: Represents city names after cleaning operations
+    %% F: Represents province names after initial cleaning
+    %% G: Output DataFrame after performing fuzzy matching corrections
+    
+    %% Relationships
+    B --> E
+    B --> F
+    E --> G
+    F --> G

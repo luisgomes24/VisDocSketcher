@@ -1,0 +1,46 @@
+```mermaid
+%% This diagram represents the workflow in the Jupyter Notebook 35462686.ipynb
+flowchart TD
+    src1["/kaggle/input/diamonds/diamonds.csv"]
+    %% Node representing the input data source
+    df["df: Loaded DataFrame"]
+    %% DataFrame containing loaded data
+    src1 -->|"pd.read_csv"| df
+    df -->|"Data Cleaning & Feature Encoding"| X
+    df -->|"Data Cleaning & Feature Encoding"| y
+    
+    %% Nodes representing features and target variable
+    X["X: Features"]
+    y["y: Target (price)"]
+    
+    %% Splitting the data into training and test sets
+    X -->|"Train/Test Split & Scaling"| X_train_scaled
+    X -->|"Train/Test Split & Scaling"| X_test_scaled
+    y -->|"Train/Test Split"| y_train
+    y -->|"Train/Test Split"| y_test
+    
+    X_train_scaled["X_train_scaled: Scaled Training Features"]
+    X_test_scaled["X_test_scaled: Scaled Test Features"]
+    y_train["y_train: Training Prices"]
+    y_test["y_test: Test Prices"]
+    
+    %% Node representing the CatBoostRegressor model
+    final_model("CatBoostRegressor\nModel Training")
+    X_train_scaled -->|"Train Model"| final_model
+    y_train -->|"Train Model"| final_model
+    X_test_scaled -->|"Predict Prices"| y_predicted
+    final_model -->|"Predict Prices"| y_predicted
+    
+    %% Node representing the predicted prices
+    y_predicted["y_predicted: Predicted Prices"]
+    y_test -->|"Evaluate"| mse
+    y_predicted -->|"Evaluate"| mse
+    y_predicted -->|"Evaluate"| mae
+    y_test -->|"Correlation Stats"| correlation_stats
+    y_predicted -->|"Correlation Stats"| correlation_stats
+    
+    %% Nodes for evaluation metrics
+    mse["mse: Mean Squared Error"]
+    mae["mae: Mean Absolute Error"]
+    correlation_stats["correlation_stats: Correlation Analysis"]
+```

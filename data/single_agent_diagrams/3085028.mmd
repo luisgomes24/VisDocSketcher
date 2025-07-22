@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> fashion_data"] --> B["🔄 Preprocess Data <img src='column_split.svg'/> <br/> prep_data()"]
+    B --> C["🔧 Build Model <img src='brain.svg'/> <br/> fashion_model"]
+    C --> D["⚙️ Add Layers <img src='brain.svg'/> <br/> Conv2D, Flatten, Dense"]
+    D --> E["🛠️ Compile Model <img src='brain.svg'/> <br/> compile()"]
+    E --> F["📈 Fit Model <img src='hist_template.svg'/> <br/> fashion_model.fit()"]
+    F --> G["🔄 Create New Model <img src='brain.svg'/> <br/> second_fashion_model"]
+    G --> H["📈 Fit New Model <img src='hist_template.svg'/> <br/> second_fashion_model.fit()"]

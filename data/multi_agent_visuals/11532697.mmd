@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train_features.csv"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> df_Train"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> train_targets_scored.csv"] -->|Load Data| D["<img src='icons/table.svg' width=100 height=100/> <br/> df_Train_scored"]
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> train_targets_nonscored.csv"] -->|Load Data| F["<img src='icons/table.svg' width=100 height=100/> <br/> df_Train_unscored"]
+    G["<img src='icons/file.svg' width=100 height=100/> <br/> test_features.csv"] -->|Load Data| H["<img src='icons/table.svg' width=100 height=100/> <br/> df_Test"]
+    
+    %% DataFrames
+    %% DataFrame containing training feature data
+    B --> I["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> EDA & Correlation Analysis"]
+    B --> J["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> Model Training"]
+    
+    %% DataFrame containing scored binary MoA targets for training
+    D --> K["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Model Evaluation"]
+    
+    %% DataFrame containing non-scored binary MoA responses
+    F --> L["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Additional Insights"]
+    
+    %% DataFrame containing test feature data
+    H --> M["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> Predict Test Set Probabilities"]

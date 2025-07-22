@@ -1,0 +1,28 @@
+flowchart TD
+    %% Nodes
+    subgraph Data_Sources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> train_data.csv"]
+        B["<img src='icons/file.svg' width=100 height=100/> <br/> test_sequences.csv"]
+    end
+
+    subgraph Data_Variables
+        C["<img src='icons/table.svg' width=100 height=100/> <br/> train"]
+        D["<img src='icons/table.svg' width=100 height=100/> <br/> test"]
+        E["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> train_nulls"]
+        F["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> test_nulls"]
+    end
+
+    %% Data flows
+    A -->|"Read CSV"| C
+    B -->|"Read CSV"| D
+
+    C -->|"Compute Null Percentage"| E
+    D -->|"Compute Null Percentage"| F
+    
+    %% Comments
+    click A title "Contains RNA sequences of the train set with 1,643,680 rows and 419 columns."
+    click B title "Contains RNA sequences of the test set with 1,343,823 rows and 5 columns."
+    click C title "DataFrame containing training data loaded from 'train_data.csv'."
+    click D title "DataFrame containing test data loaded from 'test_sequences.csv'."
+    click E title "Percentage of null values for columns in the training set."
+    click F title "Percentage of null values for columns in the test set."

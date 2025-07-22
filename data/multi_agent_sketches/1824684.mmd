@@ -1,0 +1,33 @@
+flowchart TD
+    A[Home Data CSV] -->|Read CSV| B[home_data]
+    %% Node B: DataFrame containing all home data loaded from the CSV
+
+    B -->|Extract Target| C[y]
+    %% Node C: Target variable which is the SalePrice of the homes
+
+    B -->|Extract Features| D[X]
+    %% Node D: Features DataFrame used for training the model
+
+    D -->|Split Data| E[train_X]
+    %% Node E: Training features DataFrame
+
+    D -->|Split Data| F[val_X]
+    %% Node F: Validation features DataFrame
+
+    C -->|Split Data| G[train_y]
+    %% Node G: Training target variable DataFrame
+
+    C -->|Split Data| H[val_y]
+    %% Node H: Validation target variable DataFrame
+
+    E & G -->|Train Model| I[iowa_model]
+    %% Node I: DecisionTreeRegressor model initialized and fitted on training data
+
+    F & I -->|Predict| J[val_predictions]
+    %% Node J: Predicted values on validation set
+
+    J & H -->|Calculate MAE| K[val_mae]
+    %% Node K: Mean Absolute Error for validation predictions
+
+    E & G & H -->|Train Final Model| L[final_model]
+    %% Node L: Final DecisionTreeRegressor model fitted with all data

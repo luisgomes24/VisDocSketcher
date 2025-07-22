@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing attributes and response for predictions."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset for making predictions, lacks response attribute."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Example submission file format."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data." 
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data."
+    },
+    {
+      "variable_name": "new_train",
+      "description": "Balanced sample of training data for modeling."
+    },
+    {
+      "variable_name": "pred",
+      "description": "Predictions made by the best-performing classifier on the test data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv",
+      "description": "Loaded from train.csv",
+      "flow": "Used for training and feature importance plotting."
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv",
+      "description": "Loaded from test.csv",
+      "flow": "Used for making predictions and final submission." 
+    },
+    {
+      "variable": "new_train",
+      "created_by": "pd.concat + sample",
+      "description": "Balanced version of training dataset created by sampling.",
+      "flow": "Used for model training."
+    },
+    {
+      "variable": "pred",
+      "created_by": "clf.predict",
+      "description": "Predictions made by the classifier on test_.",
+      "flow": "Outputted to submission file." 
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "All features except 'id' and 'Response'.",
+      "target_variable": "Response",
+      "hyperparameters": "Default"
+    },
+    {
+      "model_name": "Multiple classifiers",
+      "input_features": "All features except 'Response' from new_train.",
+      "target_variable": "Response",
+      "hyperparameters": "Various classifiers attempted, accuracy checked."
+    }
+  ]
+}

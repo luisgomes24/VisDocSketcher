@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "source": "WandB Artifacts",
+      "description": "Model artifacts downloaded from Weights and Biases associated with specific experiments"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "EXPERIMENTS",
+      "description": "List of experiments identifiers to download from WandB"
+    },
+    {
+      "name": "artifact",
+      "description": "Represents the specific artifact downloaded from WandB"
+    },
+    {
+      "name": "artifact_dir",
+      "description": "Path to the directory where artifacts are downloaded"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "EXPERIMENTS",
+      "creation": "List of experiment names",
+      "flow": "Used in the loop to download artifacts"
+    },
+    {
+      "variable": "artifact",
+      "creation": "Downloaded from WandB based on experiment name",
+      "flow": "Used for directory management and cleanup"
+    },
+    {
+      "variable": "artifact_dir",
+      "creation": "Derived from artifact download method",
+      "flow": "Used to access and manage downloaded artifacts"
+    }
+  ],
+  "models": []
+}

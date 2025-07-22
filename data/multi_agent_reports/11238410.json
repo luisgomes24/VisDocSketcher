@@ -1,0 +1,41 @@
+{
+    "data_sources": [
+        {
+            "file_name": "pred_tr.csv",
+            "description": "This file contains the training data for predictions. It is loaded with the first 1000 rows for exploration."
+        },
+        {
+            "file_name": "submission.csv",
+            "description": "This file is intended for submissions and contains results related to the predictions made. It is also loaded with the first 1000 rows for previewing."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df1",
+            "description": "DataFrame containing the first 1000 rows from pred_tr.csv"
+        },
+        {
+            "variable_name": "df2",
+            "description": "DataFrame containing the first 1000 rows from submission.csv"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df1",
+            "creation_method": "pd.read_csv",
+            "usage": [
+                "displays the first five rows",
+                "used for plotting distributions"
+            ]
+        },
+        {
+            "variable_name": "df2",
+            "creation_method": "pd.read_csv",
+            "usage": [
+                "displays the first five rows",
+                "used for plotting distributions"
+            ]
+        }
+    ],
+    "models": []
+}

@@ -1,0 +1,16 @@
+%%{ init : { "theme" : "default" } }%%
+flowchart TD
+    A["chicago_crime dataset"]
+    %% Represents the source dataset
+    A -->|"Fetch tables"| B["tables"]
+    %% 'tables' variable is fetched from the dataset
+    B -->|"Count tables"| C["num_tables"]
+    %% 'num_tables' derived by counting 'tables'
+    B -->|"Fetch crime table schema"| D["table"]
+    %% 'table' represents fetched schema of crime table
+    D -->|"Calculate TIMESTAMP fields"| E["num_timestamp_fields"]
+    %% 'num_timestamp_fields' derived by examining schema
+    subgraph Plotting_Requirements
+        F["fields_for_plotting"]
+        %% Hardcoded fields for plotting crime data
+    end

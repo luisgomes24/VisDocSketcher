@@ -1,0 +1,18 @@
+flowchart TD
+    %% Data Sources
+    A["../input/titanic/train.csv"]
+    B["../input/titanic/test.csv"]
+    
+    %% Data Import and Variables
+    A --> C["train DataFrame"]
+    B --> D["test DataFrame"]
+    
+    %% Data Processing and Analysis
+    C -->|"Data Analysis (count plots, heatmaps, sunburst)"| E["Visualizations"]
+    C -->|"Group by Embarkation (Embarked)"| F["count_towns DataFrame"]
+    F -->|"Heatmap Visualization"| E
+    
+    %% Machine Learning Model
+    C -->|"Feature Extraction: Pclass, Sex, Age, Fare"| G["Input Features for ANN"]
+    G --> H["Artificial Neural Network (ANN)"]
+    H -->|"Predict Survival"| D

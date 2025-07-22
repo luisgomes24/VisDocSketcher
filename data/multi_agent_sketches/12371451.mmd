@@ -1,0 +1,28 @@
+flowchart TD
+    %% Node for DataFrame
+    df["DataFrame: df"]
+    %% Node for nGraphShown
+    nGraphShown["Variable: nGraphShown"]
+    %% Node for nGraphPerRow
+    nGraphPerRow["Variable: nGraphPerRow"]
+    %% Node for graphWidth
+    graphWidth["Variable: graphWidth"]
+    %% Node for plotSize
+    plotSize["Variable: plotSize"]
+    %% Node for textSize
+    textSize["Variable: textSize"]
+    
+    %% Plotting functions
+    plotPerColumnDistribution["Function: plotPerColumnDistribution"]
+    plotCorrelationMatrix["Function: plotCorrelationMatrix"]
+    plotScatterMatrix["Function: plotScatterMatrix"]
+    
+    %% Data flow
+    df --> plotPerColumnDistribution
+    df --> plotCorrelationMatrix
+    df --> plotScatterMatrix
+    nGraphShown --> plotPerColumnDistribution
+    nGraphPerRow --> plotPerColumnDistribution
+    graphWidth --> plotCorrelationMatrix
+    plotSize --> plotScatterMatrix
+    textSize --> plotScatterMatrix

@@ -1,0 +1,55 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-aug-2021/train.csv",
+      "description": "Training dataset containing features and target variable (loss)."
+    },
+    {
+      "file": "../input/tabular-playground-series-aug-2021/test.csv",
+      "description": "Testing dataset containing features for predictions."
+    }
+  ],
+  "data_variables": [
+    { "name": "train", "description": "DataFrame containing training data with features and target variable." },
+    { "name": "test", "description": "DataFrame containing test data for predictions." },
+    { "name": "X", "description": "Features DataFrame extracted from train, excluding 'id' and target variable 'loss'." },
+    { "name": "y", "description": "Target variable extracted from train, representing the 'loss'." },
+    { "name": "average_values", "description": "Series containing average values of each feature to fill NaN values." },
+    { "name": "submission", "description": "DataFrame prepared for submission with 'id' and 'loss' predictions." }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Created by reading CSV file using pd.read_csv.",
+      "flow": "Used for data cleaning, processing and model training."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping 'id' and 'loss' from train.",
+      "flow": "Used as input features in model training."
+    },
+    {
+      "variable": "y",
+      "creation": "Created by extracting 'loss' from train.",
+      "flow": "Used as target variable in model training."
+    },
+    {
+      "variable": "test",
+      "creation": "Created by reading CSV file using pd.read_csv.",
+      "flow": "Used for predictions after model loading and cleaning."
+    },
+    {
+      "variable": "submission",
+      "creation": "Created by combining 'id' and predicted 'loss' from test.",
+      "flow": "Saved to CSV for submission." 
+    }
+  ],
+  "models": [
+    {
+      "model": "AutoML from flaml",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "Task: regression, Metric: RMSE, Time Budget: 5 minutes."
+    }
+  ]
+}

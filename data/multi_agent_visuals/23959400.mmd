@@ -1,0 +1,7 @@
+graph TD;
+  A["StudentsPerformance.csv"] -->|"load csv"| B["data"];
+  B -->|"explore features"| C["features_cat"];
+  B -->|"explore features"| D["features_num"];
+  D -->|"scale"| E["KMeans Model\n(n_clusters=7)"];
+  E -->|"generate clusters"| F["identified_clusters"];
+  F -->|"append clusters"| G["data_with_clusters"];

@@ -1,0 +1,33 @@
+flowchart TD
+    %% Nodes %%
+    subgraph DataSources
+        DS1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::file
+    end
+
+    subgraph Variables
+        V1["<img src='icons/table.svg' width=100 height=100/> <br/> tr"]:::data_variable
+        V2["<img src='icons/table.svg' width=100 height=100/> <br/> df_train"]:::data_variable
+        V3["<img src='icons/table.svg' width=100 height=100/> <br/> train_data"]:::data_variable
+    end
+    
+    subgraph Models
+        M1["<img src='icons/brain.svg' width=100 height=100/> <br/> DeepLabV3"]:::model
+    end
+    
+    subgraph Others
+        O1["optimizer"]:::other
+    end
+
+    %% Connections %%
+    DS1 -->|read| V1
+    V1 -->|filter with masks| V2
+    V2 -->|instantiate ImageData| V3
+    V3 -->|load to DataLoader| M1
+    O1 -->|SGD Optimizer for| M1
+    M1 -->|train with DataLoader| V3
+
+    %% Classes %%
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef other fill:#F2C464,stroke:#333,stroke-width:2px;

@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_audio/abethr1/XC128013.ogg",
+      "description": "Sample audio file of the Abethi bird species."
+    },
+    {
+      "file_name": "train_audio/abhori1/XC127317.ogg",
+      "description": "Sample audio file of the Abhori bird species."
+    },
+    {
+      "file_name": "train_metadata.csv",
+      "description": "Metadata file containing the primary labels of training audio."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission containing the sample rows for predictions."
+    },
+    {
+      "file_name": "test_soundscapes/*.ogg",
+      "description": "Directory containing test audio files for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "audio_abe",
+      "description": "Audio data array for the Abethi bird species."
+    },
+    {
+      "name": "audio_abh",
+      "description": "Audio data array for the Abhori bird species."
+    },
+    {
+      "name": "model",
+      "description": "Pre-trained bird vocalization classification model loaded from TensorFlow Hub."
+    },
+    {
+      "name": "train_metadata",
+      "description": "DataFrame holding metadata about training audio including species labels."
+    },
+    {
+      "name": "competition_classes",
+      "description": "List of unique primary labels from the training metadata."
+    },
+    {
+      "name": "competition_class_map",
+      "description": "Mapping from competition classes to classes in the pre-trained model."
+    },
+    {
+      "name": "sample_sub",
+      "description": "DataFrame for holding sample submission data with probabilities for predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "audio_abe",
+      "creation": "librosa.load",
+      "flow": "Used for playing back audio and analysis."
+    },
+    {
+      "variable": "audio_abh",
+      "creation": "librosa.load",
+      "flow": "Used for playing back audio and analysis."
+    },
+    {
+      "variable": "model",
+      "creation": "hub.load",
+      "flow": "Used to make predictions on audio samples."
+    },
+    {
+      "variable": "train_metadata",
+      "creation": "pd.read_csv",
+      "flow": "Used to extract competition classes and map with model classes."
+    },
+    {
+      "variable": "sample_sub",
+      "creation": "pd.read_csv",
+      "flow": "Final submission DataFrame populated with predictions and saved as submission.csv."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Bird Vocalization Classifier",
+      "input_features": "Audio data samples across 5-second windows.",
+      "target_variable": "Predicted bird species classes.",
+      "hyperparameters": "Uses probabilities derived from logits across frames."
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Dados_bancarios.csv",
+      "description": "Contains financial data for 10,127 clients, including credit limits and transaction information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "leitura_df",
+      "description": "Main DataFrame containing the client data after reading the CSV file."
+    },
+    {
+      "variable_name": "total",
+      "description": "Total number of records in the initial DataFrame."
+    },
+    {
+      "variable_name": "adimplente",
+      "description": "Number of clients who are not defaulting (adimplente)."
+    },
+    {
+      "variable_name": "inadimplente",
+      "description": "Number of clients who are defaulting (inadimplente)."
+    },
+    {
+      "variable_name": "novo_total",
+      "description": "Total number of records in the DataFrame after cleaning missing values."
+    },
+    {
+      "variable_name": "novo_adimplente",
+      "description": "Number of non-defaulting clients after cleaning."
+    },
+    {
+      "variable_name": "novo_inadimplente",
+      "description": "Number of defaulting clients after cleaning."
+    },
+    {
+      "variable_name": "adimplente_df",
+      "description": "DataFrame containing only non-defaulting (adimplente) clients."
+    },
+    {
+      "variable_name": "inadimplente_df",
+      "description": "DataFrame containing only defaulting (inadimplente) clients."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "leitura_df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for analysis, cleaned, and visualized throughout the notebook."
+    },
+    {
+      "variable_name": "total",
+      "creation_method": "Shape of leitura_df",
+      "flow": "Used for calculating percentages of defaulting and non-defaulting clients."
+    },
+    {
+      "variable_name": "adimplente",
+      "creation_method": "Data filtering",
+      "flow": "Used for calculating percentages of non-defaulting clients."
+    },
+    {
+      "variable_name": "inadimplente",
+      "creation_method": "Data filtering",
+      "flow": "Used for calculating percentages of defaulting clients."
+    },
+    {
+      "variable_name": "novo_total",
+      "creation_method": "Shape of cleaned DataFrame",
+      "flow": "Used for recalculating percentages post-cleaning."
+    },
+    {
+      "variable_name": "novo_adimplente",
+      "creation_method": "Data filtering on cleaned DataFrame",
+      "flow": "Used for recalculating non-default percentages post-cleaning."
+    },
+    {
+      "variable_name": "novo_inadimplente",
+      "creation_method": "Data filtering on cleaned DataFrame",
+      "flow": "Used for recalculating default percentages post-cleaning."
+    },
+    {
+      "variable_name": "adimplente_df",
+      "creation_method": "Data filtering",
+      "flow": "Used for visualizing data related to non-defaulting clients."
+    },
+    {
+      "variable_name": "inadimplente_df",
+      "creation_method": "Data filtering",
+      "flow": "Used for visualizing data related to defaulting clients."
+    }
+  ],
+  "models": []
+}

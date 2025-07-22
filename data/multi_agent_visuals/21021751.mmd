@@ -1,0 +1,38 @@
+graph TD
+    %% Nodes for Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /Mall_Customers.csv/"]:::dataSource
+    %% Nodes for Data Variables
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]:::dataVar
+    C[Q1]:::dataVar
+    D[Q3]:::dataVar
+    E["<img src='dummy_plots/boxplot_template.svg'/> <br/> IQR"]:::dataVar
+    F[clus]:::dataVar
+    G[Y]:::dataVar
+    %% Nodes for Processes
+    H["Data Loading"]:::process
+    I["<img src='icons/row_split.svg' width=100 height=100/> <br/> Data Analysis & Preprocessing"]:::process
+    J["<img src='icons/brain.svg' width=100 height=100/> <br/> KMeans Clustering"]:::process
+    K["<img src='icons/image.svg' width=100 height=100/> <br/> Plotting & Visualization"]:::process
+    %% Node for ML Model
+    L["KMeans Model"]:::mlModel
+    %% Relationships among nodes
+    A -->|load_csv| B
+    B -->|preprocess| I
+    I -->|determine_quartiles| C
+    I -->|determine_quartiles| D
+    I -->|compute_IQR| E
+    I --IQR_uses--> F
+    F -->|select_features| J
+    J -->|fit_predict| G
+    G -->|visualize_clusters| K
+    G -->|learn_clusters| L
+    %% Styles for nodes
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef mlModel fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    
+    
+    
+    
+    

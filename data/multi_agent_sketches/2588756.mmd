@@ -1,0 +1,36 @@
+flowchart TD
+    %% Nodes for data sources
+    A1["Publication Reports_1a.csv"]
+    A2["Publication Reports_1b.csv"]
+    A3["Publication Reports_1c.csv"]
+
+    %% Comments explaining each node
+    %% A1: Data source for publication reports (Part 1)
+    %% A2: Data source for publication reports (Part 2)
+    %% A3: Data source for publication reports (Part 3)
+
+    %% Nodes for data variables
+    B1["df1"]
+    B2["df2"]
+    B3["df3"]
+
+    %% Comments explaining each node
+    %% B1: DataFrame from Publication Reports_1a.csv
+    %% B2: DataFrame from Publication Reports_1b.csv
+    %% B3: DataFrame from Publication Reports_1c.csv
+
+    %% Data flow between sources and variables
+    A1 -->|"read_csv"| B1
+    A2 -->|"read_csv"| B2
+    A3 -->|"read_csv"| B3
+
+    %% Nodes for data processing functions
+    C1["plotPerColumnDistribution"]
+    C2["plotCorrelationMatrix"]
+
+    %% Data flow from variables to processing functions
+    B1 --> C1
+    B1 --> C2
+    B2 --> C1
+    B2 --> C2
+    B3 --> C1

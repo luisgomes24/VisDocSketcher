@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph Data_Sources
+        A[train.csv]:::source -->|Load Data| B[train DataFrame]:::variable
+        C[test.csv]:::source -->|Load Data| D[test DataFrame]:::variable
+    end
+
+    subgraph DataPreprocessing
+        B -->|Clean & Check NaN| E[train DataFrame Cleaned]:::variable
+    end
+
+    subgraph Feature_Engineering
+        E -->|Extract Features| F[X_train]:::variable
+        E -->|Extract Target| G[y_train]:::variable
+        D -->|Extract Features| H[X_test]:::variable
+        D -->|Extract Target| I[y_test]:::variable
+    end
+
+    subgraph Model
+        F -->|Train| J[LinearRegression Regressor]:::model
+        G -->|Train| J
+        J -->|Predict| F
+        J -->|Predict| H
+    end
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+```
+
+### Comments
+- **train.csv**: CSV file loaded as the main training dataset.
+- **test.csv**: CSV file loaded as the test dataset.
+- **train DataFrame Cleaned**: DataFrame created after loading and preprocessing the training data.
+- **X_train, y_train, X_test, y_test**: Features and target variables for training and testing.
+- **LinearRegression Regressor**: Machine Learning model used for fitting and predictions.

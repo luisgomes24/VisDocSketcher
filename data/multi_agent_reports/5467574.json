@@ -1,0 +1,101 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_transaction.csv",
+      "description": "Contains transaction data for training, including 'isFraud' indicator."
+    },
+    {
+      "file_name": "train_identity.csv",
+      "description": "Contains identity information corresponding to training transactions."
+    },
+    {
+      "file_name": "test_transaction.csv",
+      "description": "Contains transaction data for testing without 'isFraud' labels."
+    },
+    {
+      "file_name": "test_identity.csv",
+      "description": "Contains identity information corresponding to test transactions."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file for competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_transaction",
+      "description": "DataFrame containing the training transaction dataset."
+    },
+    {
+      "variable_name": "train_identity",
+      "description": "DataFrame containing the identity information for the training dataset."
+    },
+    {
+      "variable_name": "test_transaction",
+      "description": "DataFrame containing the testing transaction dataset."
+    },
+    {
+      "variable_name": "test_identity",
+      "description": "DataFrame containing the identity information for the testing dataset."
+    },
+    {
+      "variable_name": "sample_submission",
+      "description": "DataFrame structured for submission, including predictions for 'isFraud'."
+    },
+    {
+      "variable_name": "numOf_fraud",
+      "description": "Total count of fraudulent transactions in the training dataset."
+    },
+    {
+      "variable_name": "per_Fraud",
+      "description": "Percentage of transactions in the training dataset that are fraudulent."
+    },
+    {
+      "variable_name": "pred_non_F",
+      "description": "Array initialized to represent predictions for non-fraud transactions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_transaction",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Used to calculate numOf_fraud and per_Fraud."
+    },
+    {
+      "variable_name": "train_identity",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Not directly used."
+    },
+    {
+      "variable_name": "test_transaction",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Not directly used."
+    },
+    {
+      "variable_name": "test_identity",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Not directly used."
+    },
+    {
+      "variable_name": "sample_submission",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Final output, saved as 'sample_submission.csv'."
+    },
+    {
+      "variable_name": "numOf_fraud",
+      "creation_method": "Calculated from train_transaction",
+      "flow_destination": "Used to calculate per_Fraud."
+    },
+    {
+      "variable_name": "per_Fraud",
+      "creation_method": "Calculated from numOf_fraud",
+      "flow_destination": "Not directly used afterwards."
+    },
+    {
+      "variable_name": "pred_non_F",
+      "creation_method": "Initialized as np.zeros",
+      "flow_destination": "Filled into sample_submission."
+    }
+  ],
+  "models": []
+}

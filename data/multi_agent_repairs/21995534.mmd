@@ -1,0 +1,42 @@
+```mermaid
+flowchart TD
+  %% Nodes for Data Sources
+  A1["test.csv"]:::source --> B1["Test Data"]:::data
+  A2["sample_submission.csv"]:::source --> B3["Submission Template"]:::data
+  A3["pytorch_model_0.bin - Baseline"]:::source
+  A4["pytorch_model_0.bin - Muril"]:::source
+  A5["pytorch_model_0.bin - RemBERT"]:::source
+
+  %% Data processing nodes
+  B1 --> C1["Convert to HuggingFace Dataset"]:::process --> B2["Test Dataset"]:::data
+
+  %% Machine Learning Model Nodes
+  C2["Load Model Weights and Tokenizer"]:::process
+  subgraph BaselineModel
+      C3["Baseline Model"]:::model
+      A3 --> C3
+  end
+  subgraph MurilModel
+      C4["Muril Model"]:::model
+      A4 --> C4
+  end
+  subgraph RemBERTModel
+      C5["RemBERT Model"]:::model
+      A5 --> C5
+  end
+
+  %% Predictions and Submission
+  B2 --> C6["Generate Predictions"]:::process --> D1["Sub DataFrame"]:::data
+  C3 --> C6
+  C4 --> C6
+  C5 --> C6
+  D1 --> C7["Fill Submission Template"]:::process --> B3
+  B3 --> D2["Final Submission"]:::output
+
+  %% Style definitions
+  classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef process fill:#9f9,stroke:#333,stroke-width:2px;
+  classDef model fill:#f99,stroke:#333,stroke-width:2px;
+  classDef output fill:#ff9,stroke:#333,stroke-width:2px;
+```

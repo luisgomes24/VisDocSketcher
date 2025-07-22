@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A1["master.csv (1985-2016 Suicide Rates)"] %% Comment: Contains suicide rates overview
+    A2["abcnews-date-text.csv (News Headlines)"] %% Comment: Contains a million news headlines for analysis
+
+    %% Data Variables
+    B1["df"] %% Comment: DataFrame with suicide rates
+    B2["df_es"] %% Comment: Suicide rates in Spain
+    B3["df_es_gender_age"] %% Comment: Suicide rates by gender and age
+    B4["df_female"] %% Comment: Female suicide rates by age
+    B5["df_male"] %% Comment: Male suicide rates by age
+    B6["headlines"] %% Comment: News headlines for analysis
+    B7["hds"] %% Comment: Relevant news headlines for Spain
+    B8["topics"] %% Comment: Most frequent news topics per year
+    B9["summary_country"] %% Comment: Relation between topics and suicide rates
+    B10["results_country"] %% Comment: Impact of news on suicide rates
+
+    %% Data Flow
+    A1 --> B1 %% master.csv is read into df
+    B1 --> B2 %% df transformed into df_es
+    B1 --> B3 %% df transformed into df_es_gender_age
+    B1 --> B4 %% Derived female rates
+    B1 --> B5 %% Derived male rates
+    A2 --> B6 %% abcnews is read into headlines
+    B6 --> B7 %% headlines filtered into hds
+    B7 --> B8 %% TF-IDF topics extraction
+    B8 --> B9 %% Compile topics and rates into summary_country
+    B9 --> B10 %% Summarize results indicating news impact
+```

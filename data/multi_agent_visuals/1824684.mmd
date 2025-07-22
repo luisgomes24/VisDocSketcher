@@ -1,0 +1,13 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Home Data CSV"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> home_data"];
+    B -->|Create| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"];
+    B -->|Create| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"];
+    D -->|Split| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_X"];
+    D -->|Split| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> val_X"];
+    C -->|Split| G["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_y"];
+    C -->|Split| H["<img src='icons/row_split.svg' width=100 height=100/> <br/> val_y"];
+    H -->|Train| I["<img src='icons/brain.svg' width=100 height=100/> <br/> Decision Tree Model"];
+    I -->|Predict| J["<img src='icons/brain.svg' width=100 height=100/> <br/> val_predictions"];
+    J -->|Calculate| K["<img src='icons/brain.svg' width=100 height=100/> <br/> val_mae"];
+    K -->|Determine| L["<img src='icons/brain.svg' width=100 height=100/> <br/> best_size"];
+    L -->|Fit| M["<img src='icons/brain.svg' width=100 height=100/> <br/> final_model"];

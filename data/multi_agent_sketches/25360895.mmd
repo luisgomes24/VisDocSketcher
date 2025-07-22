@@ -1,0 +1,34 @@
+flowchart TD
+    subgraph DataSources
+        train_csv["train.csv"]
+        submission_csv["lightautoml_rounded_special_ve_37_v2.csv"]
+    end
+    subgraph DataPreparation
+        train["train"]
+        submission_in["submission_in"]
+        lower["lower quantiles"]
+        upper["upper quantiles"]
+        submission_out["submission_out"]
+    end
+    subgraph Evaluation
+        mae["mean absolute error"]
+        difference["difference"]
+        histogram["histogram"]
+    end
+
+    %% Data Source Nodes
+    train_csv --> train
+    submission_csv --> submission_in
+
+    %% Data Preparation Transformations
+    train --> lower
+    train --> upper
+    submission_in --> submission_out
+    lower --> submission_out
+    upper --> submission_out
+
+    %% Evaluation Metrics
+    submission_in --> mae
+    submission_out --> mae
+    submission_out --> difference
+    difference --> histogram

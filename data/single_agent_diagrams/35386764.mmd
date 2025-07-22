@@ -1,0 +1,11 @@
+flowchart TD
+    A["🗂️ Load Data <img src='icons/file.svg' />"] --> B["📦 Preprocess Data"]
+    B --> C["🔍 Train-Test Split"]
+    C --> D["📊 Build Dataset"]
+    D --> E["🧠 Define Model <img src='icons/brain.svg' />"]
+    E --> F["📈 Train Model"]
+    F --> G["📊 Plot Training History <img src='dummy_plots/hist_template.svg' />"]
+    G --> H["🔍 Validate Model"]
+    H --> I["🗄️ Save Model <img src='icons/database.svg' />"]
+    I --> J["📦 Optional: Deployment to TFLite"]
+    J --> K["📊 Evaluate TFLite Model <img src='dummy_plots/scatter_plot_template.svg' />"]

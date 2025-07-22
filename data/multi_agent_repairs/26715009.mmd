@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] %% Represents the train.csv data source
+    B["train_image"] %% Represents the train_image folder containing image data
+    C["test.csv"] %% Placeholder for test data
+    D["sample_submission.csv"] %% Represents the sample_submission.csv file
+
+    %% Data Variables
+    E["df_train"] %% DataFrame with training data
+    F["im"] %% Loaded image data
+    G["path_df"] %% DataFrame with image paths and metadata
+    H["mask"] %% Segmentation mask created from run-length encoding
+    I["img"] %% Loaded image data for visualization
+
+    %% Data Flow
+    A -->|Read CSV| E
+    B -->|Load Images| F
+    E -->|Merge with Image Paths| G
+    G -->|Use for Processing| H
+    H -->|Decode to| I
+
+    %% Model (Placeholder)
+    subgraph Models
+        M["Not specified"]
+    end
+
+    B -->|Input Features| M
+    H -->|Target Variable| M
+```

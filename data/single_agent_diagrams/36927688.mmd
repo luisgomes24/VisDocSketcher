@@ -1,0 +1,15 @@
+```
+graph TD;
+    A["📁 Load Data"] --> B["🤖 Load Training Dataset"];
+    B --> C["👀 Show Data <img src='dummy_plots/hist_template.svg' /> <br/> Data Preview"];
+    C --> D["📁 Load Test Dataset"];
+    D --> E["🔄 Split Data"];
+    E --> F["🔄 Scale Data"];
+    F --> G["🧠 Build Deep Learning Model"];
+    G --> H["⚙️ Compile Model"];
+    H --> I["📉 Fit Model"];
+    I --> J["📊 Loss Plot <img src='dummy_plots/lineplot_template.svg' /> <br/> Training Loss"];
+    J --> K["📊 Accuracy Plot <img src='dummy_plots/lineplot_template.svg' /> <br/> Training Accuracy"];
+    K --> L["📈 Increase Epochs"];
+    L --> M["📊 Evaluation Metrics"];
+    M --> N["✅ Output Results"];

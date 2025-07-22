@@ -1,0 +1,33 @@
+flowchart TD
+
+  %% Define data sources
+  A1["<img src='icons/file.svg' width=100 height=100/> <br/> Zomato CSV<br><small>zomato_restaurants_in_India.csv</small>"] 
+  %% Define main data variable
+  A2["<img src='icons/table.svg' width=100 height=100/> <br/> zomato<br><small>DataFrame of restaurant data</small>"]
+
+  %% Define data cleaning processes
+  B1["<img src='icons/row_split.svg' width=100 height=100/> <br/> Data Cleaning"]
+  B2["<img src='icons/row_split.svg' width=100 height=100/> <br/> Duplicates Removal"]
+  B3["<img src='icons/row_split.svg' width=100 height=100/> <br/> Missing Values Treatment"]
+
+  %% Define filtered data variables
+  C1["<img src='icons/table.svg' width=100 height=100/> <br/> zch<br><small>Chennai restaurants</small>"]
+  C2["<img src='icons/table.svg' width=100 height=100/> <br/> rd_type<br><small>Restaurant types count</small>"]
+  C3["<img src='icons/table.svg' width=100 height=100/> <br/> rd_loc<br><small>Restaurant locality count</small>"]
+  C4["<img src='icons/table.svg' width=100 height=100/> <br/> rd_pr<br><small>Restaurant price range count</small>"]
+  C5["<img src='icons/table.svg' width=100 height=100/> <br/> zch_rat<br><small>Non-zero ratings</small>"]
+  C6["<img src='icons/table.svg' width=100 height=100/> <br/> cuisine_count<br><small>Count of cuisines</small>"]
+
+  %% Diagram connections
+  A1 -->|Read CSV| A2
+  A2 --> B1 --->|Clean Data| A2
+  A2 --> B2 --->|Remove Duplicates| A2
+  A2 --> B3 --->|Treat Missing Values| A2
+  A2 -->|Filter (Chennai)| C1 
+
+  %% Further processing and analysis
+  C1 -->|Group and Count| C2
+  C1 -->|Group and Count| C3
+  C1 -->|Group and Count| C4
+  C1 -->|Filter Non-zero Ratings| C5
+  C1 -->|Count Cuisines| C6

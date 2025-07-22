@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/g-research-crypto-forecasting/train.csv",
+      "description": "Training data for cryptocurrency price forecasting including historical asset prices and their identifiers."
+    },
+    {
+      "file_name": "../input/g-research-crypto-forecasting/asset_details.csv",
+      "description": "Details of the assets including their names and identifiers used in the training data."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing the training dataset with features related to asset prices and targets."
+    },
+    {
+      "name": "asset_details",
+      "description": "DataFrame containing details of the assets including names and IDs."
+    },
+    {
+      "name": "btc",
+      "description": "DataFrame for Bitcoin (Asset_ID = 1) filtered from train_df, with timestamps set as the index."
+    },
+    {
+      "name": "eth",
+      "description": "DataFrame for Ethereum (Asset_ID = 6) filtered from train_df, with timestamps set as the index."
+    },
+    {
+      "name": "lth",
+      "description": "DataFrame for Litecoin (Asset_ID = 9) filtered from train_df, with timestamps set as the index."
+    },
+    {
+      "name": "asset_count",
+      "description": "List containing counts of observations for each asset present in the train_df."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation_method": "pd.read_csv('../input/g-research-crypto-forecasting/train.csv')",
+      "flow": "Used for data inspection, handling null values, and filtering data for BTC, ETH, LTC."
+    },
+    {
+      "variable": "asset_details",
+      "creation_method": "pd.read_csv('../input/g-research-crypto-forecasting/asset_details.csv')",
+      "flow": "Used to create a bar plot showing counts of asset occurrences."
+    },
+    {
+      "variable": "btc",
+      "creation_method": "Crypto_df(asset_id=1)",
+      "flow": "Used for generating a candle plot visualization of Bitcoin prices."
+    },
+    {
+      "variable": "eth",
+      "creation_method": "Crypto_df(asset_id=6)",
+      "flow": "Used for generating a candle plot visualization of Ethereum prices."
+    },
+    {
+      "variable": "lth",
+      "creation_method": "Crypto_df(asset_id=9)",
+      "flow": "Used for generating a candle plot visualization of Litecoin prices."
+    },
+    {
+      "variable": "asset_count",
+      "creation_method": "[counting rows for each asset ID]",
+      "flow": "Used to create a bar plot visualizing the number of rows for each asset."
+    }
+  ],
+  "models": []
+}

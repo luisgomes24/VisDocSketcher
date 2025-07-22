@@ -1,0 +1,23 @@
+```mermaid
+flowchart TD
+    subgraph Libraries
+        A["Matplotlib (plt)"]:::library
+        B["NumPy (np)"]:::library
+        C["Pandas (pd)"]:::library
+    end
+
+    classDef library fill:#f9f,stroke:#333,stroke-width:2px;
+
+    subgraph DataFlow
+        direction TB
+        D["Import Libraries"] --> A
+        D --> B
+        D --> C
+
+        E["Data Manipulation & Analysis"] --> F["Data Visualization"]
+
+        B --> E
+        C --> E
+        A --> F
+    end
+```

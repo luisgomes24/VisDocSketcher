@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Read into| B["data"]
+    A -->|Read into| F["images"]
+    A -->|Extract and flatten| G["labels_flat"]
+
+    %% Pre-processing and Variable Creation
+    B -->|Process to| F
+    B -->|Process to 1D array| G
+    G -->|One-hot encode| H["labels"]
+
+    %% Splitting Data for Training/Validation
+    F -->|Split into training| I["train_images"]
+    F -->|Split into validation| J["validation_images"]
+    G -->|Process to labels| H
+
+    %% Neural Network Operations
+    I -->|Train CNN with| H
+    H -->|Used for Training| I
+    I -->|First Convolution Layer| K["W_conv1"]
+    I -->|First Convolution Layer| L["b_conv1"]
+
+    K -->|Operation| M["h_conv1"]
+    L -->|Operation| M
+    M -->|Max Pooling| N["h_pool1"]
+
+    %% Second Convolution
+    N -->|Second Convolution Layer| O["W_conv2"]
+    M -->O
+    O -->|Activation| P["h_conv2"]
+    P -->|Max Pooling| Q["h_pool2"]
+
+    %% Fully Connected Layer
+    Q -->|Fully connect with ReLU| R["h_fc1"]
+    R -->|Apply Dropout| S["h_fc1_drop"]
+
+    %% Output Layer
+    S -->|Softmax Layer| T["y"]
+    T -->|Prediction| U["predicted_labels"]
+
+    %% Test Data Processing
+    V["test.csv"] -->|Predict using model| U
+

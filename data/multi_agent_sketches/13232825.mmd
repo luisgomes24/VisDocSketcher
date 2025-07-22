@@ -1,0 +1,38 @@
+flowchart TD
+    subgraph DataSources
+        A["Porosity Image J.xlsx"]
+    end
+    subgraph Preprocessing
+        B1["batch_train"] -->|"Read from Excel"| A
+        B2["batch_test"] -->|"Read from Excel"| A
+        C1["ds_train"] -->|"Create Dataset"| B1
+        C2["ds_test"] -->|"Create Dataset"| B2
+    end
+    subgraph Augmentation
+        D["data_augmentation"]
+    end
+    subgraph Training
+        E["model"] -->|"Keras Model with Xception"| C1
+        E --> D
+    end
+    subgraph Evaluation
+        F["history"] -->|"Model Fit"| E
+        F -->|"Store Training History"| C2
+    end
+
+    click A "Porosity Image J.xlsx" "Data source file"
+    click B1 "pandas.read_excel" "Training data extraction"
+    click B2 "pandas.read_excel" "Testing data extraction"
+    click C1 "tf.data.Dataset.from_tensor_slices" "Create training TensorFlow Dataset"
+    click C2 "tf.data.Dataset.from_tensor_slices" "Create testing TensorFlow Dataset"
+    click D "keras.Sequential" "Image data augmentation"
+    click E "keras.Model" "Xception model creation and training"
+    click F "model.fit" "Training history storage"
+
+    %% Comments for each node
+    %% A represents the initial Excel data source used for training and testing data.
+    %% B1 and B2 are the DataFrames created by reading the Excel source.
+    %% C1 and C2 are TensorFlow datasets created from the data frames for training and validation.
+    %% D represents the data augmentation setup for expanding the training data.
+    %% E is the Keras model creation step using a pre-trained Xception network, trained with the training data.
+    %% F stores the history of the training process, which includes metrics such as accuracy and loss.

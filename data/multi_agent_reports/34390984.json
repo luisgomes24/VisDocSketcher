@@ -1,0 +1,117 @@
+{
+  "data_sources": [
+    {
+      "file": "insurance.csv",
+      "description": "Medical insurance data containing details such as age, sex, BMI, number of children, smoking status, region, and charged costs."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "Dataframe containing raw data read from the CSV file"
+    },
+    {
+      "variable": "df_encoded",
+      "description": "Dataframe after applying one-hot encoding to categorical variables"
+    },
+    {
+      "variable": "X",
+      "description": "Independent variables selected for model training"
+    },
+    {
+      "variable": "y",
+      "description": "Dependent variable (charges) used for model training"
+    },
+    {
+      "variable": "X_train",
+      "description": "Training subset of independent variables"
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing subset of independent variables"
+    },
+    {
+      "variable": "y_train",
+      "description": "Training subset of dependent variable"
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing subset of dependent variable"
+    },
+    {
+      "variable": "model",
+      "description": "Linear regression model instance"
+    },
+    {
+      "variable": "train_loss",
+      "description": "List to store the mean squared error for training set during iterations"
+    },
+    {
+      "variable": "test_loss",
+      "description": "List to store the mean squared error for testing set during iterations"
+    },
+    {
+      "variable": "y_train_pred",
+      "description": "Predicted values for the training set"
+    },
+    {
+      "variable": "y_test_pred",
+      "description": "Predicted values for the testing set"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flow": "Encoded using one-hot encoding to create df_encoded"
+    },
+    {
+      "variable": "df_encoded",
+      "creation": "pd.get_dummies()",
+      "flow": "Columns selected to create X and y"
+    },
+    {
+      "variable": "X",
+      "creation": "Selection of columns from df_encoded",
+      "flow": "Used in training and testing splits"
+    },
+    {
+      "variable": "y",
+      "creation": "Selection of column from df_encoded",
+      "flow": "Used in training and testing splits"
+    },
+    {
+      "variable": "X_train, y_train",
+      "creation": "train_test_split()",
+      "flow": "Used to fit the model"
+    },
+    {
+      "variable": "X_test, y_test",
+      "creation": "train_test_split()",
+      "flow": "Used to test model performance"
+    },
+    {
+      "variable": "model",
+      "creation": "LinearRegression()",
+      "flow": "Trained on training data; predictions made on test data"
+    },
+    {
+      "variable": "train_loss, test_loss",
+      "creation": "Lists initialized before training",
+      "flow": "Store performance metrics during model training"
+    },
+    {
+      "variable": "y_train_pred, y_test_pred",
+      "creation": "model.predict()",
+      "flow": "Used for plotting actual vs predicted values"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "[age, bmi, children, sex_female, sex_male, region_northeast, region_northwest, region_southeast, region_southwest, smoker_no, smoker_yes]",
+      "target_variable": "charges",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

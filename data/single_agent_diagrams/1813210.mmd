@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Load CSV Files"] --> B["📊 Explore Data <img src='table.svg'/> <br/> df1.head()"]
+    B --> C["📈 Plot Distribution <img src='barplot_template.svg'/> <br/> plotPerColumnDistribution(df1, 10, 5)"]
+    C --> D["📂 Load Data <img src='file.svg'/> <br/> Load 2nd CSV"]
+    D --> E["📊 Explore Data <img src='table.svg'/> <br/> df2.head()"]
+    E --> F["📈 Plot Distribution <img src='barplot_template.svg'/> <br/> plotPerColumnDistribution(df2, 10, 5)"]
+    F --> G["📂 Load Data <img src='file.svg'/> <br/> Load 3rd CSV"]
+    G --> H["📊 Explore Data <img src='table.svg'/> <br/> df3.head()"]
+    H --> I["📈 Plot Distribution <img src='barplot_template.svg'/> <br/> plotPerColumnDistribution(df3, 10, 5)"]
+    I --> J["🏁 Conclusion"]

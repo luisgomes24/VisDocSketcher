@@ -1,0 +1,42 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DataSources ["Data Sources"]
+        DS1["../input/train.zip"]
+        DS2["../input/test1.zip"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables ["Data Variables"]
+        V1["dataset"]
+        V2["train_datagen"]
+        V3["test_datagen"]
+        V4["features"]
+        V5["targets"]
+    end
+
+    %% Model Components
+    subgraph Model ["Models"]
+        M1["CNN Model"]
+        M2["Logistic Regression"]
+    end
+
+    %% Data Flow
+    DS1 -->|Extract paths & labels| V1
+    DS2 -->|Extract paths| V1
+    V1 -->|Split into train/test| V2
+    V1 -->|Split into train/test| V3
+    V2 -->|Augment data| M1
+    V3 -->|Provide data| M1
+    V1 -->|VGG16 feature extraction| V4
+    V4 -->|Features for training| M2
+    V1 -->|Label Encoding| V5
+    V5 -->|Targets for training| M2
+
+    %% Comments
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    class DS1,DS2 default
+    class V1 default
+    class V2,V3,V4,V5 default
+    class M1,M2 default
+```

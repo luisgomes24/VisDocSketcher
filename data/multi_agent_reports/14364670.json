@@ -1,0 +1,79 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "variable": "X",
+      "description": "Input feature array created with squared random values."
+    },
+    {
+      "variable": "y",
+      "description": "Target output generated based on X with added noise."
+    },
+    {
+      "variable": "xf",
+      "description": "Array of 1000 evenly spaced points for plotting predictions."
+    },
+    {
+      "variable": "X2",
+      "description": "New input feature array created for testing with 20 instances."
+    },
+    {
+      "variable": "y2",
+      "description": "New target output generated based on X2 for testing."
+    },
+    {
+      "variable": "tr_score",
+      "description": "List storing training scores for polynomial models with different degrees."
+    },
+    {
+      "variable": "te_score",
+      "description": "List storing testing scores for polynomial models with different degrees."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "created_by": "make_data() function",
+      "flows_to": "fitting model and plotting"
+    },
+    {
+      "variable": "y",
+      "created_by": "make_data() function",
+      "flows_to": "fitting model and plotting"
+    },
+    {
+      "variable": "xf",
+      "created_by": "np.linspace() function",
+      "flows_to": "plotting predictions"
+    },
+    {
+      "variable": "X2",
+      "created_by": "make_data() function",
+      "flows_to": "fitting model for testing and plotting"
+    },
+    {
+      "variable": "y2",
+      "created_by": "make_data() function",
+      "flows_to": "fitting model for testing and plotting"
+    },
+    {
+      "variable": "tr_score",
+      "created_by": "model.score() during loop",
+      "flows_to": "plotting training scores"
+    },
+    {
+      "variable": "te_score",
+      "created_by": "model.score() during loop",
+      "flows_to": "plotting testing scores"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Polynomial Regression",
+      "degrees_used": "1 to 8",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

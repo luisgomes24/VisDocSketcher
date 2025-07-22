@@ -1,0 +1,20 @@
+flowchart TD
+    A["train.csv"] -->|"Load data with pandas"| B["home_data"]
+    %% home_data loaded from train.csv
+
+    B -->|"Extract target"| C["y"]
+    B -->|"Define features"| D["X"]
+    %% y and X are derived from home_data
+
+    C --> E["train_y, val_y"]
+    D --> F["train_X, val_X"]
+    %% train_test_split generates train and validation sets
+
+    E -->|"Model Training"| G["DecisionTreeRegressor iowa_model"]
+    F -->|"Model Training"| G
+    F -->|"Model Training"| H["RandomForestRegressor rf_model"]
+    %% Models are trained on training data
+
+    G -->|"Predictions"| I["val_predictions"]
+    H -->|"Evaluate"| J["rf_val_mae"]
+    %% Predictions and evaluation on validation data

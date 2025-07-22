@@ -1,0 +1,59 @@
+flowchart TD
+
+    subgraph DataSource
+        source1[/coffee.csv/] 
+        %% Data Source: coffee.csv containing daily coffee prices
+    end
+
+    subgraph DataProcessing
+        step1[/<img src='icons/file.svg' width=100 height=100/> <br/> 'Read CSV and Load DataFrame 'df' </img>/]
+        step2["Check for Nulls in 'df'"]
+        step3["Convert 'Date' to Timestamp"]
+        step4["Drop 'Currency' Column"]
+        step5["Create 'Year' Column"]
+        step6["Group by 'Year' for Max Values to Create 'byyear'"]
+    end
+    
+    subgraph DataVisualization
+        vis1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 'Scatter Plot of 'Volume' vs 'Close' using 'byyear' "]
+        vis2["<img src='dummy_plots/lineplot_template.svg'/> <br/> 'Plot 'Close' Value against 'Date' "]
+        vis3["<img src='dummy_plots/boxplot_template.svg'/> <br/> 'Plot 30-Day and 90-Day Moving Average for 'Close' "]
+        vis4["<img src='dummy_plots/hist_template.svg'/> <br/> 'Correlation Heatmap']
+    end
+    
+    subgraph MachineLearning
+        model1["<img src='icons/brain.svg' width=100 height=100/> <br/> 'Define Feature Set 'X' with ['Open', 'High', 'Low', 'Volume'] "]
+        model2["Define Target 'y' with 'Close'"]
+        model3["Split Data into Train and Test Sets"]
+        model4["Train Linear Regression Model"]
+        model5["Make Predictions 'predictions'"]
+        evaluate["Evaluate Model Performance"]
+    end
+
+    source1-->step1
+    step1-->step2
+    step2-->step3
+    step3-->step4
+    step4-->step5
+    step5-->step6
+    step6-->vis1
+    step1-->vis2
+    step1-->vis3
+    step1-->vis4
+
+    step1-->model1
+    step1-->model2
+    model1-->model3
+    model2-->model3
+    model3-->model4
+    model4-->model5
+    model5-->evaluate
+
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef processing fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef model fill:#FFCDD2,stroke:#333,stroke-width:2px;
+
+    class DataSource dataSource;
+    class DataProcessing,DataVisualization processing;
+    class MachineLearning model;

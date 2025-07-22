@@ -1,0 +1,11 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> Read train, test, store data"] --> B["🛠️ Data Preprocessing"]
+    B --> C["⏳ Convert to Time Series <img src='column_split.svg' /> <br/> Feature Engineering"]
+    C --> D["📊 EDA <img src='hist_template.svg' /> <br/> Plot Histograms"]
+    D --> E["🧑‍💻 Data Cleaning & Encoding"]
+    E --> F["🔍 Analyze Correlation"]
+    F --> G["🤖 Modeling <img src='brain.svg' /> <br/> ML Model Initializing"]
+    G --> H["🔍 Validation"]
+    H --> I["📈 Prediction & Evaluation"]
+    I --> J["📊 Feature Importances <img src='barplot_template.svg' />"]
+    J --> K["📤 Final Submission <img src='file.svg' /> <br/> Create CSV"]

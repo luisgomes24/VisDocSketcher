@@ -1,0 +1,34 @@
+flowchart TD
+    subgraph data_sources["Data Sources"]
+        kaggle_csv["kaggle_survey_2021_responses.csv"]
+    end
+
+    subgraph data_loading["Data Loading"]
+        kaggle_csv --> csv["csv\n(DataFrame containing survey data)"]
+    end
+
+    subgraph data_processing["Data Processing"]
+        csv --> eg["eg\n(Dictionary of BI tool counts)"]
+        csv --> c["c\n(Counts for Q35)"]
+        csv --> d1["d1, d2, d3\n(Lists of indices for notebook users)"]
+        csv --> outer["outer\n(Counts grouped by education level)"]
+        csv --> inner["inner\n(Counts grouped by education level and programming language)"]
+    end
+
+    subgraph visualizations["Visualizations"]
+        eg --> circular_pack["Circular Packing\n(Visualize BI tool counts)"]
+        d1 & d2 & d3 --> venn_diagram["Venn Diagram\n(Notebook users)"]
+        outer & inner --> pie_charts["Pie Charts\n(Education and language groups)"]
+    end
+
+    %%%% Model related information
+    %%% No ML models were used in this notebook
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef processing fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class data_sources dataSource;
+    class data_loading dataSource;
+    class data_processing processing;
+    class visualizations visualization;

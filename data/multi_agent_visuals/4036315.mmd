@@ -1,0 +1,14 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Training Data (train.csv)"] -->|Read| B["<img src='icons/file.svg' width=100 height=100/> <br/> Test Data (test.csv)"];
+    A --> D["<img src='icons/database.svg' width=100 height=100/> <br/> rawtrain: DataFrame"];
+    B --> D;
+    D -->|Feature Selection| E1["<img src='icons/column_split.svg' width=100 height=100/> <br/> Selected Features"];
+    E1 --> F["<img src='icons/table.svg' width=100 height=100/> <br/> Train Data"];
+    B --> E2["<img src='icons/column_split.svg' width=100 height=100/> <br/> Selected Features"];
+    E2 --> F;
+    F -->|Combine| G["<img src='dummy_plots/barplot_template.svg'/> <br/> Full Data"];
+    F -->|Model Training| H["<img src='dummy_plots/boxplot_template.svg'/> <br/> Model"];
+    model["Train Model 1: GradientBoostingRegressor"] -->|Predict| P1["<img src='icons/image.svg' width=100 height=100/> <br/> Validation Predictions"];
+    Y["Train Model 2: ExtraTreesRegressor"] -->|Predict| P2["<img src='icons/image.svg' width=100 height=100/> <br/> Test Predictions"];
+    P1 -->|Evaluate| Y;
+    Y -->|Submission| Z["Results in submission.csv"];

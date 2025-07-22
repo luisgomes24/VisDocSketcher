@@ -1,0 +1,124 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/ubiquant-market-prediction/train.csv",
+      "description": "Training dataset containing various financial features and a target variable."
+    },
+    {
+      "file": "/kaggle/input/ubiquant-market-prediction/example_test.csv",
+      "description": "Example test dataset used for making predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "features",
+      "description": "List of feature columns generated dynamically ('f_0' to 'f_299'), along with 'investment_id' and 'time_id'."
+    },
+    {
+      "variable_name": "train",
+      "description": "DataFrame to hold the loaded training data from 'train.csv'."
+    },
+    {
+      "variable_name": "X",
+      "description": "DataFrame containing the features for training (all columns except 'target')."
+    },
+    {
+      "variable_name": "y",
+      "description": "Series containing the target variable from the training data."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training feature set after splitting the dataset."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test feature set after splitting the dataset."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable set after splitting the dataset."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test target variable set after splitting the dataset."
+    },
+    {
+      "variable_name": "lgb_train",
+      "description": "LightGBM dataset for training."
+    },
+    {
+      "variable_name": "lgb_eval",
+      "description": "LightGBM dataset for evaluation."
+    },
+    {
+      "variable_name": "gbm",
+      "description": "LightGBM model object after training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used to create X and y; later deleted to save memory."
+    },
+    {
+      "variable": "X",
+      "creation": "train.drop",
+      "flow": "Used to split into training and test sets."
+    },
+    {
+      "variable": "y",
+      "creation": "train['target']",
+      "flow": "Used alongside X to split into training and test sets."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split",
+      "flow": "Used to train the LightGBM model."
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split",
+      "flow": "Used to evaluate the LightGBM model."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split",
+      "flow": "Used in LightGBM training."
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split",
+      "flow": "Used in LightGBM evaluation."
+    },
+    {
+      "variable": "lgb_train",
+      "creation": "lgb.Dataset",
+      "flow": "Used to train the LightGBM model."
+    },
+    {
+      "variable": "lgb_eval",
+      "creation": "lgb.Dataset",
+      "flow": "Used to validate the LightGBM model during training."
+    },
+    {
+      "variable": "gbm",
+      "creation": "lgb.train",
+      "flow": "Model is used for predictions on test datasets."
+    }
+  ],
+  "models": [
+    {
+      "model": "LightGBM",
+      "input_features": "X_train, X_test",
+      "target_variable": "y_train, y_test",
+      "hyperparameters": {
+        "boosting_type": "gbdt",
+        "objective": "regression",
+        "num_leaves": 40,
+        "learning_rate": 0.1,
+        "feature_fraction": 0.9
+      }
+    }
+  ]
+}

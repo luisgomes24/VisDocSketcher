@@ -1,0 +1,28 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> df = pd.read_csv('...')"] --> B["🔍 Data Exploration"]
+    B --> C["🗂️ Data Inspection <img src='table.svg' /> <br/> df.info()"]
+    C --> D["💡 Handle Missing Values"]
+    D --> E["📊 Visualize Data <img src='boxplot_template.svg' /> <br/> sns.boxplot(...)"]
+    E --> F["🧪 Prepare Data for ML"]
+    F --> G["📉 Reduce Dimensionality via PCA"]
+    G --> H["🔁 One Hot Encoding"]
+    H --> I["⬇ Split into Train/Test Sets"]
+    I --> J["🛠️ Create Pipelines"]
+    J --> K["📊 Modeling"]
+
+    K --> L["🌲 Random Forest <img src='brain.svg' />"]
+    L --> M["🔍 Evaluate Model Performance"]
+    
+    K --> N["📊 Linear Regression"]
+    N --> O["🔍 Evaluate Model Performance"]
+
+    K --> P["📈 Ridge Regression"]
+    P --> Q["🔍 Evaluate Model Performance"]
+
+    K --> R["🧠 TensorFlow Neural Network"]
+    R --> S["🔍 Evaluate Model Performance"]
+
+    M --> T["📝 Evaluation Metrics"]
+    O --> T
+    Q --> T
+    S --> T

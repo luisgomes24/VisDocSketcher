@@ -1,0 +1,93 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/nflplaybyplay2009to2016/NFL Play by Play 2009-2017 (v4).csv",
+      "description": "Dataset of events in American Football games from 2009 to 2017"
+    },
+    {
+      "source": "../input/building-permit-applications-data/Building_Permits.csv",
+      "description": "Dataset of building permits issued in San Francisco"
+    },
+    {
+      "source": "../input/openaddresses-us-west/ca.csv",
+      "description": "Dataset of open addresses in California"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "nfl_data",
+      "description": "DataFrame containing NFL event data"
+    },
+    {
+      "variable": "sf_permits",
+      "description": "DataFrame containing San Francisco building permit data"
+    },
+    {
+      "variable": "missing_values_count",
+      "description": "Series containing count of missing values per column in nfl_data"
+    },
+    {
+      "variable": "total_cells",
+      "description": "Total number of cells in the nfl_data DataFrame"
+    },
+    {
+      "variable": "total_missing",
+      "description": "Total number of missing data points in nfl_data"
+    },
+    {
+      "variable": "sf_permits_temp",
+      "description": "Temporary DataFrame of sf_permits after dropping columns with more than 50% missing values"
+    },
+    {
+      "variable": "subset_nfl_data",
+      "description": "Subset of nfl_data for analysis with a focus on relevant columns"
+    },
+    {
+      "variable": "sf_permits_filled",
+      "description": "DataFrame containing sf_permits with NaN values filled"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "nfl_data",
+      "creation": "read_csv from NFL dataset",
+      "flow": "Analyzed for missing values, used for imputation and dropping NaNs"
+    },
+    {
+      "variable": "sf_permits",
+      "creation": "read_csv from SF permits dataset",
+      "flow": "Analyzed for missing values, used for imputation and dropping NaNs"
+    },
+    {
+      "variable": "missing_values_count",
+      "creation": "Derived from nfl_data",
+      "flow": "Used to assess the scale of missing values"
+    },
+    {
+      "variable": "total_cells",
+      "creation": "Derived from nfl_data shape",
+      "flow": "Calculation for determining missing percentage"
+    },
+    {
+      "variable": "total_missing",
+      "creation": "Derived from missing_values_count",
+      "flow": "Calculation for determining missing percentage"
+    },
+    {
+      "variable": "sf_permits_temp",
+      "creation": "Derived from sf_permits by dropping columns",
+      "flow": "Used for further analysis after cleaning"
+    },
+    {
+      "variable": "subset_nfl_data",
+      "creation": "Filtered from nfl_data",
+      "flow": "Used for testing fillna methods"
+    },
+    {
+      "variable": "sf_permits_filled",
+      "creation": "Created by filling NaNs in sf_permits",
+      "flow": "Final cleaned DataFrame for output"
+    }
+  ],
+  "models": []
+}

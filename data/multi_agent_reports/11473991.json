@@ -1,0 +1,25 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Felicia3Fights_addedFeatures.csv",
+      "description": "Contains features related to Felicia's fights, with additional calculated or added features."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first 1000 rows of Felicia3Fights_addedFeatures.csv loaded into memory."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flow": [
+        "Used in plotting functions: plotPerColumnDistribution(df1), plotCorrelationMatrix(df1), plotScatterMatrix(df1)",
+        "Displayed through multiple visualizations (histograms, correlation matrices, scatter plots)."
+      ]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,12 @@
+graph TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["📝 Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='dummy_plots/hist_template.svg' />"]
+    C --> D["🧠 Build CNN Model"]
+    D --> E["🏋️ Train Model"]
+    E --> F["📝 Evaluate Model"]
+    F --> G["📈 Plot Loss & Accuracy <img src='dummy_plots/lineplot_template.svg' />"]
+    G --> H["🛠️ Implement Data Augmentation"]
+    H --> I["🧠 Build Augmented Model"]
+    I --> E
+    F --> J["🧩 Transfer Learning"]
+    J --> K["🛠️ Fine-Tune Model"]

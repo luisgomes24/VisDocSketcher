@@ -1,0 +1,27 @@
+flowchart TD
+ subgraph DataSources
+ A1["train.csv"]:::file -- Read --> B1["train_df"]:::data
+ A2["sample_submission.csv"]:::file --> B4["submit_df"]:::data
+ A3["med.csv"]:::file --> B2["med_df"]:::data
+ A4["Turkish calendar.csv"]:::file --> B3["new_df"]:::data
+ end
+
+ subgraph DataProcessing
+ B1 --> C1["Processed & Merged"] --> D1["X_train"]:::data
+ B1 --> C1 --> D2["y_train"]:::data
+ B3 --> C1
+ B2 --> C1
+ B4 --> C2["Final Submission"] --> D3["X_test"]:::data
+ C2 --> E1["y_pred"]:::data
+ end
+
+ subgraph ModelTraining
+ F1["RandomForestRegressor"]:::model
+ D1 --> F1
+ D2 --> F1
+ F1 --> E1
+ end
+
+ classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+ classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+ classDef model fill:#f96,stroke:#333,stroke-width:3px;

@@ -1,0 +1,7 @@
+graph TD;
+A["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> Data Preprocessing"];
+B --> C["Cleaned Data"]; 
+C -->|Train-Test Split| D["<img src='dummy_plots/barplot_template.svg'/> <br/> Training and Test Set"];
+D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model"];
+E --> F["Model Evaluation"];
+F --> G["Model Deployment"];

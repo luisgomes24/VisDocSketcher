@@ -1,0 +1,8 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg' /><br/> Load diabetes dataset"] --> B["🔧 Preprocess Data <br/> Fix Data Types"]
+    B --> C["🔀 Split Data <img src='icons/row_split.svg' /><br/> Train/Test Split"]
+    C --> D["🎲 Allocate QLattice <img src='icons/brain.svg' /><br/> Connect to QLattice"]
+    D --> E["🔍 Search for Model <br/> QLattice Auto Run"]
+    E --> F["📊 Evaluate Model <img src='icons/column_split.svg' /><br/> ROC Curves"]
+    F --> G["🤔 Compare Models <br/> Random Forest, Gradient Boosting, Logistic Regression"]
+    G --> H["✅ Conclusion <br/> Insight from QLattice"]

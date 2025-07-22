@@ -1,0 +1,14 @@
+flowchart TD
+    source_burden["/burden.csv/"] -->|load data| df1_loaded["/df1: First 1000 rows of data/"]
+    
+    %% df1 is used for analysis and visualization
+    df1_loaded --> |data used in| plotPerColumnDistribution["Function: plotPerColumnDistribution()"]
+    df1_loaded --> |data used in| plotCorrelationMatrix["Function: plotCorrelationMatrix()"]
+    df1_loaded --> |data used in| plotScatterMatrix["Function: plotScatterMatrix()"]
+
+    %% Comments
+    %% source_burden: Represents the original data source CSV file
+    %% df1_loaded: DataFrame created from loading the CSV file, limited to first 1000 rows
+    %% plotPerColumnDistribution: Function used to plot distribution of each column in df1
+    %% plotCorrelationMatrix: Function used to create correlation matrix using df1
+    %% plotScatterMatrix: Function used for scatter matrix plotting with df1

@@ -1,0 +1,38 @@
+flowchart TD
+    A["Start"] --> B["Load Data"]
+    B --> C["raw_csv_data : Read CSV"]
+    C --> D["df_comp : DataFrame Setup"]
+    D --> E["Create Features"]
+    E --> F["df : Training Dataset"]
+    E --> G["df_test : Test Dataset"]
+    F --> H["df['returns'] : Calculate Returns"]
+    H --> I["Model Training"]
+    I --> J["model_ret_ar_1_ma_1 : ARMA(1,1) Model"]
+    J --> K["results_ret_ar_1_ma_1 : Fit Model"]
+    K --> L["Model Evaluation"]
+    L --> M["ARMA: Compare with AR/MA"]
+    E --> N["model_ret_ar_3_ma_3 : ARMA(3,3) Model"]
+    N --> O["results_ret_ar_3_ma_3 : Fit Model"]
+    O --> P["Performance Evaluation"]
+    P --> Q["Higher-lag ARMA Models Analysis"]
+
+    %% Node Comments
+    A:::comment -- "Start the data science process." --> B
+    B:::comment -- "Load raw CSV data from files." --> C
+    C:::comment -- "Stores raw CSV data in a variable." --> D
+    D:::comment -- "Set up DataFrame, adjust date index and fill NAs." --> E
+    E:::comment -- "Create additional features like returns." --> F
+    F:::comment -- "Split data into training set." --> G
+    G:::comment -- "Split data into test set for validation." --> H
+    H:::comment -- "Calculate returns from market value change." --> I
+    I:::comment -- "Train ARMA(1,1) model for return predictions." --> J
+    J:::comment -- "Specify ARMA(1,1) model and fit data." --> K
+    K:::comment -- "Fit ARMA model, generate results." --> L
+    L:::comment -- "Evaluate model results and diagnostics." --> M
+    M:::comment -- "Compare ARMA model performance with other models." --> N
+    N:::comment -- "Specify a higher-order ARMA(3,3) model." --> O
+    O:::comment -- "Fit ARMA(3,3) model to returns data." --> P
+    P:::comment -- "Evaluate performance of multiple ARMA models." --> Q
+    Q:::comment -- "Analyze and compare higher-lag ARMA models." --> P
+
+    classDef comment fill:#fff,stroke:#333,stroke-width:2px;

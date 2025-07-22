@@ -1,0 +1,12 @@
+flowchart TD
+    A["/kaggle/input/Leads.csv"] --> |"Read into DataFrame"| B[df1]
+    B --> |"Display head"| C[Head of DataFrame]
+    B --> |"Plot distribution"| D[Column Distribution Graphs]
+    B --> |"Plot correlation"| E[Correlation Matrix]
+    B --> |"Plot scatter matrix"| F[Scatter and Density Plots]
+    %% A: CSV file containing Leads data, likely related to customer interactions or marketing leads.
+    %% B: Pandas DataFrame storing the first 1000 rows of Leads.csv for analysis.
+    %% C: Displaying first 5 rows for initial understanding of the data.
+    %% D: Plotting distribution of columns for exploratory data analysis.
+    %% E: Visualizing correlation matrix to understand relationships between features.
+    %% F: Scatter and density plots for examining data distributions and relationships.

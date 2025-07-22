@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/database.svg' />"] --> B["🛠️ Preprocess Data"]
+    B --> C["📝 Create CTE <br/> 'WITH time AS'"]
+    C --> D["📊 Get Monthly Transactions <img src='dummy_plots/barplot_template.svg' />"]
+    D --> E["📊 Monthly Bitcoin Transactions Plot <img src='dummy_plots/lineplot_template.svg' />"]
+    
+    A --> F["📊 Get Daily Transactions in 2017 <br/> <img src='dummy_plots/hist_template.svg' />"]
+    F --> G["📊 Daily Bitcoin Transactions Plot <img src='dummy_plots/lineplot_template.svg' />"]
+    
+    A --> H["📊 Count Transactions per Merkle Root <img src='dummy_plots/scatter_plot_template.svg' />"]
+    H --> I["📊 Transactions per Merkle Root Plot <img src='dummy_plots/scatter_plot_template.svg' />"]
+    
+    E --> J["✅ Evaluate Results"]
+    G --> J
+    I --> J

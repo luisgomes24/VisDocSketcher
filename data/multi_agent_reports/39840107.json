@@ -1,0 +1,105 @@
+{
+  "data_sources": [
+    {
+      "source": "/kaggle/input/playground-series-s3e16/train.csv",
+      "description": "Training dataset with features and target variable (Age)"
+    },
+    {
+      "source": "/kaggle/input/playground-series-s3e16/test.csv",
+      "description": "Test dataset without target variable"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training data"
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data"
+    },
+    {
+      "name": "x",
+      "description": "Features DataFrame after dropping 'id' and 'Age'"
+    },
+    {
+      "name": "y",
+      "description": "Target variable (Age) from the training data"
+    },
+    {
+      "name": "x_train",
+      "description": "Training features set after splitting"
+    },
+    {
+      "name": "x_test",
+      "description": "Testing features set after splitting"
+    },
+    {
+      "name": "y_train",
+      "description": "Training target set after splitting"
+    },
+    {
+      "name": "y_test",
+      "description": "Testing target set after splitting"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used for preprocessing, encoding categorical variables, and splitting into x and y"
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flow": "Not used in training, available for submission or further testing"
+    },
+    {
+      "variable": "x",
+      "creation": "train.drop",
+      "flow": "Used in model training"
+    },
+    {
+      "variable": "y",
+      "creation": "train.Age",
+      "flow": "Used in model training"
+    },
+    {
+      "variable": "x_train",
+      "creation": "train_test_split",
+      "flow": "Used for training the models"
+    },
+    {
+      "variable": "x_test",
+      "creation": "train_test_split",
+      "flow": "Used for testing the models"
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split",
+      "flow": "Used for training the models"
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split",
+      "flow": "Used for evaluating the models"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "Ridge Regression",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "Lasso Regression",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    }
+  ]
+}

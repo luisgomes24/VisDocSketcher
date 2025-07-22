@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Source
+    A[Data Source: heart.csv] --> B
+
+    %% Data Loading
+    B[Read Data] --> |pd.read_csv| C[Data Variable: data] <img src='dummy_plots/table.svg'/> <br/>
+
+    %% Exploratory Data Analysis and Preprocessing
+    C --> D1[Feature Selection: X] <img src='icons/column_split.svg'/> <br/>
+    C --> D2[Target Selection: y] <img src='icons/column_split.svg'/> <br/>
+
+    %% Data Splitting
+    D1 --> |train_test_split| E1[X_train]
+    D1 --> |train_test_split| E2[X_test]
+    D2 --> |train_test_split| F1[y_train]
+    D2 --> |train_test_split| F2[y_test]
+
+    %% Data Scaling
+    E1 --> |StandardScaler| G1[Scaled X_train] <img src='dummy_plots/barplot_template.svg'/> <br/>
+    E2 --> |StandardScaler| G2[Scaled X_test] <img src='dummy_plots/barplot_template.svg'/> <br/>
+
+    %% Model Training
+    G1 --> |Logistic Regression| H1[Model: LogisticReg] <img src='icons/brain.svg'/> <br/>
+    G1 --> |Random Forest| H2[Model: RandomForest] <img src='icons/brain.svg'/> <br/>
+    G1 --> |Gaussian Naive Bayes| H3[Model: GaussNB] <img src='icons/brain.svg'/> <br/>
+    G1 --> |Decision Tree| H4[Model: DecisionTree] <img src='icons/brain.svg'/> <br/>
+    G1 --> |KNeighbors| H5[Model: KNeighbors] <img src='icons/brain.svg'/> <br/>
+    G1 --> |Support Vector| H6[Model: SupportVC] <img src='icons/brain.svg'/> <br/>
+
+    %% Ensemble Model
+    H1 --> |Voting Classifier| I1[Ensemble Model: Hard Voting]
+    H2 --> |Voting Classifier| I1
+    H3 --> |Voting Classifier| I1
+
+    H4 --> |Voting Classifier (Soft Voting)| I2[Ensemble Model: Soft Voting]
+    H5 --> |Voting Classifier (Soft Voting)| I2
+    H6 --> |Voting Classifier (Soft Voting)| I2
+
+    %% Model Evaluation
+    G2 --> |Evaluate I1| J1[Evaluation: Hard Voting]
+    G2 --> |Evaluate I2| J2[Evaluation: Soft Voting]
+    F2 --> J1
+    F2 --> J2

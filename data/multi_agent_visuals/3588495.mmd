@@ -1,0 +1,11 @@
+graph TD;
+    A["<img src='path/to/icon.svg' width=100 height=100/> <br/> Input Data"]
+    B["<img src='path/to/icon.svg' width=100 height=100/> <br/> Data Cleaning <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    C["<img src='path/to/icon.svg' width=100 height=100/> <br/> Model Training <br/> <img src='dummy_plots/hist_template.svg' />"]
+    D["<img src='path/to/icon.svg' width=100 height=100/> <br/> Model Evaluation <br/> <img src='dummy_plots/boxplot_template.svg' />"]
+    E["<img src='path/to/icon.svg' width=100 height=100/> <br/> Predictions <br/> <img src='dummy_plots/scatter_plot_template.svg' />"]
+
+    A --> B;
+    B --> C;
+    C --> D;
+    D --> E;

@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Parking_Violations_Issued_-_Fiscal_Year_2017.csv",
+      "description": "Contains records of parking violations issued in the fiscal year 2017"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df2017",
+      "description": "DataFrame containing parking violation records from 2017"
+    },
+    {
+      "name": "mini2017",
+      "description": "Sample of 10% of df2017 for analysis"
+    },
+    {
+      "name": "month",
+      "description": "List of months extracted from 'Issue Date' as integers"
+    },
+    {
+      "name": "violation_code",
+      "description": "Counts of tickets issued for each violation code"
+    },
+    {
+      "name": "vehicle_make",
+      "description": "Counts of tickets issued per vehicle make"
+    },
+    {
+      "name": "violation_county",
+      "description": "Counts of tickets issued per violation county"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df2017",
+      "created_from": "pd.read_csv",
+      "flows_to": ["mini2017", "plt.barh", "sns.barplot", "pd.Series"]
+    },
+    {
+      "variable": "mini2017",
+      "created_from": "sample method from df2017",
+      "flows_to": ["plt.barh", "sns.barplot", "pd.Series"]
+    },
+    {
+      "variable": "month",
+      "created_from": "pd.to_datetime",
+      "flows_to": ["sns.barplot"]
+    },
+    {
+      "variable": "violation_code",
+      "created_from": "mini2017['Violation Code'].value_counts()",
+      "flows_to": ["sns.barplot"]
+    },
+    {
+      "variable": "vehicle_make",
+      "created_from": "mini2017['Vehicle Make'].value_counts()",
+      "flows_to": ["sns.barplot"]
+    },
+    {
+      "variable": "violation_county",
+      "created_from": "mini2017['Violation County'].value_counts()",
+      "flows_to": ["sns.barplot"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,5 @@
+flowchart TD
+    A[<img src='icons/database.svg' width=100 height=100/> <br/> Data Source: train_ship_segmentations.csv] -->|Load CSV| B[<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df]
+    B -->|Extract Image IDs| C[<img src='dummy_plots/boxplot_template.svg'/> <br/> Variable: train_ids]
+    B --> D[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Variable: path_train]
+    B --> E[<img src='icons/row_split.svg' width=100 height=100/> <br/> Variable: path_test]

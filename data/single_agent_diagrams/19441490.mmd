@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' /> <br/> df = pd.read_csv()"] --> B["🔍 Check for Missing Values <img src='icons/column_split.svg' /> <br/> klib.missingval_plot(df)"]
+    B --> C["🔄 Data Visualization <img src='icons/table.svg' /> <br/> klib.cat_plot(df)"]
+    C --> D["🧹 Data Cleaning <img src='icons/brain.svg' /> <br/> df_cleaned = klib.data_cleaning(df)"]
+    D --> E["📈 Distribution Plot <img src='dummy_plots/dist_template.svg' /> <br/> klib.dist_plot(df_cleaned['lp_id'])"]
+    E --> F["📊 Load Engagement Data <img src='icons/file.svg' /> <br/> df1 = pd.read_csv()"]
+    F --> G["🔄 Correlation Analysis <img src='icons/brain.svg' /> <br/> klib.corr_mat(df1_cleaned)"]
+    G --> H["📉 Correlation Plots <img src='dummy_plots/corr_plot_template.svg' /> <br/> klib.corr_plot(df1)"]

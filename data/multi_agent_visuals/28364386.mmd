@@ -1,0 +1,43 @@
+%% Begin of the Mermaid.js diagram
+graph TD;
+  %% Data Source Node
+  A["churn_prediction.csv"]
+  %% Comment: Data source containing customer demographic, relationship, and transactional information
+
+  %% Import Train Data Node
+  B["Load data"]
+  A --> B
+  %% Comment: Load data from CSV to pandas dataframe
+
+  %% Split Data Node
+  C["Split into Train/Test"]
+  B --> C
+  %% Comment: Split data into training and testing sets
+
+  %% Imputation Train Node
+  D["Impute Train Data"]
+  C --> D
+  %% Comment: Apply LGBMImputer on training data
+
+  %% Prepare Train Data
+  E["Prepare Train Data"]
+  D --> E
+  %% Comment: Separate target variable 'churn' from training data
+
+  %% ML Model Training Node
+  F["Train AutoML Model"]
+  E --> F
+  %% Comment: Train AutoML model with 'roc_auc' as metric
+
+  %% Imputation Test Node
+  G["Impute Test Data"]
+  C --> G
+  %% Comment: Apply LGBMImputer on test data
+
+  %% Prepare Test Data
+  H["Prepare Test Data"]
+  G --> H
+  %% Comment: Separate target variable 'churn' from test data
+
+  F -->|"Model predicts churn"| H
+  %% ML Model Prediction Comment

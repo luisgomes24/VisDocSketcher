@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A["bigquery-public-data.bitcoin_blockchain.transactions"]
+    %% Helper for Data Access
+    B[bitcoin_blockchain]
+    %% Transactions Per Month Processing
+    C[transactions_per_month Query]
+    D[transactions_per_month DataFrame]
+    E[Monthly Transactions Plot]
+    %% Transactions per Day Processing
+    F[transactions_per_day Query]
+    G[transactions_per_day DataFrame]
+    H[Daily Transactions 2017 Plot]
+    %% Transactions per Merkle Root Processing
+    I[transactions_per_merkleroot Query]
+    J[transactions_per_merkleroot DataFrame]
+    K[Transactions per Merkle Root Plot]
+
+    %% Flow connections
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    B --> F
+    F --> G
+    G --> H
+    B --> I
+    I --> J
+    J --> K

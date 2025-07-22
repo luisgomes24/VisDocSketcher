@@ -1,0 +1,58 @@
+{
+    "data_sources": [
+        {
+            "file_name": "products_info.csv",
+            "description": "Contains information about digital learning products."
+        },
+        {
+            "file_name": "5404.csv",
+            "description": "Engagement data related to the learning products, each indicating user interaction and engagement metrics."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "DataFrame containing product information imported from products_info.csv."
+        },
+        {
+            "variable_name": "df_cleaned",
+            "description": "DataFrame containing the cleaned data after preprocessing the products information."
+        },
+        {
+            "variable_name": "df1",
+            "description": "DataFrame containing engagement data imported from the engagement_data/5404.csv file."
+        },
+        {
+            "variable_name": "df1_cleaned",
+            "description": "DataFrame containing the cleaned engagement data after preprocessing."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df",
+            "creation": "pd.read_csv('../input/learnplatform-covid19-impact-on-digital-learning/products_info.csv', encoding='utf8')",
+            "flows_to": ["df_cleaned"]
+        },
+        {
+            "variable_name": "df_cleaned",
+            "creation": "klib.data_cleaning(df)",
+            "flows_to": ["dist_plot"]
+        },
+        {
+            "variable_name": "df1",
+            "creation": "pd.read_csv('../input/learnplatform-covid19-impact-on-digital-learning/engagement_data/5404.csv', encoding='utf8')",
+            "flows_to": ["df1_cleaned", "corr_mat", "corr_plot"]
+        },
+        {
+            "variable_name": "df1_cleaned",
+            "creation": "klib.data_cleaning(df1)",
+            "flows_to": ["dist_plot"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Klib",
+            "description": "A Python library for data cleaning and preprocessing used throughout the notebook."
+        }
+    ]
+}

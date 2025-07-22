@@ -1,0 +1,10 @@
+flowchart TD
+    %% Node for data source a
+    A["a: List Initialization"] --> |List Operations| B["b: Mixed Type List"]
+    A --> C
+    %% Node for data source b
+    B --> |Indexing & Removal| C["Tuple c: Conversion"]
+    %% Node for variable c
+    C --> |Convert to List| D["d: List Result"]
+    %% Node for variable d
+    D --> |Used for Tuple & List Operations| A

@@ -1,0 +1,34 @@
+{
+  "data_sources": [
+    {"file": "chicago_taxi_trips", "description": "Dataset about taxi trips in the city of Chicago"}
+  ],
+  "data_variables": [
+    {"name": "client", "description": "BigQuery client for accessing datasets"},
+    {"name": "dataset_ref", "description": "Reference to the chicago_taxi_trips dataset"},
+    {"name": "tables", "description": "List of tables in the dataset"},
+    {"name": "table_name", "description": "Name of the taxi trips table"},
+    {"name": "table_ref", "description": "Reference to the taxi_trips table"},
+    {"name": "table", "description": "Fetched data table from BigQuery"},
+    {"name": "rides_per_year_query", "description": "SQL query to count trips per year"},
+    {"name": "rides_per_year_result", "description": "DataFrame containing trips per year"},
+    {"name": "rides_per_month_query", "description": "SQL query to count trips per month in 2017"},
+    {"name": "rides_per_month_result", "description": "DataFrame containing trips per month"},
+    {"name": "speeds_query", "description": "SQL query to calculate trips and average speed per hour"},
+    {"name": "speeds_result", "description": "DataFrame containing average speed and trip counts"}
+  ],
+  "data_flow": [
+    {"variable": "client", "created_by": "bigquery.Client()", "flows_to": ["dataset_ref"]},
+    {"variable": "dataset_ref", "created_by": "client.dataset()", "flows_to": ["tables", "table_ref"]},
+    {"variable": "tables", "created_by": "client.list_tables(dataset)", "flows_to": ["table_name"]},
+    {"variable": "table_name", "created_by": "string assignment", "flows_to": ["table_ref"]},
+    {"variable": "table_ref", "created_by": "dataset_ref.table()", "flows_to": ["table"]},
+    {"variable": "table", "created_by": "client.get_table()", "flows_to": ["rides_per_year_query"]},
+    {"variable": "rides_per_year_query", "created_by": "SQL string assignment", "flows_to": ["rides_per_year_result"]},
+    {"variable": "rides_per_year_result", "created_by": "client.query()", "flows_to": []},
+    {"variable": "rides_per_month_query", "created_by": "SQL string assignment", "flows_to": ["rides_per_month_result"]},
+    {"variable": "rides_per_month_result", "created_by": "client.query()", "flows_to": []},
+    {"variable": "speeds_query", "created_by": "SQL string assignment", "flows_to": ["speeds_result"]},
+    {"variable": "speeds_result", "created_by": "client.query()", "flows_to": []}
+  ],
+  "models": []
+}

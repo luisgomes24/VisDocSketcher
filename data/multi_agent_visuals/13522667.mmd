@@ -1,0 +1,31 @@
+graph TD;
+    %%% Data Sources %%%
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> Raw Data"]:::dataSource;
+    
+    %%% Data Preparation %%%
+    A1 -->|"Load CSV"| A2["<img src='icons/table.svg' width=100 height=100/> <br/> data"]:::dataVar;
+    A2 -->|"Standardize 'Amount' & 'Time'"| A3["<img src='icons/column_split.svg' width=100 height=100/> <br/> data_clean"]:::dataVar;
+    A3 -->|"Define Features"| A4["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]:::dataVar;
+    A3 -->|"Define Target"| A5["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]:::dataVar;
+    A4 -->|"Train/Test Split"| A6["X_train"]:::dataVar;
+    A4 -->|"Train/Test Split"| A7["X_test"]:::dataVar;
+    A5 -->|"Train/Test Split"| A8["y_train"]:::dataVar;
+    A5 -->|"Train/Test Split"| A9["y_test"]:::dataVar;
+
+    %%% Handle Imbalance %%%
+    A6 -->|"Random Under Sampling"| A10["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_rus"]:::dataVar;
+    A8 -->|"Random Under Sampling"| A11["y_rus"]:::dataVar;
+
+    %%% ML Models %%%
+    A10 -->|"Train Logistic Regression"| B1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> model_log"]:::model;
+    A11 -->|"Train Logistic Regression"| B1;
+    A10 -->|"Train Decision Tree"| B2["<img src='dummy_plots/lineplot_template.svg'/> <br/> model_tree"]:::model;
+    A11 -->|"Train Decision Tree"| B2;
+
+    %%% Predictions and Evaluations %%%
+    B1 -->|"Predict"| B3["y_pred_log"]:::dataVar;
+    B2 -->|"Predict"| B4["y_pred_tree"]:::dataVar;
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#9f6,stroke:#333,stroke-width:2px;

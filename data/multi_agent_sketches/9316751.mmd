@@ -1,0 +1,28 @@
+flowchart TD
+    %% Nodes
+    DS1["TimeGender.csv"]
+    DS2["covid_19_clean_complete.csv"]
+    ID1["Input_Data1"]
+    ID["Input_Data"]
+    Male["male"]
+    Female["female"]
+    CConfirmed["country_confirmed_cases"]
+    CDeath["country_death_cases"]
+    CActive["country_active_cases"]
+    CRecovery["country_recovery_cases"]
+
+    %% Data Sources
+    DS1 -->|"pd.read_csv"| ID1
+    DS2 -->|"pd.read_csv"| ID
+
+    %% Gender-based Analysis
+    ID1 -->|"Calculate through iteration"| Male
+    ID1 -->|"Calculate through iteration"| Female
+
+    %% Global COVID-19 Statistics
+    ID -->|"Analyze for confirmed cases"| CConfirmed
+    ID -->|"Analyze for death cases"| CDeath
+    ID -->|"Analyze for recovery cases"| CRecovery
+
+    %% Active Cases Calculation
+    CConfirmed & CRecovery -->|"Calculate active cases"| CActive

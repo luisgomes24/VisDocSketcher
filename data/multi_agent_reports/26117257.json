@@ -1,0 +1,117 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/image-matching-challenge-2022/train/taj_mahal/images/05106170_2123793679.jpg",
+      "description": "Image of the Taj Mahal for image processing."
+    },
+    {
+      "file_path": "../input/image-matching-challenge-2022/train/temple_nara_japan/images/07628787_6482156727.jpg",
+      "description": "Image of Tōdai-ji Temple for image processing."
+    },
+    {
+      "file_path": "../input/image-matching-challenge-2022/train/piazza_san_marco/images/07961084_7175726083.jpg",
+      "description": "Image of Piazza San Marco for data augmentation."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "img_bgr",
+      "description": "Image read in BGR format using OpenCV."
+    },
+    {
+      "name": "img_rgb",
+      "description": "Converted RGB version of img_bgr."
+    },
+    {
+      "name": "x_rgb",
+      "description": "Torch tensor representation of the RGB image."
+    },
+    {
+      "name": "x_bgr",
+      "description": "Torch tensor representation of the BGR image."
+    },
+    {
+      "name": "aug_list",
+      "description": "Sequential data augmentation pipeline using Kornia."
+    },
+    {
+      "name": "bbox",
+      "description": "Bounding box data for augmentation."
+    },
+    {
+      "name": "keypoints",
+      "description": "Key points data for augmentation."
+    },
+    {
+      "name": "mask",
+      "description": "Mask generated from bounding boxes."
+    },
+    {
+      "name": "out_tensor",
+      "description": "Resulting tensor after applying augmentations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "img_bgr",
+      "creation": "Loaded from file using cv2.imread",
+      "flow": "Converted to RGB and visualized."
+    },
+    {
+      "variable": "img_rgb",
+      "creation": "Conversion from BGR to RGB",
+      "flow": "Visualized with matplotlib."
+    },
+    {
+      "variable": "x_bgr",
+      "creation": "Converted from img_bgr using Kornia's image_to_tensor",
+      "flow": "Used for further processing and augmented."
+    },
+    {
+      "variable": "x_rgb",
+      "creation": "Conversion of img_bgr to RGB tensor",
+      "flow": "Used for visualization."
+    },
+    {
+      "variable": "aug_list",
+      "creation": "Defined with various augmentations",
+      "flow": "Applied to img_tensor along with bbox, keypoints, and mask."
+    },
+    {
+      "variable": "out_tensor",
+      "creation": "Result from applying aug_list",
+      "flow": "Visualized after augmentation."
+    }
+  ],
+  "models": {
+    "augmentation_pipeline": {
+      "type": "PatchSequential",
+      "components": [
+        {
+          "name": "ColorJitter",
+          "hyperparameters": {
+            "brightness": 0.1,
+            "contrast": 0.1,
+            "saturation": 0.1,
+            "hue": 0.1
+          }
+        },
+        {
+          "name": "RandomAffine",
+          "hyperparameters": {
+            "degrees": 360,
+            "translate": [0.1, 0.1],
+            "scale": [0.7, 1.2],
+            "shear": [30., 50.]
+          }
+        },
+        {
+          "name": "RandomPerspective",
+          "hyperparameters": {
+            "distortion_scale": 0.5
+          }
+        }
+      ]
+    }
+  }
+}

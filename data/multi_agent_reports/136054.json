@@ -1,0 +1,87 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/train.csv",
+      "description": "Training dataset containing passenger information including 'Survived', 'Sex', 'Age', 'Pclass', etc."
+    },
+    {
+      "file": "../input/test.csv",
+      "description": "Test dataset containing passenger information, used for making predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training dataset loaded from 'train.csv'."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test dataset loaded from 'test.csv'."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "DataFrame of features used for training the model, excluding the target variable 'Survived'."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Series containing the target variable 'Survived' from the training dataset."
+    },
+    {
+      "variable_name": "rf",
+      "description": "RandomForestClassifier model instance used to fit and predict survival."
+    },
+    {
+      "variable_name": "prediction",
+      "description": "Array containing the predicted survival outcomes for the test dataset."
+    },
+    {
+      "variable_name": "output",
+      "description": "DataFrame that consists of 'PassengerId' and corresponding 'Predicted Survived' for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["train.head()", "sns.countplot()", "sns.heatmap()", "sns.distplot()", "train.drop()"]
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["test.head()", "test = test.drop()"]
+    },
+    {
+      "variable_name": "x_train",
+      "creation_method": "train.drop()",
+      "flows_to": ["rf.fit()"]
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train['Survived']",
+      "flows_to": ["rf.fit()"]
+    },
+    {
+      "variable_name": "rf",
+      "creation_method": "RandomForestClassifier()",
+      "flows_to": ["rf.fit()", "rf.predict()"]
+    },
+    {
+      "variable_name": "prediction",
+      "creation_method": "rf.predict()",
+      "flows_to": ["output.to_csv()"]
+    },
+    {
+      "variable_name": "output",
+      "creation_method": "pd.DataFrame()",
+      "flows_to": ["output.to_csv()"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["Age", "Pclass", "Fare", "Embarked", "Sex"],
+      "target_variable": "Survived",
+      "hyperparameters": {}
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+"data_sources": [
+    {
+        "file_name": "train.csv",
+        "description": "Training dataset containing features and target variable."
+    },
+    {
+        "file_name": "test.csv",
+        "description": "Test dataset containing features without target variable."
+    },
+    {
+        "file_name": "sample_submission.csv",
+        "description": "Sample submission file to guide format of submissions."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "train_data",
+        "description": "DataFrame containing training data with features and target."
+    },
+    {
+        "variable_name": "test_data",
+        "description": "DataFrame containing test data with features only."
+    },
+    {
+        "variable_name": "sub",
+        "description": "DataFrame for submission file, initially copied from sample_submission."
+    },
+    {
+        "variable_name": "Y",
+        "description": "Target variable from train_data."
+    },
+    {
+        "variable_name": "X",
+        "description": "Features from train_data excluding target and id."
+    },
+    {
+        "variable_name": "x_train",
+        "description": "Training features subset for model training."
+    },
+    {
+        "variable_name": "x_validation",
+        "description": "Validation features subset for model validation."
+    },
+    {
+        "variable_name": "y_train",
+        "description": "Training target subset for model training."
+    },
+    {
+        "variable_name": "y_validation",
+        "description": "Validation target subset for model validation."
+    },
+    {
+        "variable_name": "predictCLF",
+        "description": "Predictions from the trained classification model."
+    },
+    {
+        "variable_name": "acc_CLF",
+        "description": "Accuracy score of the classification model."
+    }
+],
+"data_flow": [
+    {
+        "variable": "train_data",
+        "creation": "Loaded via pd.read_csv",
+        "flows_to": ["Y", "X", "x_train", "x_validation", "y_train", "y_validation"]
+    },
+    {
+        "variable": "test_data",
+        "creation": "Loaded via pd.read_csv",
+        "flows_to": ["sub"]
+    },
+    {
+        "variable": "sub",
+        "creation": "Initialized with sample_submission data",
+        "flows_to": ["sub.to_csv"]
+    },
+    {
+        "variable": "Y",
+        "creation": "Extracted from train_data",
+        "flows_to": ["x_train", "x_validation", "y_train", "y_validation"]
+    },
+    {
+        "variable": "X",
+        "creation": "Extracted from train_data",
+        "flows_to": ["x_train", "x_validation"]
+    },
+    {
+        "variable": "x_train",
+        "creation": "Subset from X for training",
+        "flows_to": ["clf.fit"]
+    },
+    {
+        "variable": "y_train",
+        "creation": "Subset from Y for training",
+        "flows_to": ["clf.fit"]
+    },
+    {
+        "variable": "predictCLF",
+        "creation": "Result of clf.predict",
+        "flows_to": ["classification_report", "accuracy_score"]
+    },
+    {
+        "variable": "sub['target']",
+        "creation": "Predictions from AutoML model",
+        "flows_to": ["sub.to_csv"]
+    }
+],
+"models": [
+    {
+        "model_name": "MLPClassifier",
+        "features": "X",
+        "target": "Y",
+        "hyperparameters": {
+            "solver": "adam",
+            "alpha": 1e-08,
+            "hidden_layer_sizes": "(32,)"
+            "activation": "logistic",
+            "random_state": 2,
+            "batch_size": "auto",
+            "shuffle": true
+        }
+    },
+    {
+        "model_name": "TabularAutoML",
+        "features": "train_data",
+        "target": "target",
+        "hyperparameters": {
+            "timeout": "8 hours",
+            "cpu_limit": 8,
+            "use_algos": [["cb"]]
+        }
+    }
+]
+}

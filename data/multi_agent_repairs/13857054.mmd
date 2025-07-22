@@ -1,0 +1,12 @@
+flowchart TD
+    subgraph DataLoading
+        A["../input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv"] -->|Load CSV| B[df]
+    end
+    subgraph DataCleaning
+        C["DataFrame Cleaning"] -->|Clean Data| D[df_clean]
+    end
+    subgraph DataAnalysis
+        E["Data Analysis"] -->|Perform Analysis| F[results]
+    end
+    A --> C
+    D --> E

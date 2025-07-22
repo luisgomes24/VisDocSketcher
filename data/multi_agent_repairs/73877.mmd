@@ -1,0 +1,17 @@
+```mermaid
+flowchart TD;
+    %% This node represents the data source directory
+    InputDataFile["../input"]
+
+    %% This node represents the Pandas library
+    Pandas["pd: Import Pandas library"]
+    Pandas -->|"Used for data processing and creating DataFrames"| DataFrame["DataFrame"]
+
+    %% This node represents the NumPy library
+    NumPy["np: Import NumPy library"]
+
+    %% Relationships and Data Flow
+    InputDataFile -->|"Provides data to"| Pandas
+    Pandas -->|"Processes data"| DataFrame
+    DataFrame -->|"Data for numerical analysis"| NumPy
+```

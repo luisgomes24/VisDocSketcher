@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Sources
+    DS1["Apple images"]
+    DS2["Peach images"]
+    DS3["Carambola images"]
+    DS4["Kiwi images"]
+    DS5["Tomato images"]
+    DS6["Persimmon images"]
+    DS7["Plum images"]
+    DS8["Guava images"]
+    DS9["Pear images"]
+    DS10["Mango images"]
+    DS11["Muskmelon images"]
+    DS12["Banana images"]
+    DS13["Pomegranate images"]
+    DS14["Pitaya images"]
+    DS15["Orange images"]
+
+    %% Data Variables
+    V1["dim1: Image height"]
+    V2["dim2: Image width"]
+    V3["image_shape: Input image shape"]
+    V4["image_gen: ImageDataGenerator"]
+    V5["model: Keras fruit recognizer"]
+
+    %% Data Flow
+    DS1 --> |Calculate height| V1
+    DS1 --> |Calculate width| V2
+    V3 --> |Set input shape| V5
+    V4 --> |Augment data| V5
+    V5 --> |Predict class| Output
+
+    %% Models
+    M1["Sequential Model"]
+    V5 -.-> M1
+    M1 --> Output["Fruit class prediction"]

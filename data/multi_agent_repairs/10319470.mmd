@@ -1,0 +1,20 @@
+```mermaid
+flowchart TD
+    %% Node for data source
+    A["IMDB Movie Dataset"] -->|read_csv| B["Data DataFrame"]
+    
+    %% Processing nodes
+    B -->|Analyze & Display| C["max_info"]
+    B -->|Analyze & Display| D["min_info"]
+    
+    %% Node for compiling information
+    C --> E["all_info"]
+    D --> E
+    
+    %% Explanation comments
+    %% A: Represents the IMDB movie CSV data source.
+    %% B: Data DataFrame initialized from the CSV file.
+    %% C: List of movies with maximum revenue or rating.
+    %% D: List of movies with minimum revenue or rating.
+    %% E: Compilation of both max_info and min_info.
+```

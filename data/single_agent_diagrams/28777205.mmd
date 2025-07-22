@@ -1,0 +1,15 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> df = pd.read_csv(...)"] --> B["🧪 Data Overview"];
+    B --> C["🔍 Data Summary <img src='table.svg'/>"];
+    C --> D["🌈 Check for Missing Values"];
+    D --> E["📊 Correlation Heatmap <img src='heatmap_template.svg'/>"];
+    E --> F["🔢 Data Cleaning"];
+    F --> G["📊 Countplot Rating <img src='countplot_template.svg'/>"];
+    F --> H["📊 Countplot Cocoa Percent <img src='countplot_template.svg'/>"];
+    H --> I["🛠 Data Transformation"];
+    I --> J["🗃 Prepare Features and Target"];
+    J --> K["🔀 Split Data <img src='row_split.svg'/>"];
+    K --> L["🧠 Train Model <img src='brain.svg'/>"];
+    L --> M["📈 Predictions"];
+    M --> N["📊 Evaluation <img src='classification_report.svg'/>"];
+    N --> O["🔍 Final Countplot of Rating"];

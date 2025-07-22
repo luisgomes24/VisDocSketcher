@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file_name": "degrees-that-pay-back.csv",
+      "description": "Contains information about various degrees and their associated salaries."
+    },
+    {
+      "file_name": "salaries-by-college-type.csv",
+      "description": "Contains salary information based on different college types."
+    },
+    {
+      "file_name": "salaries-by-region.csv",
+      "description": "Contains salary information based on regions in the US."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "deg",
+      "description": "DataFrame containing degrees and their median salaries."
+    },
+    {
+      "variable_name": "sal_col",
+      "description": "DataFrame containing salary data based on college types."
+    },
+    {
+      "variable_name": "sal_reg",
+      "description": "DataFrame containing salary data based on geographical regions."
+    },
+    {
+      "variable_name": "selected_col",
+      "description": "List of columns with salary data to process."
+    },
+    {
+      "variable_name": "train_X",
+      "description": "Features for training data, specifically reflecting starting median salary."
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Target variable reflecting mid-career median salary."
+    },
+    {
+      "variable_name": "df_mod",
+      "description": "Modified DataFrame for visualizations and modeling."
+    },
+    {
+      "variable_name": "df_model_res",
+      "description": "DataFrame containing actual vs. predicted results for the models used."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "deg",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used for analysis and plotting."
+    },
+    {
+      "variable": "sal_col",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used for analysis of college-type salaries and plotting."
+    },
+    {
+      "variable": "sal_reg",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used for regional salary analysis and plotting."
+    },
+    {
+      "variable": "train_X",
+      "creation_method": "train_test_split()",
+      "flow": "Used to train linear regression and decision tree models."
+    },
+    {
+      "variable": "train_y",
+      "creation_method": "train_test_split()",
+      "flow": "Used to train linear regression and decision tree models."
+    },
+    {
+      "variable": "df_model_res",
+      "creation_method": "pd.DataFrame()",
+      "flow": "Used for evaluating model performance against actual values."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "Starting Median Salary (train_X)",
+      "target_variable": "Mid-Career Median Salary (train_y)",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Decision Tree Regressor",
+      "input_features": "Starting Median Salary (train_X)",
+      "target_variable": "Mid-Career Median Salary (train_y)",
+      "hyperparameters": {}
+    }
+  ]
+}

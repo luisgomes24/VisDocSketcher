@@ -1,0 +1,28 @@
+flowchart TD
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> bank-additional.csv"] --> |"Load data"| B["<img src='icons/table.svg' width=100 height=100/> <br/> dataset"]
+    end
+    
+    subgraph Variables
+        B --> |"Select features"| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> x"]
+        B --> |"Select target"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    
+        C --> |"Split dataset"| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> xtrain, xtest"]
+        D --> |"Split dataset"| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> ytrain, ytest"]
+    end
+    
+    subgraph Model
+        G["<img src='icons/brain.svg' width=100 height=100/> <br/> KNeighborsClassifier"]
+        E --> |"Train model"| G
+        F --> |"Train model"| G
+        G --> |"Evaluate model with xtest"| H["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"]
+    end
+    
+    %% Comments
+    %% A: Node representing the source CSV file containing the dataset.
+    %% B: Node representing the DataFrame obtained after loading the CSV file.
+    %% C: Node representing the features used for the KNN.
+    %% D: Node representing the target variable for prediction.
+    %% E & F: Representing the split datasets for training and testing.
+    %% G: The machine learning model, KNeighborsClassifier, used for creating predictions.
+    %% H: Node representing the evaluation results of the model predictions.

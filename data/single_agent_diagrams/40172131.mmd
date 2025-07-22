@@ -1,0 +1,20 @@
+flowchart TD
+    A["📂 Load Data"] --> B["🔍 Initial Data Exploration"] 
+    B --> C["🧹 Data Preprocessing"]
+    C --> D["📊 Visualize Features"]
+    D --> E["🔧 Feature Engineering"]
+    E --> F["🛠️ Modeling"]
+    F --> G["⚙️ Hyperparameter Tuning"]
+    G --> H["📈 Model Evaluation"]
+    H --> I["🔮 Final Predictions"]
+    
+    A -->|Read train/test data| B
+    C -->|Check for missing values| D
+    D -->|Histograms and Countplots| E
+    E -->|Create New Features| F
+    F -->|Create Pipelines| G
+    G -->|Use RandomizedSearchCV| H
+    H -->|Evaluate on Test Set| I
+
+    D --> C
+    G --> F

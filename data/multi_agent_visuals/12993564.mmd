@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> degrees-that-pay-back.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> salaries-by-college-type.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> salaries-by-region.csv"]
+
+    %% Data Import
+    B1["<img src='icons/file.svg' width=100 height=100/> <br/> ["deg"]"] -->|pd.read_csv()| A1
+    B2["<img src='icons/file.svg' width=100 height=100/> <br/> ["sal_col"]"] -->|pd.read_csv()| A2
+    B3["<img src='icons/file.svg' width=100 height=100/> <br/> ["sal_reg"]"] -->|pd.read_csv()| A3
+
+    %% Data Preparation
+    B4["<img src='icons/column_split.svg' width=100 height=100/> <br/> ["selected_col"]"] -->|Select relevant columns| B1
+    B5["<img src='icons/row_split.svg' width=100 height=100/> <br/> ["train_X"]"] -->|train_test_split()| B4
+    B6["<img src='icons/row_split.svg' width=100 height=100/> <br/> ["train_y"]"] -->|train_test_split()| B4
+    B7["<img src='icons/table.svg' width=100 height=100/> <br/> ["df_mod"]"] -->|Modified for visualizations| B1
+
+    %% Modeling
+    C1["<img src='icons/brain.svg' width=100 height=100/> <br/> Linear Regression Model"] -->|Input: train_X, train_y| B5 & B6
+    C2["<img src='icons/brain.svg' width=100 height=100/> <br/> Decision Tree Regressor"] -->|Input: train_X, train_y| B5 & B6
+
+    %% Results
+    D1["<img src='icons/table.svg' width=100 height=100/> <br/> ["df_model_res"]"] -->|Actual vs Predicted| C1 & C2

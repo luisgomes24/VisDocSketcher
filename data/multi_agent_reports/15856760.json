@@ -1,0 +1,82 @@
+{  
+  "data_sources": [  
+    {  
+      "source": "train.csv",  
+      "description": "Contains features and target for training the model."  
+    },  
+    {  
+      "source": "test.csv",  
+      "description": "Contains features for making predictions."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable": "train",  
+      "description": "DataFrame containing the training data."  
+    },  
+    {  
+      "variable": "test",  
+      "description": "DataFrame containing the test data."  
+    },  
+    {  
+      "variable": "X",  
+      "description": "Feature set from the training data (excluding target)."  
+    },  
+    {  
+      "variable": "y",  
+      "description": "Target variable from the training data."  
+    },  
+    {  
+      "variable": "X_test",  
+      "description": "Feature set from the test data."  
+    },  
+    {  
+      "variable": "best_params",  
+      "description": "Dictionary of best parameters found for the classifier."  
+    },  
+    {  
+      "variable": "submission",  
+      "description": "Final predictions to be submitted."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "train",  
+      "creation": "read_csv('../input/tabular-playground-series-mar-2021/train.csv')",  
+      "flow": "Used to create feature variable X and target variable y."  
+    },  
+    {  
+      "variable": "test",  
+      "creation": "read_csv('../input/tabular-playground-series-mar-2021/test.csv')",  
+      "flow": "Used to create feature variable X_test and for final predictions."  
+    },  
+    {  
+      "variable": "X",  
+      "creation": "train.iloc[:,1:-1].values",  
+      "flow": "Used for model training and optimization."  
+    },  
+    {  
+      "variable": "y",  
+      "creation": "train.iloc[:,-1].values",  
+      "flow": "Used for model training and optimization."  
+    },  
+    {  
+      "variable": "best_params",  
+      "creation": "study.best_params from Optuna optimization",  
+      "flow": "Used for fitting the final model and generating predictions."  
+    },  
+    {  
+      "variable": "submission",  
+      "creation": "pd.DataFrame({'id':test['id'],'target':preds})",  
+      "flow": "Saved to 'submit.csv' for submission."  
+    }  
+  ],  
+  "models": [  
+    {  
+      "model_name": "LGBMClassifier",  
+      "input_features": "X",  
+      "target_variable": "y",  
+      "hyperparameters": "[reg_alpha, reg_lambda, colsample_bytree, subsample, learning_rate, max_depth, num_leaves, min_child_samples, min_child_weight, cat_smooth, cat_l2, min_data_per_group]"  
+    }  
+  ]  
+}

@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📑 Data Preview"]
+    B --> C["📊 Distribution Graphs"]
+    A1["<img src='icons/file.svg'/> <br/> 2009.csv"] --> D1["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution of 2009"]
+    A2["<img src='icons/file.svg'/> <br/> 2010.csv"] --> D2["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution of 2010"]
+    A3["<img src='icons/file.svg'/> <br/> 2011.csv"] --> D3["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution of 2011"]
+    
+    A -->|Read in| A1
+    A -->|Read in| A2
+    A -->|Read in| A3
+    
+    B --> D1
+    B --> D2
+    B --> D3

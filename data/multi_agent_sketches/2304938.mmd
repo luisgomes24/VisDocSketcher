@@ -1,0 +1,54 @@
+flowchart TD
+    %% Data Sources %%
+    A1[["train.csv"]]:::dataSource
+    A2[["test.csv"]]:::dataSource
+    A3[["sample_submission.csv"]]:::dataSource
+
+    %% Variables %%
+    B1["train"]:::variable
+    B2["test"]:::variable
+    B3["class_names"]:::variable
+    B4["x"]:::variable
+    B5["y"]:::variable
+    B6["aml"]:::variable
+    B7["preds"]:::variable
+    B8["sample_submission"]:::variable
+
+    %% Processes %%
+    C1["H2O Import Train Data"]:::process
+    C2["H2O Import Test Data"]:::process
+    C3["Manual Assignment"]:::process
+    C4["Train H2OAutoML Model"]:::process
+    C5["Make Predictions"]:::process
+    C6["Prepare Submission"]:::process
+
+    %% ML Model %%
+    D1["H2OAutoML Model Training"]:::mlModel
+
+    %% Styles %%
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef mlModel fill:#bfb,stroke:#333,stroke-width:2px;
+
+    %% Data Source to Variable Flow %%
+    A1 --> C1
+    C1 --> B1
+    A2 --> C2
+    C2 --> B2
+    A3 --> B8
+
+    %% Variable to ML Model & Process Flow %%
+    B1 --> D1
+    B3 --> C3
+    B4 --> C3
+    B5 --> C3
+    B4 & B5 --> D1
+
+    D1 --> C4
+
+    %% Predictions and Submission %%
+    B6 --> C5
+    C5 --> B7
+    B7 --> C6
+    B8 --> C6

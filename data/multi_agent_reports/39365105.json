@@ -1,0 +1,132 @@
+{
+    "data_sources": [
+        {
+            "file_name": "train.csv",
+            "description": "Training dataset containing features and target variable 'microbusiness_density'."
+        },
+        {
+            "file_name": "test.csv",
+            "description": "Test dataset for making predictions."
+        },
+        {
+            "file_name": "sample_submission.csv",
+            "description": "Template for submission containing 'microbusiness_density' as the target."
+        },
+        {
+            "file_name": "revealed_test.csv",
+            "description": "Dataset used for model validation."
+        },
+        {
+            "file_name": "census_starter.csv",
+            "description": "Census data potentially providing additional features."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df_train",
+            "description": "DataFrame containing training data after cleaning and preprocessing."
+        },
+        {
+            "variable_name": "df_test",
+            "description": "DataFrame containing test data after preprocessing."
+        },
+        {
+            "variable_name": "df_sample_submission",
+            "description": "DataFrame used for submission template."
+        },
+        {
+            "variable_name": "df_revealed_test",
+            "description": "DataFrame with revealed test samples."
+        },
+        {
+            "variable_name": "df_census_starter",
+            "description": "DataFrame containing census starter data for feature expansion."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Training features excluding the target variable."
+        },
+        {
+            "variable_name": "y_train",
+            "description": "Target variable values from training dataset."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Test features for prediction excluding the target variable."
+        },
+        {
+            "variable_name": "y_pred",
+            "description": "Predicted target variable values for the test dataset."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_train",
+            "creation_method": "pd.read_csv",
+            "flow": "Cleaned and used to create X_train and y_train"
+        },
+        {
+            "variable": "df_test",
+            "creation_method": "pd.read_csv",
+            "flow": "Cleaned and used for prediction"
+        },
+        {
+            "variable": "df_revealed_test",
+            "creation_method": "pd.read_csv",
+            "flow": "Cleaned and used to form predictions and evaluate model performance"
+        },
+        {
+            "variable": "X_train",
+            "creation_method": "df_train.drop",
+            "flow": "Used as input features for model training"
+        },
+        {
+            "variable": "y_train",
+            "creation_method": "df_train['microbusiness_density']",
+            "flow": "Used as target variable for model training"
+        },
+        {
+            "variable": "y_pred",
+            "creation_method": "model.predict(X_test)",
+            "flow": "Final predictions which are saved in a submission format"
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Linear Regression",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "None"
+        },
+        {
+            "model_name": "Ridge",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "alpha values to search: [0.001, 0.01, 0.1, 1, 10]"
+        },
+        {
+            "model_name": "Lasso",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "alpha values to search: [0.001, 0.01, 0.1, 1, 10]"
+        },
+        {
+            "model_name": "Random Forest",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "n_estimators values to search: [5, 10, 50, 100, 200]"
+        },
+        {
+            "model_name": "K-Nearest Neighbors",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "n_neighbors values to search: [3, 5, 7]"
+        },
+        {
+            "model_name": "XGBoost",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "max_depth: [3, 6, 9], learning_rate: [0.1, 0.01, 0.001]"
+        }
+    ]
+}

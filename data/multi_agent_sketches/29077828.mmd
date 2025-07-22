@@ -1,0 +1,26 @@
+flowchart TD
+  %% Data Sources
+  A1[train.csv]:::dataSource --> B1[Load Training DataFrame]:::process
+  A2[test.csv]:::dataSource --> B2[Load Testing DataFrame]:::process
+  
+  %% Data Preprocessing
+  B1 --> C1[Preprocess Training Data]:::process
+  B2 --> C2[Preprocess Testing Data]:::process
+  
+  %% Processed Data
+  C1 --> D1[X_train & y_train]:::dataVariable
+  C1 --> D2[X_val & y_val]:::dataVariable
+  C2 --> D3[X_test & y_test]:::dataVariable
+  
+  %% Model
+  D1 --> E[Train CNN Model]:::model
+  D2 --> E
+  E --> D3
+  
+  %% Evaluation
+  E --> F[Evaluate Model]:::process
+  
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef dataVariable fill:#f99,stroke:#333,stroke-width:2px;
+  classDef model fill:#9f9,stroke:#333,stroke-width:2px;

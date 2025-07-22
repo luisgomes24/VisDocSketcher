@@ -1,0 +1,19 @@
+flowchart TD
+    %% Data Source
+    A["/kaggle/input/population-2022/population.csv"]:::dataSource
+    
+    %% Raw DataFrame from CSV
+    B["raw_df : DataFrame"]:::dataVariable
+    
+    %% Sub DataFrame for analysis
+    C["sub_df : DataFrame"]:::dataVariable
+    
+    %% Data Source to Raw DataFrame
+    A -->|"pd.read_csv"| B
+    
+    %% Raw DataFrame to Sub DataFrame
+    B -->|"Create various analyses"| C
+    
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:1px;

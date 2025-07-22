@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Load iris.csv into the data variable
+    A["Load iris.csv"] -->|Read CSV| B["data"]
+    
+    %% Data is split into features (X) and target (y)
+    B -->|Split data| C["X"]
+    B -->|Split data| D["y"]
+    
+    %% Features and target are split into training and testing sets
+    C -->|Train/Test Split| E["X_train"]
+    C -->|Train/Test Split| F["X_test"]
+    D -->|Train/Test Split| G["y_train"]
+    D -->|Train/Test Split| H["y_test"]
+    
+    %% Training the Logistic Regression model
+    E -->|Train model| I["Logistic Regression"]
+    G -->|Train model| I
+    
+    %% Predictions are made using the trained model
+    F -->|Predict| J["predictions"]
+    I -->|Predict| J
+    
+    %% Predictions and true values are used to calculate accuracy
+    J -->|Calculate Accuracy| K["acc"]
+    H -->|Calculate Accuracy| K
+    
+    %% Logistic Regression Model
+    classDef model fill:#f9f,stroke:#333,stroke-width:4px;
+    I:::model
+```

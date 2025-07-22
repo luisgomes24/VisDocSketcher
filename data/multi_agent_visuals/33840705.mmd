@@ -1,0 +1,40 @@
+flowchart TD
+  %% Data Source Nodes
+  DS_anime_csv["<img src='icons/file.svg' width=100 height=100/> <br/> Anime CSV\n'title, genre, rating'\ndata source"]
+  DS_rating_csv["<img src='icons/file.svg' width=100 height=100/> <br/> Rating CSV\n'user_id, anime_id, rating'\ndata source"]
+
+  %% Data Variables Nodes
+  dv1["<img src='icons/table.svg' width=100 height=100/> <br/> df1\nDataFrame with anime details"]
+  dv2["<img src='icons/table.svg' width=100 height=100/> <br/> df2\nDataFrame with user ratings"]
+  dv["<img src='icons/table.svg' width=100 height=100/> <br/> df\nMerged DataFrame"]
+  sample_df["<img src='icons/column_split.svg' width=100 height=100/> <br/> sample_df\nSubset DataFrame with selected anime IDs"]
+  user_anime_df["<img src='icons/row_split.svg' width=100 height=100/> <br/> user_anime_df\nUser-Item pivot table"]
+  sdf["<img src='icons/column_split.svg' width=100 height=100/> <br/> data\nSurprise Dataset format"]
+  trainset["<img src='icons/column_split.svg' width=100 height=100/> <br/> trainset\nTraining dataset"]
+  testset["<img src='icons/column_split.svg' width=100 height=100/> <br/> testset\nTest dataset"]
+
+  %% Model Nodes
+  svd_model["<img src='icons/brain.svg' width=100 height=100/> <br/> svd_model\nTrained SVD model"]
+  predictions["<img src='icons/column_split.svg' width=100 height=100/> <br/> predictions\nPredicted ratings"]
+  gs["<img src='icons/brain.svg' width=100 height=100/> <br/> GridSearchCV\nHyperparameter tuning"]
+
+  %% Data Flow Connections
+  DS_anime_csv --> dv1
+  DS_rating_csv --> dv2
+  dv1 --> dv
+  dv2 --> dv
+  dv --> sample_df
+  dv --> user_anime_df
+  sample_df --> user_anime_df
+  user_anime_df --> sdf
+  sdf --> trainset
+  sdf --> testset
+  trainset --> svd_model
+  svd_model --> predictions
+  testset --> predictions
+  sdf --> gs
+  gs --> svd_model
+
+  %% ML Model Description
+  svd_model_desc["SVD Model\nInput: user_id, anime_id\nOutput: Predicted ratings"]
+  svd_model --> svd_model_desc

@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Sources %%
+    A[train.csv]:::source -->|Load Data| B[data]:::process
+    %% Data Transformation %%
+    B[data]:::process -->|Filter for Questions| C[data_q]:::process
+    C[data_q]:::process -->|Count Interactions| D[users_i_counts]:::process
+    D[users_i_counts]:::process -->|Get User List| E[user_list]:::process
+    E[user_list]:::process -->|Select Users for Training| F[train_data]:::process
+    E[user_list]:::process -->|Select Users for Validation| G[valid_data]:::process
+    
+    %% Styles %%
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    
+    %% Comments %%
+    class A classDef="source" %% Represents the data source file containing user interactions %%
+    class B,C,D,E,F,G classDef="process" %% Various data processing stages %%

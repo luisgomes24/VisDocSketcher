@@ -1,0 +1,26 @@
+{"data_sources": [
+    {"file": "../input/train.csv", "description": "Contains data about Titanic passengers including survival status, age, gender, class, fare, and embarkation port."}
+],
+"data_variables": [
+    {"variable": "titanic_df", "description": "DataFrame containing the Titanic dataset."},
+    {"variable": "Survived", "description": "Indicates whether the passenger survived (0 = No, 1 = Yes)."},
+    {"variable": "Sex", "description": "Gender of the passengers (male or female)."},
+    {"variable": "Pclass", "description": "Ticket class of passengers (1 = 1st, 2 = 2nd, 3 = 3rd class)."},
+    {"variable": "Embarked", "description": "Port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton)."},
+    {"variable": "Age", "description": "Age of passengers, with missing values filled as necessary."},
+    {"variable": "Fare", "description": "Fare paid by the passengers, with missing values filled as necessary."},
+    {"variable": "Cabin", "description": "Cabin number where passengers stayed, used for further analysis on cabin information."}
+],
+"data_flow": [
+    {"variable": "titanic_df", "creation": "Read from CSV using pd.read_csv()", "flow": "Used for analysis and plotting."},
+    {"variable": "Survived", "flow": "Used as a target variable in survival analysis and plots."},
+    {"variable": "Sex", "flow": "Used in plots to analyze survival by gender."},
+    {"variable": "Pclass", "flow": "Used in plots to analyze passenger distribution and survival by class."},
+    {"variable": "Embarked", "flow": "Used in plots to analyze survival based on embarkation port."},
+    {"variable": "Age", "flow": "Used in distributions and joint plots to analyze age-related information."},
+    {"variable": "Fare", "flow": "Used in distributions and joint plots to analyze fare-related information."},
+    {"variable": "Cabin", "flow": "Used in specific analyses to check survival related to cabin numbers."}
+],
+"models": [
+    {"model_name": "Statistical Analysis", "description": "Analysis of passenger data using visualizations such as count plots and bar plots."}
+]}

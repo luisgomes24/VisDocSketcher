@@ -1,0 +1,101 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Main training data consisting of questions and answer options."
+    },
+    {
+      "file_name": "extra_train_set.csv",
+      "description": "Additional 500 high-quality training examples."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test data for predictions consisting of questions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the combined training data."
+    },
+    {
+      "name": "tokenized_dataset",
+      "description": "Tokenized dataset ready for training."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the test data used for predictions."
+    },
+    {
+      "name": "test_predictions",
+      "description": "Predictions made by the trained model on the test dataset."
+    },
+    {
+      "name": "predictions_as_ids",
+      "description": "Sorted indices of predictions output by the model."
+    },
+    {
+      "name": "predictions_as_answer_letters",
+      "description": "Predicted answers corresponding to the predictions."
+    },
+    {
+      "name": "predictions_as_string",
+      "description": "String format of the top 3 predicted answers concatenated."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used in data concatenation and processing."
+    },
+    {
+      "variable": "df_train",
+      "creation_method": "pd.concat",
+      "flow": "Merged with additional train data."
+    },
+    {
+      "variable": "tokenized_dataset",
+      "creation_method": "dataset.map(preprocess)",
+      "flow": "Used to train the model."
+    },
+    {
+      "variable": "test_df",
+      "creation_method": "pd.read_csv",
+      "flow": "Preprocessed for predictions."
+    },
+    {
+      "variable": "test_predictions",
+      "creation_method": "trainer.predict",
+      "flow": "Used to determine predicted answers."
+    },
+    {
+      "variable": "predictions_as_ids",
+      "creation_method": "np.argsort",
+      "flow": "Identifies top predictions for results."
+    },
+    {
+      "variable": "predictions_as_answer_letters",
+      "creation_method": "np.array",
+      "flow": "Used in creating final string outputs."
+    },
+    {
+      "variable": "submission",
+      "creation_method": "test_df[['id', 'prediction']].to_csv",
+      "flow": "Outputs final predictions to CSV."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "AutoModelForMultipleChoice",
+      "input_features": "Tokenized dataset representing multiple choice questions.",
+      "target_variable": "Labels representing the correct answers.",
+      "hyperparameters": {
+        "learning_rate": "5e-6",
+        "num_train_epochs": "3",
+        "per_device_train_batch_size": "2",
+        "per_device_eval_batch_size": "4"
+      }
+    }
+  ]
+}

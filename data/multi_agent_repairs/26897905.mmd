@@ -1,0 +1,19 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        DS1["tFL1 \nTransformed Follicular Lymphoma data"]
+    end
+    
+    subgraph Variables
+        V1["adata \nAnnData object for RNA-seq data"]
+        V2["G1S_genes_Tirosh \nGenes for G1/S phase"]
+        V3["G2M_genes_Tirosh \nGenes for G2/M phase"]
+    end
+
+    DS1 --> |"sc.read_10x_mtx(pathname)"| V1
+    subgraph PhasePlot
+        V1 --> |"Normalization, plotting"| PP["phase_plot function"]
+        V2 --> |"Input"| PP
+        V3 --> |"Input"| PP
+    end
+```

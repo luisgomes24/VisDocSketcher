@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "test_lung_mask.csv",
+      "description": "This file contains lung mask data with 3205 rows, of which only the first 1000 are read for analysis."
+    },
+    {
+      "file_name": "train_lung_mask.csv",
+      "description": "This file contains training lung mask data with 12089 rows, of which only the first 1000 are read for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame for the first file: test_lung_mask.csv"
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame for the second file: train_lung_mask.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv('/kaggle/input/test_lung_mask.csv', nrows=nRowsRead)",
+      "flows_to": "Used in plotting functions for exploratory analysis"
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv('/kaggle/input/train_lung_mask.csv', nrows=nRowsRead)",
+      "flows_to": "Used in plotting functions for exploratory analysis"
+    }
+  ],
+  "models": []
+}

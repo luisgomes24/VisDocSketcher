@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data sources
+    A["train.csv"] %% Training dataset
+    B["test.csv"] %% Test dataset
+
+    %% Data variables
+    C["train"] %% DataFrame containing the training dataset
+    D["test"] %% DataFrame containing the test dataset
+    E["X_train"] %% Features from training dataset
+    F["y_train"] %% Target variable from training dataset
+    G["X_test"] %% Features from test dataset
+    H["X_train_sc"] %% Scaled features from training dataset
+    I["X_test_sc"] %% Scaled features from test dataset
+    J["predict"] %% Predicted values for test dataset
+    K["submit"] %% DataFrame for submission
+
+    %% Data flow
+    A --> |"pd.read_csv"| C
+    B --> |"pd.read_csv"| D
+    C --> |"train.iloc[:,:-1]"| E
+    C --> |"train.iloc[:,-1]"| F
+    D --> |"Features"| G
+    E --> |"RobustScaler()"| H
+    G --> |"RobustScaler()"| I
+
+    %% Model
+    subgraph Logistic_Regression
+        direction TB
+        H --> |"Train model"| LR["Logistic Regression"]
+        F --> |"Target variable"| LR
+    end
+
+    %% Predictions and output
+    LR --> |"clf.predict"| J
+    J --> |"Submission DataFrame"| K
+
+    %% File creation
+    K --> |"Write to CSV"| L["submit.csv"]

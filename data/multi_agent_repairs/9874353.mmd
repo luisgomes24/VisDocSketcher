@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    subgraph DataSources["Data Sources"]
+        A1["/kaggle/input/sl_districts_coronavirus.csv"]
+        A2["/kaggle/input/sl_districts_demographics.csv"]
+        A3["/kaggle/input/sl_districts_info_sources.csv"]
+    end
+    
+    subgraph DataFrames["Data Frames"]
+        B1["df1: COVID-19 data"]
+        B2["df2: Demographic data"]
+        B3["df3: Info sources data"]
+    end
+
+    A1 -->|"read_csv()"| B1
+    A2 -->|"read_csv()"| B2
+    A3 -->|"read_csv()"| B3
+
+    subgraph DataProcessing["Data Processing & Analysis"]
+        C1["Plotting distributions"]
+        C2["Correlation matrix"]
+        C3["Scatter matrix"]
+    end
+
+    B1 --> C1
+    B2 --> C1
+    B3 --> C1
+    
+    B1 --> C2
+    B2 --> C2
+    B3 --> C2
+
+    B1 --> C3
+    B2 --> C3
+    B3 --> C3
+```

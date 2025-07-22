@@ -1,0 +1,24 @@
+flowchart TD
+    %% Node for data source
+    A["german_credit_data.csv"]
+    click A href "/kaggle/input/german-credit/german_credit_data.csv" "Opens German credit data source"
+    %% Node for data loading
+    B["data: Loaded DataFrame"]
+    %% Node for data cleansing
+    C["df: Cleansed DataFrame"]
+    %%Node for subset creation
+    D["credit: Subset DataFrame"]
+    %%Node for Correlation Matrix
+    E["corr: Correlation Matrix"]
+    %% Links
+    A -->|Load Data| B
+    B -->|Drop columns and fill NaNs| C
+    C -->|Select 'Saving accounts' and 'Credit amount'| D
+    C -->|Calculate Spearman correlation| E
+    
+    %% Comments for each node
+    %% A: Node to represent the source CSV file for German credit data
+    %% B: Node to represent the DataFrame after loading the CSV file
+    %% C: Node to represent the DataFrame after data cleansing operations
+    %% D: Node to represent the subset of data used for saving accounts analysis
+    %% E: Node to represent the correlation matrix computed from the DataFrame

@@ -1,0 +1,41 @@
+%% This is a Mermaid.js flowchart representing the workflow of the notebook 36317618
+
+flowchart TD
+  %% Movie CSV Source
+  MovieCSV["movie.csv"]
+  MovieCSV -->|Read CSV| MovieDF
+  
+  %% Rating CSV Source
+  RatingCSV["rating.csv"]
+  RatingCSV -->|Read CSV| RatingDF
+
+  %% Merging DataFrames
+  MovieDF["Movie DataFrame"]
+  RatingDF["Rating DataFrame"]
+  MovieDF -->|Merge on movieId| MergedDF
+  RatingDF -->|Merge on movieId| MergedDF
+
+  %% Creating Common Movies
+  MergedDF -->|Filter movies with >1000 ratings| CommonMovies
+
+  %% Pivot Table for User-Movie
+  CommonMovies -->|Pivot Table: UserID x Movie Titles| UserMovieDF
+
+  %% Random User Selection
+  UserMovieDF -->|Random Sampling| RandomUser
+
+  %% Identifying Random User's Movie
+  RandomUser -->|Select highest rated movie| RandomUserMovie
+  RandomUserMovie -->|Extract Title| FirstMovie
+
+  %% Correlation & Recommendations
+  UserMovieDF -->|Correlation with First Movie| Recommended
+
+  
+  %% Descriptions
+  
+  classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef processNode fill:#ccf,stroke:#333,stroke-width:2px;
+  class MovieDF,RatingDF,MergedDF,CommonMovies,UserMovieDF,RandomUserMovie,FirstMovie,Recommended processNode;
+  class MovieCSV,RatingCSV dataNode;
+

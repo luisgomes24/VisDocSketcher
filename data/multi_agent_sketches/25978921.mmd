@@ -1,0 +1,42 @@
+flowchart TD
+
+  %% Data Sources
+  DS1["Pistachio Image Dataset"]:::dataSource
+  
+  %% Nodes
+  A1["train_data_all"]:::dataVariable
+  A2["test_data"]:::dataVariable
+  A3["train_data_small"]:::dataVariable
+  A4["class_names"]:::dataVariable
+  B0["model_0 (EfficientNetB7 - Baseline)"]:::model
+  C0["history_0"]:::dataVariable
+  B1["model_1 (Data Augmentation)"]:::model
+  C1["history_1"]:::dataVariable
+  B2["model_2 (Adjusted Learning Rate)"]:::model
+  C2["history_2"]:::dataVariable
+  B3["model_final (All Optimizations)"]:::model
+  C3["history_final"]:::dataVariable
+  
+  %% Style
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#f96,stroke:#333,stroke-width:2px;
+
+  %% Data Flow
+  DS1 -->|Load images| A1 & A2
+  A1 -->|Subset| A3
+  A1 --> B0
+  A2 --> B0
+  B0 -->|Training| C0
+  
+  A3 --> B1
+  A2 --> B1
+  B1 -->|Training| C1
+  
+  A3 --> B2
+  A2 --> B2
+  B2 -->|Training| C2
+  
+  A1 --> B3
+  A2 --> B3
+  B3 -->|Training| C3

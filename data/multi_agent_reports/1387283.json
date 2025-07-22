@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/rodent-inspection.csv",
+      "description": "Contains rodent inspection data with various attributes"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first 100 rows of the rodent inspection dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotHistogram", "plotCorrelationMatrix", "plotScatterMatrix", "plotPCA"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,40 @@
+%%{ init : { 'theme' : 'base', 'themeVariables' : { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#000000', 'tertiaryTextColor':'#ffffff' }}}%%
+flowchart TD
+    subgraph Dataset
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> Candy Data CSV"]
+    end
+    subgraph DataPreprocessing
+        B["<img src='icons/table.svg' width=100 height=100/> <br/> Load Data -> Data DataFrame"]
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Extract 'names' from Data"]
+        D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Extract target 'y' from Data"]
+        E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Create Features 'X' (drop 'bar')"]
+        F["<img src='icons/brain.svg' width=100 height=100/> <br/> Normalize X with MinMaxScaler"]
+    end
+    subgraph SplitData
+        G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Split into X_train, X_test, y_train, y_test"]
+    end
+    subgraph ModelTraining
+        H["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Logistic Regression on X_train, y_train"]
+    end
+    subgraph ModelEvaluation
+        I["<img src='icons/brain.svg' width=100 height=100/> <br/> Evaluate Model on X_test, y_test"]
+    end
+    A -->|"pd.read_csv"| B
+    B -->|"Data[['competitorname']]"| C
+    B -->|"Data['bar']"| D
+    B -->|"Data.drop('bar')"| E
+    E -->|"MinMaxScaler"| F
+    F --> G
+    D --> G
+    G --> H
+    H --> I
+
+%% A: Candy data source read into the system. Provides initial data required for the workflow.
+%% B: DataFrame creation from the source. Base for all following variable extractions.
+%% C: Competitor names extraction, though not involved in further steps.
+%% D: The target variable 'y' is extracted to be used in the model training process.
+%% E: Features 'X' of the dataset prepared excluding the target for scaling and model training.
+%% F: Feature normalization step using MinMaxScaler, a part of data preprocessing.
+%% G: The dataset is split into training and testing sets for model validation.
+%% H: Model training with Logistic Regression using the training datasets.
+%% I: Model is evaluated against test data to verify accuracy and performance.

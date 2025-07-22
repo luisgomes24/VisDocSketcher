@@ -1,0 +1,26 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/tsdata-1/us_energy.csv"]
+    %% A: Time series data of US energy consumption
+    A -->|"read_csv"| B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    B -->|"set_index, plot"| C["<img src='dummy_plots/lineplot_template.svg'/> <br/> Data indexed and plotted"]
+    B -->|"seasonal_decompose"| D["<img src='dummy_plots/lineplot_template.svg'/> <br/> Seasonal decomposition"]
+    B -->|".loc on cutoff date"| E["xtrain"]
+    B -->|".loc on cutoff date"| F["xvalid"]
+    E -->|"ExponentialSmoothing"| G["ExponentialSmoothing Model"]
+    F -->|"ExponentialSmoothing"| G
+    G -->|"fit, forecast"| H["<img src='dummy_plots/lineplot_template.svg'/> <br/> forecast"]
+    H -->|"plot_acf"| I["Autocorrelation of forecast"]
+    
+    J["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/greenhouse-dataset/GreenhouseClimate1.csv"]
+    %% J: Climate data from greenhouse for time series prediction
+    J -->|"read_csv"| K["<img src='icons/table.svg' width=100 height=100/> <br/> xdat"]
+    K -->|"data cleaning"| L["<img src='dummy_plots/boxplot_template.svg'/> <br/> Cleaned climate data"]
+    L -->|"Prophet"| M["Prophet Model"]
+    M -->|"cross_validation"| N["<img src='dummy_plots/boxplot_template.svg'/> <br/> df_cv"]
+    N -->|"performance_metrics"| O["Performance metrics from cross-validation"]
+    
+    M -->|input| P["Prophet Model"]
+    Q["NeuralProphet Model"]
+    P --> R
+    Q --> R
+    R["Model Predictions"] -->|"pd.DataFrame"| S["comparison"]

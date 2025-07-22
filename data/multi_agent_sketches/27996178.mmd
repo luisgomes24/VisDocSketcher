@@ -1,0 +1,14 @@
+flowchart TD
+  %% Data Sources
+  A["/Supermart Grocery Sales - Retail Analytics Dataset.csv"/] 
+  %% Data Loading
+  B[df] -->|Read from CSV| A 
+  %% Data Cleaning
+  C{Data Cleaning} -->|Drop 'North' region entries| B 
+  %% Data Aggregation
+  D[sale_profit] -->|Pivot table: Aggregate by sub-category| B
+  E[year_sale] -->|Pivot table: Aggregate by year| B 
+  %% Data Usage
+  F[Visualizations] -->|Sales by Regions, Categories| C
+  G[Visualizations] -->|Sales by Sub-Categories| D
+  H[Visualizations] -->|Sales by Year, by Months| E

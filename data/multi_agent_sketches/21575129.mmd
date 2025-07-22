@@ -1,0 +1,27 @@
+flowchart TD
+    A[Start] --> B[Import Pandas]
+    %% B node represents the importation of Pandas library
+    B --> C[Load NBA Players Data]
+    %% C node represents loading data from a CSV file into players DataFrame
+    C --> D[Display Players Data]
+    %% D node represents displaying first rows and summary stats of the players DataFrame
+    C --> E[Filter Guards Data]
+    %% E node represents creation of guards DataFrame by filtering players
+    C --> F[Filter Forwards Data]
+    %% F node represents creation of forwards DataFrame by filtering players
+    C --> G[Filter Centers Data]
+    %% G node represents creation of centers DataFrame by filtering players
+    E --> H[Stats for Guards]
+    %% H node displays summary statistics for the guards DataFrame
+    F --> I[Stats for Forwards]
+    %% I node displays summary statistics for the forwards DataFrame
+    G --> J[Stats for Centers]
+    %% J node displays summary statistics for the centers DataFrame
+    J --> K[Compare Field Goals]
+    %% K node represents comparing field goals between different positions
+    I --> K
+    H --> K
+    K --> L[Observations]
+    %% L node represents making observations based on the data analysis of field goals] 
+    L --> M[End]
+    %% M node represents the end of the analysis

@@ -1,0 +1,78 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "Training dataset containing information about Titanic passengers including 'Survived' status."
+    },
+    {
+      "file": "/kaggle/input/titanic/test.csv",
+      "description": "Test dataset containing information about Titanic passengers without 'Survived' status."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing training data."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing test data."
+    },
+    {
+      "name": "y",
+      "description": "Series containing the target variable 'Survived' extracted from train_df."
+    },
+    {
+      "name": "X",
+      "description": "DataFrame containing the features for model training, excluding 'Survived' from train_df."
+    },
+    {
+      "name": "y_pred",
+      "description": "Predicted values for the 'Survived' variable from the test dataset."
+    },
+    {
+      "name": "answer_df",
+      "description": "DataFrame structure for submitting predictions, mapping 'PassengerId' to predicted 'Survived' status."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation": "Read from train.csv",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable": "test_df",
+      "creation": "Read from test.csv",
+      "flow": "Used for prediction; passed to scaler and model."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from train_df",
+      "flow": "Used as the target variable for model training."
+    },
+    {
+      "variable": "X",
+      "creation": "Derived from train_df, excluding 'Survived'",
+      "flow": "Used as input features for model training."
+    },
+    {
+      "variable": "y_pred",
+      "creation": "Predicted using the Logistic Regression model on test_df",
+      "flow": "Used to create the answer_df for submission."
+    },
+    {
+      "variable": "answer_df",
+      "creation": "Created from the predictions (y_pred)",
+      "flow": "Saved as 'submission.csv' for submission to competition."
+    }
+  ],
+  "models": [
+    {
+      "model": "Logistic Regression",
+      "input_features": "All features from X after preprocessing",
+      "target_variable": "y (Survived)",
+      "hyperparameters": "Default parameters used, no specific hyperparameters modified."
+    }
+  ]
+}

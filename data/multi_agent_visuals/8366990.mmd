@@ -1,0 +1,41 @@
+%% This Mermaid diagram represents the workflow of the Jupyter Notebook with ID 8366990
+flowchart TD
+    %% Import Libraries
+    A["Import Libraries"] --> B["matplotlib.pyplot, numpy, os, pandas"]
+    
+    %% Initialize DataFrame
+    B --> C["df"] 
+    
+    %% Plotting Functions
+    C --> D["plotPerColumnDistribution"]
+    C --> E["plotCorrelationMatrix"]
+    C --> F["plotScatterMatrix"]
+    
+    %% Data Variable nunique
+    C --> G["nunique"]
+    G --> D
+    
+    %% Data Variable corr
+    C --> H["corr"]
+    H --> E
+    
+    %% Data Variable columnNames
+    C --> I["columnNames"]
+    D --> I
+    F --> I
+    
+    %% Output
+    D --> J["Distribution Graphs"]
+    E --> K["Correlation Matrix"]
+    F --> L["Scatter and Density Plots"]
+
+    %% Comments for each section
+    classDef comment fill:#f96,stroke:#333,stroke-width:2px,font-size:8px;
+    class A comment;
+    class B comment;
+    class C comment;
+    class D comment; class E comment; class F comment;
+    class G comment;
+    class H comment;
+    class I comment;
+    class J comment; class K comment; class L comment;

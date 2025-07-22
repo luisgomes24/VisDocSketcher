@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Source - Placeholder for data source information
+    subgraph DataSources
+      source["/Data Source/"]
+    end
+
+    %% Node for DataFrame 'df'
+    subgraph DataVariables
+      df["/df DataFrame/"]
+      nHistogramShown["nHistogramShown - Number of histograms"]
+      nHistogramPerRow["nHistogramPerRow - Histograms per row"]
+      graphWidth["graphWidth - Correlation matrix width"]
+      plotSize["plotSize - Scatter plot size"]
+      textSize["textSize - Scatter plot text size"]
+    end
+
+    %% Functions and Flow
+    subgraph Functions
+      plotHistogram["plotHistogram Function"]
+      plotCorrelationMatrix["plotCorrelationMatrix Function"]
+      plotScatterMatrix["plotScatterMatrix Function"]
+
+      df --> plotHistogram
+      df --> plotCorrelationMatrix
+      df --> plotScatterMatrix
+      
+      nHistogramShown --> plotHistogram
+      nHistogramPerRow --> plotHistogram
+      graphWidth --> plotCorrelationMatrix
+      plotSize --> plotScatterMatrix
+      textSize --> plotScatterMatrix
+    end

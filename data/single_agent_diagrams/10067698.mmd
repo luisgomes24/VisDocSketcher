@@ -1,0 +1,14 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> apps.csv"] --> B["🧪 Data Preview <img src='table.svg' /> <br/> df1.head(5)"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg' /> <br/> plotPerColumnDistribution(df1, 10, 5)"]
+    C --> D["🧬 Correlation Matrix <img src='boxplot_template.svg' /> <br/> plotCorrelationMatrix(df1, 8)"]
+    D --> E["🔍 Scatter Matrix <img src='scatter_plot_template.svg' /> <br/> plotScatterMatrix(df1, 9, 10)"]
+
+    F["📥 Load Data <img src='file.svg' /> <br/> user_reviews.csv"] --> G["🧪 Data Preview <img src='table.svg' /> <br/> df2.head(5)"]
+    G --> H["📊 Distribution Graphs <img src='hist_template.svg' /> <br/> plotPerColumnDistribution(df2, 10, 5)"]
+    H --> I["🧬 Correlation Matrix <img src='boxplot_template.svg' /> <br/> plotCorrelationMatrix(df2, 8)"]
+    I --> J["🔍 Scatter Matrix <img src='scatter_plot_template.svg' /> <br/> plotScatterMatrix(df2, 6, 15)"]
+
+    A -->|Reads| F
+    E -->|Analyzes| G
+    J --> K["✅ Conclusion"]

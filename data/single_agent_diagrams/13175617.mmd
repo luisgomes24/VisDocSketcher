@@ -1,0 +1,15 @@
+flowchart TD
+    A["🗄️ Load Model and Features"] --> B["🔧 Preprocess Test Data"]
+    B --> C["🧠 Model Prediction"]
+    C --> D["📊 Generate Submission"]
+    
+    A -->|Load| E["<img src='icons/database.svg' /> <br/> Load Feature Columns"]
+    A -->|Load| F["<img src='icons/brain.svg' /> <br/> Load Trained Model"]
+
+    B --> G["🧼 Fill Missing Values"]
+    G --> H["📊 Prepare Input Features"]
+    
+    C --> I["🎯 Make Action Prediction"]
+    I --> J["📭 Update Sample Predictions"]
+
+    D --> K["📤 Submit Predictions"]

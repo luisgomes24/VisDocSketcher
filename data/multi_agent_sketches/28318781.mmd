@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph DataSources
+        DS1["../input/nvtabular-with-dependencies/nvt_all"]:::ds -->|Data source used| DS;
+    end
+
+    subgraph DataPreparation
+        D1["df: DataFrame with random integers and real numbers"]:::dp -->|Created with pd.DataFrame| DS;
+        DS["ds: Dataset object for NVTabular"]:::dp;
+    end
+
+    subgraph DataTransformation
+        subgraph wf["wf: Workflow containing operations"]:::dt
+            G["out: Groupby operation output features"]:::dt --> wf;
+            H["cats_hashed: Hashed categorical features"]:::dt --> wf;
+        end
+        DS --> wf;
+    end
+
+    subgraph WorkflowExecution
+        wf -->|wf.fit_transform| O["o: Transformed dataset output"]:::we;
+    end
+    classDef ds fill:#f96,stroke:#333,stroke-width:2px;
+    classDef dp fill:#ccf,stroke:#33c,stroke-width:2px;
+    classDef dt fill:#9c9,stroke:#393,stroke-width:2px;
+    classDef we fill:#cf9,stroke:#393,stroke-width:2px;

@@ -1,0 +1,32 @@
+flowchart TD
+    A[Sample Images CSV] -->|Read with Pandas| B[df]
+    B[df] -->|Data for Mask Visualization| G[Visualize Annotations]
+    B[df] -->|Source for Image Masks| J[Image Masks]
+    
+    C[Training DICOM Images] -->|Find using glob| D[sample_files]
+    D[sample_files] -->|Load Images into Array| H[Construct complete_image]
+    
+    E[Training Annotations CSV] -->|Read File| F[Mask annotations DataFrame]
+    F -->|Merge Annotations| I[df_mask_dist]
+    I -->|Filter and Analyze| K[Analysis]
+    
+    H[complete_image] -->|Display Images| L[Show Images]
+    
+    H[complete_image] -->|Overlay Masks| M[complete_image_masked]
+    M -->|Display Masked Images| N[Show Masked Images]
+    
+    %% Nodes Explanation
+    %% A: Source CSV file for sample image RLE encodings
+    %% B: DataFrame with RLE encodings
+    %% C: DICOM image files for training
+    %% D: List of sample files after applying glob
+    %% E: CSV file containing all training annotations
+    %% F: DataFrame created by reading annotations
+    %% G: Visualization of RLE based data
+    %% H: Combined image visualization from loaded files
+    %% I: DataFrame with image IDs and their annotation counts
+    %% J: Source data for creating masks from RLE
+    %% K: Filtering and analysis of images with masks
+    %% L: Display of images constructed without masks
+    %% M: Images with masks layered on
+    %% N: Display of images with masks layered 

@@ -1,0 +1,9 @@
+graph TD;
+    A["Training Dataset"] -->|"Read from train.csv"| B["train_df"];
+    A["Test Dataset"] -->|"Read from test.csv"| C["test_df"];
+    B -->|"Extract 'Survived'"| D["y"];
+    B -->|"Features for training"| E["X"];
+    C -->|"Predict using Model"| F["y_pred"];
+    F -->|"Create submission"| G["answer_df"];
+    G["Answer DataFrame"] -->|"Saved as 'submission.csv'"| H["Final Output"];
+    D -->|"Target variable"| I["Logistic Regression Model"];

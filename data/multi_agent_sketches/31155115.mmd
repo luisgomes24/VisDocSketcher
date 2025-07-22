@@ -1,0 +1,15 @@
+flowchart TD
+    %% Node representing the data source
+    A[ds_salaries.csv] --> B[Data]
+
+    %% Node representing the creation of the 'data' DataFrame
+    B[Data] --> |Load CSV| D[Data Cleaning and EDA]
+
+    %% Node representing EDA and data cleaning steps
+    D[Data Cleaning and EDA] --> |Group By| Z[Z - Aggregation]
+
+    %% Node for 'z' DataFrame representing aggregation results
+    Z[Z - Aggregation] --> |Generate Insights| D
+
+    %% Comment on model usage - no specific model is used
+    %% C(Model) - Skipped as no ML model is directly used in this notebook

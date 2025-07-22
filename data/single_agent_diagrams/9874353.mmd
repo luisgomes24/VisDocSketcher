@@ -1,0 +1,20 @@
+flowchart TD
+    A["📂 Load Data"] -->|Load Files| B["📄 Read CSV 1: <br/> sl_districts_coronavirus.csv"]
+    B --> C["📊 Data Overview 1: <br/> df1.head(5)"]
+    C --> D["📊 Distribution Plots: <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    
+    A -->|Load Files| E["📄 Read CSV 2: <br/> sl_districts_demographics.csv"]
+    E --> F["📊 Data Overview 2: <br/> df2.head(5)"]
+    F --> G["📊 Distribution Plots: <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    G --> H["📊 Correlation Matrix: <br/> <img src='dummy_plots/correlation_matrix.svg' />"]
+    H --> I["📈 Scatter & Density Plots: <br/> <img src='dummy_plots/scatter_plot_template.svg' />"]
+    
+    A -->|Load Files| J["📄 Read CSV 3: <br/> sl_districts_info_sources.csv"]
+    J --> K["📊 Data Overview 3: <br/> df3.head(5)"]
+    K --> L["📊 Distribution Plots: <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    L --> M["📊 Correlation Matrix: <br/> <img src='dummy_plots/correlation_matrix.svg' />"]
+    M --> N["📈 Scatter & Density Plots: <br/> <img src='dummy_plots/scatter_plot_template.svg' />"]
+    
+    D --> O["✅ Presentation of Insights"]
+    I --> O
+    N --> O

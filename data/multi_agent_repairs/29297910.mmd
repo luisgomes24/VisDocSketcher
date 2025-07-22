@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|"Load data"| B["df_train"]
+    C["test.csv"] -->|"Load data"| D["df_test"]
+    E["sample_submission.csv"] -->|"Load format"| F["df_submission"]
+
+    %% Data Preparation
+    B -->|"Combine"| G["df_all"]
+    D -->|"Combine"| G
+    G -->|"Encode categorical features"| H["encoders"]
+    H -->|"Apply encoding"| B
+    H -->|"Apply encoding"| D
+
+    %% Model Training
+    B -->|"Select features"| I["features"]
+    I -->|"Train model"| J["model_tpot::TPOTClassifier"]
+    J -->|"Predict on test"| D
+
+    %% Submission
+    D -->|"Prepare submission"| F
+    F -->|"Save"| K["submission.csv"]
+
+    %% Explanation comments
+    %% A: This node represents the training dataset composed of features and the target.
+    %% B: This node contains the loaded training data in a DataFrame.
+    %% C: This node represents the test dataset with features for prediction.
+    %% D: This node contains the loaded test data in a DataFrame.
+    %% E: This node refers to the sample format for submission.
+    %% F: Holds the submission DataFrame.
+    %% G: A combined DataFrame of training and test sets to handle preprocessing tasks like encoding.
+    %% H: Holds encoders for transforming categorical features into numerical ones.
+    %% I: Represents the list of selected features for model training, excluding the target.
+    %% J: Represents the TPOTClassifier model developed and used for predictions.
+    %% K: The final submission file generated from predictions.
+```

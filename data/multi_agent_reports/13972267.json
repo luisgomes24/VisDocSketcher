@@ -1,0 +1,126 @@
+{"data_sources": [
+    {
+      "file": "../input/goodbooks-10k/ratings.csv",
+      "description": "Contains user ratings for various books."
+    },
+    {
+      "file": "../input/goodbooks-10k/books.csv",
+      "description": "Contains information about books including titles and authors."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "ratings",
+      "description": "DataFrame containing user ratings, limited to the first 20,000 entries."
+    },
+    {
+      "name": "books",
+      "description": "DataFrame containing details about books, limited to the first 20 entries."
+    },
+    {
+      "name": "train",
+      "description": "Merged DataFrame containing both books and their ratings."
+    },
+    {
+      "name": "userRatings",
+      "description": "Pivot table of user ratings with users as rows and book titles as columns."
+    },
+    {
+      "name": "item_similarity_pearson",
+      "description": "DataFrame containing Pearson correlation scores for item similarity."
+    },
+    {
+      "name": "user_model",
+      "description": "KNN model for user-based collaborative filtering."
+    },
+    {
+      "name": "item_model",
+      "description": "KNN model for item-based collaborative filtering."
+    },
+    {
+      "name": "recommended_pearson",
+      "description": "List storing recommended books based on user input and Pearson scores."
+    },
+    {
+      "name": "recommended_pearson_item",
+      "description": "List storing recommended books based on item similarity."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ratings",
+      "created_by": "pd.read_csv",
+      "flows_to": [
+        "train",
+        "dataset1"
+      ]
+    },
+    {
+      "variable": "books",
+      "created_by": "pd.read_csv",
+      "flows_to": [
+        "train"
+      ]
+    },
+    {
+      "variable": "train",
+      "created_by": "pd.merge",
+      "flows_to": [
+        "userRatings",
+        "item_similarity_pearson"
+      ]
+    },
+    {
+      "variable": "userRatings",
+      "created_by": "train.pivot_table",
+      "flows_to": [
+        "item_similarity_pearson"
+      ]
+    },
+    {
+      "variable": "item_similarity_pearson",
+      "created_by": "userRatings.corr",
+      "flows_to": [
+        "recommended_pearson",
+        "recommended_pearson_item"
+      ]
+    },
+    {
+      "variable": "user_model",
+      "created_by": "surprise.KNNBasic",
+      "flows_to": [
+        "preds"
+      ]
+    },
+    {
+      "variable": "item_model",
+      "created_by": "surprise.KNNBasic",
+      "flows_to": [
+        "preds"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "name": "KNNBasic",
+      "type": "User-based Collaborative Filtering",
+      "input_features": ["ratings", "train1"],
+      "target_variable": "preds",
+      "hyperparameters": {
+        "k": 40,
+        "similarity": "pearson",
+        "user_based": true
+      }
+    },
+    {
+      "name": "KNNBasic",
+      "type": "Item-based Collaborative Filtering",
+      "input_features": ["ratings", "train1"],
+      "target_variable": "preds",
+      "hyperparameters": {
+        "k": 40,
+        "similarity": "pearson",
+        "user_based": false
+      }
+    }
+  ]}

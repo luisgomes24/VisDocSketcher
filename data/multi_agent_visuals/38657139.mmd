@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: home_data"]
+    
+    %% Data Preparation
+    B -->|Extract SalePrice| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Series: y
+    <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    B -->|Select Features| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> DataFrame: X
+    <img src='dummy_plots/barplot_template.svg'/> <br/> "]
+    
+    %% Model Training
+    D -->|Features| E["<img src='icons/brain.svg' width=100 height=100/> <br/> DecisionTreeRegressor: iowa_model
+    <img src='dummy_plots/hist_template.svg'/> <br/> "]
+    C -->|Target| E
+    
+    %% Predictions
+    E -->|Predict| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Series: predictions
+    <img src='dummy_plots/lineplot_template.svg'/> <br/> "]
+    
+    %% Comments
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#C6F4D6,stroke:#f66,stroke-width:2px;
+    classDef model fill:#F2C464,stroke:#6b6,stroke-width:2px;
+    
+    class A dataSource;
+    class B,C,D,F dataVariable;
+    class E model;

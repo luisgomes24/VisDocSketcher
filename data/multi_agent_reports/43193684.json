@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_data.csv",
+      "description": "Contains RNA sequences of the train set with 1,643,680 rows and 419 columns."
+    },
+    {
+      "file_name": "test_sequences.csv",
+      "description": "Contains RNA sequences of the test set with 1,343,823 rows and 5 columns."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training data loaded from 'train_data.csv'."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing test data loaded from 'test_sequences.csv'."
+    },
+    {
+      "name": "train_nulls",
+      "description": "Percentage of null values for columns in the training set."
+    },
+    {
+      "name": "test_nulls",
+      "description": "Percentage of null values for columns in the test set."
+    },
+    {
+      "name": "reactivity_cols",
+      "description": "List of columns containing reactivity values from the training set."
+    },
+    {
+      "name": "reactivity_error_cols",
+      "description": "List of columns containing reactivity error values from the training set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "description": "Contains RNA sequences and associated features from training data.",
+      "usage": "Used for exploratory data analysis and model training."
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "description": "Contains RNA sequences and associated features from test data.",
+      "usage": "Used for prediction and evaluation against the competition."
+    },
+    {
+      "variable_name": "train_nulls",
+      "creation_method": "pd.DataFrame",
+      "description": "Computed for analysis of missing values in training data.",
+      "usage": "Relevant for cleaning and preprocessing steps."
+    },
+    {
+      "variable_name": "test_nulls",
+      "creation_method": "pd.DataFrame",
+      "description": "Computed for analysis of missing values in test data.",
+      "usage": "Relevant for understanding data integrity in predictions."
+    }
+  ],
+  "models": []
+}

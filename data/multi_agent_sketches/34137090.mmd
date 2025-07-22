@@ -1,0 +1,34 @@
+%% This diagram represents the workflow of a data science project focused on heart attack prediction.
+flowchart TD
+    A[heart.csv] -->|load data| B[df]
+    %% Load the dataset
+    B -->|preprocess| C[X, y]
+    %% Split data into features and target
+    C -->|train_test_split| D[X_train, X_test, y_train, y_test]
+    %% Split into training and testing sets
+    D -->|train models| E((Model Training))
+    %% ML model training section
+    E -->|Logistic Regression CV| F1[LogisticRegressionCV]
+    E -->|Stochastic Gradient Descent| F2[SGDClassifier]
+    E -->|Support Vector Classifier| F3[SVC]
+    E -->|Decision Tree| F4[DecisionTreeClassifier]
+    E -->|Extra Tree| F5[ExtraTreeClassifier]
+    E -->|Random Forest| F6[RandomForestClassifier]
+    E -->|Gradient Boosting| F7[GradientBoostingClassifier]
+    E -->|AdaBoost| F8[AdaBoostClassifier]
+    E -->|XGBoost| F9[XGBClassifier]
+    E -->|LightGBM| F10[LGBMClassifier]
+    %% Each model receives training data and produces predictions.
+    F1 --> |evaluate| G[score_dict]
+    F2 --> |evaluate| G
+    F3 --> |evaluate| G
+    F4 --> |evaluate| G
+    F5 --> |evaluate| G
+    F6 --> |evaluate| G
+    F7 --> |evaluate| G
+    F8 --> |evaluate| G
+    F9 --> |evaluate| G
+    F10 --> |evaluate| G
+    %% Performance evaluation
+    G -->|create DataFrame| H[score_pd]
+    %% Consolidate scores for visualization

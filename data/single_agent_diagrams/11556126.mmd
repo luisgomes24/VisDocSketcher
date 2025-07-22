@@ -1,0 +1,12 @@
+graph TD;
+    A["📥 Load Data\n<img src='icons/file.svg' />"] --> B["📊 Histogram\n<img src='dummy_plots/hist_template.svg' />"];
+    B --> C["🧮 Estimate Parameters"];
+    C --> D["📈 Fit Distribution\n<img src='dummy_plots/lineplot_template.svg' />"];
+    D --> E["✅ Evaluate Fit"];
+    E --> F["📊 Compare PDF with Histogram\n<img src='dummy_plots/hist_template.svg' />"];
+    F --> G["🔍 Review & Adjust Data"];
+    G -->|Transform or Filter Outliers| B;
+    G --> H["🛠️ Non-Parametric Estimation"];
+    H --> I["📊 KDE Histogram\n<img src='dummy_plots/hist_template.svg' />"];
+    I --> J["📈 Fit KDE Model"];
+    J --> K["📊 Compare KDE with Histogram\n<img src='dummy_plots/hist_template.svg' />"];

@@ -1,0 +1,25 @@
+flowchart TD
+    A["📂 Read Data <img src='file.svg' /> <br/> train.csv"] --> B["📝 Copy Data <br/> df = train.copy()"]
+    B --> C["🔍 Check NULLs <br/> df.isnull().sum()"]
+    C --> D["📊 Data Summary <br/> df.describe()"]
+    D --> E["📊 Exploratory Data Analysis"]
+    
+    E --> F["📈 Gender Count vs Response <img src='dummy_plots/countplot_template.svg' />"]
+    F --> G["📈 Age vs Previously Insured <img src='dummy_plots/lineplot_template.svg' />"]
+    G --> H["📈 Vehicle Age vs Damage <img src='dummy_plots/barplot_template.svg' />"]
+    
+    H --> I["🔄 Data Preprocessing"]
+    
+    I --> J["🔢 Convert Categorical to Numeric"]
+    J --> K["📊 Heatmap of Correlations <img src='dummy_plots/heatmap_template.svg' />"]
+    
+    K --> L["📅 Split Data (train/test)"]
+    L --> M["🧠 Modeling"]
+    
+    M --> N["🚀 Train Random Forest Classifier"]
+    N --> O["📊 Evaluate Model <br/> Confusion Matrix & Report"]
+    
+    O --> P["🚀 Train XGBoost Classifier"]
+    P --> Q["📊 Evaluate Model <br/> Confusion Matrix & Report"]
+    
+    Q --> R["✅ Final Results"]

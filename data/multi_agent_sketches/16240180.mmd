@@ -1,0 +1,29 @@
+%% This Mermaid diagram represents the data workflow for a data science project
+flowchart TD
+    A[Data Source: Internal Generation] -->|Generates Data| B[N_x, N_epsilon, N]
+    B --> |Calculate Total Points| C[N]
+    C --> |Generate x Values| D[x_]
+    D -->|Used in Lambda Equation| F[lambda_eq]
+    D -->|Used in Probabilistic Equation| G[lambda_eq_probabalitic]
+    F --> |Calculate True y Values| H[y]
+    G --> |Generate Random Errors| I[epsilon]
+    I --> |Calculate Measured y Values| J[y_measure]
+    H --> |Create DataFrame| K[df]
+    J --> |Add to DataFrame| K[df]
+    K -->|Used in Plots| L[Plot y and y_measure]
+
+    subgraph Linear_Regression_Model
+        direction TB
+        M[Model: Linear Regression]
+        N1[x]
+        N2[y, y_measure]
+        M --> |Input| N1
+        M --> |Target| N2
+        M --> |Hyperparameters| O{Hyperparameters: α=10, β=60}
+    end
+    L --> |Analyze and Validate| Linear_Regression_Model
+
+    %% Node details
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef processNode fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N1,N2,O dataNode;

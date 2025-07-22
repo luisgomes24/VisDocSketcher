@@ -1,0 +1,120 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/rsna-intracranial-hemorrhage-detection/stage_1_train.csv",
+      "description": "Training data containing image IDs and associated labels."
+    },
+    {
+      "file": "../input/rsna-intracranial-hemorrhage-detection/stage_1_sample_submission.csv",
+      "description": "Sample submission data format for the competition."
+    },
+    {
+      "directory": "../input/rsna-train-stage-1-images-png-224x/stage_1_train_png_224x",
+      "description": "Directory containing training images in PNG format."
+    },
+    {
+      "directory": "../input/rsna-test-stage-1-images-png-224x/stage_1_test_png_224x",
+      "description": "Directory containing test images in PNG format."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training image IDs, diagnoses, and labels."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame for test image IDs and placeholder labels."
+    },
+    {
+      "name": "train_dataset",
+      "description": "Dataset object for loading training images and their labels."
+    },
+    {
+      "name": "test_dataset",
+      "description": "Dataset object for loading test images without labels."
+    },
+    {
+      "name": "data_loader_train",
+      "description": "DataLoader for managing batches of training data."
+    },
+    {
+      "name": "data_loader_test",
+      "description": "DataLoader for managing batches of test data."
+    },
+    {
+      "name": "model",
+      "description": "Pre-trained neural network model for image classification."
+    },
+    {
+      "name": "criterion",
+      "description": "Loss function used for binary cross-entropy with logits."
+    },
+    {
+      "name": "optimizer",
+      "description": "Adam optimizer for optimizing model parameters."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame prepared for submission containing predictions for test images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used to create train_dataset and for training model."
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flow": "Used for inference and generating submission."
+    },
+    {
+      "variable": "train_dataset",
+      "creation": "IntracranialDataset",
+      "flow": "Used to create data_loader_train for training."
+    },
+    {
+      "variable": "test_dataset",
+      "creation": "IntracranialDataset",
+      "flow": "Used to create data_loader_test for inference."
+    },
+    {
+      "variable": "data_loader_train",
+      "creation": "torch.utils.data.DataLoader",
+      "flow": "Used during model training."
+    },
+    {
+      "variable": "data_loader_test",
+      "creation": "torch.utils.data.DataLoader",
+      "flow": "Used during inference to make predictions."
+    },
+    {
+      "variable": "model",
+      "creation": "torch.hub.load and model.fc",
+      "flow": "Used for training and inference to predict labels for images."
+    },
+    {
+      "variable": "submission",
+      "creation": "pd.concat",
+      "flow": "Final output prepared for submission as 'submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNeXt-101",
+      "input_features": [
+        "Images"
+      ],
+      "target_variable": [
+        "epidural", "intraparenchymal", "intraventricular", "subarachnoid", "subdural", "any"
+      ],
+      "hyperparameters": {
+        "learning_rate": "2e-5",
+        "epochs": 1,
+        "batch_size": 64
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> train.csv] %% Represents the train.csv data source
+    B[<img src='icons/image.svg' width=100 height=100/> <br/> train_image] %% Represents the train_image folder containing image data
+    C[<img src='icons/file.svg' width=100 height=100/> <br/> test.csv] %% Placeholder for test data
+    D[<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv] %% Represents the sample_submission.csv file
+
+    %% Data Variables
+    E[df_train] %% DataFrame with training data
+    F[im] %% Loaded image data
+    G[path_df] %% DataFrame with image paths and metadata
+    H[mask] %% Segmentation mask created from run-length encoding
+    I[img] %% Loaded image data for visualization
+
+    %% Data Flow
+    A -->|Read CSV| E
+    B -->|Load Images| F
+    E -->|Merge with Image Paths| G
+    G -->|Use for Processing| H
+    H -->|Decode to| I
+
+    %% Model (Placeholder)
+    subgraph Models
+        M[Not specified]
+    end
+
+    B -->|Input Features| M
+    H -->|Target Variable| M

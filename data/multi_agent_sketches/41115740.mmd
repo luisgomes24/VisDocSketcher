@@ -1,0 +1,41 @@
+flowchart TD
+
+    %% Data Sources
+    subgraph DataSources
+        DS1["Input Files"]
+        DS1 -- "os.walk (directory not specified)" --> train
+        DS1 -- "os.walk (directory not specified)" --> test
+    end
+
+    %% DataFrames
+    subgraph DataFrames
+        train["train DataFrame"]
+        test["test DataFrame"]
+        X["X - Features DataFrame"]
+        y["y - Target Variable"]
+        submission["submission DataFrame"]
+        test_preds["test_preds Array"]
+    end
+
+    %% Data Flow
+    train -->|"pd.read_csv"| X
+    train -->|"pd.read_csv"| y
+    train -->|"pd.read_csv"| submission
+    test -->|"pd.read_csv"| test_preds
+    X -- "Used in Model Training" --> ModelTraining
+    y -- "Used in Model Training" --> ModelTraining
+    test_preds --> submission
+
+    %% ML Model
+    subgraph MLModel
+        ModelTraining["CatBoostRegressor Training"]
+    end
+    ModelTraining -->|"Trained with X and y"| test_preds
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#cff,stroke:#333,stroke-width:2px;
+
+    class DataSources dataSource;
+    class DataFrames dataFrame;
+    class MLModel process;

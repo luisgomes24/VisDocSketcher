@@ -1,0 +1,189 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/heart-disease-diagnosis-dataset/dataset_heart.csv",
+      "description": "Dataset containing attributes related to heart disease for 270 observations."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the dataset loaded from CSV file."
+    },
+    {
+      "variable": "X",
+      "description": "Features DataFrame created by dropping the target variable 'heart disease'."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable, binary values indicating the presence (1) or absence (2) of heart disease."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set of features for model training."
+    },
+    {
+      "variable": "X_test",
+      "description": "Test set of features for model evaluation."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set of target variable for model training."
+    },
+    {
+      "variable": "y_test",
+      "description": "Test set of target variable for model evaluation."
+    },
+    {
+      "variable": "model",
+      "description": "RandomForestClassifier model object used for predicting heart disease."
+    },
+    {
+      "variable": "y_pred",
+      "description": "Predictions made by the model on the test set."
+    },
+    {
+      "variable": "accuracy",
+      "description": "Model's accuracy score for the test predictions."
+    },
+    {
+      "variable": "cm",
+      "description": "Confusion matrix indicating the classification performance."
+    },
+    {
+      "variable": "report",
+      "description": "Classification report providing precision, recall, and F1-score metrics."
+    },
+    {
+      "variable": "probas",
+      "description": "Probability estimates for the positive class by the model."
+    },
+    {
+      "variable": "fpr",
+      "description": "False positive rate obtained from the ROC curve."
+    },
+    {
+      "variable": "tpr",
+      "description": "True positive rate obtained from the ROC curve."
+    },
+    {
+      "variable": "roc_auc",
+      "description": "Area under the ROC curve metric."
+    },
+    {
+      "variable": "precision",
+      "description": "Precision values obtained for the precision-recall curve."
+    },
+    {
+      "variable": "recall",
+      "description": "Recall values obtained for the precision-recall curve."
+    },
+    {
+      "variable": "cv_scores",
+      "description": "Cross-validation scores indicating model performance on different subsets."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "used_for": "Store dataset information and perform further analysis"
+    },
+    {
+      "variable": "X",
+      "created_by": "df.drop",
+      "used_for": "Separate features for model training"
+    },
+    {
+      "variable": "y",
+      "created_by": "df['heart disease']",
+      "used_for": "Separate target variable for model training"
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "used_for": "Model training"
+    },
+    {
+      "variable": "X_test",
+      "created_by": "train_test_split",
+      "used_for": "Model evaluation"
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split",
+      "used_for": "Model training"
+    },
+    {
+      "variable": "y_test",
+      "created_by": "train_test_split",
+      "used_for": "Model evaluation"
+    },
+    {
+      "variable": "model",
+      "created_by": "RandomForestClassifier",
+      "used_for": "Model training and prediction"
+    },
+    {
+      "variable": "y_pred",
+      "created_by": "model.predict",
+      "used_for": "Model evaluation"
+    },
+    {
+      "variable": "accuracy",
+      "created_by": "accuracy_score",
+      "used_for": "Model performance evaluation"
+    },
+    {
+      "variable": "cm",
+      "created_by": "confusion_matrix",
+      "used_for": "Model performance evaluation"
+    },
+    {
+      "variable": "report",
+      "created_by": "classification_report",
+      "used_for": "Model performance evaluation"
+    },
+    {
+      "variable": "fpr",
+      "created_by": "roc_curve",
+      "used_for": "ROC curve plotting"
+    },
+    {
+      "variable": "tpr",
+      "created_by": "roc_curve",
+      "used_for": "ROC curve plotting"
+    },
+    {
+      "variable": "roc_auc",
+      "created_by": "auc",
+      "used_for": "ROC curve evaluation"
+    },
+    {
+      "variable": "precision",
+      "created_by": "precision_recall_curve",
+      "used_for": "Precision-recall curve plotting"
+    },
+    {
+      "variable": "recall",
+      "created_by": "precision_recall_curve",
+      "used_for": "Precision-recall curve plotting"
+    },
+    {
+      "variable": "cv_scores",
+      "created_by": "cross_val_score",
+      "used_for": "Model performance evaluation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "All features except 'heart disease',",
+      "target_variable": "'heart disease'",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "random_state": 42
+      }
+    }
+  ]
+}

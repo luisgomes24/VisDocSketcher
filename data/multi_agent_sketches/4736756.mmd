@@ -1,0 +1,30 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00'}}}%%
+%%{init: {'logLevel': 'debug'}}%%
+
+```mermaid
+flowchart TD
+    %% The DataFrame node below represents the dataset that is used throughout the notebook.
+    df["DataFrame df"]
+    %% This node represents the column used for counting unique values. 
+    nunique["nunique"]
+    %% This node represents the column names used for analysis.
+    columnNames["columnNames"]
+    
+    %% Edge description that we assume the DataFrame is prepared/existing
+    df -- "Data reference" --> nunique
+    df --> columnNames
+    
+    %% These functions are defined and used on the DataFrame for analysis.
+    subgraph Analysis_Functions
+        direction LR
+        A1["plotPerColumnDistribution"]
+        A2["plotCorrelationMatrix"]
+        A3["plotScatterMatrix"]
+    end
+
+    %% Show that these functions are applied to the df
+    df --> |"Analyzed and visualized in"| Analysis_Functions
+
+    %% Highlight the auxiliary state klaxons discovered in analysis.
+    nunique --> A1
+    columnNames --> A1

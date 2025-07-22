@@ -1,0 +1,39 @@
+flowchart TD
+    %% Nodes: Data Sources
+    DS["Suicides in India 2001-2012.csv"]
+    
+    %% Nodes: Data Variables
+    D1["df"]
+    D2["causesDf"]
+    D3["diff_causes"]
+    D4["causesDf_age_wise"]
+    D5["children_causes_Df"]
+    D6["elder_causes_Df"]
+    D7["gender_Df"]
+    D8["causes_gender_Df"]
+    D9["population_state_Df"]
+    D10["suicides_state"]
+    D11["final"]
+    D12["suicides_percapita"]
+    
+    %% Links: Data Flow
+    DS -->|"read_csv"| D1
+    D1 -->|"filter: causes only"| D2
+    D2 -->|"group and aggregate"| D3
+    D2 -->|"group and aggregate by age"| D4
+    D2 -->|"filter: age 0-14"| D5
+    D2 -->|"filter: age 60+"| D6
+    D1 -->|"group and aggregate by gender"| D7
+    D2 -->|"group and aggregate by gender"| D8
+    D9 -->|"manual input"|
+    D1 -->|"group and aggregate by state"| D10
+    D9 -->|"merge with D10"| D11
+    D11 -->|"compute per capita"| D12
+
+    %% Comments for clarity
+    classDef used fill:#f9f,stroke:#333,stroke-width:2px;
+    class DS,D1,D2,D3,D4,D5,D6,D7,D8,D9,D10,D11,D12 used;
+
+    %% Add ML models information
+    %% As no ML models were used in the notebook, skip model nodes
+    

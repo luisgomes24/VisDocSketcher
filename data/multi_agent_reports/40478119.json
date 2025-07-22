@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file": "shakespeare.txt",
+      "description": "A text dataset containing the works of Shakespeare used for training the RNN model."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "text",
+      "description": "The entire contents of the Shakespeare dataset, decoded into a string."
+    },
+    {
+      "name": "vocab",
+      "description": "A sorted list of unique characters in the text, used for character encoding."
+    },
+    {
+      "name": "ids_from_chars",
+      "description": "A Keras layer to convert characters into unique integer IDs."
+    },
+    {
+      "name": "chars_from_ids",
+      "description": "A Keras layer to convert integer IDs back into characters."
+    },
+    {
+      "name": "dataset",
+      "description": "A TensorFlow dataset object that contains batches of input and label character sequences prepared for training."
+    },
+    {
+      "name": "model",
+      "description": "The RNN model built using Keras, which generates text based on input character sequences."
+    },
+    {
+      "name": "one_step_model",
+      "description": "An instance of a Keras Model that generates one character at a time based on the previous character."
+    },
+    {
+      "name": "history",
+      "description": "Stores the training history for the model, including loss values over epochs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "text",
+      "creation": "Read from 'shakespeare.txt' file",
+      "flow": "Used to derive vocab, create character IDs, and generate training datasets."
+    },
+    {
+      "variable": "vocab",
+      "creation": "Extracted from the text as sorted set of unique characters",
+      "flow": "Used to define the input/output layer of the model and for character encoding"
+    },
+    {
+      "variable": "ids_from_chars",
+      "creation": "Created using tf.keras.layers.StringLookup to map characters to IDs",
+      "flow": "Used to convert character strings into IDs for model training"
+    },
+    {
+      "variable": "chars_from_ids",
+      "creation": "Another tf.keras.layers.StringLookup layer for inverting IDs back to characters",
+      "flow": "Used for generating readable text from predicted IDs"
+    },
+    {
+      "variable": "dataset",
+      "creation": "Constructed from the processed character IDs, split into sequences",
+      "flow": "Used for model training via model.fit"
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized as an instance of MyModel class",
+      "flow": "Trained using the dataset, and used for generating text predictions"
+    },
+    {
+      "variable": "one_step_model",
+      "creation": "Initialized as an instance of OneStep, wrapping the main model",
+      "flow": "Used for generating text in a loop, character by character"
+    },
+    {
+      "variable": "history",
+      "creation": "Result of model.fit during training",
+      "flow": "Contains training status over epochs, typically for evaluation"
+    }
+  ],
+  "models": [
+    {
+      "name": "RNN Model",
+      "type": "Custom Keras Model",
+      "input_features": "Sequences of character IDs derived from the dataset.",
+      "target_variable": "Next character in the sequence.",
+      "hyperparameters": {
+        "embedding_dim": 256,
+        "rnn_units": 1024
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["telecom_users.csv"]:::data_source --> B["df"]
+
+    %% Initial DataFrame
+    B["df"]:::data_var --> C["DeviceProtection"]
+    B["df"] --> D["TechSupport"]
+    B["df"] --> E["MultipleLines"]
+    B["df"] --> F["Dependents"]
+    B["df"] --> G["StreamingTV"]
+    B["df"] --> H["StreamingMovies"]
+    B["df"] --> I["InternetService"]
+    B["df"] --> J["PaperlessBilling"]
+    B["df"] --> K["SeniorCitizen"]
+
+    %% Data Analysis and Grouping
+    C --> L["Group: DeviceProtection & TechSupport"]
+    D --> L
+
+    E --> M["Group: MultipleLines & Dependents"]
+    F --> M
+
+    G --> N["Group: StreamingTV & StreamingMovies & DeviceProtection"]
+    H --> N
+    C --> N
+
+    I --> O["Group: InternetService & StreamingTV & StreamingMovies"]
+    G --> O
+    H --> O
+
+    J --> P["Group: PaperlessBilling & SeniorCitizen"]
+    K --> P
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+```

@@ -1,0 +1,19 @@
+%% Data Handling Workflow for Jupyter Notebook 7824171
+flowchart TD
+    %% Data Sources
+    A1["UNSW_NB15_training-set.csv"] -->|Load CSV| B1["train DataFrame"]
+    A2["UNSW_NB15_testing-set.csv"] -->|Load CSV| B2["test DataFrame"]
+    %% DataFrames Creation
+    B1 -->|Extract Features| C1["x_train"]
+    B1 -->|Extract Labels| C2["y_train"]
+    B2 -->|Extract Features| C3["x_test"]
+    B2 -->|Extract Labels| C4["y_test"]
+    %% Data Preprocessing
+    C1 -->|Drop 'label'| D1["x_train (clean)"]
+    C3 -->|Drop 'label'| D2["x_test (clean)"]
+    D1 -->|Scaling| E1["Scaled x_train"]
+    D2 -->|Scaling| E2["Scaled x_test"]
+    %% Common Features
+    E1 & E2 -->|Find Common Features| F1["features"]
+    F1 -->|Feature Set| G1["Final x_train"]
+    F1 -->|Feature Set| G2["Final x_test"]

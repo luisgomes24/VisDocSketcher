@@ -1,0 +1,127 @@
+{
+  "data_sources": [
+    {
+      "file": "genetic_data_train.csv",
+      "description": "Training data containing genetic information and ancestry labels."
+    },
+    {
+      "file": "genetic_data_test.csv",
+      "description": "Test data containing genetic information for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df_train",
+      "description": "DataFrame containing the training dataset read from genetic_data_train.csv."
+    },
+    {
+      "variable": "X",
+      "description": "Features DataFrame created by dropping 'Ancestry' and 'Ancestry Label' columns from df_train."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable containing 'Ancestry Label' from df_train."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training features generated from train_test_split."
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing features generated from train_test_split."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training target variable generated from train_test_split."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing target variable generated from train_test_split."
+    },
+    {
+      "variable": "df_test",
+      "description": "DataFrame containing the test dataset read from genetic_data_test.csv."
+    },
+    {
+      "variable": "X_Test",
+      "description": "Features DataFrame created from df_test containing genetic data without 'Ancestry' column."
+    },
+    {
+      "variable": "Output",
+      "description": "Final DataFrame containing predictions concatenated with X_Test."
+    },
+    {
+      "variable": "map_dict",
+      "description": "Mapping dictionary created to encode 'Ancestry' labels to numeric values."
+    },
+    {
+      "variable": "inv_map_dict",
+      "description": "Inverse mapping dictionary for decoding numeric predictions back to 'Ancestry' values."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "read_csv",
+      "flows_to": "X, y"
+    },
+    {
+      "variable": "X",
+      "creation": "drop",
+      "flows_to": "train_test_split"
+    },
+    {
+      "variable": "y",
+      "creation": "select",
+      "flows_to": "train_test_split"
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split",
+      "flows_to": "model fitting"
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split",
+      "flows_to": "model evaluation"
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split",
+      "flows_to": "model fitting"
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split",
+      "flows_to": "model evaluation"
+    },
+    {
+      "variable": "df_test",
+      "creation": "read_csv",
+      "flows_to": "X_Test"
+    },
+    {
+      "variable": "X_Test",
+      "creation": "drop",
+      "flows_to": "model prediction"
+    },
+    {
+      "variable": "y_predi",
+      "creation": "model.predict",
+      "flows_to": "Output"
+    },
+    {
+      "variable": "Output",
+      "creation": "concat",
+      "flows_to": "mapping to original ancestry labels"
+    }
+  ],
+  "models": [
+    {
+      "model": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "default parameters"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+```mermaid
+flowchart TD
+  %%% Data Sources %%%
+  A["oyuncu.csv"]:::dataSource
+  
+  %%% Data Variables %%%
+  B["df"]:::dataVariable
+  C["cat_deg"]:::dataVariable
+  D["num_deg"]:::dataVariable
+  E["car_deg"]:::dataVariable
+  F["aybars"]:::dataVariable
+  G["df_pca"]:::dataVariable
+  
+  %%% Models %%%
+  H(("PCA")):::model
+  I(("KMeans")):::model
+  
+  %%% Flow %%%
+  %% df Creation %%%
+  A -->|read_csv| B
+  B -->|categorical/ numerical cardinality check| C
+  B -->|categorical/ numerical cardinality check| D
+  B -->|categorical/ numerical cardinality check| E
+  B -->|groupby.mean| F
+  
+  %% df_pca Creation %%%
+  F -->|PCA fit_transform| G
+  G --> H
+  
+  %% KMeans Model %%%
+  F -->|Numeric Data| I
+  I -->|Clusters| G
+  
+  style A fill:#f9f,stroke:#333,stroke-width:2px;
+  style B fill:#ff9,stroke:#333,stroke-width:2px;
+  style C fill:#ff9,stroke:#333,stroke-width:2px;
+  style D fill:#ff9,stroke:#333,stroke-width:2px;
+  style E fill:#ff9,stroke:#333,stroke-width:2px;
+  style F fill:#ff9,stroke:#333,stroke-width:2px;
+  style G fill:#ff9,stroke:#333,stroke-width:2px;
+  style H fill:#9ff,stroke:#333,stroke-width:2px;
+  style I fill:#9ff,stroke:#333,stroke-width:2px;
+```

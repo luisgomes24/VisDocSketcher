@@ -1,0 +1,11 @@
+```
+graph TD;
+    A["Load Dataset 🗄️"] --> B["Preprocess Data 📊"];
+    B --> C["Train Model 🧠"];
+    C --> D["Evaluate Model 📝"];
+    D --> E["Get CV Count 📈"];
+    D --> F["Mean Scores 🥇"];
+    
+    A -->|Load iris dataset| C["Load Data<br/> <img src='icons/database.svg' />"];
+    B -->|Data loaded| D["Cross-Validation Results<br/> <img src='dummy_plots/lineplot_template.svg' />"];
+    F --> G["Display Results 📃"];

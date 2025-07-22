@@ -1,0 +1,16 @@
+```mermaid
+flowchart TD
+    A["Train Images"] -->|Load Data| B["train_data_generator"]
+    B -->|Augment Data| C["train_generator"]
+
+    D["Test Images"] -->|Load Data| E["test_data_generator"]
+    E --> F["test_generator"]
+
+    G["Validation Images"] -->|Load Data| H["val_data_generator"]
+    H --> I["validation_generator"]
+
+    C -->|Train Model| J["Model: InceptionResNetV2"]
+    H -->|Evaluate Model| J
+    F -->|Test Model| K["Evaluate & Confusion Matrix"]
+    J -->|Output Prediction| L["Results"]
+```

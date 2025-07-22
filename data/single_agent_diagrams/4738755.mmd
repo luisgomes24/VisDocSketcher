@@ -1,0 +1,10 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> DataFrame Creation"]
+    B --> C["<img src='column_split.svg'/> <br/> DateTime Conversion"]
+    C --> D["<img src='table.svg'/> <br/> Data Inspection"]
+    D --> E["<img src='column_split.svg'/> <br/> Drop Unnecessary Columns"]
+    E --> F["<img src='table.svg'/> <br/> Check for Missing Data"]
+    F --> G["<img src='row_split.svg'/> <br/> Filter Data"]
+    G --> H["<img src='lineplot_template.svg'/> <br/> Plot Temperature Over Time"]
+    H --> I["<img src='scatter_plot_template.svg'/> <br/> Sort Data"]
+    I --> J["<img src='table.svg'/> <br/> Final Data Inspection"]

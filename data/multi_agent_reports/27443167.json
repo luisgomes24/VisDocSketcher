@@ -1,0 +1,61 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "m",
+      "description": "Parameter used for the plots, indicating the shift applied to the cosine functions."
+    },
+    {
+      "name": "N",
+      "description": "Number of samples/points to generate for the x-axis, default is set to 1000."
+    },
+    {
+      "name": "x",
+      "description": "Array of x values generated using numpy.linspace for the specified range based on m."
+    },
+    {
+      "name": "f",
+      "description": "The first function calculated as cos(x + m)."
+    },
+    {
+      "name": "g",
+      "description": "The second function calculated using cos(x) and m, adjusted with sine."
+    },
+    {
+      "name": "h",
+      "description": "Heaviside step function indicating conditions on x relative to m."
+    },
+    {
+      "name": "phi",
+      "description": "Piecewise combination of f and g determined by h."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "x",
+      "creation": "np.linspace(np.pi - 2 * m, np.pi, N)",
+      "flow": "Used as input to plot functions."
+    },
+    {
+      "variable": "f",
+      "creation": "np.cos(x + m)",
+      "flow": "Used for plotting."
+    },
+    {
+      "variable": "g",
+      "creation": "np.cos(x) - m * np.sin(np.pi - m)",
+      "flow": "Used for plotting."
+    },
+    {
+      "variable": "h",
+      "creation": "np.heaviside(x - (np.pi - m), 0)",
+      "flow": "Used for determining phi."
+    },
+    {
+      "variable": "phi",
+      "creation": "h * g + (1 - h) * f",
+      "flow": "Used for plotting."
+    }
+  ],
+  "models": []
+}

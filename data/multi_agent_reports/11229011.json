@@ -1,0 +1,100 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/dogs-cats-images/dataset/training_set/",
+      "description": "Contains images of dogs and cats used for training the model."
+    },
+    {
+      "file_path": "/kaggle/input/dogs-cats-images/dataset/test_set/",
+      "description": "Contains images of dogs and cats used for testing the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "IMG_SIZE",
+      "description": "The size to which images are resized (224x224 pixels)."
+    },
+    {
+      "name": "X",
+      "description": "Numpy array containing training images."
+    },
+    {
+      "name": "Y",
+      "description": "Numpy array containing training labels (1 for cats, 0 for dogs)."
+    },
+    {
+      "name": "X_t",
+      "description": "Numpy array containing test images."
+    },
+    {
+      "name": "Y_t",
+      "description": "Numpy array containing test labels (1 for cats, 0 for dogs)."
+    },
+    {
+      "name": "callback",
+      "description": "Keras callback to stop training if accuracy exceeds 95%."
+    },
+    {
+      "name": "model",
+      "description": "Keras sequential model for image classification."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation": "Images are read from the training dataset and processed.",
+      "flows": "Used as input features for training the model."
+    },
+    {
+      "variable": "Y",
+      "creation": "Labels are assigned based on whether the image is a cat or dog.",
+      "flows": "Used as target labels for training the model."
+    },
+    {
+      "variable": "X_t",
+      "creation": "Images are read from the test dataset and processed.",
+      "flows": "Used as input features for model validation."
+    },
+    {
+      "variable": "Y_t",
+      "creation": "Labels are assigned based on testing images.",
+      "flows": "Used as target labels for model validation."
+    },
+    {
+      "variable": "model",
+      "creation": "Sequential model is defined with convolution and dense layers.",
+      "flows": "Trained using X and Y, and saved after training."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Sequential",
+      "input_features": "X (images)",
+      "target_variable": "Y (labels)",
+      "architecture": {
+        "layers": [
+          {"type": "Conv2D", "params": {"filters": 64, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Conv2D", "params": {"filters": 64, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Conv2D", "params": {"filters": 64, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Conv2D", "params": {"filters": 64, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Conv2D", "params": {"filters": 64, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Flatten", "params": {}},
+          {"type": "Dense", "params": {"units": 256, "activation": "relu", "kernel_regularizer": "l2"}},
+          {"type": "Dense", "params": {"units": 256, "activation": "relu", "kernel_regularizer": "l2"}},
+          {"type": "Dense", "params": {"units": 256, "activation": "relu", "kernel_regularizer": "l2"}},
+          {"type": "Dense", "params": {"units": 2, "activation": "softmax"}}
+        ]
+      },
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss_function": "sparse_categorical_crossentropy",
+        "epochs": 30
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+graph TD;
+    A(Item Selection) -->|Using| B[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Features and Labels];
+    B --> C(Data Preparation);
+    C -->|Train-Test Split| D[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Training Features];
+    C --> D2[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Test Features];
+    D --> E[Training Models];
+    D2 --> F[Evaluate Models];
+    E --> G[AdaBoostRegressor];
+    E --> H[GradientBoostingRegressor];
+    E --> I[XGBRegressor];
+    F --> J[Model Outputs];
+    J --> K[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Final Predictions];

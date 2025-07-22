@@ -1,0 +1,8 @@
+```mermaid
+flowchart TD
+    A["Read Data: healthcare-dataset-stroke-data.csv"] -->|"pd.read_csv"| B["DataFrame: dataset"]
+    B -->|"Description and Null Check"| C["Descriptive Analysis"]
+    B --> D["Data Preprocessing"]
+    D --> E["Correlation Analysis"]
+    E --> F["Heatmap of Correlation"]
+```

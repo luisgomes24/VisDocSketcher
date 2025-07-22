@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file_name": "spam.csv",
+      "description": "Contains SMS messages tagged as ham (legitimate) or spam. It has 5574 messages."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the SMS messages along with their labels."
+    },
+    {
+      "variable_name": "tfidf_mat",
+      "description": "Sparse matrix containing the TF-IDF features along with the lengths of the messages."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set containing the SMS messages for the model."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test set containing the SMS messages used for evaluation."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set labels corresponding to X_train."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set labels corresponding to X_test."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file.",
+      "flow": "Used for data cleaning, feature engineering, training and testing data, and model fitting."
+    },
+    {
+      "variable": "tfidf_mat",
+      "creation": "Created by transforming X_train using TfidfVectorizer and additional features.",
+      "flow": "Used for fitting the Multinomial Naive Bayes model."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Split from the original DataFrame df.",
+      "flow": "Used to train the model."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Split from the original DataFrame df.",
+      "flow": "Used to evaluate the model."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Split from the original DataFrame df.",
+      "flow": "Used to train the model."
+    },
+    {
+      "variable": "y_test",
+      "creation": "Split from the original DataFrame df.",
+      "flow": "Used to evaluate the model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Multinomial Naive Bayes",
+      "input_features": "tfidf_mat + message lengths",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "alpha": "Selected through GridSearchCV from given values."
+      }
+    }
+  ]
+}

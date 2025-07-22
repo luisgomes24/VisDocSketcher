@@ -1,0 +1,22 @@
+{
+"data_sources": [
+  {
+    "source": "../input/1000000-bandcamp-sales/1000000-bandcamp-sales.csv",
+    "description": "Contains sales data from Bandcamp of one million transactions."
+  }
+],
+"data_variables": [
+  {
+    "variable": "df",
+    "description": "DataFrame containing sales data with various features such as artist, album, price, etc."
+  }
+],
+"data_flow": [
+  {
+    "variable": "df",
+    "creation": "pd.read_csv('../input/1000000-bandcamp-sales/1000000-bandcamp-sales.csv')",
+    "flow": "Used in EDA reports and visualizations."
+  }
+],
+"models": []
+}

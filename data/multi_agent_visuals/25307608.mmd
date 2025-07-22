@@ -1,0 +1,53 @@
+flowchart TD
+    %% Data Sources
+    DS1["<img src='icons/file.svg' width=100 height=100/> <br/> make_blobs Function"]
+    %% comment: Generates synthetic data for clustering
+
+    %% Data Variables
+    X["<img src='icons/table.svg' width=100 height=100/> <br/> X"]
+    %% comment: Data used for clustering
+    data["<img src='icons/table.svg' width=100 height=100/> <br/> data (DataFrame)"]
+    %% comment: Data points in 2D for clustering
+    y["<img src='icons/column_split.svg' width=100 height=100/> <br/> y (Target Variable)"]
+    %% comment: Target variable from make_blobs, not used in clustering
+    y -->|"Generated from"| DS1
+
+    %% Model Nodes
+    kmeans["<img src='icons/brain.svg' width=100 height=100/> <br/> Custom KMeans"]
+    %% comment: Custom implementation of KMeans clustering
+    kmean_sklearn["<img src='icons/brain.svg' width=100 height=100/> <br/> Sklearn KMeans"]
+    %% comment: Sklearn's implementation of KMeans clustering
+
+    %% Data Flow
+    DS1 -->|"Generates"| X
+    X -->|"Used by"| kmeans
+    X -->|"Used by"| kmean_sklearn
+    data -->|"Converted and used by"| kmeans
+    
+    %% Model Outputs
+    y_pred["<img src='icons/column_split.svg' width=100 height=100/> <br/> y_pred"]
+    %% comment: Cluster labels from Custom KMeans
+    cluter["<img src='icons/column_split.svg' width=100 height=100/> <br/> cluter"]
+    %% comment: Cluster labels from Sklearn KMeans
+
+    kmeans -->|"Outputs"| y_pred
+    kmean_sklearn -->|"Outputs"| cluter
+
+    %% Model Hyperparameters and Settings
+    subgraph Custom_KMeans_Hyperparameters
+        direction TB
+        KVar1["<img src='icons/column_split.svg' width=100 height=100/> <br/> n_clusters: 2/3"]
+        KVar2["<img src='icons/column_split.svg' width=100 height=100/> <br/> n_kmeans: 10"]
+        KVar3["<img src='icons/column_split.svg' width=100 height=100/> <br/> iteration: 500"]
+        KVar4["<img src='icons/column_split.svg' width=100 height=100/> <br/> eval_metric: inertia"]
+        KVar1 --> kmeans
+        KVar2 --> kmeans
+        KVar3 --> kmeans
+        KVar4 --> kmeans
+    end
+    
+    subgraph Sklearn_KMeans_Hyperparameters
+        direction TB
+        SKVar1["<img src='icons/column_split.svg' width=100 height=100/> <br/> n_clusters: 3"]
+        SKVar1 --> kmean_sklearn
+    end

@@ -1,0 +1,23 @@
+%% Data Science Workflow Diagram
+flowchart TD
+    A[cbb.csv] -->|Load data| B[df]
+    %% DataFrame Creation
+    B -->|Subset columns| C[df_ff]
+    B -->|Extract target| D[df_ff_y]
+
+    %% Splitting Data
+    C -->|train_test_split| E[X_train]
+    C -->|train_test_split| F[X_test]
+    D -->|train_test_split| G[y_train]
+    D -->|train_test_split| H[y_test]
+
+    %% Model Training
+    E -->|Train| I[Linear Regression Model]
+    G -->|Train| I[Linear Regression Model]
+    I -->|Predict| J[y_pred]
+
+    %% Prediction and Evaluation
+    F -->|Predict| J
+    J -->|Evaluate| K[Metrics]
+    H -->|Evaluate| K
+    J -->|Create| L[dfd]

@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A[Train CSV] -->|Read CSV| B(Combine Data)
+    A2[Extra Train CSV] -->|Read CSV| B
+    A3[Test CSV] -->|Read CSV and process| G[Tokenized Test Dataset]
+
+    %% Training Data Preparation
+    B -->|Concatenate| C[Training Data]
+    C -->|Preprocess| D[Tokenized Dataset]
+    D -->|Train Model| E[AutoModelForMultipleChoice Model]
+
+    %% Training Parameters
+    E -->|Learning Rate: 5e-6, Epochs: 3| F(Prediction Process)
+
+    %% Test Data and Predictions
+    G -->|Preprocess| H[Test Predictions]
+    H -->|Generate| I[Predicted Answer IDs]
+    I -->|Map| J[Predictions as Answer Letters]
+    J -->|Format| K[Predictions as String]
+    K -->|Create| L(Submission File)
+
+    %% Output
+    L -->|Save to CSV| M[Final Submission]
+
+    %% Comments for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+
+    class A,A2,A3 dataSource;
+    class B,C,D,E,F,G,H,I,J,K,L,M process;

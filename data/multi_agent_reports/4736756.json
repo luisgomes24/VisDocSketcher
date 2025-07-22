@@ -1,0 +1,17 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame used for plotting and analysis"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Not explicitly loaded - likely assumed to be provided by the kernel execution environment",
+      "flows_to": "Used in various plotting functions: plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+    }
+  ],
+  "models": []
+}

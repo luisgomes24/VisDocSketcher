@@ -1,0 +1,35 @@
+flowchart TD
+    %% Training dataset node
+    df_train["Training Dataset (df_train)"] --> |"merge on country info"| df_country_info
+    df_country_info["Country Information (df_country_info)"]
+
+    %% Test dataset node
+    df_test["Test Dataset (df_test)"] --> |"merge on country info"| df_country_info
+    
+    %% Target variable node
+    df_train --> |"extract target 'ConvertedSalary'"| y_train["Target Variable (y_train)"]
+    
+    %% Feature extraction for training
+    df_train --> |"remove target 'ConvertedSalary'"| x_train["Training Features (x_train)"]
+    
+    %% Machine Learning Model
+    x_train --> |"input features"| LightGBM --> |"predict"| x_test["Test Features (x_test)"]
+    y_train --> |"training target"| LightGBM["ML Model: LightGBM"]
+    
+    %% Test features node
+    df_test --> x_test
+
+    %% Labels
+    df_train:::dataSource
+    df_test:::dataSource
+    df_country_info:::dataSource
+    x_train:::featureExtraction
+    y_train:::targetVariable
+    LightGBM:::model
+    x_test:::features
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef featureExtraction fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef targetVariable fill:#f96,stroke:#333,stroke-width:2px;
+    classDef model fill:#6f6,stroke:#333,stroke-width:2px;
+    classDef features fill:#ff9,stroke:#333,stroke-width:2px;

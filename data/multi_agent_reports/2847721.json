@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the model including features such as Age, Sex, and Survived status."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains testing data for the model with features excluding the Survived status."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data loaded from train.csv"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test data loaded from test.csv"
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Feature set for training excluding the target variable Survived"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Target variable (Survived) used for training"
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Feature set for testing"
+    },
+    {
+      "variable_name": "xg_boost",
+      "description": "XGBoost classifier model used for predicting survival"
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame containing PassengerId and predicted Survived status ready for submission"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data preprocessing and feature engineering, subsequently used for training the model"
+    },
+    {
+      "variable": "test",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for predictions after model training"
+    },
+    {
+      "variable": "train",
+      "modifications": "Null values for Age and Cabin are replaced; categorical variable Embarked is filled and mapped to numbers",
+      "flow": "Data is prepared and features are engineered for model training"
+    },
+    {
+      "variable": "xg_boost",
+      "creation_method": "xgb.XGBClassifier",
+      "flow": "Trained using X_train and y_train, then used for prediction on X_test"
+    },
+    {
+      "variable": "Y_pred",
+      "creation_method": "xg_boost.predict",
+      "flow": "Predictions made for test data; used to create the submission DataFrame"
+    },
+    {
+      "variable": "submission",
+      "flow": "Saved to CSV for submission"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBoost",
+      "input_features": "X_train, X_test",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "base_score": 0.5,
+        "booster": "gbtree",
+        "colsample_bytree": 0.65,
+        "gamma": 2,
+        "learning_rate": 0.3,
+        "max_depth": 4,
+        "min_child_weight": 2,
+        "n_estimators": 280,
+        "objective": "binary:logistic"
+      }
+    }
+  ]
+}

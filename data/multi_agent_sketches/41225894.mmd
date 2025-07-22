@@ -1,0 +1,23 @@
+flowchart TD
+
+    %% Data Sources
+    ds1[/kaggle/input/titanic/train.csv\]:::dataSource -->|Load Data| data
+
+    %% Data Nodes
+    data{{data}}:::dataNode -->|Check Missing| get
+    data -->|Subset| lets_see
+    data -->|Calculate Mode| mode
+    data -->|Detect Outliers| Fare_outliers
+
+    %% Transformations and Calculations
+    get{{get}}:::processNode -- "data.isnull().sum()" -->|Summarize| get_summary[(Missing Summary)]
+    lets_see{{lets_see}}:::processNode -- "['Age', 'Embarked'] Subset" -->|Visualize| vis_missing[(Visualize Missing)]
+    Fare_outliers{{Fare_outliers}}:::processNode -- "IQR Method" -->|Analyze| outlier_analysis[(Outlier Analysis)]
+
+    %% Utilizing Mode for Outliers
+    mode{{mode}}:::processNode -- "Mode Calculation" -->|Replace| replaced_outliers[(Replace Fare Outliers)]
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef processNode fill:#bfb,stroke:#333,stroke-width:2px;

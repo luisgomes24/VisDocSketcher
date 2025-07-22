@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Source Node
+    data_source_1["Data Source: netflix_titles_nov_2019.csv\nContains information about Netflix shows"] 
+
+    %% Data Variable Nodes
+    netdata["netdata\nDataFrame containing Netflix shows details"] 
+    df["df\nDataFrame of ratings count for visualization"]
+    df1["df1\nDataFrame of unique TV shows, grouped by date added"]
+    df2["df2\nDataFrame of unique movies, grouped by date added"]
+    filterdata["filterdata\nCleaned DataFrame for recommendations"]
+
+    %% ML Model Nodes
+    model_1["Content Based Filtering\nModel: TF-IDF\nInput: Show Descriptions\nOutput: Recommended Movies"]
+    model_2["Collaborative Filtering\nModel: CountVectorizer\nInput: Meta Descriptions\nOutput: Recommended Movies"]
+
+    %% Data Flow Connections 
+    data_source_1 -->|"Read CSV"| netdata
+    netdata -->|"Extract and Process Features"| df
+    netdata -->|"Filter for TV Shows"| df1
+    netdata -->|"Filter for Movies"| df2
+    df1 -->|"Visualize TV Shows Trend"| model_1
+    df2 -->|"Visualize Movies Trend"| model_2
+    netdata -->|"Create Cleaned DataFrame"| filterdata
+    filterdata -->|"Generate Recommendations"| model_1
+    filterdata -->|"Generate Recommendations"| model_2
+
+    %% Comments for clarity
+    %% data_cover_1 represents reading of the original data from CSV to a DataFrame netdata
+    %% df represents the aggregation for visualization purposes of ratings
+    %% df1 and df2 represent filtering based on categories for trends visualization
+    %% filterdata is the cleaned data used for enhanced recommendations
+    %% model_1 and model_2 illustrate the content and collaborative filtering approaches used in this project

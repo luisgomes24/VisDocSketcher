@@ -1,0 +1,7 @@
+flowchart TD
+    A["sentiment3.csv"]
+    A -->|"read_csv"| B["df1"]
+    B -->|"head()"| C["preview data"]
+    B -->|"plotPerColumnDistribution"| D["data visualizations"]
+    B -->|"plotCorrelationMatrix"| E["correlation visualizations"]
+    B -->|"plotScatterMatrix"| F["scatter plots"]

@@ -1,0 +1,108 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/aldon-preprocessed-2/preprocessed_train_data.csv",
+      "description": "Training dataset containing comments and their toxicity labels."
+    },
+    {
+      "file_path": "../input/aldon-preprocessed-2/preprocessed_test_data.csv",
+      "description": "Test dataset containing comments for which toxicity labels are to be predicted."
+    },
+    {
+      "file_path": "../input/aldon-preprocessed-2/test_label.csv",
+      "description": "True labels for the test dataset."
+    },
+    {
+      "file_path": "../input/aldon-preprocessed/sample_submission.csv",
+      "description": "Sample submission file format for the predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training comments and their associated toxicity labels."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing test comments without labels."
+    },
+    {
+      "name": "df_test_labels",
+      "description": "DataFrame containing the labels for the test dataset, indexed by comment IDs."
+    },
+    {
+      "name": "input_ids",
+      "description": "Tokenized and padded input IDs for training comments."
+    },
+    {
+      "name": "attention_masks",
+      "description": "Attention masks created for the input IDs to indicate real tokens vs padding."
+    },
+    {
+      "name": "train_inputs",
+      "description": "Inputs for the training set created from tokenized comments."
+    },
+    {
+      "name": "validation_inputs",
+      "description": "Inputs for the validation set created from tokenized comments."
+    },
+    {
+      "name": "train_labels",
+      "description": "Labels for the training set corresponding to the training inputs."
+    },
+    {
+      "name": "validation_labels",
+      "description": "Labels for the validation set corresponding to the validation inputs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "Read from CSV using pd.read_csv()",
+      "flows_to": ["tokenize_sentences()", "train_inputs", "train_labels"]
+    },
+    {
+      "variable": "df_test",
+      "creation": "Read from CSV using pd.read_csv()",
+      "flows_to": ["tokenize_sentences()"]
+    },
+    {
+      "variable": "input_ids",
+      "creation": "Created using tokenize_sentences()",
+      "flows_to": ["train_dataset", "validation_dataset"]
+    },
+    {
+      "variable": "attention_masks",
+      "creation": "Created using create_attention_masks()",
+      "flows_to": ["train_dataset", "validation_dataset"]
+    },
+    {
+      "variable": "train_dataset",
+      "creation": "Created using create_dataset()",
+      "flows_to": ["train()"]
+    },
+    {
+      "variable": "validation_dataset",
+      "creation": "Created using create_dataset()",
+      "flows_to": ["train()"]
+    }
+  ],
+  "models": [
+    {
+      "name": "BertClassifier",
+      "description": "Custom model class based on BERT architecture.",
+      "input_features": ["input_ids", "attention_masks"],
+      "target_variables": "toxicity labels",
+      "hyperparameters": {
+        "num_classes": 6,
+        "activation_function": "sigmoid",
+        "layers": [
+          {
+            "type": "Dense",
+            "neurons": 6
+          }
+        ]
+      }
+    }
+  ]
+}

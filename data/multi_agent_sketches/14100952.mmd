@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A[Annotations CSV]:::dataSource -->|read_csv| B
+
+    %% Data Load and Initial Setup
+    B[df : DataFrame]:::dataVariable -->|Create new columns| C
+    
+    %% Data Processing
+    C[Parallelization Setup]:::process --> D[Activated Pixels Calculation]:::process
+    
+    D -->|df[mask_path]| E[n_change_pix : Parallelize on rows(df['mask_path'])]:::dataVariable
+    
+    %% Period Calculations
+    B --> F[Period Creation]:::process
+    F -->|Period 1| G[period_1 : pd.Period(year1, month1)]:::dataVariable
+    F -->|Period 2| H[period_2 : pd.Period(year2, month2)]:::dataVariable
+    
+    G --> I[Month Difference Calculation]:::process
+    H --> I
+    I --> J[month_diff : abs(period_1 - period_2)]:::dataVariable
+
+    %% Output
+    B --> K[Save Updated DataFrame to CSV]:::process:::output
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#ccf,stroke:#f66,stroke-width:2px;
+    classDef process fill:#cfc,stroke:#6c6,stroke-width:2px;
+    classDef output fill:#ffc,stroke:#cc3,stroke-width:2px;

@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file": "chicago_crime dataset from BigQuery",
+      "description": "This dataset contains information about crimes that occurred in the city of Chicago, including location, date, and types of crimes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "tables",
+      "description": "List of tables in the chicago_crime dataset"
+    },
+    {
+      "variable": "num_tables",
+      "description": "The number of tables available in the dataset"
+    },
+    {
+      "variable": "table",
+      "description": "The schema of the crime table, detailing its structure and attributes"
+    },
+    {
+      "variable": "num_timestamp_fields",
+      "description": "The number of fields in the crime table that have TIMESTAMP data"
+    },
+    {
+      "variable": "latitude",
+      "description": "Geographic coordinate representing the latitude of the crime location"
+    },
+    {
+      "variable": "longitude",
+      "description": "Geographic coordinate representing the longitude of the crime location"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "tables",
+      "created_by": "client.list_tables(dataset)",
+      "flows_to": "Used to determine the number of tables available in the dataset"
+    },
+    {
+      "variable": "num_tables",
+      "created_by": "Set as a constant value of 1",
+      "flows_to": "Used for answer verification in exercise 1"
+    },
+    {
+      "variable": "table",
+      "created_by": "client.get_table(table_ref)",
+      "flows_to": "Used to analyze the schema of the crime table"
+    },
+    {
+      "variable": "num_timestamp_fields",
+      "created_by": "Constant value set based on schema analysis",
+      "flows_to": "Used for answer verification in exercise 2"
+    },
+    {
+      "variable": "latitude",
+      "created_by": "Extracted from the crime table using client.list_rows(table, max_results=5).to_dataframe()",
+      "flows_to": "Identified as a critical feature for plotting crimes on a map"
+    },
+    {
+      "variable": "longitude",
+      "created_by": "Extracted from the crime table using client.list_rows(table, max_results=5).to_dataframe()",
+      "flows_to": "Identified as a critical feature for plotting crimes on a map"
+    }
+  ],
+  "models": []
+}

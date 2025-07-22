@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["💾 Set Weights & Video File"]
+    B --> C["🎥 YOLOv5 Inference"]
+    C --> D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 📊 Detect Ball Positions"]
+    D --> E["📸 Extract Frames"]
+    E --> F["🗂️ Collect Label Info"]
+    F --> G["🔄 Preprocess Data"]
+    G --> H["📈 Visualize Data <img src='dummy_plots/lineplot_template.svg'/>"]
+    H --> I["🔍 Evaluate Results"]
+    I --> J["📽️ View Sample Frames"]

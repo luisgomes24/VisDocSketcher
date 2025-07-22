@@ -1,0 +1,31 @@
+flowchart TD
+  %% Data Source Node
+  A[train.csv] -->|Load| B[df]
+
+  %% Data Preparation Nodes
+  B -->|Extract SalePrice| C[y] 
+  B -->|Drop SalePrice & Id| D[X] 
+  D -->|Split Data| E[X_train]
+  D -->|Split Data| F[X_valid]
+  C -->|Split Data| G[y_train]
+  C -->|Split Data| H[y_valid]
+
+  %% Feature Preprocessing Nodes
+  E -->|Select Categorical Columns| I[categorical_cols] %% I: Categorical features.
+  E -->|Select Numerical Columns| J[numerical_cols] %% J: Numerical features.
+
+  %% Preprocessing and Transformation Nodes
+  J --> K[SimpleImputer for Num]
+  I --> L[SimpleImputer & OneHot for Cat]
+  K --> M[Combine Preprocessors] 
+  L --> M
+
+  %% Model Definition Node
+  M --> N[LGBMRegressor(random_state=0)] %% N: LightGBM model definition
+  N --> O[Pipeline: Preprocessing + Model] %% O: Complete pipeline
+  O -->|Fit| P[Trained Model]
+
+  %% Prediction and Evaluation Nodes
+  P -->|Predict| Q[preds] 
+  H -->|Compare with Preds| Q
+  Q -->|Calculate RMSE| R[score] %% R: Model evaluation score

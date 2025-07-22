@@ -1,0 +1,64 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/mayo-clinic-strip-ai/train.csv",
+            "description": "Contains training data for classifying blood clots with columns for image_id, patient_id, label, and center_id"
+        },
+        {
+            "file": "../input/mayo-clinic-strip-ai/test.csv",
+            "description": "Contains test data formatted similarly to training data but without labels"
+        },
+        {
+            "file": "../input/mayo-clinic-strip-ai/sample_submission.csv",
+            "description": "Sample submission format for predictions"
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train",
+            "description": "DataFrame containing training data, images and labels"
+        },
+        {
+            "name": "test",
+            "description": "DataFrame containing test data, images without labels"
+        },
+        {
+            "name": "anss",
+            "description": "Array containing prediction probabilities for each class (CE, LAA)"
+        },
+        {
+            "name": "submission",
+            "description": "DataFrame prepared for submission containing prediction results"
+        }
+    ],
+    "data_flow": [
+        {
+            "name": "train",
+            "created_by": "pd.read_csv",
+            "flow": "Used for exploratory data analysis, model training and evaluations"
+        },
+        {
+            "name": "test",
+            "created_by": "pd.read_csv",
+            "flow": "Used for predictions via DataLoader"
+        },
+        {
+            "name": "anss",
+            "created_by": "predict function",
+            "flow": "Array of predictions passed to create final submission results"
+        },
+        {
+            "name": "submission",
+            "created_by": "pd.DataFrame and CSV writing",
+            "flow": "Final results are saved and prepared for submission"
+        }
+    ],
+    "models": [
+        {
+            "name": "Custom CNN Model",
+            "input_features": ["image"],
+            "target_variable": "label",
+            "hyperparameters": "Not specified, relying on pre-trained model"
+        }
+    ]
+}

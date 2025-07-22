@@ -1,0 +1,11 @@
+flowchart TD
+    DS1["/kaggle/input/aasaniface/nomask"] %% Node for data source (Images of individuals without masks)
+    TRAINING_SET["training_set"] %% Node for training data variable, created using ImageDataGenerator
+    TEST_IMG["test_img"] %% Node for test image variable, preprocessed for prediction
+    CNN_MODEL["cnn"] %% Node for CNN Model using Sequential Keras Model
+    RESULT["result"] %% Node for prediction result
+
+    DS1 -->|ImageDataGenerator| TRAINING_SET
+    TRAINING_SET -->|used for training| CNN_MODEL
+    TEST_IMG -->|input for prediction| CNN_MODEL
+    CNN_MODEL -->|output prediction| RESULT

@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file_name": "winequality-red.csv",
+      "description": "This dataset contains information about red wine characteristics and quality."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the wine quality dataset."
+    },
+    {
+      "variable_name": "X",
+      "description": "Features used for model training, excluding 'quality' and 'label_quality'."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable for model training, indicating the wine quality label."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set for features."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test set for features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for target variable."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set for target variable."
+    },
+    {
+      "variable_name": "model",
+      "description": "Trained model after optimization using RandomizedSearchCV."
+    },
+    {
+      "variable_name": "parameter",
+      "description": "Hyperparameters set for model optimization."
+    },
+    {
+      "variable_name": "df_imp",
+      "description": "DataFrame holding the feature importance scores."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "X",
+      "created_by": "df.drop",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created_by": "df['label_quality']",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "model",
+      "created_by": "RandomizedSearchCV.fit",
+      "flows_to": ["df_imp"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "max_depth": "[8, 12]",
+        "learning_rate": "[-2, 0]",
+        "n_estimators": "[150, 250]",
+        "subsample": "[0.5, 0.8]",
+        "gamma": "[1, 5]",
+        "colsample_bytree": "[0.5, 1]",
+        "reg_alpha": "[-3, 1]",
+        "reg_lambda": "[-3, 1]"
+      }
+    }
+  ]
+}

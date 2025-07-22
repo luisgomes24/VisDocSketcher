@@ -1,0 +1,12 @@
+flowchart TD
+  A[Start] --> B[data.csv] 
+  %% B: Represents the data source file used in the project
+
+  B --> C[pd.read_csv]
+  %% C: Function to read data from CSV into a DataFrame
+
+  C --> D[df1]
+  %% D: DataFrame containing the first 1000 rows from the data source
+
+  D --> E[Exploratory Plots]
+  %% E: Data visualization includes distribution, correlation, and scatter plots

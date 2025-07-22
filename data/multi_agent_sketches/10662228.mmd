@@ -1,0 +1,32 @@
+flowchart TD
+  subgraph Data_Sources
+    DS1[kiva_loans.shp]:::data -- Kiva loan data --> V1
+    DS2[naturalearth_lowres]:::data -- Country boundaries --> V4
+    DS3[Philippines_AL258.kml]:::data -- Island boundaries --> V6
+  end
+
+  subgraph Variables
+    V1[loans_filepath]:::var --> V2
+    V2[world_loans]:::var
+    V3[world_filepath]:::var --> V4
+    V4[world]:::var
+    V5[PHL_loans]:::var
+    V6[PHL]:::var
+  end
+
+  subgraph Processes
+    P1[gpd.read_file(loans_filepath)]:::process --> V2
+    V2 --> P2[world_loans.loc[world_loans.country=="Philippines"].copy()]:::process --> V5
+    P3[gpd.read_file(world_filepath)]:::process --> V4
+    
+    P4[gpd.read_file("../input/geospatial-learn-course-data/Philippines_AL258.kml", driver='KML')]:::process --> V6
+  end
+
+  V1 -.->|Used to load shapefile| P1
+  V3 -.->|Used to load boundaries| P3
+  V5 -.->|Visualize loan locations| P4
+  V6 -.->|Used with PHL_loans for analysis| P4
+
+  classDef data fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef var fill:#bbf,stroke:#f66,stroke-width:2px;
+  classDef process fill:#bfb,stroke:#334,stroke-width:2px;

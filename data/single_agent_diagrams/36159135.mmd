@@ -1,0 +1,7 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🔍 Check for Missing Values <img src='table.svg' /> <br/> df.isnull().sum()"]
+    B --> C["📈 Yearly Sales Visualization <img src='lineplot_template.svg' /> <br/> df.groupby('year').count()['cases'].plot(...)"]
+    C --> D["📊 Sales by Country Visualization <img src='barplot_template.svg' /> <br/> df[['country', 'year']].value_counts().plot(...)"]
+    D --> E["📊 Whiskey Quality Distribution <img src='barplot_template.svg' /> <br/> df['quality'].value_counts().plot.barh(...)"]
+    E --> F["📊 Top 10 Countries Sales <img src='barplot_template.svg' /> <br/> df['country'].value_counts()[:10].plot.barh(...)"]
+    F --> G["📊 Interactive Sales Trend <img src='lineplot_template.svg' /> <br/> fig = px.line(df, x='year', y='cases', ...)"]

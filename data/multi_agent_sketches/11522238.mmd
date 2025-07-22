@@ -1,0 +1,11 @@
+flowchart TD
+    A[../input/lish-moa/train_targets_scored.csv] %% Represents the data source of the targets for the MOA competition
+    B[df_train_scored] %% DataFrame containing the training target data loaded from CSV
+    C[targets] %% List of target variable names representing various biological assays
+    D[n_targets] %% Number of target variables in the DataFrame
+    E[cor_targets] %% Correlation matrix of all target variables
+
+    A -->|read_csv| B
+    B -->|extract columns| C
+    C -->|calculate length| D
+    B -->|calculate corr| E

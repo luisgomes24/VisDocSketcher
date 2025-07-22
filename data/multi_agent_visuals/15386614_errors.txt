@@ -1,0 +1,5 @@
+[@zenuml/core] Store is a function and is not initiated in 1 second.
+
+UnknownDiagramError: No diagram type detected matching given configuration for text: 
+detectType (/Users/user/.nvm/versions/node/v21.2.0/lib/node_modules/@mermaid-js/mermaid-cli/node_modules/mermaid/dist/mermaid.js:1541:15)
+    at $eval ($eval at renderMermaid (file:///Users/user/.nvm/versions/node/v21.2.0/lib/node_modules/@mermaid-js/mermaid-cli/src/index.js:252:33), <anonymous>:17:45)

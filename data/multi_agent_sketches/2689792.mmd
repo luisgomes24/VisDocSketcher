@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]:::dataSource -->|"Read and Scaled"| B1["df"]
+    A2["test.csv"]:::dataSource -->|"Read and Scaled"| B2["test"]
+    A3["sample_submission.csv"]:::dataSource --> C4["rounded"]
+
+    %% Data Preparation
+    B1 -->|"train_test_split"| C1["train"]
+    B1 -->|"train_test_split"| C2["dev"]
+
+    %% Model Training
+    C1 -->|"Fit Model"| D["Sequential Neural Network"]
+
+    %% Model Prediction
+    B2 -->|"Model Predict"| E1["predictions"]
+    E1 -->|"Round Predictions"| C4
+
+    %% Submission
+    C4 -->|"Create Submission"| F1["submission.csv"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;

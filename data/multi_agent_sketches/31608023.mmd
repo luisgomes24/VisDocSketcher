@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Sources
+    subgraph Data Sources
+        train_csv["train.csv"]
+        test_csv["test.csv"]
+        sample_submission_csv["sample_submission.csv"]
+    end
+
+    %% Data Variables
+    subgraph Data Preparation
+        train["Train DataFrame"]
+        test["Test DataFrame"]
+        sample_submission["Sample Submission DataFrame"]
+        texts["Tokenized Texts"]
+        text_sequences["Text Sequences"]
+        cat_labels["Categorical Labels"]
+        E["Embedding Matrix"]
+        test_text_sequences["Test Text Sequences"]
+        test_cat_labels["Predicted Test Labels"]
+        test_labels["Test Labels"]
+    end
+
+    %% Data Flow
+    train_csv -->|pd.read_csv| train
+    test_csv -->|pd.read_csv| test
+    sample_submission_csv -->|pd.read_csv| sample_submission
+    train -->|Tokenization + Lemmatization| texts
+    texts -->|Tokenizer + Padding| text_sequences
+    text_sequences -->|Embedding Matrix| E
+    train -->|to_categorical| cat_labels
+    test -->|Tokenization + Padding| test_text_sequences
+    test_text_sequences -->|Model Prediction| test_cat_labels
+    test_cat_labels -->|argmax| test_labels
+
+    %% Model Training
+    subgraph Model Training
+        E -->|"Embedding Layer"| model["CNN Model"]
+        cat_labels -->|"Training"| model
+        model -->|"Fitting"| model
+    end
+
+    model -->|"Predict"| test_cat_labels
+

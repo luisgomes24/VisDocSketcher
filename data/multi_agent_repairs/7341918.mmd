@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    subgraph DataSources["Data Sources"]
+        train_csv["train.csv"]:::ds
+        test_csv["test.csv"]:::ds
+        sample_submission_csv["sample_submission.csv"]:::ds
+    end
+    
+    subgraph DataVariables["Data Variables"]
+        X["X"]:::dv
+        y["y"]:::dv
+        Xt["Xt"]:::dv
+        id_train["id_train"]:::dv
+        id_test["id_test"]:::dv
+    end
+    
+    subgraph Model["Model"]
+        CatBoostClassifier["CatBoost Classifier"]:::model
+    end
+    
+    classDef ds fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dv fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bff,stroke:#333,stroke-width:2px;
+
+    train_csv -->|pd.read_csv| X
+    train_csv -->|pd.read_csv| y
+    test_csv -->|pd.read_csv| Xt
+    
+    X -->|Training data| CatBoostClassifier
+    y -->|Target variable| CatBoostClassifier
+    Xt -->|Prediction data| CatBoostClassifier
+
+    CatBoostClassifier -- Generates --> sample_submission_csv
+```

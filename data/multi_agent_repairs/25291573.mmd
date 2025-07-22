@@ -1,0 +1,8 @@
+graph TD;
+    A["Read russia_losses_equipment.csv"] --> B["Create russian_equipment DataFrame"];
+    A1["Read russia_losses_personnel.csv"] --> B1["Create russian_personnel DataFrame"];
+    B --> C["Visualize Equipment Losses Over Time"];
+    B1 --> C1["Handle NaN, Create russian_personnel_copy"];
+    C1 --> D["Visualize Personnel Losses Over Time"];
+    E["Impute NaN in russian_personnel_copy"] --> F["Mean Values Used"];
+    F --> D;

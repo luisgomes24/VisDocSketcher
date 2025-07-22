@@ -1,0 +1,13 @@
+flowchart TD
+    %% This is the main DataFrame used for analysis and plotting
+    df["DataFrame: df"]
+
+    %% Nodes for plotting functions
+    plotDist["Function: Distribution Plot"]
+    plotCorr["Function: Correlation Matrix Plot"]
+    plotScatter["Function: Scatter Plot"]
+
+    %% Data flow connections
+    df -->|Input| plotDist
+    df -->|Input| plotCorr
+    df -->|Input| plotScatter

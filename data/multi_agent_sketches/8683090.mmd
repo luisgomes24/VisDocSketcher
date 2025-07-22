@@ -1,0 +1,40 @@
+flowchart TD
+    %% Data Source Node
+    A1["covid_us_county.csv"]:::dataSource
+    %% df Node
+    A2["df"]:::dataNode
+    %% df_reg Node
+    A3["df_reg"]:::dataNode
+    %% df_county Node
+    A4["df_county"]:::dataNode
+    %% dfd Node
+    A5["dfd"]:::dataNode
+
+    %% Styles for different node types
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Data Source to Initial Data Read
+    A1 -->|"read_csv"| A2
+
+    %% Data Aggregation and Transformation
+    A2 -->|"groupby\nand agg"| A3
+    A2 -->|"groupby\nand agg"| A4
+    A2 -->|"groupby\nand sum"| A5
+
+    %% Comments for better understanding
+    %% A1 Node Comment
+    %% A1 represents the initial CSV file that contains the raw COVID-19 data by county.
+
+    %% A2 Node Comment
+    %% A2 is the DataFrame created from the CSV file to serve as a base for further data transformations.
+
+    %% A3 Node Comment
+    %% A3 holds aggregated data, showing total cases and deaths by county,
+    %% and is used for data visualization.
+
+    %% A4 Node Comment
+    %% A4 groups the data by both date and county, summing cases and deaths to analyze temporal trends.
+
+    %% A5 Node Comment
+    %% A5 shows aggregated data over time, useful for visualizing overall trends in COVID-19 cases and deaths.

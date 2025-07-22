@@ -1,0 +1,4 @@
+flowchart TD
+    A["cookie_cats.csv"]:::Data for A/B testing of a mobile game, including player retention and game rounds.
+    A --> |"Read CSV"| B["df"]:::DataFrame containing player data, including their version group and game metrics.
+    classDef Data fill:#f9f,stroke:#333,stroke-width:4px;

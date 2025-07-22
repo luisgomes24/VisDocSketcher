@@ -1,0 +1,30 @@
+flowchart TD
+    subgraph Data_Sources
+        A[Train CSV]%% Train dataset for time series forecasting %% <img src='dummy_plots/lineplot_template.svg'/> <br/>  
+        B[Test CSV]%% Test dataset for making predictions %% <img src='dummy_plots/lineplot_template.svg'/> <br/>  
+    end
+
+    subgraph Data_Variables
+        C[train]%% DataFrame containing training data with date as index %% <img src='dummy_plots/scatter_plot_template.svg'/> <br/>  
+        D[test]%% DataFrame containing test data with dates for prediction %% <img src='dummy_plots/scatter_plot_template.svg'/> <br/>  
+        E[model]%% The best performing model obtained after comparison %% <img src='dummy_plots/hist_template.svg'/> <br/>  
+        F[tuned_model]%% The hyper-parameter tuned version of the best model %% <img src='dummy_plots/hist_template.svg'/> <br/>  
+        G[final_model]%% The finalized model ready for making predictions %% <img src='dummy_plots/hist_template.svg'/> <br/>  
+        H[df]%% DataFrame containing predictions with dates %% <img src='dummy_plots/scatter_plot_template.svg'/> <br/>  
+    end
+
+    subgraph Data_Flow
+        A -->|Read CSV| C
+        B -->|Read CSV| D
+        C -->|Used for model setup| E
+        E -->|Tuning| F
+        F -->|Finalizing| G
+        G -->|Generating Predictions| H
+    end
+
+    subgraph Models
+        I[Time Series Model]%% Model selected and tuned for predictions %%
+    end
+    
+    C -->|Input Features| I
+    D -->|Prediction on Test| G

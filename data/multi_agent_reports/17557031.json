@@ -1,0 +1,97 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "X",
+      "description": "Feature matrix created using mglearn.datasets.make_forge() for binary classification."
+    },
+    {
+      "name": "y",
+      "description": "Target variable created using mglearn.datasets.make_forge() for binary classification."
+    },
+    {
+      "name": "cancer",
+      "description": "Dataset loaded using load_breast_cancer() method from sklearn.datasets."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features derived from the Breast Cancer dataset after splitting."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features derived from the Breast Cancer dataset after splitting."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set labels derived from the Breast Cancer dataset after splitting."
+    },
+    {
+      "name": "y_test",
+      "description": "Test set labels derived from the Breast Cancer dataset after splitting."
+    },
+    {
+      "name": "linear_svm",
+      "description": "A LinearSVC model fitted on the make_blobs dataset for multi-class classification."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation": "Created using mglearn.datasets.make_forge()",
+      "flow": "Used as input for training LinearSVC and Logistic Regression models."
+    },
+    {
+      "variable": "y",
+      "creation": "Created using mglearn.datasets.make_forge()",
+      "flow": "Used as target variable for training LinearSVC and Logistic Regression models."
+    },
+    {
+      "variable": "cancer",
+      "creation": "Loaded using load_breast_cancer()",
+      "flow": "Split into training and test sets to train Logistic Regression models."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Split from cancer.data using train_test_split()",
+      "flow": "Used for training Logistic Regression models and evaluated on test set."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Split from cancer.data using train_test_split()",
+      "flow": "Used for testing Logistic Regression models."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Split from cancer.target using train_test_split()",
+      "flow": "Used as target during training of Logistic Regression models."
+    },
+    {
+      "variable": "y_test",
+      "creation": "Split from cancer.target using train_test_split()",
+      "flow": "Used for testing the accuracy of Logistic Regression models."
+    },
+    {
+      "variable": "linear_svm",
+      "creation": "Fitted LinearSVC model to the output of make_blobs dataset.",
+      "flow": "Evaluated and plotted decision boundaries on the dataset."
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "Breast Cancer dataset features",
+      "target_variable": "Breast Cancer dataset labels",
+      "hyperparameters": [
+        { "C": 1 },
+        { "C": 100 },
+        { "C": 0.01 }
+      ]
+    },
+    {
+      "name": "LinearSVC",
+      "input_features": "Blob dataset features",
+      "target_variable": "Blob dataset labels",
+      "hyperparameters": []
+    }
+  ]
+}

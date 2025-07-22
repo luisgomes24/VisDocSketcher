@@ -1,0 +1,24 @@
+flowchart LR
+    A["📥 Load Data\n<img src='../input/tabular-playground-series-sep-2021/train.csv'/> <br/> Train Data"] --> B["🧹 Preprocessing"]
+    B --> C["📊 Feature Engineering"]
+    C --> D["🧠 Model Training"]
+    D --> E["✅ Evaluation"]
+    E --> F["📈 Visualization"]
+    
+    A1["<img src='file.svg'/> <br/> Load Train Data"] --> A
+    A2["<img src='file.svg'/> <br/> Load Test Data"] --> A
+    
+    B1["🔢 Basic Stats"] --> B
+    B2["🔄 Categorical Features"] --> B
+    
+    C1["🪄 Create New Features"] --> C
+    C2["🔗 Group Features by Category"] --> C
+    
+    D1["🤖 Run K-Fold Cross-Validation\n<img src='catboost.svg'/> <br/> Train CatBoost"] --> D
+    D2["🤖 Predictions"] --> D
+    
+    E1["📊 Calculate AUC Scores"] --> E
+    E2["💾 Save Submission"] --> E
+    
+    F1["📊 Feature Importance\n<img src='barplot_template.svg'/> <br/> Visualize Importance"] --> F
+    F2["📈 Histogram of Features\n<img src='hist_template.svg'/> <br/> Plot Histogram"] --> F

@@ -1,0 +1,9 @@
+flowchart TD
+    A["heart_failure_clinical_records_dataset.csv"] -->|read_csv| B["dataset"]
+    B -->|extract features| C["x (features)"]
+    B -->|extract target| D["y (target)"]
+    C -->|SMOTE| E["x_data (balanced features)"]
+    D -->|SMOTE| F["y_data (balanced target)"]
+    E & F -->|train| G["l1 (Logistic Regression)"]
+    G -->|cross-validate| H["model evaluation"]
+    H -->|predict| I["predictions"]

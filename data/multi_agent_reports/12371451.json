@@ -1,0 +1,37 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame object which is used in plotting functions."
+    },
+    {
+      "name": "nGraphShown",
+      "description": "Number of graphs to show in the distribution plots."
+    },
+    {
+      "name": "nGraphPerRow",
+      "description": "Number of graphs to display per row in the distribution plots."
+    },
+    {
+      "name": "graphWidth",
+      "description": "Width of the graph for correlation matrix visualization."
+    },
+    {
+      "name": "plotSize",
+      "description": "Size of the scatter plot matrix."
+    },
+    {
+      "name": "textSize",
+      "description": "Size of the text annotations in the scatter plots."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Not explicitly created in this notebook; intended to be passed to plotting functions.",
+      "flow": "Used in plotting functions such as plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix."
+    }
+  ],
+  "models": []
+}

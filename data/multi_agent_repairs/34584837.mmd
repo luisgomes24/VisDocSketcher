@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    A["CSV File: AAPL(Apple).csv"] -->|Load data| B["DataFrame df"]
+    %% B node represents the DataFrame containing stock price data
+
+    B -->|Calculate MA3| C["3 Day Moving Average MA3"]
+    %% C node represents the 3 day moving average of adjusted close prices
+
+    B -->|Calculate MA9| D["9 Day Moving Average MA9"]
+    %% D node represents the 9 day moving average of adjusted close prices
+
+    C -->|Used as target| E["Training Set y_train"]
+    C -->|Used as target| F["Testing Set y_test"]
+    %% E and F nodes represent the training and testing sets for the target
+
+    D -->|Used as target| G["Training Set y_train_MA9"]
+    D -->|Used as target| H["Testing Set y_test_MA9"]
+    %% G and H nodes represent the training and testing sets for MA9 as target
+
+    B -->|Split data| I["Training Set X_train"]
+    B -->|Split data| J["Testing Set X_test"]
+    %% I and J nodes represent the features training and testing sets
+
+    I -->|Train model| K["Linear Regression Model MA3"]
+    E -->|Train model| K
+    %% K node represents the Linear Regression model trained to predict MA3
+
+    I -->|Train model| L["Linear Regression Model MA9"]
+    G -->|Train model| L
+    %% L node represents the Linear Regression model trained to predict MA9
+```

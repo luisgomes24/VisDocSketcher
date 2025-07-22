@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Training Data"] --> B["<img src='file.svg'/> <br/> Load Testing Data"]
+    B --> C["<img src='table.svg'/> <br/> Convert Date to Datetime"]
+    C --> D["<img src='column_split.svg'/> <br/> Feature Engineering"]
+    D --> E["<img src='table.svg'/> <br/> Remove Low Variance Columns"]
+    E --> F["<img src='table.svg'/> <br/> Handle Missing Values"]
+    F --> G["<img src='brain.svg'/> <br/> Memory Reduction Function"]
+    G --> H["<img src='brain.svg'/> <br/> Model Setup"]
+    H --> I["<img src='brain.svg'/> <br/> Model Training"]
+    I --> J["<img src='brain.svg'/> <br/> Evaluate Model"]
+    J --> K["<img src='table.svg'/> <br/> Generate Predictions"]
+    K --> L["<img src='file.svg'/> <br/> Save Predictions to CSV"]

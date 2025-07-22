@@ -1,0 +1,15 @@
+```mermaid
+flowchart TD
+    A[\"test.csv\"] -->|Load CSV| B[\"df1\"]
+    C[\"train.csv\"] -->|Load CSV| D[\"df2\"]
+    
+    %% df1 represents the first 1000 rows of test data from test.csv
+    B -->|Plot Distributions| E[\"plotPerColumnDistribution df1\"]
+    B -->|Plot Correlations| F[\"plotCorrelationMatrix df1\"]
+    B -->|Plot Scatter Matrix| G[\"plotScatterMatrix df1\"]
+    
+    %% df2 represents the first 1000 rows of training data from train.csv
+    D -->|Plot Distributions| H[\"plotPerColumnDistribution df2\"]
+    D -->|Plot Correlations| I[\"plotCorrelationMatrix df2\"]
+    D -->|Plot Scatter Matrix| J[\"plotScatterMatrix df2\"]
+```

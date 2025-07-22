@@ -1,0 +1,42 @@
+{
+  "data_sources": [
+    {
+      "file": "N/A",
+      "description": "The notebook simulates population dynamics without external data sources."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "people",
+      "description": "DataFrame containing records of individuals, including generation, sex, and ancestor information."
+    },
+    {
+      "variable": "stats",
+      "description": "DataFrame summarizing statistics of generations, population, and ancestry."
+    },
+    {
+      "variable": "outcome",
+      "description": "Results of multiple experiment executions, containing simulation results and summaries."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "people",
+      "creation_method": "Initial generation created in the simulation function and populated through a loop for subsequent generations.",
+      "flow": "Used to calculate descendant columns and statistical measures in the simulation and experiment functions."
+    },
+    {
+      "variable": "stats",
+      "creation_method": "Generated from the simulation results in the experiment function.",
+      "flow": "Displayed as the output of the experiment indicating summarized statistics of populations across generations."
+    }
+  ],
+  "models": [
+    {
+      "model": "Population Simulation Model",
+      "input_features": ["starting_population", "total_generations", "childless_avg", "children_avg"],
+      "target_variable": "Population dynamics over generations",
+      "hyperparameters": "None applicable."
+    }
+  ]
+}

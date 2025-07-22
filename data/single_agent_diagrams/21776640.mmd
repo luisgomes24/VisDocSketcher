@@ -1,0 +1,15 @@
+```
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🧩 Split Data <img src='icons/row_split.svg' />"];
+    B --> C["🔄 Data Preprocessing <img src='icons/column_split.svg' />"];
+    C --> D["🛠️ Build CNN Model <img src='icons/brain.svg' />"];
+    D --> E["📊 Train Model <img src='icons/brain.svg' />"];
+    E --> F["📈 Evaluate Model <img src='icons/table.svg' />"];
+    F --> G["🖼️ Visualization of Results <img src='dummy_plots/scatter_plot_template.svg' />"];
+    
+    A -->|data| B;
+    B -->|splits| C;
+    C -->|preprocessed data| D;
+    D -->|model| E;
+    E -->|training stats| F;
+    F -->|eval results| G;

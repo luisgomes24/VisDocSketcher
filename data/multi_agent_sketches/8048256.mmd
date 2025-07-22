@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data sourcing and preparation
+    A1[train_data_modified21_02.xlsx] -->|Load data| B1[df]\nA1 -->|Extract target| B2[labels]\nB1 -->|Check NaNs| C1[df_null]
+    B1 -->|Handle missing values\nFill NaNs| B1
+    B1 -->|Drop columns| B3[dfc]
+
+    %% Splitting and transforming data
+    B1 -->|Copy var24 for processing| C2[df_var24]
+    C2 -->|Fill NaNs with mean| C2
+    C2 -->|Reintegrate processed var24| B1
+    B1 -->|Sample data| D1[df_train]
+    B1 -->|Sample data| D2[df_val]
+    D1 -->|Create Dataset| E1[my_data_train]
+    D2 -->|Create Dataset| E2[my_data_val]
+
+    %% Model training
+    E1 -->|Create DataLoader| F1[dataloader_train]
+    E2 -->|Create DataLoader| F2[dataloader_val]
+    F1 -->|Train| G1[Model Training]
+    F2 -->|Validate| G1
+    G1 -->|Log losses| G2[train_loss, val_loss]
+
+    %% Neural network
+    subgraph H1 ["Neural Network Model"]
+        direction TB
+        H2[Net] --> I1[Input: 37 features]
+        I1 -->I2[Multi-layer Linear: 2048, 512, 128, ...]
+        I2 -->I3[Activation: Leaky ReLU]
+        I2 -->I4[Output: 4 classes]
+    end
+    G1 -->|Network used| H1
+
+    %% Final outputs
+    B1-.->|Save final version of data| J1["final_train_data.xlsx"]
+    G2 -->|Plot result metrics| K1[Metrics Plot]

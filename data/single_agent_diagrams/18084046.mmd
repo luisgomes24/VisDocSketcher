@@ -1,0 +1,12 @@
+flowchart TD;
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🗃 Combine Dataframes"];
+    B --> C["🧹 Preprocess Data"];
+    C --> D["🏷 Tokenize & Lemmatize"];
+    D --> E["📈 Vectorize Text <img src='dummy_plots/scatter_plot_template.svg'/>"];
+    E --> F["🤖 Ask Question"];
+    F --> G["🔍 Output Results"];
+    
+    A1["<img src='icons/table.svg'/> <br/> df1, df2, df3"] --> B;
+    C1["<img src='icons/column_split.svg'/> <br/> Clean Columns"] --> C;
+    D1["<img src='icons/brain.svg'/> <br/> Tokenization Function"] --> D;
+    G1["📊 Similarity Score"] --> G;

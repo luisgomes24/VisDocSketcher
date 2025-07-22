@@ -1,0 +1,43 @@
+flowchart TD
+%% Nodes
+A[Start] 
+%% This is where the process begins
+
+B[Kaggle Write-ups CSV Read] 
+%% Loading Kaggle write-ups data from CSV
+
+C[Sample Submission CSV Read] 
+%% Loading sample submission data from CSV
+
+D[DataFrame df Created] 
+%% DataFrame containing Kaggle write-ups
+
+E[DataFrame submission Created] 
+%% DataFrame containing sample submissions
+
+F[Display Sample Submissions] 
+%% Shows the first few rows of submission DataFrame
+
+G[DataSummary] 
+%% Summary statistics & structure of df
+
+H[Missing Values Check] 
+%% Checks for null values in df
+
+I[Duplicate Rows Check] 
+%% Checks for duplicated rows in df
+
+J[Drop NA and Duplicates] 
+%% Drops any missing or duplicate rows
+
+%% Custom Links
+A --> B
+A --> C
+B --> D
+C --> E
+E --> F
+D --> G
+D --> H
+D --> I
+I --> J
+H --> J

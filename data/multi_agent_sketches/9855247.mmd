@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data source node
+    A["corona_morocco.csv"] -->|Load data| B["my_data"]
+    
+    %% Data transformation nodes
+    B -->|Calculate active cases - actif_column| C["actif_column"]
+    B -->|Extract total deaths| D["total_Deaths"]
+    B -->|Extract total confirmed cases| E["total_Confirmed"]
+    E -->|Differentiate| F["new_cases"]
+    
+    %% Data usage nodes
+    D -->|Forecasting| G["Prophet model"]
+    E -->|Forecasting| G
+    F -->|Visualizations and Forecasting| G
+    
+    %% Prophet Model specifics
+    G -->|Uses features: Total confirmed, New cases, Total deaths| H{{"Forecasting Results"}}
+    
+    %% Comments for node clarification
+    classDef nodeClass fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H nodeClass;
+
+    %% Class descriptions:
+    %% A: CSV data source for COVID-19 Morocco stats
+    %% B: DataFrame containing loaded and preprocessed data
+    %% C: Active cases calculation subtracted from confirmed cases
+    %% D: Total deaths series extracted for forecasting
+    %% E: Total confirmed cases series as model input
+    %% F: New cases identified for forecasting and analysis
+    %% G: Prophet model for time-series forecasting
+    %% H: Outputting forecast results based on input features

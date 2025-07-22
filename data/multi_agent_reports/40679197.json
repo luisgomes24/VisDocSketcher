@@ -1,0 +1,59 @@
+{
+  "data_sources": [
+    {
+      "file": "results-imagenet.csv",
+      "description": "Contains benchmark results for various image classification models."
+    },
+    {
+      "file": "benchmark-infer-amp-nhwc-pt111-cu113-rtx3090.csv",
+      "description": "Contains inference performance metrics for models."
+    },
+    {
+      "file": "benchmark-train-amp-nhwc-pt111-cu113-rtx3090.csv",
+      "description": "Contains training performance metrics for models."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_results",
+      "description": "DataFrame holding the results from the ImageNet benchmark."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing models data after filtering and merging with results for inference performance."
+    },
+    {
+      "name": "tdf",
+      "description": "DataFrame containing models data after filtering and merging with results for training performance."
+    },
+    {
+      "name": "subs",
+      "description": "Regex patterns for selecting specific model families in plots."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_results",
+      "creation": "Read from 'results-imagenet.csv'.",
+      "flow": "Used for merging with other DataFrames and plotting results."
+    },
+    {
+      "variable": "df",
+      "creation": "Created by calling get_data() for inference performance.",
+      "flow": "Used in plotting inference results and for further analysis."
+    },
+    {
+      "variable": "tdf",
+      "creation": "Created by calling get_data() for training performance.",
+      "flow": "Used in plotting training results and for further analysis."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Various CNNs and Transformers",
+      "input_features": "Image data of different sizes used for training/inference.",
+      "target_variable": "Accuracy on ImageNet benchmark.",
+      "hyperparameters": "Not explicitly defined in the notebook, descriptions of performance and families provided."
+    }
+  ]
+}

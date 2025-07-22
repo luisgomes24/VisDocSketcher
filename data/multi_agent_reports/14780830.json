@@ -1,0 +1,87 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/data-science-project-lifecycle/SPY_2015.csv",
+      "description": "Historical stock price data for SPY from 2015"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "SPY_data",
+      "description": "DataFrame containing stock price data including Date, Open, High, Low, Close, Adj Close, and Volume"
+    },
+    {
+      "name": "variables",
+      "description": "List of variable names from the SPY_data DataFrame"
+    },
+    {
+      "name": "train",
+      "description": "Training dataset for the model based on dates before 2015"
+    },
+    {
+      "name": "test",
+      "description": "Test dataset for the model based on dates from 2015 onwards"
+    },
+    {
+      "name": "X_train",
+      "description": "Features for the training dataset"
+    },
+    {
+      "name": "Y_train",
+      "description": "Target variable for the training dataset"
+    },
+    {
+      "name": "X_test",
+      "description": "Features for the test dataset"
+    },
+    {
+      "name": "Y_test",
+      "description": "Target variable for the test dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "SPY_data",
+      "creation_method": "read_csv",
+      "flow": "used for data cleansing, feature engineering, and model training"
+    },
+    {
+      "variable": "train",
+      "creation_method": "filtered from SPY_data",
+      "flow": "used for training the Linear Regression model"
+    },
+    {
+      "variable": "test",
+      "creation_method": "filtered from SPY_data",
+      "flow": "used for evaluating the model"
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "feature selection from train",
+      "flow": "used for training the model"
+    },
+    {
+      "variable": "Y_train",
+      "creation_method": "target selection from train",
+      "flow": "used for training the model"
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "feature selection from test",
+      "flow": "used for making predictions"
+    },
+    {
+      "variable": "Y_test",
+      "creation_method": "target selection from test",
+      "flow": "used for comparing predictions"
+    }
+  ],
+  "models": [
+    {
+      "model": "Linear Regression",
+      "input_features": ["High-Low_pct", "ewm_5", "price_std_5", "volume_avg_5", "volume Change", "volume Close"],
+      "target_variable": "Adj Close",
+      "hyperparameters": "None"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground':'#ffffff', 'edgeLabelForeground':'#000000'}}}%%
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/><br/>train.csv"]:::source
+    B["<img src='icons/table.svg' width=100 height=100/><br/>sample DataFrame"]:::variable
+    C["<img src='icons/column_split.svg' width=100 height=100/><br/>Feature Selection"]:::variable
+    D["<img src='icons/row_split.svg' width=100 height=100/><br/>Train-Test Split"]:::variable
+    E["<img src='icons/brain.svg' width=100 height=100/><br/>ML Model"]:::model
+    F["<img src='icons/image.svg' width=100 height=100/><br/>Image Output"]:::output
+    G["<img src='dummy_plots/barplot_template.svg'/><br/>Plot Node"]:::plot
+
+    A -->|"Load data into"| B
+    B -->|"Select features"| C
+    C -->|"Split data"| D
+    D -->|"Train model"| E
+    E -->|"Generate output"| F
+    F -->|"Create plot"| G
+
+    classDef source fill:#ffcccc,stroke:#333,stroke-width:2px;
+    classDef variable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;

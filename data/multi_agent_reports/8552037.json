@@ -1,0 +1,26 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Mental-Health-on-Campus-Survey.csv",
+      "description": "Contains survey data about mental health on campus"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding the survey data read from Mental-Health-on-Campus-Survey.csv"
+    },
+    {
+      "variable_name": "nRowsRead",
+      "description": "Specifies the number of rows to read from the CSV file"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in plotting functions for distribution, correlation, and scatter/density plots"]
+    }
+  ],
+  "models": []
+}

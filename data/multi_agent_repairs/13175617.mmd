@@ -1,0 +1,49 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A1["/Input: feature_cols.dill/"] 
+        A2["/Input: val_model.hdf5/"]
+    end
+
+    %% Data Preparation
+    subgraph DataPreparation
+        B1["Import feature_cols"] 
+        B2["Import model"]
+        B3["Load test_df"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables
+        C1["feature_cols"]
+        C2["model"]
+        C3["test_df"]
+        C4["X"]
+        C5["action"]
+        C6["sample_prediction_df"]
+    end
+
+    %% ML Model
+    subgraph MLModel
+        D1["Keras Model: val_model"]
+    end
+
+    %% Flow
+    A1 --> B1
+    A2 --> B2
+    B1 --> C1
+    B2 --> C2
+    B3 --> C3
+    C1 --> C4["Extract X from test_df using feature_cols"]
+    C3 --> C4
+    C4 --> D1
+    D1 --> C5["Predict action using model"]
+    C5 --> C6["Store predictions in sample_prediction_df"]
+
+    %% Description
+    C1 -->|"Used for"| C4
+    C2 -->|"Predict with"| C5
+    C3 -->|"Provides data for"| C4
+    D1 -->|"Outputs"| C5
+    C5 -->|"Stored in"| C6
+```

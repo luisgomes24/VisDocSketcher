@@ -1,0 +1,14 @@
+```
+flowchart TD
+    A["📁 Load Data from Web"] --> B["🛠 Preprocess Data"]
+    B --> C["🔍 Extract Medal Standings"]
+    C --> D["<img src='dummy_plots/barplot_template.svg' /> <br/> 📊 Visualize Medal Standings"]
+    A --> E["📊 Extract Athlete Count"]
+    E --> F["<img src='dummy_plots/hist_template.svg'/> <br/> 📈 Visualize Athlete Count"]
+    A --> G["🗓 Extract Event Schedule"]
+    G --> H["<img src='dummy_plots/lineplot_template.svg'/> <br/> 📅 Visualize Event Schedule"]
+    
+    B --> I["💾 Save Data to CSV"]
+    C --> I
+    E --> I
+    G --> I

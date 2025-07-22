@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph DataSources
+        A["/kaggle/input/skin-cancer-mnist-ham10000/HAM10000_metadata.csv"]
+        %% This node represents the CSV file containing metadata of skin cancer images
+    end
+
+    subgraph Variables
+        B["skin_df"]
+        %% DataFrame containing skin cancer metadata, sorted by image_id
+        C["img_to_class_dict"]
+        %% Dictionary mapping image_id to disease name
+        D["dls"]
+        %% DataLoaders object encapsulating training and validation datasets
+        E["learn"]
+        %% Learner object which is or will be used for fitting the model
+    end
+
+    subgraph Model
+        F["ResNet34 model"]
+        %% Pre-trained ResNet34 model used for image classification
+    end
+
+    A -->|"pd.read_csv"| B
+    B -->|"Mapping image_id to disease"| C
+    C -->|"Encapsulating as DataLoaders"| D
+    D -->|"Initialize Learner"| E
+    E -->|"Train using Fast.ai"| F
+
+    %% Model Details
+    subgraph ModelDetails
+        G["Parameters: epochs=3, lr=1e-2"]
+    end
+
+    E -.-> G
+    F -.-> G

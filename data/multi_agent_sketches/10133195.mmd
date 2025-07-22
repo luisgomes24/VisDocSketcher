@@ -1,0 +1,14 @@
+flowchart TD
+    %% Data Sources
+    A[No CSV files]:::dataSource
+
+    %% Data Variables
+    B[DataFrame df]:::dataVariable
+
+    %% Data Flow
+    A --> B
+    B --> C([Plotting and Correlation Analysis])
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

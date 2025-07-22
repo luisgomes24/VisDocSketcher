@@ -1,0 +1,25 @@
+flowchart TD
+
+%% Data Sources
+A1[("train.csv")]:::source -->|Read| B1[df_train]
+A2[("test.csv")]:::source -->|Read| B2[df_test]
+A3[("sample_submission.csv")]:::source -->|Read| B3[df_sub]
+
+%% Data Variables
+B1[df_train]:::variable -->|Fit Model| D1[TabularPredictor]
+B2[df_test]:::variable -->|Predict| D1
+B3[df_sub]:::variable
+
+%% Model
+D1[("AutoGluon\nfeatures: features_num + features_cat\nlabel: target_variable\nhyperparameters: best_quality\nnum_bag_folds=10\ntime_limit=300")]:::mlmodel -->|Generate Predictions| E1[pred_test]
+D1 -->|2nd Best Model Predictions| E2[pred_test_2nd]
+D1 -->|3rd Best Model Predictions| E3[pred_test_3rd]
+
+%% Predictions
+E1[pred_test]:::variable -->|Write| B3[df_sub]
+E2[pred_test_2nd]:::variable -->|Write to 2nd Submission| B3
+E3[pred_test_3rd]:::variable -->|Write to 3rd Submission| B3
+
+classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+classDef mlmodel fill:#bfb,stroke:#333,stroke-width:2px;

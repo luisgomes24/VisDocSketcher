@@ -1,0 +1,42 @@
+flowchart TD
+    %% Data Source: Iris Dataset
+    iris_data["Iris Dataset"]
+    click iris_data href "https://archive.ics.uci.edu/ml/datasets/iris"
+    
+    %% df: Initial Data
+    df["df: DataFrame with Petal length and Petal Width"]
+    iris_data -->|load_iris()| df
+    
+    %% df4: Normalized Data
+    df4["df4: Normalized DataFrame"]
+    df -->|MinMaxScaler| df4
+    
+    %% SSE: Sum of Squared Errors with Original Data
+    sse["SSE: Sum of Squared Errors on df"]
+    df -->|KMeans fit| sse
+    
+    %% SSE with MinMaxScaler
+    ssem["SSE with MinMaxScaler: Sum of Squared Errors on df4"]
+    df4 -->|KMeans fit| ssem
+    
+    %% Elbow Chart
+    elbow_chart["Elbow Chart"]
+    sse --> elbow_chart
+    ssem --> elbow_chart
+    
+    %% Clustering on Original Data
+    df9["df9: Clusters on df with KMeans (2 clusters)"]
+    df -->|KMeans (n_clusters=2)| df9
+    
+    %% Clustering on Normalized Data
+    df5["df5: Clusters on df4 with KMeans (3 clusters)"]
+    df4 -->|KMeans (n_clusters=3)| df5
+
+    %% Final Scatter Plots
+    scatter_plots["Scatter Plots"]
+    df9 -->|Segmented into df10, df11| scatter_plots
+    df5 -->|Segmented into df6, df7| scatter_plots
+    
+    %% Explanation for each node
+    classDef explanation fill:#f9f,stroke:#333,stroke-width:4px;
+    class iris_data,df,df4,sse,ssem,df9,df5,elbow_chart,scatter_plots explanation;

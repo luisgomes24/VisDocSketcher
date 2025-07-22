@@ -1,0 +1,15 @@
+flowchart TD
+    A[shootings.csv]:::dataSource -->|Load Data| B[df1]:::dataFrame
+    B -->|Visualize Distribution| C[plotPerColumnDistribution]:::visualization
+    B -->|Visualize Correlation| D[plotCorrelationMatrix]:::visualization
+    B -->|Visualize Scatter| E[plotScatterMatrix]:::visualization
+
+    %% Classes for styling
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#f96,stroke:#333,stroke-width:2px;
+
+    %% Comments for each node
+    %% A node represents the CSV data source
+    %% B node represents the DataFrame created from the CSV
+    %% C, D, and E nodes represent different types of visualizations

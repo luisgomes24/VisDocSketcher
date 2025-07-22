@@ -1,0 +1,10 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Explore Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Preprocess Data"]
+    C --> D["<img src='brain.svg'/> <br/> Train KMeans"]
+    D --> E["<img src='scatter_plot_template.svg'/> <br/> Visualize Clusters"]
+    E --> F["<img src='table.svg'/> <br/> Create Target Variable"]
+    F --> G["<img src='table.svg'/> <br/> Split Data"]
+    G --> H["<img src='brain.svg'/> <br/> Train Classifier"]
+    H --> I["<img src='table.svg'/> <br/> Evaluate Model"]
+    I --> J["<img src='table.svg'/> <br/> Display Predictions"]

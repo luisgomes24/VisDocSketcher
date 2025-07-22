@@ -1,0 +1,38 @@
+{
+  "data_sources": [
+    {"file":"/kaggle/input/hranalysis/train.csv", "description":"Contains training data for HR analysis with features to predict promotions."},
+    {"file":"/kaggle/input/hranalysis/test.csv", "description":"Contains testing data for HR predictions."}
+  ],
+  "data_variables": [
+    {"name":"df_train", "description":"DataFrame containing the training dataset loaded from train.csv."},
+    {"name":"df_test", "description":"DataFrame containing the testing dataset loaded from test.csv."},
+    {"name":"df_missing_stat", "description":"DataFrame that contains statistics of missing values for df_train."},
+    {"name":"df_x", "description":"Copy of df_train after dropping employee_id, used for further analysis and visualization."}
+  ],
+  "data_flow": [
+    {"variable":"df_train", "created_by":"pd.read_csv", "flows_to":["df_missing_stat", "df_x"]},
+    {"variable":"df_test", "created_by":"pd.read_csv", "flows_to":["analysis and visualization"]},
+    {"variable":"df_missing_stat", "created_by":"calcMissingValues", "flows_to":["visualizations"]},
+    {"variable":"df_x", "created_by":"df_train.copy", "flows_to":["pairplot analysis", "visualization of features against target"]}
+  ],
+  "models": [
+    {
+      "name":"Logistic Regression", 
+      "input_features":["previous_year_rating", "education", "length_of_service"], 
+      "target":"is_promoted", 
+      "hyperparameters":{ "none":"fixed" }
+    },
+    {
+      "name":"Random Forest", 
+      "input_features":["previous_year_rating", "education", "length_of_service"], 
+      "target":"is_promoted",
+      "hyperparameters":{ "none":"fixed" }
+    },
+    {
+      "name":"Naive Bayes", 
+      "input_features":["previous_year_rating", "education", "length_of_service"], 
+      "target":"is_promoted",
+      "hyperparameters":{ "none":"fixed" }
+    }
+  ]
+}

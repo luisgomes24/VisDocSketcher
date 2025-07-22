@@ -1,0 +1,131 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/ckdisease/kidney_disease.csv",
+      "description": "Contains the data related to kidney diseases including various health metrics and classifications."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the dataset loaded from the CSV file."
+    },
+    {
+      "name": "X",
+      "description": "Training features for the models selected from the dataset."
+    },
+    {
+      "name": "y",
+      "description": "Target variable indicating classification of kidney disease from the dataset."
+    },
+    {
+      "name": "X_train",
+      "description": "Training subset of X features."
+    },
+    {
+      "name": "X_test",
+      "description": "Test subset of X features."
+    },
+    {
+      "name": "y_train",
+      "description": "Training subset of the target variable y."
+    },
+    {
+      "name": "y_test",
+      "description": "Test subset of the target variable y."
+    },
+    {
+      "name": "model",
+      "description": "Instance of the RandomForestClassifier used for training."
+    },
+    {
+      "name": "predictions",
+      "description": "Predicted values from the Random Forest model."
+    },
+    {
+      "name": "mod",
+      "description": "Instance of XGBClassifier used for boosting."
+    },
+    {
+      "name": "model2",
+      "description": "Instance of SVC used for support vector classification."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "pd.read_csv",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "X",
+      "creation": "data.loc[:,[..]]",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "creation": "data["classification"]",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split",
+      "flows_to": []
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split",
+      "flows_to": []
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split",
+      "flows_to": []
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split",
+      "flows_to": []
+    },
+    {
+      "variable": "model",
+      "creation": "RandomForestClassifier",
+      "flows_to": ["predictions"]
+    },
+    {
+      "variable": "predictions",
+      "creation": "model.predict",
+      "flows_to": []
+    },
+    {
+      "variable": "mod",
+      "creation": "XGBClassifier",
+      "flows_to": []
+    },
+    {
+      "variable": "model2",
+      "creation": "SVC",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "name": "Random Forest",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {}  
+    },
+    {
+      "name": "XGBoost",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {}  
+    },
+    {
+      "name": "Support Vector Machine",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {}  
+    }
+  ]
+}

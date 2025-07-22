@@ -1,0 +1,22 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["🔍 Data Overview"]
+    B --> C["🧼 Data Cleaning & Transformation"]
+    C -->|2.1| D["🗑️ Drop Unnecessary Columns"]
+    C -->|2.2| E["🔢 Transform 'Total_Income' to Float"]
+    C -->|2.3| F["📊 Review Data Statistics"]
+    F -->|2.3.1| G["📊 Dataset Statistics Description"]
+    F -->|2.3.2| H["📊 Boxplot <img src='boxplot_template.svg' />"]
+    F -->|2.3.3| I["📊 Histogram <img src='hist_template.svg' />"]
+    C -->|2.4| J["🔍 Check Missing Data"]
+    C -->|2.5| K["🎭 Check Skewness & Kurtosis"]
+    K --> L["🧩 Build Model"]
+    L -->|3.1| M["📊 Dividing Dataframe"]
+    L -->|3.2| N["✂️ Splitting Data of X and Y"]
+    L -->|3.3| O["🔍 Testing Several Models"]
+    O --> P["📊 Confusion Matrix"]
+    O --> Q["📈 ROC Curve"]
+    O --> R["🔍 Finding Threshold"]
+    R --> S["✅ Chosen Model"]
+    S --> T["📊 Model Evaluation"]
+    
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;

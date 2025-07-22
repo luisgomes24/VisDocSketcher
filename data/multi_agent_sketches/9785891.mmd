@@ -1,0 +1,56 @@
+flowchart TD
+    %% Data Sources
+    A1[FlowerColorImages.h5]:::source
+    A2[Synthetic Data]:::source
+    A3[MNIST Dataset]:::source
+
+    %% Data Variables
+    B1[X]:::variable
+    B2[y]:::variable
+    B3[X_train]:::variable
+    B4[X_test]:::variable
+    B5[y_train]:::variable
+    B6[y_test]:::variable
+    B7[train_loader]:::variable
+    B8[test_loader]:::variable
+    B9[train]:::variable
+    B10[test]:::variable
+
+    %% Data Transformation & Flow
+    A2 -->|make_classification| B1
+    A2 -->|make_classification| B2
+    B1 -->|shuffle & split| B3
+    B1 -->|shuffle & split| B4
+    B2 -->|shuffle & split| B5
+    B2 -->|shuffle & split| B6
+    A3 -->|DataLoader| B7
+    A3 -->|DataLoader| B8
+    A1 -->|TData initialization| B9
+    A1 -->|TData initialization| B10
+
+    %% Models
+    C1[Perceptron]:::model
+    C2[Logistic Regression]:::model
+    C3[Softmax Regression (784 input)]:::model
+    C4[Softmax Regression (49152 input)]:::model
+
+    %% Model Training & Usage
+    B3 -->|Train| C1
+    B5 -->|Train| C1
+    B4 -->|Test| C1
+    B6 -->|Test| C1
+
+    B3 -->|Train| C2
+    B5 -->|Train| C2
+    B4 -->|Test| C2
+    B6 -->|Test| C2
+
+    B7 -->|Train| C3
+    B8 -->|Test| C3
+
+    B9 -->|Train| C4
+    B10 -->|Test| C4
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

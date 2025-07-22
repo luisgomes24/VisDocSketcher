@@ -1,0 +1,4 @@
+{"data_sources": [{"file_name": "fb_sentiment.csv", "description": "Contains sentiment analysis data from Facebook posts"}],
+"data_variables": [{"name": "df1", "description": "DataFrame loaded from fb_sentiment.csv"}],
+"data_flow": [{"variable": "df1", "creation_method": "pd.read_csv", "used_for": "data visualization using plotPerColumnDistribution"}],
+"models": []}

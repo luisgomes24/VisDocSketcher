@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/daily-total-female-births-in-california-1959/daily-total-female-births-CA.csv",
+      "description": "Contains daily total female births in California for the year 1959"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing daily total female births, with date as 'ds' and births as 'y'"
+    },
+    {
+      "name": "m",
+      "description": "Prophet model instance used for forecasting"
+    },
+    {
+      "name": "future",
+      "description": "DataFrame created for future prediction periods"
+    },
+    {
+      "name": "forecast",
+      "description": "DataFrame containing the predicted values using the Prophet model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "usage": ["Used for fitting the Prophet model", "Plotting the initial graph"]
+    },
+    {
+      "variable": "m",
+      "creation_method": "fbprophet.Prophet",
+      "usage": ["Fitted with the df DataFrame"]
+    },
+    {
+      "variable": "future",
+      "creation_method": "m.make_future_dataframe",
+      "usage": ["Used for making predictions for future periods"]
+    },
+    {
+      "variable": "forecast",
+      "creation_method": "m.predict",
+      "usage": ["Used for visualizations and understanding predicted trends"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Prophet",
+      "input_features": ["daily female births"],
+      "target_variable": "forecasted births",
+      "hyperparameters": {
+        "yearly_seasonality": true,
+        "daily_seasonality": false,
+        "changepoint_range": 0.9,
+        "changepoint_prior_scale": 0.5,
+        "seasonality_mode": "multiplicative"
+      }
+    }
+  ]
+}

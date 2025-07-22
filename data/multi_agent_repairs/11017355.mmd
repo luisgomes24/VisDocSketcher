@@ -1,0 +1,18 @@
+```mermaid
+flowchart TD
+    A1["/kaggle/input/wineQualityReds.csv"]
+    A2["/kaggle/input/wineQualityWhites.csv"]
+    B1["df1\nRed Wine DataFrame"]
+    B2["df2\nWhite Wine DataFrame"]
+
+    A1 -->| "Load CSV" | B1
+    A2 -->| "Load CSV" | B2
+
+    B1 -->| "Visualizations" | C1["Red Wine Distribution Plots"]
+    B1 -->| "Visualizations" | C2["Red Wine Correlation Plots"]
+    B1 -->| "Visualizations" | C3["Red Wine Scatter Plots"]
+
+    B2 -->| "Visualizations" | D1["White Wine Distribution Plots"]
+    B2 -->| "Visualizations" | D2["White Wine Correlation Plots"]
+    B2 -->| "Visualizations" | D3["White Wine Scatter Plots"]
+```

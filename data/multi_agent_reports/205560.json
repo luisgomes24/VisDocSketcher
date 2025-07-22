@@ -1,0 +1,13 @@
+{"data_sources": [ 
+    { "file_path": "../input/directory.csv", "description": "Contains data about Starbucks stores globally" } 
+],
+"data_variables": [ 
+    { "variable_name": "starbucks", "description": "DataFrame containing details about Starbucks stores" }, 
+    { "variable_name": "usa_states", "description": "DataFrame containing details about Starbucks stores only in the US" } 
+],
+"data_flow": [ 
+    { "variable_name": "starbucks", "creation_method": "pd.read_csv('../input/directory.csv')", "flows_to": ["data analysis", "data visualization"] }, 
+    { "variable_name": "usa_states", "creation_method": "starbucks[starbucks['Country'] == 'US']", "flows_to": ["data analysis", "data visualization"] } 
+],
+"models": [] 
+}

@@ -1,0 +1,34 @@
+flowchart TD
+    %% Node for Data Sources
+    KHI_csv["KHI.csv"]
+    IHI_csv["IHI.csv"]
+    MHI_csv["MHI.csv"]
+    
+    %% Nodes for DataFrames
+    KHI["KHI DataFrame"]
+    IHI["IHI DataFrame"]
+    MHI["MHI DataFrame"]
+
+    %% Nodes for Closing Price DataFrames
+    KHI_M["KHI_M DataFrame"]
+    IHI_M["IHI_M DataFrame"]
+    MHI_M["MHI_M DataFrame"]
+
+    %% Data Flow
+    KHI_csv -->|"Read with Pandas"| KHI
+    IHI_csv -->|"Read with Pandas"| IHI
+    MHI_csv -->|"Read with Pandas"| MHI
+
+    KHI -->|"Drop columns"| KHI_M
+    IHI -->|"Drop columns"| IHI_M
+    MHI -->|"Drop columns"| MHI_M
+
+    %% Closing price calculations and plots
+    KHI -->|"Closing price plots"| KHI_M
+    IHI -->|"Closing price plots"| IHI_M
+    MHI -->|"Closing price plots"| MHI_M
+
+    %% Recovery calculations
+    KHI -->|"Recovery calculations"| KHI_M
+    IHI -->|"Recovery calculations"| IHI_M
+    MHI -->|"Recovery calculations"| MHI_M

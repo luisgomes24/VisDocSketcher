@@ -1,0 +1,26 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🛠️ Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='hist_template.svg'/>"]
+    C --> D["🤖 Build Recommendation System"]
+    D --> E["✅ Evaluate Recommendations"]
+
+    subgraph preproc[Data Preprocessing]
+        B1["🗓️ Convert Date Features"]
+        B2["🔍 Filter Columns"]
+        B3["📊 Handle Missing Values"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph vis[Data Visualization]
+        C1["📈 Plot Rating Distribution <img src='pie_plot_template.svg'/>"]
+        C2["📅 Release Month Analysis <img src='scatter_plot_template.svg'/>"]
+        C3["📊 Correlation Heatmap <img src='heatmap_template.svg'/>"]
+        C1 --> C2 --> C3
+    end
+
+    subgraph recsys[Recommendation System]
+        D1["📜 Create TF-IDF Matrix"]
+        D2["🔄 Compute Cosine Similarity"]
+        D3["🎬 Generate Recommendations"]
+        D1 --> D2 --> D3
+    end

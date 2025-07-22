@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/hackathon/task_1-google_search_txt_files_v2/PE/Peru-es-result-18.txt",
+      "description": "Text file containing data related to Peru, likely regarding the COVID-19 situation."
+    },
+    {
+      "file_path": "../input/hackathon/task_2-Tuberculosis_infection_estimates_for_2018.csv",
+      "description": "CSV file with tuberculosis infection estimates for the year 2018."
+    },
+    {
+      "file_path": "../input/hackathon/task_2-owid_covid_data-21_June_2020.csv",
+      "description": "CSV file containing COVID-19 data statistics as of June 21, 2020."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "text",
+      "description": "Contents of the Peru text file containing information related to COVID-19."
+    },
+    {
+      "name": "df1",
+      "description": "DataFrame containing data from the tuberculosis infection estimates CSV."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing COVID-19 statistics loaded from the OWID COVID data CSV."
+    },
+    {
+      "name": "peru",
+      "description": "Filtered DataFrame containing COVID-19 data specifically for Peru."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "text",
+      "creation": "Read from the Peru text file.",
+      "uses": "Displayed excerpts of text for context."
+    },
+    {
+      "variable": "df1",
+      "creation": "Loaded using pd.read_csv for tuberculosis data.",
+      "uses": "Generated a profile report using pandas profiling."
+    },
+    {
+      "variable": "df",
+      "creation": "Loaded using pd.read_csv for COVID-19 data.",
+      "uses": "Filtered for the country Peru and stored in 'peru'."
+    },
+    {
+      "variable": "peru",
+      "creation": "Filtered from 'df' DataFrame where location is Peru.",
+      "uses": [
+        "Used for visualizations (bar plots, violin plots, line plots).",
+        "Analyzed in various distributions and box plots."
+      ]
+    }
+  ],
+  "models": []
+}

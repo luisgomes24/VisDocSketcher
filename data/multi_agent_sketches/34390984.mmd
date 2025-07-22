@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Source Node
+    A["insurance.csv"] --> |"Loaded into DataFrame"| B["df\nDataframe with raw insurance data"]
+    
+    %% Data Encoding and Preparation
+    B --> |"One-hot encode categorical variables"| C["df_encoded\nEncoded Dataframe"]
+    
+    %% Features Selection
+    C --> |"Select independent variables"| D["X\nIndependent Variables"]
+    C --> |"Select dependent variable"| E["y\nDependent Variable (charges)"]
+    
+    %% Train-Test Split
+    D & E --> |"Split data into training and testing sets"| F["X_train, y_train\nTraining Data"] & G["X_test, y_test\nTesting Data"]
+    
+    %% Model Training
+    F --> |"Train Linear Regression Model"| H["model\nLinear Regression Model"]
+    
+    %% Predictions
+    H --> |"Predict on training data"| I["y_train_pred\nTraining Data Predictions"]
+    H --> |"Predict on test data"| J["y_test_pred\nTest Data Predictions"]
+    
+    %% Performance Metrics
+    I & J --> |"Assess model performance using MSE"| K["train_loss, test_loss\nPerformance Metrics (MSE)"]

@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 Data Preprocessing <img src='table.svg'/>"]
+    B --> C["🧹 Clean Data"]
+    C --> D["🔠 Text Preparation"]
+    D --> E["🔍 Tokenization"]
+    E --> F["📦 Create Folds"]
+    F --> G["🧪 RoBERTa Model and Training Module"]
+    G --> H["🧠 Train Model"]
+    H --> I["✅ Evaluate Model"]
+    I --> J["📈 Visualize Predictions"]
+    J --> K["📤 Load Weights and Inference"]
+    K --> L["📊 Create Submission <img src='file.svg'/>"]

@@ -1,0 +1,18 @@
+flowchart TD
+    %% Node for the data source: OpenAQ dataset
+    A[OpenAQ Dataset] -->|Filtering US cities| B[us_cities]
+    A -->|Filtering pollutants with zero value| C[zero_pollutants]
+    A -->|Filtering countries not using ppm| D[country_unit_not_ppm]
+    %% Analysis and further data processing nodes
+    B -->|Analysis| E[Data Analysis on US Cities]
+    C -->|Display| F[Pollutants with Zero Value]
+    D -->|Count Display| G[Countries not using ppm]
+    
+    %% Comments for clarity
+    %% A: Represents the original dataset being used.
+    %% B: Data after filtering for U.S. cities.
+    %% C: Data containing pollutants with a value of zero.
+    %% D: Data containing countries not using ppm as unit.
+    %% E: Output of data analysis on US cities.
+    %% F: Displayed result of pollutants with zero value.
+    %% G: Displayed count of countries not using ppm.

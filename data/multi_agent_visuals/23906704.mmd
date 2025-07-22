@@ -1,0 +1,59 @@
+flowchart TD
+    subgraph DataSources
+        DS1["Session Data Files"]
+    end
+
+    subgraph Variables
+        V1["sessions"]
+        V2["session_dirs"]
+        V3["X"]
+        V4["Y"]
+        V5["fitted_model"]
+    end
+
+    subgraph CrossValidation
+        CV1["cross_val"]
+        CV2["kf"]
+        CV3["SVM_rbf_acc"]
+        CV4["LDA_acc"]
+        CV5["LR_acc"]
+        CV6["RF_acc"]
+    end
+
+    subgraph Models
+        M1["SVC Model"]
+        M2["LDA Model"]
+        M3["Logistic Regression Model"]
+        M4["Random Forest Model"]
+    end
+
+    DS1 --> |Load| V2
+	V2 --> |Extract sessions| V1
+    V2 --> |np.load| V3
+    V2 --> |np.load| V4
+
+    V3 --> |Input| CV1
+    V4 --> |Target| CV1
+    CV1 --> CV3
+    CV1 --> CV4
+    CV1 --> CV5
+    CV1 --> CV6
+
+
+    CV3 --> |Evaluate Accuracy| M1
+    CV4 --> |Evaluate Accuracy| M2
+    CV5 --> |Evaluate Accuracy| M3
+    CV6 --> |Evaluate Accuracy| M4
+
+    M1 --> |Train| V5
+    M2 --> |Train| V5
+    M3 --> |Train| V5
+    M4 --> |Train| V5
+
+    %% Detailed Descriptions
+    DS1:::comment --> |"Contains EEG session data."|V2
+    V1:::comment --> |"Session identifiers"|
+    V2:::comment --> |"Paths to session directories"|V3
+    V3:::comment --> |"Input data array"|CV1
+    V4:::comment --> |"Target data array"|CV1
+    CV1:::comment --> |"Cross-validation process"|

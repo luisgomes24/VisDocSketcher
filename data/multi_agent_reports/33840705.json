@@ -1,0 +1,121 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/anime-recommendations-database/anime.csv",
+      "description": "Contains information about various anime titles."
+    },
+    {
+      "file_path": "/kaggle/input/anime-recommendations-database/rating.csv",
+      "description": "Contains user ratings for the various anime titles."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing anime details from the anime.csv file."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame containing user ratings from the rating.csv file."
+    },
+    {
+      "name": "df",
+      "description": "Merged DataFrame containing both anime details and user ratings."
+    },
+    {
+      "name": "sample_df",
+      "description": "Subset DataFrame including only selected anime IDs for analysis."
+    },
+    {
+      "name": "user_anime_df",
+      "description": "User-anime pivot table constructed for matrix factorization."
+    },
+    {
+      "name": "data",
+      "description": "Surprise Dataset object created from sample_df for modeling."
+    },
+    {
+      "name": "trainset",
+      "description": "Training dataset created from data for SVD model."
+    },
+    {
+      "name": "testset",
+      "description": "Test dataset created from data for model validation."
+    },
+    {
+      "name": "svd_model",
+      "description": "SVD model initialized for collaborative filtering."
+    },
+    {
+      "name": "predictions",
+      "description": "Predicted ratings from the SVD model for the test set."
+    },
+    {
+      "name": "gs",
+      "description": "GridSearchCV object for hyperparameter tuning of the SVD model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv",
+      "flows_to": ["df"]
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv",
+      "flows_to": ["df"]
+    },
+    {
+      "variable": "df",
+      "creation": "df1.merge(df2)",
+      "flows_to": ["sample_df", "user_anime_df"]
+    },
+    {
+      "variable": "sample_df",
+      "creation": "df[df.anime_id.isin(anime_ids)]",
+      "flows_to": ["user_anime_df"]
+    },
+    {
+      "variable": "user_anime_df",
+      "creation": "sample_df.pivot_table",
+      "flows_to": ["data"]
+    },
+    {
+      "variable": "data",
+      "creation": "Dataset.load_from_df",
+      "flows_to": ["trainset", "testset"]
+    },
+    {
+      "variable": "trainset",
+      "creation": "train_test_split",
+      "flows_to": ["svd_model"]
+    },
+    {
+      "variable": "svd_model",
+      "creation": "SVD() + svd_model.fit(trainset)",
+      "flows_to": ["predictions"]
+    },
+    {
+      "variable": "predictions",
+      "creation": "svd_model.test(testset)",
+      "flows_to": []
+    },
+    {
+      "variable": "gs",
+      "creation": "GridSearchCV()",
+      "flows_to": ["svd_model"]
+    }
+  ],
+  "models": [
+    {
+      "model": "SVD",
+      "input_features": ["user_id", "anime_id"],
+      "target_variable": "rating_y",
+      "hyperparameters": {
+        "n_epochs": [50, 100],
+        "lr_all": [0.005, 0.009]
+      }
+    }
+  ]
+}

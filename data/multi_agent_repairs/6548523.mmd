@@ -1,0 +1,30 @@
+```mermaid
+%% A diagram showing the workflow for car data clustering using KMeans
+flowchart TD
+    %% Node for data source
+    A["CARS.csv"] -->|Load data into DataFrame| B["dados"]
+    
+    %% Node for selecting features
+    B -->|Select features for clustering| C["x"]
+    
+    %% Convert DataFrame to Numpy array for KMeans
+    C -->|Convert to Numpy Array| D["x_array"]
+    
+    %% KMeans model initialization and training
+    D -->|Fit data to model| E["KMeans Model"]
+    E -->|Predict clusters and add to dados| F["dados['clusters']"]
+
+    %% Specify KMeans model details
+    E:::model
+    classDef model fill:#ffe599,stroke:#000,stroke-width:2px;
+    
+    %% Comments and labels for understanding model specifics
+    E -->|Model Inputs: mpg, cylinders, cubicinches, hp, weightlbs, time-to-60, year| E1["Input Features"]
+    E -->|Model Outputs: clusters| E2["Output Variable"]
+
+    %% Link specific nodes with arrows to show dependencies
+    B --> C
+    C --> D
+    C --> E
+    D --> E
+```

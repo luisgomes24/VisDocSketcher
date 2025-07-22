@@ -1,0 +1,30 @@
+flowchart TD
+    %% Node definitions
+    A1["Oxford Pets Dataset"]
+    A2["dataset"]
+    A3["train"]
+    A4["test"]
+    A5["train_dataset"]
+    A6["test_dataset"]
+    A7["U-Net Model"]
+    A8["model_history"]
+
+    %% Data source
+    A1 -- "load using tfds.load()" --> A2
+    
+    %% Data preprocessing
+    A2 -- "dataset['train'].map(load_image_train)" --> A3
+    A3 -- "cache, shuffle, batch, repeat" --> A5
+
+    A2 -- "dataset['test'].map(load_image_test)" --> A4
+    A4 -- "batch data" --> A6
+
+    %% Model Training and Evaluation
+    A5 -- "train model" --> A7
+    A6 -- "validate model" --> A7
+    A7 -- "fit model and create history" --> A8
+
+    %% ML Model
+    subgraph Model_Training
+        A7
+    end

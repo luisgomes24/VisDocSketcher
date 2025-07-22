@@ -1,0 +1,55 @@
+flowchart TD
+  %% Nodes
+  subgraph data_sources
+    ds1["../input/xgb-valid-preds-public/xgb_valid.csv"]
+    ds2["../input/porto-seguro-safe-driver-prediction/train.csv"]
+  end
+
+  subgraph data_variables
+    oof_preds["oof_preds"]
+    y["y"]
+    gini_public["gini_public"]
+    gini_private["gini_private"]
+    gini_public_arr["gini_public_arr"]
+    gini_private_arr["gini_private_arr"]
+  end
+
+  subgraph models
+    xgboost["XGBoost Model"]
+  end
+
+  %% Data Source Descriptions
+  ds1:::comment["Contains OOF predictions for the validation set."]
+  ds2:::comment["Contains the training dataset with IDs and target labels."]
+
+  %% Data Variables Descriptions
+  oof_preds:::comment["DataFrame containing the OOF predictions from the xgboost model."]
+  y:::comment["DataFrame containing the training target variable (labels) and IDs."]
+  gini_public:::comment["List to store Gini scores from public splits during the 10,000 trials."]
+  gini_private:::comment["List to store Gini scores from private splits during the 10,000 trials."]
+  gini_public_arr:::comment["Numpy array of Gini scores from public splits."]
+  gini_private_arr:::comment["Numpy array of Gini scores from private splits."]
+
+  %% Model Details
+  xgboost:::comment["XGBoost model using default parameters."]
+
+  %% Data Flow
+  ds1 -- "pd.read_csv" --> oof_preds
+  ds2 -- "pd.read_csv" --> y
+  oof_preds -- "Used in train_test_split" --> xgboost
+  y -- "Used in train_test_split" --> xgboost
+  gini_public_arr -- "np.array(gini_public)" --> gini_public
+  gini_private_arr -- "np.array(gini_private)" --> gini_private
+  gini_public -- "Used for analytical comparisons" --> gini_public_arr
+  gini_private -- "Used for analytical comparisons" --> gini_private_arr
+  
+  style ds1 fill:#f9f,stroke:#333,stroke-width:2px;
+  style ds2 fill:#f9f,stroke:#333,stroke-width:2px;
+  style oof_preds fill:#bbf,stroke:#333,stroke-width:2px;
+  style y fill:#bbf,stroke:#333,stroke-width:2px;
+  style gini_public fill:#ccf,stroke:#333,stroke-width:2px;
+  style gini_private fill:#ccf,stroke:#333,stroke-width:2px;
+  style gini_public_arr fill:#fac,stroke:#333,stroke-width:2px;
+  style gini_private_arr fill:#fac,stroke:#333,stroke-width:2px;
+
+  classDef comment fill:#fff,stroke:none,stroke-width:0px,font-style:italic;

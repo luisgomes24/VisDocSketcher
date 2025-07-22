@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/ccdata/CC GENERAL.csv",
+      "description": "Data containing customer credit card transactions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "raw_df",
+      "description": "Original DataFrame containing customer data after reading from CSV."
+    },
+    {
+      "name": "scaled_df",
+      "description": "DataFrame containing standardized data after applying StandardScaler."
+    },
+    {
+      "name": "normalized_df",
+      "description": "Normalized DataFrame obtained by normalizing the standardized data."
+    },
+    {
+      "name": "X_principal",
+      "description": "Reduced DataFrame containing 2 principal components extracted using PCA."
+    },
+    {
+      "name": "silhouette_scores",
+      "description": "List of silhouette scores computed for cluster numbers ranging from 2 to 7."
+    },
+    {
+      "name": "agg",
+      "description": "Agglomerative clustering model applied to the principal component data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "raw_df",
+      "creation": "pd.read_csv",
+      "usage": "Cleaned by dropping 'CUST_ID' and handling missing values."
+    },
+    {
+      "variable": "scaled_df",
+      "creation": "StandardScaler().fit_transform",
+      "usage": "Standardized version of raw_df for normalization."
+    },
+    {
+      "variable": "normalized_df",
+      "creation": "normalize(scaled_df)",
+      "usage": "Converted to a pandas DataFrame for PCA."
+    },
+    {
+      "variable": "X_principal",
+      "creation": "PCA().fit_transform",
+      "usage": "Used for clustering and visualization."
+    },
+    {
+      "variable": "silhouette_scores",
+      "creation": "computed in a loop while evaluating clustering performance.",
+      "usage": "Used for visualizing the effectiveness of different cluster numbers."
+    },
+    {
+      "variable": "agg",
+      "creation": "AgglomerativeClustering(n_clusters=3).fit",
+      "usage": "Fit model to the principal components for clustering."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Agglomerative Clustering",
+      "input_features": "2 principal components from PCA!",
+      "target_variable": "Cluster assignments (3 clusters).",
+      "hyperparameters": {
+        "n_clusters": 3
+      }
+    }
+  ]
+}

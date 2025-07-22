@@ -1,0 +1,45 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A["train.csv"]
+        B["sample_submission.csv"]
+    end
+
+    %% Data Frames
+    subgraph DataFrames
+        C["train_df"]
+        D["ss_df"]
+    end
+
+    %% Environment Setup
+    subgraph Environment
+        E["DATA_DIR"]
+        F["N_REPLICAS"]
+    end
+
+    %% Nodes description
+    %% A: Contains training data with digit IDs and paths to the corresponding images
+    %% B: Sample submission file with digit IDs for prediction
+    %% C: DataFrame containing training data, including image file paths
+    %% D: DataFrame containing sample submission data with image file paths
+    %% E: Path to the dataset directory in Google Cloud Storage or local for accessing images
+    %% F: Number of replicas for TPU distribution strategy
+
+    %% Model
+    subgraph Model
+        G["tfgan Model"]
+    end
+
+    %% Model description
+    %% G: TensorFlow GAN model used to predict digit sums
+
+    %% Data Flow
+    A -->|"Load data into"| C
+    B -->|"Load data into"| D
+    E -->|"Provide paths to"| C
+    E -->|"Provide paths to"| D
+    F -->|"Setup"| G
+    C -->|"Training data for"| G
+    D -->|"Generate predictions for"| G
+```

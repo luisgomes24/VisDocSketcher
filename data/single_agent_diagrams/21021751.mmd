@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["📝 Data Overview <img src='table.svg' /> <br/> df.info()"]
+    B --> C["📊 Exploratory Data Analysis <img src=' hist_template.svg' /> <br/> df.describe()"]
+    C --> D["🔍 Check for Nulls <img src='column_split.svg' /> <br/> df.isnull().sum()"]
+    D --> E["📉 Check for Outliers <img src='boxplot_template.svg' />"]
+    E --> F["⚖️ Treat Outliers"]
+    F --> G["📦 Boxplot After Treatment <img src='boxplot_template.svg' />"]
+    G --> H["📈 Visualization of Income vs Spending <img src='scatter_plot_template.svg' />"]
+    H --> I["👥 Clustering <img src='brain.svg' />"]
+    I --> J["📊 Determine Optimal Clusters <img src='lineplot_template.svg' />"]
+    J --> K["✅ Fit K-Means <img src='brain.svg' />"]
+    K --> L["📊 Final Cluster Visualization <img src='scatter_plot_template.svg' />"]
+    L --> M["📊 Conclusion & Recommendations"]

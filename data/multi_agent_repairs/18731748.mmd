@@ -1,0 +1,34 @@
+```mermaid
+stateDiagram-v2
+    %% Data Source Node
+    state "Loan Application Data (CSV)" as csv
+    %% Data Loading Node
+    state "Load DataFrame: loans" as loans
+    %% Data Cleaning Node
+    state "Data Cleaning & Transformation" as cleaning
+    %% Feature and Target Selection Nodes
+    state "Select Features: x" as x
+    state "Select Target: y" as y
+    
+    %% Machine Learning Models Nodes
+    state "RandomForest Classifier" as rf
+    state "DecisionTree Classifier" as dt
+    state "Gaussian Naive Bayes" as gnb
+    state "KNeighbors Classifier" as knn
+    
+    %% Process Flow
+    csv --> loans : "pd.read_csv"
+    loans --> cleaning : "Data Cleaning"
+    cleaning --> x : "Drop 'Loan_Status'"
+    cleaning --> y : "Select 'Loan_Status'"
+    
+    %% Models Training
+    x --> rf : "Train Model"
+    y --> rf
+    x --> dt : "Train Model"
+    y --> dt
+    x --> gnb : "Train Model"
+    y --> gnb
+    x --> knn : "Train Model"
+    y --> knn
+```

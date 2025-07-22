@@ -1,0 +1,5 @@
+flowchart TD
+    A1["train.csv"]:::dataSource -->|pd.read_csv| B1["train DataFrame"]
+    A2["test.csv"]:::dataSource -->|pd.read_csv| B2["test DataFrame"]
+
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;

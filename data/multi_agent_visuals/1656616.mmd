@@ -1,0 +1,14 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> PovStatsCountry"];
+    B["<img src='icons/database.svg' width=100 height=100/> <br/> PovStatsCountry-Series"];
+    C["<img src='icons/database.svg' width=100 height=100/> <br/> PovStatsData"];
+    D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scatter Plot"];
+    E["<img src='dummy_plots/hist_template.svg'/> <br/> Histogram"];
+    F["<img src='dummy_plots/boxplot_template.svg'/> <br/> Boxplot"];
+    G["<img src='dummy_plots/lineplot_template.svg'/> <br/> Lineplot"];
+    H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Density Plot"];
+    A -->|"pd.read_csv"| D;
+    B -->|"pd.read_csv"| E;
+    C -->|"pd.read_csv"| F;
+    D -->|"Analysis"| G;
+    E -->|"Analysis"| H;

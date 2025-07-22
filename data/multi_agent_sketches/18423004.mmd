@@ -1,0 +1,25 @@
+flowchart TD
+    %% This node represents the CSV data source for Italian earthquakes
+    A["italy_earthquakes_from_2016-08-24_to_2016-11-30.csv"]
+    
+    %% This node represents loading data into a DataFrame
+    B["data0: DataFrame with all earthquake data"]
+    
+    %% Nodes that represent data transformation extracting year and month
+    C["year: Extract year from 'Time'"]
+    D["month: Extract month from 'Time'"]
+    
+    %% This node filters earthquakes with a magnitude greater than 4.4
+    E["data1: Filtered DataFrame with magnitude > 4.4"]
+    
+    %% Nodes that represent visualization, though not specified in detail, they consume the data
+    F["Visualization with data0"]
+    G["Map visualization with data1"]
+
+    %% Data flow connections
+    A -->|"pd.read_csv"| B
+    B --> E
+    B -.-> F
+    C --> B
+    D --> B
+    E --> G

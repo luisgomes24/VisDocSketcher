@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Source Node
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> test_scores.csv"]:::dataSource --> B
+
+    %% DataFrame Node
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> df: DataFrame with test scores"]:::data --> C & D
+    B --> |Visualizations| L["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Data Visualization"]
+
+    %% Feature and Target Variable Nodes
+    C[x: Features after preprocessing]:::data --> E & F
+    D[y: Target variable (posttest scores)]:::data --> G & H
+
+    %% Train-Test Split Nodes
+    E[X_train: Training features]:::data --> I
+    F[X_test: Test features]:::data --> J
+    G[y_train: Training targets]:::data
+    H[y_test: Test targets]:::data
+
+    %% Scaling Nodes
+    I[X_train_s: Scaled training features]:::data --> K & M
+    J[X_test_s: Scaled test features]:::data --> N & O
+
+    %% Random Forest Model Nodes
+    K["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmax_depth=6"]:::model
+    N[rf_pred: Random Forest Predictions]:::data --> Q[Evaluation Metrics\n(Random Forest)]:::evaluation
+
+    %% Decision Tree Model Nodes
+    M["<img src='icons/brain.svg' width=100 height=100/> <br/> DecisionTreeRegressor\nmax_depth=6"]:::model
+    O[dt_pred: Decision Tree Predictions]:::data --> R[Evaluation Metrics\n(Decision Tree)]:::evaluation
+
+    %% Class Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef evaluation fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef visual fill:#FFCDD2,stroke:#333,stroke-width:2px;

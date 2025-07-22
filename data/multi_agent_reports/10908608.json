@@ -1,0 +1,109 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the Titanic dataset, including features such as Passenger Class, Sex, Siblings/Spouses Aboard, and whether the passenger survived."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for the Titanic dataset used for making predictions, with similar features as train.csv but no target variable."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_data",
+      "description": "DataFrame containing the training data from train.csv."
+    },
+    {
+      "variable_name": "test_data",
+      "description": "DataFrame containing the test data from test.csv."
+    },
+    {
+      "variable_name": "rate_women",
+      "description": "Percentage of female passengers who survived."
+    },
+    {
+      "variable_name": "rate_men",
+      "description": "Percentage of male passengers who survived."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature set (DataFrame) for model training, including categorical variables converted to dummy variables."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Feature set (DataFrame) for prediction on test data after converting categorical variables to dummy variables."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable (Series) representing survival status from train_data."
+    },
+    {
+      "variable_name": "model",
+      "description": "Random Forest Classifier model used for predicting survival."
+    },
+    {
+      "variable_name": "predictions",
+      "description": "Array of predicted survival outcomes for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for calculating survival rates and training the model."
+    },
+    {
+      "variable_name": "test_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to make predictions and generate submission file."
+    },
+    {
+      "variable_name": "rate_women",
+      "creation_method": "Calculated from train_data",
+      "flow": "Printed for analysis."
+    },
+    {
+      "variable_name": "rate_men",
+      "creation_method": "Calculated from train_data",
+      "flow": "Printed for analysis."
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "pd.get_dummies(train_data[features])",
+      "flow": "Input feature set used for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "pd.get_dummies(test_data[features])",
+      "flow": "Input feature set used for predictions."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "train_data['Survived']",
+      "flow": "Target variable used to train the model."
+    },
+    {
+      "variable_name": "model",
+      "creation_method": "RandomForestClassifier",
+      "flow": "Trained on X and y and used for making predictions on X_test."
+    },
+    {
+      "variable_name": "output",
+      "creation_method": "pd.DataFrame",
+      "flow": "Saved as submission file 'my_submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["Pclass", "Sex", "SibSp", "Parch"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 5,
+        "random_state": 1
+      }
+    }
+  ]
+}

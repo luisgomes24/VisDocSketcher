@@ -1,0 +1,21 @@
+%% This Mermaid diagram sketches the data flow and processing steps in a data science notebook
+flowchart TD
+
+  %% Data Source Node
+  A["petrol_data.csv"] --> |"Load data using pd.read_csv"| B["petrol DataFrame"]
+  %% petrol_data.csv: Data source containing petrol price data
+  %% petrol: DataFrame containing loaded data
+
+  B --> |"Filter for specific city data"| C["city DataFrame"]
+  %% city: Filtered DataFrame for a specific city
+
+  C --> |"Extract rate series for analysis"| D["data Series"]
+  %% data: Series for time series analysis
+
+  D --> |"Initialize TimeSeriesExperiment"| E["exp TimeSeriesExperiment"]
+  %% exp: Object for managing time series experiments
+
+  E --> |"Setup and model comparison"| F["Various models"]
+  %% Various models: Models compared using the time series data
+  F -- "Analyzed Results" --> G["Output Analysis and Visualization"]
+

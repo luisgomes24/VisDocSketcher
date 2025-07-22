@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "bad_case_words.csv",
+      "description": "Contains bad case words data, loaded with the first 1000 rows."
+    },
+    {
+      "file_name": "contraction_mapping.csv",
+      "description": "Contains contraction mapping data, loaded with the first 1000 rows."
+    },
+    {
+      "file_name": "rare_words_mapping.csv",
+      "description": "Contains rare words mapping data, loaded with the first 1000 rows."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the bad_case_words data."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing the contraction_mapping data."
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame containing the rare_words_mapping data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": "Visualized through distribution and summary statistics." 
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "flow": "Visualized through distribution and summary statistics."
+    },
+    {
+      "variable_name": "df3",
+      "creation_method": "pd.read_csv",
+      "flow": "Visualized through distribution and summary statistics."
+    }
+  ],
+  "models": []
+}

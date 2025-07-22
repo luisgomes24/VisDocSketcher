@@ -1,0 +1,17 @@
+flowchart TD
+    A["📁 Load Data"] --> B["📑 Describe Datasets"]
+    B --> C["📊 Visualize Null Values"]
+    C --> D["📈 Exploratory Data Analysis"]
+    
+    D --> E["📊 Distribution of Sequence Length"]
+    E --> F["📊 Experiment Types Analysis"]
+    F --> G["📊 Data Sources Analysis"]
+    
+    G --> H["📊 Distribution of Reads and Signal-to-Noise"]
+    H --> I["🔍 Conclusion"]
+    
+    A --> |"Load Train Data"| J["<img src='dummy_plots/hist_template.svg' /> <br/> Train Dataset Shape"]
+    A --> |"Load Test Data"| K["<img src='dummy_plots/hist_template.svg' /> <br/> Test Dataset Shape"]
+    
+    J --> B
+    K --> B

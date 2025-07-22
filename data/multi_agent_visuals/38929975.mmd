@@ -1,0 +1,10 @@
+flowchart TD
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> Train Data CSV] --> B[<img src='icons/table.svg' width=100 height=100/> <br/> Load df DataFrame]
+    C[<img src='icons/file.svg' width=100 height=100/> <br/> Test Data CSV] --> D[<img src='icons/table.svg' width=100 height=100/> <br/> Load Test DataFrame]
+    B --> E[<img src='icons/column_split.svg' width=100 height=100/> <br/> Define Features]
+    B --> F[<img src='icons/column_split.svg' width=100 height=100/> <br/> Define Label]
+    E --> G[<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Model]
+    F --> G
+    G --> H[<img src='dummy_plots/barplot_template.svg'/> <br/> Final Valid Predictions]
+    G --> I[<img src='dummy_plots/barplot_template.svg'/> <br/> Final Test Predictions]
+    G --> J[<img src='dummy_plots/barplot_template.svg'/> <br/> Balanced Log Loss]

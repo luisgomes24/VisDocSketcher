@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Source
+    A["train.csv"] -->|load csv| B["data_train"]
+    
+    %% Data Preparation
+    B -->|drop unused columns| C["X"]
+    B -->|extract 'Survived'| D["y"]
+    
+    %% Train/Test Split
+    C -->|train_test_split| E["X_train"]
+    C -->|train_test_split| F["X_test"]
+    D -->|train_test_split| G["y_train"]
+    D -->|train_test_split| H["y_test"]
+    
+    %% Model Training
+    E -->|fit| I["Logistic Regression\nmax_iter=5000"]
+    G -->|fit| I
+    E -->|fit| J["Random Forest\nn_estimators=1000"]
+    G -->|fit| J
+    
+    %% Model Prediction
+    I -->|predict| K["LR Predictions"]
+    J -->|predict| L["RF Predictions"]

@@ -1,0 +1,27 @@
+%% This is a workflow diagram representing data processing and model training steps.
+
+flowchart TD
+    %% Data Source Nodes
+    A[Train dataset 
+ (train.csv) <img src='icons/database.svg' width=100 height=100/> <br/>] -->|Load| B[df_train]
+    C[Test dataset 
+ (test.csv) <img src='icons/database.svg' width=100 height=100/> <br/>] -->|Load| D[df_test]
+    E[Sample Submission 
+ (sample_submission.csv) <img src='icons/file.svg' width=100 height=100/> <br/>]
+
+    %% Data Processing and Preparation Nodes
+    B -->|Preprocess| F[X_train]
+    B -->|Extract SalePrice| G[y_train]
+    D -->|Preprocess| H[X_test]
+
+    %% Model Training Nodes
+    F -->|Train| I[Linear Regression 
+ Model <img src='icons/brain.svg' width=100 height=100/> <br/>]
+    G -->|Train| I
+
+    %% Prediction Nodes
+    I -->|Predict| J[predictions_lm]
+    J -->|Transform log scale| K[final_predict]
+
+    %% Submission Preparation
+    K -->|Prepare for submission| E

@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/train.csv",
+      "description": "Training dataset containing taxi ride information including fare amount, pickup and dropoff location, and passenger count."
+    },
+    {
+      "source": "../input/test.csv",
+      "description": "Test dataset containing taxi ride information used for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing the training data."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the test data."
+    },
+    {
+      "name": "X",
+      "description": "Feature set from training data for model input."
+    },
+    {
+      "name": "y",
+      "description": "Target variable (fare_amount) from training data."
+    },
+    {
+      "name": "X_train",
+      "description": "Training subset of features after splitting from X."
+    },
+    {
+      "name": "X_test",
+      "description": "Test subset of features after splitting from X."
+    },
+    {
+      "name": "y_train",
+      "description": "Training subset of target variable after splitting from y."
+    },
+    {
+      "name": "y_test",
+      "description": "Test subset of target variable after splitting from y."
+    },
+    {
+      "name": "xgbm",
+      "description": "Trained XGBoost model."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame for submission containing predicted fare_amount."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used as base for cleaning, feature engineering, and model training"]
+    },
+    {
+      "variable": "test_df",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for predictions and output submission"]
+    },
+    {
+      "variable": "X",
+      "creation_method": "Subset from train_df",
+      "flow": ["Used in model training"]
+    },
+    {
+      "variable": "y",
+      "creation_method": "Subset from train_df",
+      "flow": ["Used in model training"]
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": ["Used to train model"]
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "flow": ["Used to test model performance"]
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flow": ["Used to train model"]
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flow": ["Used to test model performance"]
+    },
+    {
+      "variable": "xgbm",
+      "creation_method": "XGBoost function",
+      "flow": ["Used to predict values for test set"]
+    },
+    {
+      "variable": "submission",
+      "creation_method": "pd.DataFrame",
+      "flow": ["Saved to CSV for submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBoost",
+      "input_features": ["distance", "passenger_count"],
+      "target_variable": "fare_amount",
+      "hyperparameters": {
+        "objective": "reg:linear",
+        "eval_metric": "rmse",
+        "num_rounds": 500
+      }
+    }
+  ]
+}

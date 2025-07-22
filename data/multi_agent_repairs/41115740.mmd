@@ -1,0 +1,11 @@
+```mermaid
+flowchart TD
+    A["Input Files"] --> B["train DataFrame"]
+    A --> C["test DataFrame"]
+    B --> D["X - Features"]
+    B --> E["y - Target"]
+    B --> F["Submission"]
+    C --> G["Test Predictions"]
+    H["CatBoostRegressor Training"]
+    H --> G
+```

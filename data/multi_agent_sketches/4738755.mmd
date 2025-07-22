@@ -1,0 +1,24 @@
+flowchart TD
+    %% Node for the data source VIGR_updated.txt
+    A[VIGR_updated.txt] 
+    %% Node for the initial DataFrame 'temp'
+    B[temp] 
+    %% Node for the filtered DataFrame 'temp_updated'
+    C[temp_updated] 
+    %% Node for the subset DataFrame 'temp_update_new'
+    D[temp_update_new] 
+    %% Node for the training data 'temp_new'
+    E[temp_new] 
+    %% Node for the testing data 'temp_test'
+    F[temp_test] 
+    %% Node for the sorted DataFrame 'temp_temp'
+    G[temp_temp] 
+
+    %% Connecting the data source to the initial DataFrame loading
+    A -->|read_csv| B
+    %% Transformation flows
+    B -->|drop columns| C
+    B -->|filter year <= 2016| E
+    B -->|filter year > 2016| F
+    C -->|loc[:65460,]| D
+    E -->|sort by tmpc| G

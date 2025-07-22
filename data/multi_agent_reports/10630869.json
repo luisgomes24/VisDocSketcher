@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_name": "data/names/*.txt",
+      "description": "Text files containing names categorized by country/language"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "category_lines",
+      "description": "Dictionary mapping each category to a list of names"
+    },
+    {
+      "variable_name": "all_categories",
+      "description": "List of all unique categories (countries/languages)"
+    },
+    {
+      "variable_name": "n_categories",
+      "description": "Number of unique categories"
+    },
+    {
+      "variable_name": "n_letters",
+      "description": "Total number of unique letters used in names"
+    },
+    {
+      "variable_name": "n_hidden",
+      "description": "Number of hidden units in the RNN model"
+    },
+    {
+      "variable_name": "rnn",
+      "description": "Instance of the RNN model initialized with specified parameters"
+    },
+    {
+      "variable_name": "all_losses",
+      "description": "List to keep track of the loss values during training"
+    },
+    {
+      "variable_name": "confusion",
+      "description": "Confusion matrix to evaluate model prediction accuracy"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "category_lines",
+      "created_by": "Reading individual .txt files of names",
+      "flows_to": "Used for model training"
+    },
+    {
+      "variable": "all_categories",
+      "created_by": "Extracting category names from file metadata",
+      "flows_to": "Used to index predicted categories"
+    },
+    {
+      "variable": "n_categories",
+      "created_by": "Count of all_categories length",
+      "flows_to": "Defines size parameters for model outputs"
+    },
+    {
+      "variable": "n_letters",
+      "created_by": "Length of all_letters string",
+      "flows_to": "Defines input size for the RNN model"
+    },
+    {
+      "variable": "rnn",
+      "created_by": "Instantiation of RNN class",
+      "flows_to": "Used for training and generating predictions"
+    },
+    {
+      "variable": "all_losses",
+      "created_by": "Tracking loss during training iterations",
+      "flows_to": "Used for plotting performance over time"
+    },
+    {
+      "variable": "confusion",
+      "created_by": "Initialized as a zero tensor, updated during evaluation",
+      "flows_to": "Used for plotting confusion matrix to visualize predictions"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RNN",
+      "input_features": "n_letters",
+      "target_variable": "n_categories",
+      "hyperparameters": {
+        "hidden_size": 128,
+        "learning_rate": 0.005,
+        "n_iters": 100000
+      }
+    }
+  ]
+}

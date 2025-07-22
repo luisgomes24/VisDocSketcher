@@ -1,0 +1,3 @@
+flowchart TD
+  A1["../input/samsung-electronics-stock-historical-price/005930.KS.csv"]:::dataSource --> B1["df"]:::dataVariable
+  B1 --> |"Passed to bollinger function"| C1["Bollinger Bands Model"]:::model

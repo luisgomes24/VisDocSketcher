@@ -1,0 +1,94 @@
+{
+    "data_sources": [
+        {
+            "file_name": "spam.csv",
+            "description": "Contains SMS messages labeled as either spam or ham."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "data",
+            "description": "DataFrame containing SMS text and their corresponding labels (Class)."
+        },
+        {
+            "variable_name": "sentiment",
+            "description": "List containing the sentiment (Positive, Neutral, Negative) for each text message."
+        },
+        {
+            "variable_name": "vec",
+            "description": "TfidfVectorizer instance used for text vectorization."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Feature set for training, includes vectorized text messages."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Feature set for testing, includes vectorized text messages."
+        },
+        {
+            "variable_name": "Y_train",
+            "description": "Target variable for training, includes encoded class labels."
+        },
+        {
+            "variable_name": "Y_test",
+            "description": "Target variable for testing, includes encoded class labels."
+        },
+        {
+            "variable_name": "model",
+            "description": "RandomForestClassifier instance trained to classify spam and ham messages."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "data",
+            "creation_method": "pd.read_csv",
+            "flow": ["data cleaning", "data exploration", "model training"]
+        },
+        {
+            "variable": "sentiment",
+            "creation_method": "TextBlob analysis",
+            "flow": ["added to data DataFrame", "used for visualization"]
+        },
+        {
+            "variable": "vec",
+            "creation_method": "TfidfVectorizer()",
+            "flow": ["text vectorization"]
+        },
+        {
+            "variable": "X_train",
+            "creation_method": "train_test_split",
+            "flow": ["training the model"]
+        },
+        {
+            "variable": "X_test",
+            "creation_method": "train_test_split",
+            "flow": ["testing the model"]
+        },
+        {
+            "variable": "Y_train",
+            "creation_method": "train_test_split",
+            "flow": ["training the model"]
+        },
+        {
+            "variable": "Y_test",
+            "creation_method": "train_test_split",
+            "flow": ["testing the model"]
+        },
+        {
+            "variable": "model",
+            "creation_method": "RandomForestClassifier",
+            "flow": ["model training", "performance metrics", "confusion matrix"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "RandomForestClassifier",
+            "input_features": "Vectorized SMS Text",
+            "target_variable": "Encoded Class (0 for ham, 1 for spam)",
+            "hyperparameters": {
+                "n_estimators": 100
+            }
+        }
+    ]
+}

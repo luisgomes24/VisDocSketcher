@@ -1,0 +1,33 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    { "name": "classifier", "description": "Hugging Face pipeline for sentiment analysis" },
+    { "name": "generator", "description": "Hugging Face pipeline for text generation" },
+    { "name": "chatbot", "description": "Hugging Face pipeline for conversational tasks" },
+    { "name": "pipe", "description": "Diffusion pipeline for image generation" },
+    { "name": "model_name", "description": "DistilBERT model fine-tuned for sentiment analysis" },
+    { "name": "model", "description": "Loaded model for sequence classification" },
+    { "name": "tokenizer", "description": "Tokenizer for DistilBERT model" },
+    { "name": "inputs", "description": "Sample inputs for sentiment analysis" },
+    { "name": "batch", "description": "Batch of tokenized inputs" },
+    { "name": "outputs", "description": "Outputs from the model after inference" },
+    { "name": "predictions", "description": "Softmax predictions of the outputs" },
+    { "name": "labels", "description": "Predicted class labels from the model" }
+  ],
+  "data_flow": [
+    { "variable": "classifier", "creation": "pipeline('sentiment-analysis')", "flows_to": "Used to perform sentiment analysis on text" },
+    { "variable": "generator", "creation": "pipeline('text-generation')", "flows_to": "Generates text based on input prompt" },
+    { "variable": "chatbot", "creation": "pipeline('conversational', model='microsoft/DialoGPT-medium')", "flows_to": "Facilitates a conversation with user input" },
+    { "variable": "pipe", "creation": "DiffusionPipeline.from_pretrained('google/ddpm-cifar10-32')", "flows_to": "Generates images based on prompts" },
+    { "variable": "model", "creation": "AutoModelForSequenceClassification.from_pretrained(model_name)", "flows_to": "Used to classify sentiment based on input" },
+    { "variable": "tokenizer", "creation": "AutoTokenizer.from_pretrained(model_name)", "flows_to": "Tokenizes inputs for the sentiment model" },
+    { "variable": "batch", "creation": "tokenizer(inputs, padding=True, truncation=True, max_length=512, return_tensors='pt')", "flows_to": "Inputs processed for model" },
+    { "variable": "outputs", "creation": "model(**batch)", "flows_to": "Outputs used to calculate predictions" },
+    { "variable": "predictions", "creation": "F.softmax(outputs.logits, dim=1)", "flows_to": "Determines probabilities for each class" },
+    { "variable": "labels", "creation": "torch.argmax(predictions, dim=1)", "flows_to": "Final predicted labels from the model" }
+  ],
+  "models": [
+    { "name": "DistilBERT", "input_features": "Text inputs for sentiment analysis", "target_variable": "Sentiment labels", "hyperparameters": "N/A" },
+    { "name": "DiffusionPipeline", "input_features": "Prompt for image generation", "target_variable": "Generated images", "hyperparameters": "N/A" }
+  ]
+}

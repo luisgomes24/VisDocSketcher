@@ -1,0 +1,13 @@
+graph TD;
+  %% Data Source
+  A["Crime_Data_from_2020_to_Present.csv"] -->|Load data| B["data"]
+  %% Data Exploration
+  B -->|Initial exploration| C[".head(), .info(), .describe()"]
+  %% Data Visualization
+  B -->|Data visualization| D["Pie charts, Count plots"]
+
+  %% Comments
+  %% A: Node representing the data source file containing crime data.
+  %% B: Node for the main data variable containing the loaded DataFrame.
+  %% C: Node depicting initial data exploration steps for understanding data structure and summary.
+  %% D: Node showing visualization techniques applied on the data to extract insights.

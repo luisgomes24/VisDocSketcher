@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "br_xtransaction_details.csv",
+      "description": "Contains transaction details with several columns describing the transactions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first 1000 rows of transaction details from br_xtransaction_details.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for exploratory data analysis and visualization (distribution graphs, correlation matrix, scatter plots)"
+    }
+  ],
+  "models": []
+}

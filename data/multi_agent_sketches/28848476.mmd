@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Source Node
+    A[DATA.csv]:::dataSource -->|read_csv| B[df1]
+    
+    %% Data Cleaning and Preparation
+    B -->|drop 'Unnamed: 5'| C[df]
+    C -->|Select 'Weight', 'Volume'| D[X]
+    C -->|Select 'CO2'| E[y]
+    
+    %% Model Creation and Training
+    D --> F[LinearRegression Model]:::model
+    E --> F
+    F -->|fit| G[Trained Model]
+    
+    %% Predictions
+    G -->|predict 2300kg, 1300cm3| H[predictedCO2]
+    G -->|predict 3300kg, 1300cm3| I[predictedCO2_new]
+
+    %% Class Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;

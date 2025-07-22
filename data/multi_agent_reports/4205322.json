@@ -1,0 +1,40 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/museum_visitors.csv",
+            "description": "Data containing the number of monthly visitors for various museums in Los Angeles, indexed by date."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "museum_data",
+            "description": "DataFrame containing the monthly visitors for each museum, indexed by date."
+        },
+        {
+            "variable_name": "ca_museum_jul18",
+            "description": "Number of visitors to the Chinese American Museum in July 2018."
+        },
+        {
+            "variable_name": "avila_oct18",
+            "description": "Difference in the number of visitors between Avila Adobe and Firehouse Museum in October 2018."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "museum_data",
+            "creation_method": "pd.read_csv",
+            "usage": "Printed the last five rows and used in visualizations."
+        },
+        {
+            "variable_name": "ca_museum_jul18",
+            "created_in_step": "Step 2",
+            "usage": "Used in answering a specific question about visitors."
+        },
+        {
+            "variable_name": "avila_oct18",
+            "created_in_step": "Step 2",
+            "usage": "Used in answering a specific question about visitors."
+        }
+    ],
+    "models": []
+}

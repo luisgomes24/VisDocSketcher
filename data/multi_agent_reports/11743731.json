@@ -1,0 +1,35 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "plt",
+      "description": "Matplotlib library used for creating static, animated, and interactive visualizations in Python."
+    },
+    {
+      "name": "np",
+      "description": "NumPy library used for numerical computations, particularly with arrays."
+    },
+    {
+      "name": "pd",
+      "description": "Pandas library for data manipulation and analysis, primarily used to work with data in DataFrame format."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "plt",
+      "creation": "Imported as part of Matplotlib for plotting visualizations.",
+      "flow": "Used in functions for plotting data, such as plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix."
+    },
+    {
+      "variable_name": "np",
+      "creation": "Imported for numerical operations. Used for array manipulation and checks in various functions.",
+      "flow": "Used in calculations for analyzing data (e.g., histograms in plotPerColumnDistribution, correlation coefficient in plotScatterMatrix)."
+    },
+    {
+      "variable_name": "pd",
+      "creation": "Imported for data handling and processing, particularly to work with dataframes.",
+      "flow": "Used to read, manipulate, and visualize data in functions."
+    }
+  ],
+  "models": []
+}

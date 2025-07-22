@@ -1,0 +1,9 @@
+flowchart TD
+    A[diabetes.csv] --> B[df1]
+    %% Node A represents the source data file containing diabetes-related metrics.
+    B[df1] --> C[Plot Distributions]
+    %% Node B represents the DataFrame 'df1', which is the dataset loaded into the environment.
+    B --> D[Plot Correlation Matrix]
+    %% 'df1' is used to plot correlation matrix.
+    B --> E[Plot Scatter Plots]
+    %% 'df1' is used to plot scatter plots among variables.

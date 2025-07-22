@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    DS1["Train Images Directory"]
+    DS2["Validation Images Directory"]
+
+    %% Model and Data Generators
+    MG1["train_generator"]
+    MG2["validation_generator"]
+    M1["my_new_model: Sequential Model"]
+
+    %% Processes
+    P1["ResNet50 Pre-trained Model Loaded"]
+    P2["Data Augmentation and Preprocessing"]
+    P3["Model Compilation"]
+    P4["Model Training"]
+    P5["Result Evaluation"]
+
+    %% Data Flow and Transitions
+    %% Data is fed from directories into generators
+    DS1 --> |"generate data"| MG1
+    DS2 --> |"generate data"| MG2
+    MG1 & MG2 --> P2
+
+    %% Model Creation and Training Flow
+    P2 --> |"load as base"| P1
+    P1 --> |"build Sequential model"| M1
+    M1 --> |"compile using Adam, CCE, Accuracy"| P3
+    P3 --> |"train with generators output"| P4
+
+    %% Completion and Evaluation
+    P4 --> |"output fit statistics"| P5
+
+    %% Result Storage
+    P5 --> |"store results"| fit_stats
+```

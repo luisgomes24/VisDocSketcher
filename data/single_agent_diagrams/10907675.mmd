@@ -1,0 +1,12 @@
+graph TD;
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Data Overview"];
+    B --> C["<img src='scatter_plot_template.svg'/> <br/> Visualize MinTemp vs MaxTemp"];
+    C --> D["<img src='hist_template.svg'/> <br/> Visualize MaxTemp Distribution"];
+    D --> E["<img src='column_split.svg'/> <br/> Reshape Data"];
+    E --> F["<img src='row_split.svg'/> <br/> Train-Test Split"];
+    F --> G["<img src='brain.svg'/> <br/> Fit Linear Regression Model"];
+    G --> H["<img src='barplot_template.svg'/> <br/> Display Model Coefficients"];
+    H --> I["<img src='table.svg'/> <br/> Create Predictions DataFrame"];
+    I --> J["<img src='barplot_template.svg'/> <br/> Barplot of Actual vs Predicted"];
+    I --> K["<img src='scatter_plot_template.svg'/> <br/> Scatter Plot with Predictions"];
+    K --> L["<img src='table.svg'/> <br/> Evaluate Model Performance"];

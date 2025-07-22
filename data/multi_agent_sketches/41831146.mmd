@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    A["CO2 Emissions.csv"]
+    
+    %% Data Loading
+    B["Load CO2 Emissions Dataset"]
+    B -->|"DataFrame loaded"| C["df"]
+    
+    %% Data Splitting
+    C -->|"Stratified By VehicleClass"| D["strat_train_set"]
+    C -->|"Stratified By VehicleClass"| E["strat_test_set"]
+    
+    %% Feature and Target Separation
+    D -->|"Features"| F["X_train"]
+    D -->|"Target"| G["y_train"]
+    E -->|"Features"| H["X_test"]
+    E -->|"Target"| I["y_test"]
+    
+    %% Data Preprocessing
+    F -->|"ColumnTransformer"| J["X_train_prepared"]
+    H -->|"ColumnTransformer"| K["X_test_prepared"]
+    
+    %% Model Training
+    J -->|"Train"| L["Random Forest Regression"]
+    J -->|"Train"| M["Linear Regression"]
+    J -->|"Train"| N["Ridge Regression"]
+    J -->|"Train"| O["TensorFlow Neural Network"]
+    
+    %% Models
+    L -->|"Hyperparameters: n_estimators=100, max_depth=7, min_samples_split=20"| P
+    M -->|"Standard Linear Regression"| Q
+    N -->|"Hyperparameters: alpha=5"| R
+    O -->|"Layers: [75, 50, 25], Activation: linear, Epochs: 1000, Learning Rate: 0.01"| S

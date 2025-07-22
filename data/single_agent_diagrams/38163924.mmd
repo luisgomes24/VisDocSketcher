@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Data Overview"]
+    B --> C["📊 EDA"]
+    C --> D["<img src='boxplot_template.svg'/> <br/> Boxplots of Ad Spending"]
+    C --> E["<img src='scatter_plot_template.svg'/> <br/> Scatterplot of Total Cost vs. Sales"]
+    C --> F["<img src='barplot_template.svg'/> <br/> Correlation Matrix"]
+    C --> G["<img src='scatter_plot_template.svg'/> <br/> Sales by Ad Type"]
+    
+    D --> H["<img src='column_split.svg'/> <br/> Analyze Costs"]
+    E --> H
+    F --> H
+    G --> H

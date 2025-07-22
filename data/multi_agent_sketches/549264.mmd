@@ -1,0 +1,38 @@
+flowchart TD
+    %% Node for attendance_valuation_elo_df
+    A1[Attendance Valuation and Elo CSV] -->|Load CSV| attendance_valuation_elo_df((attendance_valuation_elo_df))
+    %% Node for salary_df
+    A2[Salary CSV] -->|Load CSV| salary_df((salary_df))
+    
+    %% Node for pie_df
+    A3[PIE CSV] -->|Load CSV| pie_df((pie_df))
+    
+    %% Node for plus_minus_df
+    A4[Real Plus Minus CSV] -->|Load CSV| plus_minus_df((plus_minus_df))
+    
+    %% Node for br_stats_df
+    A5[Basic Stats CSV] -->|Load CSV| br_stats_df((br_stats_df))
+    
+    %% Merging DataFrames into nba_players_df
+    br_stats_df -->|Merge| nba_players_df((nba_players_df))
+    plus_minus_df -->|Merge| nba_players_df
+    
+    %% Merging salary_df into nba_players_with_salary_df
+    nba_players_df -->|Merge| nba_players_with_salary_df((nba_players_with_salary_df))
+    salary_df -->|Merge| nba_players_with_salary_df
+    
+    %% Merging wikipedia_df into nba_players_with_salary_wiki_df
+    E[Wikipedia CSV] -->|Load CSV| wikipedia_df((wikipedia_df))
+    nba_players_with_salary_df -->|Merge| nba_players_with_salary_wiki_df((nba_players_with_salary_wiki_df))
+    wikipedia_df -->|Merge| nba_players_with_salary_wiki_df
+    
+    %% Merging twitter_df into nba_players_with_salary_wiki_twitter_df
+    F[Twitter CSV] -->|Load CSV| twitter_df((twitter_df))
+    nba_players_with_salary_wiki_df -->|Merge| nba_players_with_salary_wiki_twitter_df((nba_players_with_salary_wiki_twitter_df))
+    twitter_df -->|Merge| nba_players_with_salary_wiki_twitter_df
+    
+    %% Models using OLS
+    nba_players_with_salary_wiki_twitter_df -->|Use| M1((OLS: Wins ~ POINTS))
+    nba_players_with_salary_wiki_twitter_df -->|Use| M2((OLS: Wins ~ Wins RPM))
+    nba_players_with_salary_wiki_twitter_df -->|Use| M3((OLS: Salary ~ POINTS))
+    nba_players_with_salary_wiki_twitter_df -->|Use| M4((OLS: Salary ~ Wins RPM))

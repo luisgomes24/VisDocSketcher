@@ -1,0 +1,4 @@
+Flowchart is invalid in both repairs and visuals, errors detected:
+1. [@zenuml/core] Store is a function and is not initiated in 1 second.
+
+2. UnknownDiagramError: No diagram type detected matching given configuration.

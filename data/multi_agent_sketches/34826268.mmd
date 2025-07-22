@@ -1,0 +1,19 @@
+flowchart TD
+
+%% Data Sources %%
+A["<img src='path/to/file.svg' width=100 height=100/> <br/> /train.csv/"]:::dataSource -- Load Data --> B[train]:::dataVar -- "Data Analysis & Visualization" --> E[Data Analysis]
+C["<img src='path/to/file.svg' width=100 height=100/> <br/> /train_labels.csv/"]:::dataSource -- Load Data --> D[labels]:::dataVar
+
+%% Data Processing %%
+B:::dataVar -- "Batch Users Selection" --> F[batch_users]
+
+%% Data Usage %%
+D:::dataVar -- "Target for Prediction" --> G[Prediction Labels]
+
+classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+classDef dataVar fill:#C6F4D6,stroke:#333,stroke-width:2px;
+
+// Class descriptions for understanding
+%% A & C are the main data files being used
+%% B & D are data variables representing the loaded datasets
+%% F is a filtered representation of a batch from the main dataset

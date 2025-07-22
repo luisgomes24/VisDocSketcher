@@ -1,0 +1,73 @@
+{
+    "data_sources": [
+        {
+            "file_name": "M2SLMoneyStock.csv",
+            "description": "Monthly M2 Money Stock data."
+        },
+        {
+            "file_name": "PCEPersonalSpending.csv",
+            "description": "Monthly Personal Consumption Expenditures data."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "DataFrame containing the merged data from M2 Money Stock and Personal Spending datasets."
+        },
+        {
+            "variable_name": "sp",
+            "description": "DataFrame containing Personal Consumption Expenditures data."
+        },
+        {
+            "variable_name": "df_transformed",
+            "description": "DataFrame containing the second-order differenced data for Money and Spending."
+        },
+        {
+            "variable_name": "train",
+            "description": "Training dataset used for fitting the VARMA model."
+        },
+        {
+            "variable_name": "test",
+            "description": "Test dataset (last 12 observations) used for predicting and evaluating the model."
+        },
+        {
+            "variable_name": "df_forecast",
+            "description": "DataFrame containing forecasted values for Money and Spending after applying the VARMA model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df",
+            "creation_method": "pd.read_csv",
+            "flows_to": ["df_transformed", "train", "test"]
+        },
+        {
+            "variable_name": "sp",
+            "creation_method": "pd.read_csv",
+            "flows_to": ["df"]
+        },
+        {
+            "variable_name": "df_transformed",
+            "creation_method": "df.diff().diff()",
+            "flows_to": ["train", "test", "df_forecast"]
+        },
+        {
+            "variable_name": "train",
+            "creation_method": "nobs",
+            "flows_to": ["model"]
+        },
+        {
+            "variable_name": "df_forecast",
+            "creation_method": "results.forecast",
+            "flows_to": ["plotting", "evaluation"]
+        }
+    ],
+    "models": [
+        {
+            "model_type": "VARMAX",
+            "input_features": ["Money", "Spending"],
+            "target_variables": ["MoneyForecast", "SpendingForecast"],
+            "hyperparameters": {"order": [1,2], "trend": "c"}
+        }
+    ]
+}

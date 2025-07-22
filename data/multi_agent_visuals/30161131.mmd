@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Source Nodes
+    A[/customer_segmentation_10k.csv/ <br/> 🌐]:::data  
+    
+    %% Data Variables Nodes
+    B["dataset_10k <br/> <img src='path/to/plot.svg'/>"]:::data
+    C["exp_fre <br/> <img src='path/to/plot.svg'/>"]:::mlmodel
+    D["exp_rec <br/> <img src='path/to/plot.svg'/>"]:::mlmodel
+    E["exp_mon <br/> <img src='path/to/plot.svg'/>"]:::mlmodel
+    F["result_frequency <br/> <img src='path/to/plot.svg'/>"]:::output
+    G["result_recency <br/> <img src='path/to/plot.svg'/>"]:::output
+    H["result_monetary <br/> <img src='path/to/plot.svg'/>"]:::output
+
+    %% Models
+    subgraph KMeans["KMeans Clustering Model"]
+        direction TB
+        C1["KMeans on Frequency"]
+        C2["KMeans on Recency"]
+        C3["KMeans on Monetary"]
+    end
+
+    %% Data Flow
+    A -->|"pd.read_csv"| B
+    B --> C
+    B --> D
+    B --> E
+    C -->|"assign_model(kmeans_frequency)"| F --> B
+    D -->|"assign_model(kmeans_recency)"| G --> B
+    E -->|"assign_model(kmeans_monetary)"| H --> B
+
+    classDef data fill:#87CEEB;
+    classDef mlmodel fill:#C6F4D6;
+    classDef output fill:#F2C464;

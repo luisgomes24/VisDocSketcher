@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file": "train_with_ClusterNo.csv",
+      "description": "Contains training data with cluster assignment."
+    },
+    {
+      "file": "test_with_ClusterNo.csv",
+      "description": "Contains test data with cluster assignment."
+    },
+    {
+      "file": "sample_submission.csv",
+      "description": "Contains submission example format."
+    },
+    {
+      "file": "submission.csv",
+      "description": "Results of predictions post-processing used for submission."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training dataset with cluster numbers."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing test dataset with cluster numbers."
+    },
+    {
+      "variable": "submission",
+      "description": "DataFrame to hold the predicted emission values for test data."
+    },
+    {
+      "variable": "df_plot",
+      "description": "DataFrame used for plotting emissions across years."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used for initial training and later analysis."
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flow": "Used for predictions and later combined for plotting."
+    },
+    {
+      "variable": "submission",
+      "creation": "pd.read_csv",
+      "flow": "Updated with predicted emissions and saved as 'submission.csv' at the end."
+    },
+    {
+      "variable": "df_plot",
+      "creation": "pd.concat() and pivot_table()",
+      "flow": "Used for plotting emission trends."
+    }
+  ],
+  "models": []
+}

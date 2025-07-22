@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    DS1["School Explorer CSV"] --> |"Load Data"| school_explorer
+    DS2["SHSAT Registrations CSV"] --> |"Load Data"| registration_testers
+    DS3["Brooklyn Census CSV"] --> |"Load Data"| brooklyn_census
+    
+    %% Data Variables
+    school_explorer["school_explorer DataFrame"]
+    registration_testers["registration_testers DataFrame"]
+    brooklyn_census["brooklyn_census DataFrame"]
+    
+    %% Data Flow
+    school_explorer --> |"Filter Brooklyn Schools"| brooklyn["brooklyn DataFrame"]
+    school_explorer --> |"Analyze & Visualize"| analysis1["Data Analysis"]
+    registration_testers --> |"Analyze SHSAT Data"| analysis2["SHSAT Analysis"]
+    brooklyn_census --> |"Analyze Brooklyn Demographics"| analysis3["Demographic Analysis"]
+
+    %% Data Analysis Nodes
+    analysis1 --> result1["Analysis Results"]
+    analysis2 --> result2["SHSAT Results"]
+    analysis3 --> result3["Demographic Insights"]

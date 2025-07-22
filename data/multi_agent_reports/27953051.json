@@ -1,0 +1,65 @@
+{
+    "data_sources": [
+        {
+            "file_path": "/kaggle/input/daily-coffee-price/coffee.csv",
+            "description": "Contains daily coffee prices including columns for Date, Open, High, Low, Close, Volume, and Currency."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame containing the dataset read from the coffee.csv file."
+        },
+        {
+            "name": "byyear",
+            "description": "DataFrame containing the maximum values for each year based on the original dataset."
+        },
+        {
+            "name": "X",
+            "description": "Feature set containing 'Open', 'High', 'Low', and 'Volume' to be used in modeling."
+        },
+        {
+            "name": "y",
+            "description": "Target variable 'Close' which the model aims to predict."
+        },
+        {
+            "name": "predictions",
+            "description": "Array of predicted 'Close' values generated from the linear regression model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "read_csv",
+            "used_in": "data cleaning, analysis, and model training"
+        },
+        {
+            "variable": "byyear",
+            "creation": "groupby",
+            "used_in": "visualization of yearly maximum values"
+        },
+        {
+            "variable": "X",
+            "creation": "subset of df",
+            "used_in": "model training (input features)"
+        },
+        {
+            "variable": "y",
+            "creation": "subset of df",
+            "used_in": "model training (target variable)"
+        },
+        {
+            "variable": "predictions",
+            "creation": "model prediction",
+            "used_in": "model evaluation and visualization"
+        }
+    ],
+    "models": [
+        {
+            "model_type": "Linear Regression",
+            "input_features": ["Open", "High", "Low", "Volume"],
+            "target_variable": "Close",
+            "hyperparameters": "None specified"
+        }
+    ]
+}

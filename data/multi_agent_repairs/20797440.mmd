@@ -1,0 +1,17 @@
+```mermaid
+flowchart TD
+  A["Latest Covid-19 India Status.csv"] -->|read_csv| B["df"]
+  B -->|copy| C["df copy"]
+  B -->|check_shape| D["Check Data Shape"]
+  B -->|check_duplicates| E["Check Duplicates"]
+  B -->|info| F["Data Info"]
+  B -->|correlation| G["Data Correlation"]
+  B -->|iloc[:,1:7]| H["Features: x"]
+  B -->|[['Death Ratio']]| I["Target: y"]
+  B -->|unique_analysis| J["Unique Values Train Analysis"]
+  H -->|fit| K["DecisionTreeRegressor"]
+  I -->|fit| K
+  K -->|predict| L["y_pred"]
+  I -->|mean_squared_error| M["Evaluate MSE"]
+  L --> M
+```

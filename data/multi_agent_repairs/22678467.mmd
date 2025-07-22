@@ -1,0 +1,9 @@
+```mermaid
+flowchart TD
+    A["Final Product List.csv"] --> B["df"]
+    A2["Product Lists.csv"] --> B
+    C["search_term"] --> D["Collect Data"]
+    D --> E["record"]
+    E -->| "Convert to DataFrame" | B
+    B -->| "Save to CSV" | A
+```

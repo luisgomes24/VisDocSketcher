@@ -1,0 +1,9 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Sample Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Select Relevant Columns"]
+    C --> D["<img src='column_split.svg'/> <br/> Clean Data (Drop NaN)"]
+    D --> E["<img src='scatter_plot_template.svg'/> <br/> 📊 Count of Incidents per Box"]
+    E --> F["<img src='brain.svg'/> <br/> Analyze Risk Levels"]
+    F --> G["<img src='column_split.svg'/> <br/> Calculate Time Difference to Respond"]
+    G --> H["<img src='scatter_plot_template.svg'/> <br/> 📊 Time Taken to Respond vs Box"]
+    H --> I["<img src='scatter_plot_template.svg'/> <br/> 📊 High Risk Boxes Analysis"]

@@ -1,0 +1,12 @@
+flowchart TD
+    %% Data Sources
+    A[("db_books.csv")]:::dataSource --> |"pd.read_csv"| B["df1"]:::dataVariable
+    C[("stories.csv")]:::dataSource --> |"pd.read_csv"| D["df2"]:::dataVariable
+    
+    %% Data Analysis and Plotting
+    B --> |"plotPerColumnDistribution"| E["Plot df1 Distributions"]
+    D --> |"plotPerColumnDistribution"| F["Plot df2 Distributions"]
+
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;

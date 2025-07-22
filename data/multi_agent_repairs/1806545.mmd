@@ -1,0 +1,52 @@
+```mermaid
+flowchart TD
+    %% Input Data Nodes
+    A1["train.csv"]
+    A2["test.csv"]
+
+    %% DataFrame Nodes
+    B1["train DataFrame"]
+    B2["test DataFrame"]
+    B3["all_data DataFrame"]
+    B4["y_train array"]
+    B5["stacked_pred array"]
+
+    %% Model Nodes
+    C1["Kernel Ridge Regression"]
+    C2["Lasso Regression"]
+    C3["ElasticNet Regression"]
+    C4["Gradient Boosting Regression"]
+    C5["XGBoost"]
+    C6["LightGBM"]
+    C7["Stacking Averaged Models"]
+
+    %% Data Load
+    A1 --> B1 %% Loading training data
+    A2 --> B2 %% Loading test data
+
+    %% Data Preparation
+    B1 --> B3 %% Combining train and test for feature engineering
+    B2 --> B3
+    B1 --> B4 %% Extracting target variable
+
+    %% Model Training and Predictions
+    B4 --> C1 %% Models use the target variable
+    B3 --> C1
+    B4 --> C2
+    B3 --> C2
+    B4 --> C3
+    B3 --> C3
+    B4 --> C4
+    B3 --> C4
+    B4 --> C5
+    B3 --> C5
+    B4 --> C6
+    B3 --> C6
+    C1 --> C7 %% Stacking different models
+    C2 --> C7
+    C3 --> C7
+    C4 --> C7
+    C5 --> C7
+    C6 --> C7
+    C7 --> B5 %% Final predictions
+```

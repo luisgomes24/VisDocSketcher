@@ -1,0 +1,20 @@
+```mermaid
+flowchart TD
+    A["Top Ramen Ratings.csv"]
+    %% A node representing the source CSV file containing ramen ratings data
+    
+    B["ramen_df"]
+    %% Node representing ramen_df, a DataFrame for cleaned and preprocessed data
+    
+    A -->|"pd.read_csv"| B
+    %% Transition showing that ramen_df is created by reading the CSV file
+    
+    B --> C["Data Exploration"]
+    %% Data exploration activities performed on ramen_df
+    
+    B --> D["Data Cleaning"]
+    %% Data cleaning activities performed on ramen_df such as renaming and dropping columns
+    
+    B --> E["Visualization"]
+    %% Visualization activities performed on ramen_df
+```

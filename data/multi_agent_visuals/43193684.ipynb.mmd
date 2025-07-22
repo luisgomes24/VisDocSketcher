@@ -1,0 +1,17 @@
+graph TD;
+    A["Data Sources"]
+    B["Data Variables"]
+    C["Data Flow"]
+    D["Models"]
+
+    A -->|"train_source"| train["<img src='icons/file.svg' width=100 height=100/> <br/> train"];
+    A -->|"test_source"| test["<img src='icons/file.svg' width=100 height=100/> <br/> test"];
+    C -->|"sequence_length"| seq_len["<img src='icons/column_split.svg' width=100 height=100/> <br/> seq_len"];
+    C -->|"signal_to_noise"| SN_filter["<img src='icons/row_split.svg' width=100 height=100/> <br/> SN_filter"];
+    train --> "train_data"
+    test --> "test_data"
+    seq_len --> "seq_length_analysis"
+    SN_filter --> "passing_filter";
+    
+    train -->|"<img src='dummy_plots/hist_template.svg'/> <br/> Train Data"| train_analysis;
+    test -->|"<img src='dummy_plots/lineplot_template.svg'/> <br/> Test Evaluation"| test_evaluation;

@@ -1,0 +1,38 @@
+flowchart TD
+    A[Train CSV] -->|Load data| B[train DataFrame]
+    B -->|Extract features| C[train_data]
+    B -->|Extract labels| D[train_label]
+    C -->|PCA Transformation| E[pcaTrainData]
+    F[Test CSV] -->|Load data| G[test DataFrame]
+    G -->|PCA Transformation| H[pcaTestData]
+    E -->|Train model| I[KNeighborsClassifier]
+    D -->|Use for training| I
+    I -->|Predict| J[testLabel]
+
+    %% Comments explaining each node
+    subgraph DataLoading
+        A:::csvFile
+        F:::csvFile
+        B:::dataFrame
+        G:::dataFrame
+    end
+    subgraph DataProcessing
+        C:::featureArray
+        D:::labelArray
+        E:::transformedData
+        H:::transformedData
+    end
+    subgraph ModelTraining
+        I:::model
+    end
+    subgraph Prediction
+        J:::predictions
+    end
+
+    classDef csvFile fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef featureArray fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef labelArray fill:#fbf,stroke:#333,stroke-width:2px;
+    classDef transformedData fill:#ffb,stroke:#333,stroke-width:2px;
+    classDef model fill:#f3f,stroke:#333,stroke-width:2px;
+    classDef predictions fill:#3ff,stroke:#333,stroke-width:2px;

@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A[Image URLs]:::source
+
+    %% Data Variables
+    B[url]:::data_var
+    C[images]:::data_var
+    D[pipline]:::data_var
+    E[kerasocr_preds]:::data_var
+    F[text_reader]:::data_var
+    G[results]:::data_var
+    H[tesseract_preds]:::data_var
+
+    %% Data Flow and Transitions
+    A -->|image URLs| B
+    B -->|load images with keras_ocr.tools| C
+    C -->|input for OCR| D
+    D -->|run pipeline.recognize| E
+    C -->|input for EasyOCR| F
+    F -->|text_reader.readtext| G
+    C -->|input for Pytesseract| H
+    H -->|pytesseract.image_to_string| F
+
+    %% Models Used
+    D[Keras-OCR]:::model
+    F[EasyOCR]:::model
+    G[Pytesseract]:::model
+
+    R{{Display Results}}:::process
+
+    E -->|visualize results| R
+    G -->|print results| R
+    H -->|print OCR results| R
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#fbf,stroke:#333,stroke-width:2px;

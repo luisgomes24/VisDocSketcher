@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/rainfall-data-from-1901-to-2017-for-india/Rainfall_Data_LL.csv",
+      "description": "Rainfall data in India from 1901 to 2017"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Initial DataFrame containing the rainfall data"
+    },
+    {
+      "name": "andaman",
+      "description": "DataFrame containing rainfall data specific to Andaman & Nicobar Islands"
+    },
+    {
+      "name": "df1",
+      "description": "Melted DataFrame for time series analysis of rainfall"
+    },
+    {
+      "name": "lr",
+      "description": "Linear regression model for predicting rainfall"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for exploratory data analysis, summary statistics, and visualizations"
+    },
+    {
+      "variable": "andaman",
+      "creation_method": "df.loc[df['SUBDIVISION'] == 'Andaman & Nicobar Islands']",
+      "flow": "Used to analyze specific rainfall data for Andaman & Nicobar Islands"
+    },
+    {
+      "variable": "df1",
+      "creation_method": "pd.melt",
+      "flow": "Used for time series analysis and visualizations of rainfall"
+    },
+    {
+      "variable": "lr",
+      "creation_method": "LinearRegression()",
+      "flow": "Trained with train_x and train_y for prediction of rainfall"
+    }
+  ],
+  "models": [
+    {
+      "name": "KMeans",
+      "input_features": ["Rainfall"],
+      "target_variable": "Cluster Labels",
+      "hyperparameters": {"n_clusters": 3}
+    },
+    {
+      "name": "LinearRegression",
+      "input_features": ["Year", "Month"],
+      "target_variable": "Rainfall",
+      "hyperparameters": {}  
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> training.csv"];
+    A --> C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"];
+    A --> D["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"];
+    B --> E["Data Loading"];
+    E --> F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    F --> G["<img src='icons/table.svg' width=100 height=100/> <br/> Feature Data"];
+    G --> H["Feature Engineering"];
+    H --> I["Train-test Split"];
+    I --> J["<img src='icons/row_split.svg' width=100 height=100/> <br/> Split Data"];
+    J --> K["<img src='icons/brain.svg' width=100 height=100/> <br/> Train ML Model"];
+    K --> L["Model Training"];
+    L --> M["<img src='icons/file.svg' width=100 height=100/> <br/> predictions"];
+    M --> N["Evaluate Model"];
+    M --> O["<img src='icons/image.svg' width=100 height=100/> <br/> submission.csv"];
+    O --> P["Submit Results"];

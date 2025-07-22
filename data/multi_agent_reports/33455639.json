@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file": "sample_submission.csv",
+      "description": "This file contains the sample submission format including topic IDs."
+    },
+    {
+      "file": "topics.csv",
+      "description": "This file contains the list of topics with their respective titles and IDs."
+    },
+    {
+      "file": "content.csv",
+      "description": "This file contains the educational content with titles and their respective IDs."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "sub_df",
+      "description": "DataFrame that holds the sample submission data including the topic IDs."
+    },
+    {
+      "name": "topics_df",
+      "description": "DataFrame that holds the topics information including titles."
+    },
+    {
+      "name": "content_df",
+      "description": "DataFrame that holds content information including titles and IDs."
+    },
+    {
+      "name": "predicts",
+      "description": "List used to store predicted content IDs associated with each topic."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sub_df",
+      "creation": "Read from sample_submission.csv",
+      "flow": "Used to add predictions (content_ids) and subsequently saved as submission.csv"
+    },
+    {
+      "variable": "topics_df",
+      "creation": "Read from topics.csv",
+      "flow": "Used to retrieve titles based on topic IDs"
+    },
+    {
+      "variable": "content_df",
+      "creation": "Read from content.csv",
+      "flow": "Used to find content IDs matching titles from topics"
+    },
+    {
+      "variable": "predicts",
+      "creation": "Created through iteration over topic IDs and lookups in content_df",
+      "flow": "Stored in sub_df as content_ids"
+    }
+  ],
+  "models": []
+}

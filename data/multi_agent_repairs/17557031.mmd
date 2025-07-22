@@ -1,0 +1,41 @@
+```mermaid
+classDiagram
+    class "X" {
+        "Feature matrix created using mglearn.datasets.make_forge() for binary classification."
+    }
+    class "y" {
+        "Target variable created using mglearn.datasets.make_forge() for binary classification."
+    }
+    class "cancer" {
+        "Dataset loaded using load_breast_cancer() method from sklearn.datasets."
+    }
+    class "X_train" {
+        "Training set features derived from the Breast Cancer dataset after splitting."
+    }
+    class "X_test" {
+        "Test set features derived from the Breast Cancer dataset after splitting."
+    }
+    class "y_train" {
+        "Training set labels derived from the Breast Cancer dataset after splitting."
+    }
+    class "y_test" {
+        "Test set labels derived from the Breast Cancer dataset after splitting."
+    }
+    class "LogisticRegression" {
+        "Logistic Regression models trained with various hyperparameters."
+    }
+    class "LinearSVC" {
+        "LinearSVC model fitted on make_blobs dataset for multi-class classification."
+    }
+    
+    "X" --> "LinearSVC" : "input"
+    "X" --> "LogisticRegression" : "input"
+    "cancer" --> "X_train" : "loaded, then split"
+    "cancer" --> "X_test" : "loaded, then split"
+    "cancer" --> "y_train" : "loaded, then split"
+    "cancer" --> "y_test" : "loaded, then split"
+    "X_train" --> "LogisticRegression" : "train features"
+    "X_test" --> "LogisticRegression" : "test features"
+    "y_train" --> "LogisticRegression" : "train labels"
+    "y_test" --> "LogisticRegression" : "test labels"
+```

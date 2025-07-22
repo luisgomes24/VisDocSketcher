@@ -1,0 +1,64 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/2022-ukraine-russian-war/russia_losses_equipment.csv",
+      "description": "Dataset containing losses of Russian military equipment over time."
+    },
+    {
+      "file": "../input/2022-ukraine-russian-war/russia_losses_personnel.csv",
+      "description": "Dataset containing losses of Russian military personnel over time."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "russian_equipment",
+      "description": "DataFrame holding the equipment loss data indexed by date."
+    },
+    {
+      "name": "russian_personnel",
+      "description": "DataFrame containing the personnel loss data indexed by date."
+    },
+    {
+      "name": "imputed_data",
+      "description": "DataFrame that contains personnel data after replacing NaN values with the mean or zero."
+    },
+    {
+      "name": "russian_personnel_copy",
+      "description": "A modified version of the personnel DataFrame with NaNs replaced."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "russian_equipment",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Visualized using line plot to show trends",
+        "Analyzed for relationships with other variables"
+      ]
+    },
+    {
+      "variable": "russian_personnel",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Cleaned by dropping irrelevant columns",
+        "Imputed NaN values with mean and then zero",
+        "Visualized using a line plot"
+      ]
+    },
+    {
+      "variable": "imputed_data",
+      "creation_method": "SimpleImputer",
+      "flow": [
+        "Used for filling NaN values"
+      ]
+    },
+    {
+      "variable": "russian_personnel_copy",
+      "creation_method": "fillna",
+      "flow": [
+        "Visualized to see trends in personnel losses"
+      ]
+    }
+  ],
+  "models": [],
+}

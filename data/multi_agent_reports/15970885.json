@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/",
+      "description": "Read-only directory containing input data files."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "d",
+      "description": "An instance of the drawSvg Drawing class used for creating vector illustrations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "d",
+      "created_by": "draw.Drawing",
+      "flows_to": "Various shapes and illustrations like polygons, rectangles, circles, paths, and arcs are added to the drawing."
+    }
+  ],
+  "models": []
+}

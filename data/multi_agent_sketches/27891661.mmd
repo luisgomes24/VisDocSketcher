@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A1["/train.csv\/"]:::source -- Provides data to --> B1[train_data]
+    A2["/test.csv\/"]:::source -- Provides data to --> B4[test_data]
+    A3["/sample_submission.csv\/"]:::source
+
+    %% Preprocessing and Splitting
+    B1[train_data] -- Drop 'Transported' --> B2[X]
+    B1 -- Extract 'Transported' --> B3[y]
+    B2 -- train_test_split --> C1[X_train]
+    B2 -- train_test_split --> C2[X_val]
+    B3 -- train_test_split --> C3[y_train]
+    B3 -- train_test_split --> C4[y_val]
+
+    %% Model and Pipeline
+    C1 --> D2[pipe]
+    C3 --> D2
+    D2[pipe]:::model -- Logistic Regression --> D3[pipe_pred_LR]
+    D3 -- Evaluate --> E1[Confusion Matrix]
+
+    %% Test Predictions
+    B4[test_data] --> E2[test_pred_LR]
+    E2 -- Combine with sample_submission --> E3[LR_results]
+    E3 --> F1["/submission.csv\/"]
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;

@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data"] --> B["<img src='file.svg'/> <br/> Read CSV File"]
+    B --> C["🧐 Data Exploration"]
+    C --> D1["<img src='hist_template.svg'/> <br/> 📊 Distribution of Columns"]
+    C --> D2["<img src='boxplot_template.svg'/> <br/> 📊 Correlation Matrix"]
+    D1 --> E1["<img src='barplot_template.svg'/> <br/> 📊 Plot Results"]
+    D2 --> E2["<img src='scatter_plot_template.svg'/> <br/> 📊 Plot Results"]
+    E1 --> F["📊 Conclusion"]
+    E2 --> F

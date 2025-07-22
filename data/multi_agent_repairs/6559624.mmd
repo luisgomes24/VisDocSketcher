@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Define data sources
+    A1["questions_only.csv"]:::dataSource --> A2["Load Questions Data"]
+    A3["multiple_choice_responses.csv"]:::dataSource --> A4["Load Multiple Choice Responses"]
+    
+    %% Initial Data Loading
+    A4 --> B1["multiple_choice DataFrame"]
+    
+    %% Data Filtering and Preparation
+    B1 --> B2["Filter Data: Students & Data Scientists"]
+    B2 --> B3["df DataFrame"]
+    B3 --> B4["Target Variable: y"]
+    B3 --> B5["Feature Set: Xs"]
+    
+    %% Data Splitting
+    B4 --> C1["y_train"]
+    B4 --> C2["y_valid"]
+    B5 --> C3["X_train"]
+    B5 --> C4["X_valid"]
+
+    %% Model Training
+    C3 --> D1["Random Forest Model Training"]
+    C1 --> D1
+
+    %% Model Evaluation
+    D1 --> E1["Model Evaluation with y_valid"]
+    C4 --> E1
+    C2 --> E1
+
+    %% Define class definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+```

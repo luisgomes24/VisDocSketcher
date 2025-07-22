@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/MHICA06001A052NCEN.csv",
+      "description": "The first CSV file containing data for analysis."
+    },
+    {
+      "file": "/kaggle/input/MHICA06037A052NCEN.csv",
+      "description": "The second CSV file containing data for analysis."
+    },
+    {
+      "file": "/kaggle/input/MHICA06059A052NCEN.csv",
+      "description": "The third CSV file containing data for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing data from the first CSV file."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame containing data from the second CSV file."
+    },
+    {
+      "name": "df3",
+      "description": "DataFrame containing data from the third CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Created by reading the first CSV file using pd.read_csv.",
+      "flow": [
+        "Used in function plotPerColumnDistribution for visualizing data distribution.",
+        "The head of df1 is displayed."
+      ]
+    },
+    {
+      "variable": "df2",
+      "creation": "Created by reading the second CSV file using pd.read_csv.",
+      "flow": [
+        "Used in function plotPerColumnDistribution for visualizing data distribution.",
+        "The head of df2 is displayed."
+      ]
+    },
+    {
+      "variable": "df3",
+      "creation": "Created by reading the third CSV file using pd.read_csv.",
+      "flow": [
+        "Used in function plotPerColumnDistribution for visualizing data distribution.",
+        "The head of df3 is displayed."
+      ]
+    }
+  ],
+  "models": []
+}

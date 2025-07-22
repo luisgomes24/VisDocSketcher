@@ -1,0 +1,47 @@
+{
+  "data_sources": [
+    {
+      "file_name": "dc-wikia-data.csv",
+      "description": "Dataset containing data related to 'DC' characters, including various attributes."
+    },
+    {
+      "file_name": "marvel-wikia-data.csv",
+      "description": "Dataset containing data related to 'Marvel' characters, including various attributes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "my_filepath_dc",
+      "description": "The file path for the DC dataset CSV."
+    },
+    {
+      "name": "my_filepath_ml",
+      "description": "The file path for the Marvel dataset CSV."
+    },
+    {
+      "name": "my_data_dc",
+      "description": "DataFrame containing the loaded DC dataset with specified columns."
+    },
+    {
+      "name": "my_data_ml",
+      "description": "DataFrame containing the loaded Marvel dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "my_data_dc",
+      "creation_method": "pd.read_csv",
+      "usage": [
+        "Displayed with my_data_dc.head()",
+        "Described with my_data_dc.describe(include='all')",
+        "Used in plotting with sns.scatterplot and sns.barplot"
+      ]
+    },
+    {
+      "variable": "my_data_ml",
+      "creation_method": "pd.read_csv",
+      "usage": []
+    }
+  ],
+  "models": []
+}

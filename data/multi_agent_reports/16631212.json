@@ -1,0 +1,101 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/premier-league-player-statistics-updated-daily/dataset - 2020-09-24.csv",
+      "description": "Premier League player statistics including various attributes like age, appearances, shooting accuracy, goals, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing player statistics from the CSV file."
+    },
+    {
+      "name": "sample",
+      "description": "A sample of normally distributed random numbers for statistical testing."
+    },
+    {
+      "name": "a",
+      "description": "Another sample of normally distributed random numbers for comparing means."
+    },
+    {
+      "name": "b",
+      "description": "Third sample of normally distributed random numbers for comparing means."
+    },
+    {
+      "name": "before",
+      "description": "Sample drawn before a hypothetical treatment."
+    },
+    {
+      "name": "after",
+      "description": "Sample drawn after a hypothetical treatment."
+    },
+    {
+      "name": "nat_appear",
+      "description": "DataFrame containing nationality and appearances for players."
+    },
+    {
+      "name": "x",
+      "description": "Features used for linear regression model, containing Age, Goals, and Offsides."
+    },
+    {
+      "name": "y",
+      "description": "Target variable for linear regression model, containing Wins."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "pd.read_csv",
+      "flow": "Used for various analyses and visualizations." 
+    },
+    {
+      "variable": "sample",
+      "creation": "np.random.normal",
+      "flow": "Used for hypothesis testing in one-sample t-test." 
+    },
+    {
+      "variable": "a",
+      "creation": "np.random.normal",
+      "flow": "Used for hypothesis testing in two-sample t-test." 
+    },
+    {
+      "variable": "b",
+      "creation": "np.random.normal",
+      "flow": "Used for hypothesis testing in two-sample t-test." 
+    },
+    {
+      "variable": "before",
+      "creation": "np.random.normal",
+      "flow": "Used for hypothesis testing in paired t-test." 
+    },
+    {
+      "variable": "after",
+      "creation": "np.random.normal",
+      "flow": "Used for hypothesis testing in paired t-test." 
+    },
+    {
+      "variable": "nat_appear",
+      "creation": "data[['Nationality','Appearances']]",
+      "flow": "Used for ANOVA analysis and visualization." 
+    },
+    {
+      "variable": "x",
+      "creation": "data[['Age', 'Goals', 'Offsides']]",
+      "flow": "Used as input features in the linear regression model." 
+    },
+    {
+      "variable": "y",
+      "creation": "data[['Wins']]",
+      "flow": "Used as target variable in the linear regression model." 
+    }
+  ],
+  "models": [
+    {
+      "model": "LinearRegression",
+      "input_features": ["Age", "Goals", "Offsides"],
+      "target_variable": "Wins",
+      "hyperparameters": null
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+flowchart TD
+
+  %% Data Sources
+  DS1["mnist dataset"]:::data_source %% Dataset source representing the MNIST data
+  
+  %% Data Variables
+  V1["trainX"]:::variable --> M1 %% Training images for model
+  V2["trainY"]:::variable --> PT1 --> M1 %% Training labels processed and used for model fitting
+  V3["testX"]:::variable --> E1 %% Test images for evaluation
+  V4["testY"]:::variable --> PT2 --> E1 %% Test labels processed and used for evaluation
+  PT1[[y_train]]:::process --> M1 %% One-hot encoding of trainY
+  PT2[[y_test]]:::process --> E1 %% One-hot encoding of testY
+  
+  %% Models
+  M1((model)):::model %% Neural Network model for classifying digit images
+  
+  %% Data Flow and Processing
+  subgraph Data_Flow
+    DS1 -->|mnist.load_data()| V1 & V2 & V3 & V4 %% Data loading and splitting into train/test
+    PT1 -->|np_utils.to_categorical| V2
+    PT2 -->|np_utils.to_categorical| V4
+    M1 -->|Sequential & layers| V1 & PT1 %% Sequential model training with train data
+    E1(((Evaluation))):::evaluation %% Model evaluation with test data
+    E1 -->|model.evaluate| V3 & PT2
+  end
+  
+  %% Styles for nodes
+  classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef variable fill:#ccf,stroke:#333,stroke-width:2px;
+  classDef process fill:#cfc,stroke:#333,stroke-width:2px;
+  classDef model fill:#fcc,stroke:#333,stroke-width:2px;
+  classDef evaluation fill:#ffc,stroke:#333,stroke-width:2px;

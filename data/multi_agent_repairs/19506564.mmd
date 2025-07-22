@@ -1,0 +1,49 @@
+%%{ init : { 'theme' : 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00', 'tertiaryTextColor': '#000000'} } }%%
+
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A["cqt-g2net-test-0-1"]
+        B["sample_submission.csv"]
+    end
+    
+    subgraph Preprocessing
+        C["Gather test files"]
+        A --> C
+    end
+
+    subgraph ModelTraining
+        D["EfficientNet Model"]
+        subgraph Hyperparameters
+            E["IMG_SIZES"]
+            F["BATCH_SIZES"]
+            G["KGOLDS"]
+        end
+        E --> D
+        F --> D
+        G --> D
+    end
+
+    subgraph Validation
+        H["Out-of-fold predictions"]
+        GD["AdamW Optimizer"]
+        D --> H
+    end
+
+    subgraph Submission
+        I["Create submission DataFrame"]
+        B --> I
+        H --> I
+    end
+
+    DataSources --> Preprocessing --> ModelTraining --> Validation --> Submission
+    
+    %% Mermaid comments
+    %% A: Represents the test dataset
+    %% B: Represents the sample submission file
+    %% C: Represents the gathering of test files using KaggleDatasets
+    %% D: Represents the EfficientNet model training process
+    %% E, F, G: Hyperparameters for the model
+    %% H: Represents the out-of-fold predictions from the model
+    %% I: Creation of the submission DataFrame based on predictions
+```

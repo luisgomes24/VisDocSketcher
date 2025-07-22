@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {"file_name": "training_set", "description": "Directory containing the training set images"},
+    {"file_name": "test_set", "description": "Directory containing the validation/test set images"}
+  ],
+  "data_variables": [
+    {"name": "DATA_DIR", "description": "Base directory for dataset"},
+    {"name": "trn_dir", "description": "Path to training images directory"},
+    {"name": "val_dir", "description": "Path to validation images directory"},
+    {"name": "train_ds", "description": "Training dataset using ImageFolder"},
+    {"name": "valid_ds", "description": "Validation dataset using ImageFolder"},
+    {"name": "train_dl", "description": "DataLoader for training dataset"},
+    {"name": "valid_dl", "description": "DataLoader for validation dataset"}
+  ],
+  "data_flow": [
+    {"variable": "train_ds", "created_by": "datasets.ImageFolder(trn_dir, transform=tfms)", "flows_to": "DataLoader for training using train_dl"},
+    {"variable": "valid_ds", "created_by": "datasets.ImageFolder(val_dir, transform=tfms)", "flows_to": "DataLoader for validation using valid_dl"},
+    {"variable": "train_dl", "created_by": "torch.utils.data.DataLoader(train_ds, ...)"},
+    {"variable": "valid_dl", "created_by": "torch.utils.data.DataLoader(valid_ds, ...)"}
+  ],
+  "models": []
+}

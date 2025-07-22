@@ -1,0 +1,28 @@
+%% This is a Mermaid.js diagram representing the data workflow for the notebook.
+flowchart TD
+  %% Node for Data Source
+  A["StudentsPerformance.csv"]
+  %% Node for Initial Data Load
+  B["data"]
+  %% Node for Categorical Features
+  C["features_cat"]
+  %% Node for Numerical Features
+  D["features_num"]
+  %% Node for KMeans Model
+  E["KMeans Model\n(n_clusters=7)"]
+  %% Node for Clusters Assigned
+  F["identified_clusters"]
+  %% Node for Data with Clusters
+  G["data_with_clusters"]
+
+  %% Data Source to Data Load
+  A -->|"load csv"| B
+  %% Data Load to Feature Variables
+  B -->|"explore features"| C
+  B -->|"explore features"| D
+  %% Numerical Features to Scaling
+  D -->|"scale"| E
+  %% KMeans to Identified Clusters
+  E -->|"generate clusters"| F
+  %% Identified Clusters to Data with Clusters
+  F -->|"append clusters"| G

@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/1056lab-fraud-detection-in-credit-card/train.csv",
+      "description": "Training set for fraud detection containing features and target variable 'Class'."
+    },
+    {
+      "file": "/kaggle/input/1056lab-fraud-detection-in-credit-card/test.csv",
+      "description": "Testing set for fraud detection containing features only."
+    },
+    {
+      "file": "/kaggle/input/1056lab-fraud-detection-in-credit-card/sampleSubmission.csv",
+      "description": "Sample submission file format."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training dataset selected relevant features and the target variable."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the testing dataset with selected features."
+    },
+    {
+      "name": "X_train",
+      "description": "Numpy array of input features from df_train excluding the target variable 'Class'."
+    },
+    {
+      "name": "y_train",
+      "description": "Numpy array of the target variable 'Class' from df_train."
+    },
+    {
+      "name": "pca",
+      "description": "PCA object used for dimensionality reduction."
+    },
+    {
+      "name": "X_train_pca",
+      "description": "Transformed training data after applying PCA."
+    },
+    {
+      "name": "df_train_pca",
+      "description": "DataFrame containing PCA components along with the target variable 'Class' for visualization."
+    },
+    {
+      "name": "X_test",
+      "description": "Numpy array of input features from df_test."
+    },
+    {
+      "name": "df_test_pca",
+      "description": "DataFrame containing PCA components for the test set along with predictions."
+    },
+    {
+      "name": "submit",
+      "description": "DataFrame prepared for submission containing test predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "pd.read_csv()",
+      "flow": "Used for model training and dimensionality reduction."
+    },
+    {
+      "variable": "df_test",
+      "creation": "pd.read_csv()",
+      "flow": "Used for making predictions."
+    },
+    {
+      "variable": "X_train",
+      "creation": "df_train.drop('Class', axis=1)",
+      "flow": "Used for fitting the SVC model."
+    },
+    {
+      "variable": "y_train",
+      "creation": "df_train['Class']",
+      "flow": "Used as the target variable for model training."
+    },
+    {
+      "variable": "pca",
+      "creation": "PCA()",
+      "flow": "Used to fit data and to transform training/test data."
+    },
+    {
+      "variable": "X_train_pca",
+      "creation": "pca.transform(X_train)",
+      "flow": "Used for visualization and as input for model training."
+    },
+    {
+      "variable": "df_train_pca",
+      "creation": "pd.DataFrame(X_train_pca)",
+      "flow": "Used for PCA visualization."
+    },
+    {
+      "variable": "X_test",
+      "creation": "df_test.values",
+      "flow": "Used for making predictions."
+    },
+    {
+      "variable": "df_test_pca",
+      "creation": "pca.transform(X_test)",
+      "flow": "Used for visualization and contains predictions."
+    },
+    {
+      "variable": "submit",
+      "creation": "pd.read_csv() & adding predictions",
+      "flow": "Saved as 'submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Support Vector Classifier (SVC)",
+      "input_features": "X_train (features from df_train)",
+      "target_variable": "y_train (Class from df_train)",
+      "hyperparameters": {}
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/dogs-vs-cats-redux-kernels-edition/train.zip",
+      "description": "Dataset of images of cats and dogs for classification."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_dir",
+      "description": "Directory containing training images organized into 'cats' and 'dogs' directories."
+    },
+    {
+      "name": "validation_dir",
+      "description": "Directory containing validation images organized into 'cats' and 'dogs' directories."
+    },
+    {
+      "name": "model",
+      "description": "CNN model for classifying images into cats and dogs."
+    },
+    {
+      "name": "history",
+      "description": "Training history containing accuracy and loss metrics for both training and validation sets."
+    },
+    {
+      "name": "train_generator",
+      "description": "Generator for loading training images with data augmentation."
+    },
+    {
+      "name": "validation_generator",
+      "description": "Generator for loading validation images."
+    },
+    {
+      "name": "model_2",
+      "description": "CNN model with dropout regularization to prevent overfitting."
+    },
+    {
+      "name": "model_3",
+      "description": "CNN model using transfer learning with VGG16 as a base."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_dir",
+      "creation": "Path defined after extracting images.",
+      "flow": "Used to create a generator for loading training images."
+    },
+    {
+      "variable": "validation_dir",
+      "creation": "Path defined after extracting images.",
+      "flow": "Used to create a generator for loading validation images."
+    },
+    {
+      "variable": "train_generator",
+      "creation": "Created using ImageDataGenerator with train_dir.",
+      "flow": "Used to fit the model during training."
+    },
+    {
+      "variable": "validation_generator",
+      "creation": "Created using ImageDataGenerator with validation_dir.",
+      "flow": "Used for validating the model during training."
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized as a Sequential model with convolutional layers.",
+      "flow": "Used to fit the model on training data."
+    },
+    {
+      "variable": "model_2",
+      "creation": "Modified CNN model with added dropout layer.",
+      "flow": "Used to fit the model on augmented training data."
+    },
+    {
+      "variable": "model_3",
+      "creation": "Initialized with transfer learning using VGG16.",
+      "flow": "Used to fit the model with early stopping callback."
+    },
+    {
+      "variable": "history",
+      "creation": "Generated from the fit method.",
+      "flow": "Used to plot training and validation accuracy/loss."
+    }
+  ],
+  "models": [
+    {
+      "name": "CNN",
+      "input_features": "Image data of cats and dogs.",
+      "target_variable": "Binary classification (cat or dog).",
+      "hyperparameters": {
+        "layers": [
+          {"type": "Conv2D", "params": {"filters": 32, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "MaxPooling2D", "params": {"pool_size": [2, 2]}},
+          {"type": "Dense", "params": {"units": 512, "activation": "relu"}},
+          {"type": "Dense", "params": {"units": 1, "activation": "sigmoid"}}
+        ],
+        "learning_rate": 1e-4
+      }
+    },
+    {
+      "name": "CNN with Dropout",
+      "input_features": "Image data with dropout for regularization.",
+      "target_variable": "Binary classification (cat or dog).",
+      "hyperparameters": {
+        "layers": [
+          {"type": "Conv2D", "params": {"filters": 32, "kernel_size": [3, 3], "activation": "relu"}},
+          {"type": "Dropout", "params": {"rate": 0.5}},
+          {"type": "Dense", "params": {"units": 512, "activation": "relu"}},
+          {"type": "Dense", "params": {"units": 1, "activation": "sigmoid"}}
+        ],
+        "learning_rate": 1e-4
+      }
+    },
+    {
+      "name": "Transfer Learning (VGG16)",
+      "input_features": "Image data, using pre-trained VGG16 model.",
+      "target_variable": "Binary classification (cat or dog).",
+      "hyperparameters": {
+        "layers": [
+          {"type": "Flatten"},
+          {"type": "Dense", "params": {"units": 512, "activation": "relu"}},
+          {"type": "Dense", "params": {"units": 1, "activation": "sigmoid"}}
+        ],
+        "learning_rate": 1e-4
+      }
+    }
+  ]
+}

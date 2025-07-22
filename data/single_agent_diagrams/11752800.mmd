@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Load Dataset <img src='icons/file.svg' />"] --> B["📥 Read JSON File"]
+    B --> C["💾 Extract Data and Labels"]
+    C --> D["🔍 Check Data Shape"]
+    D --> E["🖼️ Reshape Images <img src='icons/image.svg' />"]
+    E --> F["📸 Display Ship Images"]
+    F --> G["🚫 Display No Ship Images"]
+    G --> H["📊 Task 2: Histogram of R, B, G Means"]
+    H --> I["📊 Task 2: Histogram of R, B, G Stds"]
+    I --> J["🔧 Task 3: Normalize Images"]
+    J --> K["📊 Task 3: Histograms After Normalization"]

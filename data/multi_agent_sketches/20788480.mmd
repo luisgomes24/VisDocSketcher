@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]:::dataSource -->|pd.read_csv| B1["train DataFrame"]
+    A2["test.csv"]:::dataSource -->|pd.read_csv| B2["test DataFrame"]
+    A3["sample_submission.csv"]:::dataSource -->|pd.read_csv| B3["sample_submission DataFrame"]
+    
+    %% Data Processing
+    B1 -->|Extract Features| C1["feature_cols: ['R','C','u_in','u_out']"]
+    C1 -->|Scale Features| D1["Scaled train DataFrame"]
+    B2 -->|Scale Features| D2["Scaled test DataFrame"]
+    
+    %% Reshape Data
+    D1 -->|Reshape| E1["X: Features for Model"]
+    B1 -->|Pop 'pressure'| E2["y: Target for Model"]
+    
+    %% Model
+    subgraph Model
+        F1["LSTM Model"]
+        F1 -->|Compile & Train| G1["Trained LSTM Model"]
+    end
+    
+    E1 --> F1
+    E2 --> F1
+    
+    %% Predictions
+    B2 -->|Predict| H1["Predictions"]
+    H1 -->|Assign to DataFrame| B3
+    
+    %% Submission
+    B3 -->|Save to CSV| I1["submission.csv"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataTransform fill:#bbf,stroke:#333,stroke-width:2px;

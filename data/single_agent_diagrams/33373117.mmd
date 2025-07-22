@@ -1,0 +1,5 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' />"] --> B["🔄 Preprocess Images"]
+    B --> C["🖼️ Convert DICOM to JPG <img src='icons/image.svg' />"]
+    C --> D["🛠️ Multiprocessing <img src='icons/row_split.svg' />"]
+    D --> E["📦 Zip Processed Images <img src='icons/file.svg' />"]

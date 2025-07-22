@@ -1,0 +1,22 @@
+flowchart TD
+    %% Kaggle URLs input
+    KaggleURLs["kaggle_urls"] -->|List of URLs| RequestLoop
+    
+    %% Number of requests made
+    NumRequests["num_requests"] -->|100 requests per URL| RequestLoop
+
+    %% Loop for sending requests
+    subgraph Requests
+        RequestLoop["Loop: Send requests to each URL"] -->|Store response time| ResponseTimes
+    end
+
+    %% Response time storage
+    ResponseTimes["response_times"]:::data_variable -->|Store in dictionary| DataFrame
+
+    %% DataFrame creation
+    DataFrame["df"]:::data_variable -->|Create from response_times| Display
+
+    %% Display DataFrame
+    Display["Display DataFrame"]
+
+    classDef data_variable fill:#f9f,stroke:#333,stroke-width:2px;

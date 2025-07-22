@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    TrainCSV["../input/rsna-str-pulmonary-embolism-detection/train.csv"]
+    TestCSV["../input/rsna-str-pulmonary-embolism-detection/test.csv"]
+    SampleSubCSV["../input/rsna-str-pulmonary-embolism-detection/sample_submission.csv"]
+
+    %% Data Variables
+    train_df["train_df: DataFrame"]
+    test_df["test_df: DataFrame"]
+    neg_pe_count_df["neg_pe_count_df: Negative PE Count"]
+    pos_pe_count_df["pos_pe_count_df: Positive PE Count"]
+    list_of_patient_ids["list_of_patient_ids: Patient IDs List"]
+
+    %% Data Flow
+    TrainCSV --> |"Load CSV"| train_df
+    TestCSV --> |"Load CSV"| test_df
+    train_df --> |"Filter negative PE"| neg_pe_count_df
+    train_df --> |"Filter positive PE"| pos_pe_count_df
+    train_df --> |"List patient IDs"| list_of_patient_ids
+    neg_pe_count_df --> |"Group by StudyInstanceUID, SeriesInstanceUID"| train_df
+    pos_pe_count_df --> |"Coexistence analysis"| train_df
+    list_of_patient_ids --> |"Count of patients"| train_df
+
+    %% Sample submission usage (not directly used in data flow)
+    SampleSubCSV -.-> |"Reference format"| test_df
+
+    %% No ML Models Used

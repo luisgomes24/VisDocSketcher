@@ -1,0 +1,12 @@
+%% This is a Mermaid.js diagram representing the data flow in the notebook 6008552
+flowchart TD
+    %% Data Source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"] -->|Read 1000 rows| B["<img src='icons/table.svg' width=100 height=100/> <br/> df1 DataFrame"]
+    
+    %% Data Variable
+    B --> C["<img src='icons/brain.svg' width=100 height=100/> <br/> Plotting Functions"]
+
+    %% Functions using the data
+    C -->|Input Data| D["<img src='dummy_plots/barplot_template.svg' /> <br/> plotPerColumnDistribution"]
+    C -->|Input Data| E["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> plotCorrelationMatrix"]
+    C -->|Input Data| F["<img src='dummy_plots/boxplot_template.svg' /> <br/> plotScatterMatrix"]

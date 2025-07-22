@@ -1,0 +1,9 @@
+graph TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/>Training Data"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/>Validation Data"]
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/>Feature Selection"]
+    C --> D["<img src='icons/brain.svg' width=100 height=100/> <br/>Decision Tree Model"]
+    C --> E["<img src='icons/brain.svg' width=100 height=100/> <br/>Random Forest Model"]
+    C --> F["<img src='icons/brain.svg' width=100 height=100/> <br/>SVR Model"]
+    D --> G["<img src='dummy_plots/barplot_template.svg'/> <br/>Model Output"]
+    E --> G
+    F --> G

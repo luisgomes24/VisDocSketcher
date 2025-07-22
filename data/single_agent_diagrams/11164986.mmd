@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Preview Data"];
+    B --> C["📉 Distribution Graphs <img src='hist_template.svg' />"];
+    C --> D["🔍 Correlation Matrix <img src='correlation_template.svg' />"];
+    D --> E["📈 Scatter and Density Plots <img src='scatter_plot_template.svg' />"];
+    A1["📂 Load 2nd File <img src='file.svg' />"] --> B1["📊 Preview 2nd Data"];
+    B1 --> C1["📉 Distribution Graphs (2nd) <img src='hist_template.svg' />"];
+    C1 --> D1["🔍 Correlation Matrix (2nd) <img src='correlation_template.svg' />"];
+    D1 --> E1["📈 Scatter and Density Plots (2nd) <img src='scatter_plot_template.svg' />"];
+    
+    classDef section fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,A1 section;

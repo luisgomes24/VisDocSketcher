@@ -1,0 +1,19 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/>"] --> B["📊 Preview Data"]
+    B --> C["🔍 Preprocessing"]
+    C --> D["🧮 Handle Missing Values"]
+    C --> E["📊 Split Features and Target"]
+    E --> F["🔄 Scale Features"]
+    F --> G["🔄 Train-Test Split"]
+    G --> H["🧠 Train Model"]
+    H --> I["📈 Evaluate Model <img src='icons/brain.svg' /> <br/>"]
+    
+    A -->|Data Source| B
+    D -->|Check for Nulls| C
+    E -->|Drop Target Column| F
+    F -->|Use MinMaxScaler| G
+    H -->|Fit Logistic Regression| I
+    I -->|Print Model Accuracy| I
+    
+    B -->|Visualize Correlation| J["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg' /> <br/>"]
+    J --> C

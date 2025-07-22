@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_path": "C:\Users\Ron\Desktop\Cars.xlsx",
+      "description": "Excel file containing car brands and their prices"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "cars",
+      "description": "Dictionary containing car brands and their corresponding prices"
+    },
+    {
+      "name": "df",
+      "description": "DataFrame created from the cars dictionary and also from the Excel file"
+    },
+    {
+      "name": "numbers",
+      "description": "Dictionary containing a set of numbers, including NaN values"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.DataFrame(cars) or pd.read_excel",
+      "usage": "Used to calculate maximum price and print DataFrame"
+    },
+    {
+      "variable": "df",
+      "creation": "pd.DataFrame(numbers)",
+      "usage": "Used to replace NaN values with 0"
+    }
+  ],
+  "models": []
+}

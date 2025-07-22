@@ -1,0 +1,10 @@
+flowchart TD
+    %% Represents the initial DataFrame 'df'
+    A[df]:::dataVar
+    A --> |Used in plotting functions| B[Plotting Functions]:::process
+
+    classDef dataVar fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;
+
+    A --> C["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    B --> D["<img src='icons/file.svg' width=100 height=100/> <br/> Plotting Functions"];

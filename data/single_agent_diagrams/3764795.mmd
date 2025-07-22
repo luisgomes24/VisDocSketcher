@@ -1,0 +1,10 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/> <br/>"] --> B["🔍 Exploratory Analysis"]
+    B --> C["🗂 Check Dataset <img src='icons/table.svg'/> <br/>"]
+    C --> D["📊 Distribution Plot <img src='dummy_plots/hist_template.svg'/> <br/>"]
+    C --> E["📈 Correlation Matrix <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    C --> F["📉 Scatter Plot Matrix <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    D --> G["✅ Insights Available?"]
+    E --> G
+    F --> G
+    G --> H["📝 Conclusion"]

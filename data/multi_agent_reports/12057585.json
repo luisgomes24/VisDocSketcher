@@ -1,0 +1,98 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.zarr",
+      "description": "Training dataset containing motion data of agents"
+    },
+    {
+      "file_name": "validate.zarr",
+      "description": "Validation dataset for tuning model parameters"
+    },
+    {
+      "file_name": "sample.zarr",
+      "description": "Sample dataset for quick testing and validation"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "cfg",
+      "description": "Configuration dictionary containing model and data loading parameters"
+    },
+    {
+      "variable_name": "train_dataloader",
+      "description": "PyTorch DataLoader object for the training dataset"
+    },
+    {
+      "variable_name": "valid_dataloader",
+      "description": "PyTorch DataLoader object for the validation dataset"
+    },
+    {
+      "variable_name": "eval_dataloader",
+      "description": "PyTorch DataLoader object for the evaluation dataset"
+    },
+    {
+      "variable_name": "model",
+      "description": "Neural network model built using ResNet-18 architecture"
+    },
+    {
+      "variable_name": "optimizer",
+      "description": "Optimizer (Adam) used for training the model"
+    },
+    {
+      "variable_name": "criterion",
+      "description": "Loss function (Mean Squared Error) used to evaluate model performance"
+    },
+    {
+      "variable_name": "losses",
+      "description": "List storing training losses during the training process"
+    },
+    {
+      "variable_name": "val_losses",
+      "description": "List storing validation losses during the training process"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_dataloader",
+      "created_via": "ChunkedDataset and DataLoader",
+      "flows_to": "Training loop for model training"
+    },
+    {
+      "variable_name": "valid_dataloader",
+      "created_via": "ChunkedDataset and DataLoader",
+      "flows_to": "Validation during model training"
+    },
+    {
+      "variable_name": "eval_dataloader",
+      "created_via": "ChunkedDataset and DataLoader",
+      "flows_to": "Model evaluation after training"
+    },
+    {
+      "variable_name": "model",
+      "created_via": "build_model function",
+      "flows_to": "Training and evaluation loops"
+    },
+    {
+      "variable_name": "losses",
+      "created_via": "Training process",
+      "flows_to": "Visualization of training loss"
+    },
+    {
+      "variable_name": "val_losses",
+      "created_via": "Validation process during training",
+      "flows_to": "Visualization of validation loss"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNet-18",
+      "input_features": "Image data with history frames",
+      "target_variable": "Future agent positions",
+      "hyperparameters": {
+        "learning_rate": 1e-4,
+        "epochs": 10,
+        "batch_size": 8
+      }
+    }
+  ]
+}

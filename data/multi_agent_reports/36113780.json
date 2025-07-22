@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/playground-series-s3e9/train.csv",
+      "description": "Training data containing features and target variable 'Strength'."
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e9/test.csv",
+      "description": "Testing data containing features for prediction."
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e9/sample_submission.csv",
+      "description": "Sample submission format intended for submission of the predictions." 
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train_df",
+      "description": "DataFrame containing training data after loading from CSV, excluding the ID column."
+    },
+    {
+      "variable": "test_df",
+      "description": "DataFrame containing testing data after loading from CSV, excluding the ID column."
+    },
+    {
+      "variable": "X",
+      "description": "Features used for training by dropping the target variable 'Strength' from 'train_df'."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable 'Strength' from 'train_df' intended for training phase."
+    },
+    {
+      "variable": "submission",
+      "description": "DataFrame structured for submission containing predictions for strength including the id column."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "read_csv",
+      "flows_to": "Feature engineering, outlier capping, model training, and final submission creation."
+    },
+    {
+      "variable": "test_df",
+      "created_by": "read_csv",
+      "flows_to": "Feature engineering and predictions for submission."
+    },
+    {
+      "variable": "X",
+      "created_by": "train_df.drop",
+      "flows_to": "Model training."
+    },
+    {
+      "variable": "y",
+      "created_by": "train_df['Strength']",
+      "flows_to": "Model training."
+    },
+    {
+      "variable": "submission",
+      "created_by": "pd.read_csv",
+      "flows_to": "Final predictions and submission file creation."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "Learning rate, max depth, n_estimators, etc. defined using 'optuna'."
+    },
+    {
+      "model_name": "LGBMRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "Learning rate, max depth, n_estimators, etc. defined using 'optuna'."
+    },
+    {
+      "model_name": "CatBoostRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "Iterations, max depth, learning rate, etc. explicitly defined prior to model fitting."
+    }
+  ]
+}

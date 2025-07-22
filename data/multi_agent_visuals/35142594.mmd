@@ -1,0 +1,58 @@
+%% Workflow for Frame Interpolation using FILM Model
+flowchart TD
+  %% Data Sources
+  DS1["<img src='icons/image.svg' width=100 height=100/> <br/> First Input Image"]
+  DS2["<img src='icons/image.svg' width=100 height=100/> <br/> Second Input Image"]
+  
+  %% Loading and Normalization
+  DS1 -->|Load and Normalize| V1["<img src='dummy_plots/lineplot_template.svg'/> <br/> image1"]
+  DS2 -->|Load and Normalize| V2["<img src='dummy_plots/lineplot_template.svg'/> <br/> image2"]
+  
+  %% Time Variable
+  V3["time"] -->|Set Interpolation Time| IN1
+  
+  %% Input Preparation
+  subgraph Input Preparation
+    direction TB
+    IN1["input"]
+    V1 --> IN1
+    V2 --> IN1
+    V3 --> IN1
+  end
+  
+  %% Machine Learning Model
+  subgraph Model
+    direction TB
+    M["FILM Model"]
+    IN1 -->|Infer| M
+    M -->|Generate| V4["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> mid_frame"]
+  end
+  
+  %% Frames Assembly
+  V4 -->|Store| V5["<img src='dummy_plots/boxplot_template.svg'/> <br/> frames"]
+  V1 --> V5
+  V2 --> V5
+  
+  %% Visualization
+  V5 -->|Display| V6["<img src='icons/file.svg' width=100 height=100/> <br/> show_images"]
+  V5 -->|Create Video| V7["<img src='icons/file.svg' width=100 height=100/> <br/> show_video"]
+
+  %% Extended Interpolation System
+  subgraph Extended Interpolation
+    direction TB
+    E1["<img src='icons/brain.svg' width=100 height=100/> <br/> Interpolator Instance"]
+    M --> E1
+    V5 -->|Iterate| E1
+  end
+  
+  E1 -->|Generate Multiple| V8["Extended Frames"]
+  V8 -->|Create Smoother Video| V9["<img src='icons/file.svg' width=100 height=100/> <br/> show_video"]
+
+  classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:1px;
+  classDef process fill:#C6F4D6,stroke:#333,stroke-width:1px;
+  classDef variable fill:#87CEEB,stroke:#333,stroke-width:1px;
+  classDef model fill:#F2C464,stroke:#333,stroke-width:1px;
+  class DS1,DS2 dataSource;
+  class V1,V2,V3,V4,V5,V6,V7,V8,V9 variable;
+  class M,E1 model;
+  class IN1 process;

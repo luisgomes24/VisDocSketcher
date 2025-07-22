@@ -1,0 +1,39 @@
+flowchart TD
+
+    %% Data Sources
+    A1["insurance.csv"]
+    %% This node represents the data source which is a CSV file containing health insurance beneficiary data.
+
+    %% Data Load
+    A2["dados"]
+    %% This node represents the dataframe containing the data loaded from the CSV file.
+    A1 --> A2
+
+    %% Initial Random Forest Model Creation
+    A3["floresta (Random Forest Model)"]
+    %% This node represents the initial Random Forest model created using PyCaret's create_model function.
+    A2 --> A3
+
+    %% Model Tuning
+    A4["floresta_adj (Tuned Random Forest Model)"]
+    %% This node represents the Random Forest model after hyperparameter tuning.
+    A3 --> A4
+
+    %% Compare Models / Select Top Models
+    A5["modelos (Top Models List)"]
+    %% Node representing the PyCaret compare_models function that determines the top models.
+    A2 --> A5
+
+    %% Blended Model
+    A6["modelo_combinado (Blended Model)"]
+    %% This node represents the ensemble model combining the top models.
+    A5 --> A6
+
+    %% Finalize Model
+    A7["modelo_final (Final Model)"]
+    %% This node represents the finalized model that is saved for predictions.
+    A6 --> A7
+    A4 --> A7
+
+    %% Predictions and Evaluation
+    %% Data used for predictions and evaluation through the finalized model.

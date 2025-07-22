@@ -1,0 +1,29 @@
+graph TD;
+    %% Data Sources
+    A["TomatoHealth.h5"] --> |Load model| B["MyCnn"];
+    C["classNames.txt"] --> |Load class names| D["classNames"];
+    
+    %% Input Images
+    E["IMG_20210209_135136229_HDR.jpg"] --> |Input| F["Tester"];
+    G["IMG_20210208_215530576_HDR.jpg"] --> |Input| F["Tester"];
+    H["IMG_20210209_135103763_HDR.jpg"] --> |Input| F["Tester"];
+    I["IMG_20210209_135154611_HDR.jpg"] --> |Input| F["Tester"];
+
+    %% Data Flow
+    B --> |Use model| F["Tester"];
+    D --> |Map prediction indices| F;
+
+    %% Prediction Output
+    F["Tester"] --> |Predict plant health| J["Prediction Results"];
+
+    %% Comments for nodes
+    click A "" "Pre-trained CNN model for tomato plant health classification."
+    click C "" "Text file containing the class names for health categories."
+    click E "" "Image of a tomato plant for prediction."
+    click G "" "Image of a tomato plant for prediction."
+    click H "" "Image of a tomato plant for prediction."
+    click I "" "Image of a tomato plant for prediction."
+    click B "" "Loaded CNN model used for predictions."
+    click D "" "Class names for mapping predicted indices."
+    click F "" "Function to test model predictions on images."
+    click J "" "Results of the model's prediction on plant images.",

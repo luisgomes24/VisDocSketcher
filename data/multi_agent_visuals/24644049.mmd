@@ -1,0 +1,29 @@
+%% The workflow diagram for the notebook
+flowchart TD
+    CCC["<img src='icons/file.svg' width=100 height=100/> <br/> CCC.csv"] -->|read_csv| df_CCC
+    gc["<img src='icons/file.svg' width=100 height=100/> <br/> gc.csv"] -->|read_csv| df_gc
+    gn["<img src='icons/file.svg' width=100 height=100/> <br/> gn.csv"] -->|read_csv| df_gn
+    val["<img src='icons/file.svg' width=100 height=100/> <br/> validation_data.csv"] -->|Validation Data| validation_df
+
+    %% Combining datasets into a list of unique comments
+    df_CCC --> text_list
+    df_gc --> text_list
+    df_gn --> text_list
+
+    %% Creating Target Dataset for Model Input
+    text_list -->|unique comment texts| target_dataset["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Target Dataset"]
+
+    %% Creating comments DataFrame
+    target_dataset -->|filter validation| comments["<img src='dummy_plots/boxplot_template.svg'/> <br/> Comments DataFrame"]
+    
+    %% Model Configuration
+    CONFIG["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Configurations"] --> JigsawModel["JigsawModel\nid, mask\nlinear(768, num_classes=1)"]
+
+    %% Dataset and DataLoader creation
+    comments -->|CCDataset| test_dataset["<img src='dummy_plots/lineplot_template.svg'/> <br/> Test Dataset"]
+    test_dataset -->|DataLoader| test_loader["<img src='dummy_plots/hist_template.svg'/> <br/> Test Loader"]
+
+    %% Model Inference
+    test_loader -->|Inference| preds["<img src='dummy_plots/barplot_template.svg'/> <br/> Predictions"]
+    preds -->|Pseudo Label| comments
+    preds -->|Save to CSV| CSV["Saved Predictions"]

@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📂 Data Loading <img src='icons/file.svg' />"] --> B["🛠️ Data Preprocessing: Normalization <img src='icons/column_split.svg' />"];
+    B --> C["🔄 Train-Test Split <img src='icons/row_split.svg' />"];
+    C --> D["🧠 Model Creation: Bayesian Optimization <img src='icons/brain.svg' />"];
+    D --> E["🎯 Tuner Search <img src='icons/brain.svg' />"];
+    E --> F["🖥️ Model Training <img src='icons/brain.svg' />"];
+    F --> G["📊 Model Evaluation <img src='icons/table.svg' />"];
+    G --> H["💾 Save Predictions <img src='icons/file.svg' />"];
+    H --> I["📊 Ensemble Models <img src='icons/table.svg' />"];
+
+    A --> J["📂 Load Datasets"];
+    J --> B;

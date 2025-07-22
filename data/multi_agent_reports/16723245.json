@@ -1,0 +1,119 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and target variable."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing features without target variable."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data for features and target."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data for features."
+    },
+    {
+      "variable_name": "X",
+      "description": "DataFrame containing feature variables (excluding target)."
+    },
+    {
+      "variable_name": "y",
+      "description": "DataFrame containing encoded target variable."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features reshaped for input into the neural network."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test features reshaped for input into the neural network."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "One-hot encoded target variable for training set."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "One-hot encoded target variable for testing set."
+    },
+    {
+      "variable_name": "preds",
+      "description": "Predictions made on the test dataset."
+    },
+    {
+      "variable_name": "predictions_df",
+      "description": "DataFrame containing final predictions formatted for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created": "pd.read_csv",
+      "flows_to": ["X", "y", "X_train", "y_train", "X_test", "y_test"]
+    },
+    {
+      "variable": "test",
+      "created": "pd.read_csv",
+      "flows_to": ["X_test", "preds"]
+    },
+    {
+      "variable": "X",
+      "created": "train.drop('target', axis=1)",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created": "LabelEncoder().fit_transform(train['target'])",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "created": "train_test_split(X, y)",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable": "X_test",
+      "created": "train_test_split(X, y)",
+      "flows_to": ["model.predict", "preds"]
+    },
+    {
+      "variable": "y_train",
+      "created": "to_categorical(y_train)",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable": "y_test",
+      "created": "to_categorical(y_test)",
+      "flows_to": ["model.evaluate"]
+    },
+    {
+      "variable": "preds",
+      "created": "model.predict_proba(test)",
+      "flows_to": ["predictions_df"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential",
+      "architecture": "Conv2D layers followed by Dense layers.",
+      "input_shape": "(img_rows, img_cols, 1)",
+      "target_variable": "num_classes",
+      "hyperparameters": {
+        "batch_size": 128,
+        "num_classes": 4,
+        "epochs": 50,
+        "early_stopping_patience": 10
+      }
+    }
+  ]
+}

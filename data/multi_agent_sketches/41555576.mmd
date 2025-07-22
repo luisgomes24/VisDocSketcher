@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data sources
+    A["Heart Attack.csv"] -->|Load data| B[df]
+    
+    %% Data preprocessing
+    B -->|Drop column 'class'| C[x]
+    B -->|Extract target 'class'| D[y]
+    C -->|Train-test split| E{x_train, x_test}
+    D -->|Train-test split| F{y_train, y_test}
+    
+    %% Model training
+    E -->|Train model| G[XGBoost Classifier]
+    F -->|Train model| G
+    
+    %% Model predictions
+    G -->|Predict on training data| H[train_pred]
+    G -->|Predict on test data| I[test_pred]
+    
+    %% Model evaluation
+    I -->|Evaluate with true labels| J[Evaluation Metrics]
+    J -->|Outputs| K[Confusion Matrix, Accuracy]

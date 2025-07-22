@@ -1,0 +1,22 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> train.csv] -->|Load Data| B[df_train]
+    C[<img src='icons/file.svg' width=100 height=100/> <br/> test.csv] -->|Load Data| D[df_test]
+
+    %% Nodes for Data Preparation
+    B -->|Clean & Encode| E[<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df_train] %% df_train data preparation
+    D -->|Clean & Encode| F[<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df_test] %% df_test data preparation
+
+    %% Feature and Target Selection
+    E -->|Select Features| G[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> X] %% X contains input features
+    E -->|Select Target| H[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Y] %% Y is the target variable
+
+    %% Train Model
+    G -->|Train| I[<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestClassifier] %% RandomForest Model Training
+    H -->|Use as Target| I
+    
+    %% Prediction
+    I -->|Predict| J[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Y_pred] %% Y_pred contains predictions
+    
+    %% Create Submission
+    J -->|Use Predictions| K[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Submission DataFrame] %% Create final submission with predictions

@@ -1,0 +1,111 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Gold Price (2013-2023).csv",
+      "description": "Contains historical daily gold price data from 2013 to 2023 including daily Open, High, Low, Price, volume of transactions, and price changes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the cleaned historical gold price data."
+    },
+    {
+      "variable_name": "train_data",
+      "description": "Train data extracted from df, scaled and used for training."
+    },
+    {
+      "variable_name": "test_data",
+      "description": "Test data extracted from df, scaled and used for testing."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Numpy array containing training input features shaped for LSTM."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Numpy array containing training target values for LSTM."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Numpy array containing test input features shaped for LSTM."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Numpy array containing test target values for LSTM."
+    },
+    {
+      "variable_name": "history",
+      "description": "Object containing the training history including loss over epochs."
+    },
+    {
+      "variable_name": "y_pred",
+      "description": "Predicted values from the model for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "source": "pd.read_csv",
+      "flow": "used for data cleaning, training and testing split"
+    },
+    {
+      "variable": "train_data",
+      "source": "df.Price[:-test_size]",
+      "flow": "scaled and used to create sliding windows for LSTM input"
+    },
+    {
+      "variable": "test_data",
+      "source": "df.Price[-test_size-60:]",
+      "flow": "scaled and used to create sliding windows for LSTM input"
+    },
+    {
+      "variable": "X_train",
+      "source": "nested lists from train_data",
+      "flow": "used as input features for LSTM model"
+    },
+    {
+      "variable": "y_train",
+      "source": "nested lists from train_data",
+      "flow": "used as target values for LSTM model"
+    },
+    {
+      "variable": "X_test",
+      "source": "nested lists from test_data",
+      "flow": "used as input features to evaluate model performance"
+    },
+    {
+      "variable": "y_test",
+      "source": "nested lists from test_data",
+      "flow": "used as target values to evaluate model performance"
+    },
+    {
+      "variable": "model",
+      "source": "define_model",
+      "flow": "compiled and trained using X_train and y_train"
+    },
+    {
+      "variable": "result",
+      "source": "model.evaluate",
+      "flow": "contains loss evaluation of the model on test dataset"
+    },
+    {
+      "variable": "y_pred",
+      "source": "model.predict",
+      "flow": "contains predictions on test dataset"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LSTM",
+      "input_features": ["X_train"],
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "units": 64,
+        "dropout_rate": 0.2,
+        "epochs": 150,
+        "batch_size": 32
+      }
+    }
+  ]
+}

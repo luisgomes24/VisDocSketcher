@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🧹 Preprocess Data"]
+    B --> C["💡 Create Tensors"]
+    C --> D["🖥️ Compute Operations"]
+    D --> E["🔄 Compute Gradients: `backward()`"]
+    E --> F["🧠 Build Neural Network"]
+    F --> G["📈 Forward Pass"]
+    G --> H["📊 Compute Loss"]
+    H --> I["🔙 Backpropagate Loss"]
+    I --> J["🔄 Update Weights"]
+    J --> K["🔍 Evaluate Model"]
+    K --> L["📊 Visualize Results"]
+    
+    classDef main fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L main;

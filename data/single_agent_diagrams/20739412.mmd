@@ -1,0 +1,7 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Preprocess Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Feature Engineering"]
+    C --> D["<img src='brain.svg'/> <br/> Create LSTM Model"]
+    D --> E["<img src='brain.svg'/> <br/> Train Model"]
+    E --> F["<img src='scatter_plot_template.svg'/> <br/> Model Prediction"]
+    F --> G["<img src='file.svg'/> <br/> Save Submission"]

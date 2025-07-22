@@ -1,0 +1,43 @@
+flowchart TD
+  %% Data Sources
+  train_clean_kalman["train_clean_kalman.csv"]
+  test_clean_kalman["test_clean_kalman.csv"]
+  sample_submission["sample_submission.csv"]
+  
+  %% Data Loading
+  A1["Load train data"] -->|reads| train_clean_kalman
+  A2["Load test data"] -->|reads| test_clean_kalman
+  
+  %% Data Variables
+  train["train DataFrame"]
+  test["test DataFrame"]
+  true_state["true_state (open_channels values)"]
+  signal["signal (from train data)"]
+  
+  %% Data Flow
+  train_clean_kalman --> A1 --> train
+  test_clean_kalman --> A2 --> test
+  train -->|extracts true_state| true_state
+  train -->|extracts signal| signal
+  
+  %% Training Model
+  ViterbiClassifier["ViterbiClassifier Model"]
+  train_predictions["train_predictions (model output)"]
+  
+  subgraph Training
+    signal -->|fit model| ViterbiClassifier
+    true_state -->|fit model| ViterbiClassifier
+    ViterbiClassifier -->|predict| train_predictions
+  end
+  
+  %% Evaluation
+  train_predictions -.->|evaluate against true_state| true_state
+  
+  %% Test Predictions
+  test_blocks["test blocks (signal split)"]
+  df_subm["df_subm (submission DataFrame)"]
+  
+  test --> test_blocks
+  test_blocks -->|use model to predict| ViterbiClassifier
+  ViterbiClassifier --> df_subm
+  sample_submission -->|template for prediction output| df_subm

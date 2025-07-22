@@ -1,0 +1,105 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/pistachio-image-dataset/Pistachio_Image_Dataset/Pistachio_Image_Dataset/",
+      "description": "A dataset of pistachio images used for training and testing the models."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data_all",
+      "description": "TensorFlow dataset containing all training images."
+    },
+    {
+      "name": "test_data",
+      "description": "TensorFlow dataset containing validation images for testing purposes."
+    },
+    {
+      "name": "train_data_small",
+      "description": "A smaller subset of the training dataset, for quicker experiments."
+    },
+    {
+      "name": "class_names",
+      "description": "List of class names corresponding to the images in the dataset."
+    },
+    {
+      "name": "history_0",
+      "description": "Training history for the baseline model."
+    },
+    {
+      "name": "history_1",
+      "description": "Training history for the model with data augmentation."
+    },
+    {
+      "name": "history_2",
+      "description": "Training history for the model with adjusted learning rate."
+    },
+    {
+      "name": "history_final",
+      "description": "Final model's training history."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data_all",
+      "creation": "Image dataset loaded from directory using image_dataset_from_directory.",
+      "flows_to": ["train_data_small", "model_0", "model_1", "model_2", "model_final"]
+    },
+    {
+      "variable": "test_data",
+      "creation": "Image dataset loaded from directory using image_dataset_from_directory.",
+      "flows_to": ["model_0", "model_1", "model_2", "model_final"]
+    },
+    {
+      "variable": "train_data_small",
+      "creation": "Subset taken from train_data_all.",
+      "flows_to": ["model_0", "model_1", "model_2"]
+    },
+    {
+      "variable": "model_0",
+      "creation": "Baseline model created using EfficientNetB7.",
+      "flows_to": ["history_0"]
+    },
+    {
+      "variable": "model_1",
+      "creation": "Model created with data augmentation layer.",
+      "flows_to": ["history_1"]
+    },
+    {
+      "variable": "model_2",
+      "creation": "Model created with adjusted learning rate.",
+      "flows_to": ["history_2"]
+    },
+    {
+      "variable": "model_final",
+      "creation": "Final model built with all optimizations.",
+      "flows_to": ["history_final"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "model_0",
+      "input_features": "Images from train_data_small",
+      "target_variable": "Classes",
+      "hyperparameters": {"loss": "categorical_crossentropy", "optimizer": "adam", "metrics": ["accuracy"]}
+    },
+    {
+      "model_name": "model_1",
+      "input_features": "Images from train_data_small with data augmentation",
+      "target_variable": "Classes",
+      "hyperparameters": {"loss": "categorical_crossentropy", "optimizer": "adam", "metrics": ["accuracy"]}
+    },
+    {
+      "model_name": "model_2",
+      "input_features": "Images from train_data_small",
+      "target_variable": "Classes",
+      "hyperparameters": {"loss": "categorical_crossentropy", "optimizer": "adam with learning rate 0.025", "metrics": ["accuracy"]}
+    },
+    {
+      "model_name": "model_final",
+      "input_features": "All images from train_data_all",
+      "target_variable": "Classes",
+      "hyperparameters": {"loss": "categorical_crossentropy", "optimizer": "adam with learning rate 0.025", "metrics": ["accuracy"]}
+    }
+  ]
+}

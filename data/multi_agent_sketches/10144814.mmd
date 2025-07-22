@@ -1,0 +1,19 @@
+flowchart TD
+
+%% Libraries
+A1["plt"] -- Import --> A2["Matplotlib library<br>used for plotting data"] 
+B1["pd"] -- Import --> B2["Pandas library<br>used for data processing"]
+C1["np"] -- Import --> C2["NumPy library<br>for mathematical operations"]
+
+%% Functions for Data Visualization
+D1["plotPerColumnDistribution"] --> D2["Creates distribution graphs<br>for DataFrame columns"]
+E1["plotCorrelationMatrix"] --> E2["Plots correlation matrix<br>for numerical DataFrame columns"]
+F1["plotScatterMatrix"] --> F2["Plots scatter and density plots<br>for numerical DataFrame columns"]
+
+%% Connecting Libraries to Functions
+A2 --> D1
+A2 --> E1
+A2 --> F1
+B2 --> D1
+B2 --> E1
+B2 --> F1

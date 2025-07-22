@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A["training_set"] -->|"Used for training dataset"| B
+    C["test_set"] -->|"Used for validation dataset"| B
+
+    %% Data Variables
+    B{{"DATA_DIR"}} -->|"Needed for defining paths"| D
+    D["trn_dir"] -->|"Defines path to training images"| E
+    E["train_ds"] -->|"ImageFolder for training set"| F
+    F["train_dl"] -->|"DataLoader for training"| G
+
+    D -->|"Defines path to validation images"| H
+    H["val_dir"] -->|"ImageFolder for validation set"| I
+    I["valid_dl"] -->|"DataLoader for validation"| J
+
+    %% Processes
+    subgraph TrainingProcess
+        E --> |"Transform and load images"| F
+    end
+
+    subgraph ValidationProcess
+        I --> |"Transform and load images"| J
+    end

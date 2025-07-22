@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and survival labels."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing features without survival labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data_train",
+      "description": "DataFrame loaded with training data from train.csv."
+    },
+    {
+      "variable_name": "data_test",
+      "description": "DataFrame loaded with test data from test.csv."
+    },
+    {
+      "variable_name": "X_all",
+      "description": "Features from data_train excluding 'Survived' and 'PassengerId' columns."
+    },
+    {
+      "variable_name": "y_all",
+      "description": "Target variable containing 'Survived' values from data_train."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training feature set for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing feature set for model evaluation."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target set for model training."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing target set for model evaluation."
+    },
+    {
+      "variable_name": "clf_rf",
+      "description": "RandomForestClassifier instance used for prediction."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data_train",
+      "creation_method": "pd.read_csv",
+      "flows": ["Used for visualizations and model training"]
+    },
+    {
+      "variable": "data_test",
+      "creation_method": "pd.read_csv",
+      "flows": ["Used for final predictions"]
+    },
+    {
+      "variable": "X_all",
+      "creation_method": "drop",
+      "flows": ["Used for splitting into train/test sets"]
+    },
+    {
+      "variable": "y_all",
+      "creation_method": "data_train['Survived']",
+      "flows": ["Used for model training"]
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flows": ["Used for training model"]
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "flows": ["Used for evaluating model performance"]
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flows": ["Used for training model"]
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flows": ["Used for evaluating model performance"]
+    },
+    {
+      "variable": "clf_rf",
+      "creation_method": "RandomForestClassifier()",
+      "flows": ["Fitted with training data and used for predictions"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": [4, 6, 9],
+        "max_features": ["log2", "sqrt", "auto"],
+        "criterion": ["entropy", "gini"],
+        "max_depth": [2, 3, 5, 10],
+        "min_samples_split": [2, 3, 5],
+        "min_samples_leaf": [1, 5, 8]
+      }
+    },
+    {
+      "model_name": "Multiple Classifiers",
+      "clfs": ["MLPClassifier", "GaussianNB", "SVC"],
+      "input_features": "X_train",
+      "target_variable": "y_train"
+    }
+  ]
+}

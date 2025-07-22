@@ -1,0 +1,12 @@
+flowchart TD
+    %% Data Source
+    A["../input/directory.csv"] --> |"Load data using pd.read_csv"| B["starbucks DataFrame"]
+    
+    %% DataFrame containing details about Starbucks stores
+    B --> |"Filter by Country == 'US'"| C["usa_states DataFrame"]
+    
+    %% Data Analysis and Visualization
+    B --> D["Data Analysis"]
+    C --> D
+    B --> E["Data Visualization"]
+    C --> E

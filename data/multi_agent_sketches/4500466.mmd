@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["itemLicitacao.csv"]
+    B["licitacao.csv"]
+    
+    %% Data Variables
+    C["item (DataFrame)"]
+    D["licit (DataFrame)"]
+
+    %% Data Flow and Operations
+    A -->|"pd.read_csv"| C
+    B -->|"pd.read_csv"| D
+    C -->|"shape, index, columns, info, count, describe"| E["Data Analysis on Item"]
+    D -->|"modalidade.value_counts"| F["Modalidade Value Counts"]
+    D -->|"sns.countplot y='modalidade'"| G["Countplot - Modalidade"]
+    D -->|"sns.countplot y='situacao'"| H["Countplot - Situacao"]
+    
+    %% Descriptions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef dataOperation fill:#cfc,stroke:#333,stroke-width:2px;
+    
+    class A,B dataSource;
+    class C,D dataVariable;
+    class E,F,G,H dataOperation;

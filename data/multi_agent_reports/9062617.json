@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for prostate cancer grade assessment."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for prostate cancer grade assessment."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "Dataframe containing the training dataset loaded from train.csv."
+    },
+    {
+      "variable_name": "test",
+      "description": "Dataframe containing the test dataset loaded from test.csv."
+    },
+    {
+      "variable_name": "profile",
+      "description": "ProfileReport object for the training dataset profiling."
+    },
+    {
+      "variable_name": "profile_test",
+      "description": "ProfileReport object for the test dataset profiling."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv('../input/prostate-cancer-grade-assessment/train.csv')",
+      "flow": "Used to generate profiling report, saved as ProfileReport_train.html and displayed in the notebook."
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv('../input/prostate-cancer-grade-assessment/test.csv')",
+      "flow": "Used to generate profiling report, saved as ProfileReport_test.html and displayed in the notebook."
+    },
+    {
+      "variable": "profile",
+      "creation": "ProfileReport(train)",
+      "flow": "Saved to file and shown in the notebook."
+    },
+    {
+      "variable": "profile_test",
+      "creation": "ProfileReport(test)",
+      "flow": "Saved to file and shown in the notebook."
+    }
+  ],
+  "models": []
+}

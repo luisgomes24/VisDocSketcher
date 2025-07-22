@@ -1,0 +1,16 @@
+flowchart TD
+    subgraph DataSources
+        DS1(("Alzheimer's images dataset"))
+    end
+    subgraph Processing
+        P1["Preprocessing"]
+        P2["Feature Extraction"]
+    end
+    subgraph Models
+        M1["Model A"]
+        M2["Model B"]
+    end
+    DS1 --> P1
+    P1 --> P2
+    P2 --> M1
+    P2 --> M2

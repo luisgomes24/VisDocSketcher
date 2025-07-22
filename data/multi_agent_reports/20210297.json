@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/wine-reviews/winemag-data-130k-v2.csv",
+      "description": "Contains wine reviews including attributes like points and price."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "reviews",
+      "description": "DataFrame containing all the wine reviews."
+    },
+    {
+      "name": "dtype",
+      "description": "Data type of the points column in the reviews DataFrame."
+    },
+    {
+      "name": "point_strings",
+      "description": "Series of point values converted to string from the points column."
+    },
+    {
+      "name": "n_missing_prices",
+      "description": "Count of missing values in the price column of the reviews DataFrame."
+    },
+    {
+      "name": "reviews_per_region",
+      "description": "Series counting occurrences of each wine-producing region, with missing values replaced."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "reviews",
+      "creation": "pd.read_csv()",
+      "flow": "Used for various calculations and checks throughout the notebook."
+    },
+    {
+      "variable": "dtype",
+      "creation": "reviews.points.dtype",
+      "flow": "Used in exercise 1 to check data type."
+    },
+    {
+      "variable": "point_strings",
+      "creation": "reviews.points.astype('str')",
+      "flow": "Used in exercise 2 to create a Series of string values."
+    },
+    {
+      "variable": "n_missing_prices",
+      "creation": "pd.isnull(reviews.price).sum()",
+      "flow": "Used in exercise 3 to count missing prices."
+    },
+    {
+      "variable": "reviews_per_region",
+      "creation": "reviews.region_1.fillna('Unknown').value_counts()",
+      "flow": "Used in exercise 4 to analyze wine-producing regions."
+    }
+  ],
+  "models": []
+}

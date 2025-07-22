@@ -1,0 +1,17 @@
+flowchart TD
+    A[gptest.csv] -->|Read CSV| B[df1]
+    A -->|<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: gptest.csv| B
+    %% A: Represents the data source file 'gptest.csv'
+    %% B: Represents the DataFrame 'df1' which contains data read from 'gptest.csv'
+
+    B -->|Visualize| C[plotPerColumnDistribution]
+    %% C: Distribution plots for each column in the DataFrame df1
+
+    B -->|Visualize| D[plotCorrelationMatrix]
+    %% D: A correlation matrix plot derived from DataFrame df1
+
+    B -->|Visualize| E[plotScatterMatrix]
+    %% E: A scatter matrix plot showing relationships between columns in DataFrame df1
+    C -->|<img src='dummy_plots/barplot_template.svg'/> <br/> Per Column Distribution| C
+    D -->|<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Correlation Matrix| D
+    E -->|<img src='dummy_plots/boxplot_template.svg'/> <br/> Scatter Matrix| E

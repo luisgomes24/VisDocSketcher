@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/creditscroring/trainbase.csv",
+      "description": "Training dataset containing customer information and eligibility status."
+    },
+    {
+      "file": "../input/creditscroring/testbase.csv",
+      "description": "Testing dataset for predictions on customer eligibility."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training data after loading from the CSV."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the test data after loading from the CSV."
+    },
+    {
+      "name": "train_features",
+      "description": "List of features used for training the Logistic Regression model."
+    },
+    {
+      "name": "x_train",
+      "description": "Features extracted from df_train for training the model."
+    },
+    {
+      "name": "y_train",
+      "description": "Target variable extracted from df_train indicating eligibility status."
+    },
+    {
+      "name": "x_test",
+      "description": "Features extracted from df_test for predicting eligibility."
+    },
+    {
+      "name": "logistic_model",
+      "description": "Instance of Logistic Regression model used for prediction."
+    },
+    {
+      "name": "predict_test",
+      "description": "Predictions made on the test data using the trained model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "created": "pd.read_csv('../input/creditscroring/trainbase.csv')",
+      "flows_to": "x_train, y_train"
+    },
+    {
+      "variable": "df_test",
+      "created": "pd.read_csv('../input/creditscroring/testbase.csv')",
+      "flows_to": "x_test"
+    },
+    {
+      "variable": "x_train",
+      "created": "df_train[train_features].values",
+      "flows_to": "logistic_model.fit()"
+    },
+    {
+      "variable": "y_train",
+      "created": "df_train['good_bad_flag'].values",
+      "flows_to": "logistic_model.fit()"
+    },
+    {
+      "variable": "x_test",
+      "created": "df_test[train_features].values",
+      "flows_to": "logistic_model.predict()"
+    },
+    {
+      "variable": "logistic_model",
+      "created": "LogisticRegression() and fitting with x_train, y_train",
+      "flows_to": "predict_test"
+    },
+    {
+      "variable": "predict_test",
+      "created": "logistic_model.predict(x_test)",
+      "flows_to": "output/display"
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "n_cards, os_balance, os_billing, tot_cash_advance_trx, tot_retail_trx, remaining_unpaid_balance, branchcode, overlimit_pct, deliquncy_score, loan_tenure, total_trx",
+      "target_variable": "good_bad_flag",
+      "hyperparameters": "default settings, no specific hyperparameters mentioned"
+    }
+  ]
+}

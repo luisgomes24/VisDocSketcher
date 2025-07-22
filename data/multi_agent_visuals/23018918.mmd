@@ -1,0 +1,9 @@
+graph TD;
+    A[<img src='icons/database.svg' width=100 height=100/> <br/> Data Source: cifar10] -->|Load data| B[<img src='icons/table.svg' width=100 height=100/> <br/> Dataset];
+    B --> C[<img src='icons/column_split.svg' width=100 height=100/> <br/> Split: X_train, y_train, X_test, y_test];
+    C -->|Train| D[<img src='icons/brain.svg' width=100 height=100/> <br/> ANN Model];
+    C -->|Train| E[<img src='icons/brain.svg' width=100 height=100/> <br/> CNN Model];
+    D --> F[<img src='icons/column_split.svg' width=100 height=100/> <br/> Predicted: pred];
+    E --> G[<img src='icons/column_split.svg' width=100 height=100/> <br/> Predicted: res];
+    F -->|Compare| H[<img src='icons/table.svg' width=100 height=100/> <br/> Evaluate ANN];
+    G -->|Compare| I[<img src='icons/table.svg' width=100 height=100/> <br/> Evaluate CNN];

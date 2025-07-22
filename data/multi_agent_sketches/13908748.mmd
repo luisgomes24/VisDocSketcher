@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base'}}%%
+flowchart TD
+    %% Node for data source
+    A[DICOM File<br>../input/vinbigdata-chest-xray-abnormalities-detection/train/0108949daa13dc94634a7d650a05c0bb.dicom]
+    %% Comment: X-ray data file
+    %% Node for reading DICOM file
+    B[pydicom.read_file<br>Reads DICOM object]
+    %% Comment: Function to read DICOM file
+    %% Node for DICOM data
+    C[dicom<br>DICOM object]
+    %% Comment: Holds the DICOM data
+    %% Node for applying transformations
+    D[apply_voi_lut / transformations<br>Normalize and transform data]
+    %% Comment: Transforms DICOM pixel data to usable format
+    %% Node for normalized data
+    E[data<br>Normalized image data]
+    %% Comment: Image data post-transformation
+    %% Node for image processing
+    F[read_xray function<br>Prepare for visualization]
+    %% Comment: Converts normalized data for visualization
+    %% Node for processed image
+    G[img<br>Image data]
+    %% Comment: Image data ready for display
+    %% Node for visualization output
+    H[plt.imshow<br>Display image]
+    %% Comment: Visualize the image using Matplotlib
+
+    %% Data flow lines
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H

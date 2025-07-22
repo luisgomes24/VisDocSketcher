@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data sources
+    A1["submission.csv"]:::dataSource %% Submission output file
+
+    %% Data variables
+    B1["solution"]:::dataVar --> B3["split_id"]:::dataVar %% Splitting the main solution string
+    B3 --> B4["t1, t2"]:::dataVar %% Indices for splitting the string
+    B1 --> B5["strings"]:::dataVar %% Resulting strings after splitting and permutations
+    B5 --> |"Final Results"| A1 %% Writing to CSV
+
+    %% Data flow and transformation
+    B1 --> |"Used as input solution"| B5
+    B5 --> |"Used for validation and further optimization"| C1["required_permutaions"]:::dataVar
+    
+    %% Models and processes
+    D1["Heuristic Optimization"]:::process 
+    D1 --> |"Takes 'solution', split points, and permutations"| B5
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#ffc,stroke:#333,stroke-width:2px;

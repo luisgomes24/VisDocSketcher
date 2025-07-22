@@ -1,0 +1,26 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/legislatives.csv",
+      "description": "This CSV file contains legislative data."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing the data read from 'legislatives.csv'."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "steps": [
+        "Data is read from the CSV file.",
+        "The shape of the DataFrame is printed.",
+        "Various plotting functions are applied to visualize the data."
+      ]
+    }
+  ],
+  "models": []
+}

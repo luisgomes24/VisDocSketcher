@@ -1,0 +1,14 @@
+graph TD;
+    A["📂 Load Data"] --> B["🧠 Preprocess Data"];
+    B --> C["📈 Train Models"];
+    C --> D["🧪 Predict & Submit"];
+    
+    A --> E["<img src='icons/file.svg'/> <br/> Load Train Data"];
+    A --> F["<img src='icons/file.svg'/> <br/> Load Asset Details"];
+    
+    B --> G["🔎 Feature Engineering"];
+    G --> H["<img src='icons/column_split.svg'/> <br/> Get Features"];
+    
+    C --> I["<img src='icons/brain.svg'/> <br/> Train LGBM Model"];
+    
+    D --> J["📊 Submit Predictions"];

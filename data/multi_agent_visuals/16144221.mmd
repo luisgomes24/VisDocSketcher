@@ -1,0 +1,22 @@
+%% This is a Mermaid.js diagram for the Jupyter Notebook workflow
+flowchart TD
+    %% Node for loading data from CSV
+    A["/kaggle/input/github-commit-messages-dataset/full.csv"] -->|Load CSV into DataFrame| B[df]
+    %% Node for processing and validating data
+    B -->|Validate and Remove Duplicates| C[processed_df]
+    %% Cumulative sum calculation
+    C -->|Calculate Cumulative Summation| D[total_df]
+    %% Extraction of Year-Month combinations
+    C -->|Extract Year-Month| E[year_months]
+    %% Extraction of unique repositories
+    C -->|Extract Repositories| F[repos]
+    %% Creation of color mapping
+    F -->|Generate Color Mapping| G[color]
+    %% User commits DataFrame creation
+    B -->|Group By Repositories for Commit Count| H[user_commit_df]
+    %% Links between processed data and visualizations
+    D -->|Data for Animation Frames| E
+    H -->|Scatter Plot Data| I[Visualizations]
+    %% Direct connection between repositories and visualizations
+    F -->|Data for Various Plots| I
+    G -->|Color Code Visualizations| I

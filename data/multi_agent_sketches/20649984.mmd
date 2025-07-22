@@ -1,0 +1,26 @@
+%% Mermaid flowchart for Jupyter Notebook workflow
+graph TD;
+    %% Data Sources
+    A1["Image File"] -->|Load & Transform| B1["Test Image"]
+    A2["PyTorch Model File"] -->|Load| B2["PyTorch Model"]
+
+    %% Data Variables
+    B1 -->|Input| C1["Model Prediction"]
+    B2 -->|Inference| C1
+
+    %% Data Flow
+    C1 -->|Argmax| D1["Predicted Class"]
+
+    %% Comments for Understanding
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    class A1,A2 dataSource;
+    class B1,B2,C1,D1 dataVariable;
+    
+    %% Explanations
+    %% A1: Represents the input image file source.
+    %% A2: Represents the pre-trained PyTorch model file.
+    %% B1: Loaded and transformed image as input variable.
+    %% B2: Represents loaded PyTorch model used for inference.
+    %% C1: The process of making predictions using the model.
+    %% D1: Output predicted class of the image.

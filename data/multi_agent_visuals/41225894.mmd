@@ -1,0 +1,18 @@
+flowchart TD
+    %% Data Sources
+    ds1["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/titanic/train.csv"]:::dataSource -->|Load Data| data
+    %% Data Nodes
+    data["<img src='icons/table.svg' width=100 height=100/> <br/> {\"data\"}"]:::dataNode -->|Check Missing| get
+    data -->|Subset| lets_see
+    data -->|Calculate Mode| mode
+    data -->|Detect Outliers| Fare_outliers
+    %% Transformations and Calculations
+    get["<img src='icons/column_split.svg' width=100 height=100/> <br/> {\"get\"}"]:::processNode -- "data.isnull().sum()" -->|Summarize| get_summary["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> (Missing Summary)"]
+    lets_see["<img src='icons/row_split.svg' width=100 height=100/> <br/> {\"lets_see\"}"]:::processNode -- "['Age', 'Embarked'] Subset" -->|Visualize| vis_missing["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> (Visualize Missing)"]
+    Fare_outliers["<img src='icons/brain.svg' width=100 height=100/> <br/> {\"Fare_outliers\"}"]:::processNode -- "IQR Method" -->|Analyze| outlier_analysis["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> (Outlier Analysis)"]
+    %% Utilizing Mode for Outliers
+    mode["<img src='icons/brain.svg' width=100 height=100/> <br/> {\"mode\"}"]:::processNode -- "Mode Calculation" -->|Replace| replaced_outliers["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> (Replace Fare Outliers)"]
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef processNode fill:#bfb,stroke:#333,stroke-width:2px;

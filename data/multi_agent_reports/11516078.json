@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "sentiment3.csv",
+      "description": "Contains sentiment analysis data"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing 1000 rows from sentiment3.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting and analysis"
+    }
+  ],
+  "models": []
+}

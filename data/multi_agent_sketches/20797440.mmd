@@ -1,0 +1,29 @@
+flowchart TD
+  %% Node for data source
+  A["Latest Covid-19 India Status.csv"] --> |read_csv| B["df"]
+  
+  %% Nodes for data processing
+  B --> |copy| C["df copy"]
+  B --> |shape| D["Check Data Shape"]
+  B --> |duplicated| E["Check Duplicates"]
+  B --> |info| F["Data Info"]
+  B --> |corr| G["Data Correlation"]
+  
+  %% Feature and Target selection
+  B --> |iloc[:,1:7]| H["Features: x"]
+  B --> |[['Death Ratio']]| I["Target: y"]
+
+  %% Unique Values Analysis
+  B --> J["Unique Values Train Analysis"]
+
+  %% Model Training
+  H --> |fit| K["DecisionTreeRegressor"]
+  I --> |fit| K
+  
+  %% Prediction
+  K --> |predict| L["y_pred"]
+
+  %% Evaluation
+  I --> |mean_squared_error| M["Evaluate MSE"]
+  L --> M
+

@@ -1,0 +1,17 @@
+flowchart TD
+    subgraph DataSources
+        DS1["<img src='icons/database.svg' width=100 height=100/> <br/> tFL1 \nTransformed Follicular Lymphoma data"]
+    end
+    
+    subgraph Variables
+        V1["<img src='icons/table.svg' width=100 height=100/> <br/> adata \nAnnData object for RNA-seq data"]
+        V2["<img src='icons/file.svg' width=100 height=100/> <br/> G1S_genes_Tirosh \nGenes for G1/S phase"]
+        V3["<img src='icons/file.svg' width=100 height=100/> <br/> G2M_genes_Tirosh \nGenes for G2/M phase"]
+    end
+
+    DS1 --> |"sc.read_10x_mtx(pathname)"| V1
+    subgraph PhasePlot
+        V1 --> |"Normalization, plotting"| PP["<img src='icons/brain.svg' width=100 height=100/> <br/> phase_plot function"]
+        V2 --> |"Input"| PP
+        V3 --> |"Input"| PP
+    end

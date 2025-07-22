@@ -1,0 +1,24 @@
+flowchart TD
+  A[CC GENERAL.csv] -->|Read CSV| B["raw_df"]
+  %% raw_df represents the original customer data from CSV
+  
+  B -->|Drop 'CUST_ID' and handle missing values| C["Cleaned raw_df"]
+  %% Cleaned raw_df is the processed data without customer IDs
+  
+  C -->|Standardize| D["scaled_df"]
+  %% scaled_df is standardized version of raw_df
+  
+  D -->|Normalize| E["normalized_df"]
+  %% normalized_df is the normalized data ready for PCA
+  
+  E -->|PCA (2 components)| F["X_principal"]
+  %% X_principal is the reduced dataset with 2 principal components
+  
+  F -->|Clustering| G[Agglomerative Clustering]
+  %% Agglomerative Clustering is performed on the principal components
+  
+  F --> H["silhouette_scores"]
+  %% silhouette_scores are used to evaluate clustering effectiveness
+  
+  G -->|Fit model| I["agg"]
+  %% Fit Agglomerative Clustering model with 3 clusters

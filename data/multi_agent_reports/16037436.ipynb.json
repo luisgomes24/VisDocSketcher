@@ -1,0 +1,140 @@
+{
+    "data_sources": [
+        {
+            "file_name": "Data_Train.xlsx",
+            "description": "Contains training data for predicting delivery times."
+        },
+        {
+            "file_name": "Data_Test.xlsx",
+            "description": "Contains test data on which predictions will be made."
+        },
+        {
+            "file_name": "Sample_Submission.xlsx",
+            "description": "Contains a sample format for how the submission should look."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train",
+            "description": "DataFrame containing the training data after reading from Data_Train.xlsx."
+        },
+        {
+            "name": "test",
+            "description": "DataFrame containing the test data after reading from Data_Test.xlsx."
+        },
+        {
+            "name": "sample",
+            "description": "DataFrame containing the sample submission format."
+        },
+        {
+            "name": "X_train",
+            "description": "Features derived from the training set used to train the models."
+        },
+        {
+            "name": "X_test",
+            "description": "Features derived from the test set used to evaluate the models."
+        },
+        {
+            "name": "y_train",
+            "description": "Target variable derived from the training set."
+        },
+        {
+            "name": "y_test",
+            "description": "Target variable derived from the test set."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "creation_method": "pd.read_excel",
+            "flow": "Preprocessed to generate X_train, y_train."
+        },
+        {
+            "variable": "test",
+            "creation_method": "pd.read_excel",
+            "flow": "Preprocessed to generate predictions."
+        },
+        {
+            "variable": "train_location_df",
+            "creation_method": "One-hot encoding for locations.",
+            "flow": "Merged with scaled training features."
+        },
+        {
+            "variable": "train_cuisines_df",
+            "creation_method": "One-hot encoding for cuisines.",
+            "flow": "Merged with scaled training features."
+        },
+        {
+            "variable": "X_train",
+            "creation_method": "train_test_split",
+            "flow": "Used in model training for various models."
+        },
+        {
+            "variable": "X_test",
+            "creation_method": "train_test_split",
+            "flow": "Used for model evaluation and predictions."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "XGBoost",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "Decision Tree",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "KNeighbors",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "best_Kvalue": "determined through evaluation"
+            }
+        },
+        {
+            "model_name": "Support Vector Machine",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "gamma": "auto"
+            }
+        },
+        {
+            "model_name": "Random Forest",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "n_estimators": 100
+            }
+        },
+        {
+            "model_name": "AdaBoost",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "Bagging",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "Extra Trees",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        }
+    ]
+}

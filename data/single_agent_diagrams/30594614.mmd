@@ -1,0 +1,27 @@
+```
+graph TD
+    A["📙 1. Load Data <img src='file.svg' />"] --> B["<img src='table.svg' /> <br/> Dataset Head"]
+    B --> C["<img src='table.svg' /> <br/> Dataset Description"]
+    
+    C --> D["📙 2. EDA on Currency Data"]
+    D --> E["Check for Null Values"]
+    E --> F["Types of Currency Data"]
+    F --> G["Country/Currency Names"]
+    G --> H["Pickup Country Codes for Analysis"]
+    H --> I["📈 Visualize USD Value"]
+    I --> J["📈 Visualize INR Value"]
+
+    D --> K["📙 3. Time Series Analysis - INR Value"]
+    K --> L["Check for Stationarity - ADF Test"]
+    L --> M["ACF and PACF Plot"]
+
+    K --> N["📙 4. Price Forecasting"]
+    N --> O["Train-Test Split"]
+    O --> P["Make Time-Series Data Supervised"]
+    P --> Q["Choose Lag Value"]
+    Q --> R["Define Model"]
+    R --> S["Fit the Model"]
+    S --> T["Summarize Model Loss"]
+    T --> U["Make Prediction with Test Data"]
+    U --> V["Model Evaluation"]
+    V --> W["Plot Test Data and Predicted Data"]

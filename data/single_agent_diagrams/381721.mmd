@@ -1,0 +1,25 @@
+flowchart TD
+    A["📁 Load Dataset"] --> B["🛠️ Preprocess Data"]
+    B --> C["📸 Read Images"]
+    C --> D["📊 <img src='dummy_plots/scatter_plot_template.svg'/> <br/> ResNet50 Predictions"]
+    D --> E["🧠 Train Model (ResNet50)"]
+    E --> F["📊 Evaluation: LogLoss & Accuracy"]
+    
+    B --> G["🛠️ Extract VGG16 Features"]
+    G --> H["🧠 Train Model (Logistic Regression on VGG)"]
+    H --> I["📊 Evaluation: LogLoss & Accuracy"]
+
+    B --> J["🛠️ Extract Xception Features"]
+    J --> K["🧠 Train Model (Logistic Regression on Xception)"]
+    K --> L["📊 Evaluation: LogLoss & Accuracy"]
+
+    B --> M["🛠️ Extract Inception Features"]
+    M --> N["🧠 Train Model (Logistic Regression on Inception)"]
+    N --> O["📊 Evaluation: LogLoss & Accuracy"]
+
+    O --> P["📊 Combine Features"]
+    P --> Q["🧠 Train Combined Model"]
+    Q --> R["📊 Combined Evaluation: LogLoss & Accuracy"]
+
+    R --> S["❌ Analyze Errors"]
+    S --> T["⏱️ Execution Time"]

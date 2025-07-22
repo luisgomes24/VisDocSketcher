@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|"Read CSV"| B["train DataFrame"]
+    C["test.csv"] -->|"Read CSV"| D["test DataFrame"]
+    E["sample_solution.csv"] -->|"Read CSV"| F["sample_submission DataFrame"]
+
+    %% Data Preparation
+    B -->|"Extract 'claim'"| G["y (target variable)"]
+    B -->|"Copy"| H["x (features)"]
+    H -->|"Used for model training"| I["LightGBM Model Training"]
+
+    %% KFold Preparation
+    B --> J["StratifiedKFold"]
+    J -->|"Create Folds"| K["K-Fold Validation"]
+    K -->|"Annotated in train DataFrame"| B
+
+    %% Saving Data
+    B -->|"Save CSV"| L["septps_train_folds.csv"]
+    D -->|"Save CSV"| M["septps_test.csv"]
+
+    %% Comments for each node
+    %% train.csv node represents the source CSV file containing training data
+    %% test.csv node represents the source CSV file containing test data
+    %% sample_solution.csv represents the sample solution for submission format
+    %% B represents the DataFrame created from train.csv
+    %% D represents the DataFrame created from test.csv
+    %% F represents the DataFrame created for submission format
+    %% G represents the target variable 'claim' extracted from train DataFrame
+    %% H represents the input features for the model
+    %% I represents where the input features are used for training the LightGBM model
+    %% J represents the creation of Stratified KFold for validation
+    %% K represents the K-Fold cross-validation process
+    %% L represents the CSV file where train DataFrame with folds is saved
+    %% M represents the CSV file where test DataFrame is saved
+```

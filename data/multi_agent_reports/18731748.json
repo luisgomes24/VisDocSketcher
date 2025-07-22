@@ -1,0 +1,83 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/loan-application-data/df1_loan.csv",
+            "description": "Loan application data containing details about the applicants like income, education, loan amount, etc."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "loans",
+            "description": "DataFrame containing the loan application data after being loaded from the CSV file."
+        },
+        {
+            "variable": "x",
+            "description": "Feature DataFrame used for training the model, excluding target variable 'Loan_Status'."
+        },
+        {
+            "variable": "y",
+            "description": "Target variable for model training which indicates loan approval status."
+        },
+        {
+            "variable": "loans1",
+            "description": "Cleaned and processed DataFrame after data cleaning, transformation, and outlier removal."
+        },
+        {
+            "variable": "threshold_dummy",
+            "description": "List of threshold values used to evaluate model performance."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "loans",
+            "creation": "pd.read_csv",
+            "flow": "Data analysis and cleaning processes."
+        },
+        {
+            "variable": "loans1",
+            "creation": "Data cleaning and transformation",
+            "flow": "Prepared for model training and evaluation."
+        },
+        {
+            "variable": "x",
+            "creation": "loans1.drop",
+            "flow": "Used as input for training various models."
+        },
+        {
+            "variable": "y",
+            "creation": "loans1['Loan_Status']",
+            "flow": "Used as target for model training."
+        },
+        {
+            "variable": "y_pred_class2",
+            "creation": "binarize(y_predict_proba, 0.4)",
+            "flow": "Used for generating final predictions and evaluation metrics."
+        }
+    ],
+    "models": [
+        {
+            "model": "RandomForestClassifier",
+            "input_features": "All features from 'x' DataFrame excluding 'Loan_Status'.",
+            "target_variable": "'y' representing loan status.",
+            "hyperparameters": null
+        },
+        {
+            "model": "DecisionTreeClassifier",
+            "input_features": "All features from 'x' DataFrame excluding 'Loan_Status'.",
+            "target_variable": "'y' representing loan status.",
+            "hyperparameters": null
+        },
+        {
+            "model": "GaussianNB",
+            "input_features": "All features from 'x' DataFrame excluding 'Loan_Status'.",
+            "target_variable": "'y' representing loan status.",
+            "hyperparameters": null
+        },
+        {
+            "model": "KNeighborsClassifier",
+            "input_features": "All features from 'x' DataFrame excluding 'Loan_Status'.",
+            "target_variable": "'y' representing loan status.",
+            "hyperparameters": null
+        }
+    ]
+}

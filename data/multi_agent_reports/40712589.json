@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file": "My Uber Drives - 2016.csv",
+      "description": "This file contains data about Uber drives including start and end times, distances, categories, and purposes of each ride."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "Main DataFrame containing data from the Uber drives CSV."
+    },
+    {
+      "variable": "start_date",
+      "description": "Converted start date of each ride in datetime format."
+    },
+    {
+      "variable": "end_date",
+      "description": "Converted end date of each ride in datetime format."
+    },
+    {
+      "variable": "purpose",
+      "description": "Categorical variable representing the purpose of each ride."
+    },
+    {
+      "variable": "category",
+      "description": "Categorical variable representing the category of each ride."
+    },
+    {
+      "variable": "month_name",
+      "description": "Month name extracted from start_date."
+    },
+    {
+      "variable": "day_name",
+      "description": "Day name extracted from start_date."
+    },
+    {
+      "variable": "start",
+      "description": "Start location for each ride."
+    },
+    {
+      "variable": "stop",
+      "description": "Stop location for each ride."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for cleaning and data analysis; plots created based on this DataFrame."
+    },
+    {
+      "variable": "start_date",
+      "creation_method": "pd.to_datetime",
+      "flow": "Used for analysis and plotting ride times."
+    },
+    {
+      "variable": "end_date",
+      "creation_method": "pd.to_datetime",
+      "flow": "Used for potential time calculations (though not explicitly shown)."
+    },
+    {
+      "variable": "purpose",
+      "creation_method": "value_counts",
+      "flow": "Analyzed and plotted to show counts of ride purposes."
+    },
+    {
+      "variable": "category",
+      "creation_method": "value_counts",
+      "flow": "Analyzed and plotted to show counts of ride categories."
+    },
+    {
+      "variable": "month_name",
+      "creation_method": "dt.month_name",
+      "flow": "Used for aggregation and plotting rides per month."
+    },
+    {
+      "variable": "day_name",
+      "creation_method": "dt.day_name",
+      "flow": "Used for aggregation and plotting rides per day."
+    },
+    {
+      "variable": "start",
+      "creation_method": "value_counts",
+      "flow": "Analyzed and plotted to show start locations of rides."
+    },
+    {
+      "variable": "stop",
+      "creation_method": "value_counts",
+      "flow": "Analyzed and plotted to show stop locations of rides."
+    }
+  ],
+  "models": []
+}

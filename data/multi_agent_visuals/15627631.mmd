@@ -1,0 +1,6 @@
+graph TD
+  A["<img src='icons/database.svg' width=100 height=100/> <br/> train.csv"]:::dataNode --> B["<img src='icons/table.svg' width=100 height=100/> <br/> df_orig <img src='dummy_plots/scatter_plot_template.svg'/> "]:::dataNode
+  B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_num <img src='dummy_plots/hist_template.svg'/> "]:::dataNode
+  B --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_cate <img src='dummy_plots/boxplot_template.svg'/> "]:::dataNode
+
+classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;

@@ -1,0 +1,27 @@
+```
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Data Preprocessing"]
+    B --> C["👨‍🎓 Sort by Criminal Cases"]
+    C --> D["🏙️ City With Most Criminal Cases"]
+    D --> E["🗳️ Top 5 Candidates with Most Criminal Cases"]
+    D --> F["📊 Education Distribution"]
+    
+    A1["<img src='table.svg' /> <br/> df_2004"] --> C
+    A2["<img src='table.svg' /> <br/> df_2009"] --> C
+    A3["<img src='table.svg' /> <br/> df_2014"] --> C
+    A4["<img src='table.svg' /> <br/> df_2019"] --> C
+    
+    D1["<img src='scatter_plot_template.svg' /> <br/> 2004 Election"] --> D
+    D2["<img src='scatter_plot_template.svg' /> <br/> 2009 Election"] --> D
+    D3["<img src='scatter_plot_template.svg' /> <br/> 2014 Election"] --> D
+    D4["<img src='scatter_plot_template.svg' /> <br/> 2019 Election"] --> D
+    
+    E1["<img src='barplot_template.svg' /> <br/> 2004 Election"] --> E
+    E2["<img src='barplot_template.svg' /> <br/> 2009 Election"] --> E
+    E3["<img src='barplot_template.svg' /> <br/> 2014 Election"] --> E
+    E4["<img src='barplot_template.svg' /> <br/> 2019 Election"] --> E
+    
+    F1["<img src='pie_template.svg' /> <br/> 2004"] --> F
+    F2["<img src='pie_template.svg' /> <br/> 2009"] --> F
+    F3["<img src='pie_template.svg' /> <br/> 2014"] --> F
+    F4["<img src='pie_template.svg' /> <br/> 2019"] --> F

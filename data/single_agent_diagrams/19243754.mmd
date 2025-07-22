@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/database.svg' />"] --> B["🧹 Data Preprocessing"]
+    B --> C["📊 Data Exploration"]
+    C --> D["📈 Visualization <img src='dummy_plots/hist_template.svg' />"]
+    D --> E["🔄 Dataset Split"]
+    E --> F["🧠 Model Training"]
+    F --> G["📊 Predictions <img src='dummy_plots/scatter_plot_template.svg' />"]
+    G --> H["📉 Evaluate Model"]
+    H --> I["📊 Report Metrics"]
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I

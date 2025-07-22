@@ -1,0 +1,11 @@
+flowchart TD
+    A(hotel_bookings.csv):::dataSource -->|Load data| B[df]
+    B -->|Clean data: dropna, replace| C{Data Cleaning}
+    C --> D[ML Model: DistilBERT]:::model
+    D -->|Train| E[Output: Model Metrics]:::output
+    D -->|Predict| F[Output: Predictions]:::output
+    E --> G[Save Model]:::output
+    F --> H[Visualization]:::output
+    classDef dataSource fill:#87CEEB;
+    classDef model fill:#C6F4D6;
+    classDef output fill:#F2C464;

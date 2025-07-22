@@ -1,0 +1,15 @@
+flowchart TD
+    %% Data Source Nodes
+    A1["train_tp.csv"]:::dataSource %% Represents the data source for true positives
+    A2["train_fp.csv"]:::dataSource %% Represents the data source for false positives
+
+    %% Data Processing Nodes
+    B1["tp_data"]:::dataVariable --> |"Read CSV"| A1
+    B2["fp_data"]:::dataVariable --> |"Read CSV"| A2
+    
+    C1["audio_path"]:::dataVariable --> |"Formatted Path"|
+    D1["x"]:::dataVariable & D2["sr"]:::dataVariable --> |"librosa.load"| C1
+
+    %% Classes for styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bff,stroke:#333,stroke-width:2px;

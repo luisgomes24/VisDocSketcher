@@ -1,0 +1,30 @@
+graph TD
+ A["<img src='icons/file.svg' width=100 height=100/> <br/> CD36importances.csv"]
+ B["<img src='icons/file.svg' width=100 height=100/> <br/> train_cite_inputs.h5"]
+ C["<img src='icons/file.svg' width=100 height=100/> <br/> train_cite_targets.h5"]
+ D["<img src='icons/database.svg' width=100 height=100/> <br/> cd36_importances"]
+ E["<img src='icons/database.svg' width=100 height=100/> <br/> train_cite_input_df"]
+ F["<img src='icons/table.svg' width=100 height=100/> <br/> dfc"]
+ G["<img src='icons/table.svg' width=100 height=100/> <br/> dfc_sim"]
+ H["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_cd36"]
+ I["<img src='icons/row_split.svg' width=100 height=100/> <br/> df_sim_corr"]
+ J["<img src='icons/row_split.svg' width=100 height=100/> <br/> sim_df_merge"]
+ K["<img src='icons/brain.svg' width=100 height=100/> <br/> model"]
+ L["<img src='icons/brain.svg' width=100 height=100/> <br/> fit model"]
+ M["<img src='icons/brain.svg' width=100 height=100/> <br/> predict"]
+ N["<img src='icons/brain.svg' width=100 height=100/> <br/> output"]
+ O["<img src='icons/row_split.svg' width=100 height=100/> "]
+ A-->D
+ B-->E
+ B-->C
+ D-->F
+ D-->G
+ E-->F
+ E-->G
+ F-->H
+ H-->I
+ G-->J
+ I-->M
+ K-->L
+ L-->N
+ N-->O

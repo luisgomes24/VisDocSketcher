@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/glove.2M.840B.300d.pkl",
+      "description": "Contains GloVe word embeddings."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "embeddings_dict_glove",
+      "description": "Dictionary loaded from GloVe embeddings containing word vectors."
+    },
+    {
+      "name": "latin_similar",
+      "description": "String containing special Latin characters and symbols."
+    },
+    {
+      "name": "white_list",
+      "description": "String of allowed characters including letters, digits, and some special characters."
+    },
+    {
+      "name": "glove_chars",
+      "description": "Characters from the GloVe embeddings that are single letter."
+    },
+    {
+      "name": "glove_symbols",
+      "description": "String of special symbols extracted from GloVe embeddings."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "embeddings_dict_glove",
+      "creation_method": "read_pickle",
+      "flow": "Loaded from GloVe file, used for text processing."
+    },
+    {
+      "variable": "latin_similar",
+      "creation_method": "initialization",
+      "flow": "Used as a reference for valid characters in processing."
+    },
+    {
+      "variable": "white_list",
+      "creation_method": "initialization",
+      "flow": "Used to filter valid characters during analysis."
+    },
+    {
+      "variable": "glove_chars",
+      "creation_method": "comprehension",
+      "flow": "Used to identify single letter characters from embeddings."
+    },
+    {
+      "variable": "glove_symbols",
+      "creation_method": "comprehension",
+      "flow": "Contains symbols for further text processing."
+    }
+  ],
+  "models": []
+}

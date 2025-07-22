@@ -1,0 +1,44 @@
+{
+  "data_sources": [
+    {
+      "file_name": "fatal-police-shootings-data.csv",
+      "description": "Dataset containing police deadly force usage in the US from 2015-2020."
+    },
+    {
+      "file_name": "State Populations.csv",
+      "description": "Contains population data for US states (2018)."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Main DataFrame containing police shooting data."
+    },
+    {
+      "variable_name": "year",
+      "description": "Extracted year from the date of incident for time period analysis."
+    },
+    {
+      "variable_name": "state_grouped",
+      "description": "A DataFrame that counts shootings per state and calculates rates per 100,000."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": ["Analyzed for gender and race distribution", "Visualized in various plots"]
+    },
+    {
+      "variable": "year",
+      "creation_method": "df['date'].dt.year",
+      "flow": ["Used for time analysis in plots"]
+    },
+    {
+      "variable": "state_grouped",
+      "creation_method": "df.groupby(['state'])...",
+      "flow": ["Visualized in state-wise analysis plots"]
+    }
+  ],
+  "models": []
+}

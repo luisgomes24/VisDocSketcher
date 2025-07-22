@@ -1,0 +1,10 @@
+flowchart TD
+    CompetitionsCSV["../input/Competitions.csv"]
+    CompetitionTagsCSV["../input/CompetitionTags.csv"]
+    DatasetsCSV["../input/Datasets.csv"]
+    df1["df1"] --> CompetitionsCSV
+    df2["df2"] --> CompetitionTagsCSV
+    df3["df3"] --> DatasetsCSV
+    df1 --> plotFunctions["Plot functions"]
+    df2 --> plotFunctions
+    df3 --> plotFunctions

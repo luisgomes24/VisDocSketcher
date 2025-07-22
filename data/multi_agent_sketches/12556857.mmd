@@ -1,0 +1,33 @@
+%% Diagram representing the data science workflow for the specified Jupyter Notebook
+flowchart TD
+    
+    %% Nodes representing data sources
+    ds2017[/'2017 CSV Data'/]:::dataSource
+    ds2019[/'2019 CSV Data'/]:::dataSource
+
+    %% Nodes representing data transformations
+    df[/'DataFrame df'/]:::dataVariable
+    x[/'Features x'/]:::dataVariable
+    y[/'Target y'/]:::dataVariable
+    x_train[/'Training Features x_train'/]:::dataVariable
+    y_train[/'Training Targets y_train'/]:::dataVariable
+    x_test[/'Test Features x_test'/]:::dataVariable
+    y_test[/'Test Targets y_test'/]:::dataVariable
+
+    %% Nodes representing model 
+    model(("Linear Regression Model")):::modelNode
+
+    %% Defining the connections and flow
+    
+    ds2017 -->|"Load Data"| df %% Load 2017 data into DataFrame
+    df -->|"Feature Selection"| x 
+    df -->|"Target Selection"| y 
+    x -->|"Train-Test Split"| x_train & x_test %% Split features 
+    y -->|"Train-Test Split"| y_train & y_test %% Split targets
+    x_train & y_train -->|"Train Model"| model %% Train the linear model
+    x_test & y_test -->|"Test Model"| model  %% Test the linear model with test data
+
+    %% Styling for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;  %% Styling data sources
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;  %% Styling data variables
+    classDef modelNode fill:#bfb,stroke:#333,stroke-width:2px;  %% Styling model node

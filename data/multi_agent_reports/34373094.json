@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/xml-sitemaps/sitemap_2023_01_11_apple_com.csv",
+      "description": "Contains URLs from the sitemap of apple.com."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "sitemap_raw",
+      "description": "Raw DataFrame containing sitemap data including URLs and their metadata."
+    },
+    {
+      "variable_name": "sitemap",
+      "description": "De-duplicated DataFrame of sitemap URLs."
+    },
+    {
+      "variable_name": "duplicated_urls",
+      "description": "Boolean Series indicating duplicated URLs in sitemap_raw."
+    },
+    {
+      "variable_name": "urldf",
+      "description": "DataFrame created from sitemap URLs with separate components (scheme, netloc, etc.)."
+    },
+    {
+      "variable_name": "country_counts",
+      "description": "Series containing counts of URLs by country."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "sitemap_raw",
+      "creation_method": "pd.read_csv",
+      "flow": "Stored in sitemap and used for analysis"
+    },
+    {
+      "variable_name": "sitemap",
+      "creation_method": "drop_duplicates",
+      "flow": "Used to generate urldf and visualizations"
+    },
+    {
+      "variable_name": "urldf",
+      "creation_method": "adv.url_to_df",
+      "flow": "Used for deriving country info, visualizations, and frequency analysis"
+    },
+    {
+      "variable_name": "country_counts",
+      "creation_method": "value_counts",
+      "flow": "Used in histogram visualizations for country page counts"
+    }
+  ],
+  "models": []
+}

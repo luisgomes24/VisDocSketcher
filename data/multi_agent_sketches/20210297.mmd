@@ -1,0 +1,26 @@
+flowchart TD
+    subgraph DataSources
+        A[Wine Reviews CSV]
+        %% The CSV file containing wine reviews data
+    end
+    
+    subgraph DataVariables
+        B[reviews]
+        %% DataFrame containing all the wine reviews
+        C[dtype]
+        %% Data type of the points column in the reviews DataFrame
+        D[point_strings]
+        %% Series of point values converted to string from the points column
+        E[n_missing_prices]
+        %% Count of missing values in the price column of reviews DataFrame
+        F[reviews_per_region]
+        %% Series counting occurrences of wine regions, missing values filled
+    end
+
+    subgraph DataFlow
+        B --Load Data--> A
+        C --Calculate DataType--> B
+        D --Convert Points to Strings--> B
+        E --Count Missing Prices--> B
+        F --Count Regions and Fill Missing--> B
+    end

@@ -1,0 +1,21 @@
+flowchart TD
+
+    %% Data Source
+    A[/metadata.dill/]:::dataSource -->|Load data using dill| B[Metadata Dictionary]
+    A[/metadata.dill/]:::dataSource -->|Extract Column Info| C[Metadata Info Dictionary]
+
+    %% Data Processing
+    B -->|Process Data| D[Reset Indices/Clean Rows]
+    D -->|Export Data| E[SQLite Files]:::output
+    C -.->|Provide Info to| E
+
+    %% Styles
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef output fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    %% A: Source file in dill format
+    %% B: Loaded data into a dictionary of user interactions
+    %% C: Dictionary setup for storing metadata information
+    %% D: Data processing and cleaning operations
+    %% E: Exported processed data into SQLite files

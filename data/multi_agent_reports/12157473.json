@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file": "pokemon.csv",
+      "description": "Dataset containing detailed information on Pokemon, derived from an API."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "url",
+      "description": "API endpoint to fetch Pokemon data."
+    },
+    {
+      "name": "content",
+      "description": "JSON content returned from the API containing Pokemon data."
+    },
+    {
+      "name": "names",
+      "description": "DataFrame containing Pokemon names and their corresponding API URLs."
+    },
+    {
+      "name": "poke_content",
+      "description": "List to store detailed Pokemon stats obtained from individual API calls."
+    },
+    {
+      "name": "pokemon",
+      "description": "Final DataFrame containing a collection of Pokemon with various attributes."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "content",
+      "creation": "API call to fetch Pokemon data",
+      "flows_to": ["names", "poke_content"]
+    },
+    {
+      "variable": "names",
+      "creation": "DataFrame created from API response of Pokemon names",
+      "flows_to": ["poke_content", "pokemon"]
+    },
+    {
+      "variable": "poke_content",
+      "creation": "List created from additional API calls to fetch detailed stats for each Pokemon",
+      "flows_to": ["pokemon"]
+    },
+    {
+      "variable": "pokemon",
+      "creation": "Final DataFrame created by merging names and poke_content, and further manipulating columns",
+      "flows_to": ["Final DataFrame Presentation", "Data Visualization", "pokemon.csv"]
+    }
+  ],
+  "models": []
+}

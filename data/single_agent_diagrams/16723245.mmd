@@ -1,0 +1,13 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' />"] --> 
+    B["🧹 Preprocess Data"]
+    B --> C["🖼️ Visualize Data <img src='icons/image.svg' />"]
+    C --> D["📊 Show Images"]
+    C --> E["📊 TSNE Visualization"]
+    C --> F["📊 LDA Visualization"]
+    C --> G["📊 UMAP Visualization"]
+    D --> H["🧠 Build Neural Network"]
+    H --> I["📊 Train Model"]
+    I --> J["📈 Visualize Training Loss <img src='lineplot_template.svg' />"]
+    J --> K["🔍 Evaluate Model"]
+    K --> L["📤 Submit Predictions <img src='file.svg' />"]

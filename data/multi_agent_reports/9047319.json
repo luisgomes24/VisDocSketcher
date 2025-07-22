@@ -1,0 +1,17 @@
+{
+    "data_sources": [],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame used in plotting functions, primarily for storing and analyzing numerical data."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "The DataFrame 'df' is implicitly created in the plotting functions but there is no explicit DataFrame being read from a source in the provided cells.",
+            "flows": "Used in functions for plotting distributions, correlation matrix, and scatter plots."
+        }
+    ],
+    "models": []
+}

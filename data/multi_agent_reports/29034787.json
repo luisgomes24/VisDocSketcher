@@ -1,0 +1,124 @@
+{
+  "data_sources": [
+    {
+      "source": "California Housing Dataset",
+      "description": "Contains features and labels related to California housing prices."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "features",
+      "description": "DataFrame with various features (e.g., number of rooms, population) of California housing."
+    },
+    {
+      "variable": "labels",
+      "description": "Series containing the target variable, the prices of the California houses, scaled by multiplying by 100."
+    },
+    {
+      "variable": "com_train_features",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "variable": "test_features",
+      "description": "Features set aside for testing after the initial split."
+    },
+    {
+      "variable": "com_train_labels",
+      "description": "Training labels corresponding to the training features after splitting."
+    },
+    {
+      "variable": "test_labels",
+      "description": "Target labels set aside for testing."
+    },
+    {
+      "variable": "train_features",
+      "description": "Training features after further splitting from the complete training dataset."
+    },
+    {
+      "variable": "dev_features",
+      "description": "Development features set aside for validation."
+    },
+    {
+      "variable": "train_labels",
+      "description": "Training labels after further splitting."
+    },
+    {
+      "variable": "dev_labels",
+      "description": "Development labels set aside for validation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "features",
+      "creation": "Fetched from the California housing dataset.",
+      "flow": "Used to create training and test datasets."
+    },
+    {
+      "variable": "labels",
+      "creation": "Fetched from the California housing dataset and scaled.",
+      "flow": "Used to create training and test datasets."
+    },
+    {
+      "variable": "com_train_features",
+      "creation": "Derived from train_test_split on features.",
+      "flow": "Used in training models."
+    },
+    {
+      "variable": "test_features",
+      "creation": "Derived from train_test_split on features.",
+      "flow": "Used for model evaluation."
+    },
+    {
+      "variable": "com_train_labels",
+      "creation": "Derived from train_test_split on labels.",
+      "flow": "Used in training models."
+    },
+    {
+      "variable": "test_labels",
+      "creation": "Derived from train_test_split on labels.",
+      "flow": "Used for model evaluation."
+    },
+    {
+      "variable": "train_features",
+      "creation": "Further derived from com_train_features.",
+      "flow": "Used for training models."
+    },
+    {
+      "variable": "dev_features",
+      "creation": "Further derived from com_train_features.",
+      "flow": "Used for validation of models."
+    },
+    {
+      "variable": "train_labels",
+      "creation": "Further derived from com_train_labels.",
+      "flow": "Used for training models."
+    },
+    {
+      "variable": "dev_labels",
+      "creation": "Further derived from com_train_labels.",
+      "flow": "Used for validating models."
+    }
+  ],
+  "models": [
+    {
+      "model": "AdaBoostRegressor",
+      "input_features": "com_train_features",
+      "target_variable": "com_train_labels",
+      "hyperparameters": "Default parameters"
+    },
+    {
+      "model": "GradientBoostingRegressor",
+      "input_features": "com_train_features",
+      "target_variable": "com_train_labels",
+      "hyperparameters": "Default parameters"
+    },
+    {
+      "model": "XGBRegressor",
+      "input_features": "com_train_features",
+      "target_variable": "com_train_labels",
+      "hyperparameters": {
+        "objective": "reg:squarederror"
+      }
+    }
+  ]
+}

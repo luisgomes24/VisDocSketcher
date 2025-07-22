@@ -1,0 +1,20 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {"name": "t", "description": "Time values ranging from 0 to 10"},
+    {"name": "g", "description": "Gravitational acceleration, approximately 9.81 m/s^2"},
+    {"name": "y", "description": "Calculated vertical position as a function of time"},
+    {"name": "data", "description": "Dictionary containing random data arrays for plotting"},
+    {"name": "names", "description": "List of group names for categorical plotting"},
+    {"name": "values", "description": "Corresponding values for each group name"}
+  ],
+  "data_flow": [
+    {"variable": "t", "creation": "np.linspace(0, 10, 10)", "flow": "Used in the calculation of y, plotted against y"},
+    {"variable": "g", "creation": "9.81", "flow": "Used in the calculation of y"},
+    {"variable": "y", "creation": "0.5 * g * np.power(t, 2)", "flow": "Plotted against t"},
+    {"variable": "data", "creation": "{'a': np.arange(50), ... }", "flow": "Used for scatter plotting of a and b variables"},
+    {"variable": "names", "creation": "['group_a', 'group_b', 'group_c']", "flow": "Used in categorical plotting"},
+    {"variable": "values", "creation": "[1, 10, 100]", "flow": "Used in categorical plotting"}
+  ],
+  "models": []
+}

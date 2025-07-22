@@ -1,0 +1,51 @@
+```mermaid
+flowchart TD
+  A1["cardio_train.csv"]
+  %% This node represents the initial data source containing patient data
+  A2["df"]
+  %% This node represents the main DataFrame containing loaded data
+  A3["h"]
+  %% This node represents the Series extracted for height analysis
+
+  A1 -->|"pd.read_csv"| A2
+  %% Load data from CSV into DataFrame df
+  A2 -->|"df['height']"| A3
+  %% Extract the 'height' column from df for analysis
+  A2 -->|"Data Exploration"| B1["Data Exploration and Initial Stats"]
+  %% Use df for initial exploration
+  A2 -->|"Visualization"| B2["Matplotlib and Seaborn Visualizations"]
+  %% Visualize data using Matplotlib and Seaborn
+
+  B1 -->|"df.info"| C1["Check Data Info"]
+  %% Get data info (type, missing values)
+  B1 -->|"df.describe"| C2["Basic Statistical Summary"]
+  %% Summarize basic statistics for numeric data
+  B2 -->|"df['height'].hist()"| D1["Height Distribution"]
+  %% Plot histogram for height
+  B2 -->|"sns.boxplot"| D2["Boxplot for Outliers"]
+  %% Use boxplot to check for height outliers
+
+  A3 -->|"Data for Binning and Normalization"| B3["Prepare Data for Analysis"]
+  %% Process height column for binning and normalization
+
+  B1 -->|"df.groupby('cardio')['age'].mean()"| E1["Group by Cardio"]
+  %% Analyze average age by cardio health status
+  B2 -->|"sns.countplot(y='age', hue='cardio', data=df)"| E2["Age and Cardio Countplot"]
+  %% Use countplot to visualize age distribution by health status
+
+  A2 -->|"df.drop(['cardio'], axis=1)"| F1["Data without Target"]
+  %% Remove target column 'cardio' for certain analyses
+
+  A2 -->|"Conditional Indexing"| G1["Height Correction"]
+  %% Identify and correct anomalies in height
+
+  G1 -->|"df.drop(outliers.index)"| H1["Dropping Height Outliers"]
+  %% Drop rows with identified height outliers
+
+  E1 -->|"Bar Plot Ages"| I1["Visualize Age Differences"]
+  %% Visualize age differences across groups
+
+  B1 -->|"df.pivot_table()"| J1["Pivot Analysis on Smoking and Drinking"]
+  %% Use pivot table for exploratory stats on smoking/drinking habits
+
+```

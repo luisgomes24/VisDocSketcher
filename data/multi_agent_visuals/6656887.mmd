@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes
+    A[Train CSV]:::data_source -->|Read| B[train_pd]
+    A1[Test CSV]:::data_source -->|Read| C[test_pd]
+    A2[Building Metadata CSV]:::data_source -->|Read| D[train_building_pd]
+    A3[Site1 Scraped CSV]:::data_source -->|Read| E[site1_pd]
+    E -->|Scrape & Process| F[site1_scraped_pd]
+    B -->|Merge metadata| B1
+    C -->|Merge metadata| C1
+    D -->|Merge with train_pd| B1
+    D -->|Merge with test_pd| C1
+    B1 -->|Filter site1| G[train_pd]
+    C1 -->|Filter site1| H[test_pd]
+    G -->|Join with site1_scraped_pd| I
+    F -->|Joined with train_pd| I[train_pd with site1_scraped]
+    H -->|Join with site1_scraped_pd| J
+    F -->|Joined with test_pd| J[test_pd with site1_scraped]
+    I -->|Concatenate train and test| K[full_pd]
+    J -->|Concatenate train and test| K
+
+    %% Styles
+    classDef data_source fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;

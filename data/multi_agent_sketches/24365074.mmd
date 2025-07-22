@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    A1[("train.csv") - Training dataset] --> B1[train]
+    A2[("test.csv") - Test dataset] --> B2[test]
+    A3[("sample_submission.csv") - Submission Template]
+
+    %% Data Transformations
+    B1[train] --> C1(X - Features from train)
+    B1 --> C2(y - Target from train)
+    B1 --> D3(full_data)
+    B2 --> D4(pred)
+
+    %% Preparations for ML Model
+    C1(X - Features) --> D1[Xtr]
+    C1 --> D2[Xval]
+    C2(y - Target) --> D5[ytr]
+    C2 --> D6[yval]
+
+    %% Model - ExtraTreesClassifier
+    subgraph Model_Training
+        direction TB
+        D1[Xtr] & D5[ytr] --> M1[ExtraTreesClassifier\nn\_estimators=800,\nrandom\_state=0,\nn\_jobs=-1]
+    end
+    M1 --> D4(pred)
+
+    %% Data for Submission
+    D4(pred) --> E1[submission]
+    A3 --> E1[submission]
+    E1 --> |Save| F1[submission.to_csv]
+
+    %% Additional Data Flows
+    D3(full_data) --> C1
+    D3(full_data) --> C2

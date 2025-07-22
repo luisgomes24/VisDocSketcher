@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/pubg-finish-placement-prediction/train_V2.csv",
+      "description": "Training dataset containing placement prediction data for PUBG."
+    },
+    {
+      "file_name": "../input/lightgbm-baseline/submission_adjusted.csv",
+      "description": "Submission file from the LightGBM baseline model."
+    },
+    {
+      "file_name": "../input/pubg-lgb-ensamble-lvl-1/submission_v8.csv",
+      "description": "Submission file from the LightGBM ensemble model."
+    },
+    {
+      "file_name": "../input/pubg-nn-ensamble-lvl-1/submission_nn_ensamble_v5.csv",
+      "description": "Submission file from the Neural Network ensemble model."
+    },
+    {
+      "file_name": "../input/pubg-finish-placement-prediction/test_V2.csv",
+      "description": "Test dataset for predicting placements in PUBG."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training dataset loaded from CSV."
+    },
+    {
+      "variable_name": "df_sub",
+      "description": "DataFrame initialized for storing submission results from ensemble predictions."
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame containing the test data for merging and predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used for data preprocessing and feature extraction, then grouped by 'matchId'."
+    },
+    {
+      "variable_name": "df_sub",
+      "creation_method": "pd.read_csv and subsequent merging",
+      "flow_description": "Merges results from different model submissions, computes average scores, and processes for final submission."
+    },
+    {
+      "variable_name": "df_test",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used to restore columns necessary for finalizing the prediction output."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LightGBM",
+      "input_features": "Various features from train dataset including categorical match types and other features.",
+      "target_variable": "winPlacePerc",
+      "hyperparameters": "Not specified in the notebook."
+    },
+    {
+      "model_name": "Neural Network",
+      "input_features": "Likely similar to LightGBM, specific features are not listed.",
+      "target_variable": "winPlacePerc",
+      "hyperparameters": "Not specified in the notebook."
+    }
+  ]
+}

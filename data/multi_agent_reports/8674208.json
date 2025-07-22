@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/survivedTitanic.csv",
+      "description": "Data contains information on passengers aboard the Titanic, including survival status."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df1",
+      "description": "DataFrame to store the first 1000 rows of 'survivedTitanic.csv'"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "usage": ["Used in plotting functions to visualize data"]
+    }
+  ],
+  "models": []
+}

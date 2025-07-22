@@ -1,0 +1,23 @@
+flowchart TD
+    A[Import Data] -->|Read data from CSV file| B[DataFrame: cars]
+    B -->|Drop missing values| C[DataFrame: cars_updated]
+    C -->|Label Encoding| D[DataFrame: cars_encoded]
+    D -->|Train/Test Split| E[Training Data: x_train, y_train]
+    D -->|Train/Test Split| F[Testing Data: x_test, y_test]
+    E -->|Train Linear Regression Model| G[Model: Linear Regression]
+    F -->|Predict using Model| H[Predictions: y_pred]
+    H -->|Validate Predictions| I[Compute RMSE]
+    
+    %% Comments for each node
+    classDef nodeStyle fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I nodeStyle;
+    
+    %% A: Import Data
+    %% B: Create cars DataFrame from CSV
+    %% C: Remove rows with missing values from DataFrame
+    %% D: Perform label encoding on selected features
+    %% E: Use data to train the model
+    %% F: Use data to test/validate the model
+    %% G: Linear Regression Model is trained
+    %% H: Use the model to make predictions
+    %% I: Calculate RMSE to evaluate model performance

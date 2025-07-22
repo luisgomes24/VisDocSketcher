@@ -1,0 +1,36 @@
+flowchart TD
+    %% Node definitions and comments
+    A[Start] --> B[Read 911.csv]
+    B --> C[DataFrame 'df']
+    C --> D{Operations on df}
+    D -->|Create| E['reason' column]
+    D -->|Extract| F['hour' column]
+    D -->|Extract| G['month' column]
+    D -->|Extract| H['day of week' column]
+    
+    %% 'reason' column transformation
+    E --> I[Apply: Split 'title' to extract reason]
+    I --> J[Countplot of Reasons]
+    
+    %% 'hour' column transformation
+    F --> K[Not explicitly visualized]
+    
+    %% 'month' column transformation
+    G --> L[Countplot and regression analysis by month]
+    
+    %% 'day of week' column transformation
+    H --> M[Map day numbers to names]
+    M --> N[Countplot by Day of Week]
+
+    %% Final visualizations
+    J --> O[(Visualize count by Reason)]
+    L --> P[(Correlation analysis)]
+    N --> Q[(Visualize by Day of Week)]
+
+    %% Data Source
+    B:::data_sources --> A[911.csv]
+    E:::data_variables --> A
+    F:::data_variables --> A
+    G:::data_variables --> A
+    H:::data_variables --> A
+    style G fill:#f9f,stroke:#333,stroke-width:2px;

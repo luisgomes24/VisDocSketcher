@@ -1,0 +1,19 @@
+flowchart TD
+    %% Data source node
+    A["Melbourne_housing_extra_data.csv"] --> |"Load CSV"| B["DataFrame (dataframe)"]
+    %% Data transformation nodes
+    B --> |"Select Features and Preprocess"| C["Features (X)"]
+    B --> |"Select Target"| D["Target (y)"]
+    %% Train-test split
+    C --> |"train_test_split"| E["X_train"]
+    C --> |"train_test_split"| F["X_test"]
+    D --> |"train_test_split"| G["y_train"]
+    D --> |"train_test_split"| H["y_test"]
+    %% Model training node
+    E --> |"Train Linear Regression (lm)"| I["Linear Regression Model"]
+    G --> |"Train Linear Regression (lm)"| I
+    %% Prediction and performance nodes
+    I --> |"Predict"| J["Predictions"]
+    J --> |"Compare with y_test"| H
+    %% Model coefficients
+    I --> |"Extract Coefficients"| K["Coefficients (coeff_df)"]

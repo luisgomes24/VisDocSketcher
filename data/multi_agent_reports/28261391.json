@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "Training dataset containing features of passengers and their survival."
+    },
+    {
+      "file": "/kaggle/input/titanic/test.csv",
+      "description": "Test dataset containing features of passengers without survival outcomes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test dataset."
+    },
+    {
+      "name": "train2",
+      "description": "Copy of training data with null values replaced."
+    },
+    {
+      "name": "test2",
+      "description": "Copy of test data with null values replaced."
+    },
+    {
+      "name": "train3",
+      "description": "Processed training dataset ready for model training."
+    },
+    {
+      "name": "test3",
+      "description": "Processed test dataset ready for predictions."
+    },
+    {
+      "name": "x_train",
+      "description": "Features for training extracted from train3."
+    },
+    {
+      "name": "x_test",
+      "description": "Features for testing extracted from train3."
+    },
+    {
+      "name": "y_train",
+      "description": "Target variable (Survived) for training."
+    },
+    {
+      "name": "y_test",
+      "description": "Target variable (Survived) for testing."
+    },
+    {
+      "name": "y_pred",
+      "description": "Predictions on the validation set."
+    },
+    {
+      "name": "df_LG",
+      "description": "Final DataFrame containing PassengerId and predicted Survived."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flows_to": "train2, train3"
+    },
+    {
+      "variable": "test",
+      "creation_method": "pd.read_csv",
+      "flows_to": "test2, test3"
+    },
+    {
+      "variable": "train2",
+      "creation_method": "train.copy()",
+      "flows_to": "train3"
+    },
+    {
+      "variable": "test2",
+      "creation_method": "test.copy()",
+      "flows_to": "test3"
+    },
+    {
+      "variable": "train3",
+      "creation_method": "pd.concat",
+      "flows_to": "x_train, y_train"
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "train3.drop",
+      "flows_to": "model_training"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train3['Survived']",
+      "flows_to": "model_training"
+    },
+    {
+      "variable": "y_pred",
+      "creation_method": "model.predict",
+      "flows_to": "df_LG"
+    },
+    {
+      "variable": "df_LG",
+      "creation_method": "pd.concat",
+      "flows_to": "CSV output"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Logistic Regression",
+      "input_features": [
+        "Pclass", "Sex-female", "Sex-male", "Age", "SibSp", "Parch", "Ticket_num", "Fare", "Cabin-A", "Cabin-B", "Cabin-C", "Cabin-D", "Cabin-E", "Cabin-F", "Cabin-G", "Cabin-T", "Cabin-X", "Embarked-C", "Embarked-Q", "Embarked-S"
+      ],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "solver": "liblinear",
+        "random_state": 0
+      }
+    }
+  ]
+}

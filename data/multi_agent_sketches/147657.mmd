@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes representing data sources
+    A[/"mort.csv"/]:::dataSource
+    %% Nodes representing data variables
+    B[>mortality<]:::dataVar
+    C[>mortality_drop<]:::dataVar
+    D[>mortality_state_overall<]:::dataVar
+    E[>mort_st_cat_yr<]:::dataVar
+    F[>mort_neonat<]:::dataVar
+    G[>mort_neonat_drop<]:::dataVar
+    %% Comments for understanding nodes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    %% Links representing the transformation process
+    A --> |"Read CSV"| B
+    B --> |"Drop columns"| C
+    C --> |"Filter states"| D
+    D --> |"Drop 'fips' column"| E
+    E --> |"Transpose for neonatal"| F
+    F --> |"Reset index and prepare for plot"| G
+    G --> |"Ready for Plotting"| H[/"Plot"/]
+    %% Comments explaining the purpose of the nodes
+    %% A node represents reading the data from a source file
+    %% B-G nodes represent transformations on data
+    %% H node represents preparing the data for visualization

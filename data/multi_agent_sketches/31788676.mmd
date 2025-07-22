@@ -1,0 +1,25 @@
+%% A Mermaid.js diagram depicting the data flow and models in the notebook
+
+flowchart TD
+    %% Node for pizza sales data source
+    DataSource(["Data Model - Pizza Sales.xlsx"]) --> |"Load and group by order date"| SalesDataVar
+    
+    %% Node for summarized pizza sales
+    SalesDataVar["Sales Data (_)\nGrouped by order_date"] --> |"Group by order_month"| MonthlySalesVar
+    SalesDataVar --> |"Analysis, Visualization, ADF test"| ARIMAModel1
+    SalesDataVar --> |"ARIMA order (1,0,1)"| ARIMAModel1
+    
+    %% Node for ARIMA model (1,0,1)
+    ARIMAModel1["ARIMA Model\nOrder: (1,0,1)\nFeatures: quantity\nTarget: quantity"]
+    
+    %% Node for ARIMA model (0,0,1)
+    SalesDataVar --> |"ARIMA order (0,0,1)"| ARIMAModel2
+    
+    %% Node for ARIMA model (0,0,1)
+    ARIMAModel2["ARIMA Model\nOrder: (0,0,1)\nFeatures: quantity\nTarget: quantity"]
+    
+    %% Node for monthly sales
+    MonthlySalesVar["Monthly Sales Data\nGrouped by order_month"] --> |"Plotting"| PlottingModule
+
+    %% Node for plotting
+    PlottingModule["Monthly Sales Plotting"]

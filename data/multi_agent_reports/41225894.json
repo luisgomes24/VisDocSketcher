@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "TITANIC dataset containing information about passengers including age, fare, class, and embarked status."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "DataFrame holding the titanic data after loading CSV and preprocessing operations."
+    },
+    {
+      "variable": "get",
+      "description": "A series holding the count of missing values for each column in the DataFrame."
+    },
+    {
+      "variable": "lets_see",
+      "description": "A DataFrame containing only 'Age' and 'Embarked' columns to visualize missing values."
+    },
+    {
+      "variable": "Fare_outliers",
+      "description": "A DataFrame containing records identified as outliers based on fare analysis."
+    },
+    {
+      "variable": "mode",
+      "description": "The most frequently occurring fare value used for replacing outliers."
+    },
+    {
+      "variable": "Q1, Q3, IQR, whisker_width",
+      "description": "Statistical values used in outlier detection methods for the Fare variable."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for data preprocessing, outlier detection, and visualization."]
+    },
+    {
+      "variable": "get",
+      "creation_method": "data.isnull().sum()",
+      "flow": ["Utilized to assess the completeness of the data."]
+    },
+    {
+      "variable": "lets_see",
+      "creation_method": "data[['Age','Embarked']]",
+      "flow": ["Visualized for understanding missing values in these features."]
+    },
+    {
+      "variable": "Fare_outliers",
+      "creation_method": "Logical operations on 'Fare' based on IQR and whisker calculations.",
+      "flow": ["Utilized for wisdom of treatment processes like flooring, capping, trimming, etc."]
+    },
+    {
+      "variable": "mode",
+      "creation_method": "data['Fare'].mode()",
+      "flow": ["Used to replace outliers in the Fare column."]
+    }
+  ],
+  "models": []
+}

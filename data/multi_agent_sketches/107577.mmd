@@ -1,0 +1,24 @@
+flowchart TD
+    %% The CSV data source with TechCrunch posts
+    A["../input/techcrunch_posts.csv"] -->|"Load Data"| B["DataFrame df"]
+    
+    %% Data pre-processing step cleaning authors, tags, and content
+    B -->|"Clean Content"| C["List clean_content"]
+    
+    %% Converting clean content to TF-IDF feature matrix using TfidfVectorizer
+    C -->|"Fit and Transform"| D["TF-IDF Matrix features"]
+    
+    %% KNN model initialization and training
+    D -->|"Train KNN Model"| E["KNN Model knn"]
+    
+    %% Output node showing the trained KNN model
+    E -->|"Use for Recommendations"| F["Recommendation Engine"]
+
+    %% Hyperparameters for KNN
+    B0["n_neighbors: 30"]
+    C0["algorithm: brute"]
+    D0["metric: cosine"]
+    
+    B0 --> E
+    C0 --> E
+    D0 --> E

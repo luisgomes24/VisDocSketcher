@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/usa-yield-prediction-flaml-rmse/rmse.csv",
+      "description": "Contains yield predictions for USA crops."
+    },
+    {
+      "file": "/kaggle/input/cotton-yield-prediction-flaml-rmse/rmse.csv",
+      "description": "Contains yield predictions for cotton."
+    },
+    {
+      "file": "/kaggle/input/cotton-price-dollar-ton-prediction-prophet/fbprophet.csv",
+      "description": "Contains historical cotton price data in dollars per ton."
+    },
+    {
+      "file": "/kaggle/input/google-for-developers-sustainability-hackathon/submission.csv",
+      "description": "Main dataset containing features for yield and price prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "sol0",
+      "description": "DataFrame containing yield predictions for USA."
+    },
+    {
+      "name": "sol1",
+      "description": "DataFrame containing yield predictions for cotton."
+    },
+    {
+      "name": "sol2",
+      "description": "DataFrame containing cotton price information."
+    },
+    {
+      "name": "sol",
+      "description": "Main DataFrame that aggregates yield and price data from other sources."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sol0",
+      "creation_method": "pd.read_csv",
+      "usage": "Merged into sol DataFrame."
+    },
+    {
+      "variable": "sol1",
+      "creation_method": "pd.read_csv",
+      "usage": "Merged into sol DataFrame."
+    },
+    {
+      "variable": "sol2",
+      "creation_method": "pd.read_csv",
+      "usage": "Merged into sol DataFrame."
+    },
+    {
+      "variable": "sol",
+      "creation_method": "pd.read_csv and merging from other DataFrames.",
+      "usage": "Filled NaN values and saved to csv."
+    }
+  ],
+  "models": []
+}

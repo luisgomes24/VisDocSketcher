@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    CSV1[fatal-police-shootings-data.csv] -->|Read| DF[df]
+    CSV2[State Populations.csv]
+    
+    %% Data Variables
+    DF -->|Extract Year| Year[year]
+    DF -->|Group by state| StateGrouped[state_grouped]
+    
+    %% Data Usage
+    DF -->|Gender & Race Analysis| Analysis1
+    DF -->|Visualization| Plots1
+    Year -->|Time Period Analysis| Plots2
+    StateGrouped -->|State-wise Analysis| Plots3
+
+    %% Comments for explanation
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    class CSV1 comment;
+    class CSV2 comment;
+    class DF comment;
+    class Year comment;
+    class StateGrouped comment;

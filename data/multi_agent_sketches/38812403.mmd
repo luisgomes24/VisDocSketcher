@@ -1,0 +1,37 @@
+flowchart TD
+    %% Node for the data source: Wally image from Mahotas demo
+    A["Wally image"]
+
+    %% Nodes for the data variables and transformations
+    B["wally"]
+    C["wfloat"]
+    D["Red Channel - r"]
+    E["Green Channel - g"]
+    F["Blue Channel - b"]
+    G["Mean Channel - w"]
+    H["Pattern"]
+    I["Convolved Image - v"]
+    J["Mask"]
+
+    %% Data Source to wally
+    A -->|"Load image"| B
+    B -->|"Convert to float"| C
+    
+    %% wfloat to channels and transformations
+    C -->|"Extract red channel"| D
+    C -->|"Extract green channel"| E
+    C -->|"Extract blue channel"| F
+    C -->|"Compute mean channel"| G
+    
+    %% Pattern creation
+    H["pattern (+1, -1)"]
+    
+    %% Red channel and mean channel are convolved with the pattern
+    D -->|"Convolve with pattern"| I
+    G -->|"Convolved with pattern"| I
+    
+    %% Mask creation
+    I -->|"Generate mask"| J
+
+    %% Mask modifies the original wally image
+    J -->|"Apply mask"| B

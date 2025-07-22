@@ -1,0 +1,28 @@
+%%% Data sources	rain_csv["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+test_csv["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]
+sample_submission_csv["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]
+
+%%% Data processing and feature extraction
+subgraph Data_Preparation
+  train_csv -->|load| X["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame X: features"]
+  test_csv -->|load| X_test["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame X_test: features"]
+  X -->|extract 'pressure'| y["<img src='icons/column_split.svg' width=100 height=100/> <br/> Series y: target values"]
+end
+
+%%% Model definition and training
+subgraph Model_Training
+  X -->|train| LSTM_Model["<img src='icons/brain.svg' width=100 height=100/> <br/> LSTM Model"]
+  y -->|target| LSTM_Model
+end
+
+%%% Model testing and prediction
+subgraph Model_Testing
+  X_test -->|predict| LSTM_Model
+  LSTM_Model -->|outputs| y_pred["<img src='icons/column_split.svg' width=100 height=100/> <br/> Predicted values y_pred"]
+end
+
+%%% Submission generation
+subgraph Submission
+  y_pred -->|save as| baseline_pytorch_cv_csv["<img src='icons/file.svg' width=100 height=100/> <br/> baseline_pytorch_cv.csv"]
+  sample_submission_csv -.-> baseline_pytorch_cv_csv
+end

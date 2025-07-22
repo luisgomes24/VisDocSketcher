@@ -1,0 +1,8 @@
+```
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> df = pd.read_csv('trends.csv')"] --> B["🔍 Filter Data <img src='table.svg'/> <br/> df = df[df['year'] > 2011]"]
+    B --> C["📊 Build Visualization <img src='barplot_template.svg'/> <br/> fig = go.Figure()"]
+    C --> D["📈 Add Data Traces <img src='barplot_template.svg'/>"]
+    D --> E["🎚️ Create Sliders <img src='column_split.svg'/>"]
+    E --> F["⚙️ Update Layout <img src='table.svg'/>"]
+    F --> G["🔗 Show Plot <img src='barplot_template.svg'/>"]

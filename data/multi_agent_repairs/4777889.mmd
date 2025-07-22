@@ -1,0 +1,26 @@
+%% Sketch Generated with Mermaid.js
+
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|"Load as DataFrame"| B["train"]
+    C["test.csv"] -->|"Load as DataFrame"| D["test"]
+    E["sample_submission.csv"]
+
+    %% Data Processing
+    B -->|"train['id_code'].values"| F["x_train"]
+    B -->|"train['diagnosis'].values"| G["y_train"]
+    D -->|"Split IDs"| H["x_test"]
+    D -->|"Split Labels"| I["y_test"]
+
+    %% Model
+    J["ResNet50 Model"]
+    F -->|"Input Images"| J
+    G -->|"Training Labels"| J
+
+    %% Model Hyperparameters
+    J -->|"Optimizer: adam"| K{{"adam optimizer"}}
+    J -->|"Loss: categorical_crossentropy"| L{{"Crossentropy Loss"}}
+    J -->|"Metrics: [accuracy]"| M{{"Accuracy Metric"}}
+
+```

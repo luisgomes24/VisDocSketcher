@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "file_name": "hotel_bookings.csv",
+      "description": "Dataset containing hotel booking information including details like booking status, number of guests, hotel type, and reservation dates."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the processed hotel booking information, including features like hotel, is_canceled, arrival dates, number of guests, and reservation details."
+    },
+    {
+      "variable_name": "month_count_df",
+      "description": "DataFrame summarizing the count of bookings for each month in an ordered manner."
+    },
+    {
+      "variable_name": "hotel_cancelation_count",
+      "description": "DataFrame showing the count of cancellations for each hotel."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv('../input/hotel-booking-demand/hotel_bookings.csv')",
+      "flow": [
+        "data cleaning (dropna, replace)",
+        "data description and analysis", 
+        "used in visualizations (e.g., barplots for month counts)",
+        "used in hypothesis testing (e.g., regression analysis)"
+      ]
+    },
+    {
+      "variable": "month_count_df",
+      "creation": "pd.DataFrame() with counts from df['arrival_date_month']",
+      "flow": [
+        "used in visualizations (bar plot of monthly counts)"
+      ]
+    },
+    {
+      "variable": "hotel_cancelation_count",
+      "creation": "df.query('is_canceled==1').groupby('hotel')['is_canceled'].value_counts().unstack()",
+      "flow": [
+        "used in visualizations (heatmap and pie chart)"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Ordinary Least Squares Regression",
+      "target_variable": "required_car_parking_spaces",
+      "input_features": ["intercept", "adults", "children"],
+      "hyperparameters": "None applicable for OLS"
+    }
+  ]
+}

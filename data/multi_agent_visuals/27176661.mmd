@@ -1,0 +1,26 @@
+flowchart TD
+    subgraph DataSources
+        DS1["<img src='icons/file.svg' width=100 height=100/> <br/> bank.csv"]
+    end
+
+    subgraph DataPreparation
+        DF["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+        df_OH["<img src='icons/table.svg' width=100 height=100/> <br/> df_OH"]
+    end
+
+    subgraph Clustering
+        KMeans["<img src='icons/brain.svg' width=100 height=100/> <br/> KMeans Clustering"]
+        Clusters["clusters"]
+    end
+
+    subgraph Analysis
+        Groups["groups"]
+    end
+
+    DS1 -->|"Read CSV"| DF
+    DF -->|"One-Hot Encoding\n& Standardization"| df_OH
+    df_OH -->|"Fit to KMeans"| KMeans
+    KMeans -->|"Predict Clusters"| Clusters
+    Clusters -->|"Assign to df"| DF
+    Clusters -->|"Assign to df_OH"| df_OH
+    Clusters -->|"Group by Cluster"| Groups

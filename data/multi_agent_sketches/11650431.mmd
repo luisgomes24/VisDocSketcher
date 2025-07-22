@@ -1,0 +1,27 @@
+flowchart TD
+    %% Represents the main DataFrame placeholder for input data
+    df[DataFrame (df)] --> |"Used in"| plotFunctions[Plotting Functions]
+    
+    %% Displays the unique values count of DataFrame for filtering
+    df --> |"Calculates"| nunique[Unique Values Count (nunique)]
+    nunique --> |"Filters columns for"| plotFunctions
+
+    %% Displays the correlation matrix for numerical columns
+    df --> |"Calculates"| corr[Correlation Matrix (corr)]
+    corr --> |"Used in"| correlationMatrixPlot[Correlation Matrix Plot]
+
+    %% Lists data columns in DataFrame
+    df --> |"Extracts"| columnNames[Column Names]
+    columnNames --> |"Used in"| plotFunctions
+
+    %% Sets plot size for visualization
+    plotSize[Plot Size]
+    plotSize --> |"Defines"| scatterMatrixPlot[Scatter Matrix Plot]
+
+    %% Sets text size for clarity
+    textSize[Text Size]
+    textSize --> |"Formats texts in"| scatterMatrixPlot
+
+    %% Comprehensive plotting combining scatter and correlation visualizations
+    plotFunctions --> scatterMatrixPlot
+    plotFunctions --> correlationMatrixPlot

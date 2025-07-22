@@ -1,0 +1,17 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/> <br/> Read Excel File"] --> B["🧹 Data Preprocessing"]
+    B --> C["📊 Visualize Data <img src='barplot_template.svg'/> <br/> Bar Plot of ICU Counts"]
+    B --> D["📉 Check Null Values <img src='hist_template.svg'/> <br/> Missing Data Visualization"]
+    C --> E["🔍 Feature Analysis"]
+    E --> F["🤖 Build Model <img src='brain.svg'/> <br/> Train Decision Tree"]
+    F --> G["📝 Evaluate Model"]
+    G --> H["📈 Visualize Results <img src='scatter_plot_template.svg'/> <br/> Confusion Matrix"]
+    H --> I["✅ Final Output"]
+
+    A -->|df| B
+    B -->|cols_to_drop| D
+    B -->|not_null_columns| E
+    E -->|x, y| F
+    F -->|df_results_test| G
+    G -->|df_plot| H
+    H -->|final_data| I

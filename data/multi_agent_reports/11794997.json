@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/lish-moa/test_features.csv",
+      "description": "Test features for the MOA dataset."
+    },
+    {
+      "file": "/kaggle/input/lish-moa/train_targets_scored.csv",
+      "description": "Target scores for the training dataset."
+    },
+    {
+      "file": "/kaggle/input/lish-moa/sample_submission.csv",
+      "description": "Sample submission format for the competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "test",
+      "description": "DataFrame containing the test features."
+    },
+    {
+      "name": "target_scored",
+      "description": "DataFrame containing target scores from the training dataset."
+    },
+    {
+      "name": "sample",
+      "description": "DataFrame used to format submission."
+    },
+    {
+      "name": "x_test",
+      "description": "Copy of the test DataFrame for further processing."
+    },
+    {
+      "name": "X_test",
+      "description": "Quantile transformed version of x_test, used for model predictions."
+    },
+    {
+      "name": "XX_test",
+      "description": "Scaled version of x_test using Standardization."
+    },
+    {
+      "name": "preds",
+      "description": "List to hold predictions from multiple models."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "test",
+      "creation": "Read from CSV file.",
+      "flows_to": [
+        "clean_fn executed on test to transform cp_type and cp_dose.",
+        "Kernel transformation applied to XX_test."
+      ]
+    },
+    {
+      "variable": "target_scored",
+      "creation": "Read from CSV file.",
+      "flows_to": []
+    },
+    {
+      "variable": "sample",
+      "creation": "Read from CSV, then populated with predictions.",
+      "flows_to": "Saved to 'submission.csv'."
+    },
+    {
+      "variable": "x_test",
+      "creation": "Copy of test.",
+      "flows_to": [
+        "Quantile transformation to create X_test.",
+        "Standardization to create XX_test."
+      ]
+    },
+    {
+      "variable": "X_test",
+      "creation": "Quantile transformation of x_test.",
+      "flows_to": "Used in model predictions."
+    },
+    {
+      "variable": "XX_test",
+      "creation": "Standardized version of x_test.",
+      "flows_to": "Used in model predictions."
+    },
+    {
+      "variable": "preds",
+      "creation": "List initialized for storing predictions.",
+      "flows_to": "Populated with predictions; values are written into sample."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "XGBoost",
+      "input_features": "XX_test",
+      "target_variable": "Columns from target_scored.",
+      "hyperparameters": "Not explicitly defined in the code."
+    }
+  ]
+}

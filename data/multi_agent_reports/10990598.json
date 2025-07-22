@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/fruits/fruits-360/Training/",
+      "description": "Directory containing training images of various fruits."
+    },
+    {
+      "file_path": "/kaggle/input/fruits/fruits-360/Test/",
+      "description": "Directory containing testing images of various fruits."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_path",
+      "description": "Path to the training images directory."
+    },
+    {
+      "name": "test_path",
+      "description": "Path to the testing images directory."
+    },
+    {
+      "name": "img",
+      "description": "An image loaded from the training path for visualization."
+    },
+    {
+      "name": "shape_of_image",
+      "description": "Shape of the loaded image, used to set input shape for the model."
+    },
+    {
+      "name": "classes",
+      "description": "List of class directories in the training path."
+    },
+    {
+      "name": "number_of_class",
+      "description": "Total number of unique classes in the dataset."
+    },
+    {
+      "name": "train_generator",
+      "description": "Image data generator for the training dataset with augmentation."
+    },
+    {
+      "name": "test_generator",
+      "description": "Image data generator for the testing dataset."
+    },
+    {
+      "name": "model",
+      "description": "Sequential model object from Keras implementing the CNN."
+    },
+    {
+      "name": "hist",
+      "description": "History object storing training progress for loss and accuracy."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "img",
+      "creation": "Loaded with load_img from train_path.",
+      "flow": "Used for visualization."
+    },
+    {
+      "variable": "shape_of_image",
+      "creation": "Generated using img_to_array on img.",
+      "flow": "Sets input shape for the convolutional layers in model."
+    },
+    {
+      "variable": "classes",
+      "creation": "Generated using glob on train_path.",
+      "flow": "Determines number_of_class."
+    },
+    {
+      "variable": "number_of_class",
+      "creation": "Calculated from length of classes.",
+      "flow": "Used to set the output layer of the model."
+    },
+    {
+      "variable": "train_generator",
+      "creation": "Created using ImageDataGenerator with augmentation parameters.",
+      "flow": "Used to fit the model."
+    },
+    {
+      "variable": "test_generator",
+      "creation": "Created using ImageDataGenerator for test data.",
+      "flow": "Used for model validation during fitting."
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized as a Sequential model.",
+      "flow": "Fitted with train_generator and evaluated with test_generator."
+    },
+    {
+      "variable": "hist",
+      "creation": "Generated from model.fit_generator.",
+      "flow": "Stores training progress used for visualization."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential CNN",
+      "input_features": "Images processed and augmented by train_generator.",
+      "target_variable": "Categorical class labels of images.",
+      "hyperparameters": {
+        "layers": [
+          {"type": "Conv2D", "filters": 32, "kernel_size": "(3,3)", "activation": "relu"},
+          {"type": "MaxPooling2D"},
+          {"type": "Conv2D", "filters": 32, "kernel_size": "(3,3)", "activation": "relu"},
+          {"type": "MaxPooling2D"},
+          {"type": "Conv2D", "filters": 64, "kernel_size": "(3,3)", "activation": "relu"},
+          {"type": "MaxPooling2D"},
+          {"type": "Flatten"},
+          {"type": "Dense", "units": 1024, "activation": "relu"},
+          {"type": "Dropout", "rate": 0.5},
+          {"type": "Dense", "units": "number_of_class", "activation": "softmax"}
+        ],
+        "loss_function": "categorical_crossentropy",
+        "optimizer": "rmsprop",
+        "metrics": ["accuracy"],
+        "epochs": 100,
+        "batch_size": 32
+      }
+    }
+  ]
+}

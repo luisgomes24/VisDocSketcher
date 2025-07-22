@@ -1,0 +1,26 @@
+flowchart TD
+    %% Define Data Sources
+    A["Training Data<br/><img src='../input/train.csv' width=100 height=100/> "] -->|Load data| B["X[DataFrame with features]<br/><img src='path/to/table.svg' width=100 height=100/> "]
+    A -->|Load data| C["y[Series with SalePrice]<br/><img src='path/to/column_split.svg' width=100 height=100/> "]
+
+    %% Data Splitting
+    B -->|Split data using train_test_split| D["X_train_full<br/><img src='path/to/row_split.svg' width=100 height=100/> "]
+    B -->|Split data using train_test_split| E["X_valid_full<br/><img src='path/to/row_split.svg' width=100 height=100/> "]
+    D -->|Feature Engineering using pd.get_dummies| F["X_train[Training features]<br/><img src='path/to/column_split.svg' width=100 height=100/> "]
+    E -->|Feature Engineering using pd.get_dummies| G["X_valid[Validation features]<br/><img src='path/to/column_split.svg' width=100 height=100/> "]
+    A -->|Load data| H["X_test[Test features]<br/><img src='path/to/table.svg' width=100 height=100/> "]
+
+    %% Model 1
+    F -->|Train model| I["my_model_1[XGBRegressor, rs=0]<br/><img src='path/to/brain.svg' width=100 height=100/> "]
+    I -->|Predict| J["predictions_1[Validation Predictions]<br/><img src='path/to/image.svg' width=100 height=100/> "]
+    J -->|Calculate MAE| K["mae_1"]
+
+    %% Model 2
+    F -->|Train model| L["my_model_2[XGBRegressor, est=1000, lr=0.05]<br/><img src='path/to/brain.svg' width=100 height=100/> "]
+    L -->|Predict| M["predictions_2[Validation Predictions]<br/><img src='path/to/image.svg' width=100 height=100/> "]
+    M -->|Calculate MAE| N["mae_2"]
+
+    %% Model 3
+    F -->|Train model| O["my_model_3[XGBRegressor, est=1]<br/><img src='path/to/brain.svg' width=100 height=100/> "]
+    O -->|Predict| P["predictions_3[Validation Predictions]<br/><img src='path/to/image.svg' width=100 height=100/> "]
+    P -->|Calculate MAE| Q["mae_3"]

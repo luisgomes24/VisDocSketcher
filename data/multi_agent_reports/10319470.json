@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/movie-data/imdb_movie_data.csv",
+      "description": "IMDB movie dataset containing various attributes including Year, Revenue, and Rating."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the movie data after reading from CSV and dropping irrelevant columns."
+    },
+    {
+      "name": "max_info",
+      "description": "List used to store titles of movies with maximum revenue or rating for the specific year."
+    },
+    {
+      "name": "min_info",
+      "description": "List used to store titles of movies with minimum revenue or rating for the specific year."
+    },
+    {
+      "name": "all_info",
+      "description": "List used to compile both max_info and min_info for display."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Created by reading the CSV file using pd.read_csv(url)",
+      "usage": "Used to analyze specific years and display movie details based on revenue and rating."
+    },
+    {
+      "variable": "max_info",
+      "creation": "Cleared and populated within the details function based on the maximum revenue or rating.",
+      "usage": "Used to display movies with the highest revenue or rating."
+    },
+    {
+      "variable": "min_info",
+      "creation": "Cleared and populated within the details function based on the minimum revenue or rating.",
+      "usage": "Used to display movies with the lowest revenue or rating."
+    },
+    {
+      "variable": "all_info",
+      "creation": "Compiled within the details function from max_info and min_info.",
+      "usage": "Used to print the table of high and low revenue/rating movies."
+    }
+  ],
+  "models": []
+}

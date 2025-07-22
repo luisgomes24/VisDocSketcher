@@ -1,0 +1,15 @@
+flowchart TD
+    A["train.json"]:::data_source -->|Load| B["train_fileJson"]
+    A1["dev.json"]:::data_source -->|Load| B
+    B --> C["<img src='path/to/plot.svg'/> <br/> Merged Train Data"]:::data
+    C --> D["MRC_model"]:::ml_model
+    D --> E["dev_outcome_merged"]:::data
+    E --> F["<img src='path/to/plot.svg'/> <br/> Evaluation Metrics"]:::output
+    E --> G["<img src='path/to/plot.svg'/> <br/> Final Predictions"]:::output
+    F --> H["Final Model"]:::output
+    G --> H
+
+    classDef data_source fill:#87CEEB;
+    classDef data fill:#C6F4D6;
+    classDef ml_model fill:#C6F4D6;
+    classDef output fill:#F2C464;

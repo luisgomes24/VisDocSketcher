@@ -1,0 +1,1 @@
+Error occurred while adding images: multiple nodes led to errors. Please check image paths and node names.

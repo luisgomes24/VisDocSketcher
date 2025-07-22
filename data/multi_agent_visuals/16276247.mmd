@@ -1,0 +1,13 @@
+graph TD;
+    A["Data Collection <img src='database.svg' width=100 height=100/> <br/> Collect data from various sources"]
+    B["Data Cleaning <img src='file.svg' width=100 height=100/> <br/> Remove inconsistencies and errors"]
+    C["Feature Engineering <img src='column_split.svg' width=100 height=100/> <br/> Select and transform features"]
+    D["Model Training <img src='brain.svg' width=100 height=100/> <br/> Train the ML model"]
+    E["Model Evaluation <img src='hist_template.svg' width=100 height=100/> <br/> Evaluate model performance"]
+    F["Predictions <img src='scatter_plot_template.svg' width=100 height=100/> <br/> Make predictions"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F;

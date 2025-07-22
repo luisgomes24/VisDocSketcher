@@ -1,0 +1,23 @@
+flowchart TD
+    %% Node for the input data source
+    input_data["/Input Data Directory/"]:::source 
+    %% Comment for input data
+    %% This is the directory that contains the input data files.
+
+    %% Node for DataFrame
+    df["DataFrame (df)"]:::data
+    %% Comment for DataFrame
+    %% The DataFrame for storing the input data and for processing.
+
+    %% Node for Data Analysis
+    analysis["Data Analysis"]:::process
+    %% Comment for Data Analysis
+    %% Used for generating plots and analysis.
+
+    %% Describing the flow
+    input_data -->|Process data files| df
+    df -->|Generate plots and analysis| analysis
+
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px;

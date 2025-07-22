@@ -1,0 +1,30 @@
+{
+  "data_sources": [
+    {
+      "file_name": "movie.csv",
+      "description": "CSV file containing movie data, specific columns and content inferred from usage in plots."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the movie data, read from 'movie.csv'."
+    },
+    {
+      "variable_name": "nRowsRead",
+      "description": "Integer specifying the number of rows to read from the CSV file (set to 1000)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        {
+          "usage": "Used in plotting functions such as plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix."
+        }
+      ]
+    }
+  ],
+  "models": []
+}

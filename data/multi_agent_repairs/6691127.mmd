@@ -1,0 +1,51 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]
+    A2["test.csv"]
+    A3["weather_train.csv"]
+    A4["weather_test.csv"]
+    A5["building_metadata.csv"]
+    
+    %% Data Ingestion
+    subgraph Data_Ingestion [Data Ingestion]
+        direction TB
+        train_ -->|read from CSV| A1
+        test_ -->|read from CSV| A2
+        weather_train_ -->|read from CSV| A3
+        weather_test_ -->|read from CSV| A4
+        metadata -->|read from CSV| A5
+    end
+
+    %% Data Preprocessing
+    subgraph Preprocessing [Preprocessing]
+        direction TB
+        train[Filtered Training Data] -->|filter based on building_id| train_
+        test[Filtered Test Data] -->|filter based on building_id| test_
+        weather_train[Filtered Weather Train] -->|filter based on site_id| weather_train_
+        weather_test[Filtered Weather Test] -->|filter based on site_id| weather_test_
+        X_train -->|merge with weather_train| train
+        X_test -->|merge with weather_test| test
+    end
+
+    %% Modeling
+    subgraph Modeling [Modeling]
+        direction TB
+        X_train -.->|use for training| Prophet_Model
+        X_test -.->|use for prediction| Prophet_Model
+        Prophet_Model["Prophet | Growth: Logistic | Changepoint Prior Scale: 0.03"]
+    end
+
+    %% Prediction & Results
+    subgraph Prediction [Prediction & Results]
+        direction TB
+        future[Future DataFrame] -->|for forecasting| Prophet_Model
+        preds[Predicted Values] -->|generated from| Prophet_Model
+    end
+
+    %% Visualization
+    Preds_Visualization[Preds Visualization] -->|plot preds| preds
+
+    %% Data Flows
+    Data_Ingestion --> Preprocessing --> Modeling --> Prediction --> Preds_Visualization
+```

@@ -1,0 +1,58 @@
+%% This is a high-level diagram of the data flow and processes
+flowchart TD
+
+    %% Data Sources
+    subgraph DataSources[Data Sources]
+        DS1[LokSabha2004.csv]
+        DS2[LokSabha2009.csv]
+        DS3[LokSabha2014.csv]
+        DS4[LokSabha2019.csv]
+    end
+
+    %% Data Frames
+    subgraph DataFrames[Data Frames]
+        DF2004[df_2004]
+        DF2009[df_2009]
+        DF2014[df_2014]
+        DF2019[df_2019]
+    end
+
+    %% Transformations & Analysis
+    subgraph Analysis[Data Analysis]
+        AF1[sort_df_by_criminal_cases]
+        AF2[find_highest_crime_city]
+        AF3[top_five_crime_candidates]
+    end
+
+    %% Data Sources to DataFrames
+    DS1 -->|read_csv| DF2004
+    DS2 -->|read_csv| DF2009
+    DS3 -->|read_csv| DF2014
+    DS4 -->|read_csv| DF2019
+
+    %% Data Frame Operations
+    DF2004 --> AF1
+    DF2009 --> AF1
+    DF2014 --> AF1
+    DF2019 --> AF1
+
+    DF2004 --> AF2
+    DF2009 --> AF2
+    DF2014 --> AF2
+    DF2019 --> AF2
+
+    DF2004 --> AF3
+    DF2009 --> AF3
+    DF2014 --> AF3
+    DF2019 --> AF3
+
+    %% Analysis Results
+    subgraph Results[Results]
+        RES1[city_list_2004]
+        RES2[max_city_2004]
+        RES3[max_crime_2004]
+    end
+
+    AF2 --> RES1
+    AF2 --> RES2
+    AF2 --> RES3

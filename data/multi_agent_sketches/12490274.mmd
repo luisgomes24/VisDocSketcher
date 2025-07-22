@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph Initialization
+        direction TB
+        R["R (Reward matrix)"]:::data -- Initializes --> Q["Q (Q-value matrix)"]:::data
+        R --> nStates["nStates (Number of states)"]:::param
+        R --> nActions["nActions (Number of actions)"]:::param
+        mu["mu (Learning rate)"]:::param
+        gamma["gamma (Discount factor)"]:::param
+        epsilon["epsilon (Epsilon for exploration)"]:::param
+        t["t (Transition matrix)"]:::data
+    end
+    subgraph SARSA_Algorithm
+        direction TB
+        Q -->|"Updates based on"| s["s (Current state)"]:::param
+        Q --> a["a (Current action)"]:::param
+        Q --> r["r (Reward)"]:::param
+        Q --> sprime["sprime (New state)"]:::param
+        Q --> aprime["aprime (Next action)"]:::param
+        r -->|"Reward received"| Q
+        s -->|"State transition"| sprime
+        a -->|"Action selection"| aprime
+        sprime -->|"Next state action"| aprime
+    end
+    classDef data fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef param fill:#bbf,stroke:#f66,stroke-width:2px;
+
+    subgraph Environment
+        direction TB
+        R
+        t
+    end
+
+    Environment --> Initialization
+    Initialization --> SARSA_Algorithm
+    SARSA_Algorithm -->|"Policies learned"| Q

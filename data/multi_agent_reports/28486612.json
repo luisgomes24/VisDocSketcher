@@ -1,0 +1,27 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Top Ramen Ratings.csv",
+      "description": "A dataset containing ramen ratings from various places, including brand names, styles, and ratings."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "ramen_df",
+      "description": "DataFrame containing the ramen ratings dataset after cleaning and preprocessing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ramen_df",
+      "creation": "pd.read_csv",
+      "source": "../input/top-ramen-ratings-2022/Top Ramen Ratings .csv",
+      "uses": [
+        "Data exploration",
+        "Data cleaning (renaming and dropping columns)",
+        "Visualization (various plots)"
+      ]
+    }
+  ],
+  "models": []
+}

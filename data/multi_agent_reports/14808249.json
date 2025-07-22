@@ -1,0 +1,102 @@
+{
+  "data_sources": [
+    {
+      "file_name": "reddit_wsb.csv",
+      "description": "Contains posts from the Reddit WallStreetBets community."
+    },
+    {
+      "file_name": "nyse-listed_csv.csv",
+      "description": "Contains listed NYSE tickers."
+    },
+    {
+      "file_name": "other-listed_csv.csv",
+      "description": "Contains other listed stock tickers."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing Reddit posts including titles and bodies."
+    },
+    {
+      "variable_name": "year_col",
+      "description": "List of years extracted from timestamps."
+    },
+    {
+      "variable_name": "month_col",
+      "description": "List of months extracted from timestamps."
+    },
+    {
+      "variable_name": "hour_col",
+      "description": "List of hours extracted from timestamps."
+    },
+    {
+      "variable_name": "minute_col",
+      "description": "List of minutes extracted from timestamps."
+    },
+    {
+      "variable_name": "blob_text",
+      "description": "List of all words from titles and bodies used for analysis."
+    },
+    {
+      "variable_name": "filtered_sentence",
+      "description": "List of words from titles/bodies excluding stopwords."
+    },
+    {
+      "variable_name": "counts",
+      "description": "Counter object to count occurrences of words."
+    },
+    {
+      "variable_name": "top_20_words",
+      "description": "Dictionary of the most popular words in titles."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "created_from": "pd.read_csv",
+      "flows_to": "Data analysis and visualization."
+    },
+    {
+      "variable_name": "year_col",
+      "created_from": "Timestamp extraction",
+      "flows_to": "Added as column to df."
+    },
+    {
+      "variable_name": "month_col",
+      "created_from": "Timestamp extraction",
+      "flows_to": "Added as column to df."
+    },
+    {
+      "variable_name": "hour_col",
+      "created_from": "Timestamp extraction",
+      "flows_to": "Added as column to df."
+    },
+    {
+      "variable_name": "minute_col",
+      "created_from": "Timestamp extraction",
+      "flows_to": "Added as column to df."
+    },
+    {
+      "variable_name": "blob_text",
+      "created_from": "create_text_blob function",
+      "flows_to": "Used for word counting and visualization."
+    },
+    {
+      "variable_name": "filtered_sentence",
+      "created_from": "Stopwords removal",
+      "flows_to": "Used to count words and visualize word frequency."
+    },
+    {
+      "variable_name": "counts",
+      "created_from": "Counter on filtered_sentence",
+      "flows_to": "Used for visualizations of top words."
+    },
+    {
+      "variable_name": "top_20_words",
+      "created_from": "Filtering on counts",
+      "flows_to": "Visualized in bar graphs."
+    }
+  ],
+  "models": []
+}

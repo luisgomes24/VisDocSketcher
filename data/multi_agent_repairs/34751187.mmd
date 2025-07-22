@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A["bank-additional.csv"] --> |"Load data"| B["dataset"]
+    end
+    
+    subgraph Variables
+        B --> |"Select features"| C["x"]
+        B --> |"Select target"| D["y"]
+    
+        C --> |"Split dataset"| E["xtrain, xtest"]
+        D --> |"Split dataset"| F["ytrain, ytest"]
+    end
+    
+    subgraph Model
+        G["KNeighborsClassifier"]
+        E --> |"Train model"| G
+        F --> |"Train model"| G
+        G --> |"Evaluate model with xtest"| H["Predictions"]
+    end
+    
+    %% Comments
+    %% A: Node representing the source CSV file containing the dataset.
+    %% B: Node representing the DataFrame obtained after loading the CSV file.
+    %% C: Node representing the features used for the KNN.
+    %% D: Node representing the target variable for prediction.
+    %% E & F: Representing the split datasets for training and testing.
+    %% G: The machine learning model, KNeighborsClassifier, used for creating predictions.
+    %% H: Node representing the evaluation results of the model predictions.
+```

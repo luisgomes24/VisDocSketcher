@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/>"] --> B["📊 Display Data Head <img src='table.svg'/> <br/>"]
+    B --> C["🔗 Merge Data <img src='column_split.svg'/> <br/>"]
+    C --> D["📊 Check Merged Data <img src='table.svg'/> <br/>"]
+    D --> E["🚦 Split Train-Test Set <img src='row_split.svg'/> <br/>"]
+    E --> F["🧠 Model Training <img src='brain.svg'/> <br/>"]
+    F --> G["🔍 Predict Test Data <img src='brain.svg'/> <br/>"]
+    G --> H["💾 Save Submission <img src='file.svg'/> <br/>"]
+
+    A --> A1["<img src='file.svg'/> <br/> Train Data"]
+    A --> A2["<img src='file.svg'/> <br/> Test Data"]
+    A --> A3["<img src='file.svg'/> <br/> Stores Data"]
+    A --> A4["<img src='file.svg'/> <br/> Features Data"]

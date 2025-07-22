@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    A1["cell_cycle_genes_reactome_extended.txt"]:::dataSource
+    A2["processed_h5ad files"]:::dataSource
+
+    %% Data Variables
+    B1["S_phase_genes_Tirosh"]:::dataVariable
+    B2["G2_M_genes_Tirosh"]:::dataVariable
+    B3["cell_cycle_genes_reactome_extended"]:::dataVariable
+    B4["df_stat"]:::dataVariable
+
+    %% Data Flow
+    A1 -->|Read CSV| B3
+    A2 -->|Read h5ad| C1["adata_orig"]
+    C1 -->|Clone| C2["adata"]
+    B3 -->|Used in PCA| C2
+    C2 -->|Statistics| B4
+    B4 -->|Save & Plot| D1["Output CSV & Visuals"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#cff,stroke:#333,stroke-width:2px;

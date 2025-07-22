@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+    num["num"]:::dataVar
+    total_candies["total_candies"]:::dataVar
+    number_of_friends["number_of_friends"]:::dataVar
+    fn["fn"]:::dataVar
+    arg["arg"]:::dataVar
+    arg1["arg1"]:::dataVar
+    arg2["arg2"]:::dataVar
+    arg3["arg3"]:::dataVar
+
+    round_to_two_places["round_to_two_places"]:::function
+    to_smash["to_smash"]:::function
+    time_call["time_call"]:::function
+    slowest_call["slowest_call"]:::function
+    
+    num -->|Passed to| round_to_two_places
+    total_candies -->|Passed to| to_smash
+    number_of_friends -->|Passed to| to_smash
+    fn -->|Passed to| time_call
+    arg -->|Passed to| time_call
+    fn -->|Passed to| slowest_call
+    arg1 -->|Passed to| slowest_call
+    arg2 -->|Passed to| slowest_call
+    arg3 -->|Passed to| slowest_call
+
+    classDef dataVar fill:#bbf, stroke:#f66, stroke-width:2px;
+    classDef function fill:#f96, stroke:#f63, stroke-width:2px;
+```

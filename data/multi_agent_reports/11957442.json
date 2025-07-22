@@ -1,0 +1,127 @@
+{
+    "data_sources": [
+        {
+            "file_name": "matches.csv",
+            "description": "This file contains information about IPL (Indian Premier League) matches."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "A DataFrame containing all data from matches.csv."
+        },
+        {
+            "variable_name": "matches",
+            "description": "A cleaned DataFrame derived from 'df', contains relevant match details excluding unnecessary columns."
+        },
+        {
+            "variable_name": "X",
+            "description": "Features DataFrame, includes all columns from 'matches' except the target variable 'winner'."
+        },
+        {
+            "variable_name": "y",
+            "description": "Target variable, represents the winner of the match, extracted from 'df'."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Training set of features used for model training."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Test set of features used for model evaluation."
+        },
+        {
+            "variable_name": "y_train",
+            "description": "Training set of the target variable."
+        },
+        {
+            "variable_name": "y_test",
+            "description": "Test set of the target variable."
+        },
+        {
+            "variable_name": "gnb",
+            "description": "The Gaussian Naive Bayes model used for predicting match outcomes."
+        },
+        {
+            "variable_name": "clf_knn",
+            "description": "The K-Nearest Neighbors model used for predicting match outcomes."
+        },
+        {
+            "variable_name": "acc_gnb",
+            "description": "Accuracy of the Gaussian Naive Bayes model on the test set."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "Loaded using pd.read_csv",
+            "flows": "Cleaned into 'matches', features and target variables extracted into 'X' and 'y'."
+        },
+        {
+            "variable": "matches",
+            "creation": "Derived from 'df' by dropping irrelevant columns.",
+            "flows": "Used to create 'X' and encode categorical variables."
+        },
+        {
+            "variable": "X",
+            "creation": "Derived from 'matches' by dropping 'winner'.",
+            "flows": "Used for model training and testing."
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted from 'df' as the 'winner' column.",
+            "flows": "Used for model training and testing."
+        },
+        {
+            "variable": "X_train",
+            "creation": "Created using train_test_split",
+            "flows": "Used to train model 'gnb' and 'clf_knn'."
+        },
+        {
+            "variable": "X_test",
+            "creation": "Created using train_test_split",
+            "flows": "Used to evaluate model 'gnb' and 'clf_knn'."
+        },
+        {
+            "variable": "y_train",
+            "creation": "Created using train_test_split",
+            "flows": "Used to train model 'gnb' and 'clf_knn'."
+        },
+        {
+            "variable": "y_test",
+            "creation": "Created using train_test_split",
+            "flows": "Used to evaluate model 'gnb' and 'clf_knn'."
+        },
+        {
+            "variable": "gnb",
+            "creation": "Initialized as GaussianNB and trained using training data.",
+            "flows": "Used to predict outcomes and calculate accuracy."
+        },
+        {
+            "variable": "clf_knn",
+            "creation": "Initialized as KNeighborsClassifier and trained using training data.",
+            "flows": "Used to predict outcomes and calculate accuracy."
+        },
+        {
+            "variable": "acc_gnb",
+            "creation": "Calculated after evaluating 'gnb'.",
+            "flows": "Output to show model performance."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Gaussian Naive Bayes",
+            "input_features": ["team1", "team2", "city", "toss_decision", "season"],
+            "target_variable": "winner",
+            "hyperparameters": {}
+        },
+        {
+            "model_name": "K-Nearest Neighbors",
+            "input_features": ["team1", "team2", "city", "toss_decision", "season"],
+            "target_variable": "winner",
+            "hyperparameters": {
+                "n_neighbors": 3
+            }
+        }
+    ]
+}

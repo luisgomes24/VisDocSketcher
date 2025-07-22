@@ -1,0 +1,17 @@
+graph TD;
+    A["Load train.csv"] --> B["Create dataset_train"];
+    A2["Load test.csv"] --> B2["Create dataset_test"];
+    B --> C["Preprocess dataset_train to X_train"];
+    B --> D["Encode dataset_train to y_train"];
+    C --> E["Use X_train to train model"];
+    D --> E;
+    B --> F["Preprocess validation set to X_val"];
+    B --> G["Encode validation set to y_val"];
+    F --> E;
+    G --> E;
+    B2 --> H["Preprocess dataset_test to X_test"];
+    H --> I["Use X_test to evaluate model"];
+    B2 --> J["Encode dataset_test to y_test"];
+    J --> I;
+    E --> K["Train Model on X_train and y_train"];
+    I --> L["Test Model on X_test and y_test"];

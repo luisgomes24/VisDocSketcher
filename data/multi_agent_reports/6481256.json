@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/fish-market/Fish.csv",
+      "description": "Fish market dataset containing species, weight and various dimensions of fish."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the fish dataset after loading and cleaning."
+    },
+    {
+      "name": "X",
+      "description": "Feature set containing all attributes excluding 'Weight'."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing the weight of the fish."
+    },
+    {
+      "name": "lg",
+      "description": "Linear Regression model instance for training and predicting."
+    },
+    {
+      "name": "lstSeed",
+      "description": "List to store seed values used in train-test split."
+    },
+    {
+      "name": "lstRMSQ",
+      "description": "List to store root mean square error values for different seeds."
+    },
+    {
+      "name": "lstRSq",
+      "description": "List to store R squared values for different seeds."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Loaded from CSV file",
+      "flow": "Used for exploratory analysis, cleaning, and as input for model training."
+    },
+    {
+      "variable": "X",
+      "creation": "Dropped 'Weight' from df",
+      "flow": "Used as input features for model training."
+    },
+    {
+      "variable": "y",
+      "creation": "Selected 'Weight' from df",
+      "flow": "Used as target variable for model training."
+    },
+    {
+      "variable": "lg",
+      "creation": "Instance of LinearRegression",
+      "flow": "Trained with X_train and y_train, predictions made on X_test."
+    },
+    {
+      "variable": "lstSeed",
+      "creation": "Initialized for tracking seeds",
+      "flow": "Populated during model evaluation process."
+    },
+    {
+      "variable": "lstRMSQ",
+      "creation": "Initialized for tracking RMSQ",
+      "flow": "Populated during model evaluation process."
+    },
+    {
+      "variable": "lstRSq",
+      "creation": "Initialized for tracking R-squared values",
+      "flow": "Populated during model evaluation process."
+    }
+  ],
+  "models": [
+    {
+      "name": "Linear Regression",
+      "library": "Scikit Learn",
+      "input_features": "All features except 'Weight'",
+      "target_variable": "Weight",
+      "hyperparameters": "None"
+    },
+    {
+      "name": "Gradient Descent",
+      "input_features": "All features except 'Weight'",
+      "target_variable": "Weight",
+      "hyperparameters": "Learning rate, iterations"
+    },
+    {
+      "name": "Normal Equation",
+      "input_features": "All features except 'Weight'",
+      "target_variable": "Weight",
+      "hyperparameters": "None"
+    }
+  ]
+}

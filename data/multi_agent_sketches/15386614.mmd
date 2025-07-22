@@ -1,0 +1,8 @@
+flowchart TD
+    %% Node for Bitcoin historical prices data source
+    A[bitcoin_usd_history.csv] -->|Read| B[price_history]
+    %% Node for Bitcoin search volume data source
+    C[bitcoin_search_volume.csv] -->|Read| D[search_volume]
+    %% Node representing data visualization process
+    B -->|Use in| E[visualization]
+    D -->|Use in| E[visualization]

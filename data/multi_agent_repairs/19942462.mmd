@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] --> |"Load Training Data"| B["X"]
+    A1["test.csv"] --> |"Load Test Data"| K["X_test"]
+
+    %% Data Preprocessing
+    B --> |"Extract Target: SalePrice"| C["y"]
+    B --> |"Split Data into Train/Valid"| D["X_train"]
+    B --> |"Split Data into Train/Valid"| E["X_valid"]
+
+    %% Transformation
+    D --> |"One-Hot Encoding and Alignment"| F["Processed X_train"]
+    E --> |"One-Hot Encoding and Alignment"| G["Processed X_valid"]
+
+    %% Model Training
+    M1["XGBRegressor"]
+    F --> |"Fit Model 1"| M1
+    M2["XGBRegressor (Tuned)"]
+    F --> |"Fit Model 2"| M2
+    M3["XGBRegressor (Poor Params)"]
+    F --> |"Fit Model 3"| M3
+
+    %% Predictions
+    G --> |"Predict with Model 1"| H["predictions_1"]
+    G --> |"Predict with Model 2"| I["predictions_2"]
+    G --> |"Predict with Model 3"| J["predictions_3"]
+
+    %% Evaluation
+    H --> |"Calculate MAE Model 1"| N["mae_1"]
+    I --> |"Calculate MAE Model 2"| O["mae_2"]
+    J --> |"Calculate MAE Model 3"| P["mae_3"]
+```

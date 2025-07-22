@@ -1,0 +1,35 @@
+flowchart TD
+    %% Node representing transaction data source
+    A["train_transaction.csv"]
+    %% Node representing identity data source
+    B["train_identity.csv"]
+    %% DataFrame containing transaction information
+    C["train_transaction"]
+    %% DataFrame containing identity data
+    D["train_id"]
+    %% Merged DataFrame with transaction and identity data
+    E["final_data"]
+    %% Features DataFrame for ML model
+    F["X"]
+    %% Target variable for ML model
+    G["y"]
+    %% Training features
+    H["X_train"]
+    %% Testing features
+    I["X_test"]
+    %% Training target
+    J["y_train"]
+    %% Testing target
+    K["y_test"]
+    %% ML Model used
+    L["XGBClassifier"]
+
+    %% Relationships showing data flow
+    A -->|pd.read_csv| C
+    B -->|pd.read_csv| D
+    C & D -->|pd.merge| E
+    E -->|final_data.drop 'isFraud'| F
+    E -->|final_data['isFraud']| G
+    F --> H & I
+    G --> J & K
+    H & J -->|train| L

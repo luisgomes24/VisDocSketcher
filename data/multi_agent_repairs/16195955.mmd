@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Data Source Node
+    A["Blackjack Simulator"] 
+    %% Player Total Node
+    B["Player Total"] 
+    %% Dealer Card Value Node
+    C["Dealer Card Value"]
+    %% Player Aces Node
+    D["Player Aces"]
+    %% Should Hit Decision Node
+    E["Should Hit Decision"]
+    %% Blackjack Simulation Node
+    F["Blackjack Simulation"]
+    %% Decision Evaluation Node
+    G["Evaluate Player Performance"]
+
+    %% Data source to variables
+    A --> B
+    A --> C
+    A --> D
+
+    %% Variables to decision
+    B --> E
+    C --> E
+    D --> E
+
+    %% Decision to simulation
+    E --> F
+
+    %% Simulation to evaluation
+    F --> G
+```

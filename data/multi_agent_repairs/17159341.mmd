@@ -1,0 +1,20 @@
+```mermaid
+flowchart TD
+    %% Nodes with comments
+    A["Colors List"] %% This node represents the Colors list containing color names.
+    B["Fruits List"] %% This node represents the Fruits list containing fruit names.
+    C["Animals List"] %% This node represents the Animals list containing animal names.
+    D["Result List"] %% This node represents the Result list with exam outcomes ('Pass' or 'Fail').
+    E["Marks List"] %% This node represents the marks list for five tests.
+    F["Distance Constant"] %% This node represents the constant value for total race distance.
+
+    %% Data flow between nodes
+    subgraph Data_Flow
+        A --> |"Used for classification"| G["User Input Classification"]
+        B --> |"Used for classification"| G
+        C --> |"Used for classification"| G
+        D --> |"Used in loop"| H["Count 'Pass'" ]
+        E --> |"Check user input"| I["Test Score Check"]
+        F --> |"Simulate race progression"| J["Race Simulation"]
+    end
+```

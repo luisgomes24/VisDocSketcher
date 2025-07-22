@@ -1,0 +1,18 @@
+flowchart TD
+    %% Data Source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/population-2022/population.csv"]:::dataSource
+    
+    %% Raw DataFrame from CSV
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> raw_df : DataFrame <img src='dummy_plots/barplot_template.svg'/> <br/>"]:::dataVariable
+    
+    %% Sub DataFrame for analysis
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> sub_df : DataFrame"]:::dataVariable
+    
+    %% Data Source to Raw DataFrame
+    A -->|"pd.read_csv"| B
+    
+    %% Raw DataFrame to Sub DataFrame
+    B -->|"Create various analyses"| C
+    
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:1px;
+    classDef dataVariable fill:#C6F4D6,stroke:#333,stroke-width:1px;

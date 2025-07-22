@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/asl-fingerspelling/supplemental_metadata.csv",
+      "description": "Supplemental metadata related to the ASL fingerspelling dataset."
+    },
+    {
+      "file": "/kaggle/input/asl-fingerspelling/train.csv",
+      "description": "Training data for the ASL fingerspelling task."
+    },
+    {
+      "file": "/kaggle/input/asl-fingerspelling/supplemental_landmarks/369584223.parquet",
+      "description": "Parquet file containing supplemental landmarks data."
+    },
+    {
+      "file": "/kaggle/input/asl-fingerspelling/train_landmarks/5414471.parquet",
+      "description": "Parquet file containing training landmarks data."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_meta",
+      "description": "DataFrame containing supplemental metadata."
+    },
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training data."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing landmarks data loaded from Parquet files."
+    },
+    {
+      "name": "df_sample",
+      "description": "Sample dataset with a specified number of records for exploratory data analysis."
+    },
+    {
+      "name": "selected_columns",
+      "description": "List of columns selected for analysis from the Parquet files."
+    },
+    {
+      "name": "correlation_matrix",
+      "description": "Matrix showing the correlation coefficients among variables in the selected dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_meta",
+      "creation": "pd.read_csv",
+      "flow": "Used for understanding metadata."
+    },
+    {
+      "variable": "df_train",
+      "creation": "pd.read_csv",
+      "flow": "Used for training data analysis."
+    },
+    {
+      "variable": "df",
+      "creation": "pd.read_parquet",
+      "flow": "Used for visualizations and exploratory data analysis."
+    },
+    {
+      "variable": "df_sample",
+      "creation": "df.sample",
+      "flow": "Used for exploratory data analysis, includes descriptive statistics and plots."
+    },
+    {
+      "variable": "correlation_matrix",
+      "creation": "df.corr()",
+      "flow": "Used to understand relationships between features in selected columns."
+    }
+  ],
+  "models": []
+}

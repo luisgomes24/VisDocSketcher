@@ -1,0 +1,17 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["📊 Data Preprocessing"];
+    B --> C["🔍 Initial Model Creation <img src='icons/brain.svg'/>"];
+    C --> D["🛠️ Model Tuning <img src='icons/brain.svg'/>"];
+    D --> E["📈 Feature Importance Analysis <img src='dummy_plots/feature_importance_template.svg'/>"];
+    E --> F["🏆 Model Comparison"];
+    F --> G["📊 Ensemble Model Creation <img src='icons/brain.svg'/>"];
+    G --> H["✅ Final Model Evaluation"];
+    H --> I["💾 Save Model"];
+    I --> J["👤 Model Deployment"];
+    J --> K["💻 Test Deployment"];
+    
+    A -->|get_data('insurance')| B;
+    B -->|setup| C;
+    C -->|create_model('rf')| D;
+    D -->|tune_model| E;
+    H -->|finalize_model| I;

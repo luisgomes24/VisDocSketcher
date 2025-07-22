@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> train & test"] --> B["🔄 Preprocess Data"]
+    B --> C["🧪 Create Biases"]
+    C --> D["🔢 Transform Data"]
+    D --> E["⚙️ Feature Engineering"]
+    E --> F["🔍 Encode Target"]
+    F --> G["📈 PCA Visualization"]
+    G --> H["📊  PCA Scatter Plots <img src='scatter_plot_template.svg' /> <br/> Scatter by GCD"]
+    H --> I["📉 Split Data by GCD"]
+    I --> J["🤖 Train Models <img src='brain.svg' />"]
+    J --> K["📬 Make Predictions"]
+    K --> L["📄 Save Submission <img src='file.svg' /> <br/> submission.csv"]

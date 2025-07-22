@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph DataSources
+        direction TB
+        src1["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/aapl10y/AAPL10Y.csv"]
+    end
+
+    subgraph DataProcessing
+        direction TB
+        df["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+        df_week["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_week"]
+        udiff["<img src='icons/row_split.svg' width=100 height=100/> <br/> udiff"]
+    end
+    
+    subgraph Model
+        direction TB
+        modelARMA["<img src='icons/brain.svg' width=100 height=100/> <br/> ARMA Model"]
+        forecast["forecast"]
+    end
+
+    src1 -->|Read as DataFrame| df
+    df -->|Resample| df_week
+    df_week -->|Log difference| udiff
+    udiff -->|Used for modeling| modelARMA
+    modelARMA -->|Generate Forecast| forecast
+
+    classDef raw fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef derived fill:#bbf,stroke:#333,stroke-width:2px;
+    class src1 raw;
+    class df, df_week, udiff, forecast derived;

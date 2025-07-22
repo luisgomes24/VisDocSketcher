@@ -1,0 +1,29 @@
+flowchart TD
+%% Data Source Node
+A["Airlines.csv"]:::dataSource
+
+%% Data Preparation/Loading
+A -->|"Load data"| B["df"]:::dataVariable
+
+%% Splitting Data into Features and Target
+B -->|"Extract features"| C["X"]:::dataVariable
+B -->|"Extract target"| D["y"]:::dataVariable
+
+%% Splitting Data into Train and Test
+C -->|"Train/Test Split"| E["X_train"]:::dataVariable
+C -->|"Train/Test Split"| F["X_test"]:::dataVariable
+D -->|"Train/Test Split"| G["y_train"]:::dataVariable
+D -->|"Train/Test Split"| H["y_test"]:::dataVariable
+
+%% Model Training
+E & G -->|"Train"| I["DecisionTreeClassifierModel"]:::modelNode
+E & G -->|"Train"| J["RandomForestClassifierModel"]:::modelNode
+E & G -->|"Train"| K["GBCModel"]:::modelNode
+
+
+%% Voting Classifier Training
+I & J & K -->|"Ensemble"| L["VotingClassifierModel"]:::modelNode
+
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+classDef modelNode fill:#8f8,stroke:#383,stroke-width:2px;

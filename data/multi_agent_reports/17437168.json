@@ -1,0 +1,68 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart.csv",
+      "description": "Heart Attack Analysis prediction dataset containing features related to heart health"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the heart attack dataset"
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features excluding the target variable"
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing features excluding the target variable"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable (output)"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing target variable (output)"
+    },
+    {
+      "variable_name": "Y_pred",
+      "description": "Predictions made by the model on the test set"
+    },
+    {
+      "variable_name": "acc",
+      "description": "Accuracy of the model on the test set"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X_train", "X_test", "y_train", "y_test", "df.describe()", "df.head()", "df.isnull().sum()"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["clf"]
+    },
+    {
+      "variable": "X_test",
+      "created_by": "train_test_split",
+      "flows_to": ["Y_pred"]
+    },
+    {
+      "variable": "Y_pred",
+      "created_by": "clf.predict",
+      "flows_to": ["acc"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": null
+    }
+  ]
+}

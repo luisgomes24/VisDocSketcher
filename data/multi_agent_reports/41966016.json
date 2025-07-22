@@ -1,0 +1,92 @@
+{
+  "data_sources": [
+    {
+      "file": "Mall_Customers.csv",
+      "description": "This file contains customer data including Gender, Age, Annual Income, and Spending Score."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing customer data loaded from Mall_Customers.csv"
+    },
+    {
+      "name": "X",
+      "description": "Features for clustering, including Annual Income and Spending Score"
+    },
+    {
+      "name": "y_means",
+      "description": "Predicted cluster labels for customers obtained from KMeans"
+    },
+    {
+      "name": "Clustered_df",
+      "description": "DataFrame containing original customer data with added cluster labels"
+    },
+    {
+      "name": "X_train",
+      "description": "Training feature set used for classification"
+    },
+    {
+      "name": "X_test",
+      "description": "Test feature set used for classification"
+    },
+    {
+      "name": "y_train",
+      "description": "Training labels for classification"
+    },
+    {
+      "name": "y_test",
+      "description": "Test labels for classification"
+    },
+    {
+      "name": "y_pred",
+      "description": "Predicted labels from the Gradient Boosting model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X", "Clustered_df"]
+    },
+    {
+      "variable": "X",
+      "created_by": "df.iloc",
+      "flows_to": ["y_means"]
+    },
+    {
+      "variable": "y_means",
+      "created_by": "km.fit_predict(X)",
+      "flows_to": ["Clustered_df"]
+    },
+    {
+      "variable": "Clustered_df",
+      "created_by": "df with y_means",
+      "flows_to": ["X_train", "X_test", "y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["y_pred"]
+    },
+    {
+      "variable": "y_pred",
+      "created_by": "gbdt.predict(X_test)",
+      "flows_to": ["prediction"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": ["Annual Income", "Spending Score"],
+      "target_variable": "Cluster labels",
+      "hyperparameters": {"n_clusters": 5}
+    },
+    {
+      "model_name": "Gradient Boosting Classifier",
+      "input_features": ["Gender", "Age", "Annual Income", "Spending Score"],
+      "target_variable": "Spending Category",
+      "hyperparameters": {"n_estimators": 50}
+    }
+  ]
+}

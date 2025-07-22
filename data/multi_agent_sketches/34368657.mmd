@@ -1,0 +1,50 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'nodeBorder':'#000000', 'tertiaryColor': '#ECECFF', 'tertiaryTextColor': '#333333'}}}%%
+flowchart TD
+    %% Data sources
+    subgraph Data_Sources
+        A1["train_meta.parquet"]
+        A2["sensor_geometry.csv"]
+        A3["batch_15.parquet"]
+        A4["sample_submission.parquet"]
+        A5["Test Data (Folder)"]
+    end
+
+    %% Data Variables
+    subgraph Data_Variables
+        B1["meta_train"]
+        B2["geometry"]
+        B3["train"]
+        B4["ssub"]
+    end
+
+    %% Models
+    subgraph ML_Models
+        M1["Line.best_fit Model"]
+    end
+
+    %% Data Flow
+    A1 --> |"read_parquet"| B1
+    A2 --> |"read_csv"| B2
+    A3 --> |"read_parquet"| B3
+    A4 --> |"read_parquet"| B4
+    B2 --> |"Merge with train data"| B3
+    B1 --> |"Provide metadata"| M1
+    B3 --> |"Provide event data"| M1
+
+    %% Model flows
+    M1 --> |"Predict azimuth, zenith"| B4
+    B4 --> |"Final submission"| A4
+
+    %% Comments
+    click A1 href "#" "Contains metadata for training"
+    click A2 href "#" "Details sensor positions"
+    click A3 href "#" "Contains training event data"
+    click A4 href "#" "Template for output submission"
+    click A5 href "#" "Folder for test data"
+
+    click B1 href "#" "Training metadata"
+    click B2 href "#" "Sensor geometry data"
+    click B3 href "#" "Pulse data for events"
+    click B4 href "#" "Submission data"
+
+    click M1 href "#" "3D coordinate fitting model"

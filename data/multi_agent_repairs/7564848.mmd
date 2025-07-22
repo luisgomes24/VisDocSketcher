@@ -1,0 +1,7 @@
+```mermaid
+flowchart TD
+    A["error_analysis.csv"] --> |Load data| B["df1"]
+    B["df1"] --> |Used for distribution graphs| C["plotPerColumnDistribution"]
+    B["df1"] --> |Used for correlation matrix| D["plotCorrelationMatrix"]
+    B["df1"] --> |Used for scatter and density plots| E["plotScatterMatrix"]
+```

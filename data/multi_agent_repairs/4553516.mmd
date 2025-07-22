@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+
+%% Data Sources
+A["hacker_news.comments"] %% Comments data from the Hacker News dataset
+
+%% BigQuery Client Setup
+B["client"] %% BigQuery Client object
+C["dataset_ref"] %% Reference to Dataset
+D["table_ref"] %% Reference to Table
+E["table"] %% Fetched comments Table
+
+%% Queries and Analysis
+F["prolific_commenters_query"] %% SQL for prolific commenters
+G["deleted_posts_query"] %% SQL for counting deleted posts
+
+%% DataFrames
+H["prolific_commenters"] %% DataFrame of authors with >10k posts
+I["deleted_posts"] %% DataFrame of deleted post count
+
+%% Data Source to Client
+A -->|Fetched by| B
+
+%% Client to Dataset and Table References
+B -->|Creates| C
+C -->|Creates| D
+D -->|Fetches| E
+
+%% Table to Queries
+E -->|Runs SQL to fetch| F
+E -->|Runs SQL to fetch| G
+
+%% Queries to DataFrames
+F -->|Executes and stores in| H
+G -->|Executes and stores in| I
+
+%% Output Flow
+H -->|Displayed in notebook| O1["output/display"]
+I -->|Displayed in notebook| O2["output/display"]
+```

@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/wine-reviews/winemag-data_first150k.csv",
+      "description": "Wine reviews dataset containing information about wine ratings and attributes."
+    },
+    {
+      "file": "../input/pitchfork-data/database.sqlite",
+      "description": "SQL database containing music reviews, specifically artists."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "fruits",
+      "description": "DataFrame created to represent fruit names and their corresponding prices."
+    },
+    {
+      "name": "fruit_sales",
+      "description": "DataFrame created to represent fruit sales data with quantities sold and revenue."
+    },
+    {
+      "name": "ingredients",
+      "description": "Pandas Series representing ingredients for a dinner recipe with their respective amounts."
+    },
+    {
+      "name": "reviews",
+      "description": "DataFrame containing wine reviews including attributes like country, points, and price."
+    },
+    {
+      "name": "animals",
+      "description": "DataFrame representing the number of cows and goats over two years."
+    },
+    {
+      "name": "music_reviews",
+      "description": "DataFrame created by reading data from a SQL database regarding music artists."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "fruits",
+      "creation": "Created manually as a DataFrame.",
+      "flow": "Used for reference in various exercises."
+    },
+    {
+      "variable": "fruit_sales",
+      "creation": "Created manually as a DataFrame.",
+      "flow": "Used for exercises related to data manipulation."
+    },
+    {
+      "variable": "ingredients",
+      "creation": "Created manually as a Series.",
+      "flow": "Used to understand Series data structure."
+    },
+    {
+      "variable": "reviews",
+      "creation": "Created by reading a CSV file.",
+      "flow": "Used for analysis and manipulation in further exercises."
+    },
+    {
+      "variable": "animals",
+      "creation": "Created manually as a DataFrame.",
+      "flow": "Used to save to a CSV file."
+    },
+    {
+      "variable": "music_reviews",
+      "creation": "Created by reading from a SQL database.",
+      "flow": "Used for exercises related to SQL data handling."
+    }
+  ],
+  "models": []
+}

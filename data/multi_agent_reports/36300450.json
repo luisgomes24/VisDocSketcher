@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/predict-concrete-strength/ConcreteStrengthData.csv",
+      "description": "Original dataset containing concrete strength features."
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e9/train.csv",
+      "description": "Training dataset for the concrete strength prediction model."
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e9/test.csv",
+      "description": "Test dataset for evaluating the model."
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e9/sample_submission.csv",
+      "description": "Sample submission file showing the expected submission format."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "original_df",
+      "description": "DataFrame storing the original dataset."
+    },
+    {
+      "name": "train_df",
+      "description": "DataFrame for the training data, containing 10 columns."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame for the test data."
+    },
+    {
+      "name": "sample_sub",
+      "description": "DataFrame for the sample submission format."
+    },
+    {
+      "name": "aux_target",
+      "description": "Label indicating whether data points belong to 'train' or 'original' dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "original_df",
+      "creation": "Created by reading CSV file.",
+      "flow": "Used in feature drift analysis."
+    },
+    {
+      "variable": "train_df",
+      "creation": "Created by reading CSV file.",
+      "flow": "Used in correlation heatmap, feature distribution plots, and model training."
+    },
+    {
+      "variable": "test_df",
+      "creation": "Created by reading CSV file.",
+      "flow": "Used in feature drift analysis and distribution plots."
+    },
+    {
+      "variable": "sample_sub",
+      "creation": "Created by reading CSV file.",
+      "flow": "Used as a reference for submission structure."
+    },
+    {
+      "variable": "aux_target",
+      "creation": "Derived by adding a column to train_df and original_df.",
+      "flow": "Used for UMAP data representation."
+    }
+  ],
+  "models": [
+    {
+      "model": "XGBoost",
+      "input_features": "Derived from train_df excluding the target variable.",
+      "target_variable": "Strength",
+      "hyperparameters": "N/A - Hyperparameter tuning not explicitly defined in the provided cells."
+    },
+    {
+      "model": "LightGBM",
+      "input_features": "Derived from train_df excluding the target variable.",
+      "target_variable": "Strength",
+      "hyperparameters": "N/A - Hyperparameter tuning not explicitly defined in the provided cells."
+    },
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "Derived from train_df excluding the target variable.",
+      "target_variable": "Strength",
+      "hyperparameters": "N/A - Hyperparameter tuning not explicitly defined in the provided cells."
+    },
+    {
+      "model": "CatBoostClassifier",
+      "input_features": "Derived from train_df excluding the target variable.",
+      "target_variable": "Strength",
+      "hyperparameters": "N/A - Hyperparameter tuning not explicitly defined in the provided cells."
+    }
+  ]
+}

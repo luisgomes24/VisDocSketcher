@@ -1,0 +1,77 @@
+{
+  "data_sources": [
+    {
+      "file_name": "car_illus.jpg",
+      "description": "An image file used as an input for various convolutional operations in the notebook."
+    },
+    {
+      "file_name": "vgg16-pretrained-base",
+      "description": "A pre-trained model file loaded to assist in classification tasks."
+    },
+    {
+      "file_name": "dataset",
+      "description": "A directory containing images of cars and trucks, used for training and testing the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "image",
+      "description": "The input image read from the file and processed for further operations."
+    },
+    {
+      "name": "image_detect",
+      "description": "The image after initial convolution and ReLU activation applied."
+    },
+    {
+      "name": "image_condense",
+      "description": "The result of applying maximum pooling to condense the feature map."
+    },
+    {
+      "name": "car_tf",
+      "description": "A tensor containing a resized car image for feature extraction through the model."
+    },
+    {
+      "name": "car_features",
+      "description": "The pooled feature maps output by the global average pooling layer from the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "image",
+      "creation": "Read and decoded from an image file using TensorFlow.",
+      "flow": "Passed through convolution and activation, then to pooling."
+    },
+    {
+      "variable": "image_detect",
+      "creation": "Result from ReLU applied to image_filter (after convolution).",
+      "flow": "Input to maximum pooling to create image_condense."
+    },
+    {
+      "variable": "image_condense",
+      "creation": "Created by applying max pooling on image_detect.",
+      "flow": "Used for visualization of pooled features and understanding translation invariance.",
+      "saved": "Visualized while using a varying number of pooling iterations."
+    },
+    {
+      "variable": "car_tf",
+      "creation": "Loaded from the dataset and resized.",
+      "flow": "Input to the global average pooling model."
+    },
+    {
+      "variable": "car_features",
+      "creation": "Output of the model after processing car_tf.",
+      "flow": "Used for visualizing pooled feature maps as results of the classification step."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "VGG16",
+      "input_features": "Images loaded and preprocessed as described.",
+      "target_variable": "Binary labels representing 'Car' or 'Truck'.",
+      "hyperparameters": {
+        "pooling_layer": "GlobalAvgPool2D",
+        "base_model": "Pretrained VGG16 without Flatten layer."
+      }
+    }
+  ]
+}

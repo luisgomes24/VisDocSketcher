@@ -1,0 +1,8 @@
+graph TD;
+    A["Data Source <img src='icons/database.svg' width=100 height=100/> <br/> SQL Database"] --> B["Data Processing <img src='icons/file.svg' width=100 height=100/> <br/> CSV Files"];
+    B --> C["Feature Selection <img src='icons/column_split.svg' width=100 height=100/> <br/> Selecting Features"];
+    C --> D["Train-Test Split <img src='icons/row_split.svg' width=100 height=100/> <br/> Splitting Data"];
+    D --> E["ML Model <img src='icons/brain.svg' width=100 height=100/> <br/> Neural Network"];
+    E --> F["Train Model <img src=''dummy_plots/barplot_template.svg''/> <br/> Model Training"];
+    E --> G["Evaluate Model <img src=''dummy_plots/boxplot_template.svg''/> <br/> Evaluation Metrics"];
+    G --> H["Final Output <img src=''dummy_plots/scatter_plot_template.svg''/> <br/> Results"];

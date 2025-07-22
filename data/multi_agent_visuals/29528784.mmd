@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/>train.csv"]:::data -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/>train DataFrame"]:::data
+    C["<img src='icons/file.svg' width=100 height=100/> <br/>test.csv"]:::data -->|Read CSV| D["<img src='icons/table.svg' width=100 height=100/> <br/>test DataFrame"]:::data
+
+    %% Data Preparation
+    B -->|Drop 'id' and 'loss'| E["<img src='icons/column_split.svg' width=100 height=100/> <br/>Features DataFrame X"]:::data
+    B -->|Extract 'loss'| F["<img src='icons/column_split.svg' width=100 height=100/> <br/>Target Variable y"]:::data
+    E -->|Fill NaN with average_values| G["<img src='icons/table.svg' width=100 height=100/> <br/>Cleaned Features DataFrame X"]:::data
+
+    %% Model Training
+    G -->|Input Features| H["<img src='icons/brain.svg' width=100 height=100/> <br/>AutoML Model"]:::model
+    F -->|Target Variable| H
+    H -->|Train Model| I["<img src='icons/brain.svg' width=100 height=100/> <br/>Trained AutoML Model"]:::model
+
+    %% Predictions
+    D -->|Clean and Transform| J["<img src='icons/row_split.svg' width=100 height=100/> <br/>Processed Test DataFrame"]:::plot
+    I -->|Predict on Test Data| J
+
+    %% Submission
+    J -->|Create Submission DataFrame| K["<img src='icons/table.svg' width=100 height=100/> <br/>submission DataFrame"]:::output
+    K -->|Save to CSV| L["<img src='icons/file.svg' width=100 height=100/> <br/>submission.csv"]:::output
+
+    %% Model Style
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;

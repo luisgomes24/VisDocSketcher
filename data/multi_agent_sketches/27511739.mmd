@@ -1,0 +1,36 @@
+flowchart TD
+  %% Data Sources
+  A["train.zip"]  %% Data source containing images for training and validation
+
+  %% Data Preparation
+  B["train_dir"]  %% Directory for training images
+  C["validation_dir"]  %% Directory for validation images
+
+  A --> B
+  A --> C
+
+  %% Data Generators
+  D["train_generator"]  %% Data generator with augmentation for training
+  E["validation_generator"]  %% Data generator for validation data
+
+  B --> D
+  C --> E
+
+  %% Models
+  F["CNN Model"]  %% Basic CNN model for image classification
+  G["CNN with Dropout"]  %% Enhanced model with dropout layer for regularization
+  H["Transfer Learning with VGG16"]  %% Uses pre-trained VGG16 for feature extraction
+
+  D --> F
+  E --> F
+  D --> G
+  E --> G
+  D --> H
+  E --> H
+
+  %% Training and Validation
+  I["History"]  %% Stores training and validation metrics
+
+  F --> I
+  G --> I
+  H --> I

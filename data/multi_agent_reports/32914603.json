@@ -1,0 +1,104 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/maestro-merged-npz/maestro_notes.npz",
+      "description": "Contains MIDI notes data in NPZ format, which is loaded and processed for training the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "Holds the loaded NPZ file data containing the notes."
+    },
+    {
+      "name": "all_notes",
+      "description": "A flattened array of all individual piano notes extracted from the loaded data."
+    },
+    {
+      "name": "full_dataset",
+      "description": "TensorFlow dataset created from the all_notes array."
+    },
+    {
+      "name": "train_dataset",
+      "description": "The training subset of the full_dataset, suitable for model training."
+    },
+    {
+      "name": "train_seq",
+      "description": "A dataset of input-output sequence pairs created for training the neural network."
+    },
+    {
+      "name": "train_loader",
+      "description": "The final training dataset prepared for loading in batches during the model training."
+    },
+    {
+      "name": "model",
+      "description": "Deep learning model constructed using LSTM layers for predicting the next note in a sequence."
+    },
+    {
+      "name": "history",
+      "description": "Records the training progress of the model including loss metrics over epochs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Loaded from NPZ file using np.load",
+      "flow": "Extracted to create all_notes."
+    },
+    {
+      "variable": "all_notes",
+      "creation": "Combined from all notes in data using np.append.",
+      "flow": "Converted to TensorFlow dataset as full_dataset."
+    },
+    {
+      "variable": "full_dataset",
+      "creation": "Created from all_notes using tf.data.Dataset.from_tensor_slices.",
+      "flow": "Shuffled and split into training data as train_dataset."
+    },
+    {
+      "variable": "train_dataset",
+      "creation": "Derived from full_dataset.",
+      "flow": "Used to create input-output sequences in train_seq."
+    },
+    {
+      "variable": "train_seq",
+      "creation": "Created using create_sequences function.",
+      "flow": "Processed into batches with train_loader for model fitting."
+    },
+    {
+      "variable": "train_loader",
+      "creation": "Batched dataset from train_seq.",
+      "flow": "Used as input to model.fit during training."
+    },
+    {
+      "variable": "model",
+      "creation": "Defined using Keras Sequential API with LSTM layers.",
+      "flow": "Trained using train_loader and history is recorded."
+    },
+    {
+      "variable": "history",
+      "creation": "Output of model.fit.",
+      "flow": "Used for evaluating model performance and visualizations."
+    }
+  ],
+  "models": [
+    {
+      "name": "LSTM Model",
+      "input_features": [
+        "Sequences of piano notes represented as a normalized array."
+      ],
+      "target_variable": "Next note to be predicted in the sequence.",
+      "hyperparameters": {
+        "layers": [
+          {"type": "LSTM", "neurons": 512, "dropout": 0.3, "return_sequences": true},
+          {"type": "LSTM", "neurons": 512, "dropout": 0.3, "return_sequences": true},
+          {"type": "LSTM", "neurons": 512, "dropout": 0},
+          {"type": "Dense", "neurons": 256, "activation": "relu"},
+          {"type": "Dense", "neurons": 128, "activation": "softmax"}
+        ],
+        "optimizer": "RMSprop (learning_rate=0.0005)",
+        "epochs": 100
+      }
+    }
+  ]
+}

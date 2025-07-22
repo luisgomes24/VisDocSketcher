@@ -1,0 +1,112 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/birdclef-2021/test_soundscapes/*.ogg",
+      "description": "Test audio files for inference."
+    },
+    {
+      "file": "../input/birdclef-2021/train_metadata.csv",
+      "description": "Metadata containing labels for training."
+    },
+    {
+      "file": "../input/birdclef-2021/train_soundscapes/*.ogg",
+      "description": "Fallback training audio files."
+    },
+    {
+      "file": "../input/birdclef-2021/train_soundscape_labels.csv",
+      "description": "Labels for training soundscapes."
+    },
+    {
+      "file": "../input/birdclef-2021/sample_submission.csv",
+      "description": "Sample submission format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame holding filenames and their metadata."
+    },
+    {
+      "name": "df_train",
+      "description": "DataFrame of training labels and metadata."
+    },
+    {
+      "name": "LABEL_IDS",
+      "description": "Mapping of label names to integer IDs."
+    },
+    {
+      "name": "INV_LABEL_IDS",
+      "description": "Inverse mapping of integer IDs back to label names."
+    },
+    {
+      "name": "test_data",
+      "description": "BirdCLEFDataset object for handling audio files."
+    },
+    {
+      "name": "pred_probas",
+      "description": "Predicted probabilities from the models."
+    },
+    {
+      "name": "preds",
+      "description": "Final predicted bird names based on threshold."
+    },
+    {
+      "name": "sub",
+      "description": "DataFrame for submission containing predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Constructed from test audio filenames.",
+      "flow": "Used for creating test_data and submission DataFrame."
+    },
+    {
+      "variable": "df_train",
+      "creation": "Loaded from a CSV file.",
+      "flow": "Used to create LABEL_IDS and INV_LABEL_IDS."
+    },
+    {
+      "variable": "LABEL_IDS",
+      "creation": "Derived from df_train.",
+      "flow": "Used for mapping predictions back to bird names."
+    },
+    {
+      "variable": "INV_LABEL_IDS",
+      "creation": "Derived from LABEL_IDS.",
+      "flow": "Used in interpreting the final predictions."
+    },
+    {
+      "variable": "test_data",
+      "creation": "Instantiated from the BirdCLEFDataset class.",
+      "flow": "Used for making predictions using models."
+    },
+    {
+      "variable": "pred_probas",
+      "creation": "Generated during the prediction process using the models.",
+      "flow": "Converted to bird names in preds."
+    },
+    {
+      "variable": "preds",
+      "creation": "Formulated by applying thresholds to pred_probas.",
+      "flow": "Used in forming the final submission dataframe sub."
+    },
+    {
+      "variable": "sub",
+      "creation": "Created from preds and data DataFrame.",
+      "flow": "Saved as 'submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model": "resnest50",
+      "input_features": "Audio features extracted as mel spectrograms.",
+      "target_variable": "Predicted bird species.",
+      "hyperparameters": {
+        "num_classes": 397,
+        "activation_function": "sigmoid",
+        "threshold": 0.11
+      }
+    }
+  ]
+}

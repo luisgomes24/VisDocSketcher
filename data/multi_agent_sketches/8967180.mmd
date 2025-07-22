@@ -1,0 +1,26 @@
+%% This Mermaid diagram visualizes the data flow and processing as detailed in the Jupyter Notebook.
+
+flowchart TD
+    %% Data Sources
+    A["sample_submission.csv"]
+    B["test.csv"]
+    C["train_kfold5.csv"]
+
+    %% DataFrames Creation
+    D["DataFrame df1"]
+    E["DataFrame df2"]
+    F["DataFrame df3"]
+    
+    %% Create DataFrames by reading CSV files
+    A --> |"Read with pd.read_csv"| D
+    B --> |"Read with pd.read_csv"| E
+    C --> |"Read with pd.read_csv"| F
+
+    %% DataFrames Usage
+    D --> |"Used for plotting distributions\n correlation matrix, scatter/density plots"| G["Plotting Operations"]
+    E --> |"Used for plotting distributions\n correlation matrix, scatter/density plots"| G
+    F --> |"Used for plotting distributions\n correlation matrix, scatter/density plots"| G
+
+    %% Note: Add ML Model Nodes here if models were being used
+    
+    %% No ML models are utilized in the code as per the analysis

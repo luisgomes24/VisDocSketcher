@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data source node
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> winemag-data-130k-v2.csv] -->|Read CSV| B[<img src='icons/table.svg' width=100 height=100/> <br/> reviews]
+    
+    %% Nodes for data transformation and analysis
+    B -->|GroupBy and count| C[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> reviews_written]
+    B -->|Aggregation based on price| D[<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> best_rating_per_price]
+    B -->|GroupBy and min/max| E[<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> price_extremes]
+    B -->|GroupBy and mean| F[<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> reviewer_mean_ratings]
+    B -->|MultiIndex creation and count| G[<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> country_variety_counts]
+
+    %% Further processing
+    E -->|Sort by prices| H[<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> sorted_varieties]
+
+    %% Comments for clarity
+    classDef nodeClass fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H nodeClass;

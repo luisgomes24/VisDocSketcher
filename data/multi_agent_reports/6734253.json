@@ -1,0 +1,93 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/google-quest-challenge/train.csv",
+      "description": "Training data containing questions, answers, and various metrics."
+    },
+    {
+      "file": "../input/google-quest-challenge/test.csv",
+      "description": "Test data containing questions but without their corresponding answers."
+    },
+    {
+      "file": "../input/google-quest-challenge/sample_submission.csv",
+      "description": "A sample submission file structure for output predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training data."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data."
+    },
+    {
+      "name": "target_cols",
+      "description": "List of target columns to predict, including various metrics of question and answer quality."
+    },
+    {
+      "name": "simple_engineered_feature",
+      "description": "Array containing engineered features from the training data."
+    },
+    {
+      "name": "simple_engineered_feature_test",
+      "description": "Array containing engineered features from the test data."
+    },
+    {
+      "name": "train_features",
+      "description": "Combined features for training used for model fitting."
+    },
+    {
+      "name": "test_features",
+      "description": "Combined features for testing used for making predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "read_csv",
+      "flows_to": ["simple_engineered_feature", "train_features", "model training"]
+    },
+    {
+      "variable": "test",
+      "creation_method": "read_csv",
+      "flows_to": ["simple_engineered_feature_test", "test_features"]
+    },
+    {
+      "variable": "simple_engineered_feature",
+      "creation_method": "feature engineering",
+      "flows_to": ["train_features"]
+    },
+    {
+      "variable": "simple_engineered_feature_test",
+      "creation_method": "feature engineering",
+      "flows_to": ["test_features"]
+    },
+    {
+      "variable": "train_features",
+      "creation_method": "concatenate features",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "test_features",
+      "creation_method": "concatenate features",
+      "flows_to": ["submission"]
+    }
+  ],
+  "models": [
+    {
+      "model": "Sequential Neural Network",
+      "input_features": "train_features",
+      "target_variable": "target_cols",
+      "layers": [
+        {"type": "Dense", "units": 512, "activation": "relu"},
+        {"type": "Dense", "units": 128, "activation": "relu"},
+        {"type": "Dense", "units": "len(target_cols)", "activation": "sigmoid"}
+      ],
+      "loss_function": "binary_crossentropy",
+      "optimizer": "adam",
+      "early_stopping": "Enabled"
+    }
+  ]
+}

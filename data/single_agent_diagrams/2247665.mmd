@@ -1,0 +1,9 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> home_data"] --> B["🔍 Target & Features Selection <img src='column_split.svg'/>"];
+    B --> C["🔄 Train-Test Split <img src='row_split.svg'/>"];
+    C --> D["🧠 Specify & Fit Model <img src='brain.svg'/>"];
+    D --> E["📊 Validation Predictions & MAE <img src='hist_template.svg'/>"];
+    E --> F["⚙️ Optimize Tree Size"];
+    F --> G["🔄 Fit Final Model using All Data"];
+    G --> H["✅ Model Tuning Complete"];

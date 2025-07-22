@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {"file_name": "spotify.csv", "description": "Dataset containing information about tracks, including features like danceability, energy, loudness, etc. and target variable 'track_popularity'."},  
+    {"file_name": "concrete.csv", "description": "Dataset containing features used to predict 'CompressiveStrength' of concrete."}
+  ],
+  "data_variables": [
+    {"name": "spotify", "description": "DataFrame containing Spotify dataset loaded from csv."},
+    {"name": "X", "description": "DataFrame containing features of the Spotify dataset after dropping the target variable."},
+    {"name": "y", "description": "Series containing the target variable 'track_popularity' from the Spotify dataset."},
+    {"name": "artists", "description": "Series containing the 'track_artist' from the Spotify dataset."},
+    {"name": "features_num", "description": "List of numerical feature column names from the Spotify dataset."},
+    {"name": "features_cat", "description": "List of categorical feature column names from the Spotify dataset."},
+    {"name": "preprocessor", "description": "ColumnTransformer used to apply different preprocessing steps to numerical and categorical features."},
+    {"name": "X_train", "description": "Training features DataFrame after preprocessing and grouping based on artists."},
+    {"name": "X_valid", "description": "Validation features DataFrame after preprocessing."},
+    {"name": "y_train", "description": "Normalized training target variable."},
+    {"name": "y_valid", "description": "Normalized validation target variable."},
+    {"name": "input_shape", "description": "List containing the shape of the input features for the neural network."},
+    {"name": "concrete", "description": "DataFrame containing the Concrete dataset loaded from csv."},
+    {"name": "df", "description": "Copy of the concrete DataFrame for manipulation."},
+    {"name": "df_train", "description": "Sample of DataFrame for training data (70% of total)."},
+    {"name": "df_valid", "description": "Remaining DataFrame for validation data (30% of total)."},
+    {"name": "X_train", "description": "Training features DataFrame, excluding 'CompressiveStrength'."},
+    {"name": "X_valid", "description": "Validation features DataFrame, excluding 'CompressiveStrength'."},
+    {"name": "y_train", "description": "Training target variable for concrete dataset."},
+    {"name": "y_valid", "description": "Validation target variable for concrete dataset."}
+  ],
+  "data_flow": [
+    {"variable": "spotify", "creation_method": "pd.read_csv", "flow": "Used to create X and y by extracting features and target from the DataFrame."},
+    {"variable": "X", "creation_method": "X = spotify.copy().dropna()", "flow": "X is the processed features from the spotify DataFrame, used for model training and evaluation."},
+    {"variable": "y", "creation_method": "y = X.pop('track_popularity')", "flow": "Target variable extracted from the features DataFrame for training and evaluation."},
+    {"variable": "artists", "creation_method": "artists = X['track_artist']", "flow": "Used in group splitting into training and validation sets."},
+    {"variable": "X_train, X_valid, y_train, y_valid", "creation_method": "group_split(X, y, artists)", "flow": "Training and validation sets used for fitting the Spotify model."},
+    {"variable": "X_train", "creation_method": "preprocessor.fit_transform(X_train)", "flow": "Transformed to apply scaling and one-hot encoding before feeding into the model."},
+    {"variable": "X_valid", "creation_method": "preprocessor.transform(X_valid)", "flow": "Transformed for validation data using the fitted preprocessor from training data."},
+    {"variable": "history", "creation_method": "model.fit()", "flow": "Contains training history, including loss values, used for plot visualization and evaluation of training process."},
+    {"variable": "concrete", "creation_method": "pd.read_csv", "flow": "Used to create df, which is further split into training and validation sets for the Concrete model."},
+    {"variable": "model", "creation_method": "keras.Sequential([...])", "flow": "Define the structure of the neural networks for both Spotify and Concrete datasets."  }
+  ],
+  "models": [
+    {
+      "model_name": "Spotify Model",
+      "input_features": "Numerical and categorical features from the Spotify dataset.",
+      "target_variable": "track_popularity after normalization.",
+      "layers": [
+        {"layer_type": "Dense", "units": 128, "activation": "relu"},
+        {"layer_type": "Dropout", "rate": 0.3},
+        {"layer_type": "Dense", "units": 64, "activation": "relu"},
+        {"layer_type": "Dropout", "rate": 0.3},
+        {"layer_type": "Dense", "units": 1}
+      ],
+      "hyperparameters": {"optimizer": "adam", "loss": "mae", "epochs": 50}
+    },
+    {
+      "model_name": "Concrete Model",
+      "input_features": "Features of Concrete dataset.",
+      "target_variable": "CompressiveStrength.",
+      "layers": [
+        {"layer_type": "BatchNormalization"},
+        {"layer_type": "Dense", "units": 512, "activation": "relu"},
+        {"layer_type": "BatchNormalization"},
+        {"layer_type": "Dense", "units": 512, "activation": "relu"},
+        {"layer_type": "BatchNormalization"},
+        {"layer_type": "Dense", "units": 512, "activation": "relu"},
+        {"layer_type": "BatchNormalization"},
+        {"layer_type": "Dense", "units": 1}
+      ],
+      "hyperparameters": {"optimizer": "sgd", "loss": "mae", "epochs": 100}
+    }
+  ]
+}

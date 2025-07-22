@@ -1,0 +1,21 @@
+flowchart TD
+    A[Train.csv] -->|Read with pandas| B[data]
+    %% A: Data source file
+    B -->|Group by x, y, direction| C[data_dir]
+    %% B: Loaded training data
+    C -->|Visualize| D((show_congestion))
+    %% C: Grouped DataFrame for road direction
+    B -->|Get unique times| E[unique_times]
+    %% E: Unique time stamps
+    E -->|Filter times| F[times_filtered]
+    %% F: Filtered time intervals
+    B -->|Filter by time| G[data_filtered]
+    %% G: Data filtered on selected time
+    G -->|Create animation DataFrame array| H[d_a]
+    %% H: List of DataFrames for animation
+    H -->|Visualize animation| I((Animation Function))
+    %% I: Animation to show congestion over time
+    B -->|Filter by direction and time| J[df_array]
+    %% J: DataFrames for specific directions and time
+    J -->|Secondary animation| K((Secondary Animation))
+    %% K: Animation for specific roads and directions

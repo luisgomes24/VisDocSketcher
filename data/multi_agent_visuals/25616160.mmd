@@ -1,0 +1,8 @@
+graph LR
+    A["Train.csv"] -->|"Read with pandas"| B["data"]
+    B -->|"Group by x, y, direction"| C["data_dir"]
+    C -->|"Use in visualization"| D["show_congestion"]
+    D -->|"Use to plot"| E["Plot function"]
+    E -->|"Generate visuals"| F["Visualization output"]
+    G["Time variable"] -->|"Filtered for animation"| H["d_a"] 
+    H -->|"Used for animation"| D

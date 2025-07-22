@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "mental-heath-in-tech-2016_20161114.csv",
+      "description": "Contains data related to mental health in the tech industry for 2016, including various mental health indicators and demographics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the mental health data after being read from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "description": "The DataFrame is created by loading data from a CSV file. The DataFrame is used to explore the data and extract insights from it."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A["Mall_Customers.csv"] --> B["df"]
+    
+    %% Data Preparation
+    B --> C["X"]
+    C --> D["KMeans Clustering"]
+    D --> E["y_means"]
+    B --> F["Clustered_df"]
+    E --> F
+    
+    %% Clustering
+    subgraph Clustering
+        C --> D
+        D --> F
+    end
+
+    %% Train/Test Split
+    F --> G["X_train, X_test, y_train, y_test"]
+    G --> H["Gradient Boosting Classifier"]
+    H --> I["y_pred"]
+
+    %% Comments
+    subgraph Legend
+        KMeans["KMeans Clustering"] -- "Clusters customers based on income and spending" --> F
+        GradientBoosting["Gradient Boosting Classifier"] -- "Classifies spending categories" --> I
+    end

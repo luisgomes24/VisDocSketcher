@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "mort.csv",
+      "description": "CSV file containing mortality rates across different states and years."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "mortality",
+      "description": "DataFrame containing the original mortality data loaded from CSV."
+    },
+    {
+      "variable_name": "mortality_drop",
+      "description": "DataFrame after dropping unnecessary mortality rate columns."
+    },
+    {
+      "variable_name": "mortality_state_overall",
+      "description": "DataFrame containing state-level mortality information filtered to include specified states."
+    },
+    {
+      "variable_name": "mort_st_cat_yr",
+      "description": "DataFrame after dropping the 'fips' column and containing mortality rates by state and year."
+    },
+    {
+      "variable_name": "mort_neonat",
+      "description": "Transposed DataFrame containing neonatal disorder mortality rates across states over the years."
+    },
+    {
+      "variable_name": "mort_neonat_drop",
+      "description": "Final DataFrame prepared for plotting, with appropriate column names and without the first row."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "mortality",
+      "created_by": "pd.read_csv",
+      "flows_to": ["mortality_drop"]
+    },
+    {
+      "variable": "mortality_drop",
+      "created_by": "DataFrame.drop",
+      "flows_to": ["mortality_state_overall"]
+    },
+    {
+      "variable": "mortality_state_overall",
+      "created_by": "DataFrame.loc",
+      "flows_to": ["mort_st_cat_yr"]
+    },
+    {
+      "variable": "mort_st_cat_yr",
+      "created_by": "DataFrame.drop",
+      "flows_to": ["mort_neonat"]
+    },
+    {
+      "variable": "mort_neonat",
+      "created_by": "DataFrame.drop",
+      "flows_to": ["mort_neonat_drop"]
+    },
+    {
+      "variable": "mort_neonat_drop",
+      "created_by": "DataFrame.reset_index",
+      "flows_to": ["plot"]
+    }
+  ],
+  "models": []
+}

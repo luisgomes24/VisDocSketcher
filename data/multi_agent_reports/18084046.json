@@ -1,0 +1,81 @@
+{
+  "data_sources": [
+    {
+      "file_name": "S08_question_answer_pairs.txt",
+      "description": "Contains question-answer pairs related to specific articles."
+    },
+    {
+      "file_name": "S09_question_answer_pairs.txt",
+      "description": "Contains question-answer pairs similar to those in S08, related to a different set of articles."
+    },
+    {
+      "file_name": "S10_question_answer_pairs.txt",
+      "description": "Contains question-answer pairs encoded in ISO-8859-1, related to various articles."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing question-answer pairs from S08 dataset."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing question-answer pairs from S09 dataset."
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame containing question-answer pairs from S10 dataset."
+    },
+    {
+      "variable_name": "all_data",
+      "description": "Merged DataFrame of df1, df2, and df3; contains unique question-answer pairs with cleaned questions."
+    },
+    {
+      "variable_name": "tfidf_vectorizer",
+      "description": "TfidfVectorizer instance for transforming text data into TF-IDF feature vectors."
+    },
+    {
+      "variable_name": "tfidf_matrix",
+      "description": "TF-IDF matrix from the questions in all_data indicating the text features."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "used_in": "Merged into all_data"
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "used_in": "Merged into all_data"
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv",
+      "used_in": "Merged into all_data"
+    },
+    {
+      "variable": "all_data",
+      "creation_method": "DataFrame.append",
+      "used_in": "Used in TF-IDF transformation, questions asked in ask_question function"
+    },
+    {
+      "variable": "tfidf_vectorizer",
+      "creation_method": "TfidfVectorizer(tokenizer=my_tokenizer)",
+      "used_in": "Used to transform the questions in all_data"
+    },
+    {
+      "variable": "tfidf_matrix",
+      "creation_method": "tfidf_vectorizer.fit_transform",
+      "used_in": "Used in ask_question function to find the closest question"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Cosine Similarity",
+      "input_features": "TF-IDF matrix of questions",
+      "target_variable": "Response based on user query"
+    }
+  ]
+}

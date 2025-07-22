@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A[../input/handwriting-recognition/written_name_train_v2.csv] -->|read_csv| B(train_df) 
+    C[../input/handwriting-recognition/written_name_validation_v2.csv] -->|read_csv| D(val_df)
+    E[../input/handwriting-recognition/written_name_test_v2.csv] -->|read_csv| F(test_df)
+    G[../input/handwriting-recognition/train_v2/train/] --> H(JPEG Images)
+    
+    %% Data Variables and Transformations
+    B -->|DataFrame creation| I(train_df Analysis)
+    I -->|column extraction| J[columns]
+    B --> K[Data Analysis & Visualizations]
+    D --> L[Validation Analysis]
+    F --> M[Testing/Validation Analysis]
+    
+    %% Comments
+    %% A, C, E: CSV files representing different datasets used for training, validation, and testing.
+    %% B, D, F: DataFrames created from respective CSV data.
+    %% G: Directory containing image data for training.
+    %% H: Placeholder representing operations involving training images.
+    %% I: Operations involving training data analysis.
+    %% J: List of column names extracted for reference.
+    %% K: Train dataset analysis and visualizations.
+    %% L: Analysis of validation dataset.
+    %% M: Analysis involving test dataset.

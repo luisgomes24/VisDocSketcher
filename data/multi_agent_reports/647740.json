@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file": "bigquery-public-data.openaq.global_air_quality",
+      "description": "Contains global air quality data, including various measurements by location."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "global_air",
+      "description": "An instance of BigQueryHelper used to interact with the OpenAQ dataset."
+    },
+    {
+      "name": "country",
+      "description": "A DataFrame containing country information obtained from the global air quality dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "global_air",
+      "creation": "Initialized using BigQueryHelper with active project and dataset name.",
+      "flow": "Used to list tables, check schema, and execute queries on the dataset."
+    },
+    {
+      "variable": "country",
+      "creation": "Created by executing a SQL query to extract country data from the global air quality dataset.",
+      "flow": "Holds the results from the query and is further used to generate value counts and save to CSV."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,41 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame variable used for most plotting functions. It contains the processed data to analyze."
+    },
+    {
+      "name": "nHistogramShown",
+      "description": "Parameter for the number of histograms to display."
+    },
+    {
+      "name": "nHistogramPerRow",
+      "description": "Parameter for the number of histograms to display per row."
+    },
+    {
+      "name": "graphWidth",
+      "description": "Parameter specifying the width of the correlation matrix plot."
+    },
+    {
+      "name": "plotSize",
+      "description": "Parameter specifying the size of scatter plots."
+    },
+    {
+      "name": "textSize",
+      "description": "Parameter for the size of text annotations in scatter plots."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created": "Not explicitly shown in notebook; implies it's created when data is read from a source.",
+      "flows_to": [
+        "plotHistogram function",
+        "plotCorrelationMatrix function",
+        "plotScatterMatrix function"
+      ]
+    }
+  ],
+  "models": []
+}

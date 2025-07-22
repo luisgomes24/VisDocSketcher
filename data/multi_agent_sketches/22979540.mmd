@@ -1,0 +1,22 @@
+%% This diagram shows the data flow and processing steps in a data science project
+flowchart TD
+
+    %% Data source node
+    A["CSV File: Premier League Matches 2014-2020"] --> |"Read data from CSV"| B["DataFrame: data0"]
+    %% Initial data loading
+    B --> |"Preprocess: Label Encoding, Score-Diff Calculation"| C["DataFrame: data1"]
+    %% Preprocessed data to training/testing split
+    C --> |"Split data into features and target"| D["Features: trainX"]
+    C --> E["Target: trainY0"]
+    C --> F["Features: testX"]
+    C --> G["Target: testY0"]
+    %% Model Training
+    D & E --> |"Train LGBMClassifier"| H["LGBMClassifier Model"]
+    %% Model Evaluation
+    F & G --> |"Evaluate model"| H
+
+    %% Model specifics
+    H --> |"Model Hyperparameters and Configurations"| I["num_leaves, objective, max_depth, learning_rate, lambda_l1, lambda_l2, bagging_freq, bagging_fraction"]
+
+    %% Hyperparameter optimization step
+    I --> |"Optimized using Optuna"| I

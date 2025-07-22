@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Source Node
+    A["embold_train.json"] --> |Read JSON| B["DataFrame: df"]
+    
+    %% Data Processing Nodes
+    B --> |Filter Bugs| C["df_bug"]
+    B --> |Filter Features| D["df_feature"]
+    B --> |Filter Questions| E["df_question"]
+    
+    %% Data Loader Nodes
+    B --> |Create Train Data Loader| F["train_data_loader"]
+    B --> |Create Test Data Loader| G["testing_data_loader"]
+    B --> |Create Validation Data Loader| H["val_data_loader"]
+    
+    %% Model Node
+    I["BERT Model\nInput: commit_message\nOutput: label\nParams: dropout=0.3, lr=2e-5, epochs=5"]
+    
+    %% DataFlow to Model
+    F --> |Train Model| I
+    G --> |Test Model| I
+    H --> |Validate Model| I
+    
+    %% Explanation Nodes
+    %% A: This node represents the data source file that feeds the initial data.
+    %% B: This node is the DataFrame that includes the commit messages and their labels.
+    %% C, D, E: These nodes represent filtered subsets of the data for specific labels.
+    %% F, G, H: These nodes represent different data loaders used for training, testing, and validation respectively.
+    %% I: This node is the BERT-based machine learning model used for classifying commit messages.

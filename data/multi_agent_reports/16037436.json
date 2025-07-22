@@ -1,0 +1,134 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Data_Train.xlsx",
+      "description": "Contains features and target variable for training the model."
+    },
+    {
+      "file_name": "Data_Test.xlsx",
+      "description": "Contains features for testing the model."
+    },
+    {
+      "file_name": "Sample_Submission.xlsx",
+      "description": "Contains sample submission format for the predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training data including features and target variable."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing test data with features for prediction."
+    },
+    {
+      "name": "sample",
+      "description": "DataFrame for submission sample which includes the target format."
+    },
+    {
+      "name": "X_train",
+      "description": "Features used for training the models after preprocessing."
+    },
+    {
+      "name": "y_train",
+      "description": "Target variable for model training (Delivery_Time)."
+    },
+    {
+      "name": "X_test",
+      "description": "Features used for testing the models after preprocessing."
+    },
+    {
+      "name": "y_test",
+      "description": "Target variable for model testing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_excel",
+      "flow": "Preprocessed into features and target variable. Used for training models."
+    },
+    {
+      "variable": "test",
+      "creation_method": "pd.read_excel",
+      "flow": "Preprocessed into features for prediction."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Used for training various model classifiers."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "Variable split from train",
+      "flow": "Used for training various model classifiers."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "flow": "Used for evaluating model performance."
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "Variable split from train",
+      "flow": "Used for evaluating model performance."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "XGBoost Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "Decision Tree Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "K-Neighbors Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "{'n_neighbors': best_Kvalue from 2 to 14 based on accuracy}"
+    },
+    {
+      "model_name": "Support Vector Machine",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "{'random_state': 42, 'gamma': 'auto'}"
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "{'n_estimators': 100, 'random_state': 42}"
+    },
+    {
+      "model_name": "AdaBoost Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "Bagging Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "Extra Trees Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    }
+  ]
+}

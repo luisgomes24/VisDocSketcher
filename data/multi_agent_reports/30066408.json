@@ -1,0 +1,78 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tps092022-time-series-conversation/train_Spain_KaggleRama_Kaggle Advanced Techniques.csv",
+      "description": "Training dataset for time series forecasting."
+    },
+    {
+      "file": "../input/tps092022-time-series-conversation/test_Spain_KaggleRama_Kaggle Advanced Techniques.csv",
+      "description": "Test dataset for making predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data with date as index."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing test data with dates for prediction."
+    },
+    {
+      "variable": "model",
+      "description": "The best performing model obtained after comparison."
+    },
+    {
+      "variable": "tuned_model",
+      "description": "The hyper-parameter tuned version of the best model."
+    },
+    {
+      "variable": "final_model",
+      "description": "The finalized model ready for making predictions."
+    },
+    {
+      "variable": "df",
+      "description": "DataFrame containing predictions with dates."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used to set up the time series model and make predictions."
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flow": "Used for predictions and final output."
+    },
+    {
+      "variable": "model",
+      "creation": "time.compare_models",
+      "flow": "Used to evaluate model performance and select the best one."
+    },
+    {
+      "variable": "tuned_model",
+      "creation": "time.tune_model",
+      "flow": "Provides optimized model for better predictions."
+    },
+    {
+      "variable": "final_model",
+      "creation": "time.finalize_model",
+      "flow": "Final model used for generating predictions."
+    },
+    {
+      "variable": "df",
+      "creation": "predict_model(final_model, fh = 365)",
+      "flow": "Used to retrieve predictions for the test set."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Time Series Model",
+      "input_features": "Train dataset with date as index.",
+      "target_variable": "num_sold",
+      "hyperparameters": "Optimized for SMAPE during tuning."
+    }
+  ]
+}

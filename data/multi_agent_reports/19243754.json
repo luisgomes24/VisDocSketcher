@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "source": "Boston Housing Dataset",
+      "description": "A dataset from sklearn containing information about housing prices and attributes in Boston"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Pandas DataFrame containing housing data with prices"
+    },
+    {
+      "name": "X_train",
+      "description": "Training feature set (rooms)"
+    },
+    {
+      "name": "X_test",
+      "description": "Test feature set (rooms)"
+    },
+    {
+      "name": "y_train",
+      "description": "Training target set (prices)"
+    },
+    {
+      "name": "y_test",
+      "description": "Test target set (prices)"
+    },
+    {
+      "name": "model",
+      "description": "Lasso regression model for predicting house prices"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Converted from sklearn dataset to pandas DataFrame",
+      "flow": "Used for data exploration and model training"
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split on rooms",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split on rooms",
+      "flow": "Used for evaluating the model"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split on price",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split on price",
+      "flow": "Used for evaluating the model"
+    },
+    {
+      "variable": "model",
+      "creation_method": "Initialized and fitted Lasso regression",
+      "flow": "Used to make predictions and evaluate model performance"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Lasso Regression",
+      "input_features": ["rooms"],
+      "target_variable": "price",
+      "hyperparameters": {"alpha": 0.3}
+    }
+  ]
+}

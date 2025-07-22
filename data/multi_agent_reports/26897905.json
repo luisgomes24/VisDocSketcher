@@ -1,0 +1,15 @@
+{"data_sources": [
+    {"file_name": "tFL1", "description": "Transformed Follicular Lymphoma data from provided path"}
+],
+"data_variables": [
+    {"variable_name": "adata", "description": "AnnData object containing the loaded single-cell RNA-sequencing data and associated gene expression information"},
+    {"variable_name": "G1S_genes_Tirosh", "description": "List of genes associated with the G1/S phase of the cell cycle"},
+    {"variable_name": "G2M_genes_Tirosh", "description": "List of genes associated with the G2/M phase of the cell cycle"}
+],
+"data_flow": [
+    {"variable_name": "adata", "creation_method": "sc.read_10x_mtx(pathname)", "usage": "Used in normalization, plotting in phase_plot function"},
+    {"variable_name": "G1S_genes_Tirosh", "creation_method": "Defined as a list", "usage": "Input for phase_plot function"},
+    {"variable_name": "G2M_genes_Tirosh", "creation_method": "Defined as a list", "usage": "Input for phase_plot function"}
+],
+"models": []
+}

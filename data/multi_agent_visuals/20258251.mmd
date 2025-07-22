@@ -1,0 +1,12 @@
+flowchart TD
+    A["Edge List CSV"]:::datasource
+    A -->|Import CSV| B["df"]:::dataframe
+    B --> C["Data Processing"]:::process
+    C --> D["Analysis"]:::analysis
+    D --> E["Visualization"]:::visualization
+    E --> F["Reporting"]:::report
+    classDef datasource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef analysis fill:#ffb,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef report fill:#fbf,stroke:#333,stroke-width:2px;

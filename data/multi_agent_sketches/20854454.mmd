@@ -1,0 +1,33 @@
+flowchart TD
+ subgraph DataSources
+ A["train.csv"]:::dataSource  %% This node represents the CSV file containing historical customer data.
+ end
+
+ subgraph DataPreparation
+ B["Read train.csv into train DataFrame"]:::process --> C["Copy train to df for processing"]:::process
+ C --> D["Prepare X by dropping 'Response' column"]:::process
+ C --> E["Prepare y as train['Response']"]:::process
+ end
+
+ subgraph DataSplitting
+ F["Split data into X_train, X_test, y_train, y_test"]:::process
+ end
+
+ subgraph Modeling
+ G["RandomForestClassifier Model"]:::model
+ H["XGBClassifier Model"]:::model
+ F --> G & H
+ end
+
+ A --> B
+ B --> C
+ D --> F
+ E --> F
+
+ G --> J["Evaluate RandomForest on X_test, y_test"]:::evaluation
+ H --> K["Evaluate XGBClassifier on X_test, y_test"]:::evaluation
+
+ classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+ classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+ classDef model fill:#aff,stroke:#333,stroke-width:2px;
+ classDef evaluation fill:#aaf,stroke:#333,stroke-width:2px;

@@ -1,0 +1,22 @@
+flowchart TD
+    color["color"]
+    pi["pi"]
+    diameter["diameter"]
+    radius["radius"]
+    area["area"]
+    a["a"]
+    b["b"]
+    summ["summ"]
+    div["div"]
+    to_smash["to_smash"]
+
+    diameter -->|Calculate radius| radius
+    radius -->|Calculate area| area
+    pi -->|Used in calculation| area
+
+    a -->|Swapped with| b
+    b -->|Swapped with| a
+
+    summ -->|Calculate each share| div
+    summ -->|Calculate to smash| to_smash
+    div -->|Used to calculate to smash| to_smash

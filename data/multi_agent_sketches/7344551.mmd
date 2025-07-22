@@ -1,0 +1,31 @@
+flowchart TD
+    %% Node definitions
+    A["heart.csv"] --> |"Load data"| B["heart_df"]
+    B --> |"Split features and target"| C["X_training"]
+    B --> |"Split features and target"| D["y_training"]
+    B --> |"Split features and target"| E["X_vault"]
+    B --> |"Split features and target"| F["y_vault"]
+    C --> |"Standardize features"| G["X_train_scaled"]
+    E --> |"Standardize features"| H["X_test_scaled"]
+    G --> |"Train model with RandomForestClassifier (n_estimators=150)"| I["Model: RandomForest"]
+    G --> |"Train model with XGBClassifier"| J["Model: XGBClassifier"]
+    I --> |"Evaluate on test data"| H
+    J --> |"Evaluate on test data"| H
+
+    %% Node descriptions
+    subgraph Data_Source
+        A
+    end
+    subgraph Data_Preparation
+        B
+        C
+        D
+        E
+        F
+        G
+        H
+    end
+    subgraph Model_Training
+        I
+        J
+    end

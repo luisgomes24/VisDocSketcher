@@ -1,0 +1,77 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/rsna-str-pulmonary-embolism-detection/train.csv",
+      "description": "Training data containing details of patients and their examinations."
+    },
+    {
+      "file_name": "../input/rsna-str-pulmonary-embolism-detection/test.csv",
+      "description": "Testing data for evaluation of models."
+    },
+    {
+      "file_name": "../input/rsna-str-pulmonary-embolism-detection/sample_submission.csv",
+      "description": "Sample submission file to illustrate the required format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing training data with patient details."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing testing data."
+    },
+    {
+      "name": "neg_pe_count_df",
+      "description": "DataFrame filtered for patients who do not have any diagnosed pulmonary embolism."
+    },
+    {
+      "name": "pos_pe_count_df",
+      "description": "DataFrame filtered for patients with at least one type of pulmonary embolism."
+    },
+    {
+      "name": "list_of_patient_ids",
+      "description": "A list containing the IDs of all patients present in the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation": "pd.read_csv('../input/rsna-str-pulmonary-embolism-detection/train.csv')",
+      "usage": [
+        "Group by StudyInstanceUID and SeriesInstanceUID",
+        "Data analysis and visualizations"
+      ]
+    },
+    {
+      "variable": "test_df",
+      "creation": "pd.read_csv('../input/rsna-str-pulmonary-embolism-detection/test.csv')",
+      "usage": [
+        "Model prediction"
+      ]
+    },
+    {
+      "variable": "neg_pe_count_df",
+      "creation": "train_df.loc[train_df.negative_exam_for_pe==1,:]",
+      "usage": [
+        "Group by StudyInstanceUID and SeriesInstanceUID for analysis of patients without PE"
+      ]
+    },
+    {
+      "variable": "pos_pe_count_df",
+      "creation": "train_df.loc[train_df.negative_exam_for_pe!=1,:]",
+      "usage": [
+        "Coexistence of illness types analysis"
+      ]
+    },
+    {
+      "variable": "list_of_patient_ids",
+      "creation": "os.listdir('../input/rsna-str-pulmonary-embolism-detection/train')",
+      "usage": [
+        "Count of patients in the study"
+      ]
+    }
+  ],
+  "models": []
+}

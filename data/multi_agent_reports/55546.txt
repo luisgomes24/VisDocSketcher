@@ -1,0 +1,1 @@
+The analysis of the notebook contains two data variables: 'actual' and 'predicted' which flow through the workflow connecting various processes in the ML pipeline.

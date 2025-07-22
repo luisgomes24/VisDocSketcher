@@ -1,0 +1,124 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/train.csv",
+      "description": "Contains training data including question texts and corresponding target labels."
+    },
+    {
+      "file_name": "../input/test.csv",
+      "description": "Contains test data including question texts for which predictions are to be made."
+    },
+    {
+      "file_name": "../input/embeddings/glove.840B.300d/glove.840B.300d.txt",
+      "description": "Pre-trained GloVe embeddings for converting words into vector representations."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing training data."
+    },
+    {
+      "name": "X_train",
+      "description": "Array containing question texts from the training set after filling NaNs."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing test data."
+    },
+    {
+      "name": "X_test",
+      "description": "Array containing question texts from the test set after filling NaNs."
+    },
+    {
+      "name": "y",
+      "description": "Array containing the target labels from the training set."
+    },
+    {
+      "name": "x_train",
+      "description": "Padded sequences of texts from the training set."
+    },
+    {
+      "name": "x_test",
+      "description": "Padded sequences of texts from the test set."
+    },
+    {
+      "name": "embedding_matrix",
+      "description": "Matrix that holds the GloVe embeddings for the words in the tokenizer."
+    },
+    {
+      "name": "model",
+      "description": "Keras model built for the task."
+    },
+    {
+      "name": "submit_df",
+      "description": "DataFrame prepared for submission containing question IDs and predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created": "pd.read_csv('../input/train.csv')",
+      "flows_to": "X_train, y"
+    },
+    {
+      "variable": "X_train",
+      "created": "train_df['question_text'].fillna('dieter').values",
+      "flows_to": "x_train"
+    },
+    {
+      "variable": "test_df",
+      "created": "pd.read_csv('../input/test.csv')",
+      "flows_to": "X_test"
+    },
+    {
+      "variable": "X_test",
+      "created": "test_df['question_text'].fillna('dieter').values",
+      "flows_to": "x_test"
+    },
+    {
+      "variable": "y",
+      "created": "train_df['target']",
+      "flows_to": "train-test split"
+    },
+    {
+      "variable": "x_train",
+      "created": "sequence.pad_sequences(X_train, maxlen=maxlen)",
+      "flows_to": "model training"
+    },
+    {
+      "variable": "x_test",
+      "created": "sequence.pad_sequences(X_test, maxlen=maxlen)",
+      "flows_to": "predictions"
+    },
+    {
+      "variable": "embedding_matrix",
+      "created": "Calculated from the pre-trained GloVe embeddings and tokenizer.",
+      "flows_to": "model"
+    },
+    {
+      "variable": "model",
+      "created": "get_model()",
+      "flows_to": "model.fit() and predictions"
+    },
+    {
+      "variable": "submit_df",
+      "created": "pd.DataFrame({'qid': test_df['qid'], 'prediction': y_te})",
+      "flows_to": "CSV output"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Keras Sequential Model",
+      "architecture": "Combines Conv1D layers, Bidirectional CuDNNLSTM layers, attention mechanisms, and dense layers.",
+      "input_features": ["question_text"],
+      "target_variable": "binary classification (0 or 1)",
+      "hyperparameters": {
+        "batch_size": 256,
+        "epochs": 5,
+        "embedding_dim": 300,
+        "max_len": 60
+      }
+    }
+  ]
+}

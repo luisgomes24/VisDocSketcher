@@ -1,0 +1,123 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Apple/Total Number of Apples",
+      "description": "Contains data/images of apples."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Peach",
+      "description": "Contains data/images of peaches."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Carambola",
+      "description": "Contains data/images of carambolas."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Kiwi/Total Number of Kiwi fruit",
+      "description": "Contains data/images of kiwis."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Tomatoes",
+      "description": "Contains data/images of tomatoes."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Persimmon",
+      "description": "Contains data/images of persimmons."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Plum",
+      "description": "Contains data/images of plums."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Guava/guava total final",
+      "description": "Contains data/images of guavas."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Pear",
+      "description": "Contains data/images of pears."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Mango",
+      "description": "Contains data/images of mangoes."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/muskmelon",
+      "description": "Contains data/images of muskmelons."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Banana",
+      "description": "Contains data/images of bananas."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Pomegranate",
+      "description": "Contains data/images of pomegranates."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Pitaya",
+      "description": "Contains data/images of pitayas."
+    },
+    {
+      "file_path": "/kaggle/input/fruit-recognition/Orange",
+      "description": "Contains data/images of oranges."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dim1",
+      "description": "List to store the first dimension (height) of images."
+    },
+    {
+      "name": "dim2",
+      "description": "List to store the second dimension (width) of images."
+    },
+    {
+      "name": "image_shape",
+      "description": "The shape of input images (height, width, channels)."
+    },
+    {
+      "name": "image_gen",
+      "description": "ImageDataGenerator for augmenting images during training."
+    },
+    {
+      "name": "model",
+      "description": "Keras model loaded from a saved .h5 file for fruit recognition."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dim1",
+      "creation": "Calculated by reading images from the apple directory.",
+      "flows_to": "Used to analyze image dimensions."
+    },
+    {
+      "variable": "dim2",
+      "creation": "Calculated from the apple images during iteration.",
+      "flows_to": "Used for understanding image width."
+    },
+    {
+      "variable": "image_shape",
+      "creation": "Defined directly in the code.",
+      "flows_to": "Used when loading images for prediction."
+    },
+    {
+      "variable": "image_gen",
+      "creation": "Created using ImageDataGenerator methodology.",
+      "flows_to": "Used to augment input data for training the model."
+    },
+    {
+      "variable": "model",
+      "creation": "Loaded from saved file '/kaggle/input/trained/fruit.h5'.",
+      "flows_to": "Used for making predictions on input images.",
+      "used_for": "Predicting the class (fruit type) of input images."
+    }
+  ],
+  "models": [
+    {
+      "name": "Sequential Model",
+      "description": "Neural network architecture used for classifying fruit images.",
+      "input_features": "Image data from ImageDataGenerator.",
+      "target_variable": "Class labels of fruit types.",
+      "hyperparameters": "Conv2D layers, Dense layers, Activation functions"
+    }
+  ]
+}

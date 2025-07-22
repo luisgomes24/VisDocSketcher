@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Dataset <img src='file.svg'/> <br/>"] --> B["🛠️ Data Preprocessing <br/> Drop 'Id' and Split 'Cover_Type'"]
+    B --> C["🔍 PCA <br/> <img src='dummy_plots/hist_template.svg'/> "]
+    C --> D["📉 Eigen Vector Analysis <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    D --> E["📊 Best n_components <br/> ⬅️ Selecting 2 Components"]
+    E --> F["🌐 Transform Data <br/> PCA Transformation"]
+    F --> G["📊 2D Visualization <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    G --> H["🌌 3D Visualization <br/> <img src='dummy_plots/scatter_plot_template.svg'/>"]

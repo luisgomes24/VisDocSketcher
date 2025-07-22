@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A[UNSW_NB15_training-set.csv] -->|Load data| B[train DataFrame]
+    C[UNSW_NB15_testing-set.csv] -->|Load data| D[test DataFrame]
+
+    %% Data Preparation and Processing
+    B -->|Extract features| E[x_train, y_train]
+    D -->|Extract features| F[x_test, y_test]
+
+    %% Feature Engineering
+    E -->|Drop 'label' and process| G[Feature-engineered x_train]
+    F -->|Drop 'label' and process| H[Feature-engineered x_test]
+
+    %% Scaling
+    G -->|Scale non-categorical| I[Scaled x_train]
+    H -->|Scale non-categorical| J[Scaled x_test]
+
+    %% Convert to Dummy Variables
+    I -->|Get dummies| K[Dummy-encoded x_train]
+    J -->|Get dummies| L[Dummy-encoded x_test]
+
+    %% Consistent Features
+    K -->|Filter by features| M[Consistent x_train]
+    L -->|Filter by features| N[Consistent x_test]
+
+    %% Save Processed Data
+    M -->|Save as CSV| O[train.csv]
+    N -->|Save as CSV| P[test.csv]

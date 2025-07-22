@@ -1,0 +1,25 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Crime_Data_from_2020_to_Present.csv",
+      "description": "Los Angeles crime data from 2020 to the present."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "A DataFrame containing crime data with various columns such as crime codes, area names, victim's sex, and victim's age."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data",
+      "creation_method": "pd.read_csv()",
+      "flow": [
+        "Analyzed using .head(), .info(), .describe() for initial exploration.",
+        "Visualized with various plots, including pie charts and count plots."
+      ]
+    }
+  ],
+  "models": []
+}

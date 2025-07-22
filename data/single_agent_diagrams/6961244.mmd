@@ -1,0 +1,11 @@
+```
+graph TD;
+    A["📁 Load Data"] --> B["🗃️ Read CSV File /kaggle/input/winequalityN.csv"];
+    B --> C["📊 View Dataframe Head"];
+    C --> D["📊 Distribution Graphs"];
+    D --> E["<img src='dummy_plots/hist_template.svg' /> <br/> Histogram/Bar Graph"];
+    D --> F["<img src='dummy_plots/boxplot_template.svg' /> <br/> Boxplot"];
+    D --> G["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Scatter Matrix"];
+    G --> H["📈 Correlation Matrix"];
+    H --> I["<img src='dummy_plots/corr_matrix_template.svg' /> <br/> Correlation Heatmap"];
+    I --> J["🔍 Exploration Completed"];

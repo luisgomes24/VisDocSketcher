@@ -1,0 +1,41 @@
+```mermaid
+flowchart TD
+    A[("face-mask-lite-dataset"):::datasource] --> B_Img[_img:::datavariable]
+    B_Img --> C[Dataset:::datavariable]
+
+    C --> D{Generator:::model}
+    B_Img --> E{Discriminator:::model}
+
+    F[Noise:::datavariable] --> D
+    D --> E
+
+    E --> G[Output:::output]
+
+    %% Styling
+    classDef datasource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef datavariable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    class A datasource
+    class B_Img datavariable
+    class C datavariable
+    class D model
+    class E model
+    class F datavariable
+    class G output
+    
+    %% Legend
+    style G fill:#F2C464,stroke:#333,stroke-width:2px;
+```
+
+### Legend
+- **Datasources**: Highlight the original data source.
+- **Data Variables**: Show different data variables along with their transformations and flow.
+- **Models**: Specify machine learning models, architectures, and their roles.
+
+### Key Features
+- **Dataset**: A dataset consisting of images, primarily used for training purposes (_img).
+- **Generator and Discriminator Models**: Different stages highlight their architectures and the flow of data into these models. This involves the noise variable generated and directly used as an input in the Generator model.
+- **Output**: The results generated through the Discriminator model after processing the input, distinguishing real and fake images.

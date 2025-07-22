@@ -1,0 +1,8 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] --> |Read Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    B --> |Split Features| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> X"]
+    B --> |Split Target| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    C --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> Model"]
+    D --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> Predictions"]
+    E --> |Predict| F
+    F --> |Output| G["<img src='icons/file.svg' width=100 height=100/> <br/> Submission"].

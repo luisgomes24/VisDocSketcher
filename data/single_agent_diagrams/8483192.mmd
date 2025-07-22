@@ -1,0 +1,11 @@
+```
+graph TD;
+    A["📂 Load Data from CSV Files"] --> B["🔍 Explore Data"];
+    B --> C["📊 Distribution Plot"];
+    C --> D["<img src='dummy_plots/barplot_template.svg'/> <br/> Barplot Results"];
+    B --> E["🔗 Correlation Matrix"];
+    E --> F["<img src='dummy_plots/boxplot_template.svg'/> <br/> Correlation Heatmap"];
+    A --> G["📂 Load 2nd CSV File"];
+    G --> B;
+    E --> H["📈 Scatter and Density Plots"];
+    H --> I["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scatter Matrix"];

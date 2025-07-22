@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["👁️ Visualize Data <img src='dummy_plots/barplot_template.svg'/>"]
+    B --> C["🛠️ Transform Features"]
+    C --> D["🔄 Encode Features"]
+    D --> E["✂️ Split Data <img src='row_split.svg'/>"]
+    E --> F["🔍 Fit & Tune Algorithms"]
+    F --> G["🧪 Validate with KFold"]
+    G --> H["📤 Predict & Export <img src='file.svg'/>"]

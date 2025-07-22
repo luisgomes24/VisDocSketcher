@@ -1,0 +1,84 @@
+{
+    "data_sources": [
+        {
+            "file_path": "/kaggle/input/brain-mri-images-for-brain-tumor-detection/no",
+            "description": "Contains MRI images of patients without tumors"
+        },
+        {
+            "file_path": "/kaggle/input/brain-mri-images-for-brain-tumor-detection/yes",
+            "description": "Contains MRI images of patients with tumors"
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "folder_no",
+            "description": "List of image filenames in the 'no' tumor folder"
+        },
+        {
+            "name": "folder_yes",
+            "description": "List of image filenames in the 'yes' tumor folder"
+        },
+        {
+            "name": "labels",
+            "description": "List where 0 represents 'No Tumor' and 1 represents 'Tumor'"
+        },
+        {
+            "name": "data",
+            "description": "List of images processed into numpy arrays"
+        },
+        {
+            "name": "x",
+            "description": "Numpy array of image data"
+        },
+        {
+            "name": "y",
+            "description": "Numpy array of labels corresponding to the images"
+        },
+        {
+            "name": "x_train, x_test, y_train, y_test",
+            "description": "Split datasets for training and testing"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "x",
+            "created_by": "np.array(data)",
+            "flows_to": "Model training as input features"
+        },
+        {
+            "variable": "y",
+            "created_by": "np.array(labels)",
+            "flows_to": "Model training as target variable"
+        },
+        {
+            "variable": "x_train, x_test, y_train, y_test",
+            "created_by": "train_test_split(x, y, test_size=0.10, shuffle=True)",
+            "flows_to": "Model training and evaluation"
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Convolutional Neural Network (CNN)",
+            "input_features": "x_train_scaled",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "filters": [80, 64],
+                "units": [500, 500],
+                "dropout_rate": 0.3,
+                "optimizer": "adam",
+                "loss_function": "binary_crossentropy",
+                "activation_function": "sigmoid"
+            }
+        },
+        {
+            "model_name": "EfficientNet",
+            "input_features": "x_train_scaled",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "path": "https://tfhub.dev/google/efficientnet/b0/classification/1",
+                "optimizer": "adam",
+                "loss_function": "binary_crossentropy"
+            }
+        }
+    ]
+}

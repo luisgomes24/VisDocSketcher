@@ -1,0 +1,46 @@
+```mermaid
+flowchart TD
+    subgraph Data_Sources
+        A["train.csv"]
+        B["test.csv"]
+    end
+
+    subgraph Data_Preparation
+        C["Load Training Data"]
+        D["Extract Comments"]
+        E["Extract Labels"]
+    end
+
+    subgraph Features_Engineering
+        F["Prepare Input Features"]
+        G["Concatenate Features"]
+    end
+
+    subgraph Model_Training
+        H["Train/Test Split"]
+        I["Train BERT Model"]
+    end
+
+    %% Data Sources
+    A --> C
+    B --> H
+
+    %% Data Preparation
+    C -->|DataFrame: df| D
+    C --> E
+    D -->|Array: train_sentences| F
+    E -->|Array: train_y| F
+
+    %% Features Engineering
+    F -->|Features: input_ids, masks, segments, labels| G
+    G -->|Concatenated Features: features| H
+
+    %% Model Training
+    H -->|Features: features_train, features_test| I
+
+    %% Model Specification
+    subgraph BERT_Model
+        J["BERT\n(dropout: 0.1, dense units: 128, epochs: 2, batch size: 64)"]
+    end
+    I --> J
+```

@@ -1,0 +1,7 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"] -->|"CSV File"| B(("<img src='icons/table.svg' width=100 height=100/> <br/> dataset"))
+    B -->|"Convert to Numpy"| C(("<img src='icons/brain.svg' width=100 height=100/> <br/> data"))
+    C -->|"Train-Test Split"| D(("<img src='icons/database.svg' width=100 height=100/> <br/> Train/Test Sets"))
+    D -->|"Train Model"| E(("<img src='icons/column_split.svg' width=100 height=100/> <br/> model"))
+    E -->|"Predict"| F(("<img src='icons/database.svg' width=100 height=100/> <br/> predictions"))
+    F -->|"Calculate Accuracy"| G(("<img src='icons/column_split.svg' width=100 height=100/> <br/> accuracy"))

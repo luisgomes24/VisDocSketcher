@@ -1,0 +1,36 @@
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#ffcc00',
+      'edgeLabelBackground':'#ffffff'
+    }
+  }
+}%%
+flowchart TD
+    %% Data Sources
+    A[train.csv]:::data -- data input --> C[df_train]:::process
+    B[test.csv]:::data -- data input --> D[df_test]:::process
+
+    %% File Paths
+    C[df_train]:::process -- create file paths --> E[file_names]:::data
+    C[df_train] -- concatenated --> K[df]:::process
+    
+    %% Data Transformations
+    E[file_names] -- used by --> F[FourierTransformHelper]:::process
+    F -- spectra & frequencies --> G[spectra]:::data
+    G -- scale --> H[scaled spectra]:::process
+    H -- dataframe --> I[df_frq]:::process
+    I -- combined with df_train --> K
+
+    %% Machine Learning Models
+    K -- features & target --> L[TSNE]:::model
+    L -- visualization --> M[TSNE Plot]:::visualization
+    K -- features & target --> N[UMAP]:::model
+    N -- visualization --> O[UMAP Plot]:::visualization
+
+    %% Subgraph Styling
+    classDef data fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef model fill:#9c6,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#9cf,stroke:#333,stroke-width:2px;

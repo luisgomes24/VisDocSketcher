@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Display Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Unique Species"]
+    C --> D["<img src='column_split.svg'/> <br/> Replace Species"]
+    D --> E["<img src='row_split.svg'/> <br/> Train-Test Split"]
+    E --> F["<img src='brain.svg'/> <br/> Train Model"]
+    F --> G["<img src='brain.svg'/> <br/> Make Predictions"]
+    G --> H["<img src='brain.svg'/> <br/> Model Evaluation"]
+    H --> I["<img src='scatter_plot_template.svg'/> <br/> Data Visualization"]
+    
+    classDef step fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I step;

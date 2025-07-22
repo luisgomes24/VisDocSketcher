@@ -1,0 +1,5 @@
+flowchart TD
+    A["apps.csv"] -->|"Load and clean data"| B["DataFrame apps_with_duplicates"]
+    B --> C["Process Data"]
+    C -->|"Data Processing Steps"| D["Processed Data"]
+    D --> E["Output Results"].

@@ -1,0 +1,25 @@
+flowchart TD
+    A["📂 Read Dataset <img src='file.svg' /> <br/> Salary_Data.csv"] --> B["🔍 Discover Dataset"]
+    B --> C["🗃️ Dataset Info"]
+    C --> D["📊 Dataset Description"]
+    D --> E["⚙ Check for Null Values"]
+
+    E --> F["📊 Visualize Dataset"]
+    F --> G["📈 Linear Regression Plot <img src='dummy_plots/scatter_plot_template.svg' /> <br/>"]
+    F --> H["🚀 Distribution Plot <img src='dummy_plots/hist_template.svg' /> <br/>"]
+    F --> I["🌡️ Correlation Heatmap <img src='dummy_plots/heatmap_template.svg' /> <br/>"]
+
+    G --> J["🧠 Train-Test Split"]
+    H --> J
+    I --> J
+
+    J --> K["🧪 Fit Model"]
+    K --> L["📊 Evaluate Model"]
+    L --> M["📉 View Results"]
+
+    L --> N["📊 Linear Regression Plots <img src='dummy_plots/lineplot_template.svg' /> <br/>"]
+
+    M --> O["🌟 Experiment with Split Ratios"]
+    O --> P["Fit Model with 50%"]
+    O --> Q["Fit Model with 30%"]
+    O --> R["Fit Model with 20%"]

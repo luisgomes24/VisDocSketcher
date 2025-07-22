@@ -1,0 +1,9 @@
+graph TD;
+    A(Data Sources) -->|"Contains training CSV and DICOM images"| B{DataVariables};
+    B --> C["DataFrame with image identifiers"];
+    B --> D["Input file name for image"];
+    B --> E["Output file name for JPEG image"];
+    A --> F(Data Flow);
+    F --- C;
+    F --- D;
+    F --- E;

@@ -1,0 +1,16 @@
+flowchart TD
+    A[../input/Mall_Customers.csv]:::source --> B[file]
+    B[file]:::variable --> C{Data Preparation}
+    C --> D[file_ages]
+    B --> E[Plotting and Analysis]
+    D --> F[Age Density Analysis]
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% A: Represents the CSV data source containing customer information
+    %% B: Represents the DataFrame holding the full dataset loaded from CSV
+    %% C: Represents data preparation step, creating subset DataFrame
+    %% D: Represents subset DataFrame focusing on ID and Age
+    %% E: Represents the use of file DataFrame for general plotting and analysis
+    %% F: Represents specific analysis conducted on the age subset of the data

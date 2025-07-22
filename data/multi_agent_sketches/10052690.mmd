@@ -1,0 +1,23 @@
+%% This is a flowchart representing the Data Science Workflow
+flowchart TD;
+  A[Start] --> B[Read CSV: framingham.csv];
+  B --> C[Data Cleaning];
+  C --> D[Feature Selection];
+  D --> E[Define X and y];
+  E --> F[Train/Test Split];
+  F --> G[Train Logistic Regression Model];
+  G --> H[Predict on Test Set];
+  H --> I[Evaluate Model];
+  I --> J[End];
+  subgraph dataset[Dataset]
+      B
+  end
+  subgraph preprocessing[Preprocessing]
+      C --> D --> E;
+  end
+  subgraph training[Training]
+      F --> G;
+  end
+  subgraph evaluation[Evaluation]
+      H --> I;
+  end

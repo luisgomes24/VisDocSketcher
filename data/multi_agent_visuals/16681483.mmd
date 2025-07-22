@@ -1,0 +1,46 @@
+flowchart TD
+    subgraph Data_Loading
+        A[Kreuz-Kreis-Plus-Minus-Gartenhag.csv]
+        <img src='icons/file.svg' width=100 height=100/> <br/> A -->|read_csv| B[df]
+    end
+
+    subgraph Data_Preprocessing
+        B -->|DataFrame indexing| C[x]
+        <img src='icons/table.svg' width=100 height=100/> <br/> B -->|DataFrame indexing| D[y]
+        C -->|train_test_split| E[x_train]
+        C -->|train_test_split| F[x_test]
+        D -->|train_test_split| G[y_train]
+        D -->|train_test_split| H[y_test]
+    end
+
+    subgraph Model_Training
+        E -->|Train Logistic Regression| I1[LogisticRegression]
+        G --> I1
+        I1 -->|Validate| J[results]
+
+        E -->|Train Random Forest| I2[RandomForestClassifier]
+        G --> I2
+        I2 -->|Validate| J
+
+        E -->|Train KNN| I3[KNeighborsClassifier]
+        G --> I3
+        I3 -->|Validate| J
+
+        E -->|Train SVC| I4[SVC]
+        G --> I4
+        I4 -->|Validate| J
+
+        E -->|Train GaussianNB| I5[GaussianNB]
+        G --> I5
+        I5 -->|Validate| J
+
+        E -->|Train XGBClassifier| I6[XGBClassifier]
+        G --> I6
+        I6 -->|Validate| J
+    end
+
+    subgraph Results_Processing
+        J -->|Concatenate results| K[final]
+        <img src='icons/table.svg' width=100 height=100/> <br/> K -->|Generate metrics| L(Metrics Collection)
+        <img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> K -->|Generate plots| M(Plots)
+    end

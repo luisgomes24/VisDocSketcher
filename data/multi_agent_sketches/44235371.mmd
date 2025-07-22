@@ -1,0 +1,14 @@
+flowchart TD
+    A[/CSV File: WLD_RTFP_country_2023-10-02.csv/] -->|Load Data| B[DataFrame: df]
+    B -->|Clean Data| C[DataFrame with NaNs filled and date indexed]
+    C -->|Extract Unique Countries| D[Array: unique_countries]
+    D -->|Loop Each Country| E[Subset DataFrame: country_data]
+    E -->|Visualize Trends| F((Time Series Graphs))
+
+    %% Nodes explanations
+    %% A: This node represents the CSV file being loaded, which includes monthly food price data.
+    %% B: This node is the initial DataFrame (df) containing raw data from the CSV.
+    %% C: Represents the cleaned DataFrame with NaN values filled and date set as the index.
+    %% D: This contains unique country names extracted from the DataFrame df.
+    %% E: Represents data subset for each country, facilitated by looping through unique countries.
+    %% F: Visualizes price trends and inflation using time series graphs.

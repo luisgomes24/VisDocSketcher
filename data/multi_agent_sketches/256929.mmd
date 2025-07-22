@@ -1,0 +1,45 @@
+flowchart TD
+
+    %% Nodes for Data Sources
+    A[train.csv]:::dataSource -->|Load Data| B[data_train]
+    C[test.csv]:::dataSource -->|Load Data| D[data_test]
+
+    %% Nodes for Data Processing
+    B -->|Extract Features| E[X_all]
+    B -->|Extract Target| F[y_all]
+    E -->|Split| G[X_train]
+    E -->|Split| H[X_test]
+    F -->|Split| I[y_train]
+    F -->|Split| J[y_test]
+
+    %% Nodes for Model Training
+    G -->|Train| K(RandomForestClassifier):::model
+    I -->|Train| K
+
+    %% Nodes for Model Evaluation
+    K -->|Evaluate| L[Evaluate Performance]
+    H -->|Test| L
+    J -->|Test| L
+
+    %% Node for Multiple Classifiers
+    G -->|Train & Compare| M(Multiple Classifiers: MLP, GaussianNB, SVC):::model
+    I -->|Train & Compare| M
+
+    %% Class Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments explaining each node
+    %% train.csv: Training dataset containing the initial features and labels.
+    %% test.csv: Testing dataset for model validation.
+    %% data_train: DataFrame loaded with train.csv contents.
+    %% data_test: DataFrame loaded with test.csv contents.
+    %% X_all: Features for training, excluding the target.
+    %% y_all: Target variable from the training data.
+    %% X_train: Training set features.
+    %% X_test: Testing set features.
+    %% y_train: Training set target.
+    %% y_test: Testing set target.
+    %% RandomForestClassifier: Main classifier used with hyperparameter tuning.
+    %% Evaluate Performance: Step to check the accuracy and prediction power.
+    %% Multiple Classifiers: Other models like MLP, GaussianNB, and SVC for comparison.

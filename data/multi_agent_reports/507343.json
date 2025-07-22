@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file_name": "sub_200_ens_densenet.csv",
+      "description": "Submission data from a Densenet model"
+    },
+    {
+      "file_name": "sub_TF_keras.csv",
+      "description": "Submission data from a Keras TensorFlow model"
+    },
+    {
+      "file_name": "sub_fcn.csv",
+      "description": "Submission data from a Fully Convolutional Network model"
+    },
+    {
+      "file_name": "sub_blend009.csv",
+      "description": "Submission data from a blended model"
+    },
+    {
+      "file_name": "sub_keras_beginner.csv",
+      "description": "Submission data from a beginner Keras model"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "concat_sub",
+      "description": "DataFrame that contains concatenated submissions from various models"
+    },
+    {
+      "variable_name": "cutoff_lo",
+      "description": "Lower cutoff threshold for stacking"
+    },
+    {
+      "variable_name": "cutoff_hi",
+      "description": "Upper cutoff threshold for stacking"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "concat_sub",
+      "created_by": "pd.concat",
+      "flows_to": ["csv files (stack_mean.csv, stack_median.csv, ...)"],
+      "operations": ["max", "min", "mean", "median"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Stacking Method",
+      "input_features": ["is_iceberg_mean", "is_iceberg_median", "is_iceberg_max", "is_iceberg_min"],
+      "target_variable": "is_iceberg",
+      "variations": [
+        "Mean Stacking",
+        "Median Stacking",
+        "Pushout + Median Stacking",
+        "MinMax + Mean Stacking",
+        "MinMax + Median Stacking",
+        "MinMax + BestBase Stacking"
+      ]
+    }
+  ]
+}

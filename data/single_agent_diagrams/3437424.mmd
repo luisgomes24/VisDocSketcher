@@ -1,0 +1,16 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["🔄 Rename Columns"];
+    B --> C["📊 Sample Data <img src='table.svg' />"];
+    C --> D["⚙️ Load Embeddings"];
+
+    D --> E["🔄 Preprocessing"];
+    E --> F["🔍 Negation Handling"];
+    F --> G["🔄 Replace Numbers"];
+    G --> H["📝 Tokenization"];
+    H --> I["🔒 Zero Padding"];
+
+    I --> J["🧠 Build Model"];
+    J --> K["🎓 Train Model"];
+    
+    K --> L["📈 Make Predictions"];
+    L --> M["📄 Create Submission File"];

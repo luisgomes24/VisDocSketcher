@@ -1,0 +1,43 @@
+%% Import train and test data
+flowchart TD
+    A["/kaggle/input/titanic/train.csv"] -- Reads data --> B[train]
+    A2["/kaggle/input/titanic/test.csv"] -- Reads data --> B2[test]
+    
+    subgraph Preprocessing
+    B --> C[dataset]
+    B2 --> C
+    end
+    
+    subgraph OutliersHandling
+    C -->|Extract with outliers| D[Y_train_with_outliers]
+    C -->|Extract with outliers| E[X_train_with_outliers]
+    
+    D -->|Remove outliers| F[Y_train_without_outliers]
+    E -->|Remove outliers| G[X_train_without_outliers]
+    end
+
+    
+    subgraph Modelling
+    H1[Support Vector Classifier] 
+    H2[Random Forest Classifier] 
+    H3[AdaBoost Classifier] 
+    H4[Gradient Boosting Classifier] 
+    
+    E --> H1
+    E --> H2
+    E --> H3
+    E --> H4
+    G --> H1
+    G --> H2
+    G --> H3
+    G --> H4
+    
+    D --> H1
+    D --> H2
+    D --> H3
+    D --> H4
+    F --> H1
+    F --> H2
+    F --> H3
+    F --> H4
+    end

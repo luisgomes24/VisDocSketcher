@@ -1,0 +1,57 @@
+{"data_sources": [
+    {"file_name": "fashion-mnist_train.csv", "description": "Contains labeled images of clothing items for model training"}
+],
+"data_variables": [
+    {"variable_name": "fashion_file", "description": "Path to the input CSV file containing training data"},
+    {"variable_name": "fashion_data", "description": "Raw data loaded from the CSV file"},
+    {"variable_name": "x", "description": "Normalized images structured for model input"},
+    {"variable_name": "y", "description": "Categorical labels for the clothing items"},
+    {"variable_name": "fashion_model", "description": "The first deep learning model built to classify clothing images"},
+    {"variable_name": "second_fashion_model", "description": "A second, alternative model for classifying clothing images"}
+],
+"data_flow": [
+    {"variable_name": "fashion_data", "creation_method": "np.loadtxt", "flow": "processed by prep_data to create x and y"},
+    {"variable_name": "x", "creation_method": "prep_data(fashion_data)", "flow": "used to fit the first model, fashion_model"},
+    {"variable_name": "y", "creation_method": "prep_data(fashion_data)", "flow": "used as the target variable in model fitting"},
+    {"variable_name": "fashion_model", "creation_method": "Sequential() and layers added", "flow": "compiled and fitted using x and y"},
+    {"variable_name": "second_fashion_model", "creation_method": "Sequential() and layers added", "flow": "compiled and fitted using x and y"}
+],
+"models": [
+    {
+        "model_name": "fashion_model",
+        "input_features": "x",
+        "target_variable": "y",
+        "hyperparameters": {
+            "optimizer": "adam",
+            "loss_function": "categorical_crossentropy",
+            "metrics": ["accuracy"],
+            "layers": [
+                {"type": "Conv2D", "filters": 12, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Conv2D", "filters": 20, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Conv2D", "filters": 20, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Flatten"},
+                {"type": "Dense", "neurons": 100, "activation": "relu"},
+                {"type": "Dense", "neurons": 10, "activation": "softmax"}
+            ]
+        }
+    },
+    {
+        "model_name": "second_fashion_model",
+        "input_features": "x",
+        "target_variable": "y",
+        "hyperparameters": {
+            "optimizer": "adam",
+            "loss_function": "categorical_crossentropy",
+            "metrics": ["accuracy"],
+            "layers": [
+                {"type": "Conv2D", "filters": 10, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Conv2D", "filters": 20, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Conv2D", "filters": 20, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Conv2D", "filters": 20, "kernel_size": "3x3", "activation": "relu"},
+                {"type": "Flatten"},
+                {"type": "Dense", "neurons": 150, "activation": "relu"},
+                {"type": "Dense", "neurons": 10, "activation": "softmax"}
+            ]
+        }
+    }
+]}

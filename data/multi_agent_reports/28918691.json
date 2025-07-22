@@ -1,0 +1,110 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/adult-income-dataset/adult.csv",
+      "description": "Contains adult income data, including demographic features and income class."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the raw data from the CSV, including features like age, race, and income."
+    },
+    {
+      "variable": "numerical",
+      "description": "List of numerical features to be analyzed and scaled."
+    },
+    {
+      "variable": "categorical",
+      "description": "List of categorical features to be one-hot encoded."
+    },
+    {
+      "variable": "df1",
+      "description": "Transformed DataFrame after encoding and scaling features."
+    },
+    {
+      "variable": "x",
+      "description": "Features DataFrame used for model training."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable (income class) for the model to predict."
+    },
+    {
+      "variable": "x_train",
+      "description": "Training subset of features."
+    },
+    {
+      "variable": "x_test",
+      "description": "Testing subset of features."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training subset of target variable."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing subset of target variable."
+    },
+    {
+      "variable": "k",
+      "description": "Hyperparameter for K-Nearest Neighbors indicating the number of neighbors to use."
+    },
+    {
+      "variable": "metric_acc_training",
+      "description": "Dictionary to store training accuracy for different distance metrics."
+    },
+    {
+      "variable": "metric_acc_testing",
+      "description": "Dictionary to store testing accuracy for different distance metrics."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV using pd.read_csv",
+      "flows_to": "df1 (data cleaning, encoding, scaling)"
+    },
+    {
+      "variable": "df1",
+      "creation": "Copy of df with transformations applied",
+      "flows_to": "x (features) and y (target)"
+    },
+    {
+      "variable": "x",
+      "creation": "Subset from df1 excluding the target variable",
+      "flows_to": "Training and testing split"
+    },
+    {
+      "variable": "y",
+      "creation": "Target variable extracted from df1",
+      "flows_to": "Training and testing split"
+    },
+    {
+      "variable": "x_train, x_test, y_train, y_test",
+      "creation": "Split from x and y using train_test_split",
+      "flows_to": "Model training and evaluation"
+    },
+    {
+      "variable": "k",
+      "creation": "Set to optimal value based on model evaluation",
+      "flows_to": "Model training"
+    },
+    {
+      "variable": "metric_acc_training, metric_acc_testing",
+      "creation": "Accuracies during model hyperparameter tuning",
+      "flows_to": "Final model training evaluation"
+    }
+  ],
+  "models": [
+    {
+      "model": "KNeighborsClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "k": 13,
+        "metric": "euclidean"
+      }
+    }
+  ]
+}

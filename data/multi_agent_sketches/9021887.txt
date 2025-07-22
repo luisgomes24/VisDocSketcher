@@ -1,0 +1,19 @@
+# Diagram of the Workflow
+
+## Data Sources
+- Training_Apr_jul_2019_Master_Lanes.csv
+- Testing_Aug_dec_2019_Master.csv
+- Training_Jan_mar_2019_Master_Lanes.csv
+
+## Data Variables
+- df1: DataFrame for Training_Apr_jul_2019_Master_Lanes.csv
+- df2: DataFrame for Testing_Aug_dec_2019_Master.csv
+- df3: DataFrame for Training_Jan_mar_2019_Master_Lanes.csv
+
+## Data Flow
+- df1 created using pd.read_csv, visualized using plotPerColumnDistribution
+- df2 created using pd.read_csv, visualized using plotPerColumnDistribution
+- df3 created using pd.read_csv, visualized using plotPerColumnDistribution
+
+## Models
+(No models are defined in this notebook)

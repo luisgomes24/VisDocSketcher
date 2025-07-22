@@ -1,0 +1,11 @@
+%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#fff', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#F2C464'} } }%%
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Adult Income Dataset"] --> B["<img src='dummy_plots/hist_template.svg'/> <br/><img src='icons/table.svg' width=100 height=100/> <br/> Raw DataFrame (df)"];
+    B --> C["<img src='dummy_plots/lineplot_template.svg'/> <br/><img src='icons/table.svg' width=100 height=100/> <br/> Transformed DataFrame (df1)"]; 
+    C --> D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/><img src='icons/column_split.svg' width=100 height=100/> <br/> Features DataFrame (x)"];
+    C --> E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Target Variable (y)"]; 
+    D --> F["<img src='dummy_plots/barplot_template.svg'/> <br/> Training and Testing Feature Split (x_train, x_test)"];
+    E --> G[" Training and Testing Target Split (y_train, y_test)"];
+    F --> H["<img src='icons/brain.svg' width=100 height=100/> <br/> KNeighborsClassifier Model"]; 
+    G --> H;
+    H --> I["<img src='dummy_plots/boxplot_template.svg'/> <br/> Model Evaluation"];

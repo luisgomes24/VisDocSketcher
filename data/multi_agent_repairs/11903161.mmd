@@ -1,0 +1,15 @@
+```mermaid
+flowchart TD
+    %% Node for CSV file data source
+    A["Salary_Data.csv"] --> |"read_csv"| B["df"]
+    %% Node for DataFrame containing imported data
+    B --> |"df.iloc[:, :-1]"| C["X"]
+    %% Node for feature variables
+    B --> |"df.iloc[:, [-1]]"| D["y"]
+    %% Node for target variable
+    C --> |"fit"| E["Linear Regression Model"]
+    D --> |"fit"| E
+    %% Node for linear regression model
+
+    %% Additional comments can be added to explain more parts of the model training process if necessary.
+```

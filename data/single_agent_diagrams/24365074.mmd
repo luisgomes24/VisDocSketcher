@@ -1,0 +1,24 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Preprocess Data <img src='column_split.svg' />"]
+    B --> C["🔍 Split Data <img src='row_split.svg' />"]
+    C --> D["🧠 Train Model <img src='brain.svg' />"]
+    D --> E["📈 Evaluate Model <img src='barplot_template.svg' />"]
+    E --> F["📦 Prepare Submission <img src='file.svg' />"]
+    
+    subgraph  Load
+        A -->|Train Data| G["<img src='file.svg'/> <br/> train.csv"]
+        A -->|Test Data| H["<img src='file.svg'/> <br/> test.csv"]
+    end
+
+    subgraph Preprocess
+        B -->|Drop Unwanted Columns| I["<img src='column_split.svg'/> <br/> Drop: row_id, target"]
+    end
+
+    subgraph Train
+        D -->|Fit Model| J["<img src='brain.svg'/> <br/> ExtraTreesClassifier"]
+        J --> K["<img src='barplot_template.svg'/> <br/> Print Accuracy"]
+    end
+
+    subgraph Submit
+        F -->|CSV Output| L["<img src='file.svg'/> <br/> submission_labels.csv"]
+    end

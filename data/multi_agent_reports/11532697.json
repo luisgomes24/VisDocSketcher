@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_features.csv",
+      "description": "Features for the training set including gene expression and cell viability data."
+    },
+    {
+      "file_name": "train_targets_scored.csv",
+      "description": "Binary targets indicating the MoA that are scored."
+    },
+    {
+      "file_name": "train_targets_nonscored.csv",
+      "description": "Additional optional binary MoA responses for the training data, not used for scoring."
+    },
+    {
+      "file_name": "test_features.csv",
+      "description": "Features for test data for which MoA probabilities need to be predicted."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Submission file template for the predicted results."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_Train",
+      "description": "DataFrame containing training feature data."
+    },
+    {
+      "variable_name": "df_Test",
+      "description": "DataFrame containing test feature data."
+    },
+    {
+      "variable_name": "df_Train_scored",
+      "description": "DataFrame containing scored binary MoA targets for training."
+    },
+    {
+      "variable_name": "df_Train_unscored",
+      "description": "DataFrame containing non-scored binary MoA responses for training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_Train",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used for exploratory data analysis, correlation analysis, and model training."
+    },
+    {
+      "variable_name": "df_Test",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used to predict probabilities for the test set."
+    },
+    {
+      "variable_name": "df_Train_scored",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used for evaluating model performance against known targets."
+    },
+    {
+      "variable_name": "df_Train_unscored",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used for additional insights but not for model training/scores."
+    }
+  ],
+  "models": []
+}

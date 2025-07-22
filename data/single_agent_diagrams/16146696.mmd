@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Image Data"] --> B["🧠 Load Pretrained Model"]
+    B --> C["🖼️ Process Image 1 <img src='dummy_plots/image_template.svg'/> <br/> Process Image"]
+    C --> D["🔮 Predict Label for Image 1"]
+    
+    D --> E["🖼️ Process Image 2 <img src='dummy_plots/image_template.svg'/> <br/> Process Image"]
+    E --> F["🔮 Predict Label for Image 2"]
+    
+    F --> G["🖼️ Process Image 3 <img src='dummy_plots/image_template.svg'/> <br/> Process Image"]
+    G --> H["🔮 Predict Label for Image 3"]
+    
+    H --> I["🖼️ Process Image 4 <img src='dummy_plots/image_template.svg'/> <br/> Process Image"]
+    I --> J["🔮 Predict Label for Image 4"]
+    
+    J --> K["📊 Summary of Predictions"]

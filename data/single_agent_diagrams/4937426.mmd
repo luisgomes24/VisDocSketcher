@@ -1,0 +1,5 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> Read '../input/funda_train.csv'"] --> B["📊 Explore Data <img src='table.svg' /> <br/> df1.head()"]
+    B --> C["📈 Distribution Graphs <img src='barplot_template.svg' /> <br/> plotPerColumnDistribution(df1, 10, 5)"]
+    C --> D["📉 Correlation Matrix <img src='boxplot_template.svg' /> <br/> plotCorrelationMatrix(df1, 8)"]
+    D --> E["🔍 Scatter & Density Plots <img src='scatter_plot_template.svg' /> <br/> plotScatterMatrix(df1, 12, 10)"]

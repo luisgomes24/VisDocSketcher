@@ -1,0 +1,37 @@
+flowchart TD
+
+%% Data sources
+A["../input/segmentation-full-body-mads-dataset/images"]
+B["../input/segmentation-full-body-mads-dataset/masks"]
+
+%% Data variables
+C["IMAGE_DIR"]
+D["MASK_DIR"]
+E["BATCH_SIZE"]
+F["train_loader"]
+G["val_loader"]
+H["test_loader"]
+I["model"]
+J["criterion"]
+
+%% Data flow
+A --> C
+B --> D
+C --> |"DataLoader for images"| F
+D --> |"DataLoader for masks"| G
+F --> |"Training data"| I
+G --> |"Validation data"| I
+H --> |"Evaluation data"| I
+I --> |"Uses DiceLoss, IoULoss, BCEWithLogitsLoss"| J
+
+%% Model
+subgraph UNet_Model
+    I["UNet"]
+end
+
+%% Training and Evaluation
+subgraph Training_Evaluation
+    F --> |"batch input for training"| I
+    G --> |"batch input for validation"| I
+    H --> |"final evaluation"| I
+end

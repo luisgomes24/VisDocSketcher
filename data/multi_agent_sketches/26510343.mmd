@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    DS1["Dataset from images from Star Wars movies"] 
+
+    %% Data Variables
+    V1["path"]:::variable
+    V2["fns"]:::variable
+    V3["failed"]:::variable
+    V4["data"]:::variable
+    V5["data2"]:::variable
+
+    %% Data Flows and Processing
+    DS1 --> V1
+    V1 -->|get_image_files| V2
+    V2 -->|verify_images| V3
+    V3 -->|filter_invalid_images| V2
+
+    %% ImageDataLoaders
+    V1 -->|ImageDataLoaders.from_folder| V4
+    subgraph Image_Data_Processing
+      V4 --|Images for Training and Validation|--> M1["FastAI Vision Model"]:::model
+    end
+    V1 -->|ImageDataLoaders.from_folder| V5
+    subgraph Episode_VI_Processing
+      V5 --> M1
+    end
+
+    %% Models
+    M1["FastAI Vision Model"]:::model
+
+    classDef variable fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;

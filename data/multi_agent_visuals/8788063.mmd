@@ -1,0 +1,30 @@
+%% This is a workflow diagram for a data science project in Mermaid.js
+flowchart TD
+
+    %% Data Sources
+    A1["train.zip"] --> |"Contains images of cats and dogs for training."| B1["B1"]
+    A2["test.zip"] --> |"Contains images of cats and dogs for testing."| B2["B2"]
+
+    %% Data Variables and Flow
+    B1["train_images_filepaths"] --> |"List of file paths for training images."| C1["train_data"]
+    C1 --> |"Preprocessed images from training"| D1["X_train"]
+    B1 --> |"File paths for dog images in training"| C2["train_dogs_filepaths"]
+    B1 --> |"File paths for cat images in training"| C3["train_cats_filepaths"]
+    C2 --> |"File paths"| D2["y_train"]
+    C3 --> D2
+
+    %% Test Data Preparation
+    B2["test_images_filepaths"] --> |"List of file paths for test images."| C4["arr_test"]
+    C4 --> |"Preprocessed images from testing"| D3["D3"]
+
+    %% Model
+    D1 --> |"Numpy array for training images"| E1["dvc_classifier"]
+    D2 --> |"Target variable"| E1
+
+    E1 --> |"Trained model"| F1["prediction_probabilities"]
+    D3 --> |"Numpy array from testing data"| F1
+
+    F1 --> |"Model's probabilities for each test image"| G1["Results visualized and recorded"]
+
+    %% Model Details
+    Note1["dvc_classifier \n - CNN for Dogs vs. Cats classification \n - Layers: \n   * Conv2D (32, (3, 3)) x2 \n   * Conv2D (64, (3, 3)) \n   * Flatten \n   * Dense (128, ReLU) \n   * Dropout (0.5) \n   * Dense (1, Sigmoid) \n - Loss: binary_crossentropy \n - Optimizer: adam \n - Metrics: accuracy \n - Batch size: 128, Epochs: 3 "]

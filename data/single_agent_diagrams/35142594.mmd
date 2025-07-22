@@ -1,0 +1,8 @@
+flowchart TD
+    A["Load Model from TFHub <img src='icons/database.svg' />"] --> B["Load Images <img src='icons/image.svg' />"]
+    B --> C["Generate Interpolated Frame <img src='icons/brain.svg' />"]
+    C --> D["Display Images <img src='icons/image.svg' /> <br/> media.show_images()"]
+    D --> E["Create Video from Frames <img src='icons/image.svg' /> <br/> media.show_video()"]
+    E --> F["Define Interpolator Library <img src='icons/brain.svg' />"]
+    F --> G["Run Interpolator <img src='icons/brain.svg' />"]
+    G --> H["Final Video Output <img src='icons/image.svg' /> <br/> media.show_video()"]

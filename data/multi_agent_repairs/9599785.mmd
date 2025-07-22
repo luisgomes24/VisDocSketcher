@@ -1,0 +1,8 @@
+```mermaid
+flowchart TD
+    A["CSV File: 20200520_datamartlaw.csv"] --> B["DataFrame: df"]
+    B --> C["Visualizations"]
+
+    A -->|"pd.read_csv()"| B
+    B -->|"Data visualization using libraries like seaborn, plotly"| C
+```

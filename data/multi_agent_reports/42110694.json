@@ -1,0 +1,11 @@
+{"data_sources": [
+    {"file": "loans_full_schema.csv", "description": "Contains data on loans, including various features of the loans and borrowers"}
+],
+"data_variables": [
+    {"name": "df", "description": "Pandas DataFrame containing the entire dataset for analysis"}
+],
+"data_flow": [
+    {"variable": "df", "creation_method": "pd.read_csv", "flow": "Used for initial data exploration and analysis"}
+],
+"models": []
+}

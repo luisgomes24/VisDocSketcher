@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv] -->|Read and Preprocess| B(X)
+    A1[test.csv] -->|Read and Preprocess| B1(X_test)
+    A2[sample_submission.csv] --> E[Prepares Placeholder for Submission]
+    
+    %% Data Variables
+    subgraph Features and Target Variables
+        B(X) -->|Extract Target| C[y]
+        B1(X_test) -->|Preprocess| D
+    end
+
+    %% Model Training
+    subgraph Model Training
+        B -->|Features| F[LSTMModel] 
+        C -->|Target Variable| F
+        F -->|Trained Model| G[Model Parameters]
+    end
+
+    %% Prediction
+    subgraph Prediction
+        D -->|Prediction Features| F
+        F -->|Predicted Values| H[y_pred]
+    end
+
+    %% Output
+    H -->|Create Submission| E
+    E -->|Save to submission.csv| I[Output CSV File]
+
+    %% Explanations
+    %% A - train.csv: Contains training data including features and target variable 'pressure'.
+    %% A1 - test.csv: Contains test data to be used for predictions.
+    %% A2 - sample_submission.csv: Template for submitting predictions.
+    %% B - X: Training features dataset without 'pressure'.
+    %% C - y: Target variable for training.
+    %% F - LSTMModel: Model trained using LSTM architecture with specified hyperparameters.
+    %% H - y_pred: Predicted outcomes for the test data.

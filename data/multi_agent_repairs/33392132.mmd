@@ -1,0 +1,22 @@
+```mermaid
+%% Data Flow Diagram for Jupyter Notebook 33392132
+flowchart TD
+    %% Node for the test CSV data source
+    A["test.csv"] -->|Load Data| B["df_test DataFrame"]
+    class B internal-node;
+    
+    %% Node for processing the test DataFrame
+    B -->|Filter Data with e_id=2089| C["e_id"]
+    class C internal-node;
+    
+    %% Node for extracting clue
+    C -->|Extract Clue| D["Clue Data"]
+    class D internal-node;
+    
+    %% Node for HTML Representation
+    D -->|Generate HTML| E["HTML Advent Calendar"]
+    class E internal-node;
+
+    classDef file-node fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef internal-node fill:#bbf,stroke:#333,stroke-width:2px;
+```

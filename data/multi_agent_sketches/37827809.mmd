@@ -1,0 +1,18 @@
+%% This diagram was generated based on the Jupyter Notebook analysis provided
+flowchart TD
+    %% Node for the data source train.csv
+    A["train.csv"] -->|read_csv| B["train"]
+    %% Node for the data source test.csv
+    C["test.csv"] -->|read_csv| D["test"]
+    %% Node for the pre-trained ResNet50 model
+    E["Pre-trained ResNet50 Model"]
+    %% Using ResNet50 to predict opacity
+    B -->|Predict opacity
+    ResNet50| F["result"]
+    D -->|Predict opacity
+    ResNet50| F
+    %% Display and output handling
+    F -->|Generate Report| G["Classifications & Predictions Report"]
+    F -->|Assign Predictions| B
+    F -->|Assign Predictions| D
+    D -->|Save to CSV| H["test_predictions.csv"]

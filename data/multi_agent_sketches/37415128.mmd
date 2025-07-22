@@ -1,0 +1,20 @@
+flowchart TD
+    A[Drug.csv] %% Data Source: Original CSV file containing drug data
+    A --> B[df] %% Variable containing data loaded into DataFrame
+    B --> C[Effective_Cat] %% Categorical variable for drug effectiveness
+    B --> D[EaseOfUse_Cat] %% Categorical variable for ease of use
+    B --> E[Satisfaction_Cat] %% Categorical variable for satisfaction
+    B --> F[popular_drugs] %% Top 10 most reviewed drugs
+
+    C --> G[Analysis and Visualization 1] %% Use of Effective_Cat for analysis
+    D --> H[Analysis and Visualization 2] %% Use of EaseOfUse_Cat for analysis
+    E --> I[Analysis and Visualization 3] %% Use of Satisfaction_Cat for analysis
+    F --> J[Top 10 Drugs Visualization] %% Visualization of popular drugs based on reviews
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef analysisStep fill:#ffb,stroke:#333,stroke-width:2px;
+
+    class A dataSource;
+    class B, C, D, E, F dataVariable;
+    class G, H, I, J analysisStep;

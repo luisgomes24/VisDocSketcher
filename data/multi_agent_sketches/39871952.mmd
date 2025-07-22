@@ -1,0 +1,25 @@
+%% This flowchart depicts the data flow and transformations in the notebook
+
+flowchart TD
+
+    subgraph DataSources
+        A[/student_data.csv/] %% Represents the student data CSV file
+    end
+
+    subgraph DataVariables
+        B[df] %% Represents the DataFrame loaded with student data
+        C[duplicate] %% Represents the Series for duplicate row detection
+    end
+
+    subgraph DataFlow
+        D[Load CSV] --> B %% Data loaded into DataFrame df
+        B --> |Inspect and clean| E[Inspect and clean operations] %% Data inspection and cleaning operations
+        B --> |Rename & Drop| F[Rename and drop columns] %% Renaming columns and dropping unnecessary ones
+        B --> |Transform| G[Create new columns and modify types] %% Creating new columns and changing data types
+        B --> |Check Duplicates| C %% Creating the duplicate Series
+        C --> |Analyze Duplicates| H[Analyze duplicate data] %% Checking and analyzing duplicates
+    end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px

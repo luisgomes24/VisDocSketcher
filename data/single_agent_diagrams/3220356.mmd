@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Data: '../input/f.csv'"] --> B["📊 Preview Data: df1.head(5)"]
+    A --> C["📊 Distribution Graphs: <img src='dummy_plots/hist_template.svg'/>"]
+    A --> D["📊 Correlation Matrix: <img src='dummy_plots/barplot_template.svg'/>"]
+    A --> E["📊 Scatter and Density Plots: <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    
+    B --> C
+    C --> D
+    D --> E
+    
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style D fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px

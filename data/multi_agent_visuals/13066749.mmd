@@ -1,0 +1,7 @@
+flowchart TD
+    A["Training Data Source"] -->|"Load images from"| B
+    C["Testing Data Source"] -->|"Load images from"| D
+    B --> E["<img src='dummy_plots/barplot_template.svg'/> <br/> Data Generation Process"]
+    D --> F["<img src='icon/dataset_icon.svg' width=100 height=100/> <br/> Image Preprocessing"]
+    E --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Training"]
+    F --> H["<img src='dummy_plots/boxplot_template.svg'/> <br/> Model Evaluation"]

@@ -1,0 +1,80 @@
+{
+  "data_sources": [
+    {
+      "source_name": "NFL Play by Play 2009-2017",
+      "description": "This dataset contains information on plays that occurred in American Football games from 2009 to 2017."
+    },
+    {
+      "source_name": "Building Permits",
+      "description": "This dataset contains information about building permits issued in San Francisco."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "nfl_data",
+      "description": "DataFrame containing event details from NFL games."
+    },
+    {
+      "variable_name": "sf_permits",
+      "description": "DataFrame containing information on building permits issued in San Francisco."
+    },
+    {
+      "variable_name": "missing_values_count",
+      "description": "Series containing counts of missing data in NFL dataset."
+    },
+    {
+      "variable_name": "total_cells",
+      "description": "Total number of cells in the NFL dataset."
+    },
+    {
+      "variable_name": "total_missing",
+      "description": "Total number of missing values in the NFL dataset."
+    },
+    {
+      "variable_name": "subset_nfl_data",
+      "description": "Subset of nfl_data for demonstration, including specific columns."
+    },
+    {
+      "variable_name": "columns_with_na_dropped",
+      "description": "DataFrame containing nfl_data with columns that had at least one NaN removed."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "nfl_data",
+      "created_by": "pd.read_csv",
+      "flow": "Used in data exploration and missing values analysis."
+    },
+    {
+      "variable_name": "sf_permits",
+      "created_by": "pd.read_csv",
+      "flow": "Used in data exploration and missing values analysis."
+    },
+    {
+      "variable_name": "missing_values_count",
+      "created_by": "nfl_data.isnull().sum()",
+      "flow": "Used to see the number of missing data points per column."
+    },
+    {
+      "variable_name": "total_cells",
+      "created_by": "np.product(nfl_data.shape)",
+      "flow": "Used to calculate the percentage of missing data."
+    },
+    {
+      "variable_name": "total_missing",
+      "created_by": "missing_values_count.sum()",
+      "flow": "Used to calculate the percentage of missing data."
+    },
+    {
+      "variable_name": "subset_nfl_data",
+      "created_by": "nfl_data.loc[:, 'EPA':'Season'].head()",
+      "flow": "Used to demonstrate filling missing values in NFL dataset."
+    },
+    {
+      "variable_name": "columns_with_na_dropped",
+      "created_by": "nfl_data.dropna(axis=1)",
+      "flow": "Used to analyze the impact of dropping columns with missing values."
+    }
+  ],
+  "models": []
+}

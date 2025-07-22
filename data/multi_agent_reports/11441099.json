@@ -1,0 +1,39 @@
+{
+  "data_sources": [
+    {
+      "file_name": "/kaggle/input/pyTestTab.csv",
+      "description": "Contains testing data; first 1000 rows are read for exploration."
+    },
+    {
+      "file_name": "/kaggle/input/pyTrainTab.csv",
+      "description": "Contains training data; first 1000 rows are read for exploration."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing data from pyTestTab.csv."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing data from pyTrainTab.csv."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Read from /kaggle/input/pyTestTab.csv using pd.read_csv.",
+      "flow": [
+        "Used in plotting functions to visualize data distributions and correlations."
+      ]
+    },
+    {
+      "variable": "df2",
+      "creation": "Read from /kaggle/input/pyTrainTab.csv using pd.read_csv.",
+      "flow": [
+        "Used in plotting functions to visualize data distributions and correlations."
+      ]
+    }
+  ],
+  "models": []
+}

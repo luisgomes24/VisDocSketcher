@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data Sources
+    A[Training Data\n(train.csv)] -->|Load| B[TRAIN_PATH]
+    C[Test Data\n(test.csv)] -->|Load| D[TEST_PATH]
+    E[Sample Submission\n(sample_submission.csv)] -->|Load| F[SAMPLE_SUBMISSION_PATH]
+
+    %% Variable Definitions
+    B -->|Define| G[train\nTraining Dataset]
+    D -->|Define| H[Test Data Path]
+    F -->|Define| I[Sample Submission Path]
+
+    %% Data Preparation
+    G -->|Encoding| J[X\nInput Features]
+    G -->|Select Target| K[y\nTarget Variable]
+
+    %% Model Training
+    J -->|Train| L[AutoML Model]
+    K -->|Train| L
+
+    %% Model Details
+    L -->|Hyperparameters| M[time_budget: 60\nmetric: rmse\nestimators: lgbm, catboost, xgboost\ntask: regression\nseed: 2022]
+
+    %% Prediction and Submission
+    L -->|Predict| N[Predictions]
+    I -->|Prepare| O[sub\nsubmission DataFrame]
+    N -->|Populate| O
+    O -->|Save| P[SUBMISSION_PATH]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#f96,stroke:#333,stroke-width:2px;
+
+    class A,C,E dataSource;
+    class B,D,F,G,H,I variable;
+    class J,K,L,M,N,O,P process;

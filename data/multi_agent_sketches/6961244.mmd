@@ -1,0 +1,14 @@
+%% This Mermaid diagram represents the data workflow for the Jupyter Notebook
+flowchart TD
+    %% Data source node
+    A[winequalityN.csv] --> |Read 1000 rows| B[df1]
+    
+    %% Data visualization nodes
+    B --> |Distribution plots| C[Visualize Distribution]
+    B --> |Correlation plots| D[Visualize Correlations]
+    B --> |Scatter matrix| E[Scatter Matrix Plots]
+    
+    %% Additional commentary on nodes
+    %% A: Represents the CSV file being used as a data source
+    %% B: df1 is the main DataFrame used for analysis, containing a subset of the dataset
+    %% C, D, E: Various visualization tasks performed using df1

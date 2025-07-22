@@ -1,0 +1,17 @@
+{"data_sources": [
+    {"file": "/kaggle/input/gldv2_extra/gldv2_extra.csv", "description": "This CSV file contains additional gold price data."}
+],
+"data_variables": [
+    {"variable": "df1", "description": "DataFrame containing the first 1000 rows from gldv2_extra.csv"},
+    {"variable": "nRowsRead", "description": "Number of rows to read from the CSV file, set to 1000"},
+    {"variable": "nRow", "description": "Number of rows in the DataFrame after loading"},
+    {"variable": "nCol", "description": "Number of columns in the DataFrame after loading"}
+],
+"data_flow": [
+    {"variable": "df1", "creation_method": "pd.read_csv", "flow": "Used for plotting distributions and head display"},
+    {"variable": "nRowsRead", "flow": "Specifies how many rows to load from the CSV"},
+    {"variable": "nRow", "flow": "Used to print out the dimensions of the DataFrame"},
+    {"variable": "nCol", "flow": "Used to print out the dimensions of the DataFrame"}
+],
+"models": []
+}

@@ -1,0 +1,13 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Data"] --> B["<img src='boxplot_template.svg'/> <br/> Preprocess Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Select Features"]
+    C --> D["<img src='brain.svg'/> <br/> Train Model"]
+    D --> E["<img src='scatter_plot_template.svg'/> <br/> Evaluate Model"]
+    E --> F["<img src='table.svg'/> <br/> Save Predictions"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#ff0,stroke:#333,stroke-width:4px
+    style C fill:#0f0,stroke:#333,stroke-width:4px
+    style D fill:#0ff,stroke:#333,stroke-width:4px
+    style E fill:#00f,stroke:#333,stroke-width:4px
+    style F fill:#f00,stroke:#333,stroke-width:4px

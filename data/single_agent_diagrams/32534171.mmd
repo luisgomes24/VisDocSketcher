@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> train.csv, test.csv"] --> B["🔍 Data Exploration <img src='table.svg' /> <br/> train_df.head()"]
+    B --> C["🗂️ Column Separation"]
+    C --> D["📉 Feature Selection <img src='column_split.svg' />"]
+    D --> E["📊 Data Visualization <img src='barplot_template.svg' /> <br/> Barplot of Features"]
+    E --> F["🧹 Handle Missing Values"]
+    F --> G["🔁 Train-Test Split <img src='row_split.svg' />"]
+    G --> H["⚙️ Feature Scaling"]
+    H --> I["🚀 Model Training <img src='brain.svg' /> <br/> Random Forest Classifier"]
+    I --> J["📈 Model Evaluation <img src='scatter_plot_template.svg' /> <br/> Performance Metrics"]
+    J --> K["🔄 Apply Model on Test Data"]
+    K --> L["📁 Save Predictions <img src='file.svg' /> <br/> my_prediction.csv"]

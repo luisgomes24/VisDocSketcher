@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/>"] --> B["🔍 Preprocess Data"]
+    B --> C["🧪 Train-Test Split"]
+    C --> D["🧠 Fit Model"]
+    D --> E["📊 Validate Model <img src='scatter_plot_template.svg'/> <br/>"]
+    E --> F["🔍 Compare Different Tree Sizes"]
+    F --> G["🧪 Fit Model Using All Data"]
+    G --> H["📊 Evaluate Final Model <img src='barplot_template.svg'/> <br/>"]

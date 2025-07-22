@@ -1,0 +1,88 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Porosity Image J.xlsx",
+      "description": "Excel sheet containing images for porosity classification. Contains two sheets for first two batches and a third sheet for testing."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "batch_train",
+      "description": "DataFrame containing training data from the first and second sheets of the Excel file."
+    },
+    {
+      "variable_name": "batch_test",
+      "description": "DataFrame containing testing data from the third sheet of the Excel file."
+    },
+    {
+      "variable_name": "ds_train",
+      "description": "TensorFlow dataset created from training data file paths and labels."
+    },
+    {
+      "variable_name": "ds_test",
+      "description": "TensorFlow dataset created from testing data file paths and labels."
+    },
+    {
+      "variable_name": "data_augmentation",
+      "description": "Keras Sequential model for augmenting input images to prevent overfitting."
+    },
+    {
+      "variable_name": "model",
+      "description": "Keras model created for image classification using a pre-trained Xception architecture."
+    },
+    {
+      "variable_name": "history",
+      "description": "Store the training history including loss and accuracy metrics for the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "batch_train",
+      "creation_method": "pd.read_excel",
+      "usage": "Used for training the CNN model."
+    },
+    {
+      "variable_name": "batch_test",
+      "creation_method": "pd.read_excel",
+      "usage": "Used for testing the CNN model."
+    },
+    {
+      "variable_name": "ds_train",
+      "creation_method": "tf.data.Dataset.from_tensor_slices",
+      "usage": "Split into train dataset, used for training the model."
+    },
+    {
+      "variable_name": "ds_test",
+      "creation_method": "tf.data.Dataset.from_tensor_slices",
+      "usage": "Split into test dataset, used for validation of the model."
+    },
+    {
+      "variable_name": "data_augmentation",
+      "creation_method": "keras.Sequential",
+      "usage": "Applied to the input images during training to augment the data."
+    },
+    {
+      "variable_name": "model",
+      "creation_method": "keras.Model",
+      "usage": "Trained using ds_train dataset and evaluated with ds_test dataset."
+    },
+    {
+      "variable_name": "history",
+      "creation_method": "model.fit",
+      "usage": "Stores training history for visualization of loss and accuracy."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Xception",
+      "input_features": "Porosity images.",
+      "target_variable": "Porosity category classification.",
+      "hyperparameters": {
+        "learning_rate": 5.0e-5,
+        "epochs": 75,
+        "dropout_rate": 0.2,
+        "num_outputs": 4
+      }
+    }
+  ]
+}

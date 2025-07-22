@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file_name": "winemag-data-130k-v2.csv",
+      "description": "Contains reviews of wines including taster, points, price, and variety."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "reviews",
+      "description": "DataFrame containing wine reviews with various attributes such as taster, points, price, and variety."
+    },
+    {
+      "variable_name": "reviews_written",
+      "description": "Series counting the number of reviews written by each taster, indexed by taster Twitter handle."
+    },
+    {
+      "variable_name": "best_rating_per_price",
+      "description": "Series with wine prices indexed and maximum rating for wines at that price."
+    },
+    {
+      "variable_name": "price_extremes",
+      "description": "DataFrame containing minimum and maximum prices for each wine variety."
+    },
+    {
+      "variable_name": "sorted_varieties",
+      "description": "DataFrame of wine varieties sorted by minimum and maximum prices."
+    },
+    {
+      "variable_name": "reviewer_mean_ratings",
+      "description": "Series with average review scores assigned by each reviewer."
+    },
+    {
+      "variable_name": "country_variety_counts",
+      "description": "Series with count of wines indexed by country and variety."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "reviews",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for creating all other variables."
+    },
+    {
+      "variable": "reviews_written",
+      "creation_method": "GroupBy and count operations",
+      "flow": "Analyzed for insights about taster activity."
+    },
+    {
+      "variable": "best_rating_per_price",
+      "creation_method": "Aggregation based on price",
+      "flow": "Useful for identifying maximum ratings at different price points."
+    },
+    {
+      "variable": "price_extremes",
+      "creation_method": "GroupBy and min/max operations",
+      "flow": "Provides a summary of price ranges per wine variety."
+    },
+    {
+      "variable": "sorted_varieties",
+      "creation_method": "Sort operations on price_extremes",
+      "flow": "Allows examination of expensive varieties."
+    },
+    {
+      "variable": "reviewer_mean_ratings",
+      "creation_method": "GroupBy and mean calculations",
+      "flow": "Used to assess taster performance. Descriptive statistics calculated afterwards."
+    },
+    {
+      "variable": "country_variety_counts",
+      "creation_method": "MultiIndex creation and count",
+      "flow": "Enables analysis of common wine varieties by country."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,37 @@
+%%{
+  init: {
+    "theme": "default"
+  }
+}%%
+flowchart TD
+
+%% Define Data Sources and Variables
+A["Data Source:\nHousing Price Dataset"] 
+%% Data source for housing prices
+B["Variable:\nPotential Leakage Feature"]
+%% Variable representing a feature being analyzed for potential leakage
+
+%% Data Flow
+A -->|Train & Validate Model| B
+%% Data source is used in training and validation to identify potential leakage
+
+B --> C["Check for Leakage\nin Housing Price Features"]
+%% Using the potential leakage feature in answer checks to identify leakage
+
+%% Steps from the Notebook
+subgraph E[Example Scenarios]
+    E1["Step 1: Data Science of Shoelaces"]
+    E2["Step 2: Return of Shoelaces"]
+    E3["Step 3: Cryptocurrency Prediction"]
+    E4["Step 4: Preventing Infections"]
+    E5["Step 5: Housing Prices"]
+end
+
+%% Linking different considerations of leakage
+B -->E5
+
+%% Explanation of Steps with Leakage Concerns
+C -->|Analyze| E
+%% Analyzing various examples in the notebook to understand data leakage
+
+%% No specific ML model

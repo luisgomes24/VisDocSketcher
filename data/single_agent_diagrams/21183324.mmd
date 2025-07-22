@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Dataset <img src='file.svg' /> <br/> IPL Matches"] --> B["🛠 Preprocess Data"]
+    B --> C["📅 Convert Date <img src='column_split.svg' /> <br/> Date to datetime"]
+    B --> D["📉 Filter Data <img src='row_split.svg' /> <br/> Last 3 years (2018-2020)"]
+    B --> E["⚾ Create CSK DataFrame <img src='table.svg' /> <br/> Matches Played by CSK"]
+    E --> F["📝 Add Match Result Column"]
+    E --> G["📝 Add Toss Decision Column"]
+    E --> H["📊 Create Contingency Table <img src='table.svg' /> <br/> for Hypothesis Test"]
+    H --> I["📜 Hypothesis Formulation"]
+    I --> J["🔍 Chi-Square Test <img src='brain.svg' />"]
+    J --> K["📉 Evaluate Results <img src='barplot_template.svg'/> <br/> p-value Analysis"]

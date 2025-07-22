@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Sources
+    A[anime.csv] -->|Import Data| B[animes]
+    C[rating.csv] -->|Import Data| D[ratings]
+
+    %% Data Transformation and Analysis
+    B -->|Convert Genres to Dummies| E[dummies]
+    E -->|Calculate Correlations| F[corr]
+    E -->|Correlation to Matrix| G[matrix]
+    
+    %% Graph Construction
+    G -->|Matrix to Graph| H[G(Graph)]
+    H -->|Filter and Create Subgraph| I[H(Subgraph)]
+    
+    %% Further Analysis
+    B -->|Filter Known Episodes| J[know_episodes]
+    B & E -->|Merge Datasets| K[merged]
+
+    %% Visualization
+    F -->|Generate Heatmap| L[Heatmap]
+    I -->|Generate Network Visualization| M[Network Visualization]
+
+    %% Comments
+    %% A: Data source containing anime metadata
+    %% C: Data source containing user ratings
+    %% B: DataFrame with anime information
+    %% D: DataFrame with user ratings (not explicitly used)
+    %% E: Genre columns converted into binary columns
+    %% F: Correlation matrix for genres
+    %% G: Matrix representation for graph creation
+    %% H: Graph representing genre correlations
+    %% I: Filtered and visualized subgraph
+    %% J: DataFrame with known episode counts
+    %% K: Combined DataFrame for in-depth analysis
+    %% L: Visualization of genre correlations
+    %% M: Visualization of genre network connections

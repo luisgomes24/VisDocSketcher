@@ -1,0 +1,27 @@
+flowchart TD
+  %% Data Source Node
+  A["../input/plant-village/PlantVillage"] -->|Load images| B["dataset"]
+  
+  %% Dataset Splits
+  B -->|Split 80%| C["train_ds"]
+  B -->|Split 10%| D["val_ds"]
+  B -->|Split 10%| E["test_ds"]
+  
+  %% Model training and validation
+  C -->|Train model| F["CNN Classifier"]
+  D -->|Validate model| F
+  
+  %% Model Description
+  F --- G["Convolutional Neural Network (CNN)"]
+  G -->|Input: (256, 256, 3) images| H["Conv2D: 96 filters, 11x11 kernel, relu"]
+  H --> I["Conv2D: 256 filters, 11x11 kernel, relu"]
+  I --> J["Dense: 4096 units, relu"]
+  J --> K["Dense: 2048 units, relu"]
+  
+  %% Callbacks and History
+  F -->|Training callbacks and monitoring| L["callbacks"]
+  F -->|Training history with metrics| M["history"]
+  M -->|Visualizations| N["Accuracy & Loss Plots"]
+  
+  %% Test Dataset
+  E -->|Test model| O["Model Testing"]

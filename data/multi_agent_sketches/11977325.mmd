@@ -1,0 +1,24 @@
+%%{init: {"flowchart": {"useMaxWidth": true, "diagramPadding": 10}}}
+flowchart TD
+
+    %% Node for data frame creation
+    DF["DataFrame 'df'"]
+    click DF "" _self
+    %% Node for data source (hypothetical)
+    DS["Data Source (hypothetical)"]
+    click DS "" _self
+
+    
+    %% Data Source to DataFrame transformation
+    DS -->|"Processed into"| DF
+
+    %% Node for Data Usage in plotting
+    PLOT["Plotting Functions"]
+    click PLOT "" _self
+    
+    %% DataFrame to Plotting Function
+    DF -->|"Used for plotting"| PLOT
+
+    %% Note for absence of machine learning model
+    %% There is no machine learning model included in this workflow.
+

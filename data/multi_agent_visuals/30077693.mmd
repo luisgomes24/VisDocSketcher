@@ -1,0 +1,30 @@
+flowchart TD
+    %% Node definitions
+    subgraph DataSources["Data Sources"]
+        DS1["train_data.csv"]
+        DS2["test_data.csv"]
+        DS3["sample_submission.csv"]
+    end
+    
+    subgraph Features["Feature Engineering"]
+        F1["train_feats"]
+        F2["test_feats"]
+        F3["FEATURES"]
+    end
+
+    subgraph Models["LightGBM Model Training"]
+        M1["LightGBM Regressor"]
+    end
+
+    subgraph Output["Output Generation"]
+        O1["submission.csv"]
+    end
+
+    %% Data flow
+    DS1 --> |"Create Features"| F1
+    DS2 --> |"Create Features"| F2
+    F1 --> |"Define Features"| F3
+    F3 --> |"Train Models"| M1
+    M1 --> |"Feature Importance"| F3
+    M1 --> |"Make Predictions"| O1
+    O1 --> DS3

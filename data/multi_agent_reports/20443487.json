@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_name": "NotebookRankings.csv",
+      "description": "Contains rankings and medal counts for various notebooks."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data0",
+      "description": "DataFrame containing the rankings and statistics of notebooks."
+    },
+    {
+      "variable_name": "TotalMedals",
+      "description": "TotalCount of medals, calculated by summing TotalGold, TotalSilver, and TotalBronze."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data0",
+      "creation_method": "read_csv",
+      "uses": ["scatter plots for analysis"]
+    },
+    {
+      "variable_name": "TotalMedals",
+      "creation_method": "Column operation on data0",
+      "uses": ["scatter plots for analysis"]
+    }
+  ],
+  "models": []
+}

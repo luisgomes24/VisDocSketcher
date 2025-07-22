@@ -1,0 +1,29 @@
+flowchart TD
+    %% Training Data Source
+    A["../input/train.csv"] -->|read_csv| B["trainDataFrame"]
+    B -->|Extract TARGET| C["trainLabels"]
+    B -->|Drop ID & TARGET| D["trainFeatures"]
+    
+    %% Data Splitting
+    C -->|train_test_split| E["y_train"]
+    C -->|train_test_split| F["y_valid"]
+    D -->|train_test_split| G["X_train"]
+    D -->|train_test_split| H["X_valid"]
+
+    %% Single Feature Model
+    G -->|GradientBoostingClassifier.fit\npredict_proba| I["singleFeatureTable"]
+    
+    %% Feature Combinations
+    G -->|Random combinations\nmodel fitting| J["featureCombinationsTable"]
+    J -->|Overlap calculations| K["combinationOverlapMatrix"]
+
+    %% Comment details for clarity
+    %% A: Initial dataset in CSV format
+    %% B: DataFrame after loading the dataset
+    %% C: Target variable extracted from DataFrame
+    %% D: Features used for training (excludes ID and TARGET columns)
+    %% E, F: Labels for training and validation sets
+    %% G, H: Feature sets for training and validation
+    %% I: Table with AUC scores for each single feature
+    %% J: Table with AUC scores for different combinations of features
+    %% K: Matrix showing overlap between feature combinations

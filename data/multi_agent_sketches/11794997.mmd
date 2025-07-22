@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    DS1[Test Features\n../input/lish-moa/test_features.csv]:::dataSource --> |Read CSV| test
+    DS2[Train Targets Scored\n/kaggle/input/lish-moa/train_targets_scored.csv]:::dataSource --> |Read CSV| target_scored
+    DS3[Sample Submission\n/kaggle/input/lish-moa/sample_submission.csv]:::dataSource --> |Read CSV| sample
+
+    %% Data Variables
+    test[Test DataFrame\nTest features]:::dataVariable --> |Copy| x_test
+    x_test[x_test DataFrame\nCopy of test]:::dataVariable --> |Quantile Transform| X_test
+    x_test --> |Standardization| XX_test
+    X_test[X_test DataFrame\nQuantile transformed x_test]:::dataVariable --> |Predict| model_predictions
+    XX_test[XX_test DataFrame\nStandardized x_test]:::dataVariable --> |Predict| model_predictions
+
+    %% Model
+    model_predictions[(Model Predictions)\nList of model predictions]:::dataVariable --> |Populate| sample
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% ML Model Used
+    ML_Model[(XGBoost Model)\nUses XX_test for predictions]:::model --> model_predictions
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+
+    %% Output
+    sample --> |Write CSV| submission[Submission CSV\nsubmission.csv]:::dataVariable

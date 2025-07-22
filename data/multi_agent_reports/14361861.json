@@ -1,0 +1,78 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv.zip",
+      "description": "Training dataset containing comments and toxicity labels."
+    },
+    {
+      "file_name": "test.csv.zip",
+      "description": "Test dataset containing comments without labels."
+    },
+    {
+      "file_name": "test_labels.csv.zip",
+      "description": "Labels for test dataset comments indicating toxicity classification."
+    },
+    {
+      "file_name": "sample_submission.csv.zip",
+      "description": "Sample submission format for the competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame holding training data with comments and toxicity labels."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame holding test data with comments."
+    },
+    {
+      "name": "val_df",
+      "description": "Validation data created by splitting the training data."
+    },
+    {
+      "name": "LABEL_COLUMNS",
+      "description": "List of columns representing different types of toxicity in comments."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "pd.read_csv",
+      "used_in": "Model training, data balancing, validation split."
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv",
+      "used_in": "Model validation."
+    },
+    {
+      "variable": "val_df",
+      "created_by": "model_selection.train_test_split",
+      "used_in": "Model validation."
+    },
+    {
+      "variable": "toxic_df",
+      "created_by": "Filtering train_df",
+      "used_in": "Rebalancing dataset for training."
+    },
+    {
+      "variable": "clean_df",
+      "created_by": "Filtering train_df",
+      "used_in": "Rebalancing dataset for training."
+    }
+  ],
+  "models": [
+    {
+      "name": "ToxicCommentClassifier",
+      "input_features": "Input IDs and attention masks from comments.",
+      "target_variables": "Toxicity labels.",
+      "hyperparameters": {
+        "optimizer": "AdamW",
+        "loss_function": "Binary Cross Entropy",
+        "batch_size": 32,
+        "n_epochs": 5
+      }
+    }
+  ]
+}

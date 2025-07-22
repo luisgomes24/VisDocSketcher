@@ -1,0 +1,20 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> df = pd.read_csv(...)"] --> B["🔄 Rename Columns"]
+    B --> C["📝 Copy Data <img src='table.svg'/> <br/> df_r_copy = df.copy()"]
+    C --> D["🔍 Filter for Lithuania <img src='row_split.svg'/> <br/> df_LT = df_r_copy[...]"]
+    D --> E["📈 Plot Consumption <img src='lineplot_template.svg'/> <br/> ax.plot(x, y)"]
+    
+    D --> F["🌍 Group by Baltic Countries <img src='column_split.svg'/>"]
+    F --> G["📊 Average Consumption <img src='table.svg'/> <br/> df_baltics_g = df_baltics.groupby(...)"]
+    
+    D --> H["🌍 Group by Nordic Countries <img src='column_split.svg'/>"]
+    H --> I["📊 Average Consumption <img src='table.svg'/> <br/> df_nordic_g = df_nordic.groupby(...)"]
+    
+    G --> J["🤝 Combine Regions <img src='table.svg'/> <br/> df_region = pd.concat(...)"]
+    J --> K["📊 Line Plot for Regions <img src='lineplot_template.svg'/> <br/> sns.lineplot(...)"]
+    
+    K --> L["📈 Analyze 70s Data <img src='table.svg'/> <br/> df_70.groupby(...)"]
+    L --> M["📈 Analyze 80s Data <img src='table.svg'/> <br/> df_80.groupby(...)"]
+    
+    M --> N["📊 Final Visuals <img src='lineplot_template.svg'/> <br/> sns.lineplot(...)"]

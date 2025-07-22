@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> DataFrame Creation"]
+    B --> C["📊 Barplot Total Cases by State<br/><img src='dummy_plots/barplot_template.svg' />"]
+    B --> D["📊 Catplot Total Cases by Year<br/><img src='dummy_plots/barplot_template.svg' />"]
+    B --> E["📊 Barplot Total Cases by State (2001-2010)<br/><img src='dummy_plots/barplot_template.svg' />"]
+    F["<img src='column_split.svg'/> <br/> Filter Delhi Data"] --> G["📊 Barplot Total Cases in Delhi<br/><img src='dummy_plots/barplot_template.svg' />"]
+    F --> H["📊 Barplot Cases by Subgroup in Delhi<br/><img src='dummy_plots/barplot_template.svg' />"]
+    
+    C --> F
+    D --> F
+    E --> F
+    G --> H

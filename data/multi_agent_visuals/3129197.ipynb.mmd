@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/train.csv"] -->|Read CSV, parse dates| B1["train DataFrame"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/test.csv"] -->|Read CSV, parse dates| B2["test DataFrame"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/sampleSubmission.csv"] -->|Read CSV| F1["submission DataFrame"]
+
+    %% Data Preparation
+    B1 -->|Extract features| C1["X_train"]
+    B2 -->|Extract features| C2["X_test"]
+    B1 -->|Extract target| D1["Y_train"]
+
+    %% Model Training
+    D1 -->|Target for training| E1["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor"]
+    C1 -->|Features for training| E1
+    E1 -->|Fit model| E2["<img src='icons/brain.svg' width=100 height=100/> <br/> Trained RandomForestRegressor"]
+
+    %% Prediction
+    E2 -->|Predict with X_test| G1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Predictions"]
+
+    %% Submission Preparation
+    F1 -->|Prepare submission| G2["submission with Predictions"]
+    G1 -->|Add predictions to submission| G2
+    G2 -->|Save submission| H1["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]
+
+    %% Comments
+    classDef default fill:#f9f,stroke:#333,stroke-width:1px;
+    class A1,A2,A3,B1,B2,F1 fill:#87CEEB;
+    class C1,C2,D1 fill:#C6F4D6;
+    class E1,E2 fill:#C6F4D6;
+    class G1,G2 fill:#F2C464;
+    class H1 fill:#F2C464;

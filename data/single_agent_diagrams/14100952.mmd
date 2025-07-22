@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Read Annotations CSV <img src='dummy_plots/hist_template.svg' />"] --> B["🔍 Obtain Number of Activated Pixels"]
+    B --> C["🖼️ Example Path for Blank Mask"]
+    C --> D["🖼️ Example Path for Non-Blank Mask"]
+    D --> E["⏱️ Time Images Processing"]
+    E --> F["🚀 Parallelize Processing"]
+    F --> G["📊 Obtaining Number of Pixels for All Rows"]
+    G --> H["📅 Creating Time Periods"]
+    H --> I["📅 Calculating Number of Months Apart"]
+    I --> J["💾 Save Output Dataframe as CSV"]

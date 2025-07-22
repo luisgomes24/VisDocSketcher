@@ -1,0 +1,103 @@
+{
+    "data_sources": [
+        {
+            "file_path": "/kaggle/input/us-crime-data/US_Crime_Data.csv",
+            "description": "Contains US crime data with various features including headlines."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "data",
+            "description": "DataFrame containing the raw data read from the CSV file."
+        },
+        {
+            "variable_name": "df",
+            "description": "DataFrame that contains only the 'Title' column from the original dataset, with no missing values."
+        },
+        {
+            "variable_name": "tokens",
+            "description": "Cleaned and lowercased tokenized titles without punctuations."
+        },
+        {
+            "variable_name": "x",
+            "description": "Input sequences prepared for model training."
+        },
+        {
+            "variable_name": "y",
+            "description": "Output labels prepared for model training, one-hot encoded."
+        },
+        {
+            "variable_name": "vocab_size",
+            "description": "Total number of unique words found in the dataset."
+        },
+        {
+            "variable_name": "model",
+            "description": "LSTM neural network model for text prediction."
+        },
+        {
+            "variable_name": "vocab_array",
+            "description": "Array containing all the unique words for prediction purposes."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "data",
+            "created_by": "pd.read_csv",
+            "flow": "Used to create df."
+        },
+        {
+            "variable_name": "df",
+            "created_by": "data[['Title']].dropna()",
+            "flow": "Used for cleaning text and creating tokens."
+        },
+        {
+            "variable_name": "tokens",
+            "created_by": "clean_text(df)",
+            "flow": "Used to create x and y for model training."
+        },
+        {
+            "variable_name": "x",
+            "created_by": "tf.keras.preprocessing.sequence.pad_sequences",
+            "flow": "Used as input for model training."
+        },
+        {
+            "variable_name": "y",
+            "created_by": "tf.keras.utils.to_categorical",
+            "flow": "Used as output for model training."
+        },
+        {
+            "variable_name": "model",
+            "created_by": "tf.keras.Sequential",
+            "flow": "Trained using history = model.fit(x, y). Saved to 'model.h5'."
+        },
+        {
+            "variable_name": "vocab_size",
+            "created_by": "len(tokenizer.word_index) + 1",
+            "flow": "Used to define the embedding layer in the model."
+        },
+        {
+            "variable_name": "vocab_array",
+            "created_by": "np.array(list(tokenizer.word_index.keys()))",
+            "flow": "Used in make_predictions function for output."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "LSTM",
+            "input_features": "x (input sequences)",
+            "target_variable": "y (output labels)",
+            "hyperparameters": {
+                "layers": [
+                    "Embedding layer (vocab_size, 49)",
+                    "LSTM layer (100, return_sequences=True)",
+                    "LSTM layer (100)",
+                    "Dense layer (100, activation='relu')",
+                    "Dense layer (vocab_size, activation='softmax')"
+                ],
+                "loss_function": "categorical_crossentropy",
+                "optimizer": "adam",
+                "metrics": ["accuracy"]
+            }
+        }
+    ]
+}

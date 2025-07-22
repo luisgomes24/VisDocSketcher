@@ -1,0 +1,9 @@
+graph LR
+  A["<img src='icons/database.svg' width=100 height=100/><br/> Training Data"] -->|Load| B["<img src='icons/database.svg' width=100 height=100/><br/> Test Data"]
+  B --> C["<img src='icons/column_split.svg' width=100 height=100/><br/> Feature Selection"]
+  C --> D["<img src='icons/row_split.svg' width=100 height=100/><br/> Train/Test Split"]
+  D --> E["<img src='dummy_plots/barplot_template.svg'/><br/> Preprocessing"]
+  E --> F["<img src='dummy_plots/scatter_plot_template.svg'/><br/> Data Visualization"]
+  F --> G["<img src='dummy_plots/boxplot_template.svg'/><br/> Model Training"]
+  G --> H["<img src='dummy_plots/hist_template.svg'/><br/> Model Evaluation"]
+  H --> M["<img src='icons/brain.svg' width=100 height=100/><br/> CNN Model"].

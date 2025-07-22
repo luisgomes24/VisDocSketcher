@@ -1,0 +1,71 @@
+{"data_sources": [
+    {
+        "source": "titanic.csv",
+        "description": "Contains data on Titanic passengers' details including class, survival status, sex, age, and fare."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "titanic",
+        "description": "Initial DataFrame loaded from the Titanic dataset."
+    },
+    {
+        "variable_name": "df",
+        "description": "Filtered DataFrame containing columns: Pclass, Survived, Sex, Age, and Fare."
+    },
+    {
+        "variable_name": "df1",
+        "description": "DataFrame after encoding the gender and interpolating missing age values."
+    },
+    {
+        "variable_name": "X",
+        "description": "Feature set for model training, excluding the target variable Survived."
+    },
+    {
+        "variable_name": "y",
+        "description": "Target variable representing survival status of passengers."
+    }
+],
+"data_flow": [
+    {
+        "variable": "titanic",
+        "creation_method": "pd.read_csv",
+        "flow": "Filtered to create df."
+    },
+    {
+        "variable": "df",
+        "creation_method": "DataFrame filtering",
+        "flow": "Processed to create df1."
+    },
+    {
+        "variable": "df1",
+        "creation_method": "Drop and encode operations",
+        "flow": "Used for model input features X and target y."
+    },
+    {
+        "variable": "X",
+        "creation_method": "df1.drop",
+        "flow": "Used for training and testing model."
+    },
+    {
+        "variable": "y",
+        "creation_method": "df1['Survived']",
+        "flow": "Used for training and testing model."
+    },
+    {
+        "variable": "model",
+        "creation_method": "DecisionTreeClassifier",
+        "flow": "Trained with X_train and y_train."
+    }
+],
+"models": [
+    {
+        "model_name": "DecisionTreeClassifier",
+        "input_features": "Pclass, Age, Fare, Gender",
+        "target_variable": "Survived",
+        "hyperparameters": {
+            "max_leaf_nodes": 90,
+            "random_state": 10
+        }
+    }
+]}

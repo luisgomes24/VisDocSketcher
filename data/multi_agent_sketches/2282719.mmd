@@ -1,0 +1,37 @@
+%% This is a workflow for the notebook 2282719.ipynb
+flowchart TD
+    %% Input list to the select_second function
+    L["L: Input list to select_second"]
+    
+    %% List of sports teams passed to losing_team_captain
+    teams["teams: List of sports teams"]
+    
+    %% List of racer names for purple_shell function
+    racers["racers: List of racer names"]
+    
+    %% Ordered list of party arrivals for fashionably_late function
+    arrivals["arrivals: Ordered list of party arrivals"]
+    
+    %% Manually defined list of lengths
+    lengths["lengths: Predicted lengths"]
+    
+    %% List of numbers to count negatives
+    nums["nums: List of numbers"]
+
+    %% Data flow for select_second
+    L -->|Used to| select_second["Select second element"]
+    
+    %% Data flow for losing_team_captain
+    teams -->|Used to return| losing_team_captain["Return last team captain"]
+    
+    %% Data flow for purple_shell
+    racers -->|Used to swap| purple_shell["Swap first and last racer"]
+    
+    %% Data flow for fashionably_late
+    arrivals -->|Used to determine| fashionably_late["Determine if fashionably late"]
+    
+    %% Flow for lengths usage
+    lengths -->|Check lengths| check_lengths["Check question 4"]
+    
+    %% Data flow for count_negatives
+    nums -->|Count negatives in| count_negatives["Count negatives"]

@@ -1,0 +1,16 @@
+flowchart TD
+    %% Data Variable Declarations
+    A[m: Shift for cosine functions] %% Parameter representing the shift for cosine functions
+    B[N: Number of samples/points] %% Number of samples for x-axis
+    A -->|Uses| B
+    %% Data Variables
+    C[x: np.linspace] --> A
+    C -->|Generates| D[f: cos(x + m)]
+    C -->|Generates| E[g: cos(x) - m * sin(np.pi - m)]
+    C -->|Generates| F[h: Heaviside(x - (np.pi - m), 0)]
+    %% Piecewise Function
+    F -->|Determines| G[phi: h * g + (1 - h) * f]
+    %% Data Usage
+    D -->|Used for| H[Plots]
+    E -->|Used for| H
+    G -->|Used for| H

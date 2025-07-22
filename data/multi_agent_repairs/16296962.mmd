@@ -1,0 +1,20 @@
+%% Diagram of data flow in the toxic comment classification project
+flowchart TD
+    %% Data Sources
+    A["jigsaw-toxic-comment-train.csv"] -->|Load Data| B["jigsaw_seqlen128_df"]
+    C["jigsaw-unintended-bias-train.csv"] -->|Load Data| D["jigsaw_seqlen128_df"]
+    E["validation.csv"] -->|Preprocess for BERT| F["validation-processed-seqlen128.csv"]
+    G["test.csv"] -->|Preprocess for BERT| H["test-processed-seqlen128.csv"]
+
+    %% Dataframes and Operations
+    B -->|Memory Optimization| I["optimized_jigsaw_seqlen128_df"]
+    I -->|Analysis and Model Training| J["BERT Model"]
+
+    %% Processes
+    I -->|Feature Extraction| K["Input Features for BERT"]
+
+    %% Model
+    J:::model
+
+    %% Styling
+    class model fill:#f9f,stroke:#333,stroke-width:4px;

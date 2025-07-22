@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data"] --> B["📊 Data Exploration"]
+    B --> C["🔍 Define Plotting Functions"]
+    C --> D["<img src='dummy_plots/hist_template.svg'/> <br/> 📈 Distribution Graphs"]
+    C --> E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 📉 Scatter Matrix"]
+    C --> F["<img src='dummy_plots/boxplot_template.svg'/> <br/> 📊 Correlation Matrix"]
+    D --> G["🗂 Plot Results"]
+    E --> G
+    F --> G
+    G --> H["🔚 End of Analysis"]

@@ -1,0 +1,23 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> df = pd.read_csv('../input/bmidataset/bmi.csv')"] --> B["🔍 Data Overview <img src='table.svg'/> <br/> df.head(), df.describe()"]
+    B --> C["📊 Correlation Check <img src='scatter_plot_template.svg'/> <br/> df.corr()"]
+    
+    C --> D["🔍 EDA <img src='barplot_template.svg'/> <br/> Analysis by Index and Gender"]
+    D --> E["📊 Boxplot <img src='boxplot_template.svg'/> <br/> Factors of BMI"]
+    E --> F["📊 Average Height by Index <img src='barplot_template.svg'/>"]
+    F --> G["📊 Average Weight by Index <img src='barplot_template.svg'/>"]
+    G --> H["📈 Distribution of Variables <img src='hist_template.svg'/> <br/> df.hist()"]
+    
+    H --> I["📊 Profile Report <img src='table.svg'/> <br/> pandas_profiling.ProfileReport(df)"]
+
+    I --> J["🧠 Model Preparation <img src='brain.svg'/>"]
+    J --> K["🔄 Data Splitting <img src='row_split.svg'/> <br/> Train-test split"]
+    K --> L["📊 Classifier Setup <img src='brain.svg'/> <br/> Prepare ML Classifiers"]
+    L --> M["⚙️ Model Training <img src='brain.svg'/>"]
+    M --> N["📈 Model Evaluation <img src='barplot_template.svg'/> <br/> Accuracy Scores"]
+
+    N --> O["📊 Confusion Matrix <img src='table.svg'/>"]
+    O --> P["📜 Classification Report <img src='table.svg'/>"]
+
+    P --> Q["📦 Deployment <img src='database.svg'/> <br/> pickle.dump(qda, open('quadratic_discriminant_analysis.pkl', 'wb'))"]
+

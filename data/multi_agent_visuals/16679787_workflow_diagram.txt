@@ -1,0 +1,10 @@
+# Workflow Diagram for the Notebook 16679787
+
+1. **Data Source**: Insurance dataset containing simulated beneficiary data and charges.
+2. **Data Loading**: Use of get_data() from PyCaret to load the insurance data.
+3. **Model Setup**: Creating a regression setup in PyCaret to predict charges.
+4. **Model Creation**: Implementing and tuning Random Forest model to improve accuracy.
+5. **Model Comparison**: Comparing multiple models to find the best performing ones.
+6. **Model Blending**: Blending tuned models to create a stronger predictive model.
+7. **Model Finalization**: Finalizing and saving the combined model for deployment.
+8. **Prediction Function**: Using the final model to predict health insurance costs based on input parameters.

@@ -1,0 +1,42 @@
+flowchart TD
+    %% Data Sources
+    Ds1["/diabetes.csv/"] %% Pima Indians Diabetes Database
+
+    %% Data Variables
+    Df["df"] %% DataFrame containing the dataset loaded
+    Ftr["features"] %% List of feature columns
+    Lbl["labels"] %% Series containing the target variable
+    X_tr["X_train"] %% Training set features
+    y_tr["y_train"] %% Training set labels
+    X_ts["X_test"] %% Testing set features
+    y_ts["y_test"] %% Testing set labels
+
+    %% ML Models
+    Ann["Artificial Neural Network"] 
+    Ann_desc["(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, Age)"] %% ANN model description
+    Btc["Boosted Trees Classifier"]
+    Btc_desc["(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, Age)"] %% Boosted Tree model description
+
+    %% Data Flow
+    Ds1 -->|pd.read_csv| Df
+    Df -->|df.drop| Ftr
+    Df -->|"df['Outcome']"| Lbl
+    Ftr -->|train_test_split| X_tr
+    Lbl -->|train_test_split| y_tr
+    Ftr -->|train_test_split| X_ts
+    Lbl -->|train_test_split| y_ts
+
+    %% Model Training
+    X_tr -->|Model Training| Ann
+    y_tr -->|Model Training| Ann
+    X_ts -->|Model Evaluation| Ann
+    y_ts -->|Model Evaluation| Ann
+
+    Ann --> Ann_desc
+
+    X_tr -->|Model Training| Btc
+    y_tr -->|Model Training| Btc
+    X_ts -->|Model Evaluation| Btc
+    y_ts -->|Model Evaluation| Btc
+
+    Btc --> Btc_desc

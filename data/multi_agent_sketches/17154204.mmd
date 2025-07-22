@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph DataSources
+        A["/WA_Fn-UseC_-Telco-Customer-Churn.csv/"]:::datasource
+    end
+    subgraph DataProcessing
+        B[Data Import]:::process
+        C[Setup Data]:::process
+    end
+    subgraph Modeling
+        D[Train ADA Model]:::process
+        E[Tune ADA Model]:::process
+        F[Finalize ADA Model]:::process
+    end
+    subgraph Prediction
+        G[Predict with Finalized Model]:::process
+    end
+
+    classDef datasource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+
+    A --> B
+    B -->|DataFrame: data| C
+    C -->|PyCaret setup: telecom| D
+    D -->|Model: ada| E
+    E -->|Model: tuned_ada| F
+    F -->|Model: final_ada| G
+
+    %% Comments
+    %% A: Source data file for the customer churn data
+    %% B: Reading the CSV data into a DataFrame
+    %% C: Setting up data in PyCaret with preprocessing for model training
+    %% D: Training initial ADA model
+    %% E: Tuning the ADA model with Kappa optimization
+    %% F: Finalizing tuned ADA model for predictions
+    %% G: Using finalized model for making predictions

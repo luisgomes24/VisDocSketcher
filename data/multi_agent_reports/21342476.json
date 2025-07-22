@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "kaggle_survey_2021_responses.csv",
+      "description": "Responses from the Kaggle 2021 survey, including various attributes about participants' backgrounds and tool usage."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "csv",
+      "description": "DataFrame containing the survey data loaded from the CSV file."
+    },
+    {
+      "variable_name": "eg",
+      "description": "Dictionary object that captures the counts of different Business Intelligence tools from the survey responses."
+    },
+    {
+      "variable_name": "c",
+      "description": "Series object containing the counts of respondents for question Q35 regarding other irrelevant commentary."
+    },
+    {
+      "variable_name": "d1, d2, d3",
+      "description": "Lists of indices for respondents who use Kaggle Notebook, Colab Notebooks, and Azure Notebooks respectively, derived from Q10 responses."
+    },
+    {
+      "variable_name": "outer",
+      "description": "Counts of respondents grouped by their highest level of education as per responses in Q4."
+    },
+    {
+      "variable_name": "inner",
+      "description": "Counts of respondents grouped by their highest level of education and another variable Q6 regarding recommended programming language."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "csv",
+      "created_by": "pd.read_csv",
+      "flows_to": "Various analysis and visualizations including circle plots, count plots, and pie charts."
+    },
+    {
+      "variable": "eg",
+      "created_by": "value_counts().to_dict()",
+      "flows_to": "Visualized using circular packing methodology."
+    },
+    {
+      "variable": "c",
+      "created_by": "csv['Q35'].value_counts()",
+      "flows_to": "Reported but not used directly in visualizations."
+    },
+    {
+      "variable": "d1, d2, d3",
+      "created_by": "csv[~csv['Q10_Part_X'].isnull()].index.tolist()",
+      "flows_to": "Used in Venn diagram visualization."
+    },
+    {
+      "variable": "outer",
+      "created_by": "csv.groupby(['Q4'])['Q4'].count()",
+      "flows_to": "Visualized in pie charts."
+    },
+    {
+      "variable": "inner",
+      "created_by": "csv.groupby(['Q4', 'Q6'])['Q4'].count()",
+      "flows_to": "Visualized in pie charts."
+    }
+  ],
+  "models": []
+}

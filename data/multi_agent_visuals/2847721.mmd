@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::dataSource-->B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: train"]:::dataVariable
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]:::dataSource-->D["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: test"]:::dataVariable
+    
+    %% Data Preparation
+    B-->E["Data Preprocessing & Feature Engineering"]:::process
+    E-->F["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> X_train, y_train"]:::dataVariable
+    D-->G["X_test"]:::dataVariable
+    
+    %% Model Training
+    F-->H["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBoost Classifier"]:::model
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+    H-->I["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Y_pred"]:::dataVariable
+    
+    %% Predictions and Submission
+    I-->J["DataFrame: submission"]:::dataVariable
+    J-->K["submission.csv"]:::output
+    
+    %% Classes for styling
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#9c6,stroke:#333,stroke-width:2px;
+    classDef process fill:#6cf,stroke:#333,stroke-width:2px;
+    classDef model fill:#fc3,stroke:#333,stroke-width:2px;
+    classDef output fill:#c93,stroke:#333,stroke-width:2px;

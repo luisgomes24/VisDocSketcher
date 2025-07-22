@@ -1,0 +1,24 @@
+%% This is a valid Mermaid.js flowchart with TD direction
+flowchart TD
+    %% Data Source node, indicates where the data originally comes from
+    subgraph Data_Sources
+        DS[None]
+    end
+    
+    %% DataFrame node, represents the main data structure used in the notebook
+    subgraph Data_Variables
+        DF[df]:::dataVariable
+    end
+    
+    %% Processing node, describes any data processing in the notebook
+    subgraph Data_Flow
+        DF -->|Used for plotting| PlotFuncs
+    end
+    
+    %% ML Models node, notes any models used (none in this case)
+    subgraph Models
+        M[None]
+    end
+
+    %% Styling for better visualization
+    classDef dataVariable fill:#f9f,stroke:#333,stroke-width:2px;

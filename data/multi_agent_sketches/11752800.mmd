@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Sources
+    data_source_json["shipsnet.json"]
+    
+    %% Data Variables
+    data["data (4000 x 19200 array)"]
+    labels["labels (4000 array)"]
+    X["X (4000, 3, 80, 80 array)"]
+    Xmeans["Xmeans (mean values of RGB channels)"]
+    Xstds["Xstds (std dev of RGB channels)"]
+    
+    %% Data Flow
+    data_source_json --> |"load"| data
+    data_source_json --> |"load"| labels
+    data --> |"reshape using np.reshape"| X
+    X --> |"calculate mean X.mean(axis=0)"| Xmeans
+    X --> |"calculate std X.std(axis=0)"| Xstds

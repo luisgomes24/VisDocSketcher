@@ -1,0 +1,151 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/train.csv",
+      "description": "Training data containing question texts and corresponding targets."
+    },
+    {
+      "file": "../input/test.csv",
+      "description": "Test data containing question texts for which predictions are to be made."
+    },
+    {
+      "file": "../input/embeddings/glove.840B.300d/glove.840B.300d.txt",
+      "description": "Pre-trained GloVe embeddings for generating word vectors."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "max_features",
+      "description": "Maximum number of words to include in the tokenizer."
+    },
+    {
+      "name": "maxlen",
+      "description": "Maximum number of words in each question after padding."
+    },
+    {
+      "name": "embed_size",
+      "description": "Size of the word embeddings."
+    },
+    {
+      "name": "train_df",
+      "description": "DataFrame containing training questions and targets."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing test questions."
+    },
+    {
+      "name": "train_X",
+      "description": "Tokenized and padded training input text."
+    },
+    {
+      "name": "val_X",
+      "description": "Tokenized and padded validation input text."
+    },
+    {
+      "name": "test_X",
+      "description": "Tokenized and padded test input text."
+    },
+    {
+      "name": "train_y",
+      "description": "Target values for the training set."
+    },
+    {
+      "name": "val_y",
+      "description": "Target values for the validation set."
+    },
+    {
+      "name": "embedding_matrix",
+      "description": "Matrix of embeddings for the words in the word index."
+    },
+    {
+      "name": "word_index",
+      "description": "Mapping of words to their respective indexes."
+    },
+    {
+      "name": "pred_val_y",
+      "description": "Predicted values for the validation set."
+    },
+    {
+      "name": "pred_test_y",
+      "description": "Predicted values for the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_from": "pd.read_csv('../input/train.csv')",
+      "used_for": [
+        "Data cleaning and preprocessing (e.g., applying clean_text)",
+        "Splitting the data into training and validation sets"
+      ]
+    },
+    {
+      "variable": "test_df",
+      "created_from": "pd.read_csv('../input/test.csv')",
+      "used_for": "Cleaning and preprocessing test questions."
+    },
+    {
+      "variable": "train_X",
+      "created_from": "tokenizer.texts_to_sequences",
+      "used_for": [
+        "Model training",
+        "Used in defining the model input"
+      ]
+    },
+    {
+      "variable": "val_X",
+      "created_from": "tokenizer.texts_to_sequences",
+      "used_for": [
+        "Model validation",
+        "Used in defining the model validation input"
+      ]
+    },
+    {
+      "variable": "test_X",
+      "created_from": "tokenizer.texts_to_sequences",
+      "used_for": [
+        "Final predictions on the test set"
+      ]
+    },
+    {
+      "variable": "embedding_matrix",
+      "created_from": "load_glove(word_index)",
+      "used_for": "Initializing the embedding layer in the model."
+    },
+    {
+      "variable": "pred_val_y",
+      "created_from": "model.predict",
+      "used_for": [
+        "Calculating F1 score",
+        "Evaluation of model on validation set"
+      ]
+    },
+    {
+      "variable": "pred_test_y",
+      "created_from": "model.predict",
+      "used_for": [
+        "Saving predictions to submission file"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LSTM with Attention",
+      "input_features": "Padded sequences of tokenized question text.",
+      "target_variable": "Binary target indicating whether a question is toxic.",
+      "architecture": [
+        "Embedding layer with pre-trained GloVe embeddings",
+        "Bidirectional CuDNNLSTM layers",
+        "AttentionWithContext layer",
+        "Dense output layer with sigmoid activation"
+      ],
+      "hyperparameters": {
+        "embedding_dimension": 300,
+        "LSTM_units": [128, 64],
+        "loss_function": "binary_crossentropy",
+        "optimizer": "adam"
+      }
+    }
+  ]
+}

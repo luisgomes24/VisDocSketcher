@@ -1,0 +1,33 @@
+flowchart TD
+
+%% Data Sources
+A["Train Data(train.csv)"]:::data_source
+B["Test Data(test.csv)"]:::data_source
+
+%% Data Variables
+C["df_train"]:::data_var
+D["df_test"]:::data_var
+E["df_missing_stat"]:::data_var
+F["df_x"]:::data_var
+
+%% Data Flow
+A --> |read_csv| C
+B --> |read_csv| D
+C --> |calcMissingValues| E
+C --> |copy(drop employee_id)| F
+E --> |missing values stats| visualizations1["Statistical Visualizations"]
+F --> |pairplot & feature analysis| visualizations2["Feature Analysis Visualizations"]
+
+%% Models
+G["Logistic Regression"]:::model
+H["Random Forest"]:::model
+I["Naive Bayes"]:::model
+
+F --> |input features: previous_year_rating, education, length_of_service<br>target: is_promoted| G
+F --> |input features: previous_year_rating, education, length_of_service<br>target: is_promoted| H
+F --> |input features: previous_year_rating, education, length_of_service<br>target: is_promoted| I
+
+%% Class Definitions
+classDef data_var fill:#f9f,stroke:#333,stroke-width:2px;
+classDef data_source fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#afa,stroke:#333,stroke-width:2px;

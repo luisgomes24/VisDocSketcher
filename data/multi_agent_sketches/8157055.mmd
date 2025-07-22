@@ -1,0 +1,18 @@
+flowchart TD
+  %% Load data from CSV
+  A[CSV File: Advertising.csv] -->|Read CSV| B[DataFrame: data]
+  %% DataFrame representing the raw data
+  B -->|Extract Column TV| C[Variable: a]
+  B -->|Extract Column Sales| D[Variable: b]
+  B -->|Extract Column Radio| E[Variable: c]
+  B -->|Extract Column Newspaper| F[Variable: d]
+  
+  %% Correlation analysis
+  B -->|Calculate Correlation| G[Matrix: corr]
+  
+  %% Visualization steps
+  C -->|Histogram| H[TV Expenditures Histogram]
+  E -->|Histogram| I[Radio Expenditures Histogram]
+  F -->|Histogram| J[Newspaper Expenditures Histogram]
+  D -->|Joint Plot with Sales| K[TV vs Sales Joint Plot]
+  G -->|Heatmap| L[Correlation Heatmap]

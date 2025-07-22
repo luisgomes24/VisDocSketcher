@@ -1,0 +1,21 @@
+graph TD;
+    A["📂 Load Files"] --> B["📃 Pre-process Data"];
+    B --> C["🗄️ Create Pandas DataFrame"];
+    C --> D["📊 EDA"];
+    
+    subgraph Preprocessing
+        B1["🗂️ Load JSON Data"] --> B2["🔄 Alter Data Format"];
+        B2 --> B3["📊 Data Conversion"];
+        B3 --> B4["📖 Prepare Data"];
+        B4 --> B5["📦 Final Data"];
+    end
+    
+    B -->|Contains| Preprocessing;
+    
+    subgraph EDA
+        D1["📈 Histogram: Paragraph Count"] --> D2["📊 Histogram: Summary Lengths"];
+        D2 --> D3["📉 Histogram: Characters in News"];
+        D3 --> D4["📊 Histogram: Characters in Summary"];
+    end
+    
+    D -->|Contains| EDA;

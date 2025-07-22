@@ -1,0 +1,98 @@
+{
+  "data_sources": [
+    {
+      "file_name": "anime.csv",
+      "description": "Contains metadata about anime including titles, genres, ratings, and number of episodes."
+    },
+    {
+      "file_name": "rating.csv",
+      "description": "Contains ratings given to the anime by users."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "animes",
+      "description": "DataFrame containing information about anime, including genres and ratings."
+    },
+    {
+      "name": "ratings",
+      "description": "DataFrame that holds user ratings of different anime."
+    },
+    {
+      "name": "dummies",
+      "description": "DataFrame created from the 'genre' of each anime, converting genres into multiple binary columns indicating genre presence."
+    },
+    {
+      "name": "matrix",
+      "description": "Matrix representation of the correlation between genres derived from the dummies DataFrame."
+    },
+    {
+      "name": "G",
+      "description": "NetworkX graph object representing connections between different genres based on their correlations."
+    },
+    {
+      "name": "H",
+      "description": "Filtered graph based on correlation threshold and direction for visualization."
+    },
+    {
+      "name": "corr",
+      "description": "Correlation matrix derived from the dummies DataFrame."
+    },
+    {
+      "name": "know_episodes",
+      "description": "DataFrame that filters out anime entries with unknown episode counts to analyze episode distribution."
+    },
+    {
+      "name": "merged",
+      "description": "DataFrame combining the animes DataFrame and the dummies DataFrame for holistic analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "animes",
+      "creation": "read_csv",
+      "flow": ["used for generating plots, calculating correlations, and analysis."]
+    },
+    {
+      "variable": "ratings",
+      "creation": "read_csv",
+      "flow": ["intended for analysis, but not explicitly utilized in visual outputs."]
+    },
+    {
+      "variable": "dummies",
+      "creation": "get_dummies",
+      "flow": ["used for correlation calculations and visualizations."]
+    },
+    {
+      "variable": "matrix",
+      "creation": "asmatrix",
+      "flow": ["used to create a graph (G) representation."]
+    },
+    {
+      "variable": "G",
+      "creation": "from_numpy_matrix",
+      "flow": ["used in network visualizations to represent genre correlations."]
+    },
+    {
+      "variable": "H",
+      "creation": "copy + filtering in create_corr_network",
+      "flow": ["used for visualization of filtered correlations."]
+    },
+    {
+      "variable": "corr",
+      "creation": "corr()
+      "flow": ["used for heatmap generation and analysis of relationships between genres."]
+    },
+    {
+      "variable": "know_episodes",
+      "creation": "filtering",
+      "flow": ["used in distribution analysis of episodes."]
+    },
+    {
+      "variable": "merged",
+      "creation": "concat",
+      "flow": ["used for conducting in-depth genre analysis across multiple attributes."]
+    }
+  ],
+  "models": []
+}

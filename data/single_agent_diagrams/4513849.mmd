@@ -1,0 +1,7 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🧹 Preprocess Data"]
+    B --> C["📊 Visualize Total Reservoir <img src='dummy_plots/lineplot_template.svg' /> <br/> Reservoir Levels"]
+    B --> D["📊 Visualize Avg Rainfall <img src='dummy_plots/lineplot_template.svg' /> <br/> Rainfall Levels"]
+    B --> E["📉 Yearly Aggregation"]
+    E --> F["📊 Barplot Population and Water <img src='dummy_plots/barplot_template.svg' /> <br/> Population vs. Liters Per Person"]
+    F --> G["👀 Display Results"]

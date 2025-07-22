@@ -1,0 +1,15 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|load| B["alp_train DataFrame"]
+    A["test.csv"] -->|load| C["alp_test DataFrame"]
+
+    %% Data Processing
+    B -->|value counts| D["train value counts"]
+    C -->|value counts| E["test value counts"]
+
+    %% Visualizations
+    D -->|visualize| F["Training Data Distribution Plots"]
+    E -->|visualize| G["Testing Data Distribution Plots"]
+
+    %% Model Training and Prediction
+    B -->|features: ClaimNumber, DateTimeOfAccident,\nDateReported, WeeklyWages, ClaimDescription| H["Model: Prediction of UltimateIncurredClaimCost"]

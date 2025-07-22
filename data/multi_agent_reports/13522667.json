@@ -1,0 +1,37 @@
+{ "data_sources": [
+        { "file": "../input/creditcardfraud/creditcard.csv", "description": "A CSV file containing credit card transaction data with information on whether each transaction is fraudulent (Class)." }
+    ],
+    "data_variables": [
+        { "name": "data", "description": "DataFrame containing the credit card transaction data." },
+        { "name": "data_clean", "description": "Cleaned DataFrame with standardized 'Amount' and 'Time' features." },
+        { "name": "X", "description": "Feature matrix excluding the target variable 'Class'." },
+        { "name": "y", "description": "Target vector indicating whether a transaction is fraudulent." },
+        { "name": "X_train", "description": "Training feature matrix split from X." },
+        { "name": "X_test", "description": "Testing feature matrix split from X." },
+        { "name": "y_train", "description": "Training target vector split from y." },
+        { "name": "y_test", "description": "Testing target vector split from y." },
+        { "name": "X_rus", "description": "Undersampled feature matrix to address class imbalance." },
+        { "name": "y_rus", "description": "Undersampled target vector to address class imbalance." },
+        { "name": "model_log", "description": "Logistic Regression model object." },
+        { "name": "y_pred_log", "description": "Predictions made by the Logistic Regression model on the test set." },
+        { "name": "model_tree", "description": "Decision Tree model object." },
+        { "name": "y_pred_tree", "description": "Predictions made by the Decision Tree model on the test set." }
+    ],
+    "data_flow": [
+        { "variable": "data", "creation": "pd.read_csv", "used_for": "Exploration and preprocessing" },
+        { "variable": "data_clean", "creation": "Copy of data, scaling features", "used_for": "Defining features and target variable" },
+        { "variable": "X", "creation": "data_clean.drop('Class', axis=1)", "used_for": "Input features for model training" },
+        { "variable": "y", "creation": "data_clean['Class']", "used_for": "Target variable for model training" },
+        { "variable": "X_train", "creation": "train_test_split(X, y)", "used_for": "Training data for models" },
+        { "variable": "X_test", "creation": "train_test_split(X, y)", "used_for": "Testing data for models" },
+        { "variable": "y_train", "creation": "train_test_split(X, y)", "used_for": "Training data for models" },
+        { "variable": "y_test", "creation": "train_test_split(X, y)", "used_for": "Testing data for models" },
+        { "variable": "X_rus", "creation": "rus.fit_sample(X_train, y_train)", "used_for": "Model training after addressing class imbalance" },
+        { "variable": "y_rus", "creation": "rus.fit_sample(X_train, y_train)", "used_for": "Model training after addressing class imbalance" },
+        { "variable": "y_pred_log", "creation": "model_log.predict(X_test)", "used_for": "Evaluation of Logistic Regression model" },
+        { "variable": "y_pred_tree", "creation": "model_tree.predict(X_test)", "used_for": "Evaluation of Decision Tree model" }
+    ],
+    "models": [
+        { "name": "Logistic Regression", "input_features": "X_rus", "target_variable": "y_rus", "hyperparameters": {} },
+        { "name": "Decision Tree", "input_features": "X_rus", "target_variable": "y_rus", "hyperparameters": { "max_depth": 4, "criterion": "entropy" } }
+    ]}

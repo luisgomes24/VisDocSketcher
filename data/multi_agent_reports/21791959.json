@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file": "None",
+      "description": "The notebook generates data on-the-fly without reading input files."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "x",
+      "description": "Array of 20 values linearly spaced between 0 and 1."
+    },
+    {
+      "variable": "y_values",
+      "description": "List to hold the computed y-values for corresponding x-values using the function g."
+    },
+    {
+      "variable": "x_values",
+      "description": "List to hold the x-values corresponding to computed y-values.",
+    },
+    {
+      "variable": "data",
+      "description": "List of tuples combining x_values and y_values, serving as the input data for DataFrame."
+    },
+    {
+      "variable": "df",
+      "description": "Pandas DataFrame containing the data with columns 'x' and 'y'."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "DataFrame created from the 'data' list.",
+      "flow": ["Used for plotting", "Visualized in scatterplots"]
+    },
+    {
+      "variable": "y_values",
+      "creation": "List populated while iterating over x.",
+      "flow": ["Used to plot y-values against x-values and stored in scatter plots"]
+    },
+    {
+      "variable": "x_values",
+      "creation": "List populated when generating corresponding y-values.",
+      "flow": ["Used for the scatter plots"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,130 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/farm-ads-binary-classification/farm-ads",
+      "description": "Contains the main data for farm ads used in the classification."
+    },
+    {
+      "file": "/kaggle/input/farm-ads-binary-classification/farm-ads-vect",
+      "description": "Contains vectorized representations of the farm ads for additional features."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "farm_ads",
+      "description": "DataFrame containing the main data for farm ads."
+    },
+    {
+      "variable": "farm_vect",
+      "description": "DataFrame containing vectorized data for farm ads."
+    },
+    {
+      "variable": "data",
+      "description": "Merged DataFrame of farm_ads and farm_vect for analysis."
+    },
+    {
+      "variable": "X",
+      "description": "Features DataFrame after dropping target variable from 'data'."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable derived from the columns '0_x' and '0_y' in the merged DataFrame."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing features after splitting the dataset."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training target variable after splitting the dataset."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing target variable after splitting the dataset."
+    },
+    {
+      "variable": "clf",
+      "description": "RandomForestClassifier model instance used for predictions."
+    },
+    {
+      "variable": "predictions",
+      "description": "Predicted values for the test set derived from the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "farm_ads",
+      "creation": "pd.read_csv()",
+      "use": "Merged into 'data'."
+    },
+    {
+      "variable": "farm_vect",
+      "creation": "pd.read_csv()",
+      "use": "Merged into 'data'."
+    },
+    {
+      "variable": "data",
+      "creation": "merge operation between 'farm_ads' and 'farm_vect'.",
+      "use": "Transformed to create 'X' and 'y', used to train and test the model."
+    },
+    {
+      "variable": "X",
+      "creation": "Dropped 'target' from 'data'.",
+      "use": "Used in training and testing (X_train, X_test)."
+    },
+    {
+      "variable": "y",
+      "creation": "Combined data from '0_x' and '0_y'.",
+      "use": "Used in training and testing (y_train, y_test)."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split()",
+      "use": "Used to fit 'clf'."
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split()",
+      "use": "Used to generate 'predictions'."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split()",
+      "use": "Used to fit 'clf'."
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split()",
+      "use": "Used to evaluate 'predictions'."
+    },
+    {
+      "variable": "clf",
+      "creation": "Instance of RandomForestClassifier.",
+      "use": "Fitted on 'X_train' and 'y_train', used to generate 'predictions'."
+    },
+    {
+      "variable": "predictions",
+      "creation": "clf.predict()",
+      "use": "Evaluated using balanced_accuracy_score."
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 400,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "max_features": "sqrt",
+        "max_depth": null,
+        "bootstrap": false
+      }
+    }
+  ]
+}

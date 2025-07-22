@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/testset.csv",
+      "description": "Contains weather data including humidity, heat index, and rainfall over time."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the weather data read from the CSV file."
+    },
+    {
+      "name": "year_humi",
+      "description": "Average humidity data aggregated by year."
+    },
+    {
+      "name": "year_heat",
+      "description": "Average heat index data aggregated by year."
+    },
+    {
+      "name": "year_rain",
+      "description": "Average rainfall data aggregated by year."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "pd.read_csv",
+      "flow": "Used to compute year_humi, year_heat, and year_rain; plots generated from this data."
+    },
+    {
+      "variable": "year_humi",
+      "creation": "data.groupby(data.year).mean()",
+      "flow": "Used for plotting average humidity over the years."
+    },
+    {
+      "variable": "year_heat",
+      "creation": "data.groupby(data.year).mean()",
+      "flow": "Used for plotting average heat index over the years."
+    },
+    {
+      "variable": "year_rain",
+      "creation": "data.groupby(data.year).mean()",
+      "flow": "Used for plotting average rainfall over the years."
+    }
+  ],
+  "models": []
+}

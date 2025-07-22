@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/coursera-course-dataset/coursea_data.csv",
+      "description": "Contains course data with columns including course title, organization, certification type, rating, difficulty, and students enrolled."
+    },
+    {
+      "file": "/kaggle/input/course-reviews-on-coursera/Coursera_reviews.csv",
+      "description": "Contains reviews of courses on Coursera, used for sentiment analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame holding course data from the CSV dataset."
+    },
+    {
+      "name": "df_fe1",
+      "description": "Modified DataFrame with engineered features from the original course DataFrame."
+    },
+    {
+      "name": "r",
+      "description": "DataFrame holding course reviews for sentiment analysis."
+    },
+    {
+      "name": "g_uni",
+      "description": "Grouped DataFrame providing aggregated metrics by course organization."
+    },
+    {
+      "name": "course_wise",
+      "description": "Grouped DataFrame showing mean sentiment and ratings per course."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flow": ["Used for exploration and visualizations", "Modified to df_fe1"]
+    },
+    {
+      "variable": "df_fe1",
+      "creation": "Copy of df with modifications applied",
+      "flow": ["Used for further analysis and EDA"]
+    },
+    {
+      "variable": "r",
+      "creation": "pd.read_csv()",
+      "flow": ["Used for generating sentiment analysis and visualizations"]
+    },
+    {
+      "variable": "g_uni",
+      "creation": "GroupBy operations on df_fe1",
+      "flow": ["Used for visualizations of course organization metrics"]
+    },
+    {
+      "variable": "course_wise",
+      "creation": "GroupBy operations on r",
+      "flow": ["Used for sentiment correlation with ratings visualizations"]
+    }
+  ],
+  "models": []
+}

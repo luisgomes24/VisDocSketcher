@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for Data Source
+    A[mff.csv] --> |Load Data| B[df1]
+    
+    %% Node for DataFrame Creation
+    B[df1] --> |Preview| C[df1.head(5)]
+    B --> |Plot Distribution| D[plotPerColumnDistribution]
+    
+    %% Node Descriptions
+    %% A: This is the CSV file containing the original dataset.
+    %% B: df1 is a DataFrame created by reading mff.csv, used as the primary dataset.
+    %% C: Displays the first 5 rows of df1 for previewing the data.
+    %% D: Plots the distribution of each column in df1.

@@ -1,0 +1,30 @@
+{
+  "data_sources": [
+    {
+      "source": "kc_house_data.csv",
+      "description": "House Sales in King County, USA dataset"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data_df",
+      "description": "DataFrame containing the loaded dataset from kc_house_data.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data_df",
+      "creation_method": "pd.read_csv",
+      "description": "Loaded from CSV file",
+      "usage": "Used as input for profiling report generation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Pandas-Profiling",
+      "input_features": "data_df",
+      "target_variable": "n/a",
+      "hyperparameters": "n/a"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+graph TD;
+    A["📥 Load Data <img src='file.svg'/>"] --> B["📊 Descriptive Statistics"];
+    B --> C["📊 Visualize Data <img src='barplot_template.svg'/>"];
+    C --> D["🧪 Perform Hypothesis Testing"];
+    
+    D --> E["📈 T-Test"];
+    D --> F["📈 Z-Test"];
+    D --> G["📈 ANOVA Test"];
+    D --> H["📈 Chi-Square Test"];
+    
+    E --> I["📉 Analyze Results"];
+    F --> I;
+    G --> I;
+    H --> I;
+
+    I --> J["✅ Conclusion"];

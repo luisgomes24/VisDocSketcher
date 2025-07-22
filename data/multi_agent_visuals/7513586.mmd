@@ -1,0 +1,15 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Input File"];
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table"];
+    C --> D["<img src='dummy_plots/barplot_template.svg'/> <br/> Data Analysis"];
+    D --> E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    E --> F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    F --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Train Set"];
+    F --> H["<img src='dummy_plots/lineplot_template.svg'/> <br/> Test Set"];
+    G --> I["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"];
+    I --> J["Output"];
+    H --> K["<img src='dummy_plots/hist_template.svg'/> <br/> Predictions"];
+    K --> L["Output Analysis"];
+    J --> M["Metrics"];
+    L --> N["<img src='dummy_plots/boxplot_template.svg'/> <br/> Final Visualization"];
+    M --> O["Final Report"].

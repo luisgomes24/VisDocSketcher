@@ -1,0 +1,13 @@
+flowchart TD
+    A["🗄️ Load Data <img src='icons/file.svg'/> <br/> train.csv"] --> B["🧹 Preprocess Data"]
+    B --> C["🔍 Augmentation Parameters"]
+    C --> D["📊 DataBlock Creation"]
+    D --> E["🛠️ DataLoader Creation"]
+    E --> F["🖼️ Show Batch <img src='dummy_plots/barplot_template.svg'/>"]
+    F --> G["🔧 Train Model"]
+    G --> H["💾 Save Model"]
+    H --> I["🔍 Inference Preparation"]
+    I --> J["🧪 Make Predictions"]
+    J --> K["📥 Create Submission <img src='dummy_plots/boxplot_template.svg'/>"]
+    
+    classDef default fill:#f9f,stroke:#333,stroke-width:4px;

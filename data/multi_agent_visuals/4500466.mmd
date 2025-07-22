@@ -1,0 +1,13 @@
+graph TD
+    A["Input Data Sources <img src='icons/file.svg' width=100 height=100/> <br/> Data"] --> B(Load Data)
+    B --> C[item["item <img src='icons/table.svg' width=100 height=100/> <br/> Item Dataset"]]
+    B --> D[licit["licit <img src='icons/table.svg' width=100 height=100/> <br/> Licit Dataset"]]
+    C --> E["Shape: (item.shape())"]
+    C --> F["Index: (item.index)"]
+    C --> G["Columns: (item.columns)"]
+    C --> H["Info: (item.info())"]
+    C --> I["Count: (item.count())"]
+    C --> J["Describe: (item.describe())"]
+    D --> K["Value Counts: (licit.modalidade.value_counts())"]
+    D --> L["Countplot Modalidade: <img src='dummy_plots/barplot_template.svg'/> <br/> Modalidade Countplot"]
+    D --> M["Countplot Situacao: <img src='dummy_plots/barplot_template.svg'/> <br/> Situacao Countplot"]

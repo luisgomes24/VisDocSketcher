@@ -1,0 +1,133 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "Training dataset containing information about passengers, including categorical and numerical features."
+    },
+    {
+      "file": "/kaggle/input/titanic/test.csv",
+      "description": "Test dataset containing information about passengers for which the survival prediction will be made."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame containing the test dataset."
+    },
+    {
+      "name": "X",
+      "description": "Feature set consisting of selected features from the training dataset."
+    },
+    {
+      "name": "y",
+      "description": "Target variable from the training dataset (Survived)."
+    },
+    {
+      "name": "train_X",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "name": "test_X",
+      "description": "Testing features after splitting the dataset."
+    },
+    {
+      "name": "train_y",
+      "description": "Training target variable after splitting the dataset."
+    },
+    {
+      "name": "test_y",
+      "description": "Testing target variable after splitting the dataset."
+    },
+    {
+      "name": "predictions",
+      "description": "Predicted survival outcomes for the test dataset."
+    },
+    {
+      "name": "output",
+      "description": "DataFrame containing predictions submitted to CSV."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "created": "pd.read_csv('/kaggle/input/titanic/train.csv')",
+      "flows_to": ["data preprocessing", "model training"]
+    },
+    {
+      "variable": "test_data",
+      "created": "pd.read_csv('/kaggle/input/titanic/test.csv')",
+      "flows_to": ["data preprocessing", "predictions"]
+    },
+    {
+      "variable": "X",
+      "created": "Selecting features from train_data",
+      "flows_to": ["train_test_split"]
+    },
+    {
+      "variable": "y",
+      "created": "Selecting target from train_data",
+      "flows_to": ["train_test_split"]
+    },
+    {
+      "variable": "train_X",
+      "created": "train_test_split(X, y, test_size=0.2)",
+      "flows_to": ["models"]
+    },
+    {
+      "variable": "test_X",
+      "created": "train_test_split(X, y, test_size=0.2)",
+      "flows_to": ["models"]
+    },
+    {
+      "variable": "train_y",
+      "created": "train_test_split(X, y, test_size=0.2)",
+      "flows_to": ["models"]
+    },
+    {
+      "variable": "test_y",
+      "created": "train_test_split(X, y, test_size=0.2)",
+      "flows_to": ["models"]
+    },
+    {
+      "variable": "predictions",
+      "created": "xgb_model.predict(X_test)",
+      "flows_to": ["output to CSV"]
+    },
+    {
+      "variable": "output",
+      "created": "Creating DataFrame and saving to submission CSV",
+      "flows_to": ["saved as CSV"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["Sex", "Pclass", "Age", "Parch", "Fam", "Fare", "Embarked"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "n_estimators": 500,
+        "max_depth": 3
+      }
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": ["Sex", "Pclass", "Age", "Parch", "Fam", "Fare", "Embarked"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "base_score": 0.5,
+        "n_estimators": 1000,
+        "learning_rate": 0.05
+      }
+    },
+    {
+      "model_name": "LogisticRegression",
+      "input_features": ["Sex", "Pclass", "Age", "Parch", "Fam", "Fare", "Embarked"],
+      "target_variable": "Survived",
+      "hyperparameters": {}
+    }
+  ]
+}

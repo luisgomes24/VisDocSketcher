@@ -1,0 +1,14 @@
+```
+graph TD;
+    A["📁 Load Data <img src='file.svg'/> <br/> reviews"] --> B["🔍 Summary Statistics"];
+    B --> C["📊 Describe Points"];
+    B --> D["📊 Describe Taster Name"];
+    B --> E["📊 Unique Taster Names"];
+    B --> F["📊 Value Counts Taster Name"];
+    B --> G["📊 Value Counts Province"];
+    B --> H["📈 Mean Points"];
+    H --> I["🗺️ Apply Mapping <img src='column_split.svg'/>"];
+    I --> J["📈 Remean Points"];
+    J --> K["📈 Remean Price"];
+    K --> L["📊 Check Transformed Points"];
+    L --> M["📊 Combined Country and Region"];

@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/one-million-reddit-jokes/one-million-reddit-jokes.csv",
+      "description": "CSV file containing 1M posts from the r/Jokes subreddit including titles, punchlines, and scores."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_one_million_reddit_jokes",
+      "description": "DataFrame containing the entire dataset with titles, punchlines and scores."
+    },
+    {
+      "variable_name": "setup_score",
+      "description": "DataFrame containing average score per joke setup (title)."
+    },
+    {
+      "variable_name": "top_setups",
+      "description": "List of the top 25 setups sorted by their average score."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_one_million_reddit_jokes",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to filter and analyze for average scores and setup lengths."
+    },
+    {
+      "variable_name": "setup_score",
+      "creation_method": "groupby().mean().reset_index()",
+      "flow": "Used for plotting average scores by setups."
+    },
+    {
+      "variable_name": "top_setups",
+      "creation_method": "sorted selection from setup_score",
+      "flow": "Used to analyze average lengths of punchlines and setups."
+    }
+  ],
+  "models": []
+}

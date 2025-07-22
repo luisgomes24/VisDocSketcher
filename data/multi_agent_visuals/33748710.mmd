@@ -1,0 +1,7 @@
+flowchart TD
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> CSV File: World's 100 Most Powerful Women"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df"]
+  B -->|Select Columns| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Selected Features"]
+  C --> D["<img src='dummy_plots/boxplot_template.svg'/> <br/> Feature Distribution"]
+  D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model: Model X"]
+  E --> F["<img src='dummy_plots/lineplot_template.svg'/> <br/> ML Model Performance"]
+  F -->|Generate Report| G["<img src='icons/file.svg' width=100 height=100/> <br/> Report.pdf"]

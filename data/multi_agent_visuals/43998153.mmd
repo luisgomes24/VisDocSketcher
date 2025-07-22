@@ -1,0 +1,45 @@
+flowchart TD
+    %% Data Sources Nodes
+    A1["/kaggle/input/brain-mri-images-for-brain-tumor-detection/no"] %% MRI images without tumors
+    A2["/kaggle/input/brain-mri-images-for-brain-tumor-detection/yes"] %% MRI images with tumors
+    
+    %% Variable Nodes
+    B1["folder_no"] %% List of 'no' tumor images
+    B2["folder_yes"] %% List of 'yes' tumor images
+    B3["labels"] %% Binary labels for images (0: No Tumor, 1: Tumor)
+    B4["data"] %% Images as numpy arrays
+    B5["x"] %% Image data array
+    B6["y"] %% Label array
+    B7["x_train, x_test, y_train, y_test"] %% Split datasets
+
+    %% Process Nodes
+    C1["train_test_split"] %% Splitting data into training and testing sets
+    C2["np.array(data)"] %% Convert image list to numpy array
+    C3["np.array(labels)"] %% Convert label list to numpy array
+    
+    %% Model Nodes
+    M1["CNN Model"] %% Convolutional Neural Network Model
+    M2["EfficientNet Model"] %% EfficientNet Model
+
+    %% Data Sources to Variables
+    A1 --> B1
+    A2 --> B2
+    
+    %% Variables Flows
+    B1 --> B4
+    B2 --> B4
+    B4 --> C2
+    B3 --> C3
+    C2 --> B5
+    C3 --> B6
+    
+    %% Data Processing Flow
+    B5 --> C1
+    B6 --> C1
+    
+    %% Split Data
+    C1 --> B7
+
+    %% Model Training Nodes
+    B7 --> M1
+    B7 --> M2

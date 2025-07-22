@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Node
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: df"]:::dataNode
+
+    %% Plot Nodes
+    plotDist["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Function: Distribution Plot"]:::plotNode
+    plotCorr["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Function: Correlation Matrix Plot"]:::plotNode
+    plotScatter["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Function: Scatter Plot"]:::plotNode
+
+    %% Data flow connections
+    df -->|Input| plotDist
+    df -->|Input| plotCorr
+    df -->|Input| plotScatter
+
+    %% Node Styles
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef plotNode fill:#FFCDD2,stroke:#333,stroke-width:2px;

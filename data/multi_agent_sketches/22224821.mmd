@@ -1,0 +1,33 @@
+flowchart TD
+    %% Node for train.csv file
+    A[train.csv]
+    %% Node for test.csv file
+    B[test.csv]
+    %% Node for image files for training
+    C[train/*.jpg]
+    %% Node for image files for testing
+    D[test/*.jpg]
+    %% Node for GCS_DS_PATH variable
+    E[GCS_DS_PATH]
+    %% Node for train_labels data variable
+    F[train_labels]
+    %% Node for test_labels data variable
+    G[test_labels]
+    %% Node for train data split
+    H[train]
+    %% Node for validate data split
+    I[validate]
+    %% Node for TFRecords creation
+    J[TFRecords]
+    
+    %% Data flow connections
+    E -->|Path defined| A
+    E -->|Path defined| B
+    A -->|Read CSV| F
+    B -->|Read CSV| G
+    F -->|Split into Train| H
+    F -->|Split into Validate| I
+    H -->|Convert to| J
+    I -->|Convert to| J
+    C -->|Images used| J
+    D -->|Images used| G

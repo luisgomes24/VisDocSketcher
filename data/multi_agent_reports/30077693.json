@@ -1,0 +1,98 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_data.csv",
+      "description": "Contains training data for the auction bid price prediction task."
+    },
+    {
+      "file_name": "test_data.csv",
+      "description": "Contains test data for the auction bid price prediction task."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file format for the predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_feats",
+      "description": "DataFrame containing the training features after processing the raw training data."
+    },
+    {
+      "variable_name": "test_feats",
+      "description": "DataFrame containing the features derived from the test data."
+    },
+    {
+      "variable_name": "FEATURES",
+      "description": "List of final features to be used in the model training."
+    },
+    {
+      "variable_name": "models",
+      "description": "List of trained LightGBM models from the cross-validation process."
+    },
+    {
+      "variable_name": "importances",
+      "description": "List measurements of feature importance across different folds."
+    },
+    {
+      "variable_name": "predictions",
+      "description": "List to store the predictions made by the models for test data."
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame to format the final predictions for submission."
+    },
+    {
+      "variable_name": "params",
+      "description": "Dictionary holding parameters for the LightGBM model training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_feats",
+      "creation_method": "Created by applying the create_features function to train data.",
+      "usage": "Used in model training."
+    },
+    {
+      "variable_name": "test_feats",
+      "creation_method": "Created by applying the create_features function to test data.",
+      "usage": "Used for predictions."
+    },
+    {
+      "variable_name": "models",
+      "creation_method": "Populated within a loop during KFold cross-validation using LightGBM.",
+      "usage": "Used to make predictions on test data and calculate feature importance."
+    },
+    {
+      "variable_name": "importances",
+      "creation_method": "Populated within the model training loop.",
+      "usage": "Gathered to summarize feature importances post-training."
+    },
+    {
+      "variable_name": "predictions",
+      "creation_method": "Populated within the KFold training loop.",
+      "usage": "Averaged for final submission output."
+    },
+    {
+      "variable_name": "submission",
+      "creation_method": "Created by aggregating predictions and formatting for output.",
+      "usage": "Saved as a CSV file for submission."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LightGBM Regressor",
+      "input_features": "Defined by the FEATURES variable, includes various engineered features.",
+      "target_variable": "winBid",
+      "hyperparameters": {
+        "boosting_type": "gbdt",
+        "objective": "regression",
+        "metric": "rmse",
+        "learning_rate": 0.1,
+        "bagging_fraction": 0.6,
+        "max_depth": 12,
+        "n_estimators": 3200
+      }
+    }
+  ]
+}

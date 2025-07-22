@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/jigsaw-unintended-bias-in-toxicity-classification/train.csv",
+      "description": "Contains reviews and their associated labels for training the model."
+    },
+    {
+      "file_path": "../input/jigsaw-unintended-bias-in-toxicity-classification/test.csv",
+      "description": "Contains reviews for which predictions are to be made."
+    },
+    {
+      "file_path": "../input/glove-global-vectors-for-word-representation/glove.6B.200d.txt",
+      "description": "Pre-trained word embeddings for use in the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training data with reviews and labels."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing test data with reviews only."
+    },
+    {
+      "name": "x_train",
+      "description": "Array containing the reviews from the training dataset."
+    },
+    {
+      "name": "x_test",
+      "description": "Array containing the reviews from the test dataset."
+    },
+    {
+      "name": "y_train",
+      "description": "Array containing the labels from the training dataset."
+    },
+    {
+      "name": "embeddings",
+      "description": "Dictionary holding the pre-trained word embeddings."
+    },
+    {
+      "name": "embedding_matrix",
+      "description": "Matrix mapping words to their embeddings, used in the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": "Processed and used to train the model."
+    },
+    {
+      "variable": "df_test",
+      "creation_method": "pd.read_csv",
+      "flow": "Processed and used for generating predictions."
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "df_train['Reviews'].values",
+      "flow": "Used as input features during model training."
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "df_test['Reviews'].values",
+      "flow": "Used to generate predictions."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "df_train['Label'].values",
+      "flow": "Target variable during model training."
+    },
+    {
+      "variable": "embedding_matrix",
+      "creation_method": "filter_embeddings",
+      "flow": "Used in the Embedding layer of the model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Attention-based LSTM",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "embedding_size": 200,
+        "lstm_units": 50,
+        "epochs": 15,
+        "batch_size": 1024
+      }
+    }
+  ]
+}

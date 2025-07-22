@@ -1,0 +1,22 @@
+{
+    "data_sources": [
+        {
+            "file_name": "ionosphere_data.csv",
+            "description": "This file contains ionosphere data for analysis, loaded with a maximum of 1000 rows for exploratory analysis."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df1",
+            "description": "DataFrame containing the ionosphere data loaded from the CSV file."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df1",
+            "created": "pd.read_csv",
+            "flow": "Used for exploratory data analysis and plotting" 
+        }
+    ],
+    "models": []
+}

@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    S1["Train Features CSV"] -->|Load data| V1["train_feat_df"]
+    S2["Train Metadata Parquet Parts"] -->|Concatenate metadata| V2["train_metadf"]
+
+    %% Variables and Data Transformation
+    V1 -->|Prepare input features| M1["MultiHeadedSequenceClassifier Model"]
+    V2 -->|Add metadata features| M1
+
+    M1 -->|Uses input features| V5["files_dict"]
+    V1 -->|Extract unique IDs| V3["unique_pids"]
+    V3 -->|Calculate 5% of IDs| V4["nvalid"]
+
+    %% Model Preparation and Management
+    subgraph ModelInputPreparation
+        V5 -->|Organize training data| V6["DataBlock"]
+        V6 -->|Manage training and validation| M1
+    end
+
+    %% Model and Target
+    M1 -->|Predicts based on medical images| D1["Multiple Target Variables"]
+
+    %% Comments for Clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:1px;
+
+    class S1,S2 dataSource;
+    class V1,V2,V3,V4,V5 dataTransformation;
+    class M1 model;
+    class V6,D1 variable;
+```

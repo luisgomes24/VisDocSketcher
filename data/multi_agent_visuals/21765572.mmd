@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] --> |"read_csv"| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_df"]
+    B --> |"Extract 'target'"| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> train_target"]
+    A --> |"feature split"| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_train"]
+    B --> |"feature split"| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_test"]
+    
+    F["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] --> |"read_csv"| G["<img src='icons/table.svg' width=100 height=100/> <br/> test_df"]
+    G --> |"for prediction"| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> submission_df"]
+    
+    I["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"] --> |"read_csv and merge with predictions"| H
+    H --> |"to CSV"| J["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]
+    
+    %% Model
+    K["<img src='icons/brain.svg' width=100 height=100/> <br/> CatBoostClassifier"]
+    D --> |"Train Model"| K
+    C --> |"Target Variable"| K
+    K --> |"Predict"| H
+    
+    %% Commentary 
+    classDef nodeStyle fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,F,I nodeStyle;
+    class C,D,E,G,H,J,K nodeStyle;

@@ -1,0 +1,7 @@
+flowchart TD
+    DS1["persona.csv"]:::dataSource -->|Read| df["DataFrame df"]:::dataNode
+    df["DataFrame df"]:::dataNode -->|Copy| data["Copy of df"]
+    data["Copy of df"]:::dataNode -->|Analyze| numeric_cols["List of numeric columns"]:::dataNode
+    data["Copy of df"]:::dataNode -->|Analyze| categoric_cols["List of categorical columns"]:::dataNode
+    numeric_cols["List of numeric columns"]:::dataNode -->|Aggregate| agg_df["Aggregated DataFrame"]:::dataNode
+    agg_df["Aggregated DataFrame"]:::dataNode -->|Segment| model["Customer segmentation model"]:::modelNode

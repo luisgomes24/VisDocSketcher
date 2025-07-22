@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file_name": "WomenRepresentaionInCityProperty-SanFrancisco.csv",
+      "description": "This dataset contains information about gender representation in city property in San Francisco."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Main DataFrame containing the dataset loaded from the CSV file."
+    },
+    {
+      "name": "df_FM",
+      "description": "DataFrame for entries consisting of both female and male names."
+    },
+    {
+      "name": "df_MF",
+      "description": "DataFrame for entries consisting of male and female names."
+    },
+    {
+      "name": "df_MM",
+      "description": "DataFrame for entries consisting only of male names."
+    },
+    {
+      "name": "male",
+      "description": "List to track male counts based on gender designation in the dataset."
+    },
+    {
+      "name": "female",
+      "description": "List to track female counts based on gender designation in the dataset."
+    },
+    {
+      "name": "df_department",
+      "description": "DataFrame aggregating the count of males and females by department/source."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created using pd.read_csv to load the CSV file.",
+      "flow": "Used for analysis and creating separate DataFrames for gender and plotting visualizations."
+    },
+    {
+      "variable": "df_FM",
+      "creation": "Filtered from df where Gender == 'F & M'.",
+      "flow": "Used for gender-based analysis."
+    },
+    {
+      "variable": "df_MF",
+      "creation": "Filtered from df where Gender == 'M & F'.",
+      "flow": "Used for gender-based analysis."
+    },
+    {
+      "variable": "df_MM",
+      "creation": "Filtered from df where Gender == 'M & M'.",
+      "flow": "Used for gender-based analysis."
+    },
+    {
+      "variable": "male",
+      "creation": "List populated based on gender designation in df.",
+      "flow": "Assigned to the df DataFrame as a new column and used for plotting."
+    },
+    {
+      "variable": "female",
+      "creation": "List populated based on gender designation in df.",
+      "flow": "Assigned to the df DataFrame as a new column and used for plotting."
+    },
+    {
+      "variable": "df_department",
+      "creation": "Created by grouping df by 'Department/Source' and aggregating male and female counts.",
+      "flow": "Used for department-wise gender distribution analysis."
+    }
+  ],
+  "models": []
+}

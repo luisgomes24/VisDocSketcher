@@ -1,0 +1,68 @@
+{
+    "data_sources": [
+        {
+            "file": "train.csv",
+            "description": "Training dataset containing passenger information including survival status."
+        },
+        {
+            "file": "test.csv",
+            "description": "Test dataset containing passenger information used to predict survival."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "df_train",
+            "description": "DataFrame containing the training data."
+        },
+        {
+            "variable": "df_test",
+            "description": "DataFrame containing the test data."
+        },
+        {
+            "variable": "df_eda",
+            "description": "Copy of training data used for exploratory data analysis (EDA)."
+        },
+        {
+            "variable": "y_targets",
+            "description": "Array containing target survival values from the training set."
+        },
+        {
+            "variable": "X_train, X_test, y_train, y_test",
+            "description": "Split training and testing data for model fitting."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_eda",
+            "creation": "Created by copying df_train.",
+            "usage": "Used for exploratory data analysis."
+        },
+        {
+            "variable": "df_test",
+            "creation": "Read from 'test.csv'.",
+            "usage": "Used for predictions after model training."
+        },
+        {
+            "variable": "X_train, X_test, y_train, y_test",
+            "creation": "Created by splitting df_train and y_targets.",
+            "usage": "Used for training and evaluating the RandomForest model."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "RandomForestClassifier",
+            "features": [
+                "Pclass",
+                "Sex",
+                "age_known",
+                "cabin_known",
+                "Young",
+                "Fare",
+                "Embarked_Q",
+                "Embarked_S"
+            ],
+            "target": "Survived",
+            "hyperparameters": {}
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+flowchart TD
+  A["../input/diabetes.csv"] --> B["dataset"]
+  B --> C["X"]
+  B --> D["Y"]
+  C --> E["X_train"]
+  C --> F["X_test"]
+  D --> G["y_train"]
+  D --> H["y_test"]
+  E --> I["model"]
+  G --> I
+  I --> J["adam"]
+  I --> K["scores"]
+  F --> K
+  H --> K
+
+  %% Comments for each node
+  click A "Data Source: CSV file with diabetes dataset" "_blank"
+  click B "Loaded dataset from CSV using numpy.loadtxt" "_blank"
+  click C "Input features for model training/testing" "_blank"
+  click D "Output variable (diabetes class)" "_blank"
+  click E "Training data (input features)" "_blank"
+  click F "Testing data (input features)" "_blank"
+  click G "Training data (output variable)" "_blank"
+  click H "Testing data (output variable)" "_blank"
+  click I "Keras Sequential model with Dense layers" "_blank"
+  click J "Optimizer: Adam for compiling the model" "_blank"
+  click K "Results of model evaluation" "_blank"

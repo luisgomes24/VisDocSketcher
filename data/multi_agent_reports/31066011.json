@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Delaney dataset",
+      "description": "Contains molecular solubility data used for training and evaluation of models."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "tasks",
+      "description": "List of task names associated with the dataset."
+    },
+    {
+      "variable_name": "datasets",
+      "description": "Tuple of the training, validation, and test datasets."
+    },
+    {
+      "variable_name": "transformers",
+      "description": "List of transformers applied to the dataset during processing."
+    },
+    {
+      "variable_name": "train",
+      "description": "The training dataset containing features and labels."
+    },
+    {
+      "variable_name": "valid",
+      "description": "The validation dataset for model evaluation."
+    },
+    {
+      "variable_name": "test",
+      "description": "The test dataset for final model assessment."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "tasks",
+      "creation_method": "dc.molnet.load_delaney",
+      "flow": "Used in understanding the data processing tasks related to solubility prediction."
+    },
+    {
+      "variable_name": "datasets",
+      "creation_method": "dc.molnet.load_delaney",
+      "flow": "Flow into train, valid, and test datasets for model training and evaluation."
+    },
+    {
+      "variable_name": "transformers",
+      "creation_method": "dc.molnet.load_delaney",
+      "flow": "Utilized for normalizing the input data before model training."
+    },
+    {
+      "variable_name": "train",
+      "creation_method": "Split from datasets tuple",
+      "flow": "Feeds into model training process."
+    },
+    {
+      "variable_name": "valid",
+      "creation_method": "Split from datasets tuple",
+      "flow": "Used for validation during model training."
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "Split from datasets tuple",
+      "flow": "Used for final evaluation of model performance."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Not specified in the notebook",
+      "input_features": "Features from train dataset",
+      "target_variable": "Log solubility in mol/L",
+      "hyperparameters": "Varies depending on model implementation"
+    }
+  ]
+}

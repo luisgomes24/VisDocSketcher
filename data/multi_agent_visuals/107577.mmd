@@ -1,0 +1,8 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source (CSV)"];
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Clean Data"];
+    C --> D["<img src='dummy_plots/barplot_template.svg'/> <br/> TF-IDF Features"];
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> KNN Model"];
+    E --> F["<img src='dummy_plots/lineplot_template.svg'/> <br/> Model Training"];
+    E --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Similarity Search"];
+    G --> H["<img src='dummy_plots/hist_template.svg'/> <br/> Recommendations"];

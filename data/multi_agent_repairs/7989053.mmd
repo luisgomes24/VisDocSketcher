@@ -1,0 +1,18 @@
+```mermaid
+flowchart TD
+    A["empresas.csv"] -->|Loaded into| B["df1"]
+    
+    %% df1 creation
+    B -->|First 1000 rows taken| C["df1"]
+    
+    %% df1 usage in functions
+    C --> |Input| D["plotPerColumnDistribution"]
+    C --> |Input| E["plotCorrelationMatrix"]
+    C --> |Input| F["plotScatterMatrix"]
+    
+    %% Description of functions
+    D:::function
+    E:::function
+    F:::function
+
+    classDef function fill:#f9f,stroke:#333,stroke-width:2px;

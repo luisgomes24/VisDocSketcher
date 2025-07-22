@@ -1,0 +1,72 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "IDs and masks for all training objects."
+    },
+    {
+      "file_name": "train_image",
+      "description": "A folder of case/day folders with slice images for training."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Placeholder for test data (not detailed in the notebook)."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "A sample submission file in the correct format."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing the training data with metadata about images."
+    },
+    {
+      "variable_name": "im",
+      "description": "Variable for storing loaded image data."
+    },
+    {
+      "variable_name": "path_df",
+      "description": "DataFrame containing paths and metadata for image files."
+    },
+    {
+      "variable_name": "mask",
+      "description": "Mask for segmentation created from run-length encoding."
+    },
+    {
+      "variable_name": "img",
+      "description": "Loaded image data for visualization."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for further processing and merging with image paths."
+    },
+    {
+      "variable_name": "im",
+      "creation_method": "Image.open",
+      "flow": "Used to visualize images for segmentation."
+    },
+    {
+      "variable_name": "path_df",
+      "creation_method": "pd.DataFrame(paths, columns=['image_path'])",
+      "flow": "Merged with df_train to enrich metadata."
+    },
+    {
+      "variable_name": "mask",
+      "creation_method": "rle_decode",
+      "flow": "Used to visualize segmented areas in images."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Not specified",
+      "input_features": "Image slice data",
+      "target_variable": "Segmentation masks",
+      "hyperparameters": "None specified in this notebook"
+    }
+  ]
+}

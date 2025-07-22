@@ -1,0 +1,10 @@
+graph TD;
+    A["📂 Load Libraries"] --> B["📊 Load Data <img src='icons/file.svg' /> <br/> 'PakistanSuicideAttacks'"];
+    B --> C["🔍 Check Encoding <img src='icons/database.svg' />"];
+    C --> D["📊 Read Data <img src='icons/table.svg' />"];
+    D --> E["🧹 Preprocessing <img src='icons/column_split.svg' />"];
+    E --> F["🧽 Lowercase & Trim Whitespaces"];
+    F --> G["🔍 Unique Values <img src='icons/row_split.svg' />"];
+    G --> H["🤖 Fuzzy Matching"];
+    H --> I["🔄 Replace Inconsistencies"];
+    I --> J["📊 Final Check on Unique Values"];

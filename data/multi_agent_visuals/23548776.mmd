@@ -1,0 +1,24 @@
+flowchart TB
+    %% Data Sources
+    A["Train Dataset"]:::data -->|Load CSV| B["Data DataFrame"] 
+    C["Test Dataset"]:::data -->|Load CSV| D["Test DataFrame"]
+    E["Sample Submission"]:::data -->|Load CSV| F["Solution DataFrame"]
+
+    %% Data Variables Processing
+    B -->|Setup PyCaret Environment| G["PyCaret Setup"]
+    D -->|Predict with Model| H["Generate Predictions"]
+    G -->|Predict with Model| H
+    H -->|Store in DataFrame| I["Predictions DataFrame"]
+
+    %% Model
+    subgraph Model["Decision Tree Model"]
+        style Model fill:#f9f,stroke:#333,stroke-width:2px
+        J["Decision Tree"]:::model
+    end
+    G -->|Uses| J
+    J -->|Predicts| I
+    I -->|Prepare for Submission| F
+    I -->|Save to CSV| K["Final Submission CSV"]
+
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;

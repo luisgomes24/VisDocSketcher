@@ -1,0 +1,53 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "num",
+      "description": "A number to be rounded to two decimal places in the round_to_two_places function."
+    },
+    {
+      "name": "total_candies",
+      "description": "Total number of candies to be distributed in the to_smash function."
+    },
+    {
+      "name": "no_of_friends",
+      "description": "The number of friends among whom the candies are to be split in the to_smash function."
+    },
+    {
+      "name": "t",
+      "description": "Time in seconds since the epoch in the time_call function."
+    },
+    {
+      "name": "duration",
+      "description": "Duration to sleep in seconds used in the time_call function."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "num",
+      "created_by": "round_to_two_places function, rounds a number to two decimal places",
+      "flows_to": "no specific flow, but used for output in the function."
+    },
+    {
+      "variable": "total_candies",
+      "created_by": "to_smash function which calculates candies left after distribution",
+      "flows_to": "no specific flow, but used for output in the function."
+    },
+    {
+      "variable": "no_of_friends",
+      "created_by": "parameter in to_smash function. Defaults to 3",
+      "flows_to": "no specific flow, but influences the result in the to_smash function."
+    },
+    {
+      "variable": "t",
+      "created_by": "time function that captures current time in seconds",
+      "flows_to": "Used to track elapsed time in time_call."
+    },
+    {
+      "variable": "duration",
+      "created_by": "set as a variable in the sleep function",
+      "flows_to": "Used to pause execution in the time_call function."
+    }
+  ],
+  "models": []
+}

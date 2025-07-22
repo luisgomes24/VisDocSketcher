@@ -1,0 +1,45 @@
+flowchart TD
+    subgraph DataSources
+        A[["../input/home-data-for-ml-course/train.csv"]]
+        %% This node represents the CSV file containing the home sale data
+    end
+
+    subgraph Variables
+        B(home_data)
+        %% DataFrame storing the loaded home sale data
+        C(y)
+        %% Target series from SalePrice column of home_data
+        D(feature_columns)
+        %% List of feature names for prediction
+        E(X)
+        %% Input features DataFrame extracted from home_data
+        F(train_X)
+        %% Training set features
+        G(val_X)
+        %% Validation set features
+        H(train_y)
+        %% Training set targets
+        I(val_y)
+        %% Validation set targets
+        J(val_predictions)
+        %% Predictions made on val_X
+        K(val_mae)
+        %% Mean Absolute Error of predictions
+    end
+
+    subgraph Model
+        L(DecisionTreeRegressor)
+        %% DecisionTreeRegressor model for prediction
+    end
+
+    A -->|load data| B
+    B -->|extract target| C
+    B -->|select features| D
+    D -->|create feature set| E
+    E -->|split data| F
+    E -->|split data| G
+    C -->|split target| H
+    C -->|split target| I
+    F & H -->|train model| L
+    L -->|predict| J
+    J & I -->|calculate MAE| K

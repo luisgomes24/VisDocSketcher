@@ -1,0 +1,20 @@
+```mermaid
+flowchart TD;
+    A1["/kaggle/input/dogs-cats-images/dataset/training_set/"] -->|"Load & Resize Images"| B1["Training Data (X, Y)"];
+    B1 -->|"Train Model"| D1["Keras Sequential Model"];
+    
+    A2["/kaggle/input/dogs-cats-images/dataset/test_set/"] -->|"Load & Resize Images"| B2["Test Data (X_t, Y_t)"];
+    B2 -->|"Validate Model"| D1;
+    
+    D1 -->|"Conv2D (64 filters)"| D2["Conv Layer 1"];
+    D2 -->|"MaxPooling"| D3["MaxPool Layer 1"];
+    D3 -->|"Flatten"| D4["Flatten Layer"];
+    D4 -->|"Dense (256 units)"| D5["Dense Layer 1"];
+    D5 -->|"Dense (2 units, softmax)"| D6["Output Layer"];
+    
+    D1 -->|"Compile with Adam Optimizer"| D7["Compile Model"];
+    D7 -->|"Fit model (30 epochs)"| D8["Trained Model"];
+    D8 -->|"Save Model"| D9["saved_model.h5"];
+    
+    C1["Callback (Stop if accuracy > 95%)"] --> D1;
+```

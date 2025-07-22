@@ -1,0 +1,14 @@
+flowchart TD
+    %% Data Sources
+    A[housing_raw.csv]:::data_source
+    
+    %% Data Variables
+    B[df1]:::data_variable
+    
+    %% Data Flow
+    A --> |"pd.read_csv"| B
+    B --> |"EDA and plotting"| C["EDA & Plots"]
+    
+    %% Styles
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;

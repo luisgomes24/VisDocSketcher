@@ -1,0 +1,52 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/vlsp-dataset/dev-images/dev-images",
+      "description": "Development images used for training and validation"
+    },
+    {
+      "file_path": "/kaggle/input/vlsp-dataset/vlsp2023_dev_data.json",
+      "description": "JSON file containing annotations for development images"
+    },
+    {
+      "file_path": "/kaggle/input/vlsp-dataset/training-data-20230913T111851Z-001/training-data/training-images/training-images",
+      "description": "Training images used for model training"
+    },
+    {
+      "file_path": "/kaggle/input/vlsp-dataset/training-data-20230913T111851Z-001/training-data/vslp2023_train_data.json",
+      "description": "JSON file containing annotations for training images"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dev_json_file",
+      "description": "Path to the development JSON file containing annotations"
+    },
+    {
+      "variable_name": "dev_image_dir",
+      "description": "Path to the directory containing development images"
+    },
+    {
+      "variable_name": "train_json_file",
+      "description": "Path to the training JSON file containing annotations"
+    },
+    {
+      "variable_name": "train_image_dir",
+      "description": "Path to the directory containing training images"
+    },
+    {
+      "variable_name": "vlsp_dataset",
+      "description": "Instance of VLSP_Dataset containing loaded images and labels"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "vlsp_dataset",
+      "creation_method": "VLSP_Dataset(",
+      "input_vars": ["dev_json_file", "dev_image_dir"],
+      "uses": ["Randomly selected images for visualization"],
+      "result_storage": "Used for visualizing a few randomly selected images"
+    }
+  ],
+  "models": []
+}

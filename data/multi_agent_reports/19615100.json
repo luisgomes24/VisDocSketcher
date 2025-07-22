@@ -1,0 +1,87 @@
+{
+  "data_sources": [
+    {
+      "file_name": "photo_jpg",
+      "description": "Content images used for style transfer."
+    },
+    {
+      "file_name": "monet_jpg",
+      "description": "Style images (Monet style) used for style transfer."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "base_path",
+      "description": "Base path for dataset storage."
+    },
+    {
+      "name": "content_path",
+      "description": "Path where content images are stored."
+    },
+    {
+      "name": "style_path",
+      "description": "Path where style images are stored."
+    },
+    {
+      "name": "output_path",
+      "description": "Path where generated images will be saved."
+    },
+    {
+      "name": "image_size",
+      "description": "Size to which images will be resized for processing."
+    },
+    {
+      "name": "num_outputs",
+      "description": "Number of stylized images to generate."
+    },
+    {
+      "name": "style_images",
+      "description": "Array of paths to style images."
+    },
+    {
+      "name": "content_images",
+      "description": "Array of paths to content images."
+    },
+    {
+      "name": "hub_module",
+      "description": "Pretrained model loaded from TFHub for style transfer."
+    },
+    {
+      "name": "output_images",
+      "description": "Array of paths to generated stylized images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "style_images",
+      "creation_method": "Loaded from directory",
+      "flow": "Used in the stylization process"
+    },
+    {
+      "variable": "content_images",
+      "creation_method": "Loaded from directory",
+      "flow": "Used in the stylization process"
+    },
+    {
+      "variable": "hub_module",
+      "creation_method": "Loaded from TFHub",
+      "flow": "Used to generate stylized images"
+    },
+    {
+      "variable": "output_images",
+      "creation_method": "Generated during stylization",
+      "flow": "Visualized at the end"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Arbitrary Image Stylization",
+      "input_features": ["Content images", "Style images"],
+      "target_variable": "Stylized images",
+      "hyperparameters": {
+        "image_size": 256,
+        "num_outputs": 7000
+      }
+    }
+  ]
+}

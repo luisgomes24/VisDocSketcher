@@ -1,0 +1,14 @@
+{"data_sources": [
+    {"file_name": "pytorch_model_0.bin", "description": "Model file downloaded from Google Drive"}
+],
+"data_variables": [
+    {"variable_name": "fid", "description": "File ID used to download the PyTorch model"},
+    {"variable_name": "i", "description": "Loop index for downloading multiple model files"}
+],
+"data_flow": [
+    {"variable_name": "fid", "creation": "Manually defined list of model file IDs", "flow": "Used in the wget command to download model files"},
+    {"variable_name": "i", "creation": "Loop index in 'for' loop", "flow": "Controls the downloading of individual model files"} 
+],
+"models": [
+    {"model_name": "PyTorch Model", "input_features": "Not specified", "target_variable": "Not specified", "hyperparameters": "Not specified"}
+]}

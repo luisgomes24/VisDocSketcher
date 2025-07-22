@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data source node
+    A["/India GDP 1960-2022.csv/"] %% Represents the input CSV file containing GDP data
+    
+    %% Data cleaning and variable nodes
+    B[df] --> C[YEAR] %% YEAR variable extracted from df
+    B --> D[GDP ($,B)] %% GDP data cleaned and processed
+    B --> E[Per Capita ($)] %% Per Capita data cleaned and processed
+    B --> F[Growth (%)] %% Growth data cleaned and processed
+    
+    %% Visualization process nodes
+    C --> G[Visualize YEAR] %% YEAR used in visualization
+    D --> H[Visualize GDP] %% GDP data used in visualization
+    E --> I[Visualize Per Capita] %% Per Capita data used in visualization
+    F --> J[Visualize Growth] %% Growth data used in visualization
+
+    %% Descriptions
+    subgraph DataFlow
+    B[DataFrame df] -->|pd.read_csv| A
+    end

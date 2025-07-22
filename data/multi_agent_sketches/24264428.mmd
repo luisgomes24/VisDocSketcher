@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A(MNIST Dataset):::data_source %% The MNIST dataset is the main data source being used.
+
+    %% Data Variables
+    B(x_train):::variable -->|Load and reshape| C[x_train reshaped]:::action
+    D(y_train):::variable
+    E(x_test):::variable -->|Load and reshape| F[x_test reshaped]:::action
+    G(y_test):::variable
+    H(x_train_noisy):::variable
+    I(x_test_noisy):::variable
+    J(predictions):::variable
+    K(denoise_and_classify):::variable
+
+    %% Data Flow
+    A -->|Load data| B
+    A -->|Load data| E
+    B -->|Add noise| H
+    E -->|Add noise| I
+    H -->|Train Autoencoder| M(Autoencoder):::model
+    I -->|Evaluate| M
+    M -->|Denoise predictions| J
+    J -->|Evaluate denoised images| G
+    B -->|Train Classifier| L(Classifier Model):::model
+    G -->|Test Classifier| L
+    M -->|Combine with Classifier| K
+
+    %% Models
+    subgraph Models
+        L
+        M
+    end
+
+    %% Styling
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#f66,stroke:#333,stroke-width:2px;
+    classDef action fill:#f93,stroke:#333,stroke-width:2px;

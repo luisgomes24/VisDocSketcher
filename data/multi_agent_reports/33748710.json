@@ -1,0 +1,23 @@
+{
+    "data_sources": [
+        {
+            "file_path": "/kaggle/input/the-worlds-100-most-powerful-women/The Worlds 100 Most Powerful Women.csv",
+            "description": "CSV file containing information about the world's 100 most powerful women, including their locations, categories, and ages."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame containing the dataset loaded from the CSV.",
+            "key_columns": ["LOCATION", "CATEGORY", "AGE"]
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation_method": "pd.read_csv",
+            "flow": ["used for plotting various graphs", "analyze data features"]
+        }
+    ],
+    "models": []
+}

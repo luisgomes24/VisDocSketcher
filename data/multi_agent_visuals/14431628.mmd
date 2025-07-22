@@ -1,0 +1,13 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] -->|Load| B["<img src='icons/file.svg' width=100 height=100/> <br/> Input File"];
+    B -->|Transform| C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Frame"];
+    C -->|Select Features| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    C -->|Split Data| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    E -->|Train| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model"];
+    F -->|Train| G;
+    G -->|Validate| I["<img src='icons/table.svg' width=100 height=100/> <br/> Validation Dataset"];
+    G -->|Predict| J["<img src='icons/table.svg' width=100 height=100/> <br/> Predictions"];
+    I -->|Evaluate| K["Metrics"];
+    J -->|Evaluate| K;
+    G -->|Save Model| L["Model Saved"];
+    L -->|Visualize| N["<img src='dummy_plots/hist_template.svg'/> <br/> Visualizations"];  

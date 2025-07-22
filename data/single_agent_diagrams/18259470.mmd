@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Read Data <img src='file.svg' />"] --> B["📊 Basic Data Checks"]
+    B --> C["🔍 Check for Missing Values"]
+    C --> D["📊 Data Description"]
+    D --> E["📊 Correlation Matrix <img src='barplot_template.svg' />"]
+    E --> F["📈 Target Distribution <img src='hist_template.svg' />"]
+    F --> G["🎯 Model Creation"]
+    G --> H["🧠 Train Linear Regression Models"]
+    H --> I["📁 Create Submission File"]

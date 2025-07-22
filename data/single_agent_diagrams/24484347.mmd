@@ -1,0 +1,20 @@
+```
+graph TD;
+    A["📥 Load Data"] --> B["🔄 Preprocess Data"];
+    B --> C["📈 Exploratory Data Analysis"];
+    C --> D["📊 Time Series Decomposition <img src='dummy_plots/lineplot_template.svg'/> <br/>"];
+    D --> E["📊 ACF Plot <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"];
+    E --> F["📊 PACF Plot <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"];
+    F --> G["🔍 Train/Test Split"];
+    G --> H["🧠 Build Model - Exponential Smoothing"];
+    H --> I["📊 Predictions"];
+    I --> J["📊 Residual Analysis"];
+    J --> K["📈 Build Prophet Model"];
+    K --> L["📊 Prophet Forecasting <img src='dummy_plots/lineplot_template.svg'/> <br/>"];
+    L --> M["📊 Cross Validation"];
+    M --> N["📊 Performance Metrics"];
+    N --> O["🧠 Feature Selection with Ridge"];
+    O --> P["🧠 Build Final Model with Regressors"];
+    P --> Q["📊 Final Predictions Comparison"];
+    Q --> R["📈 Neural Prophet Model"];
+    R --> S["📊 Neural Prophet Forecast"];

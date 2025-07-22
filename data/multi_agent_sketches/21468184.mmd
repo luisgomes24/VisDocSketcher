@@ -1,0 +1,39 @@
+flowchart TD
+    %% Data source node
+    A["CSV: Healthcare dataset stroke data"] -->|Load dataset| B["DataFrame: df"]
+    
+    %% Data cleaning and preprocessing
+    B -->|Drop irrelevant columns & handle missing data| C["Clean DataFrame: df"]
+    C -->|Check missing BMI| D["DataFrame: missing"]
+    C -->|Filter complete cases| E["DataFrame: no_missing"]
+    
+    %% Generate groups and start imputation
+    E -->|Standardize data| F["StandardScaler: std"]
+    F -->|Fit to non-missing data| G["NearestNeighbors: nn"]
+    G -->|Find nearest neighbors| H["Updated DataFrame: df (imputed BMI)"]
+    
+    %% Splitting the dataset
+    H -->|train_test_split| I["X_train, y_train"]
+    H -->|train_test_split| J["X_test, y_test"]
+    
+    %% Model training
+    I -->|Train model with SGD Classifier| K["SGDClassifier: clf"]
+    K -->|Hyperparameter tuning with GridSearchCV| L["Optimized Model: clf"]
+
+    %% Model evaluation
+    L -->|Evaluate model| M["Evaluation Results"]
+
+    %% Comments about each node
+    %% A: The original dataset containing health metrics and demographics.
+    %% B: Load and store the dataset in a DataFrame for processing.
+    %% C: Clean the dataset by removing unnecessary columns and handling missing values.
+    %% D: Isolate records missing BMI for focused processing.
+    %% E: Isolate complete records to form the basis for missing value prediction.
+    %% F: Standardize features for normalized data processing.
+    %% G: Prepare NN model to find closest complete records for BMI value estimation.
+    %% H: The resulting DataFrame after imputing missing BMI values.
+    %% I: Training dataset split for model fitting.
+    %% J: Testing dataset split for model validation.
+    %% K: Use Stochastic Gradient Descent for binary classification based on health data.
+    %% L: Hyperparameter tuning to improve model performance using cross-validation.
+    %% M: The final model diagnostics and performance measurement.

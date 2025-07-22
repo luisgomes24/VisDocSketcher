@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file": "WA_Fn-UseC_-Telco-Customer-Churn.csv",
+      "description": "Telco customer churn dataset containing customer information and whether they churn or not"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "DataFrame containing the customer churn data"
+    },
+    {
+      "variable": "telecom",
+      "description": "Setup data used in PyCaret for model training with necessary preprocessing"
+    },
+    {
+      "variable": "ada",
+      "description": "ADA model created for classification"
+    },
+    {
+      "variable": "tuned_ada",
+      "description": "Tuned version of the ADA model optimized for Kappa metric"
+    },
+    {
+      "variable": "final_ada",
+      "description": "Finalized version of the tuned ADA model for prediction"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "read_csv",
+      "flows_to": "telecom setup"
+    },
+    {
+      "variable": "telecom",
+      "creation": "setup",
+      "flows_to": "ada model creation"
+    },
+    {
+      "variable": "ada",
+      "creation": "create_model",
+      "flows_to": "tune_model"
+    },
+    {
+      "variable": "tuned_ada",
+      "creation": "tune_model",
+      "flows_to": "evaluate_model, predict_model"
+    },
+    {
+      "variable": "final_ada",
+      "creation": "finalize_model",
+      "flows_to": "predict_model"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ADA",
+      "input_features": "All features used after preprocessing in telecom setup",
+      "target_variable": "Churn",
+      "hyperparameters": "Optimized for Kappa"
+    }
+  ]
+}

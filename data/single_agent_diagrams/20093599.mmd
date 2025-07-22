@@ -1,0 +1,17 @@
+flowchart TD
+    A["📂 Load Data"] --> B["🧹 Preprocess Data"]
+    B --> C["🎭 Define Functions"]
+    C --> D["🔍 Analyze Data"]
+    D --> E["📝 Check Answers"]
+    E --> F["🎯 Evaluate Performance"]
+    F --> G["📈 Fashionably Late Analysis"]
+    G --> H["📊 Results Visualization"]
+    
+    A["📂 Load Data"] -->|CSV/JSON| I["<img src='file.svg'/> <br/> Data Loaded"]
+    I --> B
+    H --> J["<img src='barplot_template.svg'/> <br/> Visualization Results"]
+
+    D --> K["<img src='scatter_plot_template.svg'/> <br/> Analysis Results"]
+
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,K process;

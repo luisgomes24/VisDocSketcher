@@ -1,0 +1,44 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A0["/kaggle/input/emg-4/0.csv"] -->|load_data| A1["df0: Data from 0.csv"]
+    A2["/kaggle/input/emg-4/1.csv"] -->|load_data| A3["df1: Data from 1.csv"]
+    A4["/kaggle/input/emg-4/2.csv"] -->|load_data| A5["df2: Data from 2.csv"]
+    A6["/kaggle/input/emg-4/3.csv"] -->|load_data| A7["df3: Data from 3.csv"]
+
+    %% Data Aggregation
+    A1 -->|concat| B0["df: Combined Sensor Data"]
+    A3 -->|concat| B0
+    A5 -->|concat| B0
+    A7 -->|concat| B0
+
+    %% Feature and Target Separation
+    B0 -->|drop_last_column| C0["dfx: Features"]
+    B0 -->|select_last_column| C1["y: Target Variable"]
+
+    %% Data Splitting
+    C0 -->|train_test_split| D0["x_train"]
+    C0 -->|train_test_split| D1["x_test"]
+    C1 -->|train_test_split| D2["y_train"]
+    C1 -->|train_test_split| D3["y_test"]
+
+    %% Data Normalization
+    D0 -->|fit_transform| E0["Normalized x_train"]
+    D1 -->|transform| E1["Normalized x_test"]
+
+    %% Model Creation
+    E0 -->|train| F0["Keras Sequential Model"]
+    D2 -->|train| F0
+
+    %% Predictions
+    E1 -->|predict| G0["y_pred: Predictions"]
+    F0 -->|predict| G0
+
+    %% Comments / Descriptions
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+    class A0,A2,A4,A6 source;
+    class C0,C1,D0,D1,D2,D3,E0,E1 process;
+    class F0,G0 model;
+```

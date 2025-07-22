@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A["/processed_train.csv/"]:::data_source --> B
+
+    %% Data Loading
+    B["/Load Data: df1/"]:::data
+    B --> C
+
+    %% Data Usage
+    %% Distribution plots
+    C["Plot Distributions"]:::plot
+    B --> D
+    
+    %% Correlation matrix
+    D["Plot Correlation Matrix"]:::plot
+    B --> E
+
+    %% Scatter and Density plots
+    E["Plot Scatter and Density"]:::plot
+
+    %% Styling
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef plot fill:#ff9,stroke:#333,stroke-width:2px;

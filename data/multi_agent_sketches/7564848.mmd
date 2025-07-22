@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for CSV file source
+    A[error_analysis.csv] --> |Load data| B[df1]
+
+    %% Node for DataFrame
+    B[df1] --> |Used for distribution graphs| C[plotPerColumnDistribution]
+    B[df1] --> |Used for correlation matrix| D[plotCorrelationMatrix]
+    B[df1] --> |Used for scatter density plots| E[plotScatterMatrix]
+
+    %% Nodes for the outputs of the visualizations
+    C --> F["Distribution Graphs"]
+    D --> G["Correlation Matrix"]
+    E --> H["Scatter Density Plots"]

@@ -1,0 +1,29 @@
+%% The workflow diagram for the notebook
+flowchart TD
+    CCC["CCC.csv"] -->|read_csv| df_CCC
+    gc["gc.csv"] -->|read_csv| df_gc
+    gn["gn.csv"] -->|read_csv| df_gn
+    val["validation_data.csv"] -->|Validation Data| validation_df
+
+    %% Combining datasets into a list of unique comments
+    df_CCC --> text_list
+    df_gc --> text_list
+    df_gn --> text_list
+
+    %% Creating Target Dataset for Model Input
+    text_list -->|unique comment texts| target_dataset
+
+    %% Creating comments DataFrame
+    target_dataset -->|filter validation| comments
+    
+    %% Model Configuration
+    CONFIG["Model Configurations"] --> JigsawModel["JigsawModel\n<ids, mask>\nlinear(768, num_classes=1)"]
+
+    %% Dataset and DataLoader creation
+    comments -->|CCDataset| test_dataset
+    test_dataset -->|DataLoader| test_loader
+
+    %% Model Inference
+    test_loader -->|Inference| preds["Predictions"]
+    preds -->|Pseudo Label| comments
+    preds -->|Save to CSV| CSV["Saved Predictions"]

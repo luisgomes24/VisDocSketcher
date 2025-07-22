@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/india-census-dataset/India Census 2011 Data.csv",
+      "description": "Contains demographic data from the 2011 Census of India."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing census data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "usage": ["data manipulation", "calculating totals", "filtering by districts"]
+    }
+  ],
+  "models": []
+}

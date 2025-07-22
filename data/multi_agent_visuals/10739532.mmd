@@ -1,0 +1,24 @@
+graph TD;
+    A["<img src='../input/hackathon/task_2-BCG_world_atlas_data-bcg_strain-7July2020.csv' /> <br/> BCG strain data"]:::data
+    B["<img src='../input/hackathon/BCG_world_atlas_data-2020.csv' /> <br/> High-risk groups data"]:::data
+    C["<img src='../input/hackathon/task_2-Tuberculosis_infection_estimates_for_2018.csv' /> <br/> TB infection estimates"]:::data
+    D["<img src='../input/hackathon/task_2-Gemany_per_state_stats_20June2020.csv' /> <br/> COVID-19 stats in Germany"]:::data
+    style A fill:#87CEEB
+    style B fill:#87CEEB
+    style C fill:#87CEEB
+    style D fill:#87CEEB
+
+    A --> E["Analyze BCG strains over the years"]
+    style E fill:#F2C464
+
+    B --> F["Examine high-risk groups that receive BCG"]
+    style F fill:#F2C464
+
+    C --> G["Analyze TB estimates and preventive therapy"]
+    style G fill:#F2C464
+
+    D --> H["Visualize COVID-19 cases and deaths in Germany"]
+    style H fill:#F2C464
+    
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;

@@ -1,0 +1,28 @@
+flowchart TD
+    A["📥 Load Images <img src='icons/file.svg'/>"] --> B["📂 Prepare Dataset"]
+    B --> C["📊 Label Encoding"]
+    C --> D["🔄 Train-Test Split"]
+    D --> E["🔁 Data Preparation for Modeling"]
+    E --> F["🧠 Model Training <img src='icons/brain.svg'/>"]
+    F --> G["📈 Model Evaluation"]
+    G --> H["🔍 Classifier Comparison"]
+    
+    subgraph Data Loading
+        A
+        B
+    end
+    
+    subgraph Data Preprocessing
+        C
+        D
+        E
+    end
+    
+    subgraph Modeling
+        F
+        G
+    end
+    
+    subgraph Evaluation
+        H
+    end

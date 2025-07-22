@@ -1,0 +1,45 @@
+flowchart TD
+%% Data Sources
+    A["CelebA Dataset Images"] %% Node A: Represents CelebA dataset images
+    B["LFW Crop Dataset Images"] %% Node B: Represents LFW crop dataset images
+
+%% Data Processing
+    C["Load & Normalize Images"] %% Node C: Images are loaded and normalized
+    A --> C
+    B --> C
+
+%% Data Variable
+    D["data"] %% Node D: Processed image data
+    C --> D
+
+%% Models
+    E["AA_Fast Model"] %% Node E: Archetypal Analysis model
+    D --> E
+    F["PCA Model"] %% Node F: Principal Component Analysis model
+    D --> F
+    G["KMeans Model"] %% Node G: KMeans Clustering model
+    D --> G
+
+%% Model Outputs
+    H["archetypes"] %% Node H: Output from AA_Fast
+    E --> H
+    I["pca"] %% Node I: PCA components
+    F --> I
+    J["kmeans"] %% Node J: KMeans cluster centers
+    G --> J
+
+%% Reconstructions
+    K["Reconstruct Archetypes"] %% Node K: Reconstructed images from archetypes
+    H --> K
+    L["Reconstruct PCA"] %% Node L: Reconstructed images from PCA components
+    I --> L
+    M["Reconstruct KMeans"] %% Node M: Reconstructed images from KMeans cluster centers
+    J --> M
+
+%% Plots
+    N["Plot Reconstructed Archetypes"] %% Node N: Plotting step for reconstructed archetypes
+    K --> N
+    O["Plot Reconstructed PCA"] %% Node O: Plotting step for reconstructed PCA images
+    L --> O
+    P["Plot Reconstructed KMeans"] %% Node P: Plotting step for reconstructed KMeans images
+    M --> P

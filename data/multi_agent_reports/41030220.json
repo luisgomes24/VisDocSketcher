@@ -1,0 +1,39 @@
+{"data_sources": [
+    {"file_name": "diabetes.csv", "description": "Dataset containing health metrics of Pima Indians with diabetes status."}
+],
+"data_variables": [
+    {"variable_name": "data", "description": "DataFrame containing the entire dataset loaded from CSV."},
+    {"variable_name": "X", "description": "Feature variables excluding the target variable ('Outcome')."},
+    {"variable_name": "Y", "description": "Target variable indicating diabetes outcome (0 or 1)."},
+    {"variable_name": "X_train", "description": "Training feature variables after split."},
+    {"variable_name": "X_test", "description": "Testing feature variables after split."},
+    {"variable_name": "Y_train", "description": "Training target variable after split."},
+    {"variable_name": "Y_test", "description": "Testing target variable after split."},
+    {"variable_name": "scaler", "description": "StandardScaler instance used to standardize features."},
+    {"variable_name": "SVM", "description": "Support Vector Classifier model instance."},
+    {"variable_name": "y_predict", "description": "Predicted outcomes for the test set."},
+    {"variable_name": "cnf_matrix", "description": "Confusion matrix used for model evaluation."},
+    {"variable_name": "input_data", "description": "Tuple containing input values for prediction (example instance)."}
+],
+"data_flow": [
+    {"variable": "data", "created_by": "pd.read_csv", "flows_to": ["X", "Y"]},
+    {"variable": "X", "created_by": "data.drop", "flows_to": ["X_train", "X_test"]},
+    {"variable": "Y", "created_by": "data[Outcome]", "flows_to": ["Y_train", "Y_test"]},
+    {"variable": "X_train", "created_by": "train_test_split", "flows_to": ["SVM"]},
+    {"variable": "Y_train", "created_by": "train_test_split", "flows_to": ["SVM"]},
+    {"variable": "scaler", "created_by": "StandardScaler()", "flows_to": ["standardized_data"]},
+    {"variable": "standardized_data", "created_by": "scaler.fit_transform", "flows_to": ["X"]},
+    {"variable": "SVM", "created_by": "SVC()", "flows_to": ["training_data_accuracy", "testing_data_accuracy", "y_predict"]},
+    {"variable": "y_predict", "created_by": "SVM.predict", "flows_to": ["cnf_matrix"]}
+],
+"models": [
+    {
+        "model_name": "Support Vector Classifier (SVC)",
+        "input_features": ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"],
+        "target_variable": "Outcome",
+        "hyperparameters": {
+            "kernel": "rbf",
+            "random_state": 0
+        }
+    }
+]}

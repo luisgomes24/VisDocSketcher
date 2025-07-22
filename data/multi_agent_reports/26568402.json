@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/gtsrb-german-traffic-sign/Train/",
+      "description": "Training images for the German Traffic Sign Recognition Benchmark."
+    },
+    {
+      "file": "../input/gtsrb-german-traffic-sign/Test/",
+      "description": "Test images for the German Traffic Sign Recognition Benchmark."
+    },
+    {
+      "file": "../input/gtsrb-german-traffic-sign/Test.csv",
+      "description": "CSV containing paths and class IDs for the test images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_dataset",
+      "description": "Training dataset with image data and corresponding labels."
+    },
+    {
+      "name": "test_dataset",
+      "description": "Testing dataset with image data and corresponding labels."
+    },
+    {
+      "name": "history",
+      "description": "History object containing training metrics such as loss and accuracy."
+    },
+    {
+      "name": "mob_history",
+      "description": "History object for MobileNetV2 training metrics."
+    },
+    {
+      "name": "vgg_history",
+      "description": "History object for VGG19 training metrics."
+    },
+    {
+      "name": "X_test",
+      "description": "Test image dataset after preprocessing and resizing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_dataset",
+      "created_by": "ImageDataGenerator.flow_from_directory",
+      "flow_direction": "Used in model training."
+    },
+    {
+      "variable": "test_dataset",
+      "created_by": "ImageDataGenerator.flow_from_directory",
+      "flow_direction": "Used for validation during model training."
+    },
+    {
+      "variable": "X_test",
+      "created_by": "Image preprocessing (cv2, PIL)",
+      "flow_direction": "Used in model predictions for accuracy assessment."
+    },
+    {
+      "variable": "history",
+      "flow_direction": "Contains training results and is plotted for performance visualization."
+    },
+    {
+      "variable": "mob_history",
+      "flow_direction": "Contains MobileNetV2 training results and is plotted for performance visualization."
+    },
+    {
+      "variable": "vgg_history",
+      "flow_direction": "Contains VGG19 training results and is plotted for performance visualization."
+    }
+  ],
+  "models": [
+    {
+      "name": "Custom CNN",
+      "input_features": "Images resized to (50, 50, 3)",
+      "target_variable": "43 classes of traffic signs",
+      "hyperparameters": {
+        "epochs": 15,
+        "batch_size": 150,
+        "optimizer": "Adam",
+        "learning_rate": 0.01
+      }
+    },
+    {
+      "name": "MobileNetV2",
+      "input_features": "Images resized to (50, 50, 3)",
+      "target_variable": "43 classes of traffic signs",
+      "hyperparameters": {
+        "epochs": 8,
+        "batch_size": 150,
+        "optimizer": "Adam",
+        "learning_rate": 0.01
+      }
+    },
+    {
+      "name": "VGG19",
+      "input_features": "Images resized to (50, 50, 3)",
+      "target_variable": "43 classes of traffic signs",
+      "hyperparameters": {
+        "epochs": 8,
+        "batch_size": 150,
+        "optimizer": "Adam",
+        "learning_rate": 0.0001
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    DS1["persona.csv"]:::dataSource -->|Read| df
+
+    %% Data Nodes
+    df["DataFrame df"]:::dataNode -->|Copy| data["Copy of df"]
+    df -->|Aggregate| agg_df["Aggregated DataFrame"]
+
+    %% Data Flow
+    %% df Creation and Use
+    df -->|EDA & Cleaning| EDA_Cleaning["EDA & Cleaning"]
+    EDA_Cleaning -->|Aggregation| agg_df
+
+    %% Model
+    agg_df -->|Segmentation| Model["Segmentation Model: Classify Segments (A, B, C, D)"]
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#bfb,stroke:#333,stroke-width:2px;

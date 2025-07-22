@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains historical home sale data including features like LotArea, YearBuilt, SalePrice, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "home_data",
+      "description": "DataFrame containing all the home sales data."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing the sale price of homes."
+    },
+    {
+      "variable_name": "X",
+      "description": "DataFrame of features used for predicting home sale prices."
+    },
+    {
+      "variable_name": "train_X",
+      "description": "Training set features for the model."
+    },
+    {
+      "variable_name": "val_X",
+      "description": "Validation set features for the model."
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Training set target variable for the model."
+    },
+    {
+      "variable_name": "val_y",
+      "description": "Validation set target variable for the model."
+    },
+    {
+      "variable_name": "iowa_model",
+      "description": "Decision Tree Regressor model used for predictions."
+    },
+    {
+      "variable_name": "rf_model",
+      "description": "Random Forest Regressor model used for predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "home_data",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["y", "X"]
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "home_data.SalePrice",
+      "flows_to": ["train_y", "val_y"]
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "home_data[features]",
+      "flows_to": ["train_X", "val_X"]
+    },
+    {
+      "variable_name": "train_X",
+      "creation_method": "train_test_split",
+      "flows_to": ["iowa_model", "rf_model"]
+    },
+    {
+      "variable_name": "val_X",
+      "creation_method": "train_test_split",
+      "flows_to": ["val_predictions"]
+    },
+    {
+      "variable_name": "iowa_model",
+      "creation_method": "DecisionTreeRegressor",
+      "flows_to": ["val_predictions"]
+    },
+    {
+      "variable_name": "rf_model",
+      "creation_method": "RandomForestRegressor",
+      "flows_to": ["rf_val_mae"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DecisionTreeRegressor",
+      "input_features": "train_X",
+      "target_variable": "train_y",
+      "hyperparameters": {"max_leaf_nodes": 100}
+    },
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "train_X",
+      "target_variable": "train_y",
+      "hyperparameters": {"random_state": 1}
+    }
+  ]
+}

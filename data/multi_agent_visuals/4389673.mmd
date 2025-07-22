@@ -1,0 +1,36 @@
+flowchart TD
+
+%% Data sources
+A1((<img src='icons/file.svg' width=100 height=100/> <br/> age-bias-wordparts.csv)):::dataSource
+A2((<img src='icons/file.svg' width=100 height=100/> <br/> Female-Bias-wordparts.csv)):::dataSource
+A3((<img src='icons/file.svg' width=100 height=100/> <br/> job_descriptions.csv)):::dataSource
+
+%% Data variables
+B1[df1]:::dataVar
+B2[df2]:::dataVar
+B3[df3]:::dataVar
+
+%% Processes
+C1[<img src='icons/column_split.svg' width=100 height=100/> <br/> Read CSV]:::process
+C2[<img src='icons/plot.svg' width=100 height=100/> <br/> Plot Distribution]:::process
+C3[<img src='icons/table.svg' width=100 height=100/> <br/> Display Head]:::process
+
+%% Data source to variable data flow
+A1 -->|pd.read_csv| C1
+A2 -->|pd.read_csv| C1
+A3 -->|pd.read_csv| C1
+
+%% Variable data flow to processes
+C1 --> B1
+C1 --> B2
+C1 --> B3
+
+%% from variables to plotting 
+B1 -->|plotPerColumnDistribution| C2
+B2 -->|plotPerColumnDistribution| C2
+B3 -->|plotPerColumnDistribution| C2
+
+%% from variables to head display
+B1 -->|df1.head| C3
+B2 -->|df2.head| C3
+B3 -->|df3.head| C3

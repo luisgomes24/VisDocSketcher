@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A1["/train.csv"]:::source  %% Metadata containing patient IDs and breast density classifications
+        A2["/train_images/"]:::source  %% DICOM images of mammograms
+    end
+
+    subgraph DataVariables
+        B1["train_meta"]:::variable  %% DataFrame containing metadata about training images
+        B2["image_dict"]:::variable  %% Dictionary holding processed images
+        B3["padded_view_l_cc"]:::variable  %% Padded left cranio-caudal view image
+        B4["predicted_density"]:::variable  %% Predicted density values
+    end
+
+    A1 -->|"pd.read_csv"| B1
+    A2 -->|"Loop over DICOM"| B2
+    B1 -->|"Density Extraction"| B3
+    B2 -->|"Image Processing"| B3
+
+    subgraph Model
+        C1["BaselineHistogramModel"]:::model  %% A histogram-based model for density prediction
+    end
+
+    B3 -->|"Input Features"| C1
+    C1 -->|"Model Prediction"| B4
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+```

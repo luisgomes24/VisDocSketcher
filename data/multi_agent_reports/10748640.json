@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/financial-markets/Index2018.csv",
+      "description": "CSV file containing financial market data for various indices."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "raw_csv_data",
+      "description": "Initial DataFrame containing raw data read from the CSV file."
+    },
+    {
+      "name": "df_comp",
+      "description": "DataFrame that contains the processed data with appropriate date indexing and cleaned missing values."
+    },
+    {
+      "name": "df",
+      "description": "Training DataFrame created from df_comp (first 80% of data)."
+    },
+    {
+      "name": "df_test",
+      "description": "Test DataFrame created from df_comp (remaining 20% of data)."
+    },
+    {
+      "name": "df['returns']",
+      "description": "Column in df that represents the daily percentage change of the market value."
+    },
+    {
+      "name": "df['res_ret_ar_3_ma_2']",
+      "description": "Residuals of the ARMA(3,2) model for returns."
+    },
+    {
+      "name": "df['res_ret_ar_5_ma_1']",
+      "description": "Residuals of the ARMA(5,1) model for returns."
+    },
+    {
+      "name": "df['res_ar_1_ma_1']",
+      "description": "Residuals of the ARMA(1,1) model for prices."
+    },
+    {
+      "name": "df['res_ar_5_ma_6']",
+      "description": "Residuals of the ARMA(5,6) model for prices."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "raw_csv_data",
+      "created_by": "pd.read_csv",
+      "flow": ["df_comp"]
+    },
+    {
+      "variable": "df_comp",
+      "created_by": "raw_csv_data.copy() and subsequent processing steps",
+      "flow": ["df", "df_test", "df['returns']"]
+    },
+    {
+      "variable": "df",
+      "created_by": "df_comp.iloc[:size]",
+      "flow": ["ARMA models"]
+    },
+    {
+      "variable": "df_test",
+      "created_by": "df_comp.iloc[size:]",
+      "flow": []
+    },
+    {
+      "variable": "df['returns']",
+      "created_by": "df.market_value.pct_change(1)*100",
+      "flow": ["ARMA model training"]
+    },
+    {
+      "variable": "df['res_ret_ar_3_ma_2']",
+      "created_by": "results_ret_ar_3_ma_2.resid",
+      "flow": ["Residual analysis", "plotting"]
+    },
+    {
+      "variable": "df['res_ret_ar_5_ma_1']",
+      "created_by": "results_ret_ar_5_ma_1.resid",
+      "flow": ["Residual analysis", "plotting"]
+    },
+    {
+      "variable": "df['res_ar_1_ma_1']",
+      "created_by": "results_ar_1_ma_1.resid",
+      "flow": ["Residual analysis", "plotting"]
+    },
+    {
+      "variable": "df['res_ar_5_ma_6']",
+      "created_by": "results_ar_5_ma_6.resid",
+      "flow": ["Residual analysis", "plotting"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "ARMA",
+      "variations": [
+        {
+          "order": "(1, 1)",
+          "input_features": "df['returns'][1:]",
+          "target": "returns",
+          "hyperparameters": "none"
+        },
+        {
+          "order": "(3, 3)",
+          "input_features": "df['returns'][1:]",
+          "target": "returns",
+          "hyperparameters": "none"
+        },
+        {
+          "order": "(5, 5)",
+          "input_features": "df['returns'][1:]",
+          "target": "returns",
+          "hyperparameters": "none"
+        }
+      ]
+    }
+  ]
+}

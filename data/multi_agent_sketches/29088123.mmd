@@ -1,0 +1,20 @@
+flowchart TD
+    A1[/"Dunnetts_Table.csv"/] %% This is the data source file providing critical values for Dunnett's test.
+
+    %% Nodes for data variables
+    B1[df] %% DataFrame containing raw Dunnett's values read from the CSV file.
+    B2[df_001] %% Subset DataFrame for alpha=0.01 cases from df.
+    B3[df_005] %% Subset DataFrame for alpha=0.05 cases from df.
+    B4[df_01] %% Subset DataFrame for alpha=0.1 cases from df.
+    B5[agg] %% Aggregated statistics DataFrame used for further statistical testing.
+
+    %% Node for model
+    C1[Dunnett's Test] %% Statistical model using aggregated stats to find differences in exam scores.
+
+    %% Arrows indicating data flow
+    A1 -->|pd.read_csv| B1
+    B1 -->|df.loc[a]| B2
+    B1 -->|df.loc[a]| B3
+    B1 -->|df.loc[a]| B4
+    B1 -->|df.agg| B5
+    B5 --> C1

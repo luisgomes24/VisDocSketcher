@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph Libraries
+        A["<img src='path/to/icon.svg' width=100 height=100/> <br/> Matplotlib (plt)"]:::library
+        B["<img src='path/to/icon.svg' width=100 height=100/> <br/> NumPy (np)"]:::library
+        C["<img src='path/to/icon.svg' width=100 height=100/> <br/> Pandas (pd)"]:::library
+    end
+
+    classDef library fill:#f9f,stroke:#333,stroke-width:2px;
+
+    subgraph DataFlow
+        direction TB
+        D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Import Libraries"]
+
+        E["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Data Manipulation & Analysis"]
+
+        F["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Data Visualization"]
+
+        D --> A
+        D --> B
+        D --> C
+
+        B --> E
+        C --> E
+        A --> F
+    end

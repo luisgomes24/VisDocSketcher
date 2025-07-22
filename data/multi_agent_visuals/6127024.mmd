@@ -1,0 +1,27 @@
+flowchart TD
+    %% Note: Start of the flowchart
+    A["Start"] --> B["Import Libraries"]
+    
+    %% Libraries import node
+    B --> |Import| C{{"<img src='icons/database.svg' width=100 height=100/> <br/> numpy, matplotlib, pandas, sklearn"}}
+    
+    %% Initial exploration node
+    C --> D["Explore Data Structure"]
+    D -->|List Directories| E["<img src='icons/table.svg' width=100 height=100/> <br/> Display file paths"]
+    
+    %% Functions for Plotting
+    E --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> Define Plotting Functions"]
+    F --> |Function| F1["<img src='dummy_plots/hist_template.svg'/> <br/> plotPerColumnDistribution"]
+    F --> |Function| F2["<img src='dummy_plots/boxplot_template.svg'/> <br/> plotCorrelationMatrix"]
+    F --> |Function| F3["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotScatterMatrix"]
+    
+    %% Plotting Data
+    F1 --> G["Plot Column Distributions"]
+    F2 --> H["Plot Correlation Matrix"]
+    F3 --> I["Plot Scatter and Density"]
+    
+    classDef neural fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#000,stroke-width:2px;
+    classDef process fill:#9f6,stroke:#333,stroke-width:2px;
+    
+    class B,C,E,F1,F2,F3,G,H,I process;

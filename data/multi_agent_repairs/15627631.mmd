@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Source Node
+    A["train.csv"] %% Kaggle House Price Prediction dataset
+        click A "https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data" "Kaggle House Price Prediction Dataset"
+    
+    %% Data Loading
+    B["df_orig"] %% Original DataFrame loaded from the CSV
+    A -->|Load CSV| B
+
+    %% Numerical Data Processing
+    C["df_num"] %% DataFrame with numerical columns
+    B -->|Select numerical columns| C
+
+    %% Categorical Data Processing
+    D["df_cate"] %% DataFrame with categorical columns
+    B -->|Select categorical columns| D
+
+    %% Usage of Data
+    B -->|Exploratory Analysis and Visualizations| E["Analysis & Visualizations"]
+    C -->|Numerical Feature Analysis| E
+    D -->|Categorical Feature Analysis| E

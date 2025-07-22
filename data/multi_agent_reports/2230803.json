@@ -1,0 +1,34 @@
+{"data_sources": [
+    {
+        "file_name": "tiny_eeg_self_experiment_music.csv",
+        "description": "Contains EEG data from a music experiment, capturing brain wave patterns."
+    },
+    {
+        "file_name": "tiny_eeg_self_experiment_reading.csv",
+        "description": "Contains EEG data from a reading experiment, capturing brain wave patterns."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "df1",
+        "description": "DataFrame containing the first 1000 rows of music EEG experiment data."
+    },
+    {
+        "variable_name": "df2",
+        "description": "DataFrame containing the first 1000 rows of reading EEG experiment data."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "df1",
+        "creation_method": "pd.read_csv",
+        "flow": ["used for exploratory plots", "input to plotPerColumnDistribution", "input to plotCorrelationMatrix", "input to plotScatterMatrix"]
+    },
+    {
+        "variable_name": "df2",
+        "creation_method": "pd.read_csv",
+        "flow": ["used for exploratory plots", "input to plotPerColumnDistribution", "input to plotCorrelationMatrix", "input to plotScatterMatrix"]
+    }
+],
+"models": []
+}

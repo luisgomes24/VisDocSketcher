@@ -1,0 +1,9 @@
+%%{init: {'theme': 'default'}}%%
+
+graph TD;
+    A["Start"] --> B["Process"];
+    B --> C["Decision"];
+    C -->|"Yes"| D["End"];
+    C -->|"No"| B;
+    A --> E["Another Process"];
+    E --> F["End"];

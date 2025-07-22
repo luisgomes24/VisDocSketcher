@@ -1,0 +1,17 @@
+%%{init: {"theme": "default"}}%%
+%% Diagram showing the data workflow in the Jupyter Notebook 29029043.ipynb
+
+flowchart TD
+    A[indian population new.csv] -->|Read CSV| B(df)
+    %% A: Represents the CSV file containing population data of India
+
+    B -->|Used in| C{Analysis & Visualization}
+    %% B: DataFrame 'df' containing the loaded population data
+
+    C --> D[Plotting Trends]
+    %% C: The data is analyzed and visualized through various plots to understand demographic trends
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#bbf,stroke:#333,stroke-width:2px;
+    style C fill:#bfb,stroke:#333,stroke-width:2px;
+    style D fill:#ff9,stroke:#333,stroke-width:2px;

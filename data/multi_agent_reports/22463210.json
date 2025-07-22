@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "playstation_4_games.csv",
+      "description": "A dataset of PlayStation 4 games scraped from TrueTrophies.com, containing information on game attributes such as publisher, developer, release year, genre, and size."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "A DataFrame containing the entire dataset of PlayStation 4 games."
+    },
+    {
+      "variable_name": "vc",
+      "description": "A DataFrame used for visualizations, representing value counts of various attributes like Publisher, Developer, ReleaseYear, etc."
+    },
+    {
+      "variable_name": "Genres",
+      "description": "A combined list of game genres extracted from the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flow": "Used for generating various visualizations about the games."
+    },
+    {
+      "variable_name": "vc",
+      "creation": "Created by performing value counts on df for different attributes.",
+      "flow": "Used in plots to show distributions of publishers, developers, release years, etc."
+    },
+    {
+      "variable_name": "Genres",
+      "creation": "Created by joining and splitting genre data from df.",
+      "flow": "Used to visualize the most popular genres."
+    }
+  ],
+  "models": []
+}

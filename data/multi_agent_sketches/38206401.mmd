@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1[Train CSV] -->|Read CSV| B1[train_df]
+    A2[Test CSV] -->|Read CSV| B6[test_df]
+    A3[Sample Submission CSV] -->|Read CSV| B8[submission]
+    
+    %% Data Transformations
+    B1 -->|Slicing| B2[val_df]
+    B1 -->|Stack & Encode FEN| B3[X_train]
+    B1 -->|Select Column| B4[y_train]
+    B2 -->|Stack & Encode FEN| B5[X_val]
+    B2 -->|Select Column| B7[y_val]
+    
+    %% Model Training
+    B3 -->|Train| C1[Neural Network Model]
+    B4 -->|Train| C1
+    B5 -->|Validation| C1
+    B7 -->|Validation| C1
+    
+    %% Model Details
+    %% Comment: A neural network model with specific layers and hyperparameters
+    C1 --- |Sequential: Flatten, Dense(512, relu), Dropout(0.2), Dense(128, relu), Dropout(0.2), Dense(1)| C2[Trained Model]
+    
+    %% Inference
+    B6 -->|Predict Best Move| D1[test_df with Predictions]
+    C2 --> D1
+    
+    %% Submission
+    D1 -->|Prepare Submission| B9[Filled Submission]
+    B8 --> B9
+    B9 -->|Write CSV| E1[Final Submission CSV]

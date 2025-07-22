@@ -1,0 +1,44 @@
+flowchart TD
+    %% Data Sources
+    A1["child_wishlist.csv"]:::dataSource --> B1
+    A2["gift_goodkids.csv"]:::dataSource --> B2
+
+    %% Data Variables
+    B1["child_prefs"]:::dataVariable --> C1["Gift Allocation Process"]:::process
+    B2["gift_prefs"]:::dataVariable --> C1
+
+    C1 --> D1["n_children"]:::dataVariable
+    C1 --> D2["n_gift_type"]:::dataVariable
+    C1 --> D3["n_gift_quantity"]:::dataVariable
+    C1 --> D4["twins"]:::dataVariable
+    C1 --> D5["gift_matches"]:::dataVariable
+    C1 --> D6["gift_counter"]:::dataVariable
+
+    %% Process
+    C1 --> E1["pick_first_choice Function"]:::function
+
+    %% Output
+    D5 --> F1["nice_inversion_benchmark.csv"]:::output
+
+    %% Class Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef function fill:#ffb,stroke:#333,stroke-width:2px;
+    classDef process fill:#cff,stroke:#333,stroke-width:2px;
+    classDef output fill:#fcf,stroke:#333,stroke-width:2px;
+
+    %% Explanations for Nodes
+    click A1 href "child_wishlist.csv" "Preferences of children for gifts."
+    click A2 href "gift_goodkids.csv" "Gift types and quantities available."
+    click B1 "Matrix of Children preferences for gifts."
+    click B2 "Matrix of gift types available."
+    click C1 "Logic that assigns gifts to children based on preferences."
+    click D1 "Total number of children."
+    click D2 "Total types of gifts."
+    click D3 "Maximum gift quantities available."
+    click D4 "Number of twins in the dataset."
+    click D5 "Resulting list of matched children to gifts."
+    click D6 "Array to keep track of gift allocation."
+    click E1 "Function to pick the first preferred gift available."
+    click F1 "Output File with gift assignments."
+

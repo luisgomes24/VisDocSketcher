@@ -1,0 +1,13 @@
+graph TD;
+    A["Load Data"] -->|"Read CSV"| B["<img src='path/to/icon.svg' width=100 height=100/> <br/> SPY Data Source"];
+    B --> D["<img src='path/to/icon.svg' width=100 height=100/> <br/> SPY Data"];
+    D -->|"Data Cleansing & Feature Engineering"| SPY_data["<img src='path/to/plot.svg'/> <br/> SPY DataFrame"];
+    SPY_data -->|"Filter"| train["<img src='path/to/icon.svg'/> <br/> Training Data"];
+    SPY_data -->|"Filter"| test["<img src='path/to/icon.svg'/> <br/> Test Data"];
+    train -->|"Feature Selection"| X_train["<img src='path/to/icon.svg'/> <br/> Features for Train"];
+    train -->|"Target Selection"| Y_train["<img src='path/to/icon.svg'/> <br/> Target for Train"];
+    test -->|"Feature Selection"| X_test["<img src='path/to/icon.svg'/> <br/> Features for Test"];
+    test -->|"Target Selection"| Y_test["<img src='path/to/icon.svg'/> <br/> Target for Test"];
+    X_train -->|"Model Training"| model["<img src='path/to/icon.svg'/> <br/> Linear Regression"];
+    model -->|"Predictions on Test Set"| X_test;
+    Y_test -->|"Model Evaluation"| predictions["Predictions"];

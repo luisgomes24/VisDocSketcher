@@ -1,0 +1,24 @@
+graph TD;
+    A["📁 Data Loading"] --> B["📊 Data Overview"];
+    B --> C["📊 Histogram of Sampled Columns"];
+    C --> D["📊 Correlation Matrix"];
+    D --> E["📊 Scatter and Density Plots"];
+    E --> F["📊 2D PCA Plots"];
+    F --> G["📊 3D PCA Plots"];
+    
+    A1["📁 Data Loading: File 1"] --> B1["📊 Data Overview: File 1"];
+    B1 --> C1["📊 Histogram of Sampled Columns: File 1"];
+    C1 --> D1["📊 Correlation Matrix: File 1"];
+    D1 --> E1["📊 Scatter and Density Plots: File 1"];
+    E1 --> F1["📊 2D PCA Plots: File 1"];
+    F1 --> G1["📊 3D PCA Plots: File 1"];
+
+    A2["📁 Data Loading: File 2"] --> B2["📊 Data Overview: File 2"];
+    B2 --> C2["📊 Histogram of Sampled Columns: File 2"];
+    C2 --> D2["📊 Correlation Matrix: File 2"];
+    D2 --> E2["📊 Scatter and Density Plots: File 2"];
+    E2 --> F2["📊 2D PCA Plots: File 2"];
+    F2 --> G2["📊 3D PCA Plots: File 2"];
+    
+    A -->|Read File 1| A1;
+    A -->|Read File 2| A2;

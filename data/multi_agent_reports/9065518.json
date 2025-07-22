@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/2020sp-gss-data/2020SP_GSS_data.csv",
+      "description": "This file contains data from the General Social Survey (GSS) for the year 2020. It includes various socio-economic and demographic variables."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dfGSS",
+      "description": "DataFrame containing data from the GSS, including variables for race, age, income, fear, grass, news, evidu."
+    },
+    {
+      "name": "lVar",
+      "description": "List of target variables for descriptive statistics and plotting (race, age, income, fear, grass, news, evidu)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dfGSS",
+      "creation": "pd.read_csv('/kaggle/input/2020sp-gss-data/2020SP_GSS_data.csv')",
+      "flows_to": ["Descriptive statistics calculation", "Histogram plots", "Bar charts", "Cross-tabulation", "Chi-square calculation", "Correlation calculation"]
+    },
+    {
+      "variable": "lVar",
+      "creation": "['race', 'age', 'income', 'fear', 'grass', 'news', 'evidu']",
+      "flows_to": ["Frequency distributions", "Descriptive statistics", "Histogram plots", "Bar charts"]
+    }
+  ],
+  "models": []
+}

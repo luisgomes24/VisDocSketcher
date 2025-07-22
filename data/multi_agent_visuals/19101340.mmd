@@ -1,0 +1,16 @@
+%%{ init : { "themeVariables": { "primaryColor": "#87CEEB", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#ffffff" } } }%%
+graph TD;
+  A["<img src='icons/database.svg' width=100 height=100/> <br/> Input Data"]
+  B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Preprocessing"]
+  C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection<br/><img src='dummy_plots/lineplot_template.svg'/>"]
+  D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model<br/><img src='dummy_plots/scatter_plot_template.svg'/> "]
+  E["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"]
+  F["<img src='icons/table.svg' width=100 height=100/> <br/> Output Data<br/><img src='dummy_plots/barplot_template.svg'/> "]
+  G["<img src='dummy_plots/hist_template.svg'/> <br/> Data Visualization"]
+  A --> B;
+  B --> C;
+  C --> D;
+  D --> E;
+  D --> F;
+  E --> G;
+  F --> G;

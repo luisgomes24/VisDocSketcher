@@ -1,0 +1,30 @@
+%%{
+init: {
+  'theme': 'default',
+  'themeVariables': {
+    'primaryColor': '#ffcc00',
+    'edgeLabelBackground':'#ffffff'
+  }
+}
+}%%
+flowchart TD
+    A[Train Data CSV] -->|pd.read_csv| B[train_data] 
+    %% B: DataFrame containing the training dataset.
+    C[Test Data CSV] -->|pd.read_csv| D[test_data]
+    %% D: DataFrame containing the test dataset.
+    B -->|target extraction| E[train_target]
+    %% E: DataFrame containing the target variable extracted from train_data.
+    B -->|scaling and splitting| F[X_train]
+    %% F: Features for training set after scaling and splitting.
+    B -->|scaling and splitting| G[X_test]
+    %% G: Features for testing set after scaling and splitting.
+    E --> H[y_train]
+    %% H: Target variable for training set.
+    B --> I[y_test]
+    %% I: Target variable for testing set.
+    D -->|predict_proba| J[Result]
+    %% J: DataFrame containing predicted probabilities for the test data.
+    F -->|train| K[Logistic Regression Model]
+    %% K: Logistic Regression with random_state=0
+    H -->|train| K
+    K -->|predict_proba| J

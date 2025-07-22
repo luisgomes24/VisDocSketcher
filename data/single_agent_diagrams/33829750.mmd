@@ -1,0 +1,21 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Train Data"] --> B["📊 Data Preprocessing"]
+    B --> C["🌀 Train-Test Split"]
+    C --> D["📊 Load Test Data <img src='file.svg'/> <br/> Test Data"]
+    D --> E["🔍 Data Validation"]
+    E --> F["🧮 Calculate Train and Test Sizes"]
+    F --> G["📊 Data Exploration"]
+    G --> H["📈 Linear Regression Model <img src='brain.svg'/>"]
+    H --> I["📉 Predictions and Visualization"]
+    
+    I --> J["📊 Results Aggregation <img src='table.svg'/>"]
+    J --> K["📤 Submission Data <img src='file.svg'/> <br/> Save Submission"]
+    K --> L["✅ Submission Complete"]
+
+    subgraph Training Process
+        H -->|Trained Model| I
+    end
+
+    subgraph Evaluation
+        I -->|Final Predictions| J
+    end

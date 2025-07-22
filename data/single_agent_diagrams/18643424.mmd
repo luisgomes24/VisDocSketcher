@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/> <br/> Read images from folder"] --> B["🔄 Preprocess Images <img src='icons/image.svg'/>"]
+    B --> C["🖼️ Image Resizing <img src='dummy_plots/boxplot_template.svg'/> <br/> Resize images to 150x150"]
+    C --> D["🧠 Define Model <img src='icons/brain.svg'/> <br/> Create CNN architecture"]
+    D --> E["📈 Compile Model <img src='dummy_plots/barplot_template.svg'/> <br/> Compile with Adam optimizer"]
+    E --> F["🔍 Train Model <img src='dummy_plots/hist_template.svg'/> <br/> Fit for 50 epochs"]
+    F --> G["💾 Save Model <img src='icons/database.svg'/> <br/> Save the trained model"]
+    G --> H["🔄 Load Model <img src='icons/database.svg'/> <br/> Load model for prediction"]
+    H --> I["🔍 Predict Image <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Make predictions on test images"]

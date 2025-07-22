@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    A["My Uber Drives - 2016.csv"] -->|Load Data| B["df"]
+    %% df: Main DataFrame containing data from the Uber drives CSV.
+
+    B -->|Convert to datetime| C["start_date"]
+    %% start_date: Converted start date of each ride in datetime format.
+    B -->|Convert to datetime| D["end_date"]
+    %% end_date: Converted end date of each ride in datetime format.
+
+    B -->|Extract and count| E["purpose"]
+    %% purpose: Categorical variable representing the purpose of each ride.
+    E -->|Plot data| F["Purpose Counts"]
+
+    B -->|Extract and count| G["category"]
+    %% category: Categorical variable representing the category of each ride.
+    G -->|Plot data| H["Category Counts"]
+
+    C -->|Extract month| I["month_name"]
+    %% month_name: Month name extracted from start_date.
+    I -->|Aggregate and plot| J["Rides per Month"]
+
+    C -->|Extract day| K["day_name"]
+    %% day_name: Day name extracted from start_date.
+    K -->|Aggregate and plot| L["Rides per Day"]
+
+    B -->|Extract and count| M["start"]
+    %% start: Start location for each ride.
+    M -->|Plot data| N["Start Location Counts"]
+
+    B -->|Extract and count| O["stop"]
+    %% stop: Stop location for each ride.
+    O -->|Plot data| P["Stop Location Counts"]
+```

@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "../input",
+      "description": "Directory that contains the input data files."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame for storing the input data and for processing." 
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation": "Processed from input data files",
+      "flow": "Used for generating plots and analysis"
+    }
+  ],
+  "models": []
+}

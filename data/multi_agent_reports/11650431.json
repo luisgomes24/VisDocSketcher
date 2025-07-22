@@ -1,0 +1,27 @@
+{
+  "data_sources": [
+    {
+      "file_name": "No files",
+      "description": "No CSV files in the current version of the dataset"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame to hold the dataset for analysis (not loaded)",
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Not specified, as no files are loaded",
+      "flows_to": "Various plotting functions (not executed due to the absence of data)"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "None",
+      "description": "No predictive models are utilized in this notebook"
+    }
+  ]
+}

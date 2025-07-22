@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file": "train_data.csv",
+      "description": "Contains RNA sequences of the training set with 1,643,680 rows and 419 columns, including details about reactivities and experimental conditions."
+    },
+    {
+      "file": "test_sequences.csv",
+      "description": "Contains RNA sequences of the test set with 1,343,823 rows and 5 columns, used to assess model performance with two future outcomes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training data loaded from 'train_data.csv'."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data loaded from 'test_sequences.csv'."
+    },
+    {
+      "name": "reactivity_cols",
+      "description": "List of columns in the training set that represent reactivity measurements."
+    },
+    {
+      "name": "reactivity_error_cols",
+      "description": "List of columns in the training set that represent errors in reactivity measurements."
+    },
+    {
+      "name": "seq_len",
+      "description": "Column representing the length of the RNA sequence in both train and test sets."
+    },
+    {
+      "name": "SN_filter",
+      "description": "Boolean column that indicates if the sequence passes the signal-to-noise criteria."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Loaded from 'train_data.csv' using pd.read_csv",
+      "flow": "Used for exploratory data analysis and model training."
+    },
+    {
+      "variable": "test",
+      "creation": "Loaded from 'test_sequences.csv' using pd.read_csv",
+      "flow": "Used for evaluating model performance."
+    },
+    {
+      "variable": "seq_len",
+      "creation": "Calculated by applying len() to the RNA sequences in 'train' and 'test'.",
+      "flow": "Used in EDA visualizations of sequence length distribution."
+    },
+    {
+      "variable": "SN_filter",
+      "creation": "Created based on conditions related to 'signal_to_noise' and 'reads'.",
+      "flow": "Used to filter sequences for evaluation."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,12 @@
+```mermaid
+%% Mermaid.js Workflow Diagram for the Data Science Project
+
+flowchart TD
+    %% Node representing the data source file
+    A["br_xtransaction_details.csv"] --> |Read first 1000 rows| B(df1)
+    
+    %% Node representing the dataframe variable
+    B --> |Used for EDA| C["Distribution Graphs"]
+    B --> |Used for EDA| D["Correlation Matrix"]
+    B --> |Used for EDA| E["Scatter Plots"]
+```

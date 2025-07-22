@@ -1,0 +1,65 @@
+{
+"data_sources": [
+    {
+        "file_path": "../input/dogs-gone-sideways/images/train",
+        "description": "Training images of dogs, half of which are oriented sideways."
+    },
+    {
+        "file_path": "../input/dogs-gone-sideways/images/val",
+        "description": "Validation images of dogs, half of which are oriented sideways."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "my_new_model",
+        "description": "A Sequential model built on ResNet50 for image classification of dog photos."
+    },
+    {
+        "variable_name": "train_generator",
+        "description": "Generator for feeding training images into the model.
+        It preprocesses images and controls batch size."
+    },
+    {
+        "variable_name": "validation_generator",
+        "description": "Generator for feeding validation images into the model."
+    },
+    {
+        "variable_name": "fit_stats",
+        "description": "Statistics from fitting the model, including training accuracy and loss."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "my_new_model",
+        "creation_method": "Built using Sequential API with ResNet50 base model",
+        "flow": "Compiled and then fitted using images from train_generator and validation_generator"
+    },
+    {
+        "variable_name": "train_generator",
+        "creation_method": "DataGenerator applied to training directory",
+        "flow": "Used during model fitting to provide training data"
+    },
+    {
+        "variable_name": "validation_generator",
+        "creation_method": "DataGenerator applied to validation directory",
+        "flow": "Used during model fitting to provide validation data"
+    },
+    {
+        "variable_name": "fit_stats",
+        "creation_method": "Result of fit_generator function",
+        "flow": "Holds performance metrics post training"
+    }
+],
+"models": [
+    {
+        "model_name": "ResNet50",
+        "description": "Pre-trained ResNet50 model used as a base for the new model",
+        "input_features": "Preprocessed images from generators",
+        "target_variable": "Class labels indicating image orientation",
+        "hyperparameters": {
+            "optimizer": "adam",
+            "loss_function": "categorical_crossentropy",
+            "metrics": ["accuracy"]
+        }
+    }
+]}

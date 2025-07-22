@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/segmentation-full-body-mads-dataset/segmentation_full_body_mads_dataset_1192_img/images",
+      "description": "Contains the input images for the segmentation task."
+    },
+    {
+      "file_path": "../input/segmentation-full-body-mads-dataset/segmentation_full_body_mads_dataset_1192_img/masks",
+      "description": "Contains the ground truth masks for the segmentation task."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "IMAGE_DIR",
+      "description": "Directory path for the input images."
+    },
+    {
+      "name": "MASK_DIR",
+      "description": "Directory path for the segmentation masks."
+    },
+    {
+      "name": "BATCH_SIZE",
+      "description": "Number of images to be processed in one batch during training."
+    },
+    {
+      "name": "train_loader",
+      "description": "DataLoader for the training dataset."
+    },
+    {
+      "name": "val_loader",
+      "description": "DataLoader for the validation dataset."
+    },
+    {
+      "name": "test_loader",
+      "description": "DataLoader for the test dataset."
+    },
+    {
+      "name": "model",
+      "description": "UNet model for segmentation imported from Catalyst."
+    },
+    {
+      "name": "criterion",
+      "description": "Loss functions used for training, including DiceLoss, IoULoss, and BCEWithLogitsLoss."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "img_list",
+      "created_by": "list(path_img.glob('*.png'))",
+      "flows_to": "train_loader and val_loader through FullBodySegmentation class."
+    },
+    {
+      "variable": "mask_list",
+      "created_by": "list(path_mask.glob('*.png'))",
+      "flows_to": "train_loader and val_loader through FullBodySegmentation class."
+    },
+    {
+      "variable": "train_loader",
+      "created_by": "get_loaders() function",
+      "flows_to": "training loop."
+    },
+    {
+      "variable": "val_loader",
+      "created_by": "get_loaders() function",
+      "flows_to": "validation in the training loop."
+    },
+    {
+      "variable": "test_loader",
+      "created_by": "get_loaders() function",
+      "flows_to": "final evaluation and visualization."
+    },
+    {
+      "variable": "model",
+      "created_by": "Unet()",
+      "flows_to": "training and prediction processes."
+    },
+    {
+      "variable": "criterion",
+      "created_by": "Dict containing loss functions.",
+      "flows_to": "training process for calculating losses."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "UNet",
+      "input_features": "Image tensors coming from DataLoader.",
+      "target_variable": "Mask tensors for ground truth.",
+      "hyperparameters": {
+        "optimizer": "Adam",
+        "scheduler": "ReduceLROnPlateau",
+        "num_epochs": 10
+      }
+    }
+  ]
+}

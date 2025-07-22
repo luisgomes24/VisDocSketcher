@@ -1,0 +1,9 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/> <br/> Read CSV"] --> B["🔍 Preprocess Data <img src='table.svg'/> <br/> Split Train/Val/Test"]
+    B --> C["🖼️ Image Transformation <img src='image.svg'/> <br/> Apply Transformations"]
+    C --> D["🧠 Define Model <img src='brain.svg'/> <br/> Build Neural Network"]
+    D --> E["⚙️ Initialize Training <img src='brain.svg'/> <br/> Set Optimizer and Loss"]
+    E --> F["🔄 Train Model <img src='brain.svg'/> <br/> Loop over Epochs"]
+    F --> G["📈 Visualize Training <img src='barplot_template.svg'/> <br/> Plot Losses"]
+    F --> H["✅ Evaluate Model <img src='scatter_plot_template.svg'/> <br/> Test Loss Calculation"]
+    G --> I["💾 Save Model <img src='file.svg'/> <br/> Save Classifier"]

@@ -1,0 +1,23 @@
+flowchart TD
+  A1["<img src='icons/file.svg' width=100 height=100/> <br/> cardio_train.csv"]
+  A2["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+  A3["<img src='icons/column_split.svg' width=100 height=100/> <br/> h"]
+
+  A1 -->|"pd.read_csv"| A2
+  A2 -->|"df['height']"| A3
+  A2 -->|"Data Exploration"| B1["Data Exploration and Initial Stats"]
+  A2 -->|"Visualization"| B2["<img src='icons/brain.svg' width=100 height=100/> <br/> Matplotlib and Seaborn Visualizations"]
+
+  B1 -->|"df.info"| C1["Check Data Info"]
+  B1 -->|"df.describe"| C2["Basic Statistical Summary"]
+  B2 -->|"df['height'].hist()"| D1["<img src='dummy_plots/hist_template.svg'/> <br/> Height Distribution"]
+  B2 -->|"sns.boxplot"| D2["<img src='dummy_plots/boxplot_template.svg'/> <br/> Boxplot for Outliers"]
+
+  A3 -->|"Data for Binning and Normalization"| B3["Prepare Data for Analysis"]
+  B1 -->|"df.groupby('cardio')['age'].mean()"| E1["Group by Cardio"]
+  B2 -->|"sns.countplot(y='age', hue='cardio', data=df)"| E2["Age and Cardio Countplot"]
+  A2 -->|"df.drop(['cardio'], axis=1)"| F1["Data without Target"]
+  A2 -->|"Conditional Indexing"| G1["Height Correction"]
+  G1 -->|"df.drop(outliers.index)"| H1["Dropping Height Outliers"]
+  E1 -->|"Bar Plot Ages"| I1["Visualize Age Differences"]
+  B1 -->|"df.pivot_table()"| J1["Pivot Analysis on Smoking and Drinking"]

@@ -1,0 +1,41 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/trumps-legacy/Trumps Legcy.csv",
+      "description": "Contains 56,572 tweets by President Donald Trump, including tweet IDs, dates, likes, and retweets."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame that holds the tweets and associated data."
+    },
+    {
+      "name": "texts",
+      "description": "List of tokenized and processed tweets without stopwords."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file",
+      "flow": "Used for exploratory data analysis and modeling phases (e.g. sentiment analysis, topic modeling)"
+    },
+    {
+      "variable": "texts",
+      "creation": "Processed from the texts of tweets",
+      "flow": "Used as input for LDA model to identify topics"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Latent Dirichlet Allocation (LDA)",
+      "input_features": "texts (tokenized tweets)",
+      "target_variable": "None (unsupervised)",
+      "hyperparameters": {
+        "num_topics": 10,
+        "passes": 20
+      }
+    }
+  ]
+}

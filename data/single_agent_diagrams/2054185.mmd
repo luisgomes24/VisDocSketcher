@@ -1,0 +1,5 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> Read fb_sentiment.csv"] --> B["📊 Data Preview <img src='table.svg' /> <br/> Show first 5 rows"]
+    B --> C["📊 Plot Distributions <img src='hist_template.svg' /> <br/> plotPerColumnDistribution"]
+    C --> D["📊 Correlation Analysis <img src='boxplot_template.svg' /> <br/> plotCorrelationMatrix"]
+    D --> E["📈 Scatter Plot Matrix <img src='scatter_plot_template.svg' /> <br/> plotScatterMatrix"]

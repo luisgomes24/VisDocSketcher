@@ -1,0 +1,15 @@
+flowchart TD
+    %% Node for the data source
+    A[/"playstore_prep.csv"/] 
+    %% Node for loading data into DataFrame df1
+    B[df1: DataFrame with first 1000 rows] 
+    %% Nodes for plotting functions that df1 is passed to
+    C[plotPerColumnDistribution(df1, 10, 5)]
+    D[plotCorrelationMatrix(df1, 8)]
+    E[plotScatterMatrix(df1, 6, 15)]
+
+    %% Links between nodes
+    A -->|Load data using pd.read_csv| B
+    B -->|Visualize| C
+    B -->|Visualize| D
+    B -->|Visualize| E

@@ -1,0 +1,7 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> Training and Submission Data"] --> B["📊 Preprocess Data <img src='column_split.svg' /> <br/> Extract Features"]
+    B --> C["🔍 Compute Quantiles"]
+    C --> D["✂️ Clip Predictions <img src='boxplot_template.svg' /> <br/> Apply Quantiles"]
+    D --> E["📏 Evaluate Metrics <img src='table.svg' /> <br/> Mean Absolute Error"]
+    E --> F["🔄 Round Predictions"]
+    F --> G["📈 Visualize Changes <img src='hist_template.svg' /> <br/> Histogram of Changes"]

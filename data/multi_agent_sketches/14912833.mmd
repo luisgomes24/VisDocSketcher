@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A1["GCS: landscape-pictures"]:::file --> B1["FILENAMES"]
+    A2["GCS: artstation-landscape-thumbnails"]:::file --> B3["art_dataset"]
+
+    %% Data Variables
+    B1["FILENAMES"]:::variable -- "used in" --> B3["art_dataset"]
+    B3["art_dataset"]:::variable -- "split into" --> B4["art_dataset_train"]
+    B3 -- "split into" --> B5["art_dataset_val"]
+    C0["GCS_PATH"]:::variable
+    C1["example_input"]:::variable
+    C2["example_target"]:::variable
+
+    %% Model Components
+    C3["generator"]:::model_component -- "used in" --> D1["CycleGAN Model"]
+    C4["discriminator"]:::model_component -- "used in" --> D1
+
+    %% Model
+    D1["CycleGAN Model"]:::model -- "performs" --> D2["Style Transfer"]
+    
+    %% Data Flow
+    B4 & B5 --> D1
+    C1 & C2 --> C3
+    
+    %% Style Definitions
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model_component fill:#ffb,stroke:#333,stroke-width:2px;

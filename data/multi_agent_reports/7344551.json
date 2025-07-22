@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart.csv",
+      "description": "Dataset containing various physiological indicators related to heart disease including demographic and clinical features."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "heart_df",
+      "description": "DataFrame containing the heart disease dataset with features and target variable."
+    },
+    {
+      "name": "X_training",
+      "description": "Features used for training the model, excludes the target variable."
+    },
+    {
+      "name": "y_training",
+      "description": "Target variable indicating heart disease presence (1) or absence (0)."
+    },
+    {
+      "name": "X_vault",
+      "description": "Features set aside for final testing of the models, excludes the target variable."
+    },
+    {
+      "name": "y_vault",
+      "description": "Target variable for the vault dataset indicating heart disease presence (1) or absence (0)."
+    },
+    {
+      "name": "X_train_scaled",
+      "description": "Scaled features for training set after preprocessing."
+    },
+    {
+      "name": "X_test_scaled",
+      "description": "Scaled features for test set after preprocessing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "heart_df",
+      "creation_method": "pd.read_csv",
+      "usage": "Used for initial analysis and splitting into training and testing sets."
+    },
+    {
+      "variable": "X_training",
+      "creation_method": "train_test_split",
+      "usage": "Features for training the models based on heart_df (excluding target)."
+    },
+    {
+      "variable": "y_training",
+      "creation_method": "train_test_split",
+      "usage": "Target variable for training the models based on heart_df."
+    },
+    {
+      "variable": "X_vault",
+      "creation_method": "train_test_split",
+      "usage": "Used to evaluate the performance of the trained models."
+    },
+    {
+      "variable": "y_vault",
+      "creation_method": "train_test_split",
+      "usage": "Used to evaluate the performance of the trained models."
+    },
+    {
+      "variable": "X_train_scaled",
+      "creation_method": "StandardScaler",
+      "usage": "Used as input features for model training after preprocessing."
+    },
+    {
+      "variable": "X_test_scaled",
+      "creation_method": "StandardScaler",
+      "usage": "Used as input features for model evaluation after preprocessing."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["thalach", "oldpeak", "exang", "cp", "ca", "thal", "slope"],
+      "target_variable": "y_training",
+      "hyperparameters": {"n_estimators": 150}
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": ["thalach", "oldpeak", "exang", "cp", "ca", "thal", "slope"],
+      "target_variable": "y_training",
+      "hyperparameters": {}
+    }
+  ]
+}

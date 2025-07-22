@@ -1,0 +1,116 @@
+{
+    "data_sources": [
+        {
+            "file": "numerai_training_data_int8.parquet",
+            "description": "The training dataset containing historical data for training models."
+        },
+        {
+            "file": "numerai_validation_data_int8.parquet",
+            "description": "The validation dataset used to assess the model performance."
+        },
+        {
+            "file": "numerai_live_data_int8.parquet",
+            "description": "The live dataset potentially used for real-time predictions."
+        },
+        {
+            "file": "numerai_datasets.zip",
+            "description": "A ZIP file potentially containing various datasets related to Numerai."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df_train",
+            "description": "DataFrame containing the training data loaded from the parquet file."
+        },
+        {
+            "name": "df_valid",
+            "description": "DataFrame containing the validation data loaded from the parquet file."
+        },
+        {
+            "name": "df_train_targets",
+            "description": "DataFrame containing only the target columns from the training dataset."
+        },
+        {
+            "name": "df_valid_targets",
+            "description": "DataFrame containing only the target columns from the validation dataset."
+        },
+        {
+            "name": "dd_train",
+            "description": "Dictionary storing Spearman correlation coefficients for training data targets."
+        },
+        {
+            "name": "dd_valid",
+            "description": "Dictionary storing Spearman correlation coefficients for validation data targets."
+        },
+        {
+            "name": "df_spearmanr_train",
+            "description": "DataFrame containing Spearman correlation values for each target in training data."
+        },
+        {
+            "name": "df_spearmanr_valid",
+            "description": "DataFrame containing Spearman correlation values for each target in validation data."
+        },
+        {
+            "name": "df_spearmanr_train_mean_std",
+            "description": "DataFrame containing mean and standard deviation of Spearman correlations for training data."
+        },
+        {
+            "name": "df_spearmanr_valid_mean_std",
+            "description": "DataFrame containing mean and standard deviation of Spearman correlations for validation data."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_train",
+            "creation": "read_parquet",
+            "flow": "Used to calculate correlations, eventually visualized."
+        },
+        {
+            "variable": "df_valid",
+            "creation": "read_parquet",
+            "flow": "Used to calculate correlations, eventually visualized."
+        },
+        {
+            "variable": "df_train_targets",
+            "creation": "DataFrame slicing from df_train",
+            "flow": "Used for correlation calculations."
+        },
+        {
+            "variable": "df_valid_targets",
+            "creation": "DataFrame slicing from df_valid",
+            "flow": "Used for correlation calculations."
+        },
+        {
+            "variable": "dd_train",
+            "creation": "Calculations within a for loop",
+            "flow": "Passed to df_spearmanr_train."
+        },
+        {
+            "variable": "dd_valid",
+            "creation": "Calculations within a for loop",
+            "flow": "Passed to df_spearmanr_valid."
+        },
+        {
+            "variable": "df_spearmanr_train",
+            "creation": "DataFrame creation from dd_train",
+            "flow": "Used for visualizations."
+        },
+        {
+            "variable": "df_spearmanr_valid",
+            "creation": "DataFrame creation from dd_valid",
+            "flow": "Used for visualizations."
+        },
+        {
+            "variable": "df_spearmanr_train_mean_std",
+            "creation": "Aggregations on df_spearmanr_train",
+            "flow": "Used to calculate copulas and visualized."
+        },
+        {
+            "variable": "df_spearmanr_valid_mean_std",
+            "creation": "Aggregations on df_spearmanr_valid",
+            "flow": "Used to calculate copulas and visualized."
+        }
+    ],
+    "models": [],
+    "next_steps": "Consider utilizing targets with high Sharpe ratios such as 'target_arthur_20', 'target_william_20', and 'target_jerome_20' for future model training."
+}

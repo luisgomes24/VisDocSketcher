@@ -1,0 +1,30 @@
+```mermaid
+graph TD;
+    img_df["Data Source: images.zip"];
+    img_csv["Data Source: image_subset.csv"];
+    signal_dir["Data Source: oebb-signal/"];
+
+    img_data_df["img_df"];
+    img_paths_dict["img_paths"];
+    ref_img_var["ref_img"];
+    out_frame_arr["out_frame"];
+    out_xy_arr["out_xy"];
+    out_feat_arr["out_feat"];
+    score_data_df["score_df"];
+    feature_map_df["feature_map_df"];
+    img_space_df["img_space_df"];
+
+    img_df --> img_data_df;
+    img_csv --> img_data_df;
+    signal_dir --> ref_img_var;
+    img_data_df --> out_feat_arr;
+    out_feat_arr --> score_data_df;
+    out_feat_arr --> feature_map_df;
+    score_data_df --> img_space_df;
+    feature_map_df --> img_space_df;
+
+    model_vgg16["VGG16 Model"];
+    img_data_df --> model_vgg16;
+    model_vgg16 --> out_feat_arr;
+
+```

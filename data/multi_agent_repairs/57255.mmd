@@ -1,0 +1,13 @@
+```mermaid
+flowchart TD
+    %% Data source node
+    A["config.json"] --> B["data"]
+    
+    %% Data variable node
+    B["data"] --> C["Use configuration settings"]
+    
+    %% Comments for each node
+    %% A: Represents the config.json file, a source of configuration settings for the analysis
+    %% B: Represents the data variable that stores the content read from config.json
+    %% C: Represents the utilization of the data variable in setting configurations for other operations
+```

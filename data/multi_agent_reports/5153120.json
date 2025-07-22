@@ -1,0 +1,49 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/transactions_clean.xlsx",
+            "description": "This file contains clean transaction data related to sales transactions."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame containing the clean transaction data imported from an Excel file."
+        },
+        {
+            "name": "g",
+            "description": "Grouped object created by grouping 'df' by 'date' and 'item_name'."
+        },
+        {
+            "name": "totals_df",
+            "description": "DataFrame containing total dollar amounts sold for each day, aggregated from 'df'."
+        },
+        {
+            "name": "sums_df",
+            "description": "DataFrame containing total dollar amounts sold for each day by product, aggregated from 'df'."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "Read from '../input/transactions_clean.xlsx' using pd.read_excel()",
+            "flows": "Used to create 'g', 'totals_df', and 'sums_df'; utilized in calculations for sales metrics and pivot tables."
+        },
+        {
+            "variable": "g",
+            "creation": "Created using df.groupby(['date', 'item_name'])",
+            "flows": "Used for aggregating mean and median 'quantity_sold' and mean 'total_net_amount'."
+        },
+        {
+            "variable": "totals_df",
+            "creation": "Created using df.groupby('date').agg({'total_amount':'sum'})",
+            "flows": "Used to calculate the sales mix for each product."
+        },
+        {
+            "variable": "sums_df",
+            "creation": "Created using df.groupby(['date', 'item_name']).agg({'total_amount':'sum'})",
+            "flows": "Used to calculate sales mix and for further analysis."
+        }
+    ],
+    "models": []
+}

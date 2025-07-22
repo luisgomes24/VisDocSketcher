@@ -1,0 +1,17 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame that is to be analyzed, contents dependent on input data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Undefined (no data files to read)",
+      "flow": "Used in various plotting functions"
+    }
+  ],
+  "models": []
+}

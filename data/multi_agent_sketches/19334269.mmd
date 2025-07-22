@@ -1,0 +1,25 @@
+flowchart TD
+    %% Variables
+    L[L] -->|Input parameter to| select_second[select_second Function]
+    select_second -->|Returns: Second element or None| L_result[L Result]
+
+    teams[teams] -->|Input parameter to| losing_team_captain[losing_team_captain Function]
+    losing_team_captain -->|Returns: Worst team captain| worst_captain[Worst Team Captain]
+
+    racers[racers] -->|Input parameter to| purple_shell[purple_shell Function]
+    purple_shell -->|In-place modification: Swap first and last racers| modified_racers[Modified Racers]
+
+    %% Manually Assigned
+    lengths[lengths] -->|Uses| verify_lengths[Verified Lengths of Lists]
+
+    %% Arrivals Check
+    arrivals[arrivals] -->|Input to| fashionably_late[fashionably_late Function]
+    name[name] -->|Input to| fashionably_late
+    fashionably_late -->|Returns: Boolean if guest is fashionably late| late_status[Is Fashionably Late]
+
+    %% Comments
+    %% L is a list input to select_second function to fetch the second element.
+    %% teams is a list input to losing_team_captain function to identify the captain of the losing team.
+    %% racers is modified in purple_shell to swap positions of first and last racer.
+    %% lengths are manually set to predict lengths of lists.
+    %% arrivals and name are inputs to fashionably_late function to check if someone is fashionably late.

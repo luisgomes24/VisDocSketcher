@@ -1,0 +1,68 @@
+{"data_sources": [
+    {
+        "file_name": "train.csv",
+        "description": "Training dataset containing features and target variable."
+    },
+    {
+        "file_name": "test.csv",
+        "description": "Test dataset containing features and no target variable."
+    },
+    {
+        "file_name": "sample_submission.csv",
+        "description": "Sample submission format for the Kaggle competition."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "X",
+        "description": "Training features obtained from 'train.csv' after feature engineering and preprocessing."
+    },
+    {
+        "variable_name": "y",
+        "description": "Target variable from the training dataset."
+    },
+    {
+        "variable_name": "Xt",
+        "description": "Test features obtained from 'test.csv' after preprocessing."
+    },
+    {
+        "variable_name": "id_train",
+        "description": "IDs of the training dataset from 'train.csv'."
+    },
+    {
+        "variable_name": "id_test",
+        "description": "IDs of the test dataset from 'test.csv'."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "X",
+        "created_by": "pd.read_csv",
+        "flows_to": "Training data for CatBoost classifier and generating predictions."
+    },
+    {
+        "variable_name": "y",
+        "created_by": "X.target.values",
+        "flows_to": "Model training as target variable."
+    },
+    {
+        "variable_name": "Xt",
+        "created_by": "pd.read_csv",
+        "flows_to": "Used for generating predictions."
+    }
+],
+"models": [
+    {
+        "model_name": "CatBoostClassifier",
+        "input_features": "Various engineered features from training data.",
+        "target_variable": "y",
+        "hyperparameters": {
+            "bagging_temperature": 0.8,
+            "depth": 5,
+            "iterations": 1000,
+            "l2_leaf_reg": 30,
+            "learning_rate": 0.05,
+            "random_strength": 0.8
+        }
+    }
+]}

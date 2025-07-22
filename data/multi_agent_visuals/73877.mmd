@@ -1,0 +1,16 @@
+%% Enhanced flowchart for Notebook 73877
+flowchart TD
+    A[Start] --> B{No data variables, data flow, or models identified}
+    A -->|""| B
+    B --> C[End]
+
+    style A fill:#87CEEB
+    style B fill:#87CEEB
+    style C fill:#F2C464
+    C --> D["<img src='icons/database.svg' width=100 height=100/> <br/> Data Input"]
+    C --> E["<img src='icons/file.svg' width=100 height=100/> <br/> Data Processing"]
+    C --> F["<img src='icons/table.svg' width=100 height=100/> <br/> Data Cleaning"]
+    C --> G["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    C --> H["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]
+    C --> I["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Training"]
+    C --> J["<img src='icons/image.svg' width=100 height=100/> <br/> Result Visualization"]

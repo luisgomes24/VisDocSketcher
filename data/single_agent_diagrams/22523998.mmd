@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load CSV Data <img src='icons/file.svg'/>"] --> B["🔍 Inspect Data <img src='icons/table.svg'/>"]
+    B --> C["📊 Histogram of Images per Dog <img src='dummy_plots/hist_template.svg'/>"]
+    B --> D["🏆 Most Common Breeds"]
+    B --> E["🖼️ Sample Images <img src='icons/image.svg'/>"]
+    C --> F["📏 Get Image Dimensions"]
+    F --> G["📏 Check Aspect Ratios"]
+    G --> H["📊 Boxplot of Aspect Ratios <img src='dummy_plots/boxplot_template.svg'/>"]
+    H --> I["🗑️ Data Cleaning Decisions"]
+    I --> J["🗑️ Remove Invalid Images"]
+    J --> K["🔍 Remove Outlier Aspect Ratios"]
+    K --> L["✂️ Resize and Convert Images <img src='icons/image.svg'/>"]
+    L --> M["💾 Save Cleaned Data <img src='icons/file.svg'/>"]

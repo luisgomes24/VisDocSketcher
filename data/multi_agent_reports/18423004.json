@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "italy_earthquakes_from_2016-08-24_to_2016-11-30.csv",
+      "description": "Data on earthquakes in Italy from August 24, 2016, to November 30, 2016"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data0",
+      "description": "DataFrame containing all the earthquake data"
+    },
+    {
+      "name": "data1",
+      "description": "DataFrame filtered to only include earthquakes with magnitude greater than 4.4"
+    },
+    {
+      "name": "year",
+      "description": "List containing the year extracted from the 'Time' column"
+    },
+    {
+      "name": "month",
+      "description": "List containing the month extracted from the 'Time' column"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data0",
+      "created_by": "pd.read_csv",
+      "flows_to": ["data1", "visualization"]
+    },
+    {
+      "variable": "year",
+      "created_by": "Extracted from 'Time' column",
+      "flows_to": ["data0"]
+    },
+    {
+      "variable": "month",
+      "created_by": "Extracted from 'Time' column",
+      "flows_to": ["data0"]
+    },
+    {
+      "variable": "data1",
+      "created_by": "data0[data0['Magnitude']>4.4]",
+      "flows_to": ["visualize_map"]
+    }
+  ],
+  "models": []
+}

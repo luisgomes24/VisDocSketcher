@@ -1,0 +1,65 @@
+flowchart TD
+    %% Data Loading and Preprocessing
+    A["Vehicle Dataset"] -->|"Load CSV file"| B["carPrice_dataset"]
+    B -->|"Data exploration and cleaning"| C["DataFrame ready"]
+    
+    %% Feature and Target Variable Preparation
+    C -->|"Extract features"| D["X (Features)"]
+    C -->|"Extract target"| E["y (Selling_Price)"]
+    
+    %% Splitting the Data
+    D -->|"Split dataset"| F["x_train"]
+    D -->|"Split dataset"| G["x_test"]
+    E -->|"Split dataset"| H["y_train"]
+    E -->|"Split dataset"| I["y_test"]
+    
+    %% Model Training and Evaluation
+    subgraph Models
+        direction TB
+        J1["RandomForestRegressor\nn_estimators=10"]
+        J2["RANSACRegressor"]
+        J3["HuberRegressor"]
+        J4["LinearRegression"]
+        J5["SGDRegressor"]
+        J6["SVR"]
+        J7["DecisionTreeRegressor"]
+        J8["AdaBoostRegressor"]
+        J9["GradientBoostingRegressor"]
+        J10["BaggingRegressor"]
+    end
+    
+    %% Training
+    F --> |"Train"| J1
+    F --> |"Train"| J2
+    F --> |"Train"| J3
+    F --> |"Train"| J4
+    F --> |"Train"| J5
+    F --> |"Train"| J6
+    F --> |"Train"| J7
+    F --> |"Train"| J8
+    F --> |"Train"| J9
+    F --> |"Train"| J10
+    
+    %% Testing
+    G --> |"Test"| J1
+    G --> |"Test"| J2
+    G --> |"Test"| J3
+    G --> |"Test"| J4
+    G --> |"Test"| J5
+    G --> |"Test"| J6
+    G --> |"Test"| J7
+    G --> |"Test"| J8
+    G --> |"Test"| J9
+    G --> |"Test"| J10
+    
+    %% Results Evaluation
+    J1 --> |"Evaluate with y_test"| K["Results"]
+    J2 --> |"Evaluate with y_test"| K
+    J3 --> |"Evaluate with y_test"| K
+    J4 --> |"Evaluate with y_test"| K
+    J5 --> |"Evaluate with y_test"| K
+    J6 --> |"Evaluate with y_test"| K
+    J7 --> |"Evaluate with y_test"| K
+    J8 --> |"Evaluate with y_test"| K
+    J9 --> |"Evaluate with y_test"| K
+    J10 --> |"Evaluate with y_test"| K

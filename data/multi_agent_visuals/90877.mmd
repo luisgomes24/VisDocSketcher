@@ -1,0 +1,18 @@
+graph TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> All Plays Data"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> Fourth Down Plays"]
+    C["<img src='icons/row_split.svg' width=100 height=100/> <br/> Split Data"]
+    D["<img src='dummy_plots/lineplot_template.svg'/> <br/> Line Plot Analysis"]
+    E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Field Goal Attempts"]
+    F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Punting Analysis"]
+    G["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Evaluation"]
+    H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scattering Data"]
+    I["<img src='dummy_plots/hist_template.svg'/> <br/> Histogram Analysis"]
+    J["<img src='icons/brain.svg' width=100 height=100/> <br/> Win Percentage Analysis"]
+
+    A --> B ---> C
+    C --> D
+    C --> E
+    D --> F
+    E --> G
+    J --> H

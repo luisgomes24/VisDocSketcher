@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Train Data <img src='file.svg'/>"] --> B["📂 Load Test Data <img src='file.svg'/>"]
+    B --> C["🗃️ Load Labels and Submission Files <img src='file.svg'/>"]
+    C --> D["🔍 EDA: Data Size, Info <img src='table.svg'/>"]
+    D --> E["📊 Check Missing and Duplicated Data <img src='table.svg'/>"]
+    E --> F["📈 Visualize State Distribution <img src='barplot_template.svg'/>"]
+    F --> G["🔍 Correlation Analysis <img src='heatmap_template.svg'/>"]
+    G --> H["📝 Summary of Findings"]
+    H --> I["🛠️ Feature Engineering"]
+    I --> J["📊 Clean Data for Modeling <img src='table.svg'/>"]
+    J --> K["📈 Cross-Validation & Model Training"]
+    K --> L["📊 Model Evaluation <img src='scatter_plot_template.svg'/>"]
+    L --> M["📥 Prepare Submission <img src='file.svg'/>"]

@@ -1,0 +1,27 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"]:::dataSource-->B["DataFrame: train"]:::dataVariable
+    C["test.csv"]:::dataSource-->D["DataFrame: test"]:::dataVariable
+    
+    %% Data Preparation
+    B-->E["Data Preprocessing & Feature Engineering"]:::process
+    E-->F["X_train, y_train"]:::dataVariable
+    D-->G["X_test"]:::dataVariable
+    
+    %% Model Training
+    F-->H["XGBoost Classifier"]:::model
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+    H-->I["Y_pred"]:::dataVariable
+    
+    %% Predictions and Submission
+    I-->J["DataFrame: submission"]:::dataVariable
+    J-->K["submission.csv"]:::output
+    
+    %% Classes for styling
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#9c6,stroke:#333,stroke-width:2px;
+    classDef process fill:#6cf,stroke:#333,stroke-width:2px;
+    classDef model fill:#fc3,stroke:#333,stroke-width:2px;
+    classDef output fill:#c93,stroke:#333,stroke-width:2px;
+```

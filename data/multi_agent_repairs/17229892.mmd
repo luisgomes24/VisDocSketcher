@@ -1,0 +1,11 @@
+```mermaid
+flowchart TD
+    A["Image Input"] -->|"Read by cv2.imread"| B["Image Array"]
+    B -->|"Convert to Grayscale"| C["Grayscale Image"]
+    C -->|"Calculate Histogram"| D["counts"]
+    C -->|"Get Bin Edges"| E["bins"]
+    X -->|"Define Multivariate Normal"| F["x"]
+    Y -->|"Define Multivariate Normal"| G["y"]
+    F -->|"Visualize 2D Histogram"| H["2D Histogram"]
+    G -->|"Visualize 2D Histogram"| H
+```

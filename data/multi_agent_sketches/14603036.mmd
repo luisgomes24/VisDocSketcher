@@ -1,0 +1,44 @@
+flowchart TD
+    %% Nodes
+    A[train.csv]
+    B[test.csv]
+    C[sample_submission.csv]
+    D[train_data]
+    E[test_data]
+    F[samp_subm]
+    G[X_train]
+    H[y_train]
+    I[X_val]
+    J[y_val]
+    K[X_test]
+    L[model (XGBRegressor)]
+    M[output]
+
+    %% Data Sources to Variables
+    A -->|pd.read_csv()| D
+    B -->|pd.read_csv()| E
+    C -->|pd.read_csv()| F
+
+    %% Variables flow
+    D -->|Feature extraction| G
+    D -->|Target extraction| H
+    G -->|train_test_split| I
+    H -->|train_test_split| J
+    E -->|Feature extraction| K
+
+    %% Model Training
+    G -->|Training input| L
+    H -->|Training target| L
+
+    %% Predictions and Output
+    I -->|Validation input| L
+    J -->|Validation target| L
+    K -->|Testing input| L
+    L -->|Predict and create| M
+    M -->|Save as submission.csv|
+
+    %% Comments for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,B,C dataSource;
+    class D,E,F,G,H,I,J,K,L,M dataVariable;

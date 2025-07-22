@@ -1,0 +1,40 @@
+flowchart TD
+
+%% Nodes for Data Variables
+n["n: NormalDistribution Instance"]
+r["r: RectangularDistribution Instance"]
+t["t: TriangularDistribution Instance"]
+st["st: SymmetricTriangularDistribution Instance"]
+e["e: ExponentialDistribution Instance"]
+
+%% Nodes for Distributions
+ND["Normal Distribution"]
+RD["Rectangular Distribution"]
+TD["Triangular Distribution"]
+STD["Symmetric Triangular Distribution"]
+ED["Exponential Distribution"]
+
+%% Data Flow
+n --> ND
+r --> RD
+t --> TD
+st --> STD
+e --> ED
+
+%% Descriptions
+classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+ND:::default
+RD:::default
+TD:::default
+STD:::default
+ED:::default
+
+%% Sample Generation
+ND --> |"Generate Samples"| r
+ND --> |"Generate Samples"| t
+
+%% Plotting
+r --> |"Plot"| RD
+t --> |"Plot"| TD
+st --> |"Plot"| STD
+e --> |"Statistical Summary & CDF"| ED

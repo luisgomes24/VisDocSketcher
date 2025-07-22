@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> winemag-data-130k-v2.csv"]:::dataSource --> B["<img src='icons/table.svg' width=100 height=100/> <br/> reviews<br/><img src='dummy_plots/barplot_template.svg'/>"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> gaming.csv"]:::dataSource --> D["<img src='icons/table.svg' width=100 height=100/> <br/> gaming_products<br/><img src='dummy_plots/scatter_plot_template.svg'/>"]
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> movies.csv"]:::dataSource --> F["<img src='icons/table.svg' width=100 height=100/> <br/> movie_products<br/><img src='dummy_plots/lineplot_template.svg'/>"]
+    G["<img src='icons/file.svg' width=100 height=100/> <br/> meets.csv"]:::dataSource --> H["<img src='icons/table.svg' width=100 height=100/> <br/> powerlifting_meets<br/><img src='dummy_plots/boxplot_template.svg'/>"]
+    I["<img src='icons/file.svg' width=100 height=100/> <br/> openpowerlifting.csv"]:::dataSource --> J["<img src='icons/table.svg' width=100 height=100/> <br/> powerlifting_competitors<br/><img src='dummy_plots/hist_template.svg'/>"]
+
+    %% Data Variables and Transformations
+    B --> K[renamed and reindexed reviews]
+    D --> L[combined_products]
+    F --> L
+    H --> M[powerlifting_combined]
+    J --> M
+
+    %% Custom Styling
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;

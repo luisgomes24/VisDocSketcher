@@ -1,0 +1,44 @@
+%% This diagram visualizes the data processing and machine learning workflow of the notebook.
+
+flowchart TD
+
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /US_Crime_Data.csv/"]:::data_source --> B
+
+    %% Data Import
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> /data\nRaw DataFrame/"]:::data_var
+    %% Explanation: Initial DataFrame containing raw CSV data.
+    
+    B --> |pd.read_csv| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> /df\n'Title' Column DataFrame/"]:::data_var
+    %% Explanation: Extracts 'Title' column and drops missing values.
+
+    %% Text Processing
+    C --> |clean_text| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> /tokens\nTokenized Titles/"]:::data_var
+    %% Explanation: Contains cleaned, lowercased, and tokenized headlines.
+
+    %% Sequence Preparation
+    D --> |tf.keras.preprocessing| E["/x\nInput Sequences/"]:::data_var
+    %% Explanation: Input sequence preparation for model training.
+
+    D --> |tf.keras.utils| F["/y\nOutput Labels/"]:::data_var
+    %% Explanation: One-hot encoded output labels for training.
+
+    %% Model Training
+    E --> |model.fit| G["<img src='icons/brain.svg' width=100 height=100/> <br/> LSTM Model"]:::model
+    F --> |model.fit| G
+    %% Explanation: LSTM neural network model with specified architecture.
+
+    %% Vocabulary Processing
+    D --> H["/vocab_size\nVocabulary Size/"]:::data_var
+    %% Explanation: Total number of unique words.
+
+    D --> I["/vocab_array\nVocabulary Array/"]:::data_var
+    %% Explanation: Array of unique words for predictions.
+
+    %% Model Saving
+    G --> |Save to| J["model.h5"]:::data_var
+    %% Explanation: The trained model is saved for future use.
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#87CEEB,stroke:#333,stroke-width:1px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:3px;

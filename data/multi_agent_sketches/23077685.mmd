@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    dataSource1(["../input/bmidataset/bmi.csv"]) -->|Read CSV| df
+    
+    %% Data Preparation
+    df -->|Drop 'Index'| X
+    df -->|Extract 'Index'| y
+    
+    %% Split Data
+    X -->|Train/Test Split| X_train
+    X -->|Train/Test Split| X_test
+    y -->|Train/Test Split| y_train
+    y -->|Train/Test Split| y_test
+    
+    %% Models
+    subgraph Models ["Classification Models"]
+        direction TB
+        X_train --> qdaModel["Quadratic Discriminant Analysis"]
+        X_train --> knnModel["KNeighborsClassifier (n_neighbors=5)"]
+        X_train --> svcModel["LinearSVC"]
+        X_train --> dtModel["DecisionTreeClassifier (max_depth=3, criterion='gini')"]
+        X_train --> rfModel["RandomForestClassifier (random_state=1, max_features='sqrt')"]
+        X_train --> xgbModel["XGBClassifier"]
+        X_train --> abModel["AdaBoostClassifier"]
+        X_train --> nbModel["GaussianNB"]
+        X_train --> qdaModel2["QuadraticDiscriminantAnalysis"]
+    end
+
+    %% Predictions
+    qdaModel & knnModel & svcModel & dtModel & rfModel & xgbModel & abModel & nbModel & qdaModel2 -->|Predict| y_pred
+    
+    %% Evaluation
+    y_pred -->|Confusion Matrix| matrix[["Confusion Matrix"]]

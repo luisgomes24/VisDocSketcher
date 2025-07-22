@@ -1,0 +1,9 @@
+flowchart TD
+    A[Beer Consumption Data CSV] -->|Load CSV| B[DataFrame: df] %% Contains original data with beer consumption per person across countries
+    B -->|Copy and Filter Columns| C[DataFrame: df_r_copy] %% Contains 'Entity', 'Year', 'Consumption' columns
+    C -->|Filter Lithuania| D[DataFrame: df_LT] %% Data for Lithuania
+    B -->|Filter Baltic Countries| E[DataFrame: df_baltics] %% Data for Baltic countries
+    E -->|Group by Year and Calculate Average| F[Grouped DF: df_baltics_g] %% Average consumption for Baltics by year
+    B -->|Filter Nordic Countries| G[DataFrame: df_nordic] %% Data for Nordic countries
+    G -->|Group by Year and Calculate Average| H[Grouped DF: df_nordic_g] %% Average consumption for Nordics by year
+    F & H -->|Concatenate| I[DataFrame: df_region] %% Combined Baltic and Nordic data for visualization

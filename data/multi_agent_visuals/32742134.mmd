@@ -1,0 +1,43 @@
+flowchart TD
+    subgraph LoadAndPrepData
+        A["<img src='path/to/image.svg' width=100 height=100/> <br/> /DATA_DIR/"] -->|used to create| B["<img src='path/to/file.svg' width=100 height=100/> <br/> DATA_PATH"]
+        B --> C["<img src='path/to/table.svg' width=100 height=100/> <br/> /docs/"]:::docsInfo
+        D["<img src='path/to/image.svg' width=100 height=100/> <br/> /QUERY_IMAGE/"]:::queryImageInfo --> E["/query_doc/"]:::queryDocInfo --> F["/query_docs/"]:::queryDocsInfo
+    end
+
+    subgraph Preprocessing
+        C --> G[[<img src='path/to/boxplot_template.svg'/> <br/> Preproc: Image Preprocessing]]
+        F --> G
+    end
+
+    subgraph ModelEmbedding
+        G --> H["<img src='path/to/brain.svg' width=100 height=100/> <br/> /ResNet50: Model/"]:::modelInfo
+    end
+
+    subgraph MatchingAndOutput
+        H --> I{Embed documents}
+        I -->|Query| J["query_docs.embed()"]
+        I -->|Docs| K["docs.embed()"]
+        J --> L{Match}
+        K --> L
+        L --> M["query_docs.match()"]
+    end
+
+    classDef docsInfo fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef queryImageInfo fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef queryDocInfo fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef queryDocsInfo fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef modelInfo fill:#87CEEB,stroke:#333,stroke-width:2px;
+
+    %% Explanation
+    %% A: Root directory for images
+    %% B: Path constructed using DATA_DIR
+    %% C: DocumentArray with images loaded
+    %% D: Query image file path
+    %% E: Document for the query image
+    %% F: DocumentArray containing the query document
+    %% G: Image preprocessing function
+    %% H: ResNet50 model for embedding
+    %% I: Creating embeddings for documents
+    %% L: Matching query document with the dataset
+    %% M: Matching result output

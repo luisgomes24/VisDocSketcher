@@ -1,0 +1,15 @@
+flowchart TD
+    %% Node representing the input number being rounded
+    num["num"] -->|"Passed as an argument"| roundToTwoPlaces["round_to_two_places"]
+    roundToTwoPlaces -->|"Returns rounded value"| roundedNum["Rounded Number"]
+
+    %% Node representing total candies to be distributed
+    total_candies["total_candies"] -->|"Passed as first parameter"| toSmash["to_smash"]
+    num_friends["num_friends"] -->|"Passed as second parameter, defaults to 3"| toSmash
+    toSmash -->|"Calculates leftover candies"| leftoverCandies["Leftover Candies"]
+
+    %% Node for smallest absolute value calculation
+    absX["Abs(x)"] -->|"Input to min"| minOperation["min"]
+    absY["Abs(y)"] -->|"Input to min"| minOperation
+    minOperation -->|"Calculated using min"| smallest_abs["smallest_abs"]
+    smallest_abs -->|"Final value printed"| printedSmallestAbs["Printed Smallest Abs"]

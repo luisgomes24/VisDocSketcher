@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f0f8ff', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#f0f8ff'}}}%%
+flowchart TD
+    %% Raw training data from CSV
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> raw_data"] -->|splits into| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_features"]
+    A -->|splits into| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> train_labels"]
+    A -->|splits into| D["<img src='icons/table.svg' width=100 height=100/> <br/> val_features"]
+    A -->|splits into| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> val_labels"]
+    %% Training dataset creation
+    B --> F["<img src='path/to/plot.svg'/> <br/> training_ds"]
+    F --> G["<img src='icons/database.svg' width=100 height=100/> <br/> train_dataset"]
+    C --> G
+    %% Validation dataset creation
+    D --> H["<img src='icons/database.svg' width=100 height=100/> <br/> val_dataset"]
+    E --> H
+    %% Test data processing
+    I["test_ds"] --> J["<img src='path/to/plot.svg'/> <br/> test_data"]
+    %% Model prediction
+    J --> K["<img src='icons/brain.svg' width=100 height=100/> <br/> predictions"]
+    %% Final predictions
+    K --> L["<img src='path/to/plot.svg'/> <br/> preds"]
+    L --> M["<img src='icons/file.svg' width=100 height=100/> <br/> pred_df for submission"]
+    %% Sequential Model Details
+    subgraph Model["<img src='icons/brain.svg' width=100 height=100/> <br/> Sequential Model"]
+    direction TB
+    RS["Rescaling layer"] --> CV1["Conv2D layer (16 filters)"] --> MP1["MaxPooling2D"] --> DO1["Dropout layer"] --> CV2["Conv2D layer (32 filters)"] --> MP2["MaxPooling2D"] --> DO2["Dropout layer"] --> CV3["Conv2D layer (64 filters)"] --> MP3["MaxPooling2D"] --> DO3["Dropout layer"] --> FL["Flatten layer"] --> D1["Dense layer (128 neurons)"] --> D2["Dense layer (10 neurons)"]
+    end
+    G -->|training| Model -->|predicts| K
+    H -->|validation| Model
+    

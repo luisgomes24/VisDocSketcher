@@ -1,0 +1,9 @@
+flowchart TD
+    A["💾 Load Data <img src='icons/database.svg' /> <br/> OpenAQ Dataset"] --> B["🔍 Data Exploration <img src='icons/table.svg' /> <br/> Peek at First Rows"]
+    B --> C["💡 SQL Query Creation <br/> Create Query for U.S. Cities"]
+    C --> D["🔗 Run Query <img src='icons/brain.svg' /> <br/> Get Data from BigQuery"]
+    D --> E["📊 DataFrame Creation <img src='icons/table.svg' /> <br/> us_cities DataFrame"]
+    E --> F["📈 Data Analysis <br/> What are Top 5 Cities?"]
+    F --> G["💭 User Exploration <br/> Scavenger Hunt Questions"]
+    G --> H["🗄️ Query for Non-PPM Units <img src='icons/column_split.svg' />"]
+    G --> I["🔎 Query for Zero Pollutants <img src='icons/column_split.svg' />"]

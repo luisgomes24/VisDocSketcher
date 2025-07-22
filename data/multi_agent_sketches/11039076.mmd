@@ -1,0 +1,19 @@
+flowchart TD
+    %% Node to represent the DataFrame (df)
+    df["DataFrame Loaded"]
+    
+    %% Node to represent calculation of unique values in columns
+    df_nunique["nunique Calculation"]
+    df --> df_nunique
+    
+    %% Node for filtering and plotting distribution
+    plotPerColumnDistribution["Plot Per Column Distribution"]
+    df_nunique --> plotPerColumnDistribution
+    
+    %% Node for correlation matrix plot preparation
+    df_corr["DataFrame Correlation Preparation"]
+    df --> df_corr
+    
+    %% Node for plotting correlation matrix
+    plotCorrelationMatrix["Plot Correlation Matrix"]
+    df_corr --> plotCorrelationMatrix

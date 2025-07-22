@@ -1,0 +1,57 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A1["train.csv"]
+        A2["test_image_data_0.parquet"]
+        A3["test_image_data_1.parquet"]
+        A4["test_image_data_2.parquet"]
+        A5["test_image_data_3.parquet"]
+        A6["model_0.pth"]
+    end
+
+    %% Variables and Initial Setup
+    B1["HEIGHT"]
+    B2["WIDTH"]
+    B3["SIZE"]
+    B4["bs"]
+    B5["stats"]
+    B6["arch"]
+    B7["model"]
+    B8["row_id"]
+    B9["target"]
+
+    %% Data Flow
+    subgraph DataFlow
+        direction TB
+        C1["Load train.csv"] -->|"Create df"| C2["Compute unique labels"]
+        C3["Load model_0.pth"] -->|"Load into model"| C4["Initialize Dnet_1ch model"]
+        C5["Create GraphemeDataset"] -->|"Create ds"| C6["Create DataLoader"]
+        C7["Perform Predictions"] -->|"Store in row_id, target"| C8["Create sub_df DataFrame"]
+        C8 -->|"Save to CSV"| C9["submission.csv"]
+    end
+
+    %% Models
+    D1["Dnet_1ch Model"]
+
+    %% Connections
+    A1 --> C1
+    A2 --> C5
+    A3 --> C5
+    A4 --> C5
+    A5 --> C5
+    A6 --> C3
+    C2 --> C4
+    C4 --> D1
+    C6 --> C7
+    D1 --> C7
+
+    %% Comments explaining each part
+    classDef dataSources fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variables fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataFlow fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef models fill:#fbf,stroke:#333,stroke-width:2px;
+
+    class A1,A2,A3,A4,A5,A6 dataSources;
+    class B1,B2,B3,B4,B5,B6,B7,B8,B9 variables;
+    class C1,C2,C3,C4,C5,C6,C7,C8,C9 dataFlow;
+    class D1 models;

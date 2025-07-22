@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|"Load data"| B[df_train]
+    C["test.csv"] -->|"Load data"| D[df_test]
+
+    %% Data Exploration and Processing
+    B -->|"Value counts of first_active_month"| E[df_month_counts_train]
+    D -->|"Value counts of first_active_month"| F[df_month_counts_test]
+    B -->|"Group by first_active_month & calculate mean of target"| G[df_month_means]
+
+    %% Data Cleaning
+    B -->|"Remove outliers using quantiles"| H[df_train_new]
+
+    %% Feature Analysis
+    B -->|"Group by features & calculate mean target"| I[df_feature_groups]
+
+    %% Comments for each node
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,C dataSource;
+    class B,D,E,F,G,H,I dataVar;
+    %% A & C: represent the data sources train.csv and test.csv, respectively.
+    %% B & D: represent the DataFrames loaded with training and testing data.
+    %% E & F: represent the DataFrames for first active month counts for train and test data.
+    %% G: represents the mean target per first active month for train data.
+    %% H: represents cleaned train data after outlier removal.
+    %% I: represents feature group analysis data with mean targets by features.

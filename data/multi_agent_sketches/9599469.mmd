@@ -1,0 +1,35 @@
+flowchart TD
+    %% Start with data sources
+    CSV1[/"Customer_DF (1).csv"/]:::data_source 
+    CSV2[/"cust_transaction_details (1).csv"/]:::data_source
+
+    %% Nodes representing data variables
+    DF1["df1: Customer Data"]:::data_var 
+    DF2["df2: Transaction Data"]:::data_var 
+
+    %% Reading data
+    CSV1 -->|Read with pd.read_csv| DF1
+    CSV2 -->|Read with pd.read_csv| DF2
+
+    %% Data usage in analysis
+    subgraph Analysis
+        direction TB
+        A1["Distribution plots: df1"]:::analysis
+        A2["Correlation matrix: df1"]:::analysis
+        A3["Scatter plots: df1"]:::analysis
+        B1["Distribution plots: df2"]:::analysis
+        B2["Correlation matrix: df2"]:::analysis
+        B3["Scatter plots: df2"]:::analysis
+    end
+
+    DF1 --> A1
+    DF1 --> A2
+    DF1 --> A3
+    DF2 --> B1
+    DF2 --> B2
+    DF2 --> B3
+
+    %% Class definitions for styling
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef analysis fill:#bfe,stroke:#333,stroke-width:2px;

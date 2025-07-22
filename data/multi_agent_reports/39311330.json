@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_name": "starbucks.csv",
+      "description": "Contains nutritional information of Starbucks menu items including calorie content."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "DataFrame containing the nutritional information from 'starbucks.csv'."
+    },
+    {
+      "variable_name": "X",
+      "description": "Features DataFrame excluding the target variable 'calories'."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing the calorie content of menu items."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set of features."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing set of features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set of target variable (calories)."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing set of target variable (calories)."
+    },
+    {
+      "variable_name": "model",
+      "description": "Pipeline that contains the preprocessing steps and the Random Forest model."
+    },
+    {
+      "variable_name": "y_pred",
+      "description": "Predicted calorie values from the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for exploratory data analysis and for splitting into train and test sets."
+    },
+    {
+      "variable": "X",
+      "creation_method": "data.drop('calories', axis=1)",
+      "flow": "Features used for model training."
+    },
+    {
+      "variable": "y",
+      "creation_method": "data['calories']",
+      "flow": "Target variable for model training."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Used to train the model."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flow": "Used to train the model."
+    },
+    {
+      "variable": "model",
+      "creation_method": "Pipeline",
+      "flow": "Trained on X_train and y_train, used to predict y_test."
+    },
+    {
+      "variable": "y_pred",
+      "creation_method": "model.predict",
+      "flow": "Predicted values compared against y_test for evaluation metrics."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "['fat', 'carb', 'fiber', 'protein'] and OneHotEncoded 'type'",
+      "target_variable": "calories",
+      "hyperparameters": "Default parameters of RandomForestRegressor used."
+    }
+  ]
+}

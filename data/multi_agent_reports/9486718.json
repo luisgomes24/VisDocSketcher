@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_name": "911.csv",
+      "description": "Contains 911 call information, including zip codes, township, call title, and time stamps."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the loaded 911 call data."
+    },
+    {
+      "variable_name": "reason",
+      "description": "New column in the DataFrame that classifies 911 calls by reason (e.g., EMS, Fire, Traffic)."
+    },
+    {
+      "variable_name": "hour",
+      "description": "Extracted hour from the timestamp of the call."
+    },
+    {
+      "variable_name": "month",
+      "description": "Extracted month from the timestamp of the call."
+    },
+    {
+      "variable_name": "day of week",
+      "description": "Extracted day of the week from the timestamp of the call, mapped to day names."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv('911.csv')",
+      "usage": "Used for analysis, plotting, and grouping operations."
+    },
+    {
+      "variable_name": "reason",
+      "creation_method": "df['title'].apply(lambda title: title.split(':')[0])",
+      "usage": "Used in count plots to show reasons for calls."
+    },
+    {
+      "variable_name": "hour",
+      "creation_method": "df['timeStamp'].apply(lambda x: x.hour)",
+      "usage": "Not explicitly visualized but can be used for time-based analysis."
+    },
+    {
+      "variable_name": "month",
+      "creation_method": "df['timeStamp'].apply(lambda x: x.month)",
+      "usage": "Used in plots to analyze call trends by month."
+    },
+    {
+      "variable_name": "day of week",
+      "creation_method": "df['timeStamp'].apply(lambda x: x.dayofweek)",
+      "usage": "Used in count plots and visualizations to analyze calls by day."
+    }
+  ],
+  "models": []
+}

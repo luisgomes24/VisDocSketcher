@@ -1,0 +1,62 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "variable_name": "L",
+      "description": "List passed to the function select_second"
+    },
+    {
+      "variable_name": "teams",
+      "description": "List of sports teams, where each team is a list of player names"
+    },
+    {
+      "variable_name": "racers",
+      "description": "List of racers in Mario Kart"
+    },
+    {
+      "variable_name": "lengths",
+      "description": "Predicted lengths of four lists"
+    },
+    {
+      "variable_name": "arrivals",
+      "description": "List of party attendees sorted by arrival order"
+    },
+    {
+      "variable_name": "name",
+      "description": "The name of the guest to check for being fashionably late"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "L",
+      "creation_method": "Input parameter to select_second function",
+      "flow": "Used to return the second element or None"
+    },
+    {
+      "variable_name": "teams",
+      "creation_method": "Input parameter to losing_team_captain function",
+      "flow": "Used to return the captain of the worst team"
+    },
+    {
+      "variable_name": "racers",
+      "creation_method": "Input parameter to purple_shell function",
+      "flow": "Modified in-place to swap first and last racers"
+    },
+    {
+      "variable_name": "lengths",
+      "creation_method": "Assigned manually in the code",
+      "flow": "Used to verify the predicted lengths of lists"
+    },
+    {
+      "variable_name": "arrivals",
+      "creation_method": "Input parameter to fashionably_late function",
+      "flow": "Evaluated to check if a guest is fashionably late"
+    },
+    {
+      "variable_name": "name",
+      "creation_method": "Input parameter to fashionably_late function",
+      "flow": "Used to check if this specific guest is fashionably late"
+    }
+  ],
+  "models": []
+}

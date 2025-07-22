@@ -1,0 +1,29 @@
+{ 
+  "data_sources": [ 
+    { 
+      "file_name": "n/a", 
+      "description": "This notebook does not contain any data files, it focuses on theoretical concepts and data leakage examples." 
+    } 
+  ], 
+  "data_variables": [ 
+    { 
+      "variable_name": "potential_leakage_feature", 
+      "description": "Indicates the feature most likely to cause data leakage in housing price predictions." 
+    } 
+  ], 
+  "data_flow": [ 
+    { 
+      "variable_name": "potential_leakage_feature", 
+      "creation_method": "direct assignment", 
+      "flow": "Used in checking answers for data leakage questions and determining which feature may lead to leakage." 
+    } 
+  ], 
+  "models": [ 
+    { 
+      "model_type": "n/a", 
+      "input_features": "Not applicable as this notebook discusses theoretical examples rather than fitting models.", 
+      "target_variables": "Not applicable.", 
+      "hyperparameters": "Not applicable." 
+    } 
+  ] 
+}

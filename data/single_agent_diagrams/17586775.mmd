@@ -1,0 +1,12 @@
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🔄 Preprocess Data"];
+    B --> C["💻 Load Images"];
+    C --> D["🖼️ Image Data Generation"];
+    D --> E["✂️ Split Data"];
+    E --> F["📉 Visualize Images <img src='dummy_plots/scatter_plot_template.svg' />"];
+    F --> G["🧠 Build Model"];
+    G --> H["🔧 Compile Model"];
+    H --> I["🔍 Train Model"];
+    I --> J["🧪 Evaluate Model <img src='dummy_plots/boxplot_template.svg' />"];
+    J --> K["🔄 Transfer Learning Setup"];
+    K --> L["🔍 Fine-tune Model"];

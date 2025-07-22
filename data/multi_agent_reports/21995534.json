@@ -1,0 +1,68 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/chaii-hindi-and-tamil-question-answering/test.csv",
+            "description": "This CSV file contains the test data for the question answering model."
+        },
+        {
+            "file_path": "../input/chaii-hindi-and-tamil-question-answering/sample_submission.csv",
+            "description": "This CSV file serves as a template for the submission format."
+        },
+        {
+            "file_path": "../input/chaii-baseline-download-116/pytorch_model_0.bin",
+            "description": "Pretrained model weights for the baseline."
+        },
+        {
+            "file_path": "../input/chaii-murla-download-71/pytorch_model_0.bin",
+            "description": "Pretrained model weights for the Muril model."
+        },
+        {
+            "file_path": "../input/chaii-rembert-download-77-final/pytorch_model_0.bin",
+            "description": "Pretrained model weights for the RemBERT model."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "test",
+            "description": "DataFrame containing the test dataset."
+        },
+        {
+            "name": "test_dataset",
+            "description": "HuggingFace Dataset object based on the test DataFrame."
+        },
+        {
+            "name": "sub",
+            "description": "DataFrame to hold final submission predictions."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "test",
+            "creation": "pd.read_csv()",
+            "flows": "Converted to HuggingFace Dataset format (test_dataset)."
+        },
+        {
+            "variable": "sub",
+            "creation": "pd.read_csv()",
+            "flows": "Filled with predictions from model evaluations and saved as CSV."
+        }
+    ],
+    "models": [
+        {
+            "model_type": "AutoModelForQuestionAnswering",
+            "tokenizer": "AutoTokenizer",
+            "model_checkpoints": [
+                "../input/xlm-roberta-squad2/deepset/xlm-roberta-large-squad2",
+                "../input/muril-large-pt/muril-large-cased",
+                "../input/rembert-pt"
+            ],
+            "input_features": "context, question",
+            "target_variable": "predictions",
+            "hyperparameters": {
+                "batch_size": 32,
+                "max_length": 384,
+                "doc_stride": 128
+            }
+        }
+    ]
+}

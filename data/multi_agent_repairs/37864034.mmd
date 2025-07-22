@@ -1,0 +1,37 @@
+```mermaid
+flowchart TD
+    %% Load Heart Dataset
+    A["Heart Dataset"]:::dataSource --> B["df"]:::dataVariable
+    
+    %% Data Preparation
+    B --> C["x, y"]:::dataVariable
+    C --> D["Train/Test Split"]:::process
+    
+    %% Train/Test Split
+    D --> E["x_train, y_train"]:::dataVariable
+    D --> F["x_test, y_test"]:::dataVariable
+    
+    %% Model Training
+    E --> G["Logistic Regression"]:::model
+    E --> H["Decision Tree"]:::model
+    E --> I["Random Forest"]:::model
+
+    %% Predictions
+    F --> J["y_pred_lr"]:::dataVariable
+    F --> K["y_pred_dt"]:::dataVariable
+    F --> L["y_pred_rf"]:::dataVariable
+    G --> J
+    H --> K
+    I --> L
+
+    %% Model Evaluation
+    J --> M["Evaluate LR"]:::evaluation
+    K --> N["Evaluate DT"]:::evaluation
+    L --> O["Evaluate RF"]:::evaluation
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef process fill:#f96,stroke:#333,stroke-width:1px;
+    classDef model fill:#9f9,stroke:#333,stroke-width:2px;
+    classDef evaluation fill:#ff9,stroke:#333,stroke-width:1px;
+```

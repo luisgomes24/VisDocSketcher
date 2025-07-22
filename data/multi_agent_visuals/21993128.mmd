@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    DS_CSV["Preprocessed Data CSV"]
+    DS_IMG_DIR["Image Directory"]
+
+    %% Data Variables
+    df["df: DataFrame from CSV"]
+    images_data["images_data: Image Data Path"]
+    training["training: Training Dataset"]
+    validation["validation: Validation Dataset"]
+    valdf["valdf: Validation Results DataFrame"]
+    val_image_data["val_image_data: Normalized Validation Images"]
+
+    %% Models
+    inceptionv3["InceptionV3 Model"]
+
+    %% Data Flows
+    DS_CSV -->|Read CSV| df
+    DS_IMG_DIR -->|Image Path| images_data
+    df -->|Data Preprocessing| training
+    df -->|Data Preprocessing| validation
+    training -->|Training Data| inceptionv3
+    validation -->|Validation Data| inceptionv3
+    inceptionv3 -->|Evaluation| valdf
+    validation -->|Normalize for Inference| val_image_data
+    valdf -->|Display Predictions| val_image_data

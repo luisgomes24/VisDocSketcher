@@ -1,0 +1,20 @@
+flowchart TD
+    A["📁 Load Data<br/><img src='file.svg' />"] --> B["📊 Preprocess Data"]
+    B --> C["🔍 Explore Data<br/><img src='table.svg' />"]
+    C --> D["📈 Correlation Analysis<br/><img src='scatter_plot_template.svg' />"]
+    D --> E["📉 Visualization of Results"]
+    E --> F["📥 Save Results<br/><img src='file.svg' />"]
+    
+    A1["📄 Load CD36 Importances<br/><img src='file.svg' />"] --> B1["📊 Preprocess CD36 Data"]
+    B1 --> A
+    A1 --> A
+
+    D1["🔄 Similarity Analysis"] --> D2["📊 Barplot CD36 Correlation<br/><img src='barplot_template.svg' />"]
+    D2 --> E
+
+    D3["🔄 PPI Analysis"] --> D4["📊 Barplot PPI Correlation<br/><img src='barplot_template.svg' />"]
+    D4 --> E
+
+    E1["📚 Correlation Coefficient Metrics"] --> E
+    E2["📊 Histogram of Correlation Coefficients<br/><img src='hist_template.svg' />"] --> E
+    E2 --> E

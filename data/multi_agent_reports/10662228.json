@@ -1,0 +1,75 @@
+{
+  "data_sources": [
+    {
+      "file_name": "kiva_loans.shp",
+      "description": "Contains Kiva loan data, including geographical locations and loan details."
+    },
+    {
+      "file_name": "naturalearth_lowres",
+      "description": "GeoDataFrame containing country boundaries for visualization."
+    },
+    {
+      "file_name": "Philippines_AL258.kml",
+      "description": "KML file containing island boundaries in the Philippines for detailed analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "loans_filepath",
+      "description": "File path for loading Kiva loans shapefile."
+    },
+    {
+      "variable_name": "world_loans",
+      "description": "GeoDataFrame containing Kiva loans data loaded from the shapefile."
+    },
+    {
+      "variable_name": "world_filepath",
+      "description": "File path for loading country boundary shapefile from GeoPandas."
+    },
+    {
+      "variable_name": "world",
+      "description": "GeoDataFrame containing country boundaries loaded from GeoPandas."
+    },
+    {
+      "variable_name": "PHL_loans",
+      "description": "GeoDataFrame containing loans specifically based in the Philippines."
+    },
+    {
+      "variable_name": "PHL",
+      "description": "GeoDataFrame containing boundaries for all islands in the Philippines."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "loans_filepath",
+      "creation_method": "string assignment",
+      "use_case": "Used to load the shapefile into a GeoDataFrame (world_loans)."
+    },
+    {
+      "variable_name": "world_loans",
+      "creation_method": "gpd.read_file(loans_filepath)",
+      "use_case": "Used for plotting and analyzing loan data globally."
+    },
+    {
+      "variable_name": "world_filepath",
+      "creation_method": "gpd.datasets.get_path('naturalearth_lowres')",
+      "use_case": "Used to load the country boundaries into the GeoDataFrame (world)."
+    },
+    {
+      "variable_name": "world",
+      "creation_method": "gpd.read_file(world_filepath)",
+      "use_case": "Used to plot the global map with Kiva loans."
+    },
+    {
+      "variable_name": "PHL_loans",
+      "creation_method": "world_loans.loc[world_loans.country=="Philippines"].copy()",
+      "use_case": "Used for visualizing loan locations specifically in the Philippines."
+    },
+    {
+      "variable_name": "PHL",
+      "creation_method": "gpd.read_file("../input/geospatial-learn-course-data/Philippines_AL258.kml", driver='KML')",
+      "use_case": "Used to visualize the boundaries of islands in the Philippines along with PHL_loans."
+    }
+  ],
+  "models": []
+}

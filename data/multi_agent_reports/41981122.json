@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "geonames-postal-code.csv",
+      "description": "Global postal codes data containing postal codes, locations, and related information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing global postal codes fetched from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "flow_use": "Used for data analysis and visualizations."
+    }
+  ],
+  "models": []
+}

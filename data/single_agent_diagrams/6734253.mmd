@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Preprocess Data"]
+    B --> C["🛠️ Feature Engineering"]
+    C --> D["🔍 TF-IDF Transform"]
+    D --> E["📊 Model Training"]
+    E --> F["🧪 Evaluate Model"]
+    F --> G["📈 Visualize Predictions"]
+    
+    A -->|CSV Files| B
+    B -->|Character & Word Counts| C
+    C -->|Scale Features| D
+    D -->|Fit & Transform| E
+    E -->|K-Fold CV| F
+    F -->|Spearman Correlation| G

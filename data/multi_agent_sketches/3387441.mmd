@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["/core_dataset.csv\"] --> B
+    A:::dataSource
+    B[DF: df]
+    B:::dataFrame
+
+    C["/HRDataset_v9.csv\"] --> D
+    C:::dataSource
+    D[DF: df2]
+    D:::dataFrame
+    
+    %% Data Transformations and Uses
+    B --> |"describe() for stats"| E[Statistical Description]
+    B --> |"plotting categorical data"| F[Plots of Categorical Data]
+    B --> |"data cleaning and filtering"| G[Filtered Dataset]
+
+    G --> |"analysis"| H[Analysis: Performance, Diversity, Pay Rates]
+    
+    D --> |"visualize with plots"| I[Days Employed vs Pay Rate]
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef transformation fill:#fff,stroke:#00f,stroke-width:2px;

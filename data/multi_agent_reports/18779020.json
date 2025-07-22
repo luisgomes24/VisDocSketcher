@@ -1,0 +1,103 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/datapisang/pisang/pisang matang",
+      "description": "Contains images of ripe bananas."
+    },
+    {
+      "file_path": "../input/datapisang/pisang/pisang mentah",
+      "description": "Contains images of unripe bananas."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "X",
+      "description": "List to store image arrays."
+    },
+    {
+      "name": "Z",
+      "description": "List to store image labels."
+    },
+    {
+      "name": "Y",
+      "description": "One-hot encoded labels for the images."
+    },
+    {
+      "name": "x_train",
+      "description": "Training dataset images after splitting."
+    },
+    {
+      "name": "x_test",
+      "description": "Test dataset images after splitting."
+    },
+    {
+      "name": "y_train",
+      "description": "Training dataset labels after splitting."
+    },
+    {
+      "name": "y_test",
+      "description": "Test dataset labels after splitting."
+    },
+    {
+      "name": "model",
+      "description": "CNN model used for predicting banana ripeness."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation_method": "Images read and resized in make_train_data function.",
+      "usage": "Used as input data to model training."
+    },
+    {
+      "variable": "Z",
+      "creation_method": "Labels assigned based on image names in make_train_data function.",
+      "usage": "Used to create one-hot encoded labels Y."
+    },
+    {
+      "variable": "Y",
+      "creation_method": "Created using LabelEncoder and to_categorical functions.",
+      "usage": "Target variable for model training."
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "Split from X using train_test_split.",
+      "usage": "Used for training the model."
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "Split from X using train_test_split.",
+      "usage": "Used for testing the model."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "Split from Y using train_test_split.",
+      "usage": "Used for training the model."
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "Split from Y using train_test_split.",
+      "usage": "Used for testing the model."
+    },
+    {
+      "variable": "model",
+      "creation_method": "Created using Keras Sequential API.",
+      "usage": "Trained using the fit_generator method and saved after training."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "CNN",
+      "input_features": "Images (X), one-hot encoded labels (Y)",
+      "target_variable": "Y",
+      "hyperparameters": {
+        "filters": [32, 64, 96],
+        "kernel_size": [17, 3],
+        "pool_size": [2, 2],
+        "activation": "relu",
+        "dense_units": 512,
+        "output_units": 20
+      }
+    }
+  ]
+}

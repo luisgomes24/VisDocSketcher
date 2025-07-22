@@ -1,0 +1,25 @@
+flowchart TD
+    %% Load and preprocess training data
+    A1["/kaggle/input/dogs-cats-images/dataset/training_set/"] -->|"Load & Resize Images"| B1["Training Data (X, Y)"]
+    %% Comment: Training Data contains images and labels
+    B1 -->|"Train Model"| D1["Keras Sequential Model"]
+    
+    %% Load and preprocess test data
+    A2["/kaggle/input/dogs-cats-images/dataset/test_set/"] -->|"Load & Resize Images"| B2["Test Data (X_t, Y_t)"]
+    %% Comment: Test Data contains images and labels
+    B2 -->|"Validate Model"| D1
+    
+    %% Model architecture
+    D1 -->|"Layer: Conv2D (64 filters)"| D2["Conv Layer 1"]
+    D2 -->|"Layer: MaxPooling"| D3["MaxPool Layer 1"]
+    D3 -->|"Layer: Flatten"| D4["Flatten Layer"]
+    D4 -->|"Layer: Dense (256 units)"| D5["Dense Layer 1"]
+    D5 -->|"Layer: Dense (2 units, softmax)"| D6["Output Layer"]
+    
+    %% Model training
+    D1 -->|"Compile with Adam Optimizer"| D7["Compile Model"]
+    D7 -->|"Fit model (30 epochs)"| D8["Trained Model"]
+    D8 -->|"Save Model"| D9["saved_model.h5"]
+    
+    %% Callbacks
+    C1["Callback (Stop if accuracy > 95%)"] --> D1

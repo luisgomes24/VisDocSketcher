@@ -1,0 +1,84 @@
+{
+"data_sources": [
+  {
+    "file_path": "../input/premier-league-matches-20142020/matchesall2014-2020.csv",
+    "description": "Contains Premier League match data from 2014 to 2020, including scores and teams."
+  }
+],
+"data_variables": [
+  {
+    "variable_name": "data0",
+    "description": "Initial DataFrame loaded from a CSV containing match statistics."
+  },
+  {
+    "variable_name": "data1",
+    "description": "Modified DataFrame after label encoding and preprocessing steps."
+  },
+  {
+    "variable_name": "trainX",
+    "description": "Features DataFrame for training the model."
+  },
+  {
+    "variable_name": "trainY0",
+    "description": "Target variable for model training, indicating score differences."
+  },
+  {
+    "variable_name": "testX",
+    "description": "Features DataFrame for testing the model."
+  },
+  {
+    "variable_name": "testY0",
+    "description": "Target variable for model testing."
+  }
+],
+"data_flow": [
+  {
+    "variable_name": "data0",
+    "creation_method": "pd.read_csv",
+    "flow": "Data preprocessing and feature creation; transformed into data1."
+  },
+  {
+    "variable_name": "data1",
+    "creation_method": "Preprocessing steps including label encoding and score difference calculation.",
+    "flow": "Data is split into training and testing sets (trainX, trainY0, testX, testY0)."
+  },
+  {
+    "variable_name": "trainX",
+    "creation_method": "data1.drop()",
+    "flow": "Used in model training."
+  },
+  {
+    "variable_name": "trainY0",
+    "creation_method": "data1['SCORE-DIFF']",
+    "flow": "Used as target in model training."
+  },
+  {
+    "variable_name": "testX",
+    "creation_method": "dataX.iloc[]",
+    "flow": "Used for model evaluation."
+  },
+  {
+    "variable_name": "testY0",
+    "creation_method": "dataY0[M[(m//4)*3:]]",
+    "flow": "Used for model evaluation."
+  }
+],
+"models": [
+  {
+    "model_name": "LGBMClassifier",
+    "input_features": "Features from trainX.",
+    "target_variable": "trainY0",
+    "hyperparameters": {
+      "num_leaves": "Optimized via Optuna.",
+      "objective": "Optimization objective.",
+      "max_depth": "Determined during hyperparameter tuning.",
+      "learning_rate": "Optimized.",
+      "lambda_l1": "Regularization parameter.",
+      "lambda_l2": "Regularization parameter.",
+      "bagging_freq": "Set during optimization.",
+      "bagging_fraction": "Set during optimization.",
+      "feature_fraction": "Set during optimization."
+    }
+  }
+]
+}

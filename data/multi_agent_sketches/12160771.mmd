@@ -1,0 +1,19 @@
+flowchart TD
+    %% Start of the workflow
+    A(App_reviews.csv):::dataSource -->|Read CSV| B[df1]
+    
+    %% Description for df1
+    B:::dataVariable -->|Used in plotting and analysis| C[plotPerColumnDistribution]
+    B --> D(plotCorrelationMatrix)
+    B --> E(plotScatterMatrix)
+    
+    %% Style Declarations
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    
+    %% Additional Comments
+    %% A: Represents the initial data source (CSV containing app reviews)
+    %% B: DataFrame created by reading the first 1000 rows from the CSV file
+    %% C: Function utilizing df1 to plot distributions for each column
+    %% D: Function utilizing df1 to plot the correlation matrix of the DataFrame
+    %% E: Function utilizing df1 to create a scatter matrix from the DataFrame

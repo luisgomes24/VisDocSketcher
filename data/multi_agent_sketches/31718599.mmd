@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph DataSources
+        DS1(("Alzheimer's images dataset"))
+        %% Data source for image data categorized by CONTROL, AD, PD
+    end
+    subgraph DataPreparation
+        DP1["Read and resize images to 150x150"]
+        DP2["Append labels during image loading"]
+        DP3["Convert labels from strings to integer indices"]
+        DP4["Split data into train and test sets"]
+    end
+    subgraph ModelTraining
+        MT1["EfficientNetB0 Model"]
+        MT2["Compile Model with Adam Optimizer and Categorical Crossentropy Loss"]
+        MT3["Train Model with Callbacks"]
+    end
+    subgraph ModelEvaluation
+        ME1["Evaluate model performance on test data"]
+    end
+
+    DS1 -->|"Load images"| DP1
+    DP1 -->|"X_train: Resized images"| MT1
+    DS1 -->|"Load labels"| DP2
+    DP2 -->|"Y_train: Categorical Labels"| DP3
+    DP3 -->|"Integer Indices"| MT1
+    MT1 --> MT2
+    MT2 -->|"Training with: epochs=20, batch=32, metrics=acc"| MT3
+    MT3 -->|"Trained Model"| ME1
+    DP4 -->|"Y_test: Test Labels"| ME1

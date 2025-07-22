@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/Data_Entry_2017.csv",
+      "description": "Contains X-ray image metadata including patient age and findings."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "all_xray_df",
+      "description": "Dataframe holding the X-ray image data along with their corresponding file paths and labels."
+    },
+    {
+      "name": "train_df",
+      "description": "Subset of all_xray_df used for training the model."
+    },
+    {
+      "name": "valid_df",
+      "description": "Subset of all_xray_df used for validation of the model."
+    },
+    {
+      "name": "train_gen",
+      "description": "Image data generator for the training dataset that includes real-time data augmentation."
+    },
+    {
+      "name": "valid_gen",
+      "description": "Image data generator for the validation dataset."
+    },
+    {
+      "name": "multi_disease_model",
+      "description": "The Keras model built using MobileNet architecture for multi-label classification."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "all_xray_df",
+      "creation_method": "pd.read_csv",
+      "description": "Data is read from the CSV file.",
+      "uses": ["train_df", "valid_df", "train_gen", "valid_gen"]
+    },
+    {
+      "variable": "train_df",
+      "creation_method": "train_test_split",
+      "description": "Split from all_xray_df for training. Contains labeled data used to train the model.",
+      "uses": ["train_gen"]
+    },
+    {
+      "variable": "valid_df",
+      "creation_method": "train_test_split",
+      "description": "Split from all_xray_df for validation. Used to evaluate model performance during training.",
+      "uses": ["valid_gen"]
+    },
+    {
+      "variable": "train_gen",
+      "creation_method": "flow_from_dataframe",
+      "description": "Generator for training data, handles image loading and augmentation.",
+      "uses": ["multi_disease_model.fit_generator"]
+    },
+    {
+      "variable": "valid_gen",
+      "creation_method": "flow_from_dataframe",
+      "description": "Generator for validation data.",
+      "uses": ["multi_disease_model.fit_generator"]
+    },
+    {
+      "variable": "multi_disease_model",
+      "creation_method": "Sequential model using MobileNet",
+      "description": "The main model that predicts disease from X-ray images.",
+      "uses": ["multi_disease_model.fit_generator"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "multi_disease_model",
+      "architecture": "Sequential with MobileNet base",
+      "input_features": "Images represented numerically (X-ray images)",
+      "target_variable": "Disease presence (0/1) for multiple diseases",
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss_function": "binary_crossentropy",
+        "metrics": ["binary_accuracy", "mae"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["📝 Select Attributes <img src='column_split.svg' />"]
+    B --> C["🔧 Fill Missing Values"]
+    C --> D["📊 Regression Analysis for LotFrontage"]
+    D --> E["🔍 Model Coefficients and MSE"]
+    D --> F["📊 Scatter Plot for LotFrontage <img src='scatter_plot_template.svg' />"]
+    
+    D --> G["📊 Regression Analysis for MasVnrArea"]
+    G --> H["🔍 Model Coefficients and MSE"]
+    G --> I["📊 Scatter Plot for MasVnrArea <img src='scatter_plot_template.svg' />"]
+    
+    G --> J["📊 Regression Analysis for GarageYrBlt"]
+    J --> K["🔍 Model Coefficients and MSE"]
+    J --> L["📊 Scatter Plot for GarageYrBlt <img src='scatter_plot_template.svg' />"]
+    
+    L --> M["📊 Bar Chart of MSE <img src='barplot_template.svg' />"]
+    M --> N["📝 Conclusion"]

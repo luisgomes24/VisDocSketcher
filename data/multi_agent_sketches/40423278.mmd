@@ -1,0 +1,29 @@
+%% This diagram is generated based on the extracted data flow and variables from the notebook.
+flowchart TD
+    %% L Node
+    L["L List"]
+    %% teams Node
+    teams["Teams List of Lists"]
+    %% racers Node
+    racers["Racers List"]
+    %% lengths Node
+    lengths["Lengths List"]
+    %% arrivals Node
+    arrivals["Arrivals List"]
+    %% name Node
+    name["Name Parameter"]
+
+    %% Data Flow
+    L -->|Used in select_second to return a value| select_second 
+    teams -->|Used in losing_team_captain to find the captain| losing_team_captain 
+    racers -->|Used in purple_shell for swapping| purple_shell 
+    lengths -->|Populated for validation| validation_process 
+    arrivals -->|Used in fashionably_late to check status| fashionably_late 
+    name -->|Checked in fashionably_late| fashionably_late
+
+    %% Functions
+    select_second["select_second Function"]
+    losing_team_captain["losing_team_captain Function"]
+    purple_shell["purple_shell Function"]
+    validation_process["Length Validation Process"]
+    fashionably_late["fashionably_late Function"]

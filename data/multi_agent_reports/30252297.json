@@ -1,0 +1,33 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cite_seq_inputs.h5ad",
+      "description": "Preprocessed 'denoised' single-cell RNA sequence data for Multimodal Single-Cell Integration Competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "adata",
+      "description": "The main AnnData object containing single-cell transcriptomic data."
+    },
+    {
+      "variable_name": "mask",
+      "description": "A boolean mask used to filter data based on cell types, days, and other categorizations."
+    },
+    {
+      "variable_name": "G1S_genes_Tirosh",
+      "description": "List of genes associated with the G1/S phase of the cell cycle."
+    },
+    {
+      "variable_name": "G2M_genes_Tirosh",
+      "description": "List of genes associated with the G2/M phase of the cell cycle."
+    },
+    {
+      "variable_name": "list_genes_fastCCsign",
+      "description": "List of fast cell cycle signature genes."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "adata",
+      "created_by": "sc.read()",

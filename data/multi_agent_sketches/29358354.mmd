@@ -1,0 +1,23 @@
+%% This Mermaid diagram represents the data processing workflow described in the provided Jupyter Notebook.
+flowchart TD;
+    %% Input Data Sources
+    A["emissions_EU27.csv"]:::data_source ---|"Read CSV into DataFrame"| B[data1]:::data;
+    A2["emissions_EU28.csv"]:::data_source ---|"Read CSV into DataFrame"| C[data2]:::data;
+
+    %% Data Processing Steps
+    C -->|"Filter where unit=='T' and origin=='WORLD'"| D[data_world_t_unit]:::data; %% Filter data
+    
+    D -->|"Group by 'airpol' & sum"| E[airpol_groupby]:::data;
+    D -->|"Group by 'origin' & sum"| F[origin_groupby]:::data;
+    D -->|"Group by 'induse' & sum"| G[induse_groupby]:::data;
+    D -->|"Group by 'cpa08' & sum"| H[cpa_groupby]:::data;
+
+    %% Data Visualization
+    E -->|"Bar plot for emissions by Air Pollutant"| I[Airpollutant Visualization]:::visualization;
+    F -->|"Bar plot for emissions by Origin"| J[Origin Visualization]:::visualization;
+    G -->|"Bar plot for emissions by Industry Use"| K[Industry Use Visualization]:::visualization;
+    H -->|"Bar plot for emissions by CPA"| L[CPA Visualization]:::visualization;
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#888,stroke-width:2px;
+    classDef visualization fill:#cfc,stroke:#333,stroke-width:2px;

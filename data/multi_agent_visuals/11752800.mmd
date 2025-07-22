@@ -1,0 +1,13 @@
+graph TD;
+A["<img src='icons/file.svg' width=100 height=100/> <br/> Data"]
+D["<img src='icons/table.svg' width=100 height=100/> <br/> Pandas DataFrame"]
+F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]
+Xmeans["<img src='dummy_plots/hist_template.svg'/> <br/> Means"]
+Xstds["<img src='dummy_plots/hist_template.svg'/> <br/> Standard Deviations"]
+
+A --> D;
+D --> F;
+F --> G;
+G --> Xmeans;
+G --> Xstds;

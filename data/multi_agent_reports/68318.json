@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/2016-FCC-New-Coders-Survey-Data.csv",
+      "description": "Data from the 2016 FCC New Coders Survey"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "new_c",
+      "description": "DataFrame containing the survey data"
+    },
+    {
+      "name": "SchoolMajor_counts",
+      "description": "Count of entries for each school major"
+    },
+    {
+      "name": "SchoolDegree_count",
+      "description": "Count of entries for each school degree"
+    },
+    {
+      "name": "BootcampPostSalary_count",
+      "description": "Count of various post-bootcamp salaries"
+    },
+    {
+      "name": "aplot",
+      "description": "Histogram plot of age distribution"
+    },
+    {
+      "name": "degree",
+      "description": "Array of school degree values"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "new_c",
+      "created_by": "pd.read_csv",
+      "flows_to": ["SchoolMajor_counts", "SchoolDegree_count", "BootcampPostSalary_count", "aplot", "degree"]
+    },
+    {
+      "variable": "SchoolMajor_counts",
+      "created_by": "new_c['SchoolMajor'].value_counts()",
+      "flows_to": ["SchoolMajorPlot"]
+    },
+    {
+      "variable": "SchoolDegree_count",
+      "created_by": "new_c['SchoolDegree'].value_counts()",
+      "flows_to": ["SchoolDegreePlot"]
+    },
+    {
+      "variable": "BootcampPostSalary_count",
+      "created_by": "new_c['BootcampPostSalary'].value_counts()",
+      "flows_to": ["SalaryPlot"]
+    }
+  ],
+  "models": []
+}

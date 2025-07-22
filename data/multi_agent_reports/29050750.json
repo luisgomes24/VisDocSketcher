@@ -1,0 +1,135 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training data containing features and sale prices of houses"
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test data containing features of houses without sale prices"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_df",
+      "description": "DataFrame containing training data after processing"
+    },
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame containing test data after processing"
+    },
+    {
+      "variable_name": "input",
+      "description": "Features DataFrame used for training the model"
+    },
+    {
+      "variable_name": "target",
+      "description": "Sales price of the house, used as the target variable"
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training features after splitting the data"
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Testing features after splitting the data"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable after splitting the data"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing target variable after splitting the data"
+    },
+    {
+      "variable_name": "plott",
+      "description": "DataFrame storing models' names, absolute errors, and accuracy scores"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["input", "y_train"]
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["x_test"]
+    },
+    {
+      "variable": "input",
+      "created_by": "train_df.drop(['SalePrice'], axis=1)",
+      "flows_to": ["x_train"]
+    },
+    {
+      "variable": "target",
+      "created_by": "train_df.SalePrice",
+      "flows_to": ["y_train"]
+    },
+    {
+      "variable": "x_train",
+      "created_by": "train_test_split(input, target, test_size=0.2)",
+      "flows_to": ["xg", "rmf", "gb_m"]
+    },
+    {
+      "variable": "x_test",
+      "created_by": "train_test_split(input, target, test_size=0.2)",
+      "flows_to": []
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split(input, target, test_size=0.2)",
+      "flows_to": ["xg", "rmf", "gb_m"]
+    },
+    {
+      "variable": "y_test",
+      "created_by": "train_test_split(input, target, test_size=0.2)",
+      "flows_to": []
+    },
+    {
+      "variable": "plott",
+      "created_by": "pd.DataFrame() to collect results",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBRegressor",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "subsample": 0.1,
+        "n_estimators": 700,
+        "min_child_weight": 2,
+        "max_depth": 4,
+        "learning_rate": 0.2,
+        "col_sample_bytree": 1,
+        "booster": "gblinear",
+        "alpha": 22
+      }
+    },
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 500,
+        "min_samples_split": 3,
+        "max_depth": 5
+      }
+    },
+    {
+      "model_name": "GradientBoostingRegressor",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "learning_rate": 0.5,
+        "n_estimators": 900,
+        "max_depth": 11,
+        "min_samples_split": 8
+      }
+    }
+  ]
+}

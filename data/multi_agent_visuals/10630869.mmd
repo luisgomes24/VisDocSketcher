@@ -1,0 +1,19 @@
+graph TD;
+    A(Reading directory of names);
+    A --> B[Read files of names];
+    B --> C(Category Lines);
+    C -->|"Used for model training"| D(RNN Model);
+    D --> E(Outputs);
+    C -->|"Tracking loss during training"| F(All Losses);
+    F --> G(Performance Plot);
+    D -->|"Used for classification"| G(Confusion Matrix);
+    A -->|"Extracting names"| H[Names List];
+    E --> I[Predicted Categories];
+    I -->|"Index based on categories"| J(All Categories);
+    C -->|"Counted for n_categories"| K[Number of Unique Categories];
+    J -->|"RNN model prediction"| K;
+
+    A -->|"Input data"| B;
+    subgraph data_flow
+    D --> E[Model Outputs];
+    end;

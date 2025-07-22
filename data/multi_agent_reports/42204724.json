@@ -1,0 +1,107 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/cifar-10/train.7z",
+      "description": "Training dataset containing images for classification"
+    },
+    {
+      "file": "/kaggle/input/cifar-10/test.7z",
+      "description": "Testing dataset containing images for classification"
+    },
+    {
+      "file": "/kaggle/input/cifar-10/trainLabels.csv",
+      "description": "CSV file containing labels corresponding to training images"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_data",
+      "description": "Array containing training images resized to 48x48 pixels"
+    },
+    {
+      "variable_name": "test_data",
+      "description": "Array containing testing images resized to 48x48 pixels"
+    },
+    {
+      "variable_name": "label",
+      "description": "Array containing class indices for training images"
+    },
+    {
+      "variable_name": "label_img",
+      "description": "One-hot encoded labels for training images"
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training data images for model input"
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Testing data images for model input"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "One-hot encoded labels for training data"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "One-hot encoded labels for testing data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "Array created by reading and resizing images from training directory",
+      "usage": "Used as input for model training"
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "Array created by reading and resizing images from testing directory",
+      "usage": "Used as input to evaluate model performance"
+    },
+    {
+      "variable": "label",
+      "creation_method": "List created from labels read from CSV",
+      "usage": "Converted to one-hot encoding for training labels"
+    },
+    {
+      "variable": "label_img",
+      "creation_method": "One-hot encoding of label",
+      "usage": "Used as output for model training"
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "Shuffle and split from train_data",
+      "usage": "Used as input for model training"
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "Shuffle and split from train_data",
+      "usage": "Used as input for model evaluation"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "Shuffle and split from label_img",
+      "usage": "Used as output for model training"
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "Shuffle and split from label_img",
+      "usage": "Used as output for model evaluation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential CNN",
+      "layers": {
+        "Convolutional_Layers": "6",
+        "Pooling_Layers": "5",
+        "Dense_Layers": "3"
+      },
+      "input_shape": "(48, 48, 3)",
+      "activation_functions": ["relu", "softmax"],
+      "optimizer": "nadam",
+      "loss_function": "CategoricalCrossentropy",
+      "metrics": ["accuracy"]
+    }
+  ]
+}

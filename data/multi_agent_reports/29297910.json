@@ -1,0 +1,90 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and the target variable 'failure'."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing features to predict the target variable 'failure'."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame for training data." 
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame for test data."
+    },
+    {
+      "variable_name": "df_all",
+      "description": "Combined DataFrame of df_train and df_test."
+    },
+    {
+      "variable_name": "encoders",
+      "description": "Dictionary holding LabelEncoders for categorical features."
+    },
+    {
+      "variable_name": "classifier_config_dict",
+      "description": "Configuration dictionary defining models and hyperparameters for TPOT."
+    },
+    {
+      "variable_name": "model_tpot",
+      "description": "Initialized TPOTClassifier."
+    },
+    {
+      "variable_name": "features",
+      "description": "List of feature columns used for training without the target."
+    },
+    {
+      "variable_name": "df_submission",
+      "description": "DataFrame to hold predictions and export submission file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_method": "read_csv",
+      "flow": "used to fit model_tpot"
+    },
+    {
+      "variable_name": "df_test",
+      "creation_method": "read_csv",
+      "flow": "used for predictions and submission file" 
+    },
+    {
+      "variable_name": "df_all",
+      "creation_method": "concat",
+      "flow": "used to create encoders for categorical variables"
+    },
+    {
+      "variable_name": "encoders",
+      "creation_method": "create_encoders",
+      "flow": "applied to df_train and df_test"
+    },
+    {
+      "variable_name": "model_tpot",
+      "creation_method": "TPOTClassifier",
+      "flow": "fitted on df_train and used to make predictions on df_test"
+    },
+    {
+      "variable_name": "df_submission",
+      "creation_method": "join",
+      "flow": "created for final output and saved as submission.csv"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "TPOTClassifier",
+      "input_features": "All features from df_train except for the target variable 'failure'.",
+      "target_variable": "failure",
+      "hyperparameters": "Population size, offspring size, generations, etc. as defined in classifier_config_dict."
+    }
+  ]
+}

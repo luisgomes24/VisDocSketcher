@@ -1,0 +1,35 @@
+flowchart TD
+    A["📥 Load Datasets"] --> B["📊 Data Overview"]
+    B --> C["📊 Preprocess Data"]
+    C --> D["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg'/> <br/>"]
+    D --> E["📊 Feature Selection"]
+    E --> F["📊 Train-Test Split"]
+    F --> G["🤖 Model Training & Hyperparameter Tuning"]
+    G --> H["🤖 Evaluate Models"]
+    H --> I["📉 Best Model: XGBoost"]
+    I --> J["📊 Final Model Training"]
+    J --> K["📥 Prepare Submission Data"]
+    K --> L["📜 Save Submission <img src='dummy_plots/boxplot_template.svg'/> <br/>"]
+    
+    subgraph Load_Datasets
+        A --> A1["<img src='icons/file.svg'/> <br/> df_train.csv"]
+        A --> A2["<img src='icons/file.svg'/> <br/> df_test.csv"]
+        A --> A3["<img src='icons/file.svg'/> <br/> df_sample_submission.csv"]
+    end
+    
+    subgraph Preprocess_Data
+        C --> C1["🧹 Clean Data"]
+        C --> C2["💡 Encode Categorical Features"]
+    end
+
+    subgraph Train_Test_Split
+        F --> F1["📊 Split into X, y"]
+        F --> F2["🔍 Set Test Size"]
+    end
+
+    subgraph Model_Evaluation
+        H --> H1["📈 Mean Absolute Error"]
+        H --> H2["🕵️‍♀️ Best Parameters"]
+    end
+    
+    classDef box fill:#f9f,stroke:#333,stroke-width:2px;

@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A[pred_tr.csv] -->|read_csv| B[df1]
+    C[submission.csv] -->|read_csv| D[df2]
+
+    %% Data Variables
+    B -->|Visualize with| E(Distribution Graphs)
+    D -->|Visualize with| E
+
+    %% Comments
+    subgraph Data Sources
+    A["pred_tr.csv: Training data for predictors"] 
+    C["submission.csv: Format for predictions submission"] 
+    end
+    
+    subgraph Data Variables
+    B["df1: DataFrame from pred_tr.csv"]
+    D["df2: DataFrame from submission.csv"]
+    end
+    
+    subgraph Visualizations
+    E["Distribution Graphs: Histogram/bar graph visualizations of df1 and df2"]
+    end
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style C fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#bbf,stroke:#333,stroke-width:2px;
+    style D fill:#bbf,stroke:#333,stroke-width:2px;
+    style E fill:#bfb,stroke:#333,stroke-width:2px;

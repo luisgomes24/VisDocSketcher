@@ -1,0 +1,114 @@
+{ 
+  "data_sources": [ 
+    { 
+      "file_name": "../input/train.csv", 
+      "description": "Training data containing features and target variable SalePrice." 
+    }, 
+    { 
+      "file_name": "../input/test.csv", 
+      "description": "Test data containing the same features as the training data but without the target variable SalePrice." 
+    } 
+  ], 
+  "data_variables": [ 
+    { 
+      "variable_name": "rawtrain", 
+      "description": "DataFrame for training data read from train.csv." 
+    }, 
+    { 
+      "variable_name": "rawtest", 
+      "description": "DataFrame for testing data read from test.csv." 
+    }, 
+    { 
+      "variable_name": "selected", 
+      "description": "List of selected features from the training data." 
+    }, 
+    { 
+      "variable_name": "train", 
+      "description": "DataFrame combining selected features and the target variable from rawtrain." 
+    }, 
+    { 
+      "variable_name": "test", 
+      "description": "DataFrame combining selected features from rawtest with a dummy target variable." 
+    }, 
+    { 
+      "variable_name": "full", 
+      "description": "Combined DataFrame of train and test sets with an identifier for training or testing." 
+    }, 
+    { 
+      "variable_name": "features", 
+      "description": "List of feature names extracted from the train DataFrame excluding id and target." 
+    }, 
+    { 
+      "variable_name": "target", 
+      "description": "Target variable SalePrice from the training set." 
+    }, 
+    { 
+      "variable_name": "Xtrain, Xvalid, ytrain, yvalid", 
+      "description": "Split training and validation sets for model fitting and evaluation." 
+    } 
+  ], 
+  "data_flow": [ 
+    { 
+      "variable": "rawtrain", 
+      "creation": "read_csv('../input/train.csv')", 
+      "flows_to": "Used to create 'train' DataFrame; analyzed for feature selection." 
+    }, 
+    { 
+      "variable": "rawtest", 
+      "creation": "read_csv('../input/test.csv')", 
+      "flows_to": "Used to create 'test' DataFrame for validation." 
+    }, 
+    { 
+      "variable": "train", 
+      "creation": "copy of rawtrain[selected]", 
+      "flows_to": "Used as input to the model training process." 
+    }, 
+    { 
+      "variable": "test", 
+      "creation": "copy of rawtest[selected]", 
+      "flows_to": "Used for generating predictions and submission." 
+    }, 
+    { 
+      "variable": "full", 
+      "creation": "pd.concat([train, test])", 
+      "flows_to": "Processed for transformations, encoding, and model training." 
+    }, 
+    { 
+      "variable": "Xtrain, Xvalid, ytrain, yvalid", 
+      "creation": "train_test_split(train, target)", 
+      "flows_to": "Used for training and validation during model fitting." 
+    }, 
+    { 
+      "variable": "ypred", 
+      "creation": "model.predict(Xvalid)", 
+      "flows_to": "Evaluated with rmse function to assess model performance." 
+    }, 
+    { 
+      "variable": "ytestpred", 
+      "creation": "model.predict(test[features].values)", 
+      "flows_to": "Exponentiated and saved to 'submission.csv' for Kaggle." 
+    } 
+  ], 
+  "models": [ 
+    { 
+      "model_name": "GradientBoostingRegressor", 
+      "input_features": "List from 'features'.", 
+      "target_variable": "SalePrice (log transformed)", 
+      "hyperparameters": { 
+        "n_estimators": 1500, 
+        "learning_rate": 0.02, 
+        "max_depth": 4, 
+        "random_state": 42 
+      } 
+    }, 
+    { 
+      "model_name": "ExtraTreesRegressor", 
+      "input_features": "List from 'features'.", 
+      "target_variable": "SalePrice (log transformed)", 
+      "hyperparameters": { 
+        "n_estimators": 1500, 
+        "random_state": 42 
+      } 
+    } 
+  ] 
+}

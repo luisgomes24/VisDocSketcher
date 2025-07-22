@@ -1,0 +1,103 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data features including sensor values."
+    },
+    {
+      "file_name": "train_labels.csv",
+      "description": "Contains labels corresponding to the training data, indicating the target state."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data features including sensor values for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training dataset with sensor readings."
+    },
+    {
+      "variable_name": "train_labels",
+      "description": "DataFrame containing the labels for the training dataset, indicating targets."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the testing dataset."
+    },
+    {
+      "variable_name": "train_pivoted0",
+      "description": "Pivoted DataFrame of training data with one row per sequence."
+    },
+    {
+      "variable_name": "train_pivoted",
+      "description": "Engineered DataFrame containing newly calculated features from training data."
+    },
+    {
+      "variable_name": "train_shuffled",
+      "description": "Shuffled DataFrame of engineered features for training."
+    },
+    {
+      "variable_name": "labels_shuffled",
+      "description": "Shuffled DataFrame containing target labels and additional sequence features."
+    },
+    {
+      "variable_name": "selected_columns",
+      "description": "List of selected feature column names after feature engineering and selection."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "created_by": "pd.read_csv",
+      "flows_to": "train_pivoted0"
+    },
+    {
+      "variable_name": "train_labels",
+      "created_by": "pd.read_csv",
+      "flows_to": "labels_shuffled"
+    },
+    {
+      "variable_name": "test",
+      "created_by": "pd.read_csv",
+      "flows_to": "test_pivoted0"
+    },
+    {
+      "variable_name": "train_pivoted0",
+      "created_by": "pd.pivot",
+      "flows_to": "train_pivoted"
+    },
+    {
+      "variable_name": "train_pivoted",
+      "created_by": "engineer function",
+      "flows_to": "train_shuffled"
+    },
+    {
+      "variable_name": "train_shuffled",
+      "created_by": "pd.sample",
+      "flows_to": "X (input for model)",
+      "final_destination": "Model training"
+    },
+    {
+      "variable_name": "labels_shuffled",
+      "created_by": "reindex and merge operations",
+      "flows_to": "y (target for model)"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "HistGradientBoostingClassifier",
+      "input_features": "selected_columns",
+      "target_variable": "labels_shuffled.state",
+      "hyperparameters": {
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 25,
+        "max_iter": 1000,
+        "min_samples_leaf": 500,
+        "l2_regularization": 1,
+        "max_bins": 63
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /Input Data Files/"]:::data --> B["<img src='icons/file.svg' width=100 height=100/> <br/> /Directory Listing/"]:::data
+    
+    %% Process
+    B --> C["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> os.walk()"]:::process
+    C --> D["<img src='dummy_plots/barplot_template.svg'/> <br/> filenames"]:::data
+    D --> E["<img src='dummy_plots/boxplot_template.svg'/> <br/> Print file paths"]:::output
+
+    %% Styles
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#1a1a1a,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;

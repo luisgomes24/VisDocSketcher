@@ -1,0 +1,58 @@
+%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00', 'primaryBorderColor': '#000000', 'primaryTextColor': '#000000'} } }%%
+
+flowchart TD
+
+%% Data Sources
+A0["California Housing Dataset"]
+
+%% Data Variables
+A1["features"]
+A2["labels"]
+A3["com_train_features"]
+A4["test_features"]
+A5["com_train_labels"]
+A6["test_labels"]
+A7["train_features"]
+A8["dev_features"]
+A9["train_labels"]
+A10["dev_labels"]
+
+%% Models
+M1["AdaBoostRegressor"]
+M2["GradientBoostingRegressor"]
+M3["XGBRegressor"]
+
+%% Connections
+
+%% From Source to Variables
+A0 -->|"fetch data"| A1
+A0 -->|"fetch data"| A2
+
+%% Data Splitting
+A1 -->|"train_test_split"| A3
+A1 -->|"train_test_split"| A4
+A2 -->|"train_test_split"| A5
+A2 -->|"train_test_split"| A6
+
+A3 -->|"further split"| A7
+A3 -->|"further split"| A8
+A5 -->|"further split"| A9
+A5 -->|"further split"| A10
+
+%% Models Training
+A3 -->|"train models"| M1
+A3 -->|"train models"| M2
+A3 -->|"train models"| M3
+A5 -->|"train models"| M1
+A5 -->|"train models"| M2
+A5 -->|"train models"| M3
+
+%% Comments for Clarity
+%% A0 - Represents source of the data
+%% A1 - Features extracted from the data source
+%% A2 - Labels extracted from the data source
+%% A3/A5 - Combined train features and labels after initial split
+%% A4/A6 - Test features and labels to evaluate model performance
+%% A7/A9 - Train features and labels used to train the models
+%% A8/A10 - Development features and labels used for validation
+%% M1/M2/M3 - Different Machine Learning models trained on the data

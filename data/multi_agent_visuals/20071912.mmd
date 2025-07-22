@@ -1,0 +1,7 @@
+flowchart TD
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> Crime Data CSV"]:::dataSource -->|Load| B["Crime DataFrame"]
+  B -->|Drop columns, Handle NaNs| C["<img src='dummy_plots/barplot_template.svg'/> <br/> Preprocessed Crime Data"]
+  classDef dataSource fill:#87CEEB; 
+  class A dataSource; 
+  classDef preprocessed fill:#C6F4D6;
+  class C preprocessed;  

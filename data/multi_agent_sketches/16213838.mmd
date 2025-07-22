@@ -1,0 +1,19 @@
+flowchart TD
+    %% Represents the initial data source which is a CSV file
+    A["dc-wikia-data.csv"] --> |Load data| B["my_data"]
+    
+    %% Group data by ID
+    B --> |Group by ID| C["ID"]
+    C --> |Use for plotting|
+    
+    %% Group data by ALIVE status
+    B --> |Group by ALIVE| D["alive"]
+    D --> |Use for plotting|
+    
+    %% Sort data to get top 10 characters by appearances
+    B --> |Top 10 by appearances| E["top_10"]
+    E --> |Use for plotting|
+    
+    %% Group data by YEAR appearances
+    B --> |Group by YEAR| F["per_year"]
+    F --> |Use for plotting|

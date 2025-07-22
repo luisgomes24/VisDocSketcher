@@ -1,0 +1,12 @@
+%% Diagram showing the data processing flow from mr_beast_youtube_stats.csv
+flowchart TD
+    A[mr_beast_youtube_stats.csv] --> B[DataFrame: df]
+    %% Node for reading data into DataFrame
+    B --> C[ProfileReport: report]
+    %% Node for generating profiling report from df
+    B --> D[SweetViz Analyze: advert_report]
+    %% Node for generating SweetViz report from df
+    C --> E[Show pandas profiling report]
+    %% Display the profiling report
+    D --> F[Show SweetViz report]
+    %% Display the SweetViz report

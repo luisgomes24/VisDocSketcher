@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Source Nodes
+    A1["Forest Surfaces CSV Data"]    --> B1
+    A2["GeoJSON County Data"]         --> E1
+    A3["GeoJSON Region Population"]   --> G1
+    
+    %% Data Processing Nodes
+    B1["Load forest_surfaces_romania_en_1990_2019.csv"] --> C1
+    C1["Create data_df DataFrame"]    --> D1["Filter for specific counties"]
+    D1["Create data_county_df DataFrame"] --> F1["Visualizations"]
+    
+    E1["Parse geoJSON for counties"]  --> F1
+    
+    G1["Parse geoJSON for populations"] --> H1
+    
+    %% Comment Nodes
+    F1["Visualize Forest Data"]

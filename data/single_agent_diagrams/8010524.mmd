@@ -1,0 +1,7 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg'/> <br/> farm_ads & farm_vect"] --> B["🔗 Merge Data <img src='icons/table.svg'/> <br/> merged data"]
+    B --> C["🧹 Preprocess Data <img src='icons/column_split.svg'/> <br/> Label Encoding & Target Creation"]
+    C --> D["📉 Train-Test Split <img src='icons/row_split.svg'/> <br/> X_train, X_test, y_train, y_test"]
+    D --> E["🧠 Model Training <img src='icons/brain.svg'/> <br/> Random Forest Classifier"]
+    E --> F["🔍 Prediction <img src='icons/image.svg'/> <br/> Predict on X_test"]
+    F --> G["📊 Evaluation <img src='icons/metrics.svg'/> <br/> Accuracy Score"]

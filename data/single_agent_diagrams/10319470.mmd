@@ -1,0 +1,8 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["Drop Unwanted Columns"]
+    B --> C["Check for Null Values"]
+    C --> D["<img src='table.svg'/> <br/> Drop Missing Revenue"]
+    D --> E["<img src='table.svg'/> <br/> Stats Summary"]
+    E --> F["<img src='column_split.svg'/> <br/> Function for Year Details"]
+    F --> G["<img src='table.svg'/> <br/> Analyze Revenue & Rating for 2015"]
+    F --> H["<img src='table.svg'/> <br/> Analyze Revenue & Rating for 2016"]

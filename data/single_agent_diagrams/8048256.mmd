@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/> <br/> Excel File"] --> B["🔍 Explore Data <img src='icons/table.svg'/> <br/> DataFrame Head"]
+    B --> C["🧹 Data Cleaning <img src='icons/column_split.svg'/> <br/> Fill NaNs"]
+    C --> D["🔢 Data Transformation <img src='icons/column_split.svg'/> <br/> Drop Unused Columns"]
+    D --> E["📝 Save Processed Data <img src='icons/file.svg'/> <br/> Write to Excel"]
+    E --> F["🏗️ Create Dataset Class <img src='icons/brain.svg'/> <br/> EXLdataset"]
+    F --> G["🚦 Split Data <img src='icons/row_split.svg'/> <br/> Train/Validation Set"]
+    G --> H["🧠 Define Model <img src='icons/brain.svg'/> <br/> Neural Network"]
+    H --> I["⚙️ Load Data <img src='icons/table.svg'/> <br/> DataLoader"]
+    I --> J["🔧 Train Model <img src='icons/brain.svg'/> <br/> Training Loop"]
+    J --> K["📊 Evaluate Model <img src='icons/lineplot_template.svg'/> <br/> Plot Loss"]

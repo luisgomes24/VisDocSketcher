@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file_name": "aclImdb_v1.tar.gz",
+      "description": "Dataset containing movie reviews for sentiment analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "text_train",
+      "description": "Training texts loaded from the ACL IMDB dataset"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training labels corresponding to the training texts"
+    },
+    {
+      "variable_name": "text_test",
+      "description": "Test texts loaded from the ACL IMDB dataset"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test labels corresponding to the test texts"
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Features extracted from training texts using CountVectorizer"
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Features extracted from test texts using CountVectorizer"
+    },
+    {
+      "variable_name": "scores",
+      "description": "Cross-validation scores for Logistic Regression model"
+    },
+    {
+      "variable_name": "grid",
+      "description": "GridSearchCV object for tuning Logistic Regression hyperparameters"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "text_train",
+      "creation_method": "load_files",
+      "flow": "Used in CountVectorizer to create X_train"
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "load_files",
+      "flow": "Used as target in model training"
+    },
+    {
+      "variable_name": "text_test",
+      "creation_method": "load_files",
+      "flow": "Used in CountVectorizer to create X_test"
+    },
+    {
+      "variable_name": "y_test",
+      "creation_method": "load_files",
+      "flow": "Used as target for testing the model"
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "CountVectorizer.transform",
+      "flow": "Used for model training and cross-validation"
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "CountVectorizer.transform",
+      "flow": "Used for model evaluation"
+    },
+    {
+      "variable_name": "scores",
+      "creation_method": "cross_val_score",
+      "flow": "Used to evaluate model accuracy"
+    },
+    {
+      "variable_name": "grid",
+      "creation_method": "GridSearchCV.fit",
+      "flow": "Used to find best model parameters and evaluate on X_test"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "C": [0.001, 0.01, 0.1, 1, 10]
+      }
+    }
+  ]
+}

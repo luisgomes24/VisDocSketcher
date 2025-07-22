@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Data Loading <img src='file.svg'/> <br/> Load Train & Test datasets"] --> B["🔍 Data Overview <img src='table.svg'/> <br/> Display Head, Describe, Info"]
+    B --> C["🔎 Data Analysis <img src='table.svg'/> <br/> Check Duplicates & Nulls"]
+    C --> D["📊 Visualizations <img src='barplot_template.svg'/> <br/> Pairplot and Heatmap"]
+    D --> E["🔢 Data Preprocessing <img src='column_split.svg'/> <br/> Label Encoding & Cleaning"]
+    E --> F["🧠 Feature Selection <img src='brain.svg'/> <br/> Calculate VIF"]
+    F --> G["⚙️ Train-Test Split <img src='row_split.svg'/> <br/> Split Data"]
+    G --> H["🤖 Modeling <img src='brain.svg'/> <br/> Train Classifier with XGBoost"]
+    H --> I["📈 Evaluation <img src='barplot_template.svg'/> <br/> Lazy Predict Model Comparisons"]
+    I --> J["✅ Predictions <img src='file.svg'/> <br/> Save Submission"]

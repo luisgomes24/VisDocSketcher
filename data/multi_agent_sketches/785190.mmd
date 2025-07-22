@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A1["/Earthquake Database CSV/"] -->|Load| B1[Earthquake Data]
+    A2["/Landslide Events CSV/"] -->|Load| B2[Landslide Data]
+    A3["/Volcanic Eruptions CSV/"] -->|Load| B3[Volcano Data]
+
+    %% Earthquake Data Processing
+    B1 -->|Parse and Filter| C1[Earthquakes with Normal Dates]
+    C1 -->|Extract| D1[Day of Month Earthquakes Chart]
+
+    %% Landslide Data Processing
+    B2 -->|Extract| D2[Day of Month Landslides Chart]
+
+    %% Comments
+    %% Node A1 represents the earthquake database file.
+    %% Node A2 represents the landslide events file.
+    %% Node A3 represents the volcanic eruptions file.
+    %% Node B1 represents the DataFrame containing raw earthquake data.
+    %% Node B2 represents the DataFrame containing raw landslide data.
+    %% Node B3 represents the DataFrame containing raw volcano data.
+    %% Node C1 represents the DataFrame of earthquakes filtered by valid date.
+    %% Node D1 represents the extracted day of the month for earthquake incidents used for plotting.
+    %% Node D2 represents the extracted day of the month for landslide incidents used for plotting.

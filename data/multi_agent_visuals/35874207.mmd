@@ -1,0 +1,21 @@
+flowchart TD
+    A["BirdCLEF 2023 dataset"] -->|Load test audio paths| B["test_paths"]
+    A -->|Use sample submission format| C["sample_submission.csv"]
+    B --> D["Create test_df DataFrame"]
+    D -->|Hold test file paths| E["test_df"]
+    E -->|Load and process audio files| F["load_audio(filepath)"]
+    F -->|Create audio frames| G["audio"]
+    G -->|Convert audio to spectrograms| H["Audio2Spec"]
+    H -->|Input spectrograms| I["specs"]
+    subgraph Models
+        direction TB
+        J["EfficientNet"]
+    end
+    I -->|Conduct predictions| J
+    J -->|Output probabilities| K["preds"]
+    J -->|Load pre-trained models| L["CKPT_PATHS"]
+    L -->|Loaded models| M["CKPTS"]
+    K -->|Assign identifiers| N["ids"]
+    N -->|Create prediction DataFrame| O["pred_df"]
+    C -->|Combine with| O
+    O -->|Final submission format| P["Construct final DataFrame"]

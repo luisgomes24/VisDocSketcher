@@ -1,0 +1,9 @@
+```mermaid
+flowchart TD
+    A["U.S. Budget CSV Data"] -->|Read CSV| B["Load data into DataFrame (df)"];
+    B -->|Add to data object| C["Create Data Object (data)"];
+    C -->|Use in story| E["Create Story Object (story)"];
+    D["Styling Configuration (style)"] -->|Apply style| E;
+    E -->|Play animation| F["Animated Visual Presentation"];
+    click A href "https://ipyvizzu-story.vizzuhq.com/0.8/examples/usbudget/usbudget.csv"
+```

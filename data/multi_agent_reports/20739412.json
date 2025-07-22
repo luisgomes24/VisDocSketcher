@@ -1,0 +1,68 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data including features and target variable 'pressure'."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data including features for prediction."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submitting predictions, includes 'id' and predictions columns."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "X",
+      "description": "DataFrame containing the training features with 'pressure' removed."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable extracted from the original DataFrame 'X', representing pressure."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "DataFrame containing the test features with 'pressure' removed."
+    },
+    {
+      "variable_name": "y_pred",
+      "description": "Array holding predicted values for the test data, output of the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for model training after preprocessing."
+    },
+    {
+      "variable": "y",
+      "creation_method": "Extracted from X",
+      "flow": "Used as target variable for model training."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for generating predictions after preprocessing."
+    },
+    {
+      "variable": "y_pred",
+      "creation_method": "Output of batch_gd function",
+      "flow": "Saved to a CSV file for submission."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LSTMModel",
+      "input_features": "Features from DataFrame 'X'",
+      "target_variable": "Pressure",
+      "hyperparameters": {
+        "n_hdim": 30,
+        "n_layers": 1,
+        "v_dropout": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_name": "BX-Users.csv",
+      "description": "Contains user information including IDs and location."
+    },
+    {
+      "file_name": "BX-Books.csv",
+      "description": "Contains book information such as title, author, publication year, and publisher."
+    },
+    {
+      "file_name": "BX-Book-Ratings.csv",
+      "description": "Contains user ratings for books, linked by ISBN."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "users",
+      "description": "DataFrame containing user information."
+    },
+    {
+      "variable_name": "books",
+      "description": "DataFrame containing book information."
+    },
+    {
+      "variable_name": "ratings",
+      "description": "DataFrame containing book ratings linked to users."
+    },
+    {
+      "variable_name": "dataset",
+      "description": "Merged DataFrame containing user ratings and book details."
+    },
+    {
+      "variable_name": "data",
+      "description": "Final processed DataFrame ready for analysis and model training."
+    },
+    {
+      "variable_name": "new_data",
+      "description": "Processed DataFrame without entries marked as n/a in Country."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature variable containing the concatenated book title and City for ML."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable indicating whether reviews are good (1) or not (0)."
+    },
+    {
+      "variable_name": "X_train", "X_test", "y_train", "y_test",
+      "description": "Partitioned datasets for training and testing the machine learning model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "users",
+      "created_by": "pd.read_csv",
+      "flows_to": "Merged into dataset."
+    },
+    {
+      "variable_name": "books",
+      "created_by": "pd.read_csv",
+      "flows_to": "Merged into dataset."
+    },
+    {
+      "variable_name": "ratings",
+      "created_by": "pd.read_csv",
+      "flows_to": "Merged into dataset."
+    },
+    {
+      "variable_name": "dataset",
+      "created_by": "pd.merge",
+      "flows_to": "Processed into data."
+    },
+    {
+      "variable_name": "data",
+      "created_by": "DataFrame transformations on dataset",
+      "flows_to": "Filtered into new_data."
+    },
+    {
+      "variable_name": "new_data",
+      "created_by": "Filtering operation on data",
+      "flows_to": "Used for final processing and model training."
+    },
+    {
+      "variable_name": "X",
+      "created_by": "new_data['Book_title_City_Reviewed']",
+      "flows_to": "Input feature for model."
+    },
+    {
+      "variable_name": "y",
+      "created_by": "new_data['Reviews']",
+      "flows_to": "Target variable for model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MultinomialNB",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "alpha": 0.1
+      }
+    }
+  ]
+}

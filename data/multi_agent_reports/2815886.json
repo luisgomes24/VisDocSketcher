@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "data.csv",
+      "description": "Contains data used for exploratory analysis, with a total of 18207 rows, but only the first 1000 are loaded."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing the first 1000 rows of data read from the data.csv file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "created_by": "pd.read_csv",
+      "flow": "Used for plotting distributions, correlation, and scatter plots."
+    }
+  ],
+  "models": []
+}

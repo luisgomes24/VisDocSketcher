@@ -1,0 +1,83 @@
+{
+  "data_sources": [
+    {
+      "file_name": "oxford_iiit_pet",
+      "description": "Dataset containing images and segmentation masks of pets."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataset",
+      "description": "TensorFlow Dataset containing the pet images and corresponding segmentation masks."
+    },
+    {
+      "name": "train",
+      "description": "Processed training dataset containing resized and normalized images and masks."
+    },
+    {
+      "name": "test",
+      "description": "Processed test dataset containing resized and normalized images and masks."
+    },
+    {
+      "name": "train_dataset",
+      "description": "Cached, shuffled, batched, and prefetch training dataset."
+    },
+    {
+      "name": "test_dataset",
+      "description": "Batched testing dataset."
+    },
+    {
+      "name": "model",
+      "description": "U-Net architecture model for image segmentation."
+    },
+    {
+      "name": "model_history",
+      "description": "History object containing training and validation loss metrics after fitting the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "created_by": "tfds.load",
+      "flow": "Used to create 'train' and 'test' datasets."
+    },
+    {
+      "variable": "train",
+      "created_by": "dataset['train'].map(load_image_train)",
+      "flow": "Used to create 'train_dataset'."
+    },
+    {
+      "variable": "test",
+      "created_by": "dataset['test'].map(load_image_test)",
+      "flow": "Used to create 'test_dataset'."
+    },
+    {
+      "variable": "train_dataset",
+      "created_by": "train.cache().shuffle(BUFFER_SIZE).batch(BATCH_SIZE).repeat()",
+      "flow": "Used to fit the 'model' during training."
+    },
+    {
+      "variable": "test_dataset",
+      "created_by": "test.batch(BATCH_SIZE)",
+      "flow": "Used to validate model during training."
+    },
+    {
+      "variable": "model",
+      "created_by": "unet_model(OUTPUT_CHANNELS)",
+      "flow": "Fitted with 'train_dataset' and validated with 'test_dataset'."
+    },
+    {
+      "variable": "model_history",
+      "created_by": "model.fit",
+      "flow": "Contains training and validation loss metrics after model training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "U-Net",
+      "input_features": "Images of shape [128, 128, 3]",
+      "target_variable": "Segmentation masks",
+      "hyperparameters": "Optimizer: Adam; Loss: SparseCategoricalCrossentropy; Metrics: Accuracy; EPOCHS: 20"
+    }
+  ]
+}

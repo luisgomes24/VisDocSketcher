@@ -1,0 +1,30 @@
+%% Mermaid Diagram for Titanic Survival Prediction Workflow
+flowchart TD
+    %% Data Sources
+    A["/kaggle/input/titanic/train.csv"] -->|"Load data"| B["train_data"]
+    A2["/kaggle/input/titanic/test.csv"] -->|"Load data"| C["test_data"]
+    
+    %% Data Preprocessing
+    B -->|"Select features and target"| D["X, y"]
+    
+    %% Splitting Data
+    D -->|"train_test_split(X, y)"| E["train_X, train_y, test_X, test_y"]
+    
+    %% Model Training
+    subgraph Models
+        F1["RandomForestClassifier\n(n_estimators=500, max_depth=3)"]
+        F2["XGBClassifier\n(n_estimators=1000, learning_rate=0.05)"]
+        F3["LogisticRegression"]
+    end
+    E -->|"train models"| F1
+    E -->|"train models"| F2
+    E -->|"train models"| F3
+    
+    %% Predictions
+    F2 -->|"Predict test_X"| G["predictions"]
+    
+    %% Output
+    G -->|"Create DataFrame and save to CSV"| H["output"]
+
+    %% Annotations and Save
+    H -->|"Save predictions"| I["Submission CSV"]

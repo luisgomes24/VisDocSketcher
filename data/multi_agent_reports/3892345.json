@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "hiring.csv",
+      "description": "Contains hiring data with various columns related to candidates' profiles"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing hiring data read from 'hiring.csv'"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "location": "used for plotting distributions, correlation matrix, and scatter matrix"
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='dummy_plots/boxplot_template.svg' /> <br/> Read train data"] --> B["🛠️ Preprocessing <img src='dummy_plots/barplot_template.svg' /> <br/> Clean and transform data"]
+    B --> C["🔍 Cross Validation <img src='dummy_plots/scatter_plot_template.svg' /> <br/> K-Fold split with DateKFold"]
+    C --> D["🧠 Model Training <img src='dummy_plots/lineplot_template.svg' /> <br/> Fit model using callbacks"]
+    D --> E["📊 Evaluate Model <img src='dummy_plots/hist_template.svg' /> <br/> Calculate utility scores"]
+    E --> F["⚙️ Optimize Weights <img src='dummy_plots/boxplot_template.svg' /> <br/> CMA-ES to optimize model weights"]
+    F --> G["📈 Plot Weights <img src='dummy_plots/lineplot_template.svg' /> <br/> Visualize weight changes per fold"]
+    G --> H["🔎 Final Evaluation <img src='dummy_plots/hist_template.svg' /> <br/> Summarize performance across folds"]

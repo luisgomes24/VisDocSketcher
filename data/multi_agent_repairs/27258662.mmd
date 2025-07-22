@@ -1,0 +1,15 @@
+graph TD;
+    A["Data Sources"] --> B["Train Data"];
+    A --> C["Weather Data"];
+    B --> D["Train Dataframe"];
+    D -->|"Pops target variable:"| E["Energy Consumption"];
+    D --> F["Feature Dataframe (X)"];
+    F --> G["Split Data"];
+    G --> H["Training Set Features (X_train)"];
+    G --> I["Testing Set Features (X_test)"];
+    E --> J["Training Set Target (y_train)"];
+    E --> K["Testing Set Target (y_test)"];
+    L["Model"] --> M["LazyRegressor"];
+    M --> N["Predicts based on X_train and y_train"];
+    H --> O["Used for training the model"];
+    I --> P["Used for testing the model"];

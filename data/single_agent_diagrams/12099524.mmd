@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Load Data"] --> B["📊 Load Features <img src='dummy_plots/hist_template.svg' /> <br/> train_feat_df"]
+    B --> C["🛠️ Preprocess Features"]
+    C --> D["📄 Load Metadata"]
+    D --> E["🛠️ Preprocess Metadata"]
+    E --> F["📊 Visualize Data <img src='dummy_plots/barplot_template.svg' /> <br/> seq_lens Histogram"]
+    F --> G["✂️ Train-Test Split"]
+    G --> H["🧠 Build Model"]
+    H --> I["📈 Train Model"]
+    I --> J["🔍 Evaluate Model"]
+    J --> K["💾 Save Model"]

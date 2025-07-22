@@ -1,0 +1,53 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "L",
+      "description": "A list used in function select_second to return the second element."
+    },
+    {
+      "name": "teams",
+      "description": "A list containing lists of team members including coach and captain, used in losing_team_captain."
+    },
+    {
+      "name": "racers",
+      "description": "A list of racer names used in the purple_shell function to swap first and last places."
+    },
+    {
+      "name": "lengths",
+      "description": "A list holding predicted lengths of various lists."
+    },
+    {
+      "name": "arrivals",
+      "description": "A list indicating the order of party attendees, used in fashionably_late function."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "L",
+      "creation_method": "Local variable in the select_second function.",
+      "flow": "Used to check and return the second element of the list."
+    },
+    {
+      "variable_name": "teams",
+      "creation_method": "Local variable in the losing_team_captain function.",
+      "flow": "Used to access the last team's captain's name."
+    },
+    {
+      "variable_name": "racers",
+      "creation_method": "Local variable in the purple_shell function.",
+      "flow": "Modified to swap the first and last racer names."
+    },
+    {
+      "variable_name": "lengths",
+      "creation_method": "Local variable in the length check."
+      "flow": "Used to store predictions for lengths of multiple lists."
+    },
+    {
+      "variable_name": "arrivals",
+      "creation_method": "Local variable to demonstrate arrivals to a party.",
+      "flow": "Used in fashionably_late to determine if a guest is considered late."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,26 @@
+flowchart TD
+    %% Node for data source train.csv
+    A1["train.csv"] -->|Loaded to DataFrame| B1["home_data"]
+    %% Node for target variable extraction
+    B1 -->|Extract SalePrice| C1["y"]
+    %% Node for feature selection
+    B1 -->|Select Features| D1["X"]
+    %% Node for train-test split
+    D1 -->|train_test_split| E1["train_X & val_X"]
+    C1 -->|train_test_split| F1["train_y & val_y"]
+    %% Node for Decision Tree Model
+    E1 -->|Input Features| G1["DecisionTreeRegressor: train_X, train_y"]
+    F1 -->|Target Variable| G1
+    %% Node for Random Forest Model
+    E1 -->|Input Features| H1["RandomForestRegressor: train_X, train_y"]
+    F1 -->|Target Variable| H1
+    %% Node for full data training
+    D1 -->|Full data training| I1["RandomForestRegressor (full data): X, y"]
+    C1 -->|Target Variable| I1
+    %% Node for data source test.csv
+    A2["test.csv"] -->|Loaded to DataFrame| B2["test_data"]
+    %% Node for test features extraction
+    B2 -->|Select Features| C2["test_X"]
+    %% Node for making predictions
+    I1 -->|Make Predictions| D2["test_preds"]
+    C2 -->|Features for Prediction| D2

@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Source Node
+    A["Advertising CSV File"] -->|Load data| B["data"]
+    click A href "../input/tvradionewspaperadvertising/Advertising.csv" "This CSV file contains advertising data for TV, Radio, and Newspaper ads along with the corresponding sales figures."
+
+    %% Data Variable Nodes
+    B["data"] -->|Compute correlation| C["corr"]
+    B -->|Extract TV data| D["a"]
+    B -->|Extract Sales data| E["b"]
+    B -->|Extract Radio data| F["c"]
+    B -->|Extract Newspaper data| G["d"]
+
+    %% Data Variable Usage Nodes
+    D["a"] -->|Plot distribution| J["TV Distribution"]
+    E["b"] -->|Plot distribution| K["Sales Distribution"]
+    F["c"] -->|Plot distribution| L["Radio Distribution"]
+    G["d"] -->|Plot distribution| M["Newspaper Distribution"]
+
+    C["corr"] -->|Visualize| N["Heatmap"]
+    E["b"] -->|Joint KDE plot with| O["x1 and x2"]

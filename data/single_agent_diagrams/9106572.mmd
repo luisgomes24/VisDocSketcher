@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Data Loading <img src='icons/file.svg'/> <br/>"] --> B["🧹 Preprocessing <img src='icons/table.svg'/> <br/>"]
+    B --> C["📊 Train-Test Split <img src='icons/row_split.svg'/> <br/>"]
+    C --> D["🧠 Model Creation <img src='icons/brain.svg'/> <br/>"]
+    D --> E["▶️ Model Training <img src='icons/brain.svg'/> <br/>"]
+    E --> F["🔮 Predictions <img src='icons/table.svg'/> <br/>"]
+    F --> G["📊 Results Preparation <img src='icons/table.svg'/> <br/>"]
+    G --> H["📤 Submission <img src='icons/file.svg'/> <br/>"]
+
+    A["📂 Data Loading <img src='icons/file.svg'/> <br/>"] -->|load data| L["Train Data"]
+    A -->|load data| M["Test Data"]
+    B -->|outlier removal| N["Cleaned Train Data"]
+    B -->|scaling| O["Scaled Train Data"]
+    C -->|X, y split| P["X_train, y_train"]

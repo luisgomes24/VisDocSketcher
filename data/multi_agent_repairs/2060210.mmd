@@ -1,0 +1,53 @@
+%% The Mermaid diagram represents the flowchart for the given Jupyter notebook focusing on the data flow and model used.
+
+flowchart TD
+    subgraph DataSources
+        A1["train.csv"]
+        A2["test.csv"]
+        A3["glove.840B.300d.txt"]
+    end
+    
+    subgraph TrainingProcess
+        B1["train_df"]
+        B2["X_train"]
+        B3["y"]
+        B4["x_train"]
+        B5["embedding_matrix"]
+        B6["Keras Model"]
+    end
+
+    subgraph TestingProcess
+        C1["test_df"]
+        C2["X_test"]
+        C3["x_test"]
+        C4["submit_df"]
+    end
+
+    %% Data flow from sources
+    A1 -->|read_csv| B1
+    A2 -->|read_csv| C1
+    A3 -->|Used for embedding_matrix| B5
+    
+    %% Training data preparation
+    B1 -->|question_text.fillna| B2
+    B1 -->|target| B3
+    B2 -->|pad_sequences| B4
+    
+    %% Testing data preparation
+    C1 -->|question_text.fillna| C2
+    C2 -->|pad_sequences| C3
+
+    %% Embeddings and model usage
+    B5 -->|Used in| B6
+    B6 -->|Trained with x_train and y| B4
+    B6 -->|Predict x_test| C4
+
+    %% Output
+    C4 -->|prepare submission| D1["Output CSV"]
+
+    
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    class A1,A2,A3 dataSource;
+    class B1,B2,B3,B4,B5,B6,C1,C2,C3,C4 process;

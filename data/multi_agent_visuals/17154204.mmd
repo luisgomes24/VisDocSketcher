@@ -1,0 +1,37 @@
+<mermaid>
+flowchart TD
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> /WA_Fn-UseC_-Telco-Customer-Churn.csv/"]:::datasource
+    end
+    subgraph DataProcessing
+        B["<img src='icons/table.svg' width=100 height=100/> <br/> Data Import"]:::process
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Setup Data"]:::process
+    end
+    subgraph Modeling
+        D["<img src='icons/brain.svg' width=100 height=100/> <br/> Train ADA Model"]:::process
+        E["<img src='icons/brain.svg' width=100 height=100/> <br/> Tune ADA Model"]:::process
+        F["<img src='icons/brain.svg' width=100 height=100/> <br/> Finalize ADA Model"]:::process
+    end
+    subgraph Prediction
+        G["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Predict with Finalized Model"]:::process
+    end
+
+    classDef datasource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;
+
+    A --> B
+    B -->|DataFrame: data| C
+    C -->|PyCaret setup: telecom| D
+    D -->|Model: ada| E
+    E -->|Model: tuned_ada| F
+    F -->|Model: final_ada| G
+
+    %% Comments
+    %% A: Source data file for the customer churn data
+    %% B: Reading the CSV data into a DataFrame
+    %% C: Setting up data in PyCaret with preprocessing for model training
+    %% D: Training initial ADA model
+    %% E: Tuning the ADA model with Kappa optimization
+    %% F: Finalizing tuned ADA model for predictions
+    %% G: Using finalized model for making predictions
+</mermaid>

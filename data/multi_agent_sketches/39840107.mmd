@@ -1,0 +1,45 @@
+flowchart TD
+    %% Data Sources
+    A["/kaggle/input/playground-series-s3e16/train.csv"] -->|"Load Data"| B["train: DataFrame"]
+    A2["/kaggle/input/playground-series-s3e16/test.csv"] -->|"Load Data"| B2["test: DataFrame"]
+    
+    %% Data Preprocessing
+    B -->|"Select categorical columns"| C["cat_col"]
+    C -->|"Encode 'Gender' using Label Encoding"| D["Label Encoded 'Gender'"]
+    D -->|"One-hot encode 'Sex'"| E["One-hot Encoded 'Sex'"]
+    E -->|"Join one-hot encoded columns with train"| F["Updated train with one-hot columns"]
+    F -->|"Drop original 'Sex' and 'Gender' columns"| G["Prepared train for modeling"]
+    
+    %% Features and Target
+    G -->|"Drop 'id' and 'Age' columns"| H["x: Features DataFrame"]
+    G -->|"Select 'Age' column"| I["y: Target DataFrame (Age)"]
+    
+    %% Split Data
+    H -->|"Train-test split: 70% train, 30% test"| J["x_train"]
+    H -->|"Train-test split"| K["x_test"]
+    I -->|"Train-test split"| L["y_train"]
+    I -->|"Train-test split"| M["y_test"]
+    
+    %% Model Training
+    J -->|"Train Linear Regression Model"| N["Linear Regression Model"]
+    L -->|"Used in Training"| N
+    J -->|"Train Ridge Regression Model"| O["Ridge Regression Model"]
+    L -->|"Used in Training"| O
+    J -->|"Train Lasso Regression Model"| P["Lasso Regression Model"]
+    L -->|"Used in Training"| P
+    
+    %% Predictions
+    K -->|"Predict with Linear Regression"| Q["y_pred_lr"]
+    N -->|"Predict on x_test"| Q
+    K -->|"Predict with Ridge Regression"| R["y_pred_ri"]
+    O -->|"Predict on x_test"| R
+    K -->|"Predict with Lasso Regression"| S["y_pred_la"]
+    P -->|"Predict on x_test"| S
+    
+    %% Model Evaluation
+    M -->|"Evaluate Linear Regression"| T["Metrics Linear Regression"]
+    Q -->|"Calculate Metrics"| T
+    M -->|"Evaluate Ridge Regression"| U["Metrics Ridge Regression"]
+    R -->|"Calculate Metrics"| U
+    M -->|"Evaluate Lasso Regression"| V["Metrics Lasso Regression"]
+    S -->|"Calculate Metrics"| V

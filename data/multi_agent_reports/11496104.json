@@ -1,0 +1,44 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/covid19-in-turkey-by-regions/shape/turkey.shp",
+      "description": "Shapefile for Turkey regions map"
+    },
+    {
+      "file_path": "../input/covid19-in-turkey-by-regions/turkey_covid19.csv",
+      "description": "CSV file containing Covid19 statistics for regions in Turkey with dates"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "turkey_map",
+      "description": "Geopandas DataFrame containing the shapefile of Turkey regions"
+    },
+    {
+      "name": "table",
+      "description": "Pandas DataFrame containing Covid19 cases data by region and date"
+    },
+    {
+      "name": "date",
+      "description": "String representation of the date to be plotted (e.g., '2020-08-31')"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "turkey_map",
+      "creation_method": "gpd.read_file",
+      "usage": "Passed to plot_record function to visualize cases on a map"
+    },
+    {
+      "variable": "table",
+      "creation_method": "pd.read_csv",
+      "usage": "Used for plotting Covid19 cases over time and in plotting by region"
+    },
+    {
+      "variable": "date",
+      "creation_method": "string assignment",
+      "usage": "Sent as an argument to plot_record for mapping specific date cases"
+    }
+  ],
+  "models": []
+}

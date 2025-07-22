@@ -1,0 +1,52 @@
+flowchart TD
+    %% Data Sources
+    DS1["../input/us-election-2020/governors_county.csv"]
+    DS2["../input/us-election-2020/governors_county_candidate.csv"]
+    DS3["../input/us-election-2020/governors_state.csv"]
+    DS4["../input/us-election-2020/house_candidate.csv"]
+    DS5["../input/us-election-2020/house_state.csv"]
+    DS6["../input/us-election-2020/president_county.csv"]
+    DS7["../input/us-election-2020/president_county_candidate.csv"]
+    DS8["../input/us-election-2020/president_state.csv"]
+    DS9["../input/us-election-2020/senate_county.csv"]
+    DS10["../input/us-election-2020/senate_county_candidate.csv"]
+    DS11["../input/us-election-2020/senate_state.csv"]
+
+    %% Data Variables
+    V1["data1"]
+    V2["data2"]
+    V3["data3"]
+    V4["data4"]
+    V5["data5"]
+    V6["data6"]
+    V7["data7"]
+    V8["data8"]
+    V9["data9"]
+    V10["data10"]
+    V11["data11"]
+
+    %% Data Source to Variable Mapping
+    DS1 -->|"pd.read_csv"| V1
+    DS2 -->|"pd.read_csv"| V2
+    DS3 -->|"pd.read_csv"| V3
+    DS4 -->|"pd.read_csv"| V4
+    DS5 -->|"pd.read_csv"| V5
+    DS6 -->|"pd.read_csv"| V6
+    DS7 -->|"pd.read_csv"| V7
+    DS8 -->|"pd.read_csv"| V8
+    DS9 -->|"pd.read_csv"| V9
+    DS10 -->|"pd.read_csv"| V10
+    DS11 -->|"pd.read_csv"| V11
+
+    %% Data Usage
+    V1 -->|"Used for scatter plots"| P1["Visualization"]
+    V2 -->|"Used for bar charts"| P2["Visualization"]
+    V3 -->|"Used for bar charts"| P3["Visualization"]
+    V4 -->|"Used for bar charts"| P4["Visualization"]
+    V5 -->|"Used for scatter plots"| P5["Visualization"]
+    V6 -->|"Used for box plots"| P6["Visualization"]
+    V7 -->|"Used for bar charts"| P7["Visualization"]
+    V8 -->|"Used for bar charts"| P8["Visualization"]
+    V9 -->|"Used for box plots"| P9["Visualization"]
+    V10 -->|"Used for bar charts"| P10["Visualization"]
+    V11 -->|"Used for bar charts"| P11["Visualization"]

@@ -1,0 +1,86 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/tabular-playground-series-nov-2021/train.csv",
+            "description": "Contains training data with features and target variable."
+        },
+        {
+            "file_path": "../input/tabular-playground-series-nov-2021/test.csv",
+            "description": "Contains test data without target variable for predictions."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "train_data",
+            "description": "DataFrame containing the training dataset."
+        },
+        {
+            "variable_name": "test_data",
+            "description": "DataFrame containing the test dataset."
+        },
+        {
+            "variable_name": "train_target",
+            "description": "DataFrame containing the target variable extracted from train_data."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Features for training set after scaling and splitting."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Features for testing set after scaling and splitting."
+        },
+        {
+            "variable_name": "y_train",
+            "description": "Target variable for training set."
+        },
+        {
+            "variable_name": "y_test",
+            "description": "Target variable for testing set."
+        },
+        {
+            "variable_name": "Result",
+            "description": "DataFrame containing predicted probabilities for the test data."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_data",
+            "creation": "pd.read_csv",
+            "flow": ["train_target", "X_train", "X_test", "y_train", "y_test"]
+        },
+        {
+            "variable": "test_data",
+            "creation": "pd.read_csv",
+            "flow": ["Result"]
+        },
+        {
+            "variable": "train_target",
+            "creation": "pd.DataFrame(train_data[\"target\"], columns=['target'])",
+            "flow": ["y_train"]
+        },
+        {
+            "variable": "X_train",
+            "creation": "train_test_split",
+            "flow": ["grid_search_model"]
+        },
+        {
+            "variable": "X_test",
+            "creation": "train_test_split",
+            "flow": ["grid_search_model"]
+        },
+        {
+            "variable": "Result",
+            "creation": "grid_search_model.predict_proba",
+            "flow": ["Result.to_csv"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "random_state=0"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+%% This is a workflow diagram generated based on the analysis of the Jupyter Notebook
+flowchart TD
+  
+  %% Node for the data source movie.csv
+  A[movie.csv] --> |Load data| B[DataFrame df1]
+  
+  %% Node for DataFrame df1
+  B --> |Used for plotting| C[plotPerColumnDistribution]
+  B --> |Used for plotting| D[plotCorrelationMatrix]
+  B --> |Used for plotting| E[plotScatterMatrix]
+
+  %% Descriptions for nodes
+  
+  A:::comment1
+  classDef comment1 fill:#f9f,stroke:#333,stroke-width:2px;
+  B:::comment2
+  classDef comment2 fill:#bbf,stroke:#333,stroke-width:2px;
+  C:::comment3
+  classDef comment3 fill:#bfb,stroke:#333,stroke-width:2px;
+  D:::comment4
+  classDef comment4 fill:#bfb,stroke:#333,stroke-width:2px;
+  E:::comment5
+  classDef comment5 fill:#bfb,stroke:#333,stroke-width:2px;
+
+  
+  
+  

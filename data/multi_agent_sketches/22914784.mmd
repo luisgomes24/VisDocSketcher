@@ -1,0 +1,36 @@
+flowchart TD
+    %% Define data sources
+    A[train.csv]:::source -->|load| B(train_data)
+    A -->|load| C(test_data)
+    
+    %% Data Processing
+    B -->|drop missing SalePrice| D[X]
+    D -->|extract SalePrice| E[y]
+    
+    %% Split Data
+    D -->|train_test_split| F[X_train_full & X_valid_full]
+    E -->|train_test_split| G[y_train & y_valid]
+    
+    %% Feature Engineering
+    F -->|select low cardinality columns| H[low_cardinality_cols]
+    F -->|select numeric columns| I[numeric_cols]
+    H & I --> J{combine}
+    J --> K[X_train, X_valid, X_test]
+    K -->|one-hot encode & align| L[X_train_processed]
+    K -->|one-hot encode & align| M[X_valid_processed]
+    K -->|one-hot encode & align| N[X_test_processed]
+    
+    %% Model Training
+    L -->|fit XGBRegressor| O[XGB Model]
+    G --> O
+    
+    %% Prediction
+    O -->|predict on X_valid| P[y_pred]
+    O -->|predict on X_test| Q[prediction]
+    Q --> R[output DataFrame]
+    R -->|save as CSV| S['submission.csv']
+    
+    %% Class definitions
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    class B,C,D,F,G,K,L,M,N,O class=process;

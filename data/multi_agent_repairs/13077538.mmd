@@ -1,0 +1,18 @@
+graph TD
+    A["features.csv"]
+    subgraph "Data Source"
+        A
+    end
+    %% This node represents the data source for features.
+
+    B["features DataFrame"]
+    subgraph "Data Preparation"
+        A -->|pd.read_csv| B
+    end
+    %% This node represents the DataFrame created with features from the CSV file.
+
+    C["Data Visualizations"]
+    subgraph "Data Analysis"
+        B -->|px.imshow / px.bar| C
+    end
+    %% This node shows the data visualizations created to analyze relationships and distributions.

@@ -1,0 +1,109 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with columns for latitude, longitude, year, week number, and emission."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data with columns for latitude, longitude, year, and week number (no emission column)."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission containing emission column, which will be populated with predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_df",
+      "description": "DataFrame containing cleaned training data with selected features: latitude, longitude, year, week_no, emission."
+    },
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame containing cleaned test data with features: latitude, longitude, year, week_no."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Features from train_df used for training the model (excluding emission)."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Features from train_df used for testing the model (excluding emission)."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Target variable, emission, from train_df used for training the model."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Target variable, emission, from train_df used for testing the model."
+    },
+    {
+      "variable_name": "preds",
+      "description": "Predictions from the RandomForestRegressor model on X_test."
+    },
+    {
+      "variable_name": "sub",
+      "description": "Final predictions based on test_df that will be written to submission.csv."
+    },
+    {
+      "variable_name": "samsub",
+      "description": "DataFrame used for submission which gets updated with predicted emission values."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_df",
+      "creation": "Read from train.csv",
+      "flows": ["Used for splitting into X_train, y_train and prepare for model training"]
+    },
+    {
+      "variable_name": "test_df",
+      "creation": "Read from test.csv",
+      "flows": ["Used to generate predictions and populate submission"]
+    },
+    {
+      "variable_name": "X_train",
+      "creation": "Created via train_test_split from train_df",
+      "flows": ["Used to train RandomForestRegressor"]
+    },
+    {
+      "variable_name": "y_train",
+      "creation": "Created via train_test_split from train_df",
+      "flows": ["Used to train RandomForestRegressor"]
+    },
+    {
+      "variable_name": "X_test",
+      "creation": "Created via train_test_split from train_df",
+      "flows": ["Used to test the model and generate predictions"]
+    },
+    {
+      "variable_name": "y_test",
+      "creation": "Created via train_test_split from train_df",
+      "flows": ["Used to evaluate model performance against predictions"]
+    },
+    {
+      "variable_name": "preds",
+      "creation": "Generated via model.predict on X_test",
+      "flows": ["Used to calculate MSE and plot predictions"]
+    },
+    {
+      "variable_name": "samsub",
+      "creation": "Read from sample_submission.csv",
+      "flows": ["Updated with final predictions from sub and saved as submission.csv"]
+    },
+    {
+      "variable_name": "sub",
+      "creation": "Generated via model.predict on test_df",
+      "flows": ["Used to update samsub and save to submission.csv"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": ["latitude", "longitude", "year", "week_no"],
+      "target_variable": "emission",
+      "hyperparameters": "Default parameters used"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "data_sources": [
+    {
+      "source": "https://raw.githubusercontent.com/tanmaydn/prml-group007/master/SMSSpamCollection?token=AQ6W2IN2KOBQCGJ674JUZLS74NJ6Y",
+      "description": "A dataset of SMS messages labeled as either ham (not spam) or spam."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the SMS messages and their labels."
+    },
+    {
+      "variable": "X",
+      "description": "Feature set containing the text of the messages."
+    },
+    {
+      "variable": "Y",
+      "description": "Target labels indicating whether a message is ham or spam."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training feature set for model training."
+    },
+    {
+      "variable": "X_test",
+      "description": "Test feature set for evaluating the model."
+    },
+    {
+      "variable": "Y_train",
+      "description": "Training target labels corresponding to X_train."
+    },
+    {
+      "variable": "Y_test",
+      "description": "Test target labels corresponding to X_test."
+    },
+    {
+      "variable": "cv1",
+      "description": "CountVectorizer instance for converting text to a matrix of token counts."
+    },
+    {
+      "variable": "tfidf",
+      "description": "TfidfVectorizer instance for transforming text to a matrix of TF-IDF features."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "flow": "Used to extract features X and target Y."
+    },
+    {
+      "variable": "X",
+      "creation_method": "df['Text']",
+      "flow": "Used for model training and evaluation."
+    },
+    {
+      "variable": "Y",
+      "creation_method": "df['Label']",
+      "flow": "Used for model training and evaluation."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Input for the Naive Bayes classifier."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "flow": "Used to evaluate model performance."
+    },
+    {
+      "variable": "Y_train",
+      "creation_method": "train_test_split",
+      "flow": "Used to train the Naive Bayes classifier."
+    },
+    {
+      "variable": "Y_test",
+      "creation_method": "train_test_split",
+      "flow": "Used to evaluate model performance."
+    },
+    {
+      "variable": "X_traincv",
+      "creation_method": "CountVectorizer.fit_transform",
+      "flow": "Used to train the MultinomialNB model."
+    },
+    {
+      "variable": "X_testcv",
+      "creation_method": "CountVectorizer.transform",
+      "flow": "Used to predict outcomes."
+    },
+    {
+      "variable": "pred",
+      "creation_method": "nb_classifier.predict",
+      "flow": "Used for calculating accuracy and confusion matrix."
+    },
+    {
+      "variable": "X_train_tf",
+      "creation_method": "TfidfVectorizer.fit_transform",
+      "flow": "Input for the second MultinomialNB model."
+    },
+    {
+      "variable": "X_test_tf",
+      "creation_method": "TfidfVectorizer.transform",
+      "flow": "Used to evaluate the second model's predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MultinomialNB",
+      "input_features": "Counts from CountVectorizer and TF-IDF features.",
+      "target_variable": "Label (ham/spam)",
+      "hyperparameters": "None specified."
+    }
+  ]
+}

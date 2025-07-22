@@ -1,0 +1,29 @@
+flowchart TD
+    %% High Resolution Images Node
+    HR["High Resolution Images"] --> |Load| HRDict["hr_image_raw_dict"]
+    
+    %% Low Resolution Images Node
+    LR["Low Resolution Images"] --> |Load| LRDict["lr_image_raw_dict"]
+    
+    %% Create x_train and y_train
+    LRDict --> |Create x_train| xTrain["x_train"]
+    HRDict --> |Create y_train| yTrain["y_train"]
+    
+    %% Model Training Node
+    subgraph Training
+        xTrain --> |Input| Model["Custom CNN Model"]
+        yTrain --> |Target| Model
+    end
+
+    %% Model Details
+    classDef classModel fill:#f9f,stroke:#333,stroke-width:4px;
+    class Model classModel;
+    
+    %% Model Hyperparameters Comment
+    class Model modelHyperparameters;
+    
+    %% Model Hyperparameters
+    Model:::modelHyperparameters --> |Optimizer: Adam(lr=0.0001)\nLoss: MSE\nMetrics: [PSNR, accuracy, SSIM]| Model
+    
+    %% Custom CNN Layers
+    Model:::classModel --> |Layers:\n Conv2D(32, kernel_size=3)\n Conv2D(64, kernel_size=3)\n Conv2D(128, kernel_size=9)\n UpSampling2D(size=(2,2))\n Dense(3)| Model

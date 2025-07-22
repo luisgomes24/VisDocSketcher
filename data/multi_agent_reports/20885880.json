@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/completelistofforeignbiotechstocks/Complete-List-of-Biotech-Stocks-on-NASDAQ-Oct-3-2021.xlsx",
+      "description": "Contains a list of biotech stocks on NASDAQ."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "biotech_tickers_nasdaq",
+      "description": "List of biotech stock tickers loaded from an Excel file."
+    },
+    {
+      "variable_name": "historical_data",
+      "description": "A dictionary holding the historical stock price data for each ticker."
+    },
+    {
+      "variable_name": "correlation_list",
+      "description": "List of correlated stock pairs and their correlation test results."
+    },
+    {
+      "variable_name": "corr",
+      "description": "Correlation threshold for identifying correlated stocks."
+    },
+    {
+      "variable_name": "cases_ratio",
+      "description": "The acceptable ratio of cases where correlation is observed."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "biotech_tickers_nasdaq",
+      "creation_method": "pd.read_excel",
+      "flow": "Used to retrieve historical stock data for each ticker."
+    },
+    {
+      "variable_name": "historical_data",
+      "creation_method": "yf.Ticker.history",
+      "flow": "Holds historical stock data that is further used for correlation analysis."
+    },
+    {
+      "variable_name": "correlation_list",
+      "creation_method": "List comprehension and DataFrame merging",
+      "flow": "Final output that provides correlated stocks based on the defined correlation criteria."
+    }
+  ],
+  "models": []
+}

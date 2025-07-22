@@ -1,0 +1,24 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    { "name": "num", "description": "A number to be rounded." },
+    { "name": "total_candies", "description": "Total number of candies to be smashed." },
+    { "name": "number_of_friends", "description": "Number of friends to share candies with, default is 3." },
+    { "name": "fn", "description": "Function passed as an argument to measure execution time." },
+    { "name": "arg", "description": "Argument passed to the function fn." },
+    { "name": "arg1", "description": "First argument for the slowest_call function." },
+    { "name": "arg2", "description": "Second argument for the slowest_call function." },
+    { "name": "arg3", "description": "Third argument for the slowest_call function." }
+  ],
+  "data_flow": [
+    { "variable": "num", "creation": "Passed in the function round_to_two_places", "flow": "Used in rounding operation." },
+    { "variable": "total_candies", "creation": "Passed in the to_smash function", "flow": "Used to calculate number of candies to smash." },
+    { "variable": "number_of_friends", "creation": "Passed in the to_smash function with a default value of 3", "flow": "Used in the calculation of candies to smash." },
+    { "variable": "fn", "creation": "Passed in as an argument in time_call and slowest_call", "flow": "Used to execute a function and measure the execution time." },
+    { "variable": "arg", "creation": "Passed in as an argument in time_call", "flow": "Used to pass to the function fn to measure its execution time." },
+    { "variable": "arg1", "creation": "Passed in the slowest_call function", "flow": "Used to call the fn function and measure time." },
+    { "variable": "arg2", "creation": "Passed in the slowest_call function", "flow": "Used to call fn function and measure time." },
+    { "variable": "arg3", "creation": "Passed in the slowest_call function", "flow": "Used to call fn function and measure time." }
+  ],
+  "models": []
+}

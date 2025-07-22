@@ -1,0 +1,31 @@
+graph TD;
+    A["Data Sources"]; 
+    A1["Play Audio"]
+    A --> A1;
+    B["Data Variables"]; 
+    B1["Predictions"]
+    B --> B1;
+    C["Data Flow"]; 
+    C1["Submission"]
+    C --> C1;
+    D["Model"]; 
+    D1["Plots"]
+    D --> D1;
+
+    ...
+
+    A -->|"audio_abe"| A1;
+    A -->|"audio_abh"| A1;
+    B -->|"model"| D;
+    D -->|"classify"| B1;
+    D1 -->|"plot"| D;
+    C1 -->|"submission.csv"| D1;
+
+    style A fill:#87CEEB;
+    style B fill:#87CEEB;
+    style C fill:#87CEEB;
+    style D fill:#C6F4D6;
+    style A1 fill:#FFCDD2;
+    style B1 fill:#F2C464;
+    style C1 fill:#F2C464;
+    style D1 fill:#FFCDD2;

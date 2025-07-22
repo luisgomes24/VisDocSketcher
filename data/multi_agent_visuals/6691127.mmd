@@ -1,0 +1,49 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/database.svg' width=100 height=100/> <br/> train.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> weather_train.csv"]
+    A4["<img src='icons/file.svg' width=100 height=100/> <br/> weather_test.csv"]
+    A5["<img src='icons/file.svg' width=100 height=100/> <br/> building_metadata.csv"]
+    
+    %% Data Ingestion
+    subgraph Data_Ingestion [Data Ingestion]
+        direction TB
+        train_ -->|read from CSV| A1
+        test_ -->|read from CSV| A2
+        weather_train_ -->|read from CSV| A3
+        weather_test_ -->|read from CSV| A4
+        metadata -->|read from CSV| A5
+    end
+
+    %% Data Preprocessing
+    subgraph Preprocessing [Preprocessing]
+        direction TB
+        train["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Training Data"] -->|filter based on building_id| train_
+        test["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Test Data"] -->|filter based on building_id| test_
+        weather_train["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Weather Train"] -->|filter based on site_id| weather_train_
+        weather_test["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Weather Test"] -->|filter based on site_id| weather_test_
+        X_train -->|merge with weather_train| train
+        X_test -->|merge with weather_test| test
+    end
+
+    %% Modeling
+    subgraph Modeling [Modeling]
+        direction TB
+        X_train -.->|use for training| Prophet_Model
+        X_test -.->|use for prediction| Prophet_Model
+        Prophet_Model["<img src='icons/brain.svg' width=100 height=100/> <br/> Prophet Model | Growth: Logistic | Changepoint Prior Scale: 0.03"]
+    end
+
+    %% Prediction & Results
+    subgraph Prediction [Prediction & Results]
+        direction TB
+        future["<img src='icons/image.svg' width=100 height=100/> <br/> Future DataFrame"] -->|for forecasting| Prophet_Model
+        preds["<img src='icons/image.svg' width=100 height=100/> <br/> Predicted Values"] -->|generated from| Prophet_Model
+    end
+
+    %% Visualization
+    Preds_Visualization["<img src='icons/image.svg' width=100 height=100/> <br/> Preds Visualization"] -->|plot preds| preds
+
+    %% Data Flows
+    Data_Ingestion --> Preprocessing --> Modeling --> Prediction --> Preds_Visualization

@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📁 Load Data"] --> B["📂 Load Images from GCS"];
+    B --> C["📊 Preprocess Images"];
+    C --> D["📷 Generate Data"];
+    D --> E["🧠 Build Generator Model"];
+    E --> F["🧪 Test Generator"];
+    F --> G["📊 Visualize Generator Output"];
+    G --> H["🧠 Build Discriminator Model"];
+    H --> I["📈 Compile Models"];
+    I --> J["🔄 Train CycleGAN"];
+    J --> K["📂 Save Models"];
+    K --> L["✅ Evaluation of Generated Images"];

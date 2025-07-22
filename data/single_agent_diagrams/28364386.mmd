@@ -1,0 +1,19 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train=pd.read_csv(...)"] --> B["🔍 Explore Data"]
+    B --> C["🧹 Preprocess Data"]
+    C --> D["📊 Feature Engineering <img src='column_split.svg'/> <br/> train=pd.get_dummies(...)"]
+    D --> E["📉 Split Data <img src='row_split.svg'/> <br/> train, test = train_test_split(...)"]
+    E --> F["🧠 Model Training <img src='brain.svg'/> <br/> automl.fit(...)"]
+    F --> G["📈 Model Evaluation"]
+    G --> H["📊 Predictions <img src='scatter_plot_template.svg'/> <br/> y_pred = automl.predict(...)"]
+    H --> I["📊 Evaluation Report <img src='barplot_template.svg'/> <br/> print(classification_report(...))"]
+
+    style A fill:#f9f, stroke:#333, stroke-width:2px
+    style B fill:#9f9, stroke:#333, stroke-width:2px
+    style C fill:#ff9, stroke:#333, stroke-width:2px
+    style D fill:#9ff, stroke:#333, stroke-width:2px
+    style E fill:#f99, stroke:#333, stroke-width:2px
+    style F fill:#ff9f, stroke:#333, stroke-width:2px
+    style G fill:#9f99, stroke:#333, stroke-width:2px
+    style H fill:#999f, stroke:#333, stroke-width:2px
+    style I fill:#9fff, stroke:#333, stroke-width:2px

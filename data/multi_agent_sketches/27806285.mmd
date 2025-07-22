@@ -1,0 +1,45 @@
+%% Data sources
+flowchart TD
+    TrainData[Train Data] -->|read_csv| df1((df1))
+    ValidData[Validation Data] -->|read_csv| valid((Validation Data))
+
+%% Data preprocessing
+    df1 -->|drop SalePrice column| X((Features X))
+    df1 -->|extract SalePrice column| y((Target y))
+    X -->|train_test_split| X_train((X_train)) & X_test((X_test))
+    y -->|train_test_split| y_train((y_train)) & y_test((y_test))
+
+%% ML Models
+    subgraph Models
+        direction LR
+        decisionTree[DecisionTreeRegressor]
+        randomForest[RandomForestRegressor]
+        svrRBF[Support Vector Regressor (RBF Kernel)]
+        svrLinear[Support Vector Regressor (Linear Kernel)]
+        knn[KNeighborsRegressor]
+        linearReg[Linear Regression]
+    end
+
+    X_train --> decisionTree
+    y_train --> decisionTree
+    X_train --> randomForest
+    y_train --> randomForest
+    X_train --> svrRBF
+    y_train --> svrRBF
+    X_train --> svrLinear
+    y_train --> svrLinear
+    X_train --> knn
+    y_train --> knn
+    X_train --> linearReg
+    y_train --> linearReg
+
+%% Predictions
+    decisionTree -->|predict| output((Output))
+    randomForest -->|predict| output
+    svrRBF -->|predict| output
+    svrLinear -->|predict| output
+    knn -->|predict| output
+    linearReg -->|predict| output
+
+%% Save Output
+    output -->|save as CSV| PredictionsFile((Predictions CSV))

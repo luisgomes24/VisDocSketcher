@@ -1,0 +1,29 @@
+flowchart TD
+
+    %% Data Source Node
+    A[\"diabetes.csv\"] -->|Load data| B[\"diabetes DataFrame\"]
+    %% Load the diabetes dataset from a CSV file
+
+    %% Data Copy Node
+    B -->|Copy data| C[\"diabetes_data DataFrame\"]
+    %% Create a copy for manipulation
+
+    %% Impute Blood Pressure
+    C -->|Calculate mean| D((mean_value_bloodpressure))
+    %% Calculate mean of BloodPressure in data
+
+    D -->|Fill missing BloodPressure| C
+    %% Impute missing BloodPressure values with calculated mean
+
+    %% Impute BMI
+    C -->|Calculate mean| E((mean_value_BMI))
+    %% Calculate mean of BMI in data
+
+    E -->|Fill missing BMI| C
+    %% Impute missing BMI values with calculated mean
+
+    %% Top Quartile Mean Blood Pressure
+    C -->|Compute Top Quartile| F((TopQuartile_MeanBloodPressure))
+    %% Calculate mean BloodPressure for top quartile of ages
+
+    %% There are no ML Models used in the code

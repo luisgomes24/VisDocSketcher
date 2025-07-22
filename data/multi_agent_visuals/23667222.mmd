@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> apps.csv"] -->|"Load and clean data"| B["<img src='dummy_plots/boxplot_template.svg'/> <br/> DataFrame apps_with_duplicates"]
+    B -->|"Remove duplicates"| C["<img src='icons/table.svg'/> <br/> DataFrame apps"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> user_reviews.csv"] -->|"Load data"| D["<img src='icons/table.svg'/> <br/> DataFrame reviews_df"]
+    %% Data Merging
+    C -->|"Merge with reviews"| E["DataFrame merged_df"]
+    D -->|"Merge with apps"| E
+    %% Data Analysis
+    E -->|"Sentiment polarity analysis"| F["Sentiment Analysis Model"]
+    C -->|"Calculate average rating"| G["<img src='dummy_plots/hist_template.svg'/> <br/> avg_app_rating"]
+    C -->|"Count apps by category"| H["<img src='dummy_plots/barplot_template.svg'/> <br/> num_apps_in_category"]
+    H -->|"Filter large categories"| I["large_categories"]
+    %% Visualizations
+    G -->|"Used in histogram plot"| J["<img src='dummy_plots/hist_template.svg'/> <br/> Histogram of Average Ratings"]
+    E -->|"Boxplot for sentiment polarity"| K["<img src='dummy_plots/boxplot_template.svg'/> <br/> Boxplot of Sentiment Polarity"]
+    H -->|"Bar plot by category"| L["<img src='dummy_plots/barplot_template.svg'/> <br/> Bar Plot of App Counts"]
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#fc9,stroke:#333,stroke-width:2px;
+    class A,A2 class dataSource;
+    class B,C,D,E,G,H,I class dataVariable;
+    class F,J,K,L class process;

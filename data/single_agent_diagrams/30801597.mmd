@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> reviews"] --> B["🔍 Group by Taster <img src='column_split.svg' /> <br/> reviews_written"]
+    A --> C["💵 Group by Price <img src='column_split.svg' /> <br/> best_rating_per_price"]
+    A --> D["🍇 Group by Variety <img src='column_split.svg' /> <br/> price_extremes"]
+    B --> E["📊 Check Taster Results <img src='barplot_template.svg' />"]
+    C --> F["📊 Check Price Results <img src='barplot_template.svg' />"]
+    D --> G["📊 Sort Varieties <img src='barplot_template.svg' /> <br/> sorted_varieties"]
+    D --> H["📊 Reviewer Mean Ratings <img src='barplot_template.svg' /> <br/> reviewer_mean_ratings"]
+    H --> I["📊 Describe Ratings <img src='barplot_template.svg' />"]
+    H --> J["🌍 MultiIndex Grouping <img src='column_split.svg' /> <br/> country_variety_counts"]
+    I --> K["🏁 End of Workflow"]

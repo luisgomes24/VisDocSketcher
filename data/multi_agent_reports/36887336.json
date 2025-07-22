@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/playground-series-s3e12/train.csv",
+      "description": "Training data (contains features and target variable)"
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e12/test.csv",
+      "description": "Test data (contains features only)"
+    },
+    {
+      "file": "/kaggle/input/playground-series-s3e12/sample_submission.csv",
+      "description": "Sample submission file format"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the training data"
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the test data"
+    },
+    {
+      "name": "X",
+      "description": "Features from training data (excluding target)"
+    },
+    {
+      "name": "y",
+      "description": "Target variable from training data"
+    },
+    {
+      "name": "valid_preds_1",
+      "description": "Predictions from the first model during validation"
+    },
+    {
+      "name": "valid_targets_1",
+      "description": "True targets for validation corresponding to the first model"
+    },
+    {
+      "name": "test_preds_1",
+      "description": "Predictions for the test set from the first model"
+    },
+    {
+      "name": "losses",
+      "description": "List of losses calculated during K-Fold validation"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created": "pd.read_csv",
+      "flows_to": ["X", "y", "valid_preds_1", "valid_preds_2", "valid_preds_3", "valid_targets_1", "valid_targets_2", "valid_targets_3"]
+    },
+    {
+      "variable": "df_test",
+      "created": "pd.read_csv",
+      "flows_to": ["test_preds_1", "test_preds_2", "test_preds_3"]
+    },
+    {
+      "variable": "X",
+      "created": "df.drop('target', axis=1)",
+      "flows_to": ["model.fit", "X_train", "X_valid", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created": "df['target']",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable": "valid_preds_1",
+      "created": "model.predict_proba",
+      "flows_to": ["losses"]
+    },
+    {
+      "variable": "test_preds_1",
+      "created": "model.predict_proba",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_type": "XGBClassifier",
+      "input_features": ["gravity", "cond", "calc"],
+      "target_variable": "target",
+      "hyperparameters": {
+        "n_estimators": 5000,
+        "learning_rate": 0.005,
+        "max_depth": 3,
+        "random_state": 2023,
+        "colsample_bytree": 0.8,
+        "subsample": 0.7,
+        "early_stopping_rounds": 100
+      }
+    },
+    {
+      "model_type": "LogisticRegression",
+      "input_features": ["preds_1", "preds_2", "preds_3"],
+      "target_variable": "target",
+      "hyperparameters": {
+        "C": 2
+      }
+    }
+  ]
+}

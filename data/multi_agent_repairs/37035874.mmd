@@ -1,0 +1,39 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["Train Data\ntrain.csv"] -->|Load using pd.read_csv| B["train_data"]
+    A2["Test Data\ntest.csv"] -->|Load using pd.read_csv| B2["test_data"]
+    A3["Sample Submission\nsample_submission.csv"] -->|Load using pd.read_csv| B3["sample_submission"]
+    
+    %% Data Preparation
+    B -->|Combine| C["Combined Data"]
+    B2 -->|Combine| C 
+    C -->|Preprocess| G["Processed Data"]
+    
+    %% Feature Engineering
+    G -->|Fill Missing Values| H["Feature Engineered Data"]
+    H -->|Extract and Transform Features| I["Transformed Data"]
+    
+    %% Model Training
+    I -->|Split Data| J{"Data Split"}
+    J -->|Training Data| K["Train CatBoostClassifier\nrrandom_state=42\nverbose=False"]
+    J -->|Test Data| L["Test Data"]
+    
+    %% Predictions
+    K --> |Make Predictions\n with CatBoostClassifier| M["Prediction Results"]
+    L --> |Prepare for Submission| M
+    M --> |Create Submission| N["submission.csv"]
+    
+    %% Comments
+    click A "Training data containing details of passengers."
+    click A2 "Test data for making predictions without target variable."
+    click A3 "Template for submission with PassengerId and Transported columns."
+    click B "DataFrame containing training passenger data."
+    click B2 "DataFrame containing test passenger data."
+    click C "Combined DataFrame of train and test data for processing."
+    click G "Processed combined data ready for model training."
+    click H "Data with extracted and engineered features ready for modeling."
+    click K "CatBoostClassifier model trained on passenger data."
+    click M "Final predictions ready for submission."
+    click N "CSV file created for competition submission."
+```

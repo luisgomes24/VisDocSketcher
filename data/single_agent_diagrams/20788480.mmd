@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data\n<img src='file.svg'/> <br/> train, test, sample_submission"] --> B["🔍 Preprocess Data"]
+    B --> C["🔧 Scale Features"]
+    C --> D["📊 Reshape Data"]
+    D --> E["🧠 Define Model"]
+    E --> F["🚀 Train Model"]
+    F --> G["📈 Plot Metrics"]
+    G --> H["📤 Submission"]
+    H --> I["📉 Compare Predictions\n<img src='lineplot_template.svg'/> <br/> Ground Truth vs Predicted"]

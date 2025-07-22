@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Dataset <img src='file.svg' /> <br/> dataset=pd.read_csv(...)"] --> B["🔍 Preview Data <img src='table.svg' /> <br/> dataset.head()"]
+    B --> C["🔧 Preprocess Data <img src='column_split.svg' /> <br/> dataset=dataset.loc[:,:'label']"]
+    C --> D["🔄 Shuffle & Reset Index <img src='table.svg' /> <br/> dataset.sample(...)"]
+    D --> E["🧭 Data Info <img src='table.svg' /> <br/> dataset.info()"]
+    E --> F["📊 Unique Counts <img src='table.svg' /> <br/> dataset.nunique()"]
+    F --> G["🗂 Split Data <img src='row_split.svg' /> <br/> data=model_data; data_unseen=unseen_data"]
+    G --> H["📦 Install PyCaret <img src='image.svg' /> <br/> !pip install pycaret"]
+    H --> I["🧠 Setup PyCaret <img src='brain.svg' /> <br/> exp_clf101 = setup(...)"]
+    I --> J["⚙️ Compare Models <img src='brain.svg' /> <br/> compare_models()"]

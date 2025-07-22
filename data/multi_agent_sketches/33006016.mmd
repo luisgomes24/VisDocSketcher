@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A[CD36importances.csv] -->|Import CSV| B(cd36_importances)
+    B -->|Process DataFrame| C(cd36_importances_new)
+    
+    D[train_cite_inputs.h5] -->|Import HDF5| E(train_cite_input_df)
+    F[train_cite_targets.h5] -->|Import HDF5| G(train_cite_target_df)
+    
+    %% Processed DataFrames
+    E -->|Rename Columns| H(dfc)
+    G -->|Extract Target| I(df_cd36)
+    
+    %% Filter and Correlation
+    H -->|Filter by Semantic List| J(dfc_sim)
+    J -->|Calculate Correlations| K(df_sim_corr)
+    I -->|Calculate Correlations| K
+
+    %% Merging and Outputs
+    K -->|Merge with Semantic Info| L(sim_df_merge)
+    K -->|Merge with PPI Info| M(ppi_df_merge)
+    
+    %% Comments for Clarity
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,D,F data_source;
+    class B,C data_processing;
+    class E,G data_import;
+    class H,I,J,K,L,M transformations;

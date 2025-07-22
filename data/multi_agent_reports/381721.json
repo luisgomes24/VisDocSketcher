@@ -1,0 +1,113 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/dog-breed-identification/labels.csv",
+      "description": "Contains breed labels for the dog images."
+    },
+    {
+      "file": "../input/dog-breed-identification/sample_submission.csv",
+      "description": "Sample submission file format for Kaggle."
+    },
+    {
+      "directory": "../input/keras-pretrained-models/",
+      "description": "Directory containing pretrained Keras model weights."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "labels",
+      "description": "DataFrame containing dog breed labels and IDs."
+    },
+    {
+      "name": "labels_pivot",
+      "description": "Pivoted DataFrame for training with one-hot encoded breed targets."
+    },
+    {
+      "name": "x_train",
+      "description": "Numpy array storing the resized images for training."
+    },
+    {
+      "name": "train_vgg_bf",
+      "description": "Extracted VGG16 bottleneck features for training images."
+    },
+    {
+      "name": "valid_vgg_bf",
+      "description": "Extracted VGG16 bottleneck features for validation images."
+    },
+    {
+      "name": "train_x_bf",
+      "description": "Extracted Xception bottleneck features for training images."
+    },
+    {
+      "name": "valid_x_bf",
+      "description": "Extracted Xception bottleneck features for validation images."
+    },
+    {
+      "name": "train_i_bf",
+      "description": "Extracted InceptionV3 bottleneck features for training images."
+    },
+    {
+      "name": "valid_i_bf",
+      "description": "Extracted InceptionV3 bottleneck features for validation images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "labels",
+      "creation": "Read from CSV file",
+      "flows_to": ["labels_pivot", "y_train"]
+    },
+    {
+      "variable": "labels_pivot",
+      "creation": "Pivot operation on labels",
+      "flows_to": ["ytr", "yv"]
+    },
+    {
+      "variable": "x_train",
+      "creation": "Image loading and preprocessing",
+      "flows_to": ["train_vgg_bf", "valid_vgg_bf", "train_x_bf", "valid_x_bf", "train_i_bf", "valid_i_bf"]
+    },
+    {
+      "variable": "train_vgg_bf",
+      "creation": "VGG16 prediction",
+      "flows_to": ["logreg (Logistic Regression model)"]
+    },
+    {
+      "variable": "valid_vgg_bf",
+      "creation": "VGG16 prediction",
+      "flows_to": ["Validation metrics output"]
+    },
+    {
+      "variable": "train_x_bf",
+      "creation": "Xception prediction",
+      "flows_to": ["logreg"]
+    },
+    {
+      "variable": "valid_x_bf",
+      "creation": "Xception prediction",
+      "flows_to": ["Validation metrics output"]
+    },
+    {
+      "variable": "train_i_bf",
+      "creation": "InceptionV3 prediction",
+      "flows_to": ["logreg"]
+    },
+    {
+      "variable": "valid_i_bf",
+      "creation": "InceptionV3 prediction",
+      "flows_to": ["Validation metrics output"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "Bottleneck features from VGG16, Xception, and InceptionV3.",
+      "target_variable": "Breed labels derived from one-hot encoded targets.",
+      "hyperparameters": {
+        "multi_class": "multinomial",
+        "solver": "lbfgs",
+        "random_state": 1987
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+flowchart TD
+    %% Node for data source
+    A["../input/shark-attack-dataset/attacks.csv"] -->|Read CSV| B["shark DataFrame"]
+    
+    %% Nodes for data processing and variables
+    B -->|Group by sex and sort| C["sharka DataFrame"]
+    B -->|Group by country and sort| D["sharkb DataFrame"]
+    B -->|Group by species and sort| E["sharkc DataFrame"]
+    
+    %% Visualization
+    C -->|Pie Chart| F["Visualization: Fatal/Non-fatal by Sex"]
+    D -->|Choropleth Map| G["Visualization: Shark Attacks by Country"]
+    D -->|Bar Plot| H["Visualization: Shark Attacks by Country - Bar"]
+    E -->|Pie Chart| I["Visualization: Most Dangerous Sharks"]

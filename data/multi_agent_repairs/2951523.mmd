@@ -1,0 +1,27 @@
+```mermaid
+flowchart TD
+    %% Node for Data Source
+    A["CSV file from Kaggle Datasets"]
+    class A node-style1
+    
+    %% Node for file path variable
+    B["my_filepath"]
+    class B node-style2
+    
+    %% Node for DataFrame
+    C["my_data"]
+    class C node-style3
+    
+    %% Data Source to file path
+    A -->|"Path defined"| B
+    
+    %% file path to DataFrame creation
+    B -->|"Load CSV"| C
+    
+    %% Node for Visualization
+    D["Visualization"]
+    class D node-style4
+
+    %% DataFrame to Visualization
+    C -->|"Used for visualization"| D
+```

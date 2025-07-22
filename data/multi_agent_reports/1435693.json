@@ -1,0 +1,76 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/wine-reviews/winemag-data-130k-v2.csv",
+            "description": "Contains reviews of various wines, including fields such as taster name, points, price, and variety."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "reviews",
+            "description": "DataFrame that holds the wine review data imported from the CSV file."
+        },
+        {
+            "variable": "common_wine_reviewers",
+            "description": "Series containing the count of reviews by each taster, indexed by taster_twitter_handle."
+        },
+        {
+            "variable": "best_wine",
+            "description": "Series containing the maximum score for each price point, indexed by price."
+        },
+        {
+            "variable": "wine_price_extremes",
+            "description": "DataFrame holding the minimum and maximum prices for each wine variety."
+        },
+        {
+            "variable": "reviewer_mean_ratings",
+            "description": "Series containing the average review scores assigned by each taster."
+        },
+        {
+            "variable": "wine_price_range",
+            "description": "DataFrame summarizing the minimum and maximum prices of wines for each variety, sorted in descending order by min price."
+        },
+        {
+            "variable": "country_variety_pairs",
+            "description": "Series that shows the count of wines grouped by a combination of country and variety, sorted in descending order."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "reviews",
+            "created_by": "pd.read_csv",
+            "flows_to": ["common_wine_reviewers", "best_wine", "wine_price_extremes", "reviewer_mean_ratings", "wine_price_range", "country_variety_pairs"]
+        },
+        {
+            "variable": "common_wine_reviewers",
+            "created_by": "groupby and count",
+            "flows_to": ["check_q1"]
+        },
+        {
+            "variable": "best_wine",
+            "created_by": "groupby and max",
+            "flows_to": ["check_q2"]
+        },
+        {
+            "variable": "wine_price_extremes",
+            "created_by": "groupby and agg",
+            "flows_to": ["check_q3"]
+        },
+        {
+            "variable": "reviewer_mean_ratings",
+            "created_by": "groupby and mean",
+            "flows_to": ["check_q4"]
+        },
+        {
+            "variable": "wine_price_range",
+            "created_by": "groupby and agg then sort_values",
+            "flows_to": ["check_q5"]
+        },
+        {
+            "variable": "country_variety_pairs",
+            "created_by": "groupby and count",
+            "flows_to": ["check_q6"]
+        }
+    ],
+    "models": []
+}

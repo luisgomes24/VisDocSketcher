@@ -1,0 +1,15 @@
+graph TD;
+    A["🗂️ Load Data <img src='icons/file.svg'/>"] --> B["📦 Unzip Data <img src='icons/file.svg'/>"];
+    B --> C["🐾 Split Dataset <img src='icons/column_split.svg'/>"];
+    C --> D["🖼️ Sample Image <img src='icons/image.svg'/>"];
+    D --> E["🔄 Resize Images <img src='icons/image.svg'/>"];
+    E --> F["📸 Prepare Image Data <img src='icons/table.svg'/>"];
+    F --> G["🔢 Convert to NumPy Array <img src='icons/table.svg'/>"];
+    G --> H["🔖 Prepare Labels (y_train) <img src='icons/table.svg'/>"];
+    H --> I["🧠 Build Model <img src='icons/brain.svg'/>"];
+    I --> J["⚙️ Compile Model <img src='icons/brain.svg'/>"];
+    J --> K["🔄 Fit Model <img src='icons/brain.svg'/>"];
+    K --> L["📊 Predictions <img src='icons/image.svg'/>"];
+    L --> M["📝 Generate Output <img src='icons/file.svg'/>"];
+    M --> N["🗑️ Cleanup <img src='icons/file.svg'/>"];
+    N --> O["🚀 Ready for Submission!"];

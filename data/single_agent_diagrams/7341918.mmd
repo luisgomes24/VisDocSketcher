@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Data Loading <img src='icons/file.svg' />"] --> B["🛠️ Data Preprocessing"]
+    B --> C["🔍 Feature Engineering"]
+    C --> D["🆕 Transforming Labels"]
+    D --> E["🔄 Encoding Frequencies"]
+    E --> F["🔒 Target Encoding"]
+    F --> G["💻 Model Initialization"]
+    G --> H["🔄 Cross-Validation"]
+    H --> I["📊 Evaluation Metrics"]
+    I --> J["💾 Store Results"]
+    J --> K["🚀 Predictions for Submission"]
+
+    A ---|> id["<img src='icons/file.svg' /> Read Data"]
+    B ---|> id_col_split["<img src='icons/column_split.svg' /> Separating Features & Target"]
+    C ---|> dummy_boxplot["<img src='dummy_plots/boxplot_template.svg' /> Boxplot Feature"]
+    D ---|> dummy_hist["<img src='dummy_plots/hist_template.svg' /> Histogram of Encoded Labels"]
+    I ---|> dummy_barplot["<img src='dummy_plots/barplot_template.svg' /> Barplot Evaluation"]
+    K ---|> dummy_lineplot["<img src='dummy_plots/lineplot_template.svg' /> Lineplot Predictions"]

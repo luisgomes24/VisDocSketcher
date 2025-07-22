@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "learntools.python.luigi_analysis.full_dataset",
+      "description": "Full dataset of race data for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "graph",
+      "description": "A matplotlib graph object that visually represents Jimmy's slot machine balance over time."
+    },
+    {
+      "name": "winner_item_counts",
+      "description": "A dictionary mapping items to the number of times those items were picked up by racers who finished in first place."
+    },
+    {
+      "name": "total1",
+      "description": "The total value of the first blackjack hand being compared."
+    },
+    {
+      "name": "total2",
+      "description": "The total value of the second blackjack hand being compared."
+    },
+    {
+      "name": "sample",
+      "description": "A sample dataset for testing the best_items function containing racers' finish and items."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "graph",
+      "creation": "Created by calling jimmy_slots.get_graph()",
+      "flow": "Passed to the prettify_graph function for modification and plotted."
+    },
+    {
+      "variable": "winner_item_counts",
+      "creation": "Created in the best_items function as a dictionary.",
+      "flow": "Returned as output from the best_items function."
+    },
+    {
+      "variable": "sample",
+      "creation": "Defined as a list of dictionaries for testing best_items function.",
+      "flow": "Used as input to the best_items function."
+    },
+    {
+      "variable": "total1",
+      "creation": "Calculated within the blackjack_hand_greater_than function from hand_1.",
+      "flow": "Used to determine if hand_1 beats hand_2."
+    },
+    {
+      "variable": "total2",
+      "creation": "Calculated within the blackjack_hand_greater_than function from hand_2.",
+      "flow": "Used to determine if hand_1 beats hand_2."
+    }
+  ],
+  "models": []
+}

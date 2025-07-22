@@ -1,0 +1,13 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: None<br/> "];
+    B(["<img src='icons/column_split.svg' width=100 height=100/> <br/> year<br/>Input year for Easter calculation<br/> "]);
+    C["<img src='icons/table.svg' width=100 height=100/> <br/> d1<br/>March 21 date string<br/> "];
+    D[["<img src='icons/row_split.svg' width=100 height=100/> <br/> d2<br/>Full moon date after d1<br/> "]];
+    E[["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> d3<br/>Convert d2 into date object<br/> "]];
+    F["<img src='icons/brain.svg' width=100 height=100/> <br/> d4<br/>First Sunday after full moon<br/> "];
+    
+    A --> B;
+    B --> C;
+    C --> D;
+    D --> E;
+    E --> F;

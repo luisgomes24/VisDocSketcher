@@ -1,0 +1,28 @@
+%% Mermaid.js flowchart for Jupyter Notebook workflow (19040593.ipynb)
+flowchart TD
+    %%%% Data Source Nodes
+    A["User Input (Favorite Color)"]
+    
+    %%%% Data Variable Nodes
+    B["<img src='path/to/plot.svg' /> <br/> String: color"]
+    C["<img src='path/to/plot.svg' /> <br/> Float: pi ≈ 3.14159"]
+    D["<img src='path/to/plot.svg' /> <br/> Integer: diameter"]
+    E["<img src='path/to/plot.svg' /> <br/> Float: radius"]
+    F["<img src='path/to/plot.svg' /> <br/> Float: area"]
+    G["<img src='path/to/plot.svg' /> <br/> List: a"]
+    H["<img src='path/to/plot.svg' /> <br/> List: b"]
+    I["<img src='path/to/plot.svg' /> <br/> Integer: to_smash"]
+    J["<img src='path/to/plot.svg' /> <br/> Integer: alice_candies"]
+    K["<img src='path/to/plot.svg' /> <br/> Integer: bob_candies"]
+    L["<img src='path/to/plot.svg' /> <br/> Integer: carol_candies"]
+    
+    %%%% Data Transformation and Flow
+    A --> B
+    C --> F
+    D --> E
+    E --> F
+    F -->|Checked by q1.check()| F2["Area Check"]
+    G & H -->|Value Swap| G2["Lists Swapped"]
+    J & K & L --> M["Total Candies"]
+    M --> I
+    I -->|Checked by q4.check()| I2["Smash Check"]

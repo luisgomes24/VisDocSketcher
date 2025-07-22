@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Source
+    iris_csv(["Iris.csv"]) -->|Read CSV| iris
+    
+    %% Data Preparation
+    iris -->|train_test_split| x_train & x_test & y_train & y_test
+    
+    %% Model Training
+    x_train & y_train -->|Fit| LR["Logistic Regression Model"]
+    
+    %% Prediction
+    x_test -->|Predict| LR
+    
+    %% Evaluation
+    LR -->|Score| y_test
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:4px;
+    class iris_csv dataSource;
+    class LR model;
+    
+    %% Annotations
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5;
+    class iris dataNode;
+    class x_train dataNode;
+    class x_test dataNode;
+    class y_train dataNode;
+    class y_test dataNode;

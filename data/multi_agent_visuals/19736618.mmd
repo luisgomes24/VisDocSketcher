@@ -1,0 +1,35 @@
+%% Workflow for data science project based on Jupyter Notebook analysis
+flowchart TD
+  
+  %% Data Sources
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|read_csv| B["<img src='icons/table.svg' width=100 height=100/> <br/> X_full"]
+  A1["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] -->|read_csv| B1["<img src='icons/table.svg' width=100 height=100/> <br/> X_test_full"]
+  
+  %% Data Preparation
+  B["<img src='icons/table.svg' width=100 height=100/> <br/> X_full"] -->|Select Features| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]
+  C["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"] -->|Train-Test Split| D{"Split"}
+  D -->|Train Features| E["<img src='icons/table.svg' width=100 height=100/> <br/> X_train"]
+  D -->|Validation Features| F["<img src='icons/table.svg' width=100 height=100/> <br/> X_valid"]
+  B -->|Extract Target| G["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+  G["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"] -->|Train-Test Split| H{"Split"}
+  H -->|Train Target| I["<img src='icons/table.svg' width=100 height=100/> <br/> y_train"]
+  H -->|Validation Target| J["<img src='icons/table.svg' width=100 height=100/> <br/> y_valid"]
+  
+  %% Model Training
+  subgraph Training
+    E --> K1["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmodel_1"]
+    E --> K2["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmodel_2"]
+    E --> K3["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmodel_3"]
+    E --> K4["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmodel_4"]
+    E --> K5["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor\nmodel_5"]
+  end
+  
+  %% Best Model Selection
+  K3 -->|Selected| M["<img src='icons/brain.svg' width=100 height=100/> <br/> Best Model - model_3"]
+  
+  %% Prediction
+  B1["<img src='icons/table.svg' width=100 height=100/> <br/> X_test_full"] -->|Predict with Best Model| N["<img src='icons/table.svg' width=100 height=100/> <br/> preds_test"]
+  
+  %% Output
+  N["<img src='icons/table.svg' width=100 height=100/> <br/> preds_test"] -->|Create Submission| O["<img src='icons/table.svg' width=100 height=100/> <br/> output DataFrame"]
+  O -->|Save to CSV| P["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]

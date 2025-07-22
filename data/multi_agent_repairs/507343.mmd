@@ -1,0 +1,58 @@
+```mermaid
+flowchart TD
+
+%% Data Source Nodes
+sub_200_ens_densenet["sub_200_ens_densenet.csv"]:::data_source
+sub_TF_keras["sub_TF_keras.csv"]:::data_source
+sub_fcn["sub_fcn.csv"]:::data_source
+sub_blend009["sub_blend009.csv"]:::data_source
+sub_keras_beginner["sub_keras_beginner.csv"]:::data_source
+
+%% Data Processing Nodes
+concat_sub["concat_sub DataFrame
+- Concatenated submissions"]:::data_var
+cutoff_lo["cutoff_lo
+- Lower cutoff threshold"]:::data_var
+cutoff_hi["cutoff_hi
+- Upper cutoff threshold"]:::data_var
+
+%% Model Nodes
+stacking_method["Stacking Method
+- Utilizing is_iceberg variations"]:::model
+stacking_variations{{"Stacking Variations
+- Mean Stacking
+- Median Stacking
+- Pushout + Median
+- MinMax + Mean
+- MinMax + Median
+- MinMax + BestBase"}}:::model
+
+%% Output Nodes
+csv_files["CSV Outputs
+- stack_mean.csv
+- stack_median.csv
+- ..."]:::output
+
+%% Styles
+classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+classDef output fill:#ff9,stroke:#333,stroke-width:2px;
+
+%% Data Source to Processing Flow
+sub_200_ens_densenet -->|Concatenate| concat_sub
+sub_TF_keras -->|Concatenate| concat_sub
+sub_fcn -->|Concatenate| concat_sub
+sub_blend009 -->|Concatenate| concat_sub
+sub_keras_beginner -->|Concatenate| concat_sub
+
+%% Processing to Model Flow
+concat_sub --> stacking_method
+cutoff_lo --> stacking_method
+cutoff_hi --> stacking_method
+
+%% Model to Output Flow
+stacking_method --> stacking_variations
+stacking_variations -->|Export Results| csv_files
+
+```

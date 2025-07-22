@@ -1,0 +1,17 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🔍 Explore Dataset"]
+    B --> C["🗂️ Read CSV File"]
+    C --> D["📊 Preview Data"]
+    D --> E["📊 Distribution Graphs"]
+    E --> F["📊 Plot Distribution of Columns"]
+    A --> G["📁 Load Data"]
+    G --> H["🔍 Explore Next Dataset"]
+    H --> I["🗂️ Read CSV File"]
+    I --> J["📊 Preview Data"]
+    J --> K["📊 Distribution Graphs"]
+    K --> F
+    G --> L["🔍 Explore Another Dataset"]
+    L --> M["🗂️ Read CSV File"]
+    M --> N["📊 Preview Data"]
+    N --> O["📊 Distribution Graphs"]
+    O --> F

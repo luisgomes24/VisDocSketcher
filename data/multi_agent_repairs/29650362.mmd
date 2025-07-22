@@ -1,0 +1,62 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["Insurance CSV"] -->|Load data| B["data"]
+    
+    %% Data Preprocessing
+    B -->|One-hot encode categorical variables| C["encoded_data"]
+    C -->|Remove outliers based on BMI| D["clean_data"]
+    D -->|Separate features and target variable| E["X"], F["y"]
+    
+    %% Train-Test Split
+    E -->|Train-test split| G["X_train"], H["X_test"]
+    F -->|Train-test split| I["y_train"], J["y_test"]
+    
+    %% Models
+    subgraph RegressionModels
+        direction TB
+        K["Linear Regression"]
+        L["KNeighborsRegressor"]
+        M["DecisionTreeRegressor"]
+        N["RandomForestRegressor"]
+        O["AdaBoostRegressor"]
+        P["GradientBoostingRegressor"]
+        Q["XGBoost"]
+    end
+    
+    %% Training and Evaluation
+    G -->|Train model| K
+    I -->|Train model| K
+    H -->|Evaluate model| R["r2_scores"]
+    J -->|Evaluate model| R
+    
+    G -->|Train model| L
+    I -->|Train model| L
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+    
+    G -->|Train model| M
+    I -->|Train model| M
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+
+    G -->|Train model| N
+    I -->|Train model| N
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+
+    G -->|Train model| O
+    I -->|Train model| O
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+
+    G -->|Train model| P
+    I -->|Train model| P
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+
+    G -->|Train model| Q
+    I -->|Train model| Q
+    H -->|Evaluate model| R
+    J -->|Evaluate model| R
+```

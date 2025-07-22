@@ -1,0 +1,6 @@
+flowchart TD
+    A["📄 Load Dataset <img src='dummy_plots/barplot_template.svg' /> <br/> Read CSV"] --> B["🧼 Text Data Pre-processing <img src='dummy_plots/boxplot_template.svg' /> <br/> Clean Text"]
+    B --> C["🔄 One Hot Representation <img src='dummy_plots/hist_template.svg' /> <br/> Convert Text to Vectors"]
+    C --> D["🔁 Padding Sequence <img src='dummy_plots/lineplot_template.svg' /> <br/> Ensure Equal Length"]
+    D --> E["🧠 Build LSTM Model <img src='dummy_plots/scatter_plot_template.svg' /> <br/> Train Model"]
+    E --> F["✅ Evaluate Model <img src='dummy_plots/barplot_template.svg' /> <br/> Check Accuracy"]

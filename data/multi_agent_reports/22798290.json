@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file": "student_clustering.csv",
+      "description": "Dataset containing student CGPA and IQ for clustering analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing student data loaded from CSV"
+    },
+    {
+      "name": "x",
+      "description": "Numpy array of the features (CGPA and IQ) extracted from the DataFrame"
+    },
+    {
+      "name": "y_means",
+      "description": "Labels indicating the cluster assignments for each data point"
+    },
+    {
+      "name": "cluster_1, cluster_2, cluster_3, cluster_4",
+      "description": "DataFrames containing the CGPA and IQ for each of the 4 clusters"
+    },
+    {
+      "name": "wcss",
+      "description": "List containing the Within-Cluster Sum of Squares for different cluster counts"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Read from CSV using pd.read_csv",
+      "flow": "Used for plotting and clustering analysis"
+    },
+    {
+      "variable": "x",
+      "creation": "Extracted from data using iloc",
+      "flow": "Used for fitting KMeans model"
+    },
+    {
+      "variable": "y_means",
+      "creation": "Generated from KMeans fit_predict",
+      "flow": "Used for creating cluster DataFrames and plotting"
+    },
+    {
+      "variable": "cluster_1, cluster_2, cluster_3, cluster_4",
+      "creation": "Created from array slicing based on y_means",
+      "flow": "Used for visualizing the clusters"
+    },
+    {
+      "variable": "wcss",
+      "creation": "Calculated during the elbow method loop",
+      "flow": "Used for plotting to determine optimal number of clusters"
+    }
+  ],
+  "models": [
+    {
+      "model": "KMeans",
+      "input_features": ["CGPA", "IQ"],
+      "target_variable": "Clusters",
+      "hyperparameters": {"n_clusters": 4}
+    }
+  ]
+}

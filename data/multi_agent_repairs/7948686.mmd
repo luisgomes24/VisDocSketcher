@@ -1,0 +1,5 @@
+flowchart TD
+    A[("db_books.csv")]:::dataSource --> |"pd.read_csv"| B["df1"]:::dataVariable
+    C[("stories.csv")]:::dataSource --> |"pd.read_csv"| D["df2"]:::dataVariable
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

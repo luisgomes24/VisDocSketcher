@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "source": "BigQuery Dataset",
+      "description": "The dataset 'github_repos' contains tables with GitHub commit information and programming languages used in repositories."
+    },
+    {
+      "source": "sample_commits",
+      "description": "A table within the 'github_repos' dataset containing a sample of GitHub commits."
+    },
+    {
+      "source": "languages",
+      "description": "A table within the 'github_repos' dataset containing programming languages and their sizes in various repositories."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "client",
+      "description": "BigQuery client object for interacting with Google BigQuery."
+    },
+    {
+      "name": "sample_commits_table",
+      "description": "Table representing a sample of GitHub commits queried from 'sample_commits'."
+    },
+    {
+      "name": "languages_table",
+      "description": "Table representing programming languages used in GitHub repositories queried from 'languages'."
+    },
+    {
+      "name": "max_commits_query",
+      "description": "SQL query to fetch the number of commits per committer in 2016."
+    },
+    {
+      "name": "pop_lang_query",
+      "description": "SQL query to fetch the most popular programming languages based on their usage in repositories."
+    },
+    {
+      "name": "all_langs_query",
+      "description": "SQL query to fetch programming languages used in the repository 'polyrabbit/polyglot'."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sample_commits_table",
+      "creation": "Fetched from BigQuery using client.get_table()",
+      "flow": "Used in the query max_commits_query."
+    },
+    {
+      "variable": "languages_table",
+      "creation": "Fetched from BigQuery using client.get_table()",
+      "flow": "Used in queries pop_lang_query and all_langs_query."
+    },
+    {
+      "variable": "max_commits_query",
+      "creation": "Defined as a SQL query string",
+      "flow": "Executed to find the most commits in 2016."
+    },
+    {
+      "variable": "pop_lang_query",
+      "creation": "Defined as a SQL query string",
+      "flow": "Executed to find the most popular languages."
+    },
+    {
+      "variable": "all_langs_query",
+      "creation": "Defined as a SQL query string",
+      "flow": "Executed to find languages used in a specific repository."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,64 @@
+{
+  "data_sources": [
+    {
+      "file_name": "oyuncu.csv",
+      "description": "Dataset containing player statistics"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Main DataFrame that stores player data"
+    },
+    {
+      "name": "cat_deg",
+      "description": "List of categorical variables in the dataset"
+    },
+    {
+      "name": "num_deg",
+      "description": "List of numeric variables in the dataset"
+    },
+    {
+      "name": "car_deg",
+      "description": "List of cardinal categorical variables in the dataset"
+    },
+    {
+      "name": "aybars",
+      "description": "Averages of player statistics grouped by player name"
+    },
+    {
+      "name": "df_pca",
+      "description": "DataFrame containing PCA transformed data with features and player names"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flow": "Used for data processing and feature extraction"
+    },
+    {
+      "variable": "aybars",
+      "created_by": "df.groupby('Player_name').mean()",
+      "flow": "Used for preprocessing and clustering"
+    },
+    {
+      "variable": "df_pca",
+      "created_by": "pca.fit_transform(aybars[num_deg])",
+      "flow": "Used in clustering and visualization"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": "aybars[num_deg]",
+      "num_clusters": 10,
+      "description": "Clustering model to group players"
+    },
+    {
+      "model_name": "PCA",
+      "components": 2,
+      "description": "Dimensionality reduction technique to visualize player data"
+    }
+  ]
+}

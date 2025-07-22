@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_name": "exchange_rates.csv",
+      "description": "Contains historical currency exchange rates, with date, currency type, and country information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dataset",
+      "description": "Pandas DataFrame containing the full dataset of currency exchange rates."
+    },
+    {
+      "variable_name": "data_usd",
+      "description": "Subset of dataset filtered for values in USD."
+    },
+    {
+      "variable_name": "data_inr",
+      "description": "Subset of dataset filtered for values in INR."
+    },
+    {
+      "variable_name": "train_data",
+      "description": "Training data extracted from INR dataset for model training."
+    },
+    {
+      "variable_name": "test_data",
+      "description": "Testing data extracted from INR dataset for evaluating model performance."
+    },
+    {
+      "variable_name": "train_X",
+      "description": "Supervised input features for the training set."
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Supervised output variable for the training set."
+    },
+    {
+      "variable_name": "test_X",
+      "description": "Supervised input features for the test set."
+    },
+    {
+      "variable_name": "test_y",
+      "description": "Supervised output variable for the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "dataset",
+      "creation_method": "pd.read_csv",
+      "flows_to": "data_usd, data_inr"
+    },
+    {
+      "variable_name": "data_usd",
+      "creation_method": "Filtering dataset for 'USD' currency",
+      "flows_to": "Visualization (display_usd)"
+    },
+    {
+      "variable_name": "data_inr",
+      "creation_method": "Filtering dataset for 'INR' currency",
+      "flows_to": "Time series analysis, model training and visualization (display_inr)"
+    },
+    {
+      "variable_name": "train_data",
+      "creation_method": "80% split of data_inr['value']",
+      "flows_to": "Train model"
+    },
+    {
+      "variable_name": "test_data",
+      "creation_method": "20% split of data_inr['value']",
+      "flows_to": "Evaluate model"
+    },
+    {
+      "variable_name": "train_X",
+      "creation_method": "split_sequence(train_data, lag)",
+      "flows_to": "Model fitting"
+    },
+    {
+      "variable_name": "train_y",
+      "creation_method": "split_sequence(train_data, lag)",
+      "flows_to": "Model fitting"
+    },
+    {
+      "variable_name": "test_X",
+      "creation_method": "split_sequence(test_data, lag)",
+      "flows_to": "Model evaluation"
+    },
+    {
+      "variable_name": "test_y",
+      "creation_method": "split_sequence(test_data, lag)",
+      "flows_to": "Model evaluation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LSTM",
+      "input_features": "train_X",
+      "target_variable": "train_y",
+      "hyperparameters": {
+        "units": 16,
+        "activation": "relu",
+        "optimizer": "adam",
+        "loss": "mse"
+      }
+    }
+  ]
+}

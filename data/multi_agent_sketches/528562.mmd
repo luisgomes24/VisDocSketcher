@@ -1,0 +1,68 @@
+flowchart TD
+    %% Nodes representing data sources
+    A[Train Data (train.csv)] -->|Load Data| B[df_train]
+    C[Test Data (test.csv)] -->|Load Data| D[df_test]
+
+    %% Nodes for data variables and processes
+    B -->|Reshape and Normalize| E[train_images]
+    E -->|Preprocess for GAN| F[X_train_real]
+
+    D -->|Reshape and Normalize| G[test_images]
+    G -->|Preprocess for Evaluation| H[X_test_real]
+
+    %% GAN related nodes
+    subgraph GAN_Model
+        direction LR
+        I[Generator]
+        J[GAN] --> I
+        K[Discriminator] --> J
+    end
+
+    %% Loss and Training
+    F -->|Train GAN| J
+    J -->|Store Loss| L[losses]
+
+    %% Annotations
+    F:::dataVar --> I:::modelNode
+    H:::dataVar --> K:::modelNode
+
+    %% Class Definitions
+    classDef dataVar fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    classDef className fill:#f96,font-family:monospace;
+    classDef classDesc fill:#fff,stroke:none;
+
+    %% Data Source Comments
+    class A className;
+    class A classDesc;
+
+    class C className;
+    class C classDesc;
+
+    %% Data Variable Comments
+    class B className;
+    class B classDesc;
+
+    class D className;
+    class D classDesc;
+
+    class E className;
+    class E classDesc;
+
+    class F className;
+    class F classDesc;
+
+    class G className;
+    class G classDesc;
+
+    class H className;
+    class H classDesc;
+
+    %% GAN and Loss Tracking Comments
+    class J className;
+    class J classDesc;
+
+    class L className;
+    class L classDesc;

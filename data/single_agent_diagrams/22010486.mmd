@@ -1,0 +1,24 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' />"] --> B["🔍 EDA"]
+    B --> C["📊 Describe Data"]
+    B --> D["🔎 Info Data"]
+    B --> E["🧐 Check Missing Values"]
+    B --> F["📈 Correlation Analysis <img src='dummy_plots/heatmap_template.svg' />"]
+    B --> G["📊 Histograms Visualization <img src='dummy_plots/hist_template.svg' />"]
+    B --> H["📊 Histograms Visualization - Part 2 <img src='dummy_plots/hist_template.svg' />"]
+    
+    H --> I["🛠️ Data Preparation"]
+    I --> J["📊 Target Variable Dataframe"]
+    I --> K["❌ Drop Target Column"]
+    I --> L["🧮 Column Selection"]
+    I --> M["⚖️ Standard Scaling"]
+    I --> N["🔄 Train-Test Split"]
+    
+    N --> O["🧠 Model Creation"]
+    O --> P["⚙️ Logistic Regression Instantiation"]
+    O --> Q["🔍 Hyperparameter Tuning (optional)"]
+    Q --> R["✔️ Fit Model (optional)"]
+    R --> S["📈 Evaluate Model (optional)"]
+    
+    S --> T["📤 Prepare Submission"]
+    T --> U["📈 Save Results"]

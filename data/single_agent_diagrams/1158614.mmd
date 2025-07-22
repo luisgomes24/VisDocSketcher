@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Libraries & Data"] --> B["🔍 Take a First Look at Data"]
+    B --> C["🧮 Check for Missing Values"]
+    C --> D["📉 Count Missing Values per Column"]
+    D --> E["🔍 Analyze Reasons for Missing Data"]
+    E --> F["✖️ Drop Missing Values"]
+    F --> G["🧹 Fill Missing Values"]
+
+    A -->|Contains data| B
+    B -->|Inspect data| C
+    C -->|Identify missing data| D
+    D -->|Evaluate scale| E
+    E -->|Determine action| F
+    F -->|Clean data| G
+
+    E --> |Consider Imputation| G  

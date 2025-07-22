@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Load Dataset <img src='icons/file.svg'/>"] --> B["🔍 Explore Data"]
+    B --> C["🔄 Preprocess Data"]
+    C --> D["🧠 Build Model"]
+    D --> E["📊 Visualize Training <img src='dummy_plots/hist_template.svg'/> <br/> Accuracy and Loss"]
+    E --> F["📈 Evaluate Model"]
+    F --> G["📝 Save Model"]
+
+    B --> H["📊 Data Overview <img src='dummy_plots/boxplot_template.svg'/>"]
+    B --> I["📊 Countplot Diagnosis <img src='dummy_plots/barplot_template.svg'/>"]
+
+    E --> J["🌀 Confusion Matrix <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Test Data Predictions"]

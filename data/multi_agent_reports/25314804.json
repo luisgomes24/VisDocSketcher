@@ -1,0 +1,19 @@
+{
+  "data_sources": [
+    {"file": "tmdb_5000_credits.csv", "description": "Contains movie credits, including cast and crew information."},
+    {"file": "tmdb_5000_movies.csv", "description": "Contains metadata about the movies, such as title, overview, and genre."}
+  ],
+  "data_variables": [
+    {"variable": "credits", "description": "DataFrame containing the movie credits information."},
+    {"variable": "movies", "description": "DataFrame containing the movie metadata."},
+    {"variable": "df", "description": "Merged DataFrame containing both credits and movies information."},
+    {"variable": "new_df", "description": "DataFrame containing movie ID, title, and tags generated from various features."}
+  ],
+  "data_flow": [
+    {"variable": "credits", "creation": "pd.read_csv('../input/tmdb-movie-metadata/tmdb_5000_credits.csv')", "use": "Merged into df"},
+    {"variable": "movies", "creation": "pd.read_csv('../input/tmdb-movie-metadata/tmdb_5000_movies.csv')", "use": "Merged into df"},
+    {"variable": "df", "creation": "movies.merge(credits, on='title')", "use": "Used to create new_df with relevant tags"},
+    {"variable": "new_df", "creation": "df[['movie_id','title','tags']]", "use": "Prepared for recommendations based on tags"}
+  ],
+  "models": []
+}

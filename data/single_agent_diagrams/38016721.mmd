@@ -1,0 +1,20 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 Preview Data"]
+    B --> C["🔍 Check Data Info"]
+    C --> D["⚠️ Handle Missing Values"]
+    D --> E["🔧 Data Processing"]
+    E --> F["📉 Data Visualization"]
+    F --> G["🧠 Train/Test Split"]
+    G --> H["📈 Model Training"]
+    H --> I["📊 Evaluate Model"]
+    I --> J["📊 Results"]
+    
+    A -->|read train.csv| B
+    D -->|drop Cabin| E
+    D -->|fill Age and Embarked| E
+    E -->|one-hot encode Embarked| F
+    F -->|visualize survival rate| F
+    F -->|visualize gender count| F
+    F -->|visualize class distribution| F
+    H -->|logistic regression| I
+    H -->|random forest| I

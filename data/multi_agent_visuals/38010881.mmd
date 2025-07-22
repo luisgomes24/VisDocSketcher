@@ -1,0 +1,34 @@
+flowchart TD
+
+%% Data Sources
+subgraph Data Sources
+  DS1["train.csv\nTraining dataset containing features and target variable (Attrition)"]
+  DS2["test.csv\nTesting dataset (not used directly in training)"]
+  DS3["sample_submission.csv\nExample submission format (not used in modeling)"]
+end
+
+%% Data Variables
+subgraph Data Variables
+  V1["train\nDataFrame containing the training data"]
+  V2["test\nDataFrame containing the test data"]
+  V3["submission\nDataFrame for the submission format"]
+  V4["y\nTarget variable series (Attrition)"]
+  V5["X\nFeature DataFrame (Age, DistanceFromHome, TotalWorkingYears)"]
+  V6["lr\nLogistic Regression trained model"]
+  V7["y_train_predictions\nPredicted Attrition for training data"]
+end
+
+%% Data Flow and Model
+DS1 --> |load via pd.read_csv| V1
+DS2 --> |load via pd.read_csv| V2
+DS3 --> |load via pd.read_csv| V3
+
+V1 --> |extract| V4
+V1 --> |extract| V5
+
+V4 --> |input| V6
+V5 --> |input| V6
+
+V6 --> |train Logistic Regression with class_weight=balanced| V7
+
+V7 --> |exported predictions| V1

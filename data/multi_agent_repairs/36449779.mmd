@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+
+%% Data Source
+A["Image Dataset\n'Russell's Viper and Indian Rock Python Dataset'"]
+
+%% Data Variables
+B["data_dir\nPath to the dataset directory"]
+C["filepaths\nList of image file paths"]
+D["labels\nList of image labels"]
+E["df\nDataFrame of filepaths and labels"]
+F["train_df\nTraining DataFrame"]
+G["valid_df\nValidation DataFrame"]
+H["test_df\nTest DataFrame"]
+I["dls\nImageDataLoaders object"]
+J["learn\nCNN Learner with efficientnet_b3"]
+K["preds\nModel predictions on validation set"]
+L["y\nTrue labels for validation set"]
+M["loss\nCalculated loss on validation set"]
+N["interp\nModel interpretation and error analysis"]
+
+%% Data Flow
+A --> B
+B --> C
+B --> D
+C --> E
+D --> E
+E --> F
+E --> G
+E --> H
+F --> I
+I --> J
+J --> K
+J --> L
+J --> M
+J --> N
+
+%% Models
+J --> |"efficientnet_b3\nMetrics: accuracy, error_rate\nTraining Cycles: 30\nData Type: fp16"| K
+```

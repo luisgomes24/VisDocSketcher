@@ -1,0 +1,42 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff7e6'}}}%%
+flowchart TD
+    subgraph Data_Sources
+        A1["../input/nflplaybyplay2015.csv"]
+        A2["../input/standings2015.csv"]
+    end
+    subgraph Data_Variables
+        B1["all_plays"]
+        B2["fourth_plays"]
+        B3["attempts"]
+        B4["punts"]
+        B5["field_goals"]
+        B6["standings15"]
+    end
+    subgraph Processing
+        C1["Filter 4th down plays"]
+        C2["Extract play attempts"]
+        C3["Extract punts"]
+        C4["Extract field goals"]
+        C5["Merge standings"]
+        C6["OLS Regression"]
+    end
+    A1 -->|read_csv| B1
+    B1 -->|filter 'down'==4| C1
+    C1 --> B2
+    B2 -->|Play Attempt filter| C2
+    B2 -->|Punt filter| C3
+    B2 -->|Field Goal filter| C4
+    C2 --> B3
+    C3 --> B4
+    C4 --> B5
+    A2 -->|read_csv| B6
+    B6 -->|merge| C5
+    C5 -->|analyze 4th down vs win| C6
+    C2 -->|input: PercentAttempts| C6
+    C6 -->|target: Win| D1["OLS Model"]
+    
+    %% Comments for clarity on each node's role
+    %% Data_Sources contains initial datasets used in the notebook
+    %% Data_Variables represents processing steps to refine the data
+    %% Processing includes data filtering, extraction, merging, and modeling
+    

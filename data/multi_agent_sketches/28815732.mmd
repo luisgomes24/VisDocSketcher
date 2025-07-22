@@ -1,0 +1,19 @@
+flowchart TD
+    %% Node for Data Source
+    A["../input/mayo-clinic-strip-ai/test/*.tif"]
+    click A "../input/mayo-clinic-strip-ai/test/" "TIF images from Mayo Clinic strip AI test dataset."
+    %% Node for image_paths
+    B[image_paths]
+    click B "." "List of paths to the TIF images."
+    %% Node for image
+    C[image]
+    click C "." "Single image loaded from the image_paths."
+    %% Node for tiles
+    D[tiles]
+    click D "." "Array of image tiles created from the loaded image."
+
+    %% Data flow connections
+    A -->|"list TIF files"| B
+    B -->|"load images for processing"| C
+    C -->|"create tiles"| D
+    

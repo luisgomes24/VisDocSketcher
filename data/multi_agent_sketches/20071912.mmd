@@ -1,0 +1,46 @@
+flowchart TD
+  %% Data Sources
+  A[Crime Data CSV]:::dataSource -->|Load| B[Crime DataFrame]
+
+  %% Data Preprocessing
+  B -->|Drop columns, Handle NaNs| C[Preprocessed Crime Data]
+  C -->|Subset| D[crimes_distribution]
+  C -->|MinMax Scaling| E[crimes_scaled]
+
+  %% Data for Visualization
+  D -->|Distribution| F[Plotting Features]
+  E -->|Heatmap & Barplots| G[Visualization]
+
+  %% Feature and Label Selection for Modeling
+  C -->|Select Numeric Features| H[train_features]
+  C -->|Extract Crm Cd Log| I[train_label]
+
+  %% Splitting the Data
+  H -->|train_test_split| J[X_train]
+  H -->|train_test_split| K[X_test]
+  I -->|train_test_split| L[y_train]
+  I -->|train_test_split| M[y_test]
+
+  %% Models
+  J -->|Training| N[Logistic Regression]
+  L -->|Training| N
+  N --> O[Evaluate Logistic]
+  
+  H -->|Training| P[Decision Tree Regressor]
+  I -->|Training| P
+  P --> Q[Evaluate Decision Tree]
+  
+  H -->|Training| R[Random Forest Regressor]
+  I -->|Training| R
+  R --> S[Evaluate Random Forest]
+  
+  H -->|Training| T[Gradient Boosting Regressor]
+  I -->|Training| T
+  T --> U[Evaluate Gradient Boosting]
+
+  H -->|Training| V[LightGBM Regressor]
+  I -->|Training| V
+  V --> W[Evaluate LightGBM]
+
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef preprocessing fill:#bbf,stroke:#f66,stroke-width:2px;

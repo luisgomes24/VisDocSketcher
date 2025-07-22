@@ -1,0 +1,100 @@
+{
+  "data_sources": [
+    {
+      "file": "questions_only.csv",
+      "description": "Contains the text of the survey questions asked."
+    },
+    {
+      "file": "multiple_choice_responses.csv",
+      "description": "Contains survey respondents' multiple choice answers."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "multiple_choice",
+      "description": "DataFrame containing the responses to multiple choice survey questions."
+    },
+    {
+      "variable": "df",
+      "description": "Filtered DataFrame containing only responses from Students and Data Scientists, ready for modeling."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable, the role of the survey respondents, specifically whether they are Data Scientists or Students."
+    },
+    {
+      "variable": "Xs",
+      "description": "DataFrame containing features (survey responses) used to predict the target variable."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set feature DataFrame."
+    },
+    {
+      "variable": "X_valid",
+      "description": "Validation set feature DataFrame."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set target variable (roles of respondents) for model training."
+    },
+    {
+      "variable": "y_valid",
+      "description": "Validation set target variable for evaluating model performance."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "multiple_choice",
+      "creation": "pd.read_csv('/kaggle/input/kaggle-survey-2019/multiple_choice_responses.csv')",
+      "flows_to": ["df", "y", "Xs"]
+    },
+    {
+      "variable": "df",
+      "creation": "Filtered DataFrame to include only students and data scientists.",
+      "flows_to": ["y", "Xs", "X_train", "X_valid", "y_train", "y_valid"]
+    },
+    {
+      "variable": "y",
+      "creation": "df[y_col]",
+      "flows_to": ["y_train", "y_valid"]
+    },
+    {
+      "variable": "Xs",
+      "creation": "df.drop(y_col, axis=1).fillna(-999)",
+      "flows_to": ["X_train", "X_valid"]
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_valid_split(Xs, y, test_size=.2, random_state=0)",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "X_valid",
+      "creation": "train_valid_split(Xs, y, test_size=.2, random_state=0)",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_valid_split(Xs, y, test_size=.2, random_state=0)",
+      "flows_to": ["model evaluation"]
+    },
+    {
+      "variable": "y_valid",
+      "creation": "train_valid_split(Xs, y, test_size=.2, random_state=0)",
+      "flows_to": ["model evaluation"]
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "Xs (features from df)",
+      "target_variable": "y (role)",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "random_state": 0,
+        "n_jobs": -1
+      }
+    }
+  ]
+}

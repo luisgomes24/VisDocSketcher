@@ -1,0 +1,40 @@
+%%{init: {"theme": "default", "flowchart": {"curve": "linear"}}}%%
+flowchart TD
+    subgraph Dataset
+        A[exchange_rates.csv]:::dataSource
+    end
+    subgraph Preprocessing
+        B[Load Dataset]:::process
+        A --> B
+        B --> C[dataset]:::data
+        C --> D[data_usd]:::data
+        C --> E[data_inr]:::data
+    end
+    subgraph Visualization
+        D --> |Display| F[USD Exchange Rates Visualization]:::visualization
+        E --> |Display| G[INR Exchange Rates Visualization]:::visualization
+    end
+    subgraph ModelDevelopment
+        E --> H[Split INR data]:::process
+        H --> I[train_data]:::data
+        H --> J[test_data]:::data
+        I --> K[train_X, train_y]:::data
+        J --> L[test_X, test_y]:::data
+        K --> M(LSTM Model):::model
+        style M fill:#f9f,stroke:#333;
+    end
+    subgraph ModelTraining
+        M --> |Fit Model| N[Training Process with train_X, train_y]:::process
+        N --> O[Training Complete]:::data
+    end
+    subgraph ModelEvaluation
+        O --> |Evaluate with test_X, test_y| P[Evaluate Model]:::process
+        P --> Q[Model Performance (RMSE)]:::data
+        P --> R[Predictions vs Actuals Visualization]:::visualization
+    end
+
+    classDef dataSource fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef visualization fill:#bbf,stroke:#66f,stroke-width:2px;
+    classDef process fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef data fill:#fbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f9f,stroke:#333,stroke-width:2px;

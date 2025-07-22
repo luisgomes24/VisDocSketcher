@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] --> B["train_data"]
+    C["test.csv"] --> D["test_data"]
+
+    %% Data Preparation
+    B -->|Preprocess: drop unnecessary columns| E["X_train"]
+    B -->|Extract target| F["y_train"]
+    D -->|Preprocess: drop unnecessary columns| G["X_test"]
+
+    %% Model Training
+    E --> |Train| H["Logistic Regression"]
+    F --> |Target| H
+    E --> |Train| I["Support Vector Machine"]
+    F --> |Target| I
+    E --> |Train| J["Random Forest\n(n_estimators: 100)"]
+    F --> |Target| J
+    E --> |Train| K["K-Neighbors\n(n_neighbors: 3)"]
+    F --> |Target| K
+    E --> |Train| L["Gaussian Naive Bayes"]
+    F --> |Target| L
+
+    %% Predictions
+    G --> |Predict| M["Model Outcome Prediction\n (Logistic, SVC, RF, KNN, NB)"]
+    M --> N["Output: titanic.csv"]

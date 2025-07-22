@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A["train_files"]:::source -- "Files containing training data." --> B["df_train"]
+    C["dev_files"]:::source -- "Files containing development data." --> D["df_dev"]
+    E["test_files"]:::source -- "Files containing test data." --> F["df_test"]
+    
+    %% Data Processing and Transformation
+    subgraph Processing
+        G["create_dataset_from_files(train_files)"] -- "Transform train data to DataFrame" --> B
+        H["create_dataset_from_files(dev_files)"] -- "Transform dev data to DataFrame" --> D
+        I["create_dataset_from_files(test_files)"] -- "Transform test data to DataFrame" --> F
+    end
+    
+    %% Exploratory Data Analysis
+    subgraph EDA
+        B -- "Used for EDA and plotting" --> J["EDA Histograms"]
+        D -- "Used for EDA and plotting" --> J
+        F -- "Used for EDA and plotting" --> J
+    end
+    
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef graph fill:#bbf,stroke:#f66,stroke-width:2px;
+```
+
+%% Explanation of Nodes and Transitions
+%% A, C, E represent the data sources that are the train, dev, and test files.
+%% B, D, F are the data frames created from each respective data source.
+%% G, H, I represent the processing steps to convert raw files into data frames for analysis.
+%% J encompasses the EDA tasks like histogram plotting.
+

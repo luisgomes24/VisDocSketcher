@@ -1,0 +1,44 @@
+{
+  "data_sources": [{
+      "source": "/kaggle/input/netflix-prize-data/combined_data_1.txt",
+      "description": "Contains user_id, rating, and date for Netflix movie ratings."
+    },
+    {
+      "source": "/kaggle/input/netflix-prize-data/combined_data_2.txt",
+      "description": "Contains user_id, rating, and date for Netflix movie ratings."
+    },
+    {
+      "source": "/kaggle/input/netflix-prize-data/combined_data_3.txt",
+      "description": "Contains user_id, rating, and date for Netflix movie ratings."
+    },
+    {
+      "source": "/kaggle/input/netflix-prize-data/combined_data_4.txt",
+      "description": "Contains user_id, rating, and date for Netflix movie ratings."
+    },
+    {
+      "source": "/kaggle/input/netflix-prize-data/probe.txt",
+      "description": "Contains user_id for probe sample users."
+    }
+  ],
+  "data_variables": [{
+      "variable": "combined_data",
+      "description": "DataFrame containing combined Netflix user ratings and movie info from multiple files."
+    },
+    {
+      "variable": "probe",
+      "description": "DataFrame containing user_id for sample users to probe ratings."
+    }
+  ],
+  "data_flow": [{
+      "variable": "combined_data",
+      "creation": "pd.concat([df1, df2, df3, df4])",
+      "flow": "Used for analysis and plotting average ratings and number of ratings."
+    },
+    {
+      "variable": "probe",
+      "creation": "pd.read_csv()",
+      "flow": "Used to prepare movie_id and analyze user_id."
+    }
+  ],
+  "models": []
+}

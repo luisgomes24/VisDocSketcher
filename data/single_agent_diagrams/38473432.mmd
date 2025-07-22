@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Train Data <img src='icons/file.svg' />"] --> B["📁 Load Test Data <img src='icons/file.svg' />"]
+    B --> C["🧹 Preprocess Train Data <img src='icons/table.svg' />"]
+    C --> D["🧹 Preprocess Test Data <img src='icons/table.svg' />"]
+    D --> E["🔄 Reduce Memory Usage <img src='icons/brain.svg' />"]
+    E --> F["📊 Split Features and Target <img src='icons/column_split.svg' />"]
+    F --> G["🔍 Train-Test Split <img src='icons/row_split.svg' />"]
+    G --> H["🧠 Train Model <img src='icons/brain.svg' />"]
+    H --> I["📈 Evaluate Model on Train Data <img src='icons/table.svg' />"]
+    I --> J["📈 Evaluate Model on Test Data <img src='icons/table.svg' />"]
+    J --> K["📁 Load Sample Submission <img src='icons/file.svg' />"]
+    K --> L["📊 Predict Probabilities <img src='icons/table.svg' />"]
+    L --> M["📤 Save Submission <img src='icons/file.svg' />"]

@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "dump.csv",
+      "description": "Contains 39537 rows of data, only the first 1000 rows are read for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the data imported from dump.csv. Shape: (1000, N) where N is the number of columns."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow_description": "Used for exploratory data analysis visualizations such as distribution graphs, correlation matrix, and scatter plots."
+    }
+  ],
+  "models": []
+}

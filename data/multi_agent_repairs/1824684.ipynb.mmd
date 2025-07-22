@@ -1,0 +1,34 @@
+%% Data source definition
+flowchart TD
+    A["../input/home-data-for-ml-course/train.csv"]
+    %% Data Variables
+    B["home_data"]
+    C["y"]
+    D["X"]
+    E["train_X"]
+    F["val_X"]
+    G["train_y"]
+    H["val_y"]
+    I["iowa_model"]
+    J["val_predictions"]
+    K["val_mae"]
+    L["final_model"]
+
+    %% Data Flow
+    %% Reading the data source
+    A -->|"Read CSV into DataFrame"| B
+    B -->|"Extract 'SalePrice'"| C
+    B -->|"Select relevant features"| D
+    D -->|"Split into train_X, val_X"| E
+    D -->|"Split into train_X, val_X"| F
+    C -->|"Split into train_y, val_y"| G
+    C -->|"Split into train_y, val_y"| H
+    E -->|"Train model"| I
+    G -->|"Train model"| I
+    F -->|"Predict using model"| J
+    J -->|"Calculate MAE with val_y"| K
+    K -->|"Assess model performance"| L
+
+    %% Models
+    style I fill:#f9f,stroke:#333,stroke-width:4px
+    style L fill:#f9f,stroke:#333,stroke-width:4px

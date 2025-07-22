@@ -1,0 +1,152 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/us-election-2020/governors_county.csv",
+      "description": "Data of county level elections for governors in 2020"
+    },
+    {
+      "source": "../input/us-election-2020/governors_county_candidate.csv",
+      "description": "Election results of candidates for governor by county"
+    },
+    {
+      "source": "../input/us-election-2020/governors_state.csv",
+      "description": "State level election results for governors in 2020"
+    },
+    {
+      "source": "../input/us-election-2020/house_candidate.csv",
+      "description": "Candidate election results for the House of Representatives"
+    },
+    {
+      "source": "../input/us-election-2020/house_state.csv",
+      "description": "State level election results for the House"
+    },
+    {
+      "source": "../input/us-election-2020/president_county.csv",
+      "description": "County level election results for the presidential election"
+    },
+    {
+      "source": "../input/us-election-2020/president_county_candidate.csv",
+      "description": "Candidate election results for president by county"
+    },
+    {
+      "source": "../input/us-election-2020/president_state.csv",
+      "description": "State level election results for president"
+    },
+    {
+      "source": "../input/us-election-2020/senate_county.csv",
+      "description": "County level election results for the Senate"
+    },
+    {
+      "source": "../input/us-election-2020/senate_county_candidate.csv",
+      "description": "Candidate election results for Senate by county"
+    },
+    {
+      "source": "../input/us-election-2020/senate_state.csv",
+      "description": "State level election results for Senate"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data1",
+      "description": "Dataframe for governors county election data"
+    },
+    {
+      "name": "data2",
+      "description": "Dataframe for governors county candidate data"
+    },
+    {
+      "name": "data3",
+      "description": "Dataframe for governors state election data"
+    },
+    {
+      "name": "data4",
+      "description": "Dataframe for house candidate election data"
+    },
+    {
+      "name": "data5",
+      "description": "Dataframe for house state election data"
+    },
+    {
+      "name": "data6",
+      "description": "Dataframe for president county election data"
+    },
+    {
+      "name": "data7",
+      "description": "Dataframe for president county candidate data"
+    },
+    {
+      "name": "data8",
+      "description": "Dataframe for president state election data"
+    },
+    {
+      "name": "data9",
+      "description": "Dataframe for senate county election data"
+    },
+    {
+      "name": "data10",
+      "description": "Dataframe for senate county candidate data"
+    },
+    {
+      "name": "data11",
+      "description": "Dataframe for senate state election data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting scatter plots"
+    },
+    {
+      "variable": "data2",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data3",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data4",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data5",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting scatter plots"
+    },
+    {
+      "variable": "data6",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting box plots"
+    },
+    {
+      "variable": "data7",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data8",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data9",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting box plots"
+    },
+    {
+      "variable": "data10",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    },
+    {
+      "variable": "data11",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting bar charts"
+    }
+  ],
+  "models": []
+}

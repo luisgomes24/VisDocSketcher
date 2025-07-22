@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Source Node
+    A[train.feather] -->|Load Data| B
+
+    %% Data Variable Nodes
+    B[train]
+    %% Comment: DataFrame containing cleaned and filtered training data
+    B -->|Extract Columns| C
+    %% Comment: "features" are extracted from the cleaned data
+    C[features]
+    B -->|Extract Columns| D
+    %% Comment: Response columns to be predicted
+    D[resp_cols]
+    B -->|Create| E
+    %% Comment: "action_cols" derived from responses indicating actions taken
+    E[action_cols]
+
+    %% Data Flow Nodes
+    B -->|K-Fold CV & Training| F
+    %% Comment: Model is trained using feature columns
+    F[Neural Network Model]
+    
+    F -->|Predictions| G
+    %% Comment: Predictions are stored for later use in utility score optimization
+    G[preds_list]
+    
+    G -->|Optimize Weights| H
+    %% Comment: "lcs" holds optimized weights based on model predictions
+    H[lcs]
+
+    %% Close Loops
+    H -->|Evaluate| F
+    %% Comment: Optimized weights are evaluated for utility scores

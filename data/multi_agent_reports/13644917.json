@@ -1,0 +1,31 @@
+{
+    "data_sources": [
+        {
+            "file_path": "/kaggle/input/riiid-preprocess-and-balance-the-dataset/metadata.dill",
+            "description": "Contains the pre-processed metadata used for final submissions in SQLite format."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "metadata",
+            "description": "Dictionary containing data related to users' interaction in a structured form."
+        },
+        {
+            "variable_name": "metadata_info",
+            "description": "Dictionary to store information about columns and their types for the SQLite files generated from metadata."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "metadata",
+            "creation_method": "dill.load",
+            "flow": "Used for data processing, including resetting indices, cleaning up rows, and exporting to SQLite files."
+        },
+        {
+            "variable_name": "metadata_info",
+            "creation_method": "empty dictionary",
+            "flow": "Used to store information about the columns of the SQLite files generated from metadata."
+        }
+    ],
+    "models": []
+}

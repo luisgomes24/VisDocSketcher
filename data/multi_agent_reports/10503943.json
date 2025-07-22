@@ -1,0 +1,21 @@
+{
+  "data_sources": [
+    {
+      "file_name": "/kaggle/input/kpmi_data.csv",
+      "description": "Contains KPMI data for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "df1": "DataFrame containing the first 1000 rows of KPMI data from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Created using pd.read_csv, reading the first 1000 rows from the kpmi_data.csv file.",
+      "flow": "Used in various plotting functions for exploratory data analysis."
+    }
+  ],
+  "models": []
+}

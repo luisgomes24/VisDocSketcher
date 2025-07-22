@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_name": "kc_house_data.csv",
+      "description": "House prices dataset containing various features such as sqft_living, bathrooms, grade, and more."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "house_df",
+      "description": "DataFrame holding the house prices data."
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame for simple linear regression (sqft_living)."
+    },
+    {
+      "name": "Y",
+      "description": "Target variable DataFrame for price."
+    },
+    {
+      "name": "X1",
+      "description": "Features DataFrame for multiple regression (sqft_living, bathrooms, grade, sqft_above, sqft_living15)."
+    },
+    {
+      "name": "Y1",
+      "description": "Target variable DataFrame for price in multiple regression."
+    },
+    {
+      "name": "lp",
+      "description": "Linear Regression model instance for simple linear regression."
+    },
+    {
+      "name": "lp1",
+      "description": "Linear Regression model instance for multiple regression."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "house_df",
+      "creation_method": "pd.read_csv",
+      "usage": "Data exploration, preprocessing, and modeling."
+    },
+    {
+      "variable": "X",
+      "creation_method": "house_df[['sqft_living']]",
+      "usage": "Input feature in simple linear regression."
+    },
+    {
+      "variable": "Y",
+      "creation_method": "house_df[['price']]",
+      "usage": "Target variable for simple regression."
+    },
+    {
+      "variable": "X1",
+      "creation_method": "house_df[['sqft_living', 'bathrooms', 'grade', 'sqft_above', 'sqft_living15']]",
+      "usage": "Input features for multiple regression."
+    },
+    {
+      "variable": "Y1",
+      "creation_method": "house_df[['price']]",
+      "usage": "Target variable for multiple regression."
+    },
+    {
+      "variable": "lp",
+      "creation_method": "LinearRegression()",
+      "usage": "Fitted to X_train and Y_train, scored against X_test and Y_test."
+    },
+    {
+      "variable": "lp1",
+      "creation_method": "LinearRegression()",
+      "usage": "Fitted to X1_train and Y1_train, scored against X1_test and Y1_test."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression (Simple)",
+      "input_features": "sqft_living",
+      "target": "price",
+      "hyperparameters": "N/A"
+    },
+    {
+      "model_name": "Linear Regression (Multiple)",
+      "input_features": "sqft_living, bathrooms, grade, sqft_above, sqft_living15",
+      "target": "price",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+```mermaid
+flowchart TD
+    A["train.json"] -->|Load using pd.read_json| B{train DataFrame}
+    C["test.json"] -->|Load using pd.read_json| D{test DataFrame}
+    E["bpps/*.npy"] -->|Generate list of paths| F{bppm_paths}
+    F -->|Load using np.load| G{bppm}
+    B -->|Use for plotting BPPM and structures| H["draw_structure function"]
+    H -->|Create adjacency matrix| I{pm}
+    G -->|Plot BPPM| J["plot_structures function"]
+    I -->|Plot structure| J
+    G -->|Visualize graph| K["visualize_graph function"]
+```

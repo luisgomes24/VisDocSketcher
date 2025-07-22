@@ -1,0 +1,48 @@
+flowchart TD
+    A[Start] --> B[Load Dataset]
+    B --> C[Fish.csv]
+    %% Node for Data Loading
+    C --> |Loads into| D[df]
+    
+    %% DataFrame Preparation
+    D --> |Drop 'Weight' column| E[X]
+    D --> |Select 'Weight' column| F[y]
+    
+    %% Model Definitions
+    subgraph Models
+        direction TB
+        G[Linear Regression Model]
+        H[Gradient Descent]
+        I[Normal Equation]
+    end
+    
+    %% Model Training Flow
+    E --> G
+    F --> G
+    E --> H
+    F --> H
+    E --> I
+    F --> I
+    
+    %% Additional Data Tracking
+    J[lstSeed]
+    K[lstRMSQ]
+    L[lstRSq]
+    
+    %% Model Evaluation Process
+    G --> J
+    G --> K
+    G --> L
+    
+    H --> J
+    H --> K
+    H --> L
+    
+    I --> J
+    I --> K
+    I --> L
+    
+    %% Node to represent process end
+    J --> M[End]
+    K --> M
+    L --> M

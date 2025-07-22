@@ -1,0 +1,68 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/nvtabular-with-dependencies/nvt_all",
+      "description": "Originally packaged dependencies for NVTabular"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing random integers and real numbers"
+    },
+    {
+      "variable": "ds",
+      "description": "Dataset object for NVTabular created from the DataFrame"
+    },
+    {
+      "variable": "out",
+      "description": "List of output features for the workflow"
+    },
+    {
+      "variable": "cats_hashed",
+      "description": "List of hashed categorical features"
+    },
+    {
+      "variable": "wf",
+      "description": "Workflow object containing the operations to perform"
+    },
+    {
+      "variable": "o",
+      "description": "Output of the workflow containing transformed dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.DataFrame",
+      "description": "Generated with random data",
+      "flow": "ds"
+    },
+    {
+      "variable": "ds",
+      "creation_method": "nvt.Dataset",
+      "flow": "wf"
+    },
+    {
+      "variable": "out",
+      "creation_method": "nvt.ops.Groupby",
+      "flow": "wf"
+    },
+    {
+      "variable": "cats_hashed",
+      "creation_method": "nvt.ops.HashBucket",
+      "flow": "wf"
+    },
+    {
+      "variable": "wf",
+      "creation_method": "nvt.Workflow",
+      "flow": "o"
+    },
+    {
+      "variable": "o",
+      "creation_method": "wf.fit_transform",
+      "flow": "final output"
+    }
+  ],
+  "models": []
+}

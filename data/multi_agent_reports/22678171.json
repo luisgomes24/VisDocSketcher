@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/bikeshare-analysis/NYC-CitiBike-2016.csv",
+      "description": "CitiBike rental data including start and end station information, timestamps, and rider demographics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "ds",
+      "description": "Initial dataset loaded from the CSV file."
+    },
+    {
+      "variable": "start",
+      "description": "DataFrame containing counts of departures grouped by station and time."
+    },
+    {
+      "variable": "end",
+      "description": "DataFrame containing counts of arrivals grouped by station and time."
+    },
+    {
+      "variable": "U",
+      "description": "Final DataFrame containing availability of stations over time, combining both departures and arrivals."
+    },
+    {
+      "variable": "trip",
+      "description": "DataFrame about bike trips capturing start and end stations along with timestamps."
+    },
+    {
+      "variable": "air",
+      "description": "DataFrame containing bike trips that experienced discontinuity in station transitions."
+    },
+    {
+      "variable": "output",
+      "description": "Final output DataFrame ready to be saved to CSV."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ds",
+      "creation": "pd.read_csv('../input/bikeshare-analysis/NYC-CitiBike-2016.csv')",
+      "flow": "Used to create start and end DataFrames."
+    },
+    {
+      "variable": "start",
+      "creation": "ds.groupby(...).size().reset_index(name='counts')",
+      "flow": "Used to calculate availability and joined with arrivals DataFrame."
+    },
+    {
+      "variable": "end",
+      "creation": "ds.groupby(...).size().reset_index(name='counts')",
+      "flow": "Used to calculate availability and joined with departures DataFrame."
+    },
+    {
+      "variable": "U",
+      "creation": "start.append(end)",
+      "flow": "Used to track availability over time and eventually saved to CSV."
+    },
+    {
+      "variable": "trip",
+      "creation": "pd.read_csv('../input/bikeshare-analysis/NYC-CitiBike-2016.csv')",
+      "flow": "Captured details of bike trips and used for identifying discontinuities."
+    },
+    {
+      "variable": "air",
+      "creation": "Filtered and sorted DataFrame from trip capturing discontinuities.",
+      "flow": "Combined data from arrivals and departures allowing for a complete view of availability."
+    },
+    {
+      "variable": "output",
+      "creation": "final DataFrame called U",
+      "flow": "Saved to CSV file 'NYC-CitiBike-2016.csv'."
+    }
+  ],
+  "models": []
+}

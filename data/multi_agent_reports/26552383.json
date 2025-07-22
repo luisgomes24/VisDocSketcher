@@ -1,0 +1,102 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/fulllabeldataset/train.csv",
+            "description": "Contains training data with labels for audio files."
+        },
+        {
+            "file_path": "../input/annotationdataset-furu/results.txt",
+            "description": "Initial primary label annotations from Furu dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-furu/results_num1_primary.txt",
+            "description": "Secondary primary label annotations from the Furu dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-ishii/results.txt",
+            "description": "Initial primary label annotations from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-tadokoro/results.txt",
+            "description": "Initial primary label annotations from Tadokoro dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-takemi/results.txt",
+            "description": "Initial primary label annotations from Takemi dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-furusec/results_sec1.txt",
+            "description": "Secondary label annotation for first sec label from Furu dataset."
+        },
+        {
+            "file_path": "../input/annotationdatasetishiisec/results_sec1.txt",
+            "description": "Secondary label annotation for first sec label from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdatasetishiisec/results_sec2.txt",
+            "description": "Secondary label annotation for second sec label from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdatasetishiisec/results_sec3_1.txt",
+            "description": "Secondary label annotation for third sec label from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-takemisec/results_sec1.txt",
+            "description": "Secondary label annotation for first sec label from Takemi dataset."
+        },
+        {
+            "file_path": "../input/annotationdatasetishiisec/results_sec2.txt",
+            "description": "Secondary label annotation for second sec label from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdatasetishiisec/results_sec3_2.txt",
+            "description": "Secondary label annotation for third sec label from Ishii dataset."
+        },
+        {
+            "file_path": "../input/annotationdataset-takemisec2/results_sec3.txt",
+            "description": "Secondary label annotation for third sec label from Takemi dataset."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "train",
+            "description": "DataFrame that contains the training data with various annotations and labels."
+        },
+        {
+            "variable_name": "LABEL_IDS",
+            "description": "Mapping of bird labels to their respective indices used in the dataset."
+        },
+        {
+            "variable_name": "df_label",
+            "description": "DataFrame containing only labeled instances with processed secondary labels."},
+        {
+            "variable_name": "df_nolabel",
+            "description": "DataFrame containing instances without labels, used to handle unlabeled data."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "created_by": "pd.read_csv",
+            "flows_to": ["to_csv (handlabeltrain.csv)"]
+        },
+        {
+            "variable": "df_label",
+            "created_by": "train[train.sleng > 0]; processed secondary labels",
+            "flows_to": ["train (concatenated with df_nolabel)"]
+        },
+        {
+            "variable": "df_nolabel",
+            "created_by": "train[train.sleng == 0]; processed labels",
+            "flows_to": ["train (concatenated with df_label)"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Not specified in the notebook",
+            "input_features": "Not specified in the notebook",
+            "target_variable": "Not specified in the notebook",
+            "hyperparameters": "Not applicable"
+        }
+    ]
+}

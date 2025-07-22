@@ -1,0 +1,45 @@
+flowchart TD
+%% Data Sources
+    A["<img src='icons/image.svg' width=100 height=100/> <br/> CelebA Dataset Images"]
+    B["<img src='icons/image.svg' width=100 height=100/> <br/> LFW Crop Dataset Images"]
+
+%% Data Processing
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Load & Normalize Images"]
+    A --> C
+    B --> C
+
+%% Data Variable
+    D["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+    C --> D
+
+%% Models
+    E["<img src='icons/brain.svg' width=100 height=100/> <br/> AA_Fast Model"]
+    D --> E
+    F["<img src='icons/brain.svg' width=100 height=100/> <br/> PCA Model"]
+    D --> F
+    G["<img src='icons/brain.svg' width=100 height=100/> <br/> KMeans Model"]
+    D --> G
+
+%% Model Outputs
+    H["<img src='icons/table.svg' width=100 height=100/> <br/> archetypes"]
+    E --> H
+    I["<img src='icons/table.svg' width=100 height=100/> <br/> pca"]
+    F --> I
+    J["<img src='icons/table.svg' width=100 height=100/> <br/> kmeans"]
+    G --> J
+
+%% Reconstructions
+    K["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Reconstruct Archetypes"]
+    H --> K
+    L["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Reconstruct PCA"]
+    I --> L
+    M["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Reconstruct KMeans"]
+    J --> M
+
+%% Plots
+    N["<img src='dummy_plots/barplot_template.svg'/> <br/> Plot Reconstructed Archetypes"]
+    K --> N
+    O["<img src='dummy_plots/barplot_template.svg'/> <br/> Plot Reconstructed PCA"]
+    L --> O
+    P["<img src='dummy_plots/barplot_template.svg'/> <br/> Plot Reconstructed KMeans"]
+    M --> P

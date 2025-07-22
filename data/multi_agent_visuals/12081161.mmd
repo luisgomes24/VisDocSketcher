@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> LR-2020-public_LB.csv"] -->|Load CSV| B["public_lb"]
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> Teams.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> Competitions.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> LR-2020-pvt-LB.htm"] -->|Extract HTML| D["shake_up"]
+    A4["<img src='icons/file.svg' width=100 height=100/> <br/> LR-2020-pvt_LB.xlsx"] -->|Load Excel| C["pvt_lb"]
+
+    %% Intermediate Variables
+    B -->|Group and Merge| E["<img src='icons/table.svg' width=100 height=100/> <br/> public_Scores"]
+    C -->|Use in plotting| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> plot_candle"]
+    D -->|Update Column| C
+
+    %% Usage in Analysis
+    E -->|Data Validation| G["<img src='icons/brain.svg' width=100 height=100/> <br/> assert validation"]
+    E -->|Use in Plotting| H["<img src='icons/brain.svg' width=100 height=100/> <br/> plotting functions"]
+    C -->|Data Display| I["<img src='icons/brain.svg' width=100 height=100/> <br/> final ranking displays"]
+
+    %% Annotations
+    %% A: Represents the loading of public leaderboard data from CSV.
+    %% B: The DataFrame holding public leaderboard data.
+    %% C: The DataFrame containing private leaderboard data.
+    %% D: The array for shake-up data extracted from HTML.
+    %% E: A DataFrame after grouping and merging public scores.
+    %% F/G/H/I: Utilizations in data validation, plotting and displays.

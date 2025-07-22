@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🧹 Data Cleaning"];
+    B --> C["🔍 Handle Missing Values"];
+    C --> D["🗓️ Split Date into Year, Month, Day"];
+    D --> E["🗑️ Drop Original Date Column"];
+    E --> F["🤖 Encode Categorical Variables"];
+    F --> G["📏 Feature Scaling using MinMaxScaler"];
+    G --> H["📊 Data Visualization <img src='dummy_plots/heatmap_template.svg' /> <br/> Heatmap of correlations"];
+    H --> I["📉 Prepare Features and Target <br/> y = new_df.RainTomorrow, X = new_df.drop(...)"];
+    I --> J["🔬 Clustering"];
+    J --> K["📈 K-Means Clustering <img src='dummy_plots/scatter_plot_template.svg' />"];
+    K --> L["🪄 Determine Optimal K using Elbow Method"];
+    L --> M["✅ Observations and Conclusion"];

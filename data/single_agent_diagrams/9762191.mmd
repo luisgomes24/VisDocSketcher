@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> train_clean.csv & test_clean.csv"] --> B["🔄 Preprocess Data"]
+    B --> C["🔍 Identify Drift <img src='column_split.svg' /> <br/> had_drift"]
+    C --> D["👥 Add Model Groups <img src='column_split.svg' /> <br/> add_model_groups"]
+    D --> E["🔎 Filter Data"]
+    E --> F["📊 Visualize Value Counts <img src='scatter_plot_template.svg' /> <br/> Signal by Open Channels"]
+    F --> G["🔧 Shift Drift Sections"]
+    G --> H["🏁 Model Evaluation"]    
+    H --> I["📊 Plot Drift Sections Before Shift <img src='barplot_template.svg' />"]
+    I --> J["📊 Plot Drift Sections After Shift <img src='barplot_template.svg' />"]

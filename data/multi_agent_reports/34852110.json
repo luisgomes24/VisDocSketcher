@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "source": "/kaggle/input/rsna-breast-cancer-detection/train.csv",
+      "description": "Metadata containing patient IDs and breast density classifications."
+    },
+    {
+      "source": "/kaggle/input/rsna-breast-cancer-detection/train_images/",
+      "description": "DICOM images of mammograms for breast cancer detection."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_meta",
+      "description": "DataFrame containing metadata about the training images."
+    },
+    {
+      "name": "image_dict",
+      "description": "Dictionary to hold processed images in different views."
+    },
+    {
+      "name": "padded_view_l_cc",
+      "description": "Padded left cranio-caudal view image after cropping."
+    },
+    {
+      "name": "predicted_density",
+      "description": "Predicted density values across categories A, B, C, D from the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_meta",
+      "creation": "pd.read_csv",
+      "flow": "Used to extract patient density classifications."
+    },
+    {
+      "variable": "image_dict",
+      "creation": "Loop over DICOM files",
+      "flow": "Contains processed images used for further analysis."
+    },
+    {
+      "variable": "padded_view_l_cc",
+      "creation": "np.pad(cropped_view_l_cc)",
+      "flow": "Used as input to the model for density estimation."
+    },
+    {
+      "variable": "predicted_density",
+      "creation": "model(x).cpu().numpy()",
+      "flow": "Stores model predictions used for final density classification."
+    }
+  ],
+  "models": [
+    {
+      "name": "BaselineHistogramModel",
+      "description": "A histogram-based model to predict breast density.",
+      "input_features": ["padded_view_l_cc", "padded_view_r_cc", "padded_view_l_mlo", "padded_view_r_mlo"],
+      "target_variable": "breast density classification",
+      "hyperparameters": {
+        "bins_histogram": 50
+      }
+    }
+  ]
+}

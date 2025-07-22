@@ -1,0 +1,49 @@
+```mermaid
+%% Mermaid.js Workflow Diagram for Jupyter Notebook
+flowchart TD
+    %% Data Sources
+    A["spotify.csv"]:::data_source --> B["spotify DataFrame"]:::data_var
+    O["concrete.csv"]:::data_source --> P["concrete DataFrame"]:::data_var
+    
+    %% Spotify Data Preparation
+    B --> C["Create X and y"]:::process
+    C --> D["X: Features DataFrame"]:::data_var
+    D --> E["y: track_popularity"]:::data_var
+    D --> F["artists: track_artist"]:::data_var
+    D --> G["features_num: Numerical Features"]:::data_var
+    D --> H["features_cat: Categorical Features"]:::data_var
+    
+    %% Spotify Preprocessing
+    G --> I["Preprocessor Setup"]:::process
+    H --> I
+    F --> J["Group Split X_train, X_valid, y_train, y_valid"]:::process
+    J --> K["X_train: Training Features"]:::data_var
+    J --> L["X_valid: Validation Features"]:::data_var
+    J --> M["y_train: Training Target"]:::data_var
+    J --> N["y_valid: Validation Target"]:::data_var
+
+    %% Spotify Model Training
+    K --> Q["Fit Preprocessor on X_train"]:::process
+    Q --> R["Transform X_valid with Preprocessor"]:::process
+    Q --> S{ "Spotify Model: Neural Network"}:::model
+    R --> S
+    M --> S
+    T["Training History"]:::data_var --> S
+
+    %% Concrete Data Preparation
+    P --> U["df: DataFrame Copy"]:::data_var
+    U --> V["Split into df_train and df_valid"]:::process
+    V --> W["df_train: Training DataFrame"]:::data_var
+    V --> X["df_valid: Validation DataFrame"]:::data_var
+
+    %% Concrete Model Training
+    W --> Y{ "Concrete Model: Neural Network"}:::model
+    X --> Y
+    Y["Training History"]:::data_var
+
+    %% Class Definitions
+    classDef data_source fill:#fef3b8,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#b8e994,stroke:#333,stroke-width:2px;
+    classDef process fill:#ffc0cb,stroke:#333,stroke-width:2px;
+    classDef model fill:#82ccdd,stroke:#333,stroke-width:2px;
+```

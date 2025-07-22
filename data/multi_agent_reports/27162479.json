@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "Training data containing store sales and features."
+    },
+    {
+      "file": "test.csv",
+      "description": "Test data containing features for prediction."
+    },
+    {
+      "file": "store.csv",
+      "description": "Store information including type and assortment."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train_df",
+      "description": "DataFrame containing the training dataset after merging and preprocessing."
+    },
+    {
+      "variable": "test_df",
+      "description": "DataFrame containing the test dataset after merging and preprocessing."
+    },
+    {
+      "variable": "store_df",
+      "description": "DataFrame containing store information.",
+    },
+    {
+      "variable": "y_train",
+      "description": "Target variable containing sales values for model training."
+    },
+    {
+      "variable": "ID",
+      "description": "Identifier for records in the test set."
+    },
+    {
+      "variable": "Predictions",
+      "description": "DataFrame to hold predictions from multiple models."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "pd.read_csv, pd.merge",
+      "flows_to": "Model training"
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv, pd.merge",
+      "flows_to": "Predictions"
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_df['Sales']",
+      "flows_to": "Model training"
+    },
+    {
+      "variable": "lgbm",
+      "created_by": "LGBMRegressor",
+      "flows_to": "Model fitting and prediction"
+    },
+    {
+      "variable": "Predictions",
+      "created_by": "Model predictions",
+      "flows_to": "Final predictions are written to CSV"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LightGBM",
+      "input_features": "Features from train_df excluding 'Sales',
+      "target_variable": "Sales",
+      "hyperparameters": {
+        "n_estimators": 1742,
+        "max_depth": -1,
+        "learning_rate": 0.2723,
+        "subsample": 1,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/playground-series-s3e17/train.csv",
+      "description": "Training dataset containing information about machine failures."
+    },
+    {
+      "file_path": "/kaggle/input/playground-series-s3e17/test.csv",
+      "description": "Testing dataset to evaluate model performance."
+    },
+    {
+      "file_path": "/kaggle/input/playground-series-s3e17/sample_submission.csv",
+      "description": "Sample submission file format used for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing data from the training dataset."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing data from the testing dataset."
+    },
+    {
+      "name": "y",
+      "description": "Target variable (Machine failure) extracted from the training dataset."
+    },
+    {
+      "name": "X",
+      "description": "Features used for training (all columns except the target variable)."
+    },
+    {
+      "name": "X_train",
+      "description": "Training subset of features after splitting the dataset."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing subset of features after splitting the dataset."
+    },
+    {
+      "name": "y_train",
+      "description": "Training subset of the target variable after splitting the dataset."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing subset of the target variable after splitting the dataset."
+    },
+    {
+      "name": "y_pred",
+      "description": "Predicted probabilities for machine failure on the test dataset."
+    },
+    {
+      "name": "sol",
+      "description": "DataFrame for storing the final predictions in the required submission format."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Dropped 'id' and 'Product ID', processed to reduce memory usage, then used for training and evaluation."
+    },
+    {
+      "variable": "test",
+      "creation_method": "pd.read_csv",
+      "flow": "Dropped 'id' and 'Product ID', processed to reduce memory usage, then used for predictions."
+    },
+    {
+      "variable": "y",
+      "creation_method": "train.pop('Machinefailure')",
+      "flow": "Used as the target variable for model training."
+    },
+    {
+      "variable": "X",
+      "creation_method": "train",
+      "flow": "Used for model training after dropping the target variable."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Used for training in the model fitting process."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "flow": "Used for validation in the model performance evaluation."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flow": "Used for training in the model fitting process."
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flow": "Used for validation in the model performance evaluation."
+    },
+    {
+      "variable": "y_pred",
+      "creation_method": "automl.predict_proba",
+      "flow": "Generated predictions for the test dataset and prepared for output."
+    },
+    {
+      "variable": "sol",
+      "creation_method": "pd.read_csv",
+      "flow": "Contains the final results and is saved as 'accuracy.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "AutoML",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Task: classification, Metric: accuracy, Time budget: 4 hours."
+    }
+  ]
+}

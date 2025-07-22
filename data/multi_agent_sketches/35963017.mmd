@@ -1,0 +1,35 @@
+flowchart TD
+    %% Load the CSV data into a dataframe
+    A["CSV Data - diffusiondb.csv"] -->|Load via pd.read_csv| B["DataFrame df"]
+    
+    %% Split dataframe into training and validation sets
+    B -->|train_test_split| C["Training DataFrame trn_df"]
+    B -->|train_test_split| D["Validation DataFrame val_df"]
+    
+    %% Convert training and validation sets into DataLoaders
+    C -->|Convert to DataLoader| E["Train DataLoader"]
+    D -->|Convert to DataLoader| F["Validation DataLoader"]
+    
+    %% Combine dataloaders into a single structure
+    E -->|Add to dataloaders dict| G["Dataloaders{train, val}"]
+    F -->|Add to dataloaders dict| G
+    
+    %% Create and initialize the model
+    G -->|Initialize Model via timm| H["Model: Swin Transformer V2"]
+    
+    %% Training process
+    H -->|Training Loop| I["Model Training Process"]
+    H -->|Validation & Evaluation| J["Model Evaluation"]
+    
+    %% Configuration settings
+    B -.-> K["Configuration CFG"]
+    K -.-> H
+    K -.-> I
+    
+    classDef dataNode fill:#ffcccc,stroke:#b30000,stroke-width:2px;
+    classDef processNode fill:#ccffcc,stroke:#009900,stroke-width:2px;
+    classDef modelNode fill:#ccccff,stroke:#0000b3,stroke-width:2px;
+    
+    class A,B,C,D,E,F,G dataNode;
+    class H modelNode;
+    class I,J,K processNode;

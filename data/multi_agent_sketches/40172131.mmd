@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    trainCSV["train.csv"]:::dataSource -->|Read| df["df: Training DataFrame"]:::dataVariable
+    testCSV["test.csv"]:::dataSource -->|Read| df_test["df_test: Test DataFrame"]:::dataVariable
+
+    %% Data Preprocessing
+    df -->|Preprocessing| df_preprocess["df_preprocess: Preprocessed Training Data"]:::dataVariable
+
+    %% Train/Test Split
+    df_preprocess -->|Train/Test Split| X_train["X_train: Training features"]:::dataVariable
+
+    %% Model Training
+    X_train --> RFModel["RandomForestClassifier - Hyperparameter tuning with RandomizedSearchCV"]:::model
+    X_train --> XGBModel["XGBClassifier - Similar tuning as RF"]:::model
+    X_train --> LGBMModel["LGBMClassifier - Similar tuning as RF"]:::model
+    X_train --> GBModel["GradientBoostingClassifier - Predefined grid"]:::model
+    X_train --> HGBModel["HistGradientBoostingClassifier - Predefined grid"]:::model
+
+    %% Ensemble Methods
+    RFModel --> Stacking["StackingClassifier - Logistic Regression as final estimator"]:::model
+    XGBModel --> Stacking
+    LGBMModel --> Stacking
+    GBModel --> Stacking
+    HGBModel --> Stacking
+
+    RFModel --> Voting["VotingClassifier - 'hard' voting"]:::model
+    XGBModel --> Voting
+    LGBMModel --> Voting
+    GBModel --> Voting
+    HGBModel --> Voting
+
+    %% Final Predictions
+    df_test -->|Predictions| Stacking
+    df_test -->|Predictions| Voting
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

@@ -1,0 +1,39 @@
+flowchart TD
+  %% This node represents the creation of x tensor
+  x[Tensor x] -->|Created with requires_grad=True| z
+
+  %% This node represents the creation of y tensor
+  y[Tensor y] --> z
+
+  %% This node represents the computation of z tensor
+  z[Tensor z] -->|Used in gradient computation| Gradient_Computation
+
+  %% Neural network instance is created
+  net[Neural Network: MyNet] --> Forward_Pass
+  net --> Backward_Pass
+  net --> Training_Step
+
+  %% Loss function is used in the training
+  loss_fn[MSE Loss Function] --> Training_Step
+
+  %% Forward pass in the model
+  Forward_Pass[Forward Pass] --> Loss_Calculation
+
+  %% Backward pass for gradient computation
+  Backward_Pass[Backward Pass]
+
+  %% Training step includes updating network parameters
+  Training_Step[Training Step]
+
+  %% Loss is calculated by comparing model output to targets
+  Loss_Calculation[Loss Calculation] --> Backward_Pass
+
+  %% Gradient computation on z following backward call
+  Gradient_Computation[Gradient Computation] --> x
+
+  %% Model: MyNet details
+  classDef modelClass fill:#f9f,stroke:#333,stroke-width:2px;
+  net:::modelClass
+
+  %% Explanation: x, y, z, net, loss_fn
+  %% MyNet: 3 inputs, 3 outputs, 20 hidden layer neurons, Tanh activation

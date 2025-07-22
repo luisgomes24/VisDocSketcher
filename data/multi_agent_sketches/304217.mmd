@@ -1,0 +1,26 @@
+flowchart TD
+    ds1[("train.csv")] -->|Read| df_train
+    ds2[("test.csv")] -->|Read| df_test
+    
+    %% df_train DataFrame containing training data
+    df_train[/"df_train"/] -->|Copy| df_eda
+    %% df_eda: Exploratory Data Analysis
+    df_eda[/"df_eda"/]
+
+    %% y_targets: Target values for training set
+    df_train -->|Extract 'Survived'| y_targets
+    
+    df_train -->|Split| X_split((X_train, X_test, y_train, y_test))
+    y_targets -->|Split| X_split
+    
+    %% Splitting Data: Training and Testing
+    X_split -->|Train| rf_model
+    
+    %% RandomForestClassifier Model
+    rf_model[/"RandomForestClassifier"/]:::model
+    style rf_model fill:#f9f,stroke:#333,stroke-width:2px;
+    
+    rf_model -->|Predict| df_test
+    df_test[/"df_test"/]
+    
+    classDef model fill:#bbf,stroke:#000,stroke-width:1px;

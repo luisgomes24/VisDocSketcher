@@ -1,0 +1,27 @@
+flowchart TD
+    %% Node for the CSV data source
+    A(hotel_bookings.csv):::dataSource -->|Load data| B[df]
+    
+    %% Node for data cleaning process
+    B -->|Clean data: dropna, replace| C{Data Cleaning}
+    
+    %% Node for processed DataFrame
+    C --> D[DataFrame df]
+    
+    %% Analysis and visualization stages
+    D -->|Description & Analysis| E((Visualizations))
+    D -->|Hypothesis Testing| F((OLS Regression))
+    
+    %% Month count DataFrame creation and usage
+    D -->|Summarize Monthly Counts| G[month_count_df]
+    G -->|Visualize as bar plot| H((Month Count Plot))
+    
+    %% Hotel cancelation count DataFrame creation and usage
+    D -->|Filter & Group by hotel| I[hotel_cancelation_count]
+    I -->|Visualize as heatmap & pie chart| J((Cancelation Visualizations))
+    
+    %% OLS Regression Model
+    F -->|Features: intercept, adults, children| K[[OLS Model]]
+    K -->|Predict| L((Car Parking Spaces))
+
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;

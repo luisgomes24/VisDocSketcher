@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-dec-2021/train.csv",
+      "description": "Dataset containing features and target variable regarding cover types."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data with the 'Id' column dropped."
+    },
+    {
+      "variable": "X_train",
+      "description": "Features DataFrame excluding 'Cover_Type'."
+    },
+    {
+      "variable": "y_train",
+      "description": "Target variable containing 'Cover_Type'."
+    },
+    {
+      "variable": "pca",
+      "description": "PCA object used to reduce dimensions of the features data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv and drop 'Id'",
+      "flow": "Divided into X_train and y_train."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train.drop('Cover_Type')",
+      "flow": "Used in PCA for dimensionality reduction."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train['Cover_Type']",
+      "flow": "Used as target variable in the analysis."
+    },
+    {
+      "variable": "pca",
+      "creation": "PCA(n_components) and fit_transform(X_train)",
+      "flow": "Transform X_train to reduce dimensionality."
+    }
+  ],
+  "models": [
+    {
+      "model": "PCA",
+      "input_features": "All features from X_train",
+      "target_variable": "None (dimensionality reduction)",
+      "hyperparameters": {"n_components": 2}
+    }
+  ]
+}

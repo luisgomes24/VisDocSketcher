@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A["train_v2.csv"] -->|Load Data| B["train_df"]
+    A1["test_v2.csv"] -->|Load Data| B1["test_df"]
+    A2["sample_submission.csv"] -->|Read CSV| C1["sub"]
+    A3["sample_submission_v2.csv"] -->|Read CSV| C2["sub2"]
+
+    %% Data Usage
+    B -->|Training & Evaluation| D["Model Training"]
+    B1 -->|Making Predictions| E["Prediction Generation"]
+    C1 & C2 -->|Display Format| F["Submission Formatting"]
+
+    %% Comments for each node
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,A1,A2,A3 dataSource;
+    class B,B1,C1,C2,D,E,F default;
+    
+    %% A[train_v2.csv] represents the initial source file for training data.
+    %% A1[test_v2.csv] represents the initial source file for testing data.
+    %% A2[sample_submission.csv] represents the file structure for submission formats.
+    %% A3[sample_submission_v2.csv] represents another version of file structure for submission formats.
+    %% B[train_df] is the DataFrame where the training data is loaded and transformed.
+    %% B1[test_df] is the DataFrame where the testing data is loaded and prepared for prediction.
+    %% C1[sub] is the DataFrame holding the original submission format.
+    %% C2[sub2] is the DataFrame holding another version of the submission format.
+    %% D[Model Training] is the process of training models on the training data.
+    %% E[Prediction Generation] represents generating predictions based on trained models and test data.
+    %% F[Submission Formatting] shows how the output is formatted for submission.

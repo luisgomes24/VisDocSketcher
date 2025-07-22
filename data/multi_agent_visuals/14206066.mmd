@@ -1,0 +1,7 @@
+graph TD;
+    A["<img src='icons/image.svg' width=100 height=100/> <br/> Training Images"] -->|"train_datagen.flow_from_directory"| B["<img src='icons/image.svg' width=100 height=100/> <br/> Test Images"];
+    A --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Train Dataset"];
+    C -->|"model training"| D["<img src='icons/table.svg' width=100 height=100/> <br/> Validation Dataset"];
+    D -->|"model validation"| E["<img src='icons/table.svg' width=100 height=100/> <br/> Test Dataset"];
+    E -->|"model evaluation"| F["<img src='icons/brain.svg' width=100 height=100/> <br/> CNN Model"];
+    F -->|"model.fit"| G["<img src='path/to/plot.svg'/> <br/> Result Plot"];

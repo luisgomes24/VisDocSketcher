@@ -1,0 +1,72 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "File containing labels for the training dataset."
+    },
+    {
+      "file": "test.csv",
+      "description": "File containing labels for the test dataset."
+    },
+    {
+      "file": "train/*.jpg",
+      "description": "Images for training the model."
+    },
+    {
+      "file": "test/*.jpg",
+      "description": "Images for testing the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "GCS_DS_PATH",
+      "description": "Path to the Google Cloud Storage dataset."
+    },
+    {
+      "variable": "train_labels",
+      "description": "DataFrame containing labels for training images."
+    },
+    {
+      "variable": "test_labels",
+      "description": "DataFrame containing labels for test images."
+    },
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data split from training labels."
+    },
+    {
+      "variable": "validate",
+      "description": "DataFrame containing validation data split from training labels."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_labels",
+      "creation_method": "pd.read_csv",
+      "flows_to": "train, validate data split"
+    },
+    {
+      "variable": "test_labels",
+      "creation_method": "pd.read_csv",
+      "flows_to": "test data preparation"
+    },
+    {
+      "variable": "train",
+      "creation_method": "train_test_split",
+      "flows_to": "TFRecord creation"
+    },
+    {
+      "variable": "validate",
+      "creation_method": "train_test_split",
+      "flows_to": "TFRecord creation"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "TFRecords",
+      "input_features": ["image_raw", "Subject Focus", "Eyes", "Face", "Near", "Action", "Accessory", "Group", "Collage", "Human", "Occlusion", "Info", "Blur"],
+      "target_variable": "Pawpularity",
+      "description": "The model is not explicitly defined in the provided code, but TFRecords are created for potential model training."
+    }
+  ]
+}

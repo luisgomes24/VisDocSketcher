@@ -1,0 +1,71 @@
+{
+"data_sources": [
+    {
+        "source": "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+        "description": "Dataset of flower images for classification"
+    }
+],
+"data_variables": [
+    {
+        "variable": "data_dir",
+        "description": "Directory path where the downloaded flower images are stored"
+    },
+    {
+        "variable": "train_ds",
+        "description": "Training dataset containing images and labels"
+    },
+    {
+        "variable": "val_ds",
+        "description": "Validation dataset containing images and labels"
+    },
+    {
+        "variable": "model",
+        "description": "Keras model built for classifying flower species"
+    },
+    {
+        "variable": "hist",
+        "description": "History object containing training and validation metrics after training"
+    }
+],
+"data_flow": [
+    {
+        "variable": "data_dir",
+        "creation_method": "tf.keras.utils.get_file",
+        "flow": "Used to build training and validation datasets"
+    },
+    {
+        "variable": "train_ds",
+        "creation_method": "build_dataset",
+        "flow": "Used in model training"
+    },
+    {
+        "variable": "val_ds",
+        "creation_method": "build_dataset",
+        "flow": "Used for validating model performance during training"
+    },
+    {
+        "variable": "model",
+        "creation_method": "tf.keras.Sequential",
+        "flow": "Trained on train_ds dataset and evaluated on val_ds"
+    },
+    {
+        "variable": "hist",
+        "creation_method": "model.fit",
+        "flow": "Holds training history used for plotting loss and accuracy"
+    }
+],
+"models": [
+    {
+        "model_name": "Keras Sequential Model",
+        "input_features": "Images from train_ds",
+        "target_variable": "Flower species labels",
+        "hyperparameters": {
+            "optimizer": "SGD",
+            "learning_rate": 0.005,
+            "epochs": 5,
+            "batch_size": 16,
+            "dropout_rate": 0.2
+        }
+    }
+] 
+}

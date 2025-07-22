@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train.csv"] --> B["📊 Preprocess Data"]
+    B --> C["🔍 Filter Annotations"]
+    C --> D["🔄 Convert Annotations to Dictionary"]
+    D --> E["🖼️ Load Images <img src='image.svg'/>"]
+    E --> F["📸 Draw Bounding Boxes"]
+    F --> G["🎥 Create Animation"]
+    G --> H["📊 Display Animation"]

@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Source
+    A[train.csv] -->|Load data| B[DataFrame: df]
+    click A href "train.csv" "Contains news articles data"
+    click B href "df" "DataFrame containing loaded data"
+
+    %% Data Processing
+    B -->|Extract labels| C[Targets: targets]
+    B -->|Split data| D[X_train, X_test, y_train, y_test]
+    click C href "targets" "Labels extracted for model training and evaluation"
+    click D href "train_test_split" "Data split into train and test sets"
+
+    %% ML Models
+    subgraph Models
+        direction TB
+        E[Logistic Regression] 
+        F[Support Vector Machine]
+        G[Decision Tree Classifier]
+        H[Random Forest Classifier]
+    end
+
+    D -->|Training Data| E & F & G & H
+    click E href "Logistic Regression" "Uses no hyperparameters"
+    click F href "Support Vector Machine" "Uses default hyperparameters"
+    click G href "Decision Tree Classifier" "Max depth of 58"
+    click H href "Random Forest Classifier" "Hyperparameters from GridSearchCV"

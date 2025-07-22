@@ -1,0 +1,27 @@
+%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00', 'tertiaryTextColor': '#000000' } } }%%
+flowchart TD
+    %% Data Sources
+    A["/kaggle/input/titanic/train.csv"] -->|"Load Training Data"| B["train_data"]
+    A2["/kaggle/input/titanic/test.csv"] -->|"Load Test Data"| B2["test_data"]
+
+    %% Data Preparation
+    B -->|"Select Features"| C["X"]
+    B -->|"Extract Target"| C2["y"]
+    B2 -->|"Select Features"| C3["X_test"]
+
+    %% Modeling
+    C -->|"Train Model"| D["RandomForestClassifier (rf_model)"]
+    C2 --> D
+    D -->|"Hyperparameter Tuning"| E["GridSearchCV (rf_gs)"]
+
+    %% Prediction
+    E -->|"Predict Survival"| F["predictions"]
+    C3 --> F
+
+    %% Output
+    F -->|"Export Predictions"| G["CSV File"]
+
+    classDef dataNode fill:#ffcc00,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#ccffcc,stroke:#333,stroke-width:2px;
+    class A,A2,B,B2,C,C2,C3,F class dataNode;
+    class D,E class modelNode;

@@ -1,0 +1,24 @@
+graph TD
+    %% Node Definitions
+    A["Flower Dataset Source"]
+    B["data_dir: Directory for images"]
+    C["train_ds: Training Dataset"]
+    D["val_ds: Validation Dataset"]
+    E["Keras Sequential Model"]
+    F["hist: Training History"]
+    
+    %% Node Annotations
+    %% A: Represents the source of the dataset used in the project.
+    %% B: Directory where the images from the dataset are stored.
+    %% C: Dataset used to train the machine learning model.
+    %% D: Dataset used to validate the model during training.
+    %% E: Model that classifies images to flower species.
+    %% F: Stores the outcome of the model training for analysis.
+
+    %% Data Flow
+    A -->|Download and extract| B
+    B -->|Build dataset| C
+    B -->|Build dataset| D
+    C -->|Used for training| E
+    D -->|Used for validation| E
+    E -->|Training process| F

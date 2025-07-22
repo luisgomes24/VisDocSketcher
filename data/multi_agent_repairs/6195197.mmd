@@ -1,0 +1,19 @@
+```mermaid
+%% This is a Mermaid.js diagram that visualizes the workflow for the Jupyter Notebook.
+flowchart TD
+    %% Data source node represents the CSV file being read.
+    A["Train CSV File"] -->|pd.read_csv| B["tr DataFrame"]
+    %% tr DataFrame is filtered to create df_train.
+    B -->|Filter EncodedPixels| C["df_train DataFrame"]
+    %% df_train is used to create the dataset.
+    C -->|Create Dataset| D["train_data"]
+    %% train_data is used to initialize the DataLoader.
+    D -->|DataLoader| E["data_loader"]
+    %% DataLoader feeds data to the model during training.
+    E -->|train_one_epoch| F["DeepLabV3 Model"]
+    %% DeepLabV3 model details: architecture, hyperparameters.
+    F["DeepLabV3 Model"]:::model_class
+
+    classDef model_class fill:#f9f,stroke:#333,stroke-width:2px;
+    class F model_class;
+```

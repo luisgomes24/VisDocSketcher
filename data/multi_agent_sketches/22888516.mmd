@@ -1,0 +1,19 @@
+flowchart TD
+    %% Node for the initial data source file
+    A["Unicorn_Clean.csv"] -->|"Load CSV"| B["df: DataFrame"]
+    
+    %% Node for industry valuations aggregation
+    B -->|"Group by Industry, Sum Valuations"| C["industrydf: Industry Valuations"]
+    
+    %% Node for top 20 companies by valuations
+    B -->|"Group by Company, Sum Valuations, Sort, Top 20"| D["companydf20: Top 20 Companies"]
+    
+    %% Node for valuations by joining date
+    B -->|"Group by Date, Aggregate Valuations"| E["dates: Valuations by Date"]
+    
+    %% Explanation comment for each node
+    %% A represents the initial data source file being loaded into a DataFrame
+    %% B is the main DataFrame containing all unicorn startup data
+    %% C is used to create business valuations per industry for visualizations
+    %% D aids in creating bar plots for the top 20 companies by valuation
+    %% E generates a bar graph for tracking valuation changes over time

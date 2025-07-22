@@ -1,0 +1,43 @@
+%% The diagram of the data science workflow for preprocessing, training, and evaluating a machine learning model
+flowchart TD
+    %% Data Source Node
+    A["../input/automobilepartsindentification<br>Automobile-parts Dataset"]
+    %% Data Preprocessing Nodes
+    subgraph preprocessing [Data Preprocessing]
+        B["train_transform"]
+        C["test_transform"]
+    end
+    %% Dataset Node
+    D["main_image"]
+    %% DataLoader Nodes
+    E["train_loader"]
+    F["test_loader"]
+    %% Model and Training Components
+    subgraph training [Model Training]
+        G["ResNet-50 Model"]
+        H["optimizer<br>Adam"]
+        I["criterion<br>Cross-Entropy Loss"]
+        J["scheduler"]
+        K["train_plot"]
+        L["test_plot"]
+        M["acc_plot"]
+    end
+    %% Data Analysis
+    subgraph analysis [Data Analysis]
+        N["loss_data"]
+    end
+    %% Data Flow
+    A -->|"Load data"| D
+    D -->|"Apply train_transform"| B
+    D -->|"Apply test_transform"| C
+    B -->|"Split and load to"| E
+    C -->|"Split and load to"| F
+    E -->|"Train Model"| G
+    F -->|"Evaluate Model"| G
+    G -->|"Update with optimizer"| H
+    G -->|"Compute loss"| I
+    G -->|"Adjust learning rate"| J
+    G -->|"Store training loss"| K
+    G -->|"Store test loss"| L
+    G -->|"Store accuracy"| M
+    G -->|"Analyze loss metrics"| N

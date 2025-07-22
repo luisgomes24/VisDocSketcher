@@ -1,0 +1,45 @@
+flowchart TD
+    %% Data Sources
+    A[Train CSV] -->|Read CSV| B(Combine Data)
+    A2[Extra Train CSV] -->|Read CSV| B
+    A3[Test CSV] -->|Read CSV and process| G[Tokenized Test Dataset]
+
+    %% Training Data Preparation
+    B -->|Concatenate| C[Training Data]
+    C -->|Preprocess| D[Tokenized Dataset]
+    D -->|Train Model| E[AutoModelForMultipleChoice Model]
+
+    %% Training Parameters
+    E -->|Learning Rate: 5e-6, Epochs: 3| F(Prediction Process)
+
+    %% Test Data and Predictions
+    G -->|Preprocess| H[Test Predictions]
+    H -->|Generate| I[Predicted Answer IDs]
+    I -->|Map| J[Predictions as Answer Letters]
+    J -->|Format| K[Predictions as String]
+    K -->|Create| L(Submission File)
+
+    %% Output
+    L -->|Save to CSV| M[Final Submission]
+
+    %% Comments for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+
+    class A,A2,A3 dataSource;
+    class B,C,D,E,F,G,H,I,J,K,L,M process;
+```
+
+%% Node A represents the initial reading of the main train CSV file.
+%% Node A2 represents reading additional high-quality training data.
+%% Node A3 represents reading the test CSV file.
+%% Node B represents combining the initial and additional training data.
+%% Node C involves preparing training data for model training.
+%% Node D represents preprocessing to create a ready-to-train tokenized dataset.
+%% Node E shows the training of the DeBERTa model with multiple choice.
+%% Node F relates to prediction processes, involving model inference.
+%% Node G involves preprocessing the test dataset.
+%% Node H represents making predictions on the test dataset.
+%% Node I to K include generating and formatting predictions.
+%% Node L represents preparing submission output.
+%% Node M indicates saving the final submission as a CSV.

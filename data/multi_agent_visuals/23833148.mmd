@@ -1,0 +1,50 @@
+flowchart TD
+    %% Load iris.csv into the data variable
+    A[Load iris.csv] -->|Read CSV| B[data]
+    B[data]:::data -->|Split data| C[X]
+    B -->|Split data| D[y]
+    C -->|Train/Test Split| E[X_train]
+    C -->|Train/Test Split| F[X_test]
+    D -->|Train/Test Split| G[y_train]
+    D -->|Train/Test Split| H[y_test]
+    E -->|Train model| I[Logistic Regression]
+    G -->|Train model| I
+    F -->|Predict| J[predictions]
+    I -->|Predict| J
+    J -->|Calculate Accuracy| K[acc]
+    H -->|Calculate Accuracy| K
+    %% Adding visuals
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    class B data;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    class I model;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    class K output;
+    
+    %% Adding icons for visualization
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Load iris.csv"]
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    E["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_train"]
+    F["<img src='icons/row_split.svg' width=100 height=100/> <br/> X_test"]
+    G["<img src='icons/row_split.svg' width=100 height=100/> <br/> y_train"]
+    H["<img src='icons/row_split.svg' width=100 height=100/> <br/> y_test"]
+    I["<img src='icons/brain.svg' width=100 height=100/> <br/> Logistic Regression"]
+    J["<img src='icons/image.svg' width=100 height=100/> <br/> predictions"]
+    K["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> acc"]
+    
+    %% Connections
+    A -->|Read CSV| B
+    B -->|Split data| C
+    B -->|Split data| D
+    C -->|Train/Test Split| E
+    C -->|Train/Test Split| F
+    D -->|Train/Test Split| G
+    D -->|Train/Test Split| H
+    E -->|Train model| I
+    G -->|Train model| I
+    F -->|Predict| J
+    I -->|Predict| J
+    J -->|Calculate Accuracy| K
+    H -->|Calculate Accuracy| K

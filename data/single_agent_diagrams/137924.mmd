@@ -1,0 +1,28 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> Titanic Data"] --> B["🔍 Preview & Info"]
+    B --> C["🧹 Preprocess Data"]
+    C --> D["📊 Visualize Data"]
+    D --> E["📈 Model Training"]
+    E --> F["🔍 Evaluate Models"]
+    F --> G["📤 Prepare Submission"]
+    
+    C1["🧹 Drop Columns"] --> C
+    C2["🔄 Handle Missing Values"] --> C
+    C3["🔄 Feature Engineering"] --> C
+    C -->|Data Cleaned| C1
+    C -->|Features Created| C2
+    C -->|Categories Dummified| C3
+
+    D1["📊 Explore Embarked <img src='dummy_plots/barplot_template.svg' />"] --> D
+    D2["📈 Fare Distribution <img src='dummy_plots/hist_template.svg' />"] --> D
+    D3["📊 Age Survival Rate <img src='dummy_plots/barplot_template.svg' />"] --> D
+
+    E1["🧠 Logistic Regression"] --> E
+    E2["🧠 Random Forest"] --> E
+    E -->|Trained on Features| E1
+    E -->|Trained on Features| E2
+
+    F1["✔️ Logistic Regression Score"] --> F
+    F2["✔️ Random Forest Score"] --> F
+    F -->|Model Performance| F1
+    F -->|Model Performance| F2 

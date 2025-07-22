@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph DataLoading
+        A["../input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv"] -->|Load CSV| B[df]
+        %% Load customer data into DataFrame
+    end
+    
+    subgraph DataPreprocessing
+        B -->|Drop 'customerID'| C[df1]
+        C -->|Convert 'TotalCharges' to Numeric| D
+        D -->|Remove empties from 'TotalCharges'| E[df1]
+        E -->|One-hot Encoding & Scaling| F[df2]
+        %% Transform and scale data for ML models
+    end
+
+    subgraph FeatureEngineering
+        F -->|Extract Features| G[X]
+        F -->|Extract Target| H[y]
+        %% Separate features and target variable
+    end
+
+    subgraph DataSplitting
+        G -->|Train/Test Split| I[X_train]
+        H -->|Train/Test Split| J[y_train]
+        G -->|Train/Test Split| K[X_test]
+        H -->|Train/Test Split| L[y_test]
+        %% Split the data into training and test sets
+    end
+    
+    subgraph ModelBuilding[Neural Network Model]
+        I & J -->|Train| M[Sequential Model]
+        M -->|Predict| N[yp]
+        K & L -->|Evaluate| O
+        %% Build and train a neural network model
+    end
+
+    subgraph Evaluation
+        N -->|Threshold & Convert Predictions| P[y_pred]
+        y_pred -->|Generate Classification Report| Q
+        y_test & y_pred -->|Generate Confusion Matrix| R
+        %% Evaluate model performance
+    end

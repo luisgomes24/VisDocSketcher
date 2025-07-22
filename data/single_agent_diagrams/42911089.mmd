@@ -1,0 +1,32 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Dataset"] --> B["Display Data Head"]
+    B --> C["Get Column Names"]
+    C --> D["Rename Columns"]
+    D --> E["Get Shape of Dataset"]
+    E --> F["Check Dataset Info"]
+    F --> G["Get Statistical Summary"]
+    G --> H["Check for Missing Values"]
+    H --> I["<img src='icons/table.svg'/> <br/> Data Preparation"]
+    
+    I --> J["<img src='icons/column_split.svg'/> <br/> Split Features and Target"]
+    J --> K["<img src='icons/row_split.svg'/> <br/> Train-Test Split"]
+    
+    K --> L["<img src='icons/brain.svg'/> <br/> Train Model"]
+    L --> M["Print Model Coefficients"]
+    M --> N["Print Model Summary"]
+    
+    N --> O["<img src='icons/column_split.svg'/> <br/> Evaluate Model"]
+    O --> P["Fit Model and Predict"]
+    P --> Q["Predictions for New Data"]
+    
+    subgraph "Exploratory Data Analysis"
+        R["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scatter Plots"]
+        S["<img src='dummy_plots/hist_template.svg'/> <br/> Histograms"]
+        T["<img src='dummy_plots/heatmap_template.svg'/> <br/> Correlation Heatmap"]
+    end
+    
+    I --> R
+    I --> S
+    I --> T
+
+    H --> I

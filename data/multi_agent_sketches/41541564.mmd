@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"] -->|Load| B1["train_df"]
+    A2["test.csv"] -->|Load| B2["test_df"]
+    
+    %% Data Preparation
+    B1 -->|Extract Target| C1["y (Survived)"]
+    B1 -->|Prepare Features| C2["X (Features)"]
+    
+    %% Model Training
+    C1 -->|Train| D["Logistic Regression Model"]
+    C2 -->|Train| D
+    
+    %% Prediction
+    B2 -->|Predict| E["y_pred"]
+    D -->|Predict| E
+    
+    %% Prepare Submission
+    E -->|Create Submission| F["answer_df"]
+    F -->|Save to CSV| G["submission.csv"]
+    
+    %% Comments
+    subgraph Explanation
+        A1 -- Train dataset containing Titanic passenger data with 'Survived' status.
+        A2 -- Test dataset containing Titanic passenger data without 'Survived' status.
+        B1 -- DataFrame holding training data.
+        B2 -- DataFrame holding test data for predictions.
+        C1 -- Target variable 'Survived' extracted from training DataFrame.
+        C2 -- Features prepared from training DataFrame excluding 'Survived'.
+        D -- Logistic Regression model using default parameters.
+        E -- Predicted 'Survived' values for test data.
+        F -- DataFrame with prediction results for submission.
+        G -- CSV file prepared for competition submission.
+    end

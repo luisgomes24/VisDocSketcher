@@ -1,0 +1,16 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🗄️ Explore Data"]
+    B --> C["🔍 Data Preprocessing"]
+    C --> D["📊 Visualize Data"]
+    D --> E["🧠 Choose & Train Model"]
+    E --> F["📈 Evaluate Model"]
+    F --> G["🔄 Predict on Test Data"]
+    G --> H["💾 Deploy Model"]
+
+    A -->|Load train and test datasets| B
+    B -->|Check info and describe datasets| C
+    C -->|Handle missing values and preprocess data| D
+    D -->|Create various plots for insights| E
+    E -->|Train logistic regression model| F
+    F -->|Evaluate model accuracy| G
+    G -->|Export trained model using pickle| H

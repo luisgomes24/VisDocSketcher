@@ -1,0 +1,103 @@
+{
+    "data_sources": [
+        {
+            "file_name": "movie.csv",
+            "description": "Contains movie information with unique movie numbers, titles, and genres."
+        },
+        {
+            "file_name": "rating.csv",
+            "description": "Contains user ratings for movies, including user IDs, movie IDs, ratings, and timestamps."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "movie",
+            "description": "DataFrame containing movie details loaded from movie.csv."
+        },
+        {
+            "variable_name": "rating",
+            "description": "DataFrame containing user ratings loaded from rating.csv."
+        },
+        {
+            "variable_name": "df",
+            "description": "Merged DataFrame containing both movie details and user ratings."
+        },
+        {
+            "variable_name": "common_movies",
+            "description": "Filtered DataFrame excluding movies with less than 1000 ratings."
+        },
+        {
+            "variable_name": "user_movie_df",
+            "description": "Pivot table DataFrame with user IDs as indices and movie titles as columns, storing user ratings."
+        },
+        {
+            "variable_name": "random_user",
+            "description": "Randomly selected user ID for making recommendations."
+        },
+        {
+            "variable_name": "random_user_movie",
+            "description": "DataFrame containing the highest rated movie for the randomly selected user."
+        },
+        {
+            "variable_name": "first_movie",
+            "description": "Title of the highest rated movie identified for the random user."
+        },
+        {
+            "variable_name": "movie_item",
+            "description": "Series representing the ratings of the selected movie by all users."
+        },
+        {
+            "variable_name": "recommended",
+            "description": "DataFrame containing the top 5 recommended movies based on correlation with the selected movie."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "movie",
+            "creation": "pd.read_csv",
+            "flow": "Used in merging with rating DataFrame to create df."
+        },
+        {
+            "variable": "rating",
+            "creation": "pd.read_csv",
+            "flow": "Used in merging with movie DataFrame to create df."
+        },
+        {
+            "variable": "df",
+            "creation": "movie.merge(rating, how='left', on='movieId')",
+            "flow": "Filtered to create common_movies and used to create user_movie_df.
+            Also used to find random_user_movie."
+        },
+        {
+            "variable": "common_movies",
+            "creation": "Filtering df with movies that have at least 1000 votes.",
+            "flow": "Used to create user_movie_df by creating a pivot table."
+        },
+        {
+            "variable": "user_movie_df",
+            "creation": "common_movies.pivot_table",
+            "flow": "Used to generate recommendations and find movie correlations."
+        },
+        {
+            "variable": "random_user",
+            "creation": "Random sampling from user_movie_df.",
+            "flow": "Used to identify random_user_movie."
+        },
+        {
+            "variable": "random_user_movie",
+            "creation": "Filtering df with userId and rating conditions.",
+            "flow": "Used to extract first_movie."
+        },
+        {
+            "variable": "first_movie",
+            "creation": "Extracted from random_user_movie DataFrame.",
+            "flow": "Used to find correlations in user_movie_df."
+        },
+        {
+            "variable": "recommended",
+            "creation": "Correlation calculation with user_movie_df.",
+            "flow": "Contains recommended movies for the user, based on their rating history."
+        }
+    ],
+    "models": [],
+}

@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Data Sources %%
+    A1["numerai_training_data_int8.parquet"]:::dataSource %% The training dataset
+    A2["numerai_validation_data_int8.parquet"]:::dataSource %% The validation dataset
+    A3["numerai_live_data_int8.parquet"]:::dataSource %% The live dataset
+    A4["numerai_datasets.zip"]:::dataSource %% ZIP file containing datasets
+
+    %% Variables Creation %%
+    B1["df_train"]:::dataVariable -->|read_parquet| A1
+    B2["df_valid"]:::dataVariable -->|read_parquet| A2
+
+    %% DataFrame Slicing %% 
+    C1["df_train_targets"]:::dataVariable -->|slice targets| B1
+    C2["df_valid_targets"]:::dataVariable -->|slice targets| B2
+
+    %% Correlation Calculations %%
+    D1["dd_train"]:::dataVariable -->|calculate Spearman| C1
+    D2["dd_valid"]:::dataVariable -->|calculate Spearman| C2
+
+    %% Create DataFrames from Correlations %%
+    E1["df_spearmanr_train"]:::dataVariable -->|create DataFrame| D1
+    E2["df_spearmanr_valid"]:::dataVariable -->|create DataFrame| D2
+
+    %% Aggregate Correlation Data %%
+    F1["df_spearmanr_train_mean_std"]:::dataVariable -->|aggregate| E1
+    F2["df_spearmanr_valid_mean_std"]:::dataVariable -->|aggregate| E2
+
+    %% Data Visualization %%
+
+    style A1,A2,A3,A4 fill:#f9f,stroke:#333,stroke-width:2px;
+    style B1,B2,C1,C2,D1,D2,E1,E2,F1,F2 fill:#bbf,stroke:#333,stroke-width:2px;
+    
+    classDef dataSource fill:#f96;
+    classDef dataVariable fill:#bbf;
+```

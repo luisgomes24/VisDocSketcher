@@ -1,0 +1,29 @@
+```mermaid
+%% The diagram represents the data processing flow of the Jupyter Notebook
+flowchart TD
+    %% Source node for wine reviews dataset
+    A["CSV File: winemag-data_first150k.csv"]
+    
+    %% Node for loading and storing wine reviews in a DataFrame
+    B["DataFrame: reviews"]
+    A --> B
+    
+    %% Node for a DataFrame containing fruits sales data
+    C["DataFrame: fruit_sales"]
+    
+    %% Node for DataFrame with animal details
+    D["DataFrame: animals"]
+    
+    %% Node for fruits DataFrame
+    E["DataFrame: fruits"]
+    
+    %% Node for Series containing dinner ingredients
+    F["Series: ingredients"]
+    
+    %% Arrows indicating data flow and checks
+    B --> |"Checked for correctness"| G(("Checked"))
+    C --> |"Checked for correctness"| G
+    E --> |"Displayed and verified"| G
+    D --> |"Displayed"| G
+    F --> |"Checked"| G
+```

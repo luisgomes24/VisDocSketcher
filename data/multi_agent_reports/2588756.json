@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/Publication Reports_1a.csv",
+      "description": "Contains publication reports data with multiple columns"
+    },
+    {
+      "file": "../input/Publication Reports_1b.csv",
+      "description": "Contains additional publication reports data with similar structure"
+    },
+    {
+      "file": "../input/Publication Reports_1c.csv",
+      "description": "Contains further publication reports data following the same format"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing data from Publication Reports_1a.csv"
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame containing data from Publication Reports_1b.csv"
+    },
+    {
+      "name": "df3",
+      "description": "DataFrame containing data from Publication Reports_1c.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv('../input/Publication Reports_1a.csv', delimiter=';', nrows = nRowsRead)",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix"]
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv('../input/Publication Reports_1b.csv', delimiter=';', nrows = nRowsRead)",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix"]
+    },
+    {
+      "variable": "df3",
+      "creation": "pd.read_csv('../input/Publication Reports_1c.csv', delimiter=';', nrows = nRowsRead)",
+      "flows_to": ["plotPerColumnDistribution"]
+    }
+  ],
+  "models": []
+}

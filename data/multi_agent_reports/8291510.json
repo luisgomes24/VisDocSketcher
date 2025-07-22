@@ -1,0 +1,26 @@
+{
+  "data_sources": [
+    {
+      "file_name": "HandFootandMouthDisease_Korea_2011_2019.csv",
+      "description": "Contains data related to Hand, Foot and Mouth Disease cases in Korea from 2011 to 2019."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding the first 1000 rows from the HandFootandMouthDisease_Korea_2011_2019.csv file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flows_to": [
+        "plotPerColumnDistribution",
+        "plotCorrelationMatrix",
+        "plotScatterMatrix"
+      ]
+    }
+  ],
+  "models": []
+}

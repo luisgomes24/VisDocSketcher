@@ -1,0 +1,18 @@
+```mermaid
+flowchart TD
+    A["meta_data_0016.csv"]
+    DF1["DataFrame df1"]
+    A -->|"pd.read_csv"| DF1
+    
+    B["meta_data_0027.csv"]
+    DF2["DataFrame df2"]
+    B -->|"pd.read_csv"| DF2
+    
+    C["meta_data_0013.csv"]
+    DF3["DataFrame df3"]
+    C -->|"pd.read_csv"| DF3
+
+    DF1 -->|"Visualized: plotPerColumnDistribution & head()"| E["Visualization of df1"]
+    DF2 -->|"Visualized: plotPerColumnDistribution & head()"| F["Visualization of df2"]
+    DF3 -->|"Visualized: plotPerColumnDistribution & head()"| G["Visualization of df3"]
+```

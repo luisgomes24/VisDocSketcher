@@ -1,0 +1,44 @@
+{
+  "data_sources": [
+    {
+      "source": "bigquery-public-data.bitcoin_blockchain.transactions",
+      "description": "A dataset containing Bitcoin transaction details including timestamps and transaction IDs."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "bitcoin_blockchain",
+      "description": "BigQuery helper object for accessing Bitcoin blockchain dataset."
+    },
+    {
+      "variable": "transactions_per_month",
+      "description": "DataFrame containing the count of Bitcoin transactions per month."
+    },
+    {
+      "variable": "transactions_per_day",
+      "description": "DataFrame containing the count of Bitcoin transactions per day in the year 2017."
+    },
+    {
+      "variable": "transactions_per_merkleroot",
+      "description": "DataFrame containing the count of transactions associated with each merkle root."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "transactions_per_month",
+      "creation": "Query from BigQuery through bitcoin_blockchain helper using a CTE to get monthly transaction counts.",
+      "flow": "Used for plotting monthly Bitcoin transactions."
+    },
+    {
+      "variable": "transactions_per_day",
+      "creation": "Query from BigQuery through bitcoin_blockchain helper using a CTE targeting 2017 transactions.",
+      "flow": "Used for plotting daily Bitcoin transactions in 2017."
+    },
+    {
+      "variable": "transactions_per_merkleroot",
+      "creation": "Query from BigQuery through bitcoin_blockchain helper counting transactions per merkle root.",
+      "flow": "Used for plotting transactions per merkle root."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,28 @@
+%% The workflow diagram for data processing in the given notebook
+flowchart TD
+    
+    %% Node for data source
+    A["Data Source: DataAnalyst.csv"]
+    %% Comment: This is where the dataset with job postings is loaded
+    
+    %% Node for loading data
+    B["Read CSV into DataFrame df"]
+    %% Comment: Data is read into a DataFrame using pandas read_csv()
+    
+    %% Node for data cleaning
+    C["Data Cleaning"]
+    %% Comment: Handle null values and prepare data for analysis
+    
+    %% Node for feature engineering
+    D["Feature Engineering"]
+    %% Comment: Replace categories and calculate new features like mean salary
+    
+    %% Node for data visualization
+    E["Data Visualization"]
+    %% Comment: Create histograms, bar charts, and pie charts for data insights
+
+    %% Defining the flow
+    A --> B
+    B --> C
+    C --> D
+    D --> E

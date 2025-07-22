@@ -1,0 +1,20 @@
+{"data_sources": [
+    {"file": "../input/fulllabeldataset/train.csv", "description": "Contains primary labels and file paths for training data along with additional metadata."},
+    {"file": "/kaggle/input/birdclef-2022/scored_birds.json", "description": "A JSON file that provides information about target bird species."},
+    {"file": "../input/annotationdataset-furu/results.txt", "description": "Manual annotations for primary labels from the Furu dataset."},
+    {"file": "../input/annotationdataset-furu/results_num1_primary.txt", "description": "Additional manual annotations for primary labels from the Furu dataset."},
+    {"file": "../input/annotationdataset-ishii/results.txt", "description": "Annotations for primary labels from the Ishii dataset."},
+    {"file": "../input/annotationdataset-tadokoro/results.txt", "description": "Annotations for primary labels from the Tadokoro dataset."},
+    {"file": "../input/annotationdataset-takemi/results.txt", "description": "Annotations for primary labels from the Takemi dataset."}
+],
+"data_variables": [
+    {"name": "train", "description": "DataFrame containing training data with various processed features including labels and file paths."},
+    {"name": "bird_target", "description": "Dictionary mapping from bird species names to unique label IDs."},
+    {"name": "LABEL_IDS", "description": "Mapping from bird species names to their respective label IDs."},
+    {"name": "INV_LABEL_IDS", "description": "Reverse mapping from label IDs back to bird species names."}
+],
+"data_flow": [
+    {"variable": "train", "created": "pd.read_csv to load the initial training dataset.", "flow": "Merged with additional annotations from various sources, processed for labels, and saved to 'handlabeltrain.csv'."},
+    {"variable": "bird_target", "created": "Loaded from a JSON file.", "flow": "Used to map species names to IDs in the train DataFrame."}
+],
+"models": []}

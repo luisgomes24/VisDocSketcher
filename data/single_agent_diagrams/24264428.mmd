@@ -1,0 +1,13 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load MNIST Data"] --> B["Data Preprocessing 🛠️"]
+    B --> C["Add Noise 🌩️"]
+    C --> D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Original Images 📸"]
+    D --> E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Noisy Images 🌪️"]
+    E --> F["Build Autoencoder 🧠"]
+    F --> G["Train Autoencoder 📈"]
+    G --> H["Evaluate Autoencoder Performance 📊"]
+    H --> I["Denoised Images 📷"]
+    I --> J["Evaluate Classifier Performance ⚖️"]
+    J --> K["Composite Model Composition 🔗"]
+    K --> L["Predict with Composite Model 🔮"]
+    L --> M["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Predictions 📊"]

@@ -1,0 +1,29 @@
+flowchart TD
+    A["📁 Import Data"] --> B["📊 Data Overview"]
+    B --> C["🔍 Fixing Salary Variable Type"]
+    C --> D["📈 General Statistics"]
+    D --> E["📊 Starting Median Salary by Major"]
+    E --> F["📊 Selected Majors Analysis"]
+    F --> G["🧠 Model Training"]
+    G --> H["🧪 Evaluation"]
+    H --> I["📊 Visualize Results"]
+
+    A -->|read| C
+    B -->|head| B
+    D -->|describe| D
+    E -->|barplot| E
+    F -->|plot| F
+    G -->|train test split| G
+    H -->|predictions| H
+    H -->|evaluate models| H
+    I -->|final plots| I
+
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333,stroke-width:4px
+    style C fill:#bfb,stroke:#333,stroke-width:4px
+    style D fill:#ff9,stroke:#333,stroke-width:4px
+    style E fill:#ffb,stroke:#333,stroke-width:4px
+    style F fill:#fb9,stroke:#333,stroke-width:4px
+    style G fill:#fbb,stroke:#333,stroke-width:4px
+    style H fill:#fbf,stroke:#333,stroke-width:4px
+    style I fill:#fff,stroke:#333,stroke-width:4px

@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data including tweet text, keywords, and locations."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data with tweet text, keywords, and locations for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "Initial DataFrame holding training data."
+    },
+    {
+      "variable": "X",
+      "description": "Input features for the model made up of tweet text, keywords, and locations."
+    },
+    {
+      "variable": "Y",
+      "description": "Target variable (labels) which indicates the sentiment."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame holding test data for generating predictions."
+    },
+    {
+      "variable": "predictions",
+      "description": "Predicted outputs based on the test data set after processing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "read_csv",
+      "uses": "Data cleaning and preprocessing."
+    },
+    {
+      "variable": "X",
+      "creation_method": "data.iloc slicing",
+      "uses": "Input to the model after processing."
+    },
+    {
+      "variable": "Y",
+      "creation_method": "data.iloc slicing",
+      "uses": "Target variable for model training."
+    },
+    {
+      "variable": "test",
+      "creation_method": "read_csv",
+      "uses": "Used for generating final predictions after similar preprocessing as training data."
+    },
+    {
+      "variable": "predictions",
+      "creation_method": "model.predict",
+      "uses": "Predictions saved to CSV."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Artificial Neural Network",
+      "details": {
+        "layers": [
+          {"units": 10, "activation": "relu"},
+          {"units": 10, "activation": "relu"},
+          {"units": 10, "activation": "relu"},
+          {"units": 1, "activation": "sigmoid"}
+        ],
+        "optimizer": "adam",
+        "loss": "binary_crossentropy",
+        "metrics": ["accuracy"],
+        "epochs": 100,
+        "batch_size": 32
+      }
+    }
+  ]
+}

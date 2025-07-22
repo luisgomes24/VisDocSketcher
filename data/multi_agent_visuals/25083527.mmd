@@ -1,0 +1,16 @@
+%%{init: {'theme': 'default'}}%%
+
+graph TD;
+    A["<img src='file.svg' width=100 height=100/> <br/> Input Data"]
+    --> B["<img src='database.svg' width=100 height=100/> <br/> Observations"]
+    --> C["<img src='table.svg' width=100 height=100/> <br/> Config"]
+
+    C --> D["<img src='column_split.svg' width=100 height=100/> <br/> Valid Moves"];
+    C --> E["<img src='row_split.svg' width=100 height=100/> <br/> Next Grid"];
+
+    D --> F["<img src='brain.svg' width=100 height=100/> <br/> Agent Q1"];
+    D --> G["<img src='brain.svg' width=100 height=100/> <br/> Agent Q2"];
+    D --> H["<img src='brain.svg' width=100 height=100/> <br/> My Agent"];
+
+    F --> I["<img src='scatter_plot_template.svg' width=100 height=100/> <br/> Winning Move Plot"];
+    G --> J["<img src='scatter_plot_template.svg' width=100 height=100/> <br/> Blocking Move Plot"];

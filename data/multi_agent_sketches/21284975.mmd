@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph ds1 ["ParisHousing.csv Data Source"]
+        direction TB
+        A1["ParisHousing.csv"]
+        %% DataSource: Raw CSV file containing housing data for Paris
+    end
+
+    subgraph load1 ["Load and Prepare Data"]
+        direction TB
+        B1["data"]
+        %% DataFrame created by reading the CSV file
+    end
+
+    subgraph scale1 ["Standardize Features"]
+        direction TB
+        C1["scaled_data"]
+        %% DataFrame of standardized features
+    end
+
+    subgraph wcss1 ["K-Means Clustering"]
+        direction TB
+        D1["wcss"]
+        %% List containing WCSS for determining the optimal number of clusters
+    end
+
+    A1 --> B1
+    B1 --> C1
+    C1 --> D1
+
+    subgraph model1 ["K-Means Model"]
+        direction TB
+        E1["KMeans Model"]
+        %% Uses scaled_data for clustering, hyperparameters include variable number of clusters, k-means++ initialization, random_state 0
+    end
+
+    C1 --> E1

@@ -1,0 +1,112 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing answers and their corresponding categories."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Testing dataset containing answers and their corresponding categories."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dataset_train",
+      "description": "Dataframe containing the training data from train.csv."
+    },
+    {
+      "variable_name": "dataset_test",
+      "description": "Dataframe containing the testing data from test.csv."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Array containing the training answers after preprocessing."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Array containing the encoded category labels for the training answers."
+    },
+    {
+      "variable_name": "X_val",
+      "description": "Array containing the validation answers after preprocessing."
+    },
+    {
+      "variable_name": "y_val",
+      "description": "Array containing the encoded category labels for the validation answers."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Array containing the testing answers after preprocessing."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Array containing the encoded category labels for the testing answers."
+    },
+    {
+      "variable_name": "model",
+      "description": "Keras Sequential model configured for CNN with multiple convolutional and dense layers."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "dataset_train",
+      "creation": "Loaded from train.csv using pd.read_csv.",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable_name": "dataset_test",
+      "creation": "Loaded from test.csv using pd.read_csv.",
+      "flow": "Used for testing the model."
+    },
+    {
+      "variable_name": "X_train",
+      "creation": "Generated from dataset_train after preprocessing.",
+      "flow": "Input to the model during training."
+    },
+    {
+      "variable_name": "y_train",
+      "creation": "Encoded from dataset_train.",
+      "flow": "Target variable for training."
+    },
+    {
+      "variable_name": "X_val",
+      "creation": "Generated from a portion of dataset_train after preprocessing.",
+      "flow": "Input to the model for validation."
+    },
+    {
+      "variable_name": "y_val",
+      "creation": "Encoded from a portion of dataset_train.",
+      "flow": "Target variable for validation."
+    },
+    {
+      "variable_name": "X_test",
+      "creation": "Generated from dataset_test after preprocessing.",
+      "flow": "Input to the model for testing."
+    },
+    {
+      "variable_name": "y_test",
+      "creation": "Encoded from dataset_test.",
+      "flow": "Target variable for testing."
+    },
+    {
+      "variable_name": "model",
+      "creation": "Defined using Keras Sequential API.",
+      "flow": "Trained on X_train and y_train, evaluated on X_test and y_test."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CNN",
+      "input_features": "X_train",
+      "target_variables": "y_train",
+      "hyperparameters": {
+        "vocabulary_size": "len(t.word_index)",
+        "embedding_size": "800",
+        "epochs": "25",
+        "batch_size": "64",
+        "filters": [64, 128, 256],
+        "dropout_rates": [0.15, 0.15, 0.20]
+      }
+    }
+  ]
+}

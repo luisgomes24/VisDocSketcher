@@ -1,0 +1,11 @@
+flowchart TD
+    A["🗄️ Load Data"] --> B["💾 Preprocess Data"]
+    B --> C["🔍 Train-Test Split"]
+    C --> D["🧠 Fit Decision Tree Model"]
+    D --> E["📊 Evaluate Model Performance"]
+    E --> F["🧠 Fit Random Forest Model"]
+    F --> G["📊 Evaluate Random Forest Model"]
+    G --> H["📈 Build Final Model"]
+    H --> I["📂 Load Test Data"]
+    I --> J["🔮 Make Predictions"]
+    J --> K["💾 Save Submission File"]

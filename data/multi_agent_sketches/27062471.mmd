@@ -1,0 +1,38 @@
+%% The main data source for the workflow
+graph TD;
+  subgraph DataPreparation
+    DS[Acoustic Extinguisher Fire Dataset] -->|pd.read_excel| df[DataFrame with Fire Data] %% Data is loaded from an excel file
+    df -->|Drop STATUS column| X[Features for Model] %% Features are extracted for modeling
+    df -->|Extract STATUS column| y[Target Variable for Model] %% Target labels are extracted for modeling
+  end
+
+  subgraph DataSplit
+    X -->|evalml.preprocessing.split_data| X_train[Training Features] %% Training features prepared
+    X -->|evalml.preprocessing.split_data| X_test[Testing Features] %% Testing features prepared
+    y -->|evalml.preprocessing.split_data| y_train[Training Target] %% Training labels prepared
+    y -->|evalml.preprocessing.split_data| y_test[Testing Target] %% Testing labels prepared
+  end
+
+  subgraph ModelTraining
+    X_train -->|Train Model| AutoML[AutoML Search] %% AutoML search for best pipeline
+    y_train -->|Train Model| AutoML %% Using AutoML for model training
+    AutoML -->|Extract Best Pipeline| BestPipeline[Best Model Pipeline] %% Extract the best model pipeline from AutoML
+  end
+
+  subgraph ModelTesting
+    BestPipeline -->|Predict on X_test| pred[Predictions] %% Use the best model pipeline to predict
+    y_test -->|Evaluation Metrics| Evaluation[Model Evaluation] %% Evaluate model using test labels
+  end
+
+  style DS fill:#f96,stroke:#333,stroke-width:2px;
+  style df fill:#bbf,stroke:#333,stroke-width:2px;
+  style X fill:#bbf,stroke:#333,stroke-width:2px;
+  style y fill:#bbf,stroke:#333,stroke-width:2px;
+  style X_train fill:#bfb,stroke:#333,stroke-width:2px;
+  style X_test fill:#bfb,stroke:#333,stroke-width:2px;
+  style y_train fill:#bfb,stroke:#333,stroke-width:2px;
+  style y_test fill:#bfb,stroke:#333,stroke-width:2px;
+  style AutoML fill:#fbf,stroke:#333,stroke-width:2px;
+  style BestPipeline fill:#fbf,stroke:#333,stroke-width:2px;
+  style pred fill:#fbf,stroke:#333,stroke-width:2px;
+  style Evaluation fill:#fbf,stroke:#333,stroke-width:2px;

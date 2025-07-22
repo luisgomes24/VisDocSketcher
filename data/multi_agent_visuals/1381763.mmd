@@ -1,0 +1,21 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Input Data"]
+    B["Data Processing"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source"]
+    D["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table"]
+    E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Selection"]
+    F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Row Selection"]
+    G["Model Training"]
+    H["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    I["Evaluation"]
+    J["<img src='icons/image.svg' width=100 height=100/> <br/> Output Image"]
+    K["Results"]
+    A -->|"Read"| C -->|"Process"| D -->|"Select Features"| E -->|"Filter Rows"| F -->|"Train"| G -->|"Train Model"| H -->|"Generate"| J -->|"Show"| K
+    K -->|"Display"| I;
+    style A fill:#87CEEB;
+    style C fill:#87CEEB;
+    style D fill:#87CEEB;
+    style E fill:#87CEEB;
+    style F fill:#87CEEB;
+    style H fill:#C6F4D6;
+    style J fill:#F2C464;

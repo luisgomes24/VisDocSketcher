@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Training Data <img src='dummy_plots/barplot_template.svg'/>"] --> B["📁 Load Test Data <img src='dummy_plots/barplot_template.svg'/>"]
+    B --> C["🔍 Data Info & Preprocessing"]
+    C --> D["🗃️ Drop Unnecessary Columns"]
+    D --> E["📅 Combine Date & Time"]
+    E --> F["🧮 Feature Engineering"]
+    F --> G["🔄 Handle Missing Values"]
+    G --> H["📉 Train-Test Split"]
+    H --> I["🧠 Model Training"]
+    I --> J["🔍 Evaluate Model Performance"]
+    J --> K["📤 Predictions"]
+    K --> L["📄 Save Predictions to CSV"]

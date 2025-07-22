@@ -1,0 +1,129 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and target variable 'Strength' for concrete prediction."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing features for prediction without the target variable."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission format for the predicted 'Strength' values."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing the training data after dropping the 'id' column and applying feature engineering."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the test data after dropping the 'id' column and applying feature engineering."
+    },
+    {
+      "name": "X",
+      "description": "Feature set derived from train_df excluding the target variable 'Strength'."
+    },
+    {
+      "name": "y",
+      "description": "Target variable 'Strength' derived from train_df."
+    },
+    {
+      "name": "pred_xgb",
+      "description": "Predictions from the XGBoost model on the test dataset."
+    },
+    {
+      "name": "pred_cat",
+      "description": "Predictions from the CatBoost model on the test dataset."
+    },
+    {
+      "name": "pred_lgb",
+      "description": "Predictions from the LightGBM model on the test dataset."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame for preparing the final submission with predicted Strength values."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation_method": "Read from CSV and drop 'id'",
+      "flow": "Used for training the models."
+    },
+    {
+      "variable": "test_df",
+      "creation_method": "Read from CSV and drop 'id'",
+      "flow": "Used for making predictions with the trained models."
+    },
+    {
+      "variable": "X",
+      "creation_method": "Derived from train_df",
+      "flow": "Input features for model training."
+    },
+    {
+      "variable": "y",
+      "creation_method": "Derived from train_df",
+      "flow": "Target variable used for model training."
+    },
+    {
+      "variable": "pred_xgb",
+      "creation_method": "Predicted using XGBRegressor",
+      "flow": "Stored for submission, final column in output DataFrame."
+    },
+    {
+      "variable": "pred_cat",
+      "creation_method": "Predicted using CatBoostRegressor",
+      "flow": "Stored for submission, final column in output DataFrame."
+    },
+    {
+      "variable": "pred_lgb",
+      "creation_method": "Predicted using LGBMRegressor",
+      "flow": "Stored for submission, final column in output DataFrame."
+    },
+    {
+      "variable": "submission",
+      "creation_method": "Read sample submission CSV and populate with predictions",
+      "flow": "Final output saved for submission."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "XGBoost",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": 3,
+        "learning_rate": 0.0225,
+        "n_estimators": 1000,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0.8435,
+        "reg_lambda": 0.823545
+      }
+    },
+    {
+      "model_name": "LightGBM",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": 10,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8
+      }
+    },
+    {
+      "model_name": "CatBoost",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": 7,
+        "learning_rate": 0.0036,
+        "iterations": 2000
+      }
+    }
+  ]
+}

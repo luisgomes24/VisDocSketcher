@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 Generate Graph <img src='lineplot_template.svg'/>"]
+    B --> C["✍️ Prettify Graph"]
+    C --> D["📈 Final Graph <img src='lineplot_template.svg'/>"]
+    A2["📂 Load Full Dataset <img src='file.svg'/>"] --> E["📊 Analyze Data"]
+    E --> F["✅ Data Analysis Result"]
+    G["♟️ Blackjack Logic"] --> H["⚖️ Comparison Logic"]
+    H --> I["🤖 Check Answer (Q3)"]
+
+    classDef blue fill:#ccf,stroke:#333,stroke-width:2px;
+    class A,B,C,D,A2,E,F,G,H,I blue;

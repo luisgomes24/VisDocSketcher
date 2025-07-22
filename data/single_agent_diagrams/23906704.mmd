@@ -1,0 +1,24 @@
+```
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/> <br/>"] --> B["🔍 Preprocess Data"];
+    B --> C["👥 Participant Session Extraction"];
+    C --> D["🧠 Model Training"];
+    D --> E["📊 Cross-Validation"];
+    E --> F["📈 Visualize Results <img src='dummy_plots/lineplot_template.svg'/> <br/>"];
+
+    A -->|Load files from input| B;
+    C -->|Session preparation for modeling| D;
+    E -->|Evaluate models| F;
+
+    subgraph Models
+        direction TB;
+        model1["🤖 SVM <img src='icons/brain.svg'/>"];
+        model2["📈 LDA <img src='icons/brain.svg'/>"];
+        model3["📊 Logistic Regression <img src='icons/brain.svg'/>"];
+        model4["🐦 Random Forest <img src='icons/brain.svg'/>"];
+    end
+
+    D --> model1;
+    D --> model2;
+    D --> model3;
+    D --> model4;

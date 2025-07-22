@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"]:::dataSource -->|pd.read_csv| B["train DataFrame"]:::dataVariable
+    C["test.csv"]:::dataSource -->|pd.read_csv| D["test DataFrame"]:::dataVariable
+    E["sample_submission.csv"]:::dataSource -->|Reference| F["Sample Format"]:::dataVariable
+
+    %% Model Training
+    B -->|Contains images and labels| G["Custom CNN Model"]:::model
+    G -->|Predict| H["anss Array"]:::dataVariable
+
+    %% Submission Preparation
+    H -->|Create DataFrame| I["submission DataFrame"]:::dataVariable
+    I -->|Write to CSV| J["Submission File"]:::output
+
+    %% Style Section
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+    classDef output fill:#bfb,stroke:#333,stroke-width:2px;
+    
+    %% Comments
+    class A,C,E fill:#f9f; %% Training, test, and sample files as data sources
+    class B,D,H fill:#bbf; %% Processed data held in data variables
+    class G fill:#f96; %% Model used for predictions
+    class J fill:#bfb; %% Final submission output

@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] --> |"load as train_df"| B["train_df"]
+    A1["test.csv"] --> |"load as test_df"| C["test_df"]
+    %% Combined Data
+    B --> |"combine as list"| D["combine"]
+    C --> |"combine as list"| D
+    %% Data Processing
+    D --> |"feature engineering"| E["Processed train_df and test_df"]
+    %% Machine Learning Model
+    E --> |"train logistic regression"| F["Logistic Regression Model"]
+    F --> |"predict survival status"| G["Predictions on test_df"]
+    
+    %% Comments explaining nodes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+    
+    class A,A1 dataSource;
+    class B,C,D,E,G dataVariable;
+    class F model;

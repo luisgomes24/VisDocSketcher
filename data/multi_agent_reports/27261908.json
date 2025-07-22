@@ -1,0 +1,103 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/animals10/raw-img",
+      "description": "Directory containing images of animals for training"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "dataset",
+      "description": "List of paths to all animal image directories"
+    },
+    {
+      "variable": "image_array",
+      "description": "Array containing the resized images converted to RGB format"
+    },
+    {
+      "variable": "image_label",
+      "description": "One-hot encoded labels corresponding to the images"
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set of images for model training"
+    },
+    {
+      "variable": "X_test",
+      "description": "Test set of images for model evaluation"
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set of one-hot encoded labels"
+    },
+    {
+      "variable": "y_test",
+      "description": "Test set of one-hot encoded labels"
+    },
+    {
+      "variable": "modelen7",
+      "description": "Keras model instance created using EfficientNetB7"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "creation_method": "List of directories containing images",
+      "flows_to": "Loop to read images into image_array and image_label"
+    },
+    {
+      "variable": "image_array",
+      "creation_method": "Appended from images read from dataset",
+      "flows_to": "Converted to NumPy array and used for training/testing"
+    },
+    {
+      "variable": "image_label",
+      "creation_method": "One-hot encoded from the animal labels",
+      "flows_to": "Used in training and testing"
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split from image_array",
+      "flows_to": "Input for model training"
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split from image_array",
+      "flows_to": "Input for model evaluation"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split from image_label",
+      "flows_to": "Input for model training"
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split from image_label",
+      "flows_to": "Input for model evaluation"
+    },
+    {
+      "variable": "modelen7",
+      "creation_method": "Created using EfficientNetB7 architecture",
+      "flows_to": "Trained using X_train and y_train"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "EfficientNetB7",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss": "categorical_crossentropy",
+        "metrics": ["accuracy"],
+        "epochs": 15,
+        "batch_size": 2,
+        "callbacks": [
+          "EarlyStopping",
+          "ModelCheckpoint",
+          "ReduceLROnPlateau"
+        ]
+      }
+    }
+  ]
+}

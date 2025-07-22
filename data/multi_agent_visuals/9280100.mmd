@@ -1,0 +1,24 @@
+flowchart TD
+    subgraph DataSources
+    DS1["Sarcasm_Headlines_Dataset_v2.json"]
+    DS2["database.svg <br/> SQL Database"]
+    end
+    subgraph Preprocessing
+    P1["<img src='dummy_plots/boxplot_template.svg'/> <br/> Data Cleaning"]
+    P2["<img src='dummy_plots/hist_template.svg'/> <br/> Data Transformation"]
+    end
+    subgraph ModelTraining
+    M1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Train Model"]
+    M2["<img src='dummy_plots/lineplot_template.svg'/> <br/> Validate Model"]
+    M3["<img src='dummy_plots/barplot_template.svg'/> <br/> Hyperparameter Tuning"]
+    end
+    subgraph OutputResults
+    O1["Results.json"]
+    end
+
+    DS1 --> P1 
+    P1 --> P2 
+    P2 --> M1 
+    M1 --> M2 
+    M2 --> M3 
+    M3 --> O1 

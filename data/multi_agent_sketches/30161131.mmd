@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Source Nodes
+    A[/customer_segmentation_10k.csv/] %% Data source with customer segmentation data
+    
+    %% Data Variables Nodes
+    B["dataset_10k"] %% DataFrame containing the original customer data.
+    C["exp_fre"] %% Pycaret setup for frequency segmentation.
+    D["exp_rec"] %% Pycaret setup for recency segmentation.
+    E["exp_mon"] %% Pycaret setup for monetary segmentation.
+    F["result_frequency"] %% DataFrame containing clusters based on frequency.
+    G["result_recency"] %% DataFrame containing clusters based on recency.
+    H["result_monetary"] %% DataFrame containing clusters based on monetary value.
+
+    %% Models
+    subgraph KMeans["KMeans Clustering Model"]
+        direction TB
+        C1["KMeans on Frequency"]
+        C2["KMeans on Recency"]
+        C3["KMeans on Monetary"]
+    end
+
+    %% Data Flow
+    A -->|"pd.read_csv"| B
+    B --> C
+    B --> D
+    B --> E
+    C -->|"assign_model(kmeans_frequency)"| F --> B
+    D -->|"assign_model(kmeans_recency)"| G --> B
+    E -->|"assign_model(kmeans_monetary)"| H --> B

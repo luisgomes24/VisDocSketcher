@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph data_sources [Data Sources]
+        sf_csv[../input/image-matching-challenge-2022/train/scaling_factors.csv]
+        %% Contains scaling factors for image matching
+    end
+    
+    subgraph data_variables [Data Variables]
+        DF[df]
+        %% DataFrame containing scaling factors and associated labels
+        data_dir[data_dir]
+        %% Directory path where the training images are stored
+        Labels[labels]
+        %% List of unique scene labels extracted from DataFrame
+    end
+    
+    subgraph data_flow [Data Flow]
+        sf_csv -->|Read CSV| DF
+        %% Read scaling factors into DataFrame
+        DF -->|Extract unique labels| Labels
+        DF -- Used to extract unique labels --> Labels
+        data_dir -- Used as a path for loading images during training --> CNN
+        %% Define path for image directory
+        Labels -- Model Training and Image Processing --> CNN
+        %% Unique labels used in CNN
+    end
+
+    subgraph models [Models]
+        CNN["Convolutional Neural Network (CNN)"]
+        %% CNN model with Adam optimizer and layers: Conv2D, MaxPooling2D, Flatten, Dense
+        CNN -- "Input Features: Images" --> Output
+        CNN -- "Target Variable: Labels" --> Output
+    end
+    
+    data_sources --> data_flow
+    data_flow --> data_variables
+    data_variables --> models

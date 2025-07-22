@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]:::dataSource -->|Read CSV| B1["train"]:::dataVariable
+    A2["test.csv"]:::dataSource -->|Read CSV| B2["test"]:::dataVariable
+    A3["../input/images/{1 to 1584}.jpg"]:::dataSource --> B8["fullImageMatrix3D"]:::dataVariable
+
+    %% Data Variables
+    B1 -->|train.species| B3["labels"]:::dataVariable
+    B1 -->|train.id| B4["labelid"]:::dataVariable
+    B2 -->|test.id| B5["testid"]:::dataVariable
+    B1 -->|Transpose| B6["A"]:::dataVariable
+
+    %% Data Flow and Transformations
+    B6 -->|SVD| C1["SVD Model"]:::model
+
+    %% Data Usage
+    B1 --> C1
+    C1 -->|Used for| D1["Similarity Calculation"]:::process
+    B8 --> D1
+
+    %% Similarity Scores
+    D1 --> B7["simila"]:::dataVariable
+    B7 -->|Output| E1["Matching and Output"]:::process
+
+    %% Style Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef process fill:#eef,stroke:#333,stroke-width:2px;

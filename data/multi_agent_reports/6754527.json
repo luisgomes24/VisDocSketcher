@@ -1,0 +1,151 @@
+{
+  "data_sources": [
+    {
+      "file_name": "/kaggle/input/emg-4/0.csv",
+      "description": "EMG data containing sensor readings used as input feature set."
+    },
+    {
+      "file_name": "/kaggle/input/emg-4/1.csv",
+      "description": "EMG data containing sensor readings used as input feature set."
+    },
+    {
+      "file_name": "/kaggle/input/emg-4/2.csv",
+      "description": "EMG data containing sensor readings used as input feature set."
+    },
+    {
+      "file_name": "/kaggle/input/emg-4/3.csv",
+      "description": "EMG data containing sensor readings used as input feature set."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Combined DataFrame created by concatenating data from the four CSV files."
+    },
+    {
+      "variable_name": "dfx",
+      "description": "DataFrame containing features excluding the last column."
+    },
+    {
+      "variable_name": "y",
+      "description": "Series containing the target variable (last column of df)."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training portion of the feature set, obtained from train_test_split."
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Test portion of the feature set, obtained from train_test_split."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training portion of the target variable, obtained from train_test_split."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test portion of the target variable, obtained from train_test_split."
+    },
+    {
+      "variable_name": "sc",
+      "description": "StandardScaler instance used for normalizing the feature data."
+    },
+    {
+      "variable_name": "classificator",
+      "description": "Sequential Keras model initialized for supervised learning."
+    },
+    {
+      "variable_name": "y_pred",
+      "description": "Predictions made by the model on the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.concat([df0, df1, df2, df3], axis=0)",
+      "flow": "Used to create dfx (features) and y (target)."
+    },
+    {
+      "variable": "dfx",
+      "creation": "df.drop(64, axis=1)",
+      "flow": "Used for training/testing split."
+    },
+    {
+      "variable": "y",
+      "creation": "df[64]",
+      "flow": "Used for training/testing split."
+    },
+    {
+      "variable": "x_train",
+      "creation": "train_test_split(dfx, y, test_size=0.25, random_state=1)",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable": "x_test",
+      "creation": "train_test_split(dfx, y, test_size=0.25, random_state=1)",
+      "flow": "Used for testing the model."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split(dfx, y, test_size=0.25, random_state=1)",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split(dfx, y, test_size=0.25, random_state=1)",
+      "flow": "Used for evaluating model performance."
+    },
+    {
+      "variable": "x_train",
+      "creation": "StandardScaler().fit_transform(x_train)",
+      "flow": "Normalized before training."
+    },
+    {
+      "variable": "x_test",
+      "creation": "StandardScaler().transform(x_test)",
+      "flow": "Normalized before testing."
+    },
+    {
+      "variable": "classificator",
+      "creation": "Sequential() and adding layers",
+      "flow": "Used to fit on x_train and y_train."
+    },
+    {
+      "variable": "y_pred",
+      "creation": "classificator.predict(x_test)",
+      "flow": "Used for evaluation."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Keras Sequential Model",
+      "input_features": "64 input features (data from dfx)",
+      "target_variable": "y",
+      "layers": [
+        {
+          "layer_type": "Dense",
+          "units": 34,
+          "activation": "softmax",
+          "input_dim": 64
+        },
+        {
+          "layer_type": "Dense",
+          "units": 34,
+          "activation": "softmax"
+        },
+        {
+          "layer_type": "Dense",
+          "units": 4,
+          "activation": "sigmoid"
+        }
+      ],
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss": "sparse_categorical_crossentropy",
+        "metrics": ["accuracy", "categorical_accuracy"],
+        "batch_size": 10,
+        "epochs": 150
+      }
+    }
+  ]
+}

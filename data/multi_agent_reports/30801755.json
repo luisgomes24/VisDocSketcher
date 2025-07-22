@@ -1,0 +1,44 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "y",
+      "description": "A float value initialized to 1.0."
+    },
+    {
+      "name": "z",
+      "description": "An integer value converted from the float 'y' using the int() function."
+    },
+    {
+      "name": "project_one",
+      "description": "Cost of engraving the string 'Charlie+Denver' on a solid gold ring, calculated using the cost_of_project function."
+    },
+    {
+      "name": "project_two",
+      "description": "Cost of engraving the string '08/10/2000' on a gold plated ring, calculated using the cost_of_project function."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "y",
+      "creation": "Defined as a float with value 1.0.",
+      "flow": "Used for converting to integer."
+    },
+    {
+      "variable": "z",
+      "creation": "Converted from 'y' using int() function.",
+      "flow": "Printed to show integer type."
+    },
+    {
+      "variable": "project_one",
+      "creation": "Calculated using cost_of_project function with inputs 'Charlie+Denver' and True.",
+      "flow": "Printed to showcase cost."
+    },
+    {
+      "variable": "project_two",
+      "creation": "Calculated using cost_of_project function with inputs '08/10/2000' and False.",
+      "flow": "Printed to showcase cost."
+    }
+  ],
+  "models": []
+}

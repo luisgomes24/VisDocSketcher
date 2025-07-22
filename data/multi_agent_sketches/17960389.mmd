@@ -1,0 +1,46 @@
+flowchart TD
+  subgraph Load_Data
+    A[Train Data] -->|Load CSV| B[df_train]
+    C[Test Data] -->|Load CSV| D[df_test]
+    %% A and C represent data being loaded from external source as CSV
+  end
+  
+  subgraph Preprocess_Data
+    B -->|Drop NaN| E[df_train_clean]
+    D -->|Drop NaN| F[df_test_clean]
+    E -->|Extract Features| G[X]
+    E -->|Extract Target| H[y]
+    %% Node E represents data cleaning by dropping NaN values
+    %% Node G and H show the separation of features and target variable
+  end
+  
+  subgraph Train_Test_Split
+    G -->|Split| I[X_train]
+    G -->|Split| J[X_test]
+    H -->|Split| K[y_train]
+    H -->|Split| L[y_test]
+    %% The data split into train and test sets
+  end
+  
+  subgraph Modeling
+    I -->|Train| M[Linear Regression]
+    I -->|Train| N[Random Forest]
+    I -->|Train| O[XGBoost]
+    %% Showing training phase for three models
+    %% All models use X_train and y_train
+  end
+
+  subgraph Prediction
+    J -->|Predict with Linear Regression| P[lr_pred]
+    J -->|Predict with Random Forest| Q[rfr_pred]
+    J -->|Predict with XGBoost| R[xgb_pred]
+    %% Each model makes predictions using X_test
+  end
+  
+  subgraph Submission
+    S([Submission File]) -->|CSV| T[Export]
+    %% Final step: preparing the submission file and exporting to CSV
+  end
+
+  P & Q & R --> S
+  %% Predictions from all models collected to create submission

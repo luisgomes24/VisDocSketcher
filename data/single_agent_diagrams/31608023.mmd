@@ -1,0 +1,13 @@
+flowchart TD;
+    A["📂 Load Data\n<img src='file.svg'/> <br/> train.csv"] --> B["🔍 Review Data"]
+    B --> C["📝 Tokenize Text"]
+    C --> D["🔤 Lemmatize & Lowercase"]
+    D --> E["🔢 Convert to Sequences"]
+    E --> F["📏 Pad Sequences"]
+    F --> G["💾 Build Embedding Matrix"]
+    G --> H["🏗️ Build CNN Model"]
+    H --> I["🔄 Train Model"]
+    I --> J["🔍 Validate Results"]
+    J --> K["📊 Prediction on Test Data"]
+    K --> L["📄 Review Predictions"]
+    L --> M["📤 Submit Predictions"]

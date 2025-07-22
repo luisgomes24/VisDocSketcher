@@ -1,0 +1,38 @@
+%%{ init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffe0', 'lineColor': '#333333' }}}%%
+flowchart TD
+
+%% Data Sources
+subgraph Data_Sources
+    A1["sample_submission.csv"]
+    A2["train_metadata.csv"]
+    A3["eBird_Taxonomy_v2021.csv"]
+end
+
+%% Data Variables
+subgraph Data_Variables
+    B1["submission"]
+    B2["train"]
+    B3["taxonomy"]
+    B4["counts_labels"]
+    B5["counts_family"]
+    B6["sec_labels"]
+    B7["song_types"]
+end
+
+%% Data Flow
+%% Loading Data
+A1 --> B1
+A2 --> B2
+A3 --> B3
+
+%% Creating Derived Data
+B2 --> B4["Counts of Primary Labels"]
+B3 --> B5["Counts of Bird Families"]
+B2 --> B6["Secondary Labels"]
+B2 --> B7["Song Types"]
+
+%% Data Usage
+B4 --> |"Visualized"| C1["Distribution of Bird Counts"]
+B5 --> |"Visualized"| C2["Distribution of Bird Families"]
+B6 --> |"Analyzed"| C3["Subsets and Duplicates"]
+B7 --> |"Analyzed"| C4["Frequency of Song Types"]

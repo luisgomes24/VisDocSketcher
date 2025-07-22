@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Sources
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> reddit_wsb.csv] -->|Load| B[<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df]
+    C[<img src='icons/file.svg' width=100 height=100/> <br/> nyse-listed_csv.csv] -->|Load| D[<img src='icons/table.svg' width=100 height=100/> <br/> nyse_tickers_list]
+    E[<img src='icons/file.svg' width=100 height=100/> <br/> other-listed_csv.csv] -->|Load| F[<img src='icons/table.svg' width=100 height=100/> <br/> other_tickers_list]
+    
+    %% Data Cleaning and Feature Engineering
+    B -->|Extract Titles & Bodies| G[<img src='icons/column_split.svg' width=100 height=100/> <br/> blob_text]
+    G -->|Remove Stopwords| H[<img src='icons/column_split.svg' width=100 height=100/> <br/> filtered_sentence]
+    
+    %% Word Analysis
+    G -->|Create Counter| I[<img src='icons/brain.svg' width=100 height=100/> <br/> counts]
+    I -->|Analyze| J{Most Common Words}
+    
+    %% Data Usage
+    B -.->|Cleaning| B
+    B -.->|Feature Engineering| B

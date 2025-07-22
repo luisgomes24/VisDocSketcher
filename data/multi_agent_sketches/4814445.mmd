@@ -1,0 +1,31 @@
+flowchart TD
+    %% Node for Data Source
+data_source["kc_house_data.csv"]:::dataSource
+    
+    %% Node for DataFrame house_df
+    house_df["house_df"]:::dataVariable
+    data_source --> |"Loaded into"| house_df
+    
+    %% Nodes for Features and Target Variables
+    X["X (sqft_living)"]:::dataVariable
+    Y["Y (price)"]:::dataVariable
+    X1["X1 (sqft_living, bathrooms, grade, sqft_above, sqft_living15)"]:::dataVariable
+    Y1["Y1 (price)"]:::dataVariable
+    
+    house_df --> |"Select features"| X
+    house_df --> |"Select target"| Y
+    house_df --> |"Select features"| X1
+    house_df --> |"Select target"| Y1
+    
+    %% Nodes for Linear Regression Models
+    lp["Simple Linear Regression Model (lp)"]:::model
+    lp1["Multiple Linear Regression Model (lp1)"]:::model
+    
+    X --> |"Train model with"| lp
+    Y --> |"Train model with"| lp
+    X1 --> |"Train model with"| lp1
+    Y1 --> |"Train model with"| lp1
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

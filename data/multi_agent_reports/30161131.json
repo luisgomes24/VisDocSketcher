@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/customer-segmentation-rfm/customer_segmentation_10k.csv",
+      "description": "This dataset contains customer segmentation data, including fields for last order date, total spent, and order quantity."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataset_10k",
+      "description": "DataFrame containing customer data including customer_id, last_order, total_spent, and qtt_order."
+    },
+    {
+      "name": "exp_fre",
+      "description": "Pycaret setup variable for frequency field segmentation."
+    },
+    {
+      "name": "exp_rec",
+      "description": "Pycaret setup variable for recency field segmentation."
+    },
+    {
+      "name": "exp_mon",
+      "description": "Pycaret setup variable for monetary field segmentation."
+    },
+    {
+      "name": "result_frequency",
+      "description": "DataFrame that contains the clusters assigned based on frequency."
+    },
+    {
+      "name": "result_recency",
+      "description": "DataFrame that contains the clusters assigned based on recency."
+    },
+    {
+      "name": "result_monetary",
+      "description": "DataFrame that contains the clusters assigned based on monetary value."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset_10k",
+      "created_by": "pd.read_csv",
+      "flows_to": [
+        "exp_fre",
+        "exp_rec",
+        "exp_mon"
+      ]
+    },
+    {
+      "variable": "result_frequency",
+      "created_by": "assign_model(kmeans_frequency)",
+      "flows_to": [
+        "dataset_10k"
+      ]
+    },
+    {
+      "variable": "result_recency",
+      "created_by": "assign_model(kmeans_recency)",
+      "flows_to": [
+        "dataset_10k"
+      ]
+    },
+    {
+      "variable": "result_monetary",
+      "created_by": "assign_model(kmeans_monetary)",
+      "flows_to": [
+        "dataset_10k"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "name": "KMeans",
+      "description": "Clustering model used for segmenting customers based on frequency, recency, and monetary values.",
+      "input_features": ["qtt_order", "last_order", "total_spent"],
+      "target_variable": "Cluster",
+      "hyperparameters": "Default parameters used in Pycaret's KMeans implementation."
+    }
+  ]
+}

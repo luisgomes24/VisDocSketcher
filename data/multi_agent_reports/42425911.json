@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "file_name": "indian-actor-images-dataset",
+      "description": "A dataset containing 135 directories, each for a unique Indian actor containing 50 images per actor."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "img",
+      "description": "An image read from file using OpenCV."
+    },
+    {
+      "variable_name": "detector",
+      "description": "An instance of MTCNN for face detection."
+    },
+    {
+      "variable_name": "result",
+      "description": "Contains results from the MTCNN face detection."
+    },
+    {
+      "variable_name": "excluded_images",
+      "description": "List of images that were excluded from processing based on detection results."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "img",
+      "created_by": "cv2.imread",
+      "flows_to": "The image is manipulated for visualization and analysis."
+    },
+    {
+      "variable": "detector",
+      "created_by": "MTCNN()",
+      "flows_to": "Used in face detection operations on images."
+    },
+    {
+      "variable": "result",
+      "created_by": "detector.detect_faces",
+      "flows_to": "Contains face detection results used for drawing bounding boxes and extracting faces."
+    },
+    {
+      "variable": "excluded_images",
+      "created_by": "move_images function",
+      "flows_to": "Tracks images that were not processed due to no faces or multiple faces detected."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MTCNN",
+      "input_features": "Images of actors",
+      "target_variable": "Face coordinates and dimensions",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

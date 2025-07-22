@@ -1,0 +1,12 @@
+flowchart TD
+    A["🔄 Load Data <img src='icons/file.svg' />"] --> B["🧮 Define Gini Function"]
+    B --> C["🪄 Single Split <img src='icons/row_split.svg' />"]
+    C --> D["🔁 10k Splits"]
+    D --> E["📊 Histogram of Gini Differences <img src='dummy_plots/hist_template.svg' />"]
+    E --> F["🔍 Filter Gini Score 0.284"]
+    F --> G["📊 Histogram for Gini (0.284) <img src='dummy_plots/hist_template.svg' />"]
+    G --> H["🔍 Filter Gini Score 0.286"]
+    H --> I["📊 Histogram for Gini (0.286) <img src='dummy_plots/hist_template.svg' />"]
+    I --> J["🔍 Compare Public Scores (0.284 - 0.287)"]
+    J --> K["📊 Final Histogram <img src='dummy_plots/hist_template.svg' />"]
+    K --> L["📜 Summary"]

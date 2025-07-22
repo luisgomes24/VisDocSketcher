@@ -1,0 +1,42 @@
+%%{ init : { "theme" : "base", "themeVariables" : { "primaryColor" : "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#333" }}}%%
+flowchart TD
+    subgraph DS["Data Sources"]
+    end
+
+    subgraph DV["Data Variables"]
+        A["A"]
+        B["B"]
+        C["C"]
+        D["D"]
+        E["E"]
+    end
+    
+    subgraph DF["Data Flow"]
+        A --> H[Heuristic Calculation]
+        B --> H[Heuristic Calculation]
+        C --> H[Heuristic Calculation]
+        D --> H[Heuristic Calculation]
+        E --> H[Heuristic Calculation]
+    end
+
+    H --> HG["Heuristic Output"]
+    HG --> AM[Agent Model]
+
+    subgraph M["Models"]
+        AM
+    end
+
+    DV ==> DF
+    DF ==> M
+
+    
+    %% Comments for Each Node
+    %% DS: This section is about data sources, indicating no external data inputs were identified.
+    %% DV: This section contains all the data variables used in the notebook with their specific weights.
+    %% DF: This flow shows how each variable feeds into the heuristic calculation process.
+    %% AM: The agent model node where the heuristic output is used to develop the game-playing strategy.
+
+    style AM fill:#ffcc00,stroke:#333,stroke-width:2px;
+    style H fill:#ffcc00,stroke:#333,stroke-width:2px;
+    style HG fill:#ffcc00,stroke:#333,stroke-width:2px;
+    

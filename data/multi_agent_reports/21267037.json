@@ -1,0 +1,16 @@
+{"data_sources": [
+    {"file": "../input/petrol-price-data-by-district/petrol_data.csv", "description": "Contains petrol price data by district, including date and rates."}
+],
+"data_variables": [
+    {"variable_name": "petrol", "description": "DataFrame containing all petrol price data imported from CSV."},
+    {"variable_name": "city", "description": "Filtered DataFrame containing petrol prices for a specific city."},
+    {"variable_name": "data", "description": "Series containing the petrol rate data extracted from the 'city' DataFrame."}
+],
+"data_flow": [
+    {"variable": "petrol", "created_by": "pd.read_csv", "flows_to": ["city"]},
+    {"variable": "city", "created_by": "Filtering from petrol DataFrame", "flows_to": ["data", "exp.setup"]},
+    {"variable": "data", "created_by": "Extracting 'rate' from city DataFrame", "flows_to": ["exp.setup"]}
+],
+"models": [
+    {"model_name": "TimeSeriesExperiment (from pycaret)", "input_features": ["data"], "target_variable": "rate", "hyperparameters": {"session_id": 42, "fh": 30}}
+]}

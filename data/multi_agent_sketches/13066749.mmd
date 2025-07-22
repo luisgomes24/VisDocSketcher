@@ -1,0 +1,33 @@
+%% The following diagram represents the workflow of a data science project
+flowchart TD
+    %% Node for Training Data Source
+    A["Training Data Source"] -->|"Load images from"| B
+    %% Node for Testing Data Source
+    C["Testing Data Source"] -->|"Load images from"| D
+    %% Node for ImageDataGenerator for Training Data
+    B["ImageDataGenerator for Training"] -->|"Create train data with augmentation"| E["train_data"]
+    %% Node for ImageDataGenerator for Testing Data
+    D["ImageDataGenerator for Testing"] -->|"Create test data"| F["test_data"]
+    %% Node for VGG16 Model
+    E -->|"Train VGG16 model with"| G["VGG16 Model"]
+    %% Flow from VGG16 training
+    G -->|"Predict classes"| H["y_prediction"]
+    G -->|"Evaluate with test data"| F
+    %% Node for Generating Confusion Matrix
+    H -->|"Generate Confusion Matrix with"| I["cm"]
+    F -.->|"Provide true labels"| J["y_true"]
+    F -->|"Feed to model for predicting"| H
+    D -->|"Generate true labels for evaluation"| J
+    %% Node for Evaluation
+    I -->|"Visualize using Heatmap"| K["Confusion Matrix Visualization"]
+    J -->|"Input for matrix"| I
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style C fill:#f9f,stroke:#333,stroke-width:2px;
+    style E fill:#ccf,stroke:#333,stroke-width:2px;
+    style F fill:#ccf,stroke:#333,stroke-width:2px;
+    style G fill:#cfc,stroke:#333,stroke-width:2px;
+    style H fill:#fcf,stroke:#333,stroke-width:2px;
+    style I fill:#cff,stroke:#333,stroke-width:2px;
+    style J fill:#ffc,stroke:#333,stroke-width:2px;
+    style K fill:#fcc,stroke:#333,stroke-width:2px;

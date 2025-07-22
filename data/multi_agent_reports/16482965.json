@@ -1,0 +1,105 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset with ID and features related to customer churn."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset with features related to customer churn but without target variable."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test dataset."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Features (excluding the target variable) from the training dataset."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Target variable from the training dataset (churn status)."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Features from the test dataset."
+    },
+    {
+      "variable_name": "X_train_sc",
+      "description": "Scaled features from the training dataset using RobustScaler."
+    },
+    {
+      "variable_name": "X_test_sc",
+      "description": "Scaled features from the test dataset using RobustScaler."
+    },
+    {
+      "variable_name": "predict",
+      "description": "Predicted values for the target variable from the test dataset."
+    },
+    {
+      "variable_name": "submit",
+      "description": "DataFrame for submission containing predicted churn status."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create X_train and y_train"
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create X_test"
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "train.iloc[:,:-1]",
+      "flow": "Used for model training"
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train.iloc[:,-1]",
+      "flow": "Used for model training"
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "test",
+      "flow": "Used for making predictions"
+    },
+    {
+      "variable_name": "X_train_sc",
+      "creation_method": "RobustScaler()",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable_name": "X_test_sc",
+      "creation_method": "RobustScaler()",
+      "flow": "Used for making predictions"
+    },
+    {
+      "variable_name": "predict",
+      "creation_method": "clf.predict",
+      "flow": "Stored in submit DataFrame for output"
+    },
+    {
+      "variable_name": "submit",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create a submission file which is saved as submit.csv"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train_sc",
+      "target_variable": "y_train",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

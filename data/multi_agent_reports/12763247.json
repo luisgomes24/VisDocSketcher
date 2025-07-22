@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Not_so_Markov_action_board_S100E1000.csv",
+      "description": "Contains action board data with dimensions defined by S100E1000"
+    },
+    {
+      "file_name": "Not_so_Markov_leaderboard_S100E1000.csv",
+      "description": "Contains leaderboard data corresponding to the action board"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing data from Not_so_Markov_action_board_S100E1000.csv"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing data from Not_so_Markov_leaderboard_S100E1000.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "used_in": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "used_in": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    subgraph Data_Sources
+        A["data/names/*.txt"]:::source -- Reads --> B["category_lines"]:::variable
+    end
+
+    subgraph Data_Variables
+        B --> C["Model Training"]:::process
+        D["all_categories"]:::variable -- Extract from Metadata --> C
+        E["n_categories"]:::variable -- Count Categories --> C
+        F["n_letters"]:::variable -- Unique Letters --> C
+        G["rnn"]:::variable -- Initialize RNN --> C
+        H["all_losses"]:::variable -- Track Loss -- Iterative Update --> C
+        I["confusion"]:::variable -- Initialize Confusion Matrix --> C
+    end
+
+    subgraph Model
+        J["RNN"]:::model
+        J --> C
+        C -- Train Model & Predict --> J
+    end
+
+    %% Styling
+    classDef variable fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef source fill:#bdf,stroke:#333,stroke-width:2px;
+    classDef model fill:#feb,stroke:#333,stroke-width:2px;
+
+    %% Node comments
+    %% Data Source for names categorized by country/language
+    %% Data Variables used within the notebook for training and evaluation
+    %% Defines the main RNN model with input features and target variables
+
+```

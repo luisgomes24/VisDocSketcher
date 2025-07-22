@@ -1,0 +1,10 @@
+%%{init: {'theme': 'default', 'themeVariables': {'edgeLabelBackground':'#ffffff','tertiaryColor':'#E2E2E2','edgeLabel':'#333333','primaryColor':'#87CEEB','edge1':'#87CEEB','edge2':'#87CEEB','edge3':'#87CEEB','edge4':'#87CEEB','edge5':'#87CEEB'} }}%%
+
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"] --> B["<img src='icons/table.svg' width=100 height=100/> <br/> Data Preparation"]
+    B --> C["<img src='icons/database.svg' width=100 height=100/> <br/> Data Exploration"]
+    C -->|Explored and cleaned data| D["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Training"]
+    D --> E["<img src='icons/file.svg' width=100 height=100/> <br/> Model Evaluation"]
+    E --> F["<img src='icons/image.svg' width=100 height=100/> <br/> Results"] 
+    F --> G["<img src='icons/file.svg' width=100 height=100/> <br/> Save Model"]
+    G --> H["<img src='icons/image.svg' width=100 height=100/> <br/> Visualization"]

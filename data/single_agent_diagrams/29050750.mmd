@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data"] --> B["🧹 Data Preprocessing"]
+    B --> C["🔍 Train-Test Split"]
+    C --> D["🧠 Train Models"]
+    D --> E["📊 Evaluate Models"]
+    E --> F["📈 Visualize Results"]
+
+    A --> |"train_df, test_df"| B
+    B --> |"Fill NaN, Log Transformation, Drop Skewed Columns"| C
+    C --> |"x_train, x_test, y_train, y_test"| D
+    D --> |"XGBRegressor, RandomForestRegressor, GradientBoostingRegressor"| E
+    E --> |"Absolute Error, Accuracy Score"| F
+
+    F --> G["<img src='dummy_plots/barplot_template.svg'/> <br/> 📊 Barplot Results"]

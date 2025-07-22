@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Define the data sources
+    A["Start: Load Data"] -->|"CSV File"| B(("dataset"))
+    %% Process the dataset
+    B -->|"Convert to Numpy"| C(("data"))
+    C -->|"Extract Features"| D(("X"))
+    C -->|"Extract Target"| E(("y"))
+    %% Splitting Data
+    D -->|"Split for Training & Testing"| F(("X_train"))
+    D -->|"Split for Training & Testing"| G(("X_test"))
+    E -->|"Split for Training & Testing"| H(("y_train"))
+    E -->|"Split for Training & Testing"| I(("y_test"))
+    %% Encode Features
+    F -->|"Encode"| J["OrdinalEncoder"]
+    G -->|"Encode"| J
+    %% Fit Encoded Features
+    J -->|"Train Features"| k(("X_trainEncoded"))
+    %% Encode Target
+    H -->|"Encode"| L["LabelEncoder"]
+    I -->|"Encode"| L
+    %% Train and Predict
+    L -->|"Train Target"| M(("y_trainEncoded"))
+    k -->|"Logistic Regression"| N["Model"]
+    M -->|"Train"| N
+    N -->|"Predict"| O(("yhat"))
+    O -->|"Evaluate"| P["Accuracy"]
+    P -->|"Output Result"| Q["Print Accuracy"]
+    
+    %% Annotations
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q dataNode;
+```

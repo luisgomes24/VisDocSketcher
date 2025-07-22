@@ -1,0 +1,9 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"]
+        -->|"Load Data"|  B["<img src='icons/file.svg' width=100 height=100/> <br/> Data File"];
+    B -->|"Preprocess"| C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table"];
+    C -->|"Train-Test Split"| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Split Data"];
+    C -->|"Filter Data"| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Rows"];
+    E -->|"Train"| D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"];
+    F -->|"Evaluation"| D;
+    D -->|"Results"| G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Output"];

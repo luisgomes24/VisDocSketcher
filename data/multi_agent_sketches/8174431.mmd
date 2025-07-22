@@ -1,0 +1,15 @@
+%% Diagram of the data science workflow based on notebook analysis
+graph TD;
+    A1["Processing_time_prediction_Test_1_09_09_19.csv"] %% Represents the Test data CSV file
+    A2["Processing_time_prediction_Train_1_09_09_19.csv"] %% Represents the Train data CSV file
+    B1["df1"] %% DataFrame holding Test data
+    B2["df2"] %% DataFrame holding Train data
+    C1["Exploratory Data Analysis on df1"] %% EDA on df1 including distribution and correlation
+    C2["Exploratory Data Analysis on df2"] %% EDA on df2 including distribution and correlation
+
+    A1 -->|"Read CSV into DataFrame"| B1
+    A2 -->|"Read CSV into DataFrame"| B2
+    B1 -->|"Perform EDA"| C1
+    B2 -->|"Perform EDA"| C2
+```
+

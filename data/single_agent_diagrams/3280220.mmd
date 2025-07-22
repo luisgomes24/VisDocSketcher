@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["📊 Data Overview"]
+    B --> C["🔍 Check Nulls & Outliers"]
+    C --> D["📊 Visualize Outliers <img src='boxplot_template.svg' />"]
+    C --> E["📈 Univariate Analysis"]
+    E --> F["📊 Histograms <img src='hist_template.svg' />"]
+    E --> G["📊 Boxplots <img src='boxplot_template.svg' />"]
+    F --> H["🔎 Bivariate Analysis"]
+    G --> H
+    H --> I["📊 Correlation Heatmap <img src='heatmap_template.svg' />"]
+    I --> J["🧠 Model Selection"]
+    J --> K["⚙️ Train-Test Split"]
+    K --> L["📊 Fit Model"]
+    L --> M["📊 Evaluate Model"]
+    M --> N["📋 Performance Metrics"]

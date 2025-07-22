@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "source": "C:\Users\gemma\Documents\osos\",
+      "description": "Directory containing images of black bears."
+    },
+    {
+      "source": "C:\Users\gemma\Documents\osos\grizzly\",
+      "description": "Directory containing images of grizzly bears."
+    },
+    {
+      "source": "C:\Users\gemma\Documents\osos\teddys\",
+      "description": "Directory containing images of teddy bears."
+    },
+    {
+      "source": "C:\Users\gemma\Documents\osostest\",
+      "description": "Directory containing test images used for evaluating the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "Path to the training dataset."
+    },
+    {
+      "variable": "test",
+      "description": "Path to the test dataset."
+    },
+    {
+      "variable": "model",
+      "description": "The neural network model being trained and evaluated."
+    },
+    {
+      "variable": "genera_train",
+      "description": "Generator for feeding the training data to the model."
+    },
+    {
+      "variable": "data_model",
+      "description": "The data captured from the model fitting process."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "genera_train",
+      "creation": "train_p function reads images and prepares data for training.",
+      "flow": "Used for fitting the model in proceso_train function."
+    },
+    {
+      "variable": "model",
+      "creation": "modelo function initializes the model architecture.",
+      "flow": "Compiles and fits the model using proceso_train, then evaluated in imagen_test function."
+    },
+    {
+      "variable": "data_model",
+      "creation": "Returned from proceso_train after fitting the model.",
+      "flow": "Processed for analysis of performance metrics."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "VGG16",
+      "input_features": "Images of three bear categories (black, grizzly, teddy).",
+      "target_variable": "Class labels for bear types.",
+      "hyperparameters": {"optimizer": "Adam", "epochs": 5, "learning_rate": 0.001, "activation_functions": ["relu", "softmax"]}
+    },
+    {
+      "model_name": "VGG19",
+      "input_features": "Same as VGG16.",
+      "target_variable": "Same as VGG16.",
+      "hyperparameters": {"optimizer": "Adam", "epochs": 5, "learning_rate": 0.001, "activation_functions": ["relu", "softmax"]}
+    },
+    {
+      "model_name": "MobileNetV2",
+      "input_features": "Same as VGG16.",
+      "target_variable": "Same as VGG16.",
+      "hyperparameters": {"optimizer": "Adam", "epochs": 5, "learning_rate": 0.001, "activation_functions": ["tanh", "softmax"]}
+    }
+  ]
+}

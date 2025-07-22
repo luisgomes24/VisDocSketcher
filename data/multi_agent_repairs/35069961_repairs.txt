@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["car_price_prediction.csv"] -->|"load data"| B["data"]
+    
+    %% Preprocessing Steps
+    B -->|"drop ID column"| C["data without ID"]
+    C -->|"convert Levy to int"| D["Processed Levy"]
+    D -->|"convert Leather interior values"| E["Processed Leather Interior"]
+    E -->|"process Mileage"| F["Processed Mileage"]
+    F -->|"process Engine volume"| G["Processed Engine Volume"]
+
+    %% Encoding Steps
+    G -->|"apply dummies on categorical data"| H["Encoded Categorical Data"]
+
+    %% Train/Test Split
+    H -->|"split into train/test"| I["train, test split"]
+    I -->|"scale data"| J["X_train, Y_train, X_test, Y_test"]
+
+    %% Model Training
+    J -->|"train KNeighborsRegressor"| K["KNeighborsRegressor Model"]
+    J -->|"train LinearRegression"| L["LinearRegression Model"]
+    J -->|"train RandomForestClassifier"| M["RandomForestClassifier Model"]
+    J -->|"train SVC"| N["SVC Model"]
+    J -->|"train DecisionTreeRegressor"| O["DecisionTreeRegressor Model"]
+
+    %% Model Evaluation
+    K -->|"evaluate with R2 Score"| P["R2 Score KNeighborsRegressor"]
+    L -->|"evaluate with R2 Score"| Q["R2 Score LinearRegression"]
+    M -->|"evaluate with R2 Score"| R["R2 Score RandomForestClassifier"]
+    N -->|"evaluate with R2 Score"| S["R2 Score SVC"]
+    O -->|"evaluate with R2 Score"| T["R2 Score DecisionTreeRegressor"]
+```

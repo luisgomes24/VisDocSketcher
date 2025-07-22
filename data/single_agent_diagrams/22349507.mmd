@@ -1,0 +1,15 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 Generate Normal Distribution Plots <img src='dummy_plots/normal_distribution_plot.svg'/>"];
+    A --> C["📊 Generate Rectangular Distribution Plot <img src='dummy_plots/rectangular_distribution_plot.svg'/>"];
+    A --> D["📊 Generate Triangular Distribution Plot <img src='dummy_plots/triangular_distribution_plot.svg'/>"];
+    A --> E["📊 Generate Symmetric Triangular Distribution Plot <img src='dummy_plots/symmetric_triangular_distribution_plot.svg'/>"];
+    A --> F["📊 Generate Exponential Distribution Summary <img src='file.svg'/>"];
+    
+    B --> G["🧠 Analyze Distribution Parameters"];
+    C --> G;
+    D --> G;
+    E --> G;
+    
+    G --> H["📊 Cumulative Distribution Plot <img src='dummy_plots/cumulative_distribution_plot.svg'/>"];
+    H --> I["📋 Summary Information"];

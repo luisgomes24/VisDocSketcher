@@ -1,0 +1,55 @@
+flowchart TD
+    subgraph DataSources
+        DS1["train.csv"]
+        DS2["test.csv"]
+        DS3["gender_submission.csv"]
+    end
+
+    subgraph DataPreparation
+        DP1["Import Data"]
+        DP2["Drop unwanted columns"]
+    end
+
+    subgraph ModelBuilding
+        MB1["Setup PyCaret"]
+        MB2["Compare Models"]
+        MB3["Create Model"]
+        MB4["Tune Model"]
+        MB5["Finalize Model"]
+    end
+
+    subgraph ModelUsage
+        MU1["Save Model"]
+        MU2["Load Model"]
+        MU3["Make Predictions"]
+    end
+
+    DS1 -->|Load training data| DP1
+    DS2 -->|Load test data| DP1
+    DS3 -->|Load submission format| DP1
+
+    DP1 -->|Data for training| DP2
+    DP2 -->|Feature selection| MB1
+    MB1 -->|Setup with features| MB2
+    MB2 -->|Select best model| MB3
+    MB3 -->|Create best model| MB4
+    MB4 -->|Optimize model| MB5
+    MB5 -->|Trained model| MU1
+
+    MU1 -->|Persist model| MU2
+    MU2 -->|Load optimized model| MU3
+    MU3 -->|Apply on test set| DS3
+
+    style DS1 fill:#f9f,stroke:#333,stroke-width:2px
+    style DS2 fill:#f9f,stroke:#333,stroke-width:2px
+    style DS3 fill:#f9f,stroke:#333,stroke-width:2px
+    style DP1 fill:#ccf,stroke:#333,stroke-width:2px
+    style DP2 fill:#ccf,stroke:#333,stroke-width:2px
+    style MB1 fill:#bbf,stroke:#333,stroke-width:2px
+    style MB2 fill:#bbf,stroke:#333,stroke-width:2px
+    style MB3 fill:#bbf,stroke:#333,stroke-width:2px
+    style MB4 fill:#bbf,stroke:#333,stroke-width:2px
+    style MB5 fill:#bbf,stroke:#333,stroke-width:2px
+    style MU1 fill:#fc9,stroke:#333,stroke-width:2px
+    style MU2 fill:#fc9,stroke:#333,stroke-width:2px
+    style MU3 fill:#fc9,stroke:#333,stroke-width:2px

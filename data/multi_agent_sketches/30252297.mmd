@@ -1,0 +1,36 @@
+graph TD;
+    ds1["cite_seq_inputs.h5ad"]:::dataSource
+    %% cite_seq_inputs.h5ad node represents the source of single-cell RNA sequence data
+
+    adata["adata"]:::dataVariable
+    %% adata node represents the main AnnData object containing single-cell transcriptomic data
+
+    mask["mask"]:::dataVariable
+    %% mask node represents a boolean mask for filtering data
+
+    G1S_genes_Tirosh["G1S_genes_Tirosh"]:::dataVariable
+    %% G1S_genes_Tirosh node represents genes associated with the G1/S phase of the cell cycle
+
+    G2M_genes_Tirosh["G2M_genes_Tirosh"]:::dataVariable
+    %% G2M_genes_Tirosh node represents genes associated with the G2/M phase of the cell cycle
+
+    list_genes_fastCCsign["list_genes_fastCCsign"]:::dataVariable
+    %% list_genes_fastCCsign node represents fast cell cycle signature genes
+
+    ds1 --> adata
+    %% Data from cite_seq_inputs.h5ad is loaded into adata
+
+    adata --> mask
+    %% adata is processed to create mask
+
+    adata --> G1S_genes_Tirosh
+    %% Genes related to G1/S phase are extracted from adata
+
+    adata --> G2M_genes_Tirosh
+    %% Genes related to G2/M phase are extracted from adata
+
+    adata --> list_genes_fastCCsign
+    %% Fast cell cycle signature genes are extracted from adata
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

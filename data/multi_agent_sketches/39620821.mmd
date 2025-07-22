@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    ds_salaries["ds_salaries.csv"]
+    
+    %% Data Variables
+    DS_file_path["DS_file_path"]
+    Data_science["Data_science DataFrame"]
+    dtypes["dtypes DataFrame"]
+    
+    %% Data Flow
+    ds_salaries -->|"read_csv"| Data_science %% Load data from CSV into DataFrame
+    Data_science -->|"Data_science.dtypes"| dtypes %% Check data types of the features
+
+    %% Usage of Data
+    Data_science -->|"EDA & plotting functions"| EDA["Exploratory Data Analysis"]
+    
+    %% Comments for clarity
+    %% ds_salaries: CSV file containing salary data of data scientists.
+    %% DS_file_path: Variable holding the path to the CSV file.
+    %% Data_science: DataFrame used for analysis, created from the CSV file.
+    %% dtypes: DataFrame holding data types information of Data_science.
+    %% EDA: Exploratory Data Analysis procedures executed on Data_science.

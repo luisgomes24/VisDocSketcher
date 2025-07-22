@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Data from Files"] --> B["📄 Read '../input/playoff_win_loss.csv'"]
+    B --> C["📝 Preview Data"]
+    C --> D["📊 Distribution Graphs"]
+    
+    A --> E["📄 Read '../input/playoffs_frac_score.csv'"]
+    E --> F["📝 Preview Data"]
+    F --> G["📊 Distribution Graphs"]
+
+    A --> H["📄 Read '../input/Playoffs.csv'"]
+    H --> I["📝 Preview Data"]
+    I --> J["📊 Distribution Graphs"]
+
+    D --> K["<img src='dummy_plots/hist_template.svg' /> <br/> 'Histograms/Bar Graphs'"]
+    G --> L["<img src='dummy_plots/hist_template.svg' /> <br/> 'Histograms/Bar Graphs'"]
+    J --> M["<img src='dummy_plots/hist_template.svg' /> <br/> 'Histograms/Bar Graphs'"]

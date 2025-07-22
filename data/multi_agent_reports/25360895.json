@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-mar-2022/train.csv",
+      "description": "Training data containing time and congestion information."
+    },
+    {
+      "file": "../input/tabular-playground-march-2022-04/lightautoml_rounded_special_ve_37_v2.csv",
+      "description": "Current top public submission used for modifying predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing the training data with time features and congestion values."
+    },
+    {
+      "variable": "submission_in",
+      "description": "DataFrame holding the submission data before clipping."
+    },
+    {
+      "variable": "lower",
+      "description": "Numpy array of lower quantile values for congestion, computed for specific groupings."
+    },
+    {
+      "variable": "upper",
+      "description": "Numpy array of upper quantile values for congestion, computed for specific groupings."
+    },
+    {
+      "variable": "submission_out",
+      "description": "DataFrame holding the modified submission data after clipping to quantile limits."
+    },
+    {
+      "variable": "mae",
+      "description": "Mean absolute error representing the difference between original and modified predictions."
+    },
+    {
+      "variable": "difference",
+      "description": "Series containing the difference in congestion between the original and clipped submission."
+    },
+    {
+      "variable": "histogram",
+      "description": "Counts of how many predictions were changed by different amounts after clipping."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "read_csv",
+      "flows": "Used to compute the quantiles for clipping."
+    },
+    {
+      "variable": "submission_in",
+      "creation": "read_csv",
+      "flows": "Used to clip predictions and calculate mean absolute error."
+    },
+    {
+      "variable": "lower",
+      "creation": "groupby + quantile",
+      "flows": "Used to clip 'congestion' values in 'submission_out'."
+    },
+    {
+      "variable": "upper",
+      "creation": "groupby + quantile",
+      "flows": "Used to clip 'congestion' values in 'submission_out'."
+    },
+    {
+      "variable": "submission_out",
+      "creation": "copy + clip",
+      "flows": "Saved to 'submission_rounded.csv' and used for plotting difference histogram."
+    },
+    {
+      "variable": "mae",
+      "creation": "mean_absolute_error",
+      "flows": "Printed as a statistic for evaluation."
+    },
+    {
+      "variable": "difference",
+      "creation": "submission_out - submission_in",
+      "flows": "Used to create a histogram of changes."
+    },
+    {
+      "variable": "histogram",
+      "creation": "value_counts",
+      "flows": "Rendered in histogram plot."
+    }
+  ],
+  "models": []
+}

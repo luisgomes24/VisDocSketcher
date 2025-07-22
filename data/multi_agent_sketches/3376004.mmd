@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data sources
+    A["/input/wine-reviews/winemag-data_first150k.csv"]
+
+    %% Data variables
+    B["fruits DataFrame"]
+    C["fruit_sales DataFrame"]
+    D["ingredients Series"]
+    E["reviews DataFrame"]
+    F["animals DataFrame"]
+
+    %% Data connections and transformations
+    A -->|Load CSV| E
+    E -->|Data Analysis| G[Assess wine attributes]
+    
+    B -->|Used in| H[Exercises: Check & Calculate]
+    C -->|Used in| H
+    D -->|Used in| H
+    
+    F -->|Save as CSV| I[Save to cows_and_goats.csv]
+
+    subgraph create_data
+        B
+        C
+        D
+        F
+    end

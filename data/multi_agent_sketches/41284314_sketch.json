@@ -1,0 +1,23 @@
+{
+  "sketch_diagram": {
+    "title": "Data Science Workflow for Notebook 41284314",
+    "components": [
+      {
+        "type": "data_sources",
+        "description": "The data sources include training, additional training, and test datasets."
+      },
+      {
+        "type": "data_variables",
+        "description": "Key data variables include dataframes, tokenizers, and prediction outputs."
+      },
+      {
+        "type": "data_flow",
+        "description": "Data flows through various transformations and is ultimately used for predictions."
+      },
+      {
+        "type": "models",
+        "description": "The model used is AutoModelForMultipleChoice with specific hyperparameters."
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+flowchart TD
+  %%% Data Sources %%%
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> oyuncu.csv"]:::dataSource
+  
+  %%% Data Variables %%%
+  B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]:::dataVariable
+  C["<img src='icons/column_split.svg' width=100 height=100/> <br/> cat_deg"]:::dataVariable
+  D["<img src='icons/column_split.svg' width=100 height=100/> <br/> num_deg"]:::dataVariable
+  E["<img src='icons/column_split.svg' width=100 height=100/> <br/> car_deg"]:::dataVariable
+  F["<img src='icons/table.svg' width=100 height=100/> <br/> aybars"]:::dataVariable
+  G["df_pca"]:::dataVariable
+  
+  %%% Models %%%
+  H(("<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> PCA")):::model
+  I(("<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> KMeans")):::model
+  
+  %%% Flow %%%
+  %% df Creation %%%
+  A -->|read_csv| B
+  B -->|categorical/ numerical cardinality check| C
+  B -->|categorical/ numerical cardinality check| D
+  B -->|categorical/ numerical cardinality check| E
+  B -->|groupby.mean| F
+  
+  %% df_pca Creation %%%
+  F -->|PCA fit_transform| G
+  G --> H
+  
+  %% KMeans Model %%%
+  F -->|Numeric Data| I
+  I -->|Clusters| G
+  
+  style A fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style B fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style C fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style D fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style E fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style F fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style G fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style H fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style I fill:#C6F4D6,stroke:#333,stroke-width:2px;

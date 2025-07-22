@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Training Data"] --> B["<img src='file.svg'/> <br/> Load Test Data"]
+    B --> C["<img src='table.svg'/> <br/> Explore Data"]
+    C --> D["<img src='column_split.svg'/> <br/> Preprocess Data"]
+    D --> E["<img src='column_split.svg'/> <br/> Encode Categorical Variables"]
+    E --> F["<img src='brain.svg'/> <br/> Impute Missing Values"]
+    F --> G["<img src='row_split.svg'/> <br/> Train-Test Split"]
+    G --> H["<img src='brain.svg'/> <br/> Train ML Model"]
+    H --> I["<img src='table.svg'/> <br/> Evaluate Model on Training Data"]
+    I --> J["<img src='table.svg'/> <br/> Evaluate Model on Test Data"]
+    J --> K["<img src='table.svg'/> <br/> Predict on Test Set"]
+    K --> L["<img src='file.svg'/> <br/> Save Submission"]

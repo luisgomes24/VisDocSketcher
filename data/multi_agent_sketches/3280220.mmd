@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Source Node
+    A[Credit Card Data<br>(creditcard.csv)]:::dataSource
+    %% Data Loading and Initial Variable
+    B[cfd]:::variable
+    %% Outlier Removal
+    C[cfd1]:::variable
+    %% Data Splitting
+    D[(X_train, X_test, y_train, y_test)]:::dataSplit
+    %% Model Training
+    E[Logistic Regression Model]:::model
+
+    %% Data Source Description
+    click A href "creditcard.csv" "CSV file containing credit card transaction data."
+    %% Data Source to Variable
+    A -->|pd.read_csv| B
+    %% Variable to Outlier Removal
+    B -->|Remove Outliers| C
+    %% Variable to Data Splitting
+    C -->|train_test_split| D
+    %% Data Splitting to Model
+    D -->|X_train, y_train| E
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataSplit fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef model fill:#ff9,stroke:#333,stroke-width:2px;

@@ -1,0 +1,11 @@
+graph TD;
+    A["<img src='..icons/database.svg' width=100 height=100/> <br/> Data Ingestion"] --> B["<img src='..icons/column_split.svg' width=100 height=100/> <br/> Preprocessing"];
+    B -->|"Train-Test Split"| C["<img src='..icons/row_split.svg' width=100 height=100/> <br/> Split Data"];
+    C --> D["<img src='..icons/brain.svg' width=100 height=100/> <br/> Model Training"];
+    D -->|"Calculate Loss & Metrics"| E["<img src='..icons/brain.svg' width=100 height=100/> <br/> Model Evaluation"];
+    E --> F["<img src='..icons/file.svg' width=100 height=100/> <br/> Output Results"];
+    
+    %% Nodes with plots
+    A --> G["<img src='..dummy_plots/scatter_plot_template.svg'/> <br/> Input Data Plot"];
+    D --> H["<img src='..dummy_plots/barplot_template.svg'/> <br/> Training Loss Plot"];
+    E --> I["<img src='..dummy_plots/boxplot_template.svg'/> <br/> Evaluation Metrics Plot"];

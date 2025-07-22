@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> UNSW_NB15_training-set.csv"] -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> train DataFrame"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> UNSW_NB15_testing-set.csv"] -->|Load data| D["<img src='icons/table.svg' width=100 height=100/> <br/> test DataFrame"]
+
+    %% Data Preparation and Processing
+    B -->|Extract features| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> x_train, y_train"]
+    D -->|Extract features| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> x_test, y_test"]
+
+    %% Feature Engineering
+    E -->|Drop 'label' and process| G["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature-engineered x_train"]
+    F -->|Drop 'label' and process| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature-engineered x_test"]
+
+    %% Scaling
+    G -->|Scale non-categorical| I["<img src='icons/column_split.svg' width=100 height=100/> <br/> Scaled x_train"]
+    H -->|Scale non-categorical| J["<img src='icons/column_split.svg' width=100 height=100/> <br/> Scaled x_test"]
+
+    %% Convert to Dummy Variables
+    I -->|Get dummies| K["<img src='icons/column_split.svg' width=100 height=100/> <br/> Dummy-encoded x_train"]
+    J -->|Get dummies| L["<img src='icons/column_split.svg' width=100 height=100/> <br/> Dummy-encoded x_test"]
+
+    %% Consistent Features
+    K -->|Filter by features| M["<img src='icons/column_split.svg' width=100 height=100/> <br/> Consistent x_train"]
+    L -->|Filter by features| N["<img src='icons/column_split.svg' width=100 height=100/> <br/> Consistent x_test"]
+
+    %% Save Processed Data
+    M -->|Save as CSV| O["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+    N -->|Save as CSV| P["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]

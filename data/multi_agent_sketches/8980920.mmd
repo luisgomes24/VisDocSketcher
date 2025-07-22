@@ -1,0 +1,37 @@
+%%{
+  init: {
+    "theme": "default"
+  }
+}%%
+flowchart TD
+    %% Data Sources Nodes %%
+    data1["/flu2005trials.csv/"]:::dataSource
+    data2["/flu2006trials.csv/"]:::dataSource
+    data3["/flu2007trials.csv/"]:::dataSource
+
+    %% Data Variables %%
+    df1["df1"]:::dataVar
+    df2["df2"]:::dataVar
+    df3["df3"]:::dataVar
+
+    %% Process Nodes %%
+    readCSV1["/pd.read_csv/"]:::process
+    readCSV2["/pd.read_csv/"]:::process
+    readCSV3["/pd.read_csv/"]:::process
+
+    %% Visualization %%
+    visualize1["Visualization"]
+
+    %% Data Flow %%
+    data1 --> readCSV1 --> df1
+    data2 --> readCSV2 --> df2
+    data3 --> readCSV3 --> df3
+
+    %% Usage of Variables %%
+    df1 --> visualize1
+    df2 --> visualize1
+    df3 --> visualize1
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#f96,stroke:#333,stroke-width:2px;

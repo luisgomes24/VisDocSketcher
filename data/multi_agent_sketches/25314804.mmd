@@ -1,0 +1,19 @@
+flowchart TD
+    %% Data Sources
+    A1["/tmdb_5000_credits.csv/"] %% Represents the file containing movie credits information
+    A2["/tmdb_5000_movies.csv/"] %% Represents the file containing movie metadata
+    
+    %% Data Variables
+    B1[credits] %% Represents DataFrame for movie credits
+    B2[movies] %% Represents DataFrame for movie metadata
+    B3[df] %% Represents merged DataFrame
+    B4[new_df] %% Represents DataFrame prepared for recommendations
+    
+    %% Data Flow
+    A1 --> |read_csv| B1 %% Reading the credits file into DataFrame
+    A2 --> |read_csv| B2 %% Reading the movies file into DataFrame
+    
+    B1 --> |merge on title| B3
+    B2 --> |merge on title| B3 %% Merging credits and movies DataFrames
+    
+    B3 --> |Select relevant columns| B4 %% Preparing new_df with movie_id, title, tags

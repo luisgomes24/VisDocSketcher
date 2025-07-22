@@ -1,0 +1,7 @@
+flowchart TD
+    A["leaderboard.csv"]:::dataSource -->|"Read CSV"| B["leaderboard DataFrame"]:::dataVariable
+    B -->|"Save to CSV"| C["Full leaderboard: 'full_leaderboard.csv'"]:::dataOutput
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataOutput fill:#bfb,stroke:#333,stroke-width:2px;

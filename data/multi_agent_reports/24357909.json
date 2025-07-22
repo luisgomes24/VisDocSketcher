@@ -1,0 +1,114 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/tabular-playground-series-feb-2022/train.csv",
+      "description": "Training data containing features and target variable"
+    },
+    {
+      "file_path": "../input/tabular-playground-series-feb-2022/test.csv",
+      "description": "Test data containing features"
+    },
+    {
+      "file_path": "../input/tabular-playground-series-feb-2022/sample_submission.csv",
+      "description": "Sample submission format for predictions"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_data",
+      "description": "DataFrame containing training data"
+    },
+    {
+      "variable_name": "test_data",
+      "description": "DataFrame containing test data"
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame for submission with predictions"
+    },
+    {
+      "variable_name": "X",
+      "description": "Features for model training (excluding target)"
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable for model training"
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features after splitting"
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test features after splitting"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable after splitting"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test target variable after splitting"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_data",
+      "creation_method": "pd.read_csv",
+      "uses": "Split into features (X) and target (y), used for model training"
+    },
+    {
+      "variable_name": "test_data",
+      "creation_method": "pd.read_csv",
+      "uses": "Used for making predictions"
+    },
+    {
+      "variable_name": "submission",
+      "creation_method": "pd.read_csv",
+      "uses": "Final output for model predictions, saved to CSV"
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "train_data.drop",
+      "uses": "Used for training the model"
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "train_data['target']",
+      "uses": "Used as target for model training"
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "train_test_split",
+      "uses": "Used for training the model"
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "train_test_split",
+      "uses": "Used for evaluating model performance"
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train_test_split",
+      "uses": "Used for model training"
+    },
+    {
+      "variable_name": "y_test",
+      "creation_method": "train_test_split",
+      "uses": "Used for model evaluation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "max_samples": "optimized via Bayesian optimization",
+        "max_features": "optimized via Bayesian optimization",
+        "n_estimators": 300,
+        "random_state": 42
+      }
+    }
+  ]
+}

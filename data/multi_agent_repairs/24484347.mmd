@@ -1,0 +1,37 @@
+```mermaid
+flowchart TD
+    subgraph US_Energy_Consumption_Timeseries
+        direction TB
+        A["../input/tsdata-1/us_energy.csv"]
+        %% A: Time series data of US energy consumption
+        A -->|"read_csv"| B["df"]
+        B -->|"set_index, plot"| C["Data indexed and plotted"]
+        B -->|"seasonal_decompose"| D["Seasonal decomposition"]
+        B -->|".loc on cutoff date"| E["xtrain"]
+        B -->|".loc on cutoff date"| F["xvalid"]
+        E -->|"ExponentialSmoothing"| G["ExponentialSmoothing Model"]
+        F -->|"ExponentialSmoothing"| G
+        G -->|"fit, forecast"| H["forecast"]
+        H -->|"plot_acf"| I["Autocorrelation of forecast"]
+    end
+
+    subgraph Greenhouse_Climate_Timeseries
+        direction TB
+        J["../input/greenhouse-dataset/GreenhouseClimate1.csv"]
+        %% J: Climate data from greenhouse for time series prediction
+        J -->|"read_csv"| K["xdat"]
+        K -->|"data cleaning"| L["Cleaned climate data"]
+        L -->|"Prophet"| M["Prophet Model"]
+        M -->|"cross_validation"| N["df_cv"]
+        N -->|"performance_metrics"| O["Performance metrics from cross-validation"]
+    end
+
+    subgraph Model_Comparison
+        direction TB
+        M -->|input| P["Prophet Model"]
+        Q["NeuralProphet Model"]
+        P --> R
+        Q --> R
+        R["Model Predictions"] -->|"pd.DataFrame"| S["comparison"]
+    end
+```

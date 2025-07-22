@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file_name": "face-mask-lite-dataset",
+      "description": "Dataset containing 10,000 images of faces, from which 9,090 images are used for training (images without masks)."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "_img",
+      "description": "List of images read from the dataset after converting and resizing, used as input for the GAN."
+    },
+    {
+      "name": "dataset",
+      "description": "TensorFlow Dataset created from the list of images to facilitate batching for training the GAN."
+    },
+    {
+      "name": "latent_dim",
+      "description": "Dimension of the vector input for the generator, set to 100."
+    },
+    {
+      "name": "batch_size",
+      "description": "Size of each batch of images used for training, set to 32."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "_img",
+      "creation": "Appended from images read and processed in the for loop with OpenCV",
+      "flow": "Used as input for the discriminator and batch-fed during training"
+    },
+    {
+      "variable": "dataset",
+      "creation": "Created using tf.data.Dataset from the array representation of _img",
+      "flow": "Used to generate batches of images to train both the generator and discriminator"
+    },
+    {
+      "variable": "noise",
+      "creation": "Generated randomly using np.random.normal in training steps",
+      "flow": "Used as input for the generator to create fake images"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Generator",
+      "architecture": "Sequential model with Dense, Reshape, Conv2D, BatchNormalization, LeakyReLU layers",
+      "input_features": "Random vector from normal distribution",
+      "output_dimensions": "128x128x3 image",
+      "hyperparameters": {
+        "latent_dim": "100"
+      }
+    },
+    {
+      "model_name": "Discriminator",
+      "architecture": "Sequential model with Conv2D, BatchNormalization, LeakyReLU, Flatten, Dense layers",
+      "input_features": "128x128x3 image (real or generated)",
+      "output_layer": "Single neuron with sigmoid activation",
+      "output": "Probability indicating if the input image is real or fake"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+flowchart TD
+    A["🔄 Load Data <img src='icons/file.svg' />"] --> B["🧪 Preprocess Data"]
+    B --> C["📊 Plot Distribution <img src='dummy_plots/hist_template.svg' />"]
+    B --> D["🧩 Correlation Matrix <img src='dummy_plots/scatter_plot_template.svg' />"]
+    B --> E["🔄 Scatter Matrix Plot <img src='dummy_plots/scatter_plot_template.svg' />"]
+    C --> F["📉 Visualize Results"]
+    D --> F
+    E --> F
+    F --> G["🎉 Conclusions"]

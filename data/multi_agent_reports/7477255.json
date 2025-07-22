@@ -1,0 +1,105 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cbb.csv",
+      "description": "Combined dataset containing college basketball statistics from 2015-2019."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Main DataFrame containing basketball data."
+    },
+    {
+      "name": "df_ff",
+      "description": "Subset DataFrame containing four factors and target variable (number of wins)."
+    },
+    {
+      "name": "df_ff_y",
+      "description": "Target variable (number of wins) extracted from the main DataFrame."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features used for model training."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features used for model evaluation."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set target values used for model training."
+    },
+    {
+      "name": "y_test",
+      "description": "Test set target values used for model evaluation."
+    },
+    {
+      "name": "y_pred",
+      "description": "Predicted values of wins from the test set."
+    },
+    {
+      "name": "dfd",
+      "description": "DataFrame containing actual, predicted values and their absolute differences."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created": "pd.read_csv()",
+      "flows": ["df_ff", "df_ff_y"]
+    },
+    {
+      "variable": "df_ff",
+      "created": "Subset of df with selected columns",
+      "flows": ["X_train", "X_test"]
+    },
+    {
+      "variable": "df_ff_y",
+      "created": "Extracted from df",
+      "flows": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "created": "train_test_split()
+      "flows": ["reg"]
+    },
+    {
+      "variable": "X_test",
+      "created": "train_test_split()",
+      "flows": ["y_pred"]
+    },
+    {
+      "variable": "y_train",
+      "created": "train_test_split()",
+      "flows": ["reg"]
+    },
+    {
+      "variable": "y_test",
+      "created": "train_test_split()",
+      "flows": ["metrics"]
+    },
+    {
+      "variable": "y_pred",
+      "created": "reg.predict()",
+      "flows": ["metrics", "dfd"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": [
+        "EFG_O",
+        "EFG_D",
+        "TOR",
+        "TORD",
+        "ORB",
+        "DRB",
+        "FTR",
+        "FTRD"
+      ],
+      "target": "W",
+      "hyperparameters": []
+    }
+  ]
+}

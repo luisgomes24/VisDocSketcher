@@ -1,0 +1,21 @@
+```mermaid
+
+flowchart TD
+    %% Data Sources
+    A["janestreet environment"] -->|iter_test| B["test_df"]
+    
+    %% Dataframes and Variables
+    B["test_df"] --> C["prediction_df"]
+    
+    %% Data Flow
+    C["prediction_df"] -->|action=1| D["Environment Prediction"]
+    
+    %% Model Usage
+    B --> E["Custom Prediction Model"]
+    E -->|predicts| C
+
+    %% Model Details
+    E --- |Input: weight| F["Features"]
+    E --- |Output: action| G["Target"]
+
+```

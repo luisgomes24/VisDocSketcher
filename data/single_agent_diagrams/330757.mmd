@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> df = pd.read_csv('../input/911.csv')"] --> B["🔍 Inspect Data <img src='table.svg'/> <br/> df.head()"]
+    B --> C["🧑‍⚕️ Filter Cardiac Arrest Calls <img src='row_split.svg'/>"]
+    C --> D["📊 Scatter Plot of 911 Calls <img src='scatter_plot_template.svg'/>"]
+    D --> E["🔥 Fire Calls Analysis <img src='row_split.svg'/>"]
+    E --> F["📊 Scatter Plot of Fire Calls <img src='scatter_plot_template.svg'/>"]
+    F --> G["📊 Barplot of Fire Calls <img src='barplot_template.svg'/>"]
+    G --> H["🚑 EMS Calls Analysis <img src='row_split.svg'/>"]
+    H --> I["📊 Scatter Plot of EMS Calls <img src='scatter_plot_template.svg'/>"]
+    I --> J["📊 Barplot of EMS Calls <img src='barplot_template.svg'/>"]
+    J --> K["🚦 Traffic Calls Analysis <img src='row_split.svg'/>"]
+    K --> L["📊 Scatter Plot of Traffic Calls <img src='scatter_plot_template.svg'/>"]
+    L --> M["📊 Barplot of Traffic Calls <img src='barplot_template.svg'/>"]

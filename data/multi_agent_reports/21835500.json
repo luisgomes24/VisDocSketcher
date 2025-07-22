@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/czech-printed-books-in-2020-fixed/tistene-knihy_2020_export.csv",
+      "description": "Contains information about printed books in the Czech Republic for the year 2020."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the dataset loaded from the CSV file."
+    },
+    {
+      "name": "stopwords",
+      "description": "Set of stopwords for generating word clouds."
+    },
+    {
+      "name": "wordcloud",
+      "description": "WordCloud object for visualizing frequent words from the 'Název' and 'Autor' columns in the data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create visualizations and generate word clouds."
+    },
+    {
+      "variable": "wordcloud",
+      "creation_method": "WordCloud().generate",
+      "flow": "Used to visualize text data from 'Název' and 'Autor' columns."
+    }
+  ],
+  "models": []
+}

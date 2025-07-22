@@ -1,0 +1,33 @@
+flowchart TD
+    subgraph DataPrep
+        A1["train.csv"]:::file --> B1["train_df"]:::data
+        A2["test.csv"]:::file --> B2["test_df"]:::data
+        
+        B1 --> C1["train_df_1: Subset with <10 unique int64 features"]:::data
+        B1 --> C2["train_df_2: Remaining features"]:::data
+        
+        B1 -->|train-test split| D1["new_train_df"]:::data
+        B1 -->|train-test split| D2["new_test_df"]:::data
+    end
+    
+    subgraph ModelPrep
+        D1 --> E1["X_train: Features"]:::data
+        D1 --> E2["y_train: Labels"]:::data
+        D2 --> E3["X_test: Features"]:::data
+        D2 --> E4["y_test: Labels"]:::data
+    end
+    
+    subgraph Modeling
+        E1 --> F1["RandomForestClassifier"]:::model
+        E2 --> F1
+        classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+        classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+        classDef model fill:#bb0,stroke:#333,stroke-width:2px;
+    end
+
+    F1 --> G1["Model Trained"]:::result
+    E3 --> G2["Evaluate Model"]:::evaluate
+    E4 --> G2
+
+    classDef result fill:#88f,stroke:#333,stroke-width:2px;
+    classDef evaluate fill:#8f8,stroke:#333,stroke-width:2px;

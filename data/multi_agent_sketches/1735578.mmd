@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph Data_Sources
+        CompetitionsCSV[/"Competitions.csv"/]
+        CompetitionTagsCSV[/"CompetitionTags.csv"/]
+        DatasetsCSV[/"Datasets.csv"/]
+    end
+
+    subgraph Data_Variables
+        DF1[/"df1"/]:::dataFrame
+        DF2[/"df2"/]:::dataFrame
+        DF3[/"df3"/]:::dataFrame
+    end
+
+    subgraph Data_Visualizations
+        PlotDist[/"plotPerColumnDistribution"/]
+        PlotCorr[/"plotCorrelationMatrix"/]
+        PlotScatter[/"plotScatterMatrix"/]
+    end
+
+    %% Data source to DataFrame
+    CompetitionsCSV -- Read CSV --> DF1
+    DF1 -- Used In --> PlotDist
+    DF1 -- Used In --> PlotCorr
+    DF1 -- Used In --> PlotScatter
+
+    CompetitionTagsCSV -- Read CSV --> DF2
+    DF2 -- Used In --> PlotDist
+    DF2 -- Used In --> PlotCorr
+    DF2 -- Used In --> PlotScatter
+
+    DatasetsCSV -- Read CSV --> DF3
+    DF3 -- Used In --> PlotDist
+    DF3 -- Used In --> PlotCorr
+    DF3 -- Used In --> PlotScatter
+
+    classDef dataFrame fill:#f9f,stroke:#333,stroke-width:2px;

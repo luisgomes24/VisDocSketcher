@@ -1,0 +1,35 @@
+flowchart TD
+    A["train.csv"] -->|"Load into DataFrame"| B["df_total"]
+    B -->|"Preprocess and create 'preprocessedTweet'"| C["max_length"]
+    B -->|"Preprocess and create padded sequences"| D["padded_tweets"]
+    C -->|"Determine padding length"| D
+    B -->|"Split into training and testing"| E["y_train"]
+
+    subgraph LSTM_Model ["Sequential LSTM Model"]
+        direction TB
+        F1["Embedding Layer"] --> F2["Bidirectional LSTM Layer"]
+        F2 --> F3["Dropout Layer"]
+        F3 --> F4["Batch Normalization"]
+        F4 --> F5["Bidirectional LSTM Layer"]
+        F5 --> F6["Dropout Layer"]
+        F6 --> F7["Batch Normalization"]
+        F7 --> F8["Bidirectional LSTM Layer"]
+        F8 --> F9["Dropout Layer"]
+        F9 --> F10["Batch Normalization"]
+        F10 --> F11["Dense Layer"]
+        F11 --> F12["Dense Layer"]
+        F12 --> F13["Output Layer"]
+    end
+
+    D -->|"Inputs to model"| LSTM_Model
+    E -->|"Target variable"| LSTM_Model
+
+    note right of  A
+        "Contains tweets with sentiment labels."
+    end
+    note right of F1
+        "Embedding input with GloVe 50-dimensions."
+    end
+    note left of F13
+        "Predict sentiment label."
+    end

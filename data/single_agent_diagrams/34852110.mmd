@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📄 Read Metadata"]
+    B --> C["📥 Read DICOM"]
+    C --> D["🖼️ Flip 'R' Side Images"]
+    D --> E["🖼️ Crop Images"]
+    E --> F["🧠 Density Estimation"]
+    F --> G["📊 Combine Results"]
+    G --> H["📈 Evaluate Model"]
+    
+    A -->| Data Source | B
+    C -->| Reads and processes images | D
+    D -->| Prepares images for analysis | E
+    E -->| Prepares images for modeling | F
+    F -->| Predicts breast density classes | G
+    G -->| Final density classification | H

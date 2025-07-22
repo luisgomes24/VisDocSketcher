@@ -1,0 +1,28 @@
+%% Begin of Workflow Diagram %%
+flowchart TD
+ %% Data Source Node %%
+ A["<img src='icons/file.svg' width=100 height=100/> <br/> spotify_global_2019_most_streamed_tracks_audio_features.csv"] 
+ %% Description: Contains audio features and metrics for the most streamed tracks in 2019 globally. %% 
+
+ %% DataFrame Node %%
+ B["<img src='icons/table.svg' width=100 height=100/> <br/> df1"] 
+ %% Description: DataFrame containing the loaded data from the CSV file. %% 
+
+ %% Data Flow: CSV to DataFrame %%
+ A -->|pd.read_csv()| B
+ %% Description: Loading CSV data into DataFrame df1.
+
+ %% Data Usage Nodes %%
+ B -->|Used as Input| C["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Various Plotting Functions"]
+ %% Description: df1 is used in various plotting functions to visualize data distributions. %%
+
+ B -->|Used as Input| D["<img src='dummy_plots/head_display_template.svg'/> <br/> head() Display"]
+ %% Description: df1 is used to display the first few rows of the data. %%
+
+ B -->|Used as Input| E["<img src='dummy_plots/correlation_matrix_template.svg'/> <br/> Correlation Matrix Visualization"]
+ %% Description: df1 is used to create a correlation matrix visualization. %%
+
+ B -->|Used as Input| F["<img src='dummy_plots/scatter_matrix_template.svg'/> <br/> Scatter Matrix Visualization"]
+ %% Description: df1 is used to create a scatter matrix visualization. %%
+
+%% End of Workflow Diagram %%

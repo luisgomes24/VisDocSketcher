@@ -1,0 +1,18 @@
+graph TD;
+  A["Data Load"]:::dataNode --> B["Data Preprocess"]:::dataNode;
+  B --> C["Train Model"]:::mlModelNode;
+  C --> D["Evaluate Model"]:::mlModelNode;
+  D --> E["Output"]:::outputNode;
+  D --> F["Plot Results"]:::plotNode;
+
+  classDef dataNode fill:#87CEEB;
+  classDef mlModelNode fill:#C6F4D6;
+  classDef outputNode fill:#F2C464;
+  classDef plotNode fill:#FFCDD2;
+
+  A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Load"]
+  B["<img src='icons/column_split.svg' width=100 height=100/> <br/> Data Preprocess"]
+  C["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model"]
+  D["<img src='icons/brain.svg' width=100 height=100/> <br/> Evaluate Model"]
+  E["<img src='icons/file.svg' width=100 height=100/> <br/> Output"]
+  F["<img src='dummy_plots/barplot_template.svg'/> <br/> Plot Results"]

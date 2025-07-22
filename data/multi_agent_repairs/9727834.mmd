@@ -1,0 +1,14 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+flowchart TD
+    A["March_2019_ontime.csv"] -->|Load Data| B["df1"]
+    A["March_2020_ontime.csv"] -->|Load Data| C["df2"]
+    %% Data loading nodes
+    B["df1"] -->|First 1000 rows| D["plotPerColumnDistribution(df1, 10, 5)"]
+    B --> E["plotCorrelationMatrix(df1, 8)"]
+    B --> F["plotScatterMatrix(df1, 20, 10)"]
+    %% Plotting data from df1
+    C["df2"] -->|First 1000 rows| G["plotPerColumnDistribution(df2, 10, 5)"]
+    C --> H["plotCorrelationMatrix(df2, 8)"]
+    C --> I["plotScatterMatrix(df2, 20, 10)"]
+    %% Plotting data from df2
+    %% No ML models were used in this notebook

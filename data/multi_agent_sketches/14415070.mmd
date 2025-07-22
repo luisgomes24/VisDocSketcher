@@ -1,0 +1,17 @@
+%% Load Data
+flowchart TD
+    DS["Order Data\n(GP Orders - 4.csv)"] -->|Load| DF["DataFrame df\nContains book orders"]
+    %% Preprocessing
+    DF -->|Extract & Count Books| BC["book_counts\nCount of each book"]
+    BC -->|Sort & Filter Top 5| TOP["top\nTop 5 sold books"]
+    BC -->|Sort & Filter Least 5| LEAST["least\nLeast 5 sold books"]
+    DF -->|Count Order Status| OS["os\nOrder status counts"]
+    DF -->|Filter Returned Orders| DF_NEW["df_new\nReturned orders"]
+    DF_NEW -->|Count Returned Books| RC["returned_counts\nCount of returned books"]
+    %% Visualizations
+    TOP -->|Visualize|"Plot Top Selling Books"
+    LEAST -->|Visualize|"Plot Least Selling Books"
+    OS -->|Visualize|"Plot Order Status"
+    RC -->|Visualize Findings|"Print Findings on Returned Orders"
+    DF -->|Extract Day & Count| ORD_DAY["Order frequency by Day"]
+    ORD_DAY -->|Visualize|"Plot Order Frequency by Day"

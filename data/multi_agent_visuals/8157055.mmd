@@ -1,0 +1,21 @@
+flowchart TD
+  %% Load data from CSV
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> CSV File: Advertising.csv"]:::data -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: data"]:::data
+  %% DataFrame representing the raw data
+  B -->|Extract Column TV| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Variable: a"]:::data
+  B -->|Extract Column Sales| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Variable: b"]:::data
+  B -->|Extract Column Radio| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Variable: c"]:::data
+  B -->|Extract Column Newspaper| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Variable: d"]:::data
+  
+  %% Correlation analysis
+  B -->|Calculate Correlation| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Matrix: corr"]:::data
+  
+  %% Visualization steps
+  C -->|Histogram| H["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> TV Expenditures Histogram"]:::plot
+  E -->|Histogram| I["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Radio Expenditures Histogram"]:::plot
+  F -->|Histogram| J["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Newspaper Expenditures Histogram"]:::plot
+  D -->|Joint Plot with Sales| K["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> TV vs Sales Joint Plot"]:::plot
+  G -->|Heatmap| L["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> Correlation Heatmap"]:::plot
+
+  classDef data fill:#87CEEB;
+  classDef plot fill:#FFCDD2;

@@ -1,0 +1,8 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> Unzip CSV Files"] --> B["🧹 Preprocess Data"];
+    B --> C["✂️ Split Data <img src='row_split.svg'/> <br/> Train-Test Split"];
+    C --> D["🤖 Load BERT Model"];
+    D --> E["🔄 Add Classifier & Compile Model"];
+    E --> F["🧑‍🏫 Train Model"];
+    F --> G["📊 Evaluate Model <img src='barplot_template.svg'/> <br/> Hamming Loss & Recall"];
+    G --> H["🧹 Cleanup"];

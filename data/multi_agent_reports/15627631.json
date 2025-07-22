@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Kaggle House Price Prediction dataset containing various features related to house prices"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_orig",
+      "description": "Original DataFrame loaded from the CSV file, containing all features including target variable 'SalePrice'"
+    },
+    {
+      "variable_name": "df_num",
+      "description": "DataFrame containing only numerical columns from the original DataFrame"
+    },
+    {
+      "variable_name": "df_cate",
+      "description": "DataFrame containing only categorical columns from the original DataFrame including 'SalePrice'"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_orig",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for exploratory analysis, statistical description, and plot visualizations"
+    },
+    {
+      "variable_name": "df_num",
+      "creation_method": "df_orig.select_dtypes(include = 'number')",
+      "flow": "Utilized for numerical feature analysis and visualizations through histograms and scatter plots"
+    },
+    {
+      "variable_name": "df_cate",
+      "creation_method": "df_orig.select_dtypes(include = 'object')",
+      "flow": "Used for categorical feature analysis with boxplots against 'SalePrice'"
+    }
+  ],
+  "models": []
+}

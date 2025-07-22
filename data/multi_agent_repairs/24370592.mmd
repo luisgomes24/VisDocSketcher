@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A1["/train.csv/"]  %% Training dataset node
+        A2["/example_test.csv/"]  %% Example test dataset node
+    end
+
+    subgraph LoadData
+        A1 --> B1["Load train.csv into train DataFrame"]  %% Load training data
+    end
+
+    subgraph Preprocessing
+        B1 --> C1[X["features"]]  %% Extract features from train data
+        B1 --> C2[y["target"]]  %% Extract target from train data
+    end
+
+    subgraph SplitData
+        C1 --> D1["X_train, X_test"]  %% Split features into train and test sets
+        C2 --> D2["y_train, y_test"]  %% Split target into train and test sets
+    end
+
+    subgraph CreateDatasets
+        D1 --> E1["Create lgb_train with X_train, y_train"]  %% Create LightGBM train dataset
+        D1 --> E2["Create lgb_eval with X_test, y_test"]  %% Create LightGBM eval dataset
+    end
+
+    subgraph TrainModel
+        E1 --> F1["Train LightGBM model"]  %% Model training
+    end
+
+    F1 --> G1["gbm model"]  %% Trained model
+    A2 --> G2["Use gbm for predictions"]  %% Use model for predictions
+```

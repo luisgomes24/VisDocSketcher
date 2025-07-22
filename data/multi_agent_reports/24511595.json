@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_path": "transactions_train.csv",
+      "description": "Contains transaction data with dates and prices of items sold."
+    },
+    {
+      "file_path": "customers.csv",
+      "description": "Contains customer demographic information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "transactions_train",
+      "description": "DataFrame containing transaction records loaded from transactions_train.csv."
+    },
+    {
+      "variable_name": "transactions",
+      "description": "Aggregated data by date containing the total price of transactions."
+    },
+    {
+      "variable_name": "model",
+      "description": "Instance of the Prophet model to perform forecasting."
+    },
+    {
+      "variable_name": "future",
+      "description": "DataFrame storing future timestamps for predictions."
+    },
+    {
+      "variable_name": "forecast",
+      "description": "DataFrame containing predicted values along with their bounds."
+    },
+    {
+      "variable_name": "df_cv",
+      "description": "DataFrame containing cross validation results for forecast performance."
+    },
+    {
+      "variable_name": "df_p",
+      "description": "DataFrame containing performance metrics of the forecasting model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "transactions_train",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["transactions"]
+    },
+    {
+      "variable_name": "transactions",
+      "creation_method": "groupby + sum",
+      "flows_to": ["model", "future", "forecast"]
+    },
+    {
+      "variable_name": "model",
+      "creation_method": "Prophet()",
+      "flows_to": ["forecast"]
+    },
+    {
+      "variable_name": "future",
+      "creation_method": "model.make_future_dataframe",
+      "flows_to": ["forecast"]
+    },
+    {
+      "variable_name": "forecast",
+      "creation_method": "model.predict",
+      "flows_to": ["plot"]
+    },
+    {
+      "variable_name": "df_cv",
+      "creation_method": "cross_validation",
+      "flows_to": ["df_p"]
+    },
+    {
+      "variable_name": "df_p",
+      "creation_method": "performance_metrics",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Prophet",
+      "input_features": ["ds", "y"],
+      "target_variable": "yhat",
+      "hyperparameters": {
+        "country_holidays": "US"
+      }
+    }
+  ]
+}

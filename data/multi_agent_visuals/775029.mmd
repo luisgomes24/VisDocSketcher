@@ -1,0 +1,11 @@
+flowchart TD
+
+    %% Data Sources
+    A1[NFL Play by Play Data] -->|read_csv| B1((nfl_data))
+    A2[San Francisco Building Permits Data] -->|read_csv| B2((sf_permits))
+
+    %% Data Processing
+    B1 --> C1{missing_values_count}
+    B1 --> C2[total_missing]
+    C1 --> C3[columns_with_na_dropped]
+    B1 --> C4[subset_nfl_data]

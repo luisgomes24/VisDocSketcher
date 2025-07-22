@@ -1,0 +1,33 @@
+%% Begin of the Mermaid.js diagram
+flowchart TD
+    subgraph G1[Data Sources and Imports]
+        d1(("learntools.python.jimmy_slots"))
+        d2(("learntools.python.luigi_analysis"))
+    end
+
+    subgraph G2[Data Variables]
+        v1[Graph]
+        v2[Full Dataset]
+        v3[Winner Item Counts]
+    end
+
+    subgraph G3[Data Flow and Processes]
+        p1["Call get_graph() to obtain slot machine graph"]
+        p2["Visualize slot machine balance after 500 spins"]
+        p3["Analyze items usage using best_items function"]
+        p4["Count items picked by first-place finishers"]
+    end
+
+    %% Data Source imports
+    d1 --> p1
+    d2 --> v2
+
+    %% Data Variables and Flow
+    p1 --> v1
+    v1 --> p2
+    v2 & p3 --> v3
+    p3 --> p4
+
+    %% Additional comments about the flow
+    %% Graph represents visual output of slot machine results
+    %% Winner item counts store the analysis results of items used by race winners

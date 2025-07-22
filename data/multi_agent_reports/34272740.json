@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/population-2022/population.csv",
+      "description": "Population data for various countries over the years, including Year, Country, Population, GlobalRank, Yearly%Change, MedianAge, and FertilityRate."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "raw_df",
+      "description": "DataFrame containing the entire dataset loaded from the CSV file."
+    },
+    {
+      "name": "sub_df",
+      "description": "Derived DataFrames created for specific analyses, including population, rank, yearly change, and age distribution."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "raw_df",
+      "creation_method": "pd.read_csv",
+      "used_for": ["Analysis summary", "Sub DataFrame creation"]
+    },
+    {
+      "variable": "sub_df",
+      "creation_method": "pd.DataFrame(dict) with various dictionaries",
+      "used_for": ["Plotting population trends", "Bar plots for top countries", "Distribution and bivariate analyses"]
+    }
+  ],
+  "models": []
+}

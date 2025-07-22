@@ -1,0 +1,110 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/petfinder-pawpularity-score/train.csv",
+            "description": "Contains training data includes features such as Subject Focus, Eyes, and Pawpularity score."
+        },
+        {
+            "file": "../input/petfinder-pawpularity-score/test.csv",
+            "description": "Contains test data with similar features as training but without the Pawpularity score."
+        },
+        {
+            "file": "../input/petfinder-pawpularity-score/sample_submission.csv",
+            "description": "Sample submission file format for results submission."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "train",
+            "description": "DataFrame containing training dataset with features related to images and their respective Pawpularity scores."
+        },
+        {
+            "variable": "test",
+            "description": "DataFrame containing testing dataset to evaluate the trained model's performance."
+        },
+        {
+            "variable": "sample_submission",
+            "description": "DataFrame used to format the submission of results."
+        },
+        {
+            "variable": "batch_size",
+            "description": "The size of the batches used in training the model (set to 128)."
+        },
+        {
+            "variable": "tabular_columns",
+            "description": "List of feature columns used for model training, focusing on various attributes of images."
+        },
+        {
+            "variable": "models",
+            "description": "List to store the models generated during hyperparameter tuning and training phases."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "creation": "pd.read_csv()",
+            "flow": ["Used in K-Fold cross-validation, model training, and evaluation."]
+        },
+        {
+            "variable": "test",
+            "creation": "pd.read_csv()",
+            "flow": ["Used to evaluate the generated models and obtain predictions."]
+        },
+        {
+            "variable": "train_features",
+            "creation": "train.loc[train_indices, tabular_columns]",
+            "flow": ["Used to create training dataset for model training."]
+        },
+        {
+            "variable": "train_targets",
+            "creation": "train.loc[train_indices, ['Pawpularity']]",
+            "flow": ["Used to create target values for training."]
+        },
+        {
+            "variable": "val_features",
+            "creation": "train.loc[val_indices, tabular_columns]",
+            "flow": ["Used to create validation dataset for model validation during training."]
+        },
+        {
+            "variable": "val_targets",
+            "creation": "train.loc[val_indices, ['Pawpularity']]",
+            "flow": ["Used to create target values for validation."]
+        },
+        {
+            "variable": "train_ds",
+            "creation": "tf.data.Dataset.from_tensor_slices()",
+            "flow": ["Used for training the model with tf.data API. Cached and prefetch for performance."]
+        },
+        {
+            "variable": "val_ds",
+            "creation": "tf.data.Dataset.from_tensor_slices()",
+            "flow": ["Used for validation during model training. Cached and prefetch for performance."]
+        },
+        {
+            "variable": "best_model",
+            "creation": "tuner.get_best_models()[0]",
+            "flow": ["Utilized to predict results and visualize model architecture."]
+        },
+        {
+            "variable": "total_results",
+            "creation": "Results collected from model predictions.",
+            "flow": ["Averaged out results to form final predictions. Used to create the submission DataFrame."]
+        }
+    ],
+    "models": [
+        {
+            "model": "Deep Neural Network",
+            "input_features": "Subject Focus, Eyes, Face, Near, Action, Accessory, Group, Collage, Human, Occlusion, Info, Blur",
+            "target_variable": "Pawpularity",
+            "hyperparameters": {
+                "width": 64,
+                "depth": 6,
+                "dropout": 0.1,
+                "use_batch_norm": false,
+                "loss_function": "mse",
+                "kernel_regularizer": "none",
+                "learning_rate": 0.0039
+            }
+        }
+    ]
+}

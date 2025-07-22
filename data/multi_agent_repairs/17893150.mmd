@@ -1,0 +1,21 @@
+graph TD;
+    %% Data Sources
+    A["/zomato_locations.csv/"] --> B["locations"];
+    
+    %% Data Processing
+    B --> |"Extract average rating"| C["y"];
+    B --> |"Extract features: count, lat, lon"| D["x"];
+    B --> |"Sort by avg_rating"| E["data_sort"];
+    
+    %% Modeling
+    D --> |"Used as input features"| F["Linear Regression Model"];
+    C --> |"Used as target variable"| F;
+    
+    %% Clustering
+    D --> |"Used for clustering"| G["K-Means Clustering"];
+    D --> |"Used for clustering"| H["Agglomerative Clustering"];
+    G --> I["y_kmeans"];
+    H --> J["y_hc"];
+    
+    %% Visualization
+    D --> |"Create DataFrame for visualization"| K["dd"];

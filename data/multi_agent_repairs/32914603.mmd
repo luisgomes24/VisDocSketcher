@@ -1,0 +1,46 @@
+```mermaid
+flowchart TD
+    subgraph data_sources["Data Sources"]
+        A1["/kaggle/input/maestro-merged-npz/maestro_notes.npz"]
+        %% This node represents the NPZ file containing MIDI notes data.
+    end
+
+    subgraph load_data["Load Data"]
+        D1["data := Load NPZ file"]
+        %% This node represents loading the data from the NPZ file.
+    end
+
+    subgraph process_notes["Process Notes"]
+        D2["all_notes := Extract and flatten notes"]
+        %% Extracting all notes from the loaded data into a flat array.
+    end
+
+    subgraph create_tf_dataset["Create TensorFlow Dataset"]
+        D3["full_dataset := Convert all_notes to tf.data.Dataset"]
+        %% Conversion of notes array into a TensorFlow dataset.
+    end
+
+    subgraph prepare_train_data["Prepare Training Data"]
+        D4["train_dataset := Shuffle and split full_dataset"]
+        D5["train_seq := Create sequences"]
+        D6["train_loader := Batch train_seq"]
+        %% Preparing shuffled and batched training data.
+    end
+
+    subgraph build_model["Build LSTM Model"]
+        M1["model := LSTM Neural Network"]
+        %% Defining the LSTM model architecture.
+    end
+
+    subgraph train_model["Train Model"]
+        M2["history := Train model with train_loader"]
+        %% Training the model with the prepared data and recording history.
+    end
+
+    data_sources --> load_data
+    load_data --> process_notes
+    process_notes --> create_tf_dataset
+    create_tf_dataset --> prepare_train_data
+    prepare_train_data --> build_model
+    build_model --> train_model
+```

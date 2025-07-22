@@ -1,0 +1,31 @@
+%% This flowchart depicts the data flow and transformations in the notebook
+
+flowchart TD
+
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> /student_data.csv/"] %% Represents the student data CSV file
+    end
+
+    subgraph DataVariables
+        B["<img src='icons/table.svg' width=100 height=100/> <br/> df"] %% Represents the DataFrame loaded with student data
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> duplicate"] %% Represents the Series for duplicate row detection
+    end
+
+    subgraph DataFlow
+        D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Load CSV"] --> B %% Data loaded into DataFrame df
+        B --> |Inspect and clean| E["Inspect and clean operations"] %% Data inspection and cleaning operations
+        B --> |Rename & Drop| F["Rename and drop columns"] %% Renaming columns and dropping unnecessary ones
+        B --> |Transform| G["Create new columns and modify types"] %% Creating new columns and changing data types
+        B --> |Check Duplicates| C %% Creating the duplicate Series
+        C --> |Analyze Duplicates| H["Analyze duplicate data"] %% Checking and analyzing duplicates
+    end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px
+    style C fill:#87CEEB,stroke:#333,stroke-width:2px
+    style D fill:#C6F4D6,stroke:#333,stroke-width:2px
+    style E fill:#F2C464,stroke:#333,stroke-width:2px
+    style F fill:#F2C464,stroke:#333,stroke-width:2px
+    style G fill:#F2C464,stroke:#333,stroke-width:2px
+    style H fill:#F2C464,stroke:#333,stroke-width:2px
+    

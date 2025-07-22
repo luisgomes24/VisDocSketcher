@@ -1,0 +1,13 @@
+graph TD;
+    A["📂 Load Dataset <img src='file.svg' />"] --> B["🔍 Preprocess Images"];
+    B --> C["📊 Process Data"];
+    C --> D["🧠 Fit Archetype Model"];
+    D --> E["💾 Save Archetypes"];
+    E --> F["📉 PCA Analysis"];
+    F --> G["💾 Save PCA Components"];
+    G --> H["📊 K-Means Clustering"];
+    H --> I["💾 Save K-Means Model"];
+    I --> J["🖼️ Reconstruct Images"];
+    J --> K["📊 Plot Archetype Results <img src='dummy_plots/scatter_plot_template.svg' />"];
+    K --> L["📊 Plot PCA Results <img src='dummy_plots/scatter_plot_template.svg' />"];
+    L --> M["📊 Plot K-Means Results <img src='dummy_plots/scatter_plot_template.svg' />"];

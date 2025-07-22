@@ -1,0 +1,53 @@
+flowchart TD
+  subgraph dataSources
+    A[train.csv]:::file
+    B[test.csv]:::file
+    C[sample_submission.csv]:::file
+  end
+
+  subgraph dataPreparation
+    D[train DataFrame]:::data
+    E[test DataFrame]:::data
+    F[sample_submission DataFrame]:::data
+  end
+
+  subgraph modelData
+    G[train_features]:::data
+    H[train_targets]:::data
+    I[val_features]:::data
+    J[val_targets]:::data
+    K[train_ds TensorSlice]:::data
+    L[val_ds TensorSlice]:::data
+  end
+  
+  subgraph modelTraining
+    M[Deep Neural Network]:::model
+    N[Best Model Tuning]:::process
+  end
+
+  subgraph results
+    O[total_results]:::data
+    P[submission DataFrame]:::data
+  end
+
+  A --> D
+  B --> E
+  C --> F
+
+  D --> |"loc[train_indices, tabular_columns]"| G
+  D --> |"loc[train_indices, ['Pawpularity']]"| H
+  D --> |"loc[val_indices, tabular_columns]"| I
+  D --> |"loc[val_indices, ['Pawpularity']]"| J
+
+  G & H --> K
+  I & J --> L
+
+  K & L --> M
+  M --> N
+  N --> O
+  O --> P
+
+  classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#f96,stroke:#333,stroke-width:2px;
+  classDef process fill:#6f9,stroke:#333,stroke-width:2px;

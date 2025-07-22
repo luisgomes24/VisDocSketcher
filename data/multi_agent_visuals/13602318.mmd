@@ -1,0 +1,40 @@
+flowchart TD;
+    subgraph DataSources
+        A1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+        A2["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]
+        A3["<img src='icons/file.svg' width=100 height=100/> <br/> resnet50.pth"]
+    end
+
+    subgraph DataPreparation
+        B1["path"]
+        B2["<img src='icons/table.svg' width=100 height=100/> <br/> train_df"]
+        B3["item_tfms"]
+        B4["batch_tfms"]
+        B5["<img src='icons/column_split.svg' width=100 height=100/> <br/> dataloader"]
+        B6["<img src='icons/table.svg' width=100 height=100/> <br/> sample_df"]
+    end
+
+    subgraph ModelTraining
+        C1["<img src='icons/brain.svg' width=100 height=100/> <br/> ResNet50"]
+        C2["Training Model with DataLoader"]
+    end
+
+    subgraph Predictions
+        D1["predictions"]
+    end
+
+    subgraph Submission
+        E1["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]
+    end
+
+    %% Data Flow
+    A1 --> B2
+    A2 --> B6
+    A3 --> C1
+    B2 --> B5
+    B3 --> B5
+    B4 --> B5
+    B5 --> C2
+    C2 --> D1
+    B6 --> E1
+    D1 --> E1

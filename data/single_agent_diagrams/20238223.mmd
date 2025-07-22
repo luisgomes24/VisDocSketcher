@@ -1,0 +1,6 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> from CSV"] --> B["🔍 Explore Data"]
+    B --> C["🧼 Check for Missing Values"]
+    C --> D["📊 Visualize Distributions <img src='dummy_plots/hist_template.svg'/> <br/> Histograms"]
+    D --> E["🔄 Stratified KFold Splits"]
+    E --> F["💾 Save Train-Test Splits"]

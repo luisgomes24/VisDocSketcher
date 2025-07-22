@@ -1,0 +1,163 @@
+{
+  "data_sources": [
+    {
+      "file": "train_sales.csv",
+      "description": "Contains training data with sales information."
+    },
+    {
+      "file": "test_sales.csv",
+      "description": "Contains test data with sales information."
+    },
+    {
+      "file": "stores.csv",
+      "description": "Contains information about stores."
+    },
+    {
+      "file": "features.csv",
+      "description": "Contains additional features related to the sales."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing the training sales data."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the test sales data."
+    },
+    {
+      "name": "stores_df",
+      "description": "DataFrame containing store information."
+    },
+    {
+      "name": "features_df",
+      "description": "DataFrame containing additional features."
+    },
+    {
+      "name": "train_large_df",
+      "description": "Merged DataFrame combining training data, stores, and features."
+    },
+    {
+      "name": "test_large_df",
+      "description": "Merged DataFrame combining test data, stores, and features."
+    },
+    {
+      "name": "train_test_large_df",
+      "description": "Combined DataFrame of train and test data excluding certain columns."
+    },
+    {
+      "name": "train_x_df",
+      "description": "Features for training set after splitting data.",
+    },
+    {
+      "name": "valid_x_df",
+      "description": "Features for validation set after splitting data."
+    },
+    {
+      "name": "train_y",
+      "description": "Target variable for training (Weekly Sales)."
+    },
+    {
+      "name": "valid_y",
+      "description": "Target variable for validation (Weekly Sales)."
+    },
+    {
+      "name": "dtrain",
+      "description": "LightGBM Dataset created from training features and target."
+    },
+    {
+      "name": "dvalid",
+      "description": "LightGBM Dataset created from validation features and target."
+    },
+    {
+      "name": "model",
+      "description": "The trained LightGBM model."
+    },
+    {
+      "name": "test_pred",
+      "description": "Predicted values from the trained model on the test set."
+    },
+    {
+      "name": "sub_df",
+      "description": "DataFrame containing submission data with ids and predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "pd.read_csv",
+      "flows_to": "train_large_df"
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv",
+      "flows_to": "test_large_df"
+    },
+    {
+      "variable": "stores_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["train_large_df", "test_large_df"]
+    },
+    {
+      "variable": "features_df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["train_large_df", "test_large_df"]
+    },
+    {
+      "variable": "train_large_df",
+      "created_by": "pd.merge",
+      "flows_to": ["train_test_large_df", "dtrain"]
+    },
+    {
+      "variable": "test_large_df",
+      "created_by": "pd.merge",
+      "flows_to": "test_pred"
+    },
+    {
+      "variable": "train_test_large_df",
+      "created_by": "pd.concat",
+      "flows_to": ["train_x_df", "valid_x_df"]
+    },
+    {
+      "variable": "train_x_df",
+      "flows_to": "dtrain"
+    },
+    {
+      "variable": "valid_x_df",
+      "flows_to": "dvalid"
+    },
+    {
+      "variable": "train_y",
+      "flows_to": "dtrain"
+    },
+    {
+      "variable": "valid_y",
+      "flows_to": "dvalid"
+    },
+    {
+      "variable": "model",
+      "flows_to": "test_pred"
+    },
+    {
+      "variable": "sub_df",
+      "created_by": "pd.DataFrame",
+      "flows_to": "submission.csv"
+    }
+  ],
+  "models": [
+    {
+      "name": "LightGBM",
+      "input_features": "train_x_df",
+      "target_variable": "train_y",
+      "hyperparameters": {
+        "objective": "regression",
+        "metric": "rmse",
+        "seed": 71,
+        "num_leaves": 31,
+        "num_boost_round": 1000,
+        "early_stopping_rounds": 100
+      }
+    }
+  ]
+}

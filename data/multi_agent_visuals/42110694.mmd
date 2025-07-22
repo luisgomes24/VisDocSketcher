@@ -1,0 +1,13 @@
+flowchart TD
+    A[loans_full_schema.csv] --> B
+    B[df] --> C
+    C[Data Analysis] --> D
+    D[End of Data Flow]
+    A:::comment1
+    B:::comment2
+    C:::comment3
+    D:::comment4
+    classDef comment1 fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef comment2 fill:#bbf,stroke:#333,stroke-width:4px;
+    classDef comment3 fill:#bfb,stroke:#333,stroke-width:4px;
+    classDef comment4 fill:#ffb,stroke:#333,stroke-width:4px;

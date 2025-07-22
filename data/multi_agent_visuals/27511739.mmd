@@ -1,0 +1,10 @@
+flowchart TD
+    A["<img src='/kaggle/input/dogs-vs-cats-redux-kernels-edition/train.zip' width=100 height=100/> <br/> Dataset"] --> B["<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Selection"]
+    B --> C["<img src='icons/row_split.svg' width=100 height=100/> <br/> Row split"]
+    C --> D["<img src='icons/brain.svg' width=100 height=100/> <br/> CNN Model"]
+    C --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> CNN with Dropout"]
+    C --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> Transfer Learning"]
+    D --> G["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Training History"]
+    E --> H["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Validation History"]
+    F --> I["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Training History"]
+    F --> J["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> Validation History"]

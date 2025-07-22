@@ -1,0 +1,31 @@
+  graph TD
+      A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"]
+      B["Data Preparation"]
+      C["<img src='icons/file.svg' width=100 height=100/> <br/> Dataset"]
+      D["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame"]
+      E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Select Features"]
+      F["Feature Engineering"]
+      G["Train Test Split"]
+      H["Training Data"]
+      I["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+      J["Optimizing Model"]
+      K["Output"]
+      L["Predictions"]
+      M["<img src='icons/row_split.svg' width=100 height=100/> <br/> Split Data"]
+      N["<img src='dummy_plots/barplot_template.svg'/> <br/> Model Evaluation"]
+      O["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Results"]
+
+      A --> B
+      B --> C
+      C --> D
+      D --> E
+      E --> F
+      F --> G
+      G --> H
+      H --> I
+      I --> J
+      J --> K
+      K --> L
+      L --> M
+      M --> N
+      N --> O

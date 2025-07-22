@@ -1,0 +1,148 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/digit-recognizer/train.csv",
+      "description": "Training data containing pixel values and corresponding labels for handwritten digits."
+    },
+    {
+      "file_path": "/kaggle/input/digit-recognizer/test.csv",
+      "description": "Test data containing pixel values for handwritten digits, without labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "raw_data",
+      "description": "Pandas DataFrame containing the raw training data read from CSV."
+    },
+    {
+      "name": "train_features",
+      "description": "Features for training dataset, extracted from raw_data."
+    },
+    {
+      "name": "train_labels",
+      "description": "Labels for training dataset, extracted from raw_data."
+    },
+    {
+      "name": "val_features",
+      "description": "Features for validation dataset, extracted from raw_data."
+    },
+    {
+      "name": "val_labels",
+      "description": "Labels for validation dataset, extracted from raw_data."
+    },
+    {
+      "name": "training_ds",
+      "description": "Tensor for training features, reshaped for model input."
+    },
+    {
+      "name": "validation_ds",
+      "description": "Tensor for validation features, reshaped for model input."
+    },
+    {
+      "name": "test_ds",
+      "description": "Numpy array from the CSV test dataset containing pixel values."
+    },
+    {
+      "name": "test_data",
+      "description": "Dataset for testing, reshaped from test_ds for model input."
+    },
+    {
+      "name": "train_data",
+      "description": "Mapped training dataset ready for model training."
+    },
+    {
+      "name": "val_data",
+      "description": "Mapped validation dataset ready for model validation."
+    },
+    {
+      "name": "preds",
+      "description": "Predicted labels for test data obtained from model predictions."
+    },
+    {
+      "name": "pred_df",
+      "description": "DataFrame containing ImageId and predicted labels for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "raw_data",
+      "created_by": "read_input_data function",
+      "flows_to": ["train_features", "train_labels", "val_features", "val_labels"]
+    },
+    {
+      "variable": "train_features",
+      "flows_to": ["training_ds", "train_data"]
+    },
+    {
+      "variable": "train_labels",
+      "flows_to": ["train_data"]
+    },
+    {
+      "variable": "val_features",
+      "flows_to": ["validation_ds", "val_data"]
+    },
+    {
+      "variable": "val_labels",
+      "flows_to": ["val_data"]
+    },
+    {
+      "variable": "training_ds",
+      "flows_to": ["train_data"]
+    },
+    {
+      "variable": "validation_ds",
+      "flows_to": ["val_data"]
+    },
+    {
+      "variable": "test_ds",
+      "created_by": "pd.read_csv",
+      "flows_to": ["test_data"]
+    },
+    {
+      "variable": "test_data",
+      "flows_to": []
+    },
+    {
+      "variable": "train_data",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable": "val_data",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable": "preds",
+      "created_by": "model.predict",
+      "flows_to": ["pred_df"]
+    },
+    {
+      "variable": "pred_df",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential",
+      "layers": [
+        "Rescaling layer",
+        "Conv2D (16 filters, 3x3 kernel, 'relu')",
+        "MaxPooling2D",
+        "Dropout (0.3)",
+        "Conv2D (32 filters, 3x3 kernel, 'relu')",
+        "MaxPooling2D",
+        "Dropout (0.3)",
+        "Conv2D (64 filters, 3x3 kernel, 'relu')",
+        "MaxPooling2D",
+        "Dropout (0.3)",
+        "Flatten",
+        "Dense (128, 'relu')",
+        "Dense (10, 'softmax')"
+      ],
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss_function": "SparseCategoricalCrossentropy(from_logits=True)",
+        "epochs": 30
+      }
+    }
+  ]
+}

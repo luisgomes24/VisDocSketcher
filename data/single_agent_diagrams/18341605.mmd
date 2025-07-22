@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["📁 Load Data <img src='file.svg'/> <br/> train_df, test_df"] --> B["🔍 Data Exploration"];
+    B --> C["📊 Visualize Data <img src='hist_template.svg'/> <br/> Multiple Plots"];
+    C --> D["🧑‍🏫 Feature Selection"];
+    D --> E["🗂 Prepare Data <img src='column_split.svg'/> <br/> X, Y"];
+    E --> F["✂️ Train-Test Split"];
+    F --> G["🧠 Build Model"];
+    G --> H["🏋️‍♂️ Train Model"];
+    H --> I["📉 Evaluate Model <img src='lineplot_template.svg'/> <br/> Loss and MSE"];
+    I --> J["📝 Create Submission"];
+    J --> K["✅ Save to CSV"];

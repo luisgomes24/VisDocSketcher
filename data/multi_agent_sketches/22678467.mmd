@@ -1,0 +1,26 @@
+flowchart TD
+    %% This node represents the data source from a CSV file %%
+    A[FinalProductList.csv]-->B[df]
+
+    %% This node represents another data source in CSV format %%
+    A2[Productlists.csv]-->B
+    
+    %% This node represents user input for search terms %%
+    C[search_term]-->D[Collect Data]
+
+    %% This node represents the main scraping function where data is collected %%
+    D-->E[record]
+
+    %% This node represents the list of records converted to a DataFrame %%
+    E-->|Convert to DataFrame|B
+    
+    %% This node represents writing the DataFrame to CSV files %%
+    B-->|Save to CSV|A & A2
+
+    %% Explanation of nodes %%
+    %% A: Data source CSV file containing product details %%
+    %% A2: Another format of data source CSV for product details %%
+    %% B: DataFrame containing the scraped product list %%
+    %% C: User's search keyword input %%
+    %% D: Initial data collection/scraping from Amazon using search terms %%
+    %% E: Record of product details stored in a list format %%

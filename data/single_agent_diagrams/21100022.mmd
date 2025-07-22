@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data <br/> <img src='file.svg' />"] --> B["🧪 Data Preprocessing"]
+    B --> C["🔍 Check for NaN Values"]
+    B --> D["🗑️ Drop Columns with >50% Nulls"]
+    D --> E["💧 Fill Remaining NaNs with Defaults"]
+    E --> F["🔄 Label Encode Categorical Columns"]
+    F --> G["📊 Merge Datasets"]
+    G --> H["🧬 Split Features and Target"]
+    H --> I["📉 Train-Test Split"]
+    I --> J["🧠 Train Model"]
+    J --> K["✅ Evaluate Model"]
+    K --> L["📊 Feature Importance <br/> <img src='barplot_template.svg' />"]

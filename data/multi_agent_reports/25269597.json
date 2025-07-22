@@ -1,0 +1,90 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/jigsaw-toxic-comment-classification-challenge/train.csv.zip",
+            "description": "Training dataset containing toxic comment labels."
+        },
+        {
+            "file": "../input/jigsaw-toxic-comment-classification-challenge/test.csv.zip",
+            "description": "Testing dataset without labels."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train_df",
+            "description": "DataFrame containing the training comments and labels."
+        },
+        {
+            "name": "test_df",
+            "description": "DataFrame containing the test comments without labels."
+        },
+        {
+            "name": "X",
+            "description": "Feature set with the cleaned comment texts for training."
+        },
+        {
+            "name": "y",
+            "description": "Label set containing the target variables (toxic labels) for training."
+        },
+        {
+            "name": "x_train, x_test, y_train, y_test",
+            "description": "Split datasets for training and testing the model."
+        },
+        {
+            "name": "train_word_features",
+            "description": "Transformed training comments using TF-IDF vectorization."
+        },
+        {
+            "name": "X_train_transformed, X_test_transformed",
+            "description": "Transformed feature sets for training and testing."
+        },
+        {
+            "name": "y_pred",
+            "description": "Predictions made on the test set based on the trained model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_df",
+            "creation_method": "pd.read_csv",
+            "flow": "Cleaned and used as training data for model fitting."
+        },
+        {
+            "variable": "test_df",
+            "creation_method": "pd.read_csv",
+            "flow": "Used for predictions after data preprocessing."
+        },
+        {
+            "variable": "X",
+            "creation_method": "train_df.comment_text",
+            "flow": "Split into training and testing datasets. Used for model training."
+        },
+        {
+            "variable": "y",
+            "creation_method": "train_df.drop",
+            "flow": "Used as target variable for model training."
+        },
+        {
+            "variable": "train_word_features",
+            "creation_method": "TfidfVectorizer.transform",
+            "flow": "Used for training the Logistic Regression model."
+        },
+        {
+            "variable": "y_pred",
+            "creation_method": "make_test_predictions",
+            "flow": "Predicted labels saved in a DataFrame for submission."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": "Transformed training comments (train_word_features)",
+            "target_variables": "Toxic comment labels",
+            "hyperparameters": {
+                "C": 10,
+                "penalty": "l2",
+                "solver": "liblinear"
+            }
+        }
+    ]
+}

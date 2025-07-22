@@ -1,0 +1,8 @@
+graph TD;
+    A["📁 Load Dataset <img src='icons/file.svg'/> <br/> Kaggle Dataset"] --> B["🔧 Preprocess Data"];
+    B --> C["🔄 Convert to TFRecords <img src='icons/table.svg'/> <br/> Function to Create TFRecords"];
+    C --> D["📦 Create GCS Bucket <img src='icons/database.svg'/> <br/> Uploading Bucket"];
+    D --> E["⬆️ Upload Data to GCS <img src='icons/database.svg'/>"];
+    E --> F["⬇️ Download Data for Verification <img src='icons/file.svg'/>"];
+    F --> G["🔍 Preview Downloaded Data <img src='icons/table.svg'/>"];
+    G --> H["🧠 Train ML Model with TFRecords <img src='icons/brain.svg'/>"];

@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/image-matching-challenge-2022/train/scaling_factors.csv",
+      "description": "Contains scaling factors for image matching"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing scaling factors and associated labels"
+    },
+    {
+      "name": "data_dir",
+      "description": "Directory path where the training images are stored"
+    },
+    {
+      "name": "labels",
+      "description": "List of unique scene labels extracted from DataFrame"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flow": "Used to extract unique labels"
+    },
+    {
+      "variable": "data_dir",
+      "creation": "string assignment",
+      "flow": "Used as a path for loading images during training"
+    },
+    {
+      "variable": "labels",
+      "creation": "list(df.scene.unique())",
+      "flow": "Used for model training and image processing"
+    }
+  ],
+  "models": [
+    {
+      "name": "Convolutional Neural Network (CNN)",
+      "input_features": "Images",
+      "target_variable": "Labels",
+      "hyperparameters": {
+        "optimizer": "Adam",
+        "layers": ["Conv2D", "MaxPooling2D", "Flatten", "Dense"],
+        "activation_functions": ["Activation()", "Dropout()"]
+      }
+    }
+  ]
+}

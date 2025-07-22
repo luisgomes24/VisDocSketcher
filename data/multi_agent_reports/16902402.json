@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_name": "KaggleV2-May-2016.csv",
+      "description": "Contains appointment records including patient demographics and attendance status"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Main DataFrame containing cleaned appointment data"
+    },
+    {
+      "name": "Show",
+      "description": "Target variable indicating whether a patient showed up (1) or not (0)"
+    },
+    {
+      "name": "Male",
+      "description": "Binary feature indicating male (1) or female (0)"
+    },
+    {
+      "name": "Age_bins",
+      "description": "Categorical bins for patient age"
+    },
+    {
+      "name": "diabetic_hiper",
+      "description": "Interaction between diabetic and hypertension status"
+    },
+    {
+      "name": "Wait_days",
+      "description": "Number of days waited for appointment"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Data cleaning and analysis including plotting and model evaluations"
+    },
+    {
+      "variable": "Show",
+      "flow": "Analyzed and plotted for impact assessment on show up rates"
+    },
+    {
+      "variable": "Male",
+      "flow": "Analyzed to study its impact on show up rates"
+    },
+    {
+      "variable": "Age_bins",
+      "flow": "Used for categorization in exploratory analysis"
+    },
+    {
+      "variable": "diabetic_hiper",
+      "flow": "Analyzed to assess its influence on show up"
+    },
+    {
+      "variable": "Wait_days",
+      "flow": "Examined for impact on appointment attendance"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Pivot Tables",
+      "description": "Various pivot tables used to analyze the impact of different features on show-up rates",
+      "input_features": ["Male", "Scholarship", "Wait_days", "Age_bins", "Diabetes", "Hipertension"],
+      "target_variable": "Show"
+    }
+  ]
+}

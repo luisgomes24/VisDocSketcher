@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    subgraph DataSources["Data Sources"]
+        A["train_Spain_KaggleRama.csv"]
+        B["test_Spain_KaggleRama.csv"]
+    end
+    subgraph DataLoading["Data Loading"]
+        A --> C["Load train into DataFrame (train)"]
+        B --> D["Load test into DataFrame (test)"]
+    end
+    subgraph Modeling["Model Training and Tuning"]
+        C --> E["Initial Model Training"]
+        E --> F["Tune Model with SMAPE"]
+        F --> G["Finalize Model"]
+    end
+    subgraph Prediction["Prediction Phase"]
+        G --> H["Predict on Test Data"]
+        H --> I["Store Predictions in test as y_predict"]
+    end
+    subgraph Output["Output Handling"]
+        I --> J["Create Final DataFrame (df) with Predictions"]
+        J --> K["Save predictions to 'Spain_KaggleRama_Kaggle Advanced Techniques.csv'"]
+    end
+    %% Descriptions %%
+    DataSources:::comment
+    DataSources-->DataLoading:::comment["Load data into DataFrames for processing"]
+    Modeling:::comment
+    Modeling-->Prediction:::comment["Use final model to make predictions on test data"]
+    Prediction-->Output:::comment["Handle and save final prediction results"]
+```

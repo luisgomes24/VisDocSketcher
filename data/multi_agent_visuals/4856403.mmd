@@ -1,0 +1,32 @@
+flowchart TD
+    %% A string variable that represents a favorite color.
+    color["<img src='icons/file.svg' width=100 height=100/> <br/> color"]
+    %% A float variable representing the approximate value of pi.
+    pi["<img src='icons/file.svg' width=100 height=100/> <br/> pi"]
+    %% An integer that denotes the diameter of a circle.
+    diameter["<img src='icons/file.svg' width=100 height=100/> <br/> diameter"]
+    %% A float variable representing the radius of a circle, calculated as half of the diameter.
+    radius["<img src='icons/file.svg' width=100 height=100/> <br/> radius"]
+    %% A float variable that represents the area of a circle, calculated using the formula pi * radius^2.
+    area["<img src='icons/file.svg' width=100 height=100/> <br/> area"]
+    %% A list variable initially set to [1, 2, 3].
+    a["<img src='icons/file.svg' width=100 height=100/> <br/> a"]
+    %% A list variable initially set to [3, 2, 1].
+    b["<img src='icons/file.svg' width=100 height=100/> <br/> b"]
+    %% An integer representing the total number of candies collected by Alice, Bob, and Carol.
+    summ["<img src='icons/file.svg' width=100 height=100/> <br/> summ"]
+    %% An integer representing the amount of candies each person would get when evenly distributed.
+    div["<img src='icons/file.svg' width=100 height=100/> <br/> div"]
+    %% An integer representing the number of candies that will be smashed, calculated as the remainder when the total is divided by 3.
+    to_smash["<img src='icons/file.svg' width=100 height=100/> <br/> to_smash"]
+
+    diameter -->|Calculate radius| radius
+    radius -->|Calculate area| area
+    pi -->|Used in calculation| area
+
+    a -->|Swapped with| b
+    b -->|Swapped with| a
+
+    summ -->|Calculate each share| div
+    summ -->|Calculate to smash| to_smash
+    div -->|Used to calculate to smash| to_smash

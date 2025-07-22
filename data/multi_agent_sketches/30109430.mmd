@@ -1,0 +1,15 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+    %% Data Sources
+    A["/Input Data Files/"]:::data --> B["/Directory Listing/"]
+    
+    %% Process
+    B --> C["os.walk()"]:::process
+    C --> D["filenames"]:::data
+    D --> E["Print file paths"]:::output
+
+    %% Styles
+    classDef data fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#1a1a1a,stroke-width:2px;
+    classDef output fill:#faf,stroke:#333,stroke-width:2px;
+    classDef decision fill:#f96,stroke:#333,stroke-width:2px;

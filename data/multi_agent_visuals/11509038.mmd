@@ -1,0 +1,9 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Pre_restaurants.csv"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> df: DataFrame"]
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Split Features"]
+    C --> D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model (e.g., Random Forest)"]
+    E --> F["<img src='icons/database.svg' width=100 height=100/> <br/> Model Training"]
+    F --> G["<img src='icons/brain.svg' width=100 height=100/> <br/> Predictions"]
+    G --> H["<img src='icons/table.svg' width=100 height=100/> <br/> Results"]
+    H --> I["<img src='icons/file.svg' width=100 height=100/> <br/> Output.csv"]

@@ -1,0 +1,29 @@
+flowchart TD
+    %% Nodes for data sources
+    A["train_clean.csv"] -->|Load CSV| B(Train DataFrame)
+    A1["test_clean.csv"] -->|Load CSV| C(Test DataFrame)
+
+    %% Node for combined DataFrame
+    B -->|Concat| D(Combined DataFrame tt)
+    C -->|Concat| D
+
+    %% Processing for drift and signal shift
+    D -->|Identify Drifts| E(Drift Batches)
+    D -->|Optimize Shifts| F(Signal Shift)
+
+    %% Model Node
+    F -->|Maximize Anchor Count| G{{"Optimization Problem"}}
+
+    %% Output of the model
+    G -->|Rounded Values| H(Signal Round4)
+    
+    %% Comments explaining each stage
+    %% A: Represents the training dataset file source
+    %% A1: Represents the testing dataset file source
+    %% B: DataFrame containing loaded training data
+    %% C: DataFrame containing loaded testing data
+    %% D: Combined data from train and test
+    %% E: Identified batches with drift
+    %% F: Modified signal with optimized shift values
+    %% G: Optimization problem applied for anchor maximization
+    %% H: Results after rounding the signal shift values

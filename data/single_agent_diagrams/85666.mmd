@@ -1,0 +1,30 @@
+flowchart TD
+    A["📂 Load Data\n<img src='dummy_plots/hist_template.svg'/> <br/> Train Data"] --> B["⬇️ Preprocess Data"]
+    
+    B --> C["🔢 Prepare Image Data"]
+    C --> D["🖼️ Display Image\n<img src='icons/image.svg'/> <br/> Original Image"]
+    
+    B --> E["🔤 Prepare Labels"]
+    E --> F["🏷️ One-hot Encoding"]
+    
+    F --> G["✂️ Split Data"]
+    G --> H["📈 Define Neural Network Structure"]
+    
+    H --> I["⚙️ Build Convolutional Layers"]
+    I --> J["🔗 Fully Connected Layer"]
+    J --> K["🚫 Apply Dropout"]
+    K --> L["🔍 Readout Layer"]
+    
+    L --> M["📊 Define Loss Function\n<img src='dummy_plots/barplot_template.svg'/> <br/> Cross-Entropy"]
+    M --> N["🔄 Train the Model"]
+    
+    N --> O["📈 Validate Model"]
+    O --> P["📊 Visualize Results\n<img src='dummy_plots/lineplot_template.svg'/> <br/> Accuracy Over Time"]
+    
+    P --> Q["📂 Load Test Data"]
+    Q --> R["🏷️ Predict Labels"]
+    
+    R --> S["📤 Save Predictions"]
+    S --> T["👁️ Display Test Image\n<img src='icons/image.svg'/> <br/> Predicted Image"]
+    
+    T --> U["🔒 Close Session"]

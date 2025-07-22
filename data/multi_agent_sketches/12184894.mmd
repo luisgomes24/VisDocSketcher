@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A["SMS Spam Collection Dataset"]
+    %% Data Variables
+    B["DataFrame df"]
+    C["Features X"]
+    D["Target Y"]
+    E["Training Features X_train"]
+    F["Test Features X_test"]
+    G["Training Target Y_train"]
+    H["Test Target Y_test"]
+    I["CountVectorizer cv1"]
+    J["TF-IDF Vectorizer tfidf"]
+    K["X_traincv"]
+    L["X_testcv"]
+    M["Predictions pred"]
+    N["X_train_tf"]
+    O["X_test_tf"]
+    %% Models
+    P["Multinomial Naive Bayes"]
+
+    %% Data Flow
+    A -->|read_csv| B
+    B -->|Extract| C
+    B -->|Extract| D
+    C -->|train_test_split| E
+    C -->|train_test_split| F
+    D -->|train_test_split| G
+    D -->|train_test_split| H
+    E -->|CountVectorizer.fit_transform| K
+    F -->|CountVectorizer.transform| L
+    E -->|TfidfVectorizer.fit_transform| N
+    F -->|TfidfVectorizer.transform| O
+    K -->|Train| P
+    L -->|Predict| P
+    N -->|Train| P
+    O -->|Predict| P
+    P -->|Output| M

@@ -1,0 +1,18 @@
+flowchart TD
+    A["📁 Load Data"] --> B["📊 Toy Data 1 <img src='dummy_plots/table.svg'/> <br/>"]
+    B --> C["🔍 Initialize Decision Tree Classifier"]
+    C --> D["🌳 Fit Decision Tree <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    D --> E["🧮 Predict on Toy Data 1"]
+    E --> F["📁 Load Breast Cancer Dataset"]
+    F --> G["📊 Preprocess Data <img src='dummy_plots/table.svg'/> <br/>"]
+    G --> H["🔍 Initialize Decision Tree Classifier for Breast Cancer"]
+    H --> I["🌳 Fit Decision Tree on Breast Cancer Data"]
+    I --> J["🧮 Predict on Breast Cancer Data"]
+    J --> K["📈 ROC Curve from Scratch"]
+    K --> L["📊 ROC Curve Visualization <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    L --> M["🔍 Compare with Sklearn Implementations"]
+    M --> N["📊 Final ROC Curve Comparison <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    N --> O["🎉 End"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style O fill:#cfc,stroke:#333,stroke-width:2px

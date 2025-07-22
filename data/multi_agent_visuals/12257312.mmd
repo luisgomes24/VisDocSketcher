@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    input_data["<img src='icons/file.svg' width=100 height=100/> <br/> 911.csv\nContains 911 emergency call data"]
+    
+    %% Data Variables
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> df\nDataFrame holding 911 call data"]
+    Reason["<img src='icons/column_split.svg' width=100 height=100/> <br/> Reason\nCategorizes reason for each call"]
+    Hour["<img src='icons/column_split.svg' width=100 height=100/> <br/> Hour\nHour extracted from timestamp"]
+    Month["<img src='icons/column_split.svg' width=100 height=100/> <br/> Month\nMonth extracted from timestamp"]
+    DayOfWeek["<img src='icons/column_split.svg' width=100 height=100/> <br/> DayOfWeek\nDay of week from timestamp"]
+
+    %% Data Flow
+    input_data -->|"Read CSV"| df
+    df -->|"Derive Reason"| Reason
+    df -->|"Extract Hour"| Hour
+    df -->|"Extract Month"| Month
+    df -->|"Get Day of Week"| DayOfWeek
+    
+    %% Usages
+    df -->|"EDA & Visualizations"| eda["<img src='icons/brain.svg' width=100 height=100/> <br/> Exploratory Data Analysis"]
+    Reason -->|"Plot & Analyze"| analysis1["<img src='dummy_plots/barplot_template.svg'/> <br/> Reason-wise Analysis"]
+    Hour -->|"Hourly Analysis"| analysis2["<img src='dummy_plots/lineplot_template.svg'/> <br/> Hour-wise Analysis"]
+    Month -->|"Monthly Trends"| analysis3["<img src='dummy_plots/hist_template.svg'/> <br/> Month-wise Analysis"]
+    DayOfWeek -->|"Weekly Patterns"| analysis4["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Day-wise Analysis"]

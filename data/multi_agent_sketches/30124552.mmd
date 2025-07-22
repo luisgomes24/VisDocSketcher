@@ -1,0 +1,23 @@
+flowchart TD
+    %% Node for Data Source
+    A["/one-million-reddit-jokes.csv/"] --> B
+
+    %% Node for Initial DataFrame
+    B[df_one_million_reddit_jokes] --> C
+    %% Description for df_one_million_reddit_jokes node
+    %% A DataFrame containing the entire dataset with titles, punchlines and scores.
+
+    %% Node for calculating setup_score
+    C --> |"Group by setup and calculate mean score"| D[setup_score]
+    %% Description for setup_score node
+    %% DataFrame containing average score per joke setup (title).
+
+    %% Node for top setups selection
+    D --> |"Select top 25 setups by average score"| E[top_setups]
+    %% Description for top_setups node
+    %% List of the top 25 setups sorted by their average score.
+
+    %% Descriptions for data processes
+    %% B to C: CSV file is read into the DataFrame for analysis.
+    %% C to D: Group by setup and calculate average score.
+    %% D to E: Sort to get top 25 setups.

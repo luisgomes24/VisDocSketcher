@@ -1,0 +1,14 @@
+flowchart TD
+    %% Data source node
+    A[googleplaystore.csv] --> B[apps]
+    %% Nodes for data variables
+    B --> |DataFrame import| C[Preprocessing & Feature Extraction]
+    C --> |Extract target variable| D[y (Rating)]
+    C --> |Feature set| E[X (features)]
+    %% ML Model node
+    E --> |Features input| F[RandomForestRegressor]
+    D --> |Target variable| F
+    %% ML Model details
+    subgraph RandomForestRegressor Details
+        F[n_estimators=200, n_jobs=-1, random_state=42]
+    end

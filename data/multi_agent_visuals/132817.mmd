@@ -1,0 +1,35 @@
+flowchart TD
+    subgraph DataSources
+        A1["../input/study_list.csv"]
+        %% Contains the study data for each patient
+        A2["../input/patient_images_lowres.h5"]
+        %% HDF5 file with low-resolution CT images
+    end
+
+    subgraph DataVariables
+        B1["study_df"]
+        %% DataFrame with study data from CSV
+        B2["p_data"]
+        %% Context manager for HDF5 patient image data
+        B3["p_id"]
+        %% Extracted Patient ID for data filtering
+        B4["p_img"]
+        %% CT image data for a specific patient
+        B5["c_df"]
+        %% Filtered DataFrame for specific patient ID
+        B6["c_dict"]
+        %% Dictionary from the first row of c_df
+    end
+
+    subgraph DataFlow
+        A1 -->|Read via pd.read_csv| B1
+        %% study_df used for filtering patient data
+        A2 -->|Read via h5py.File| B2
+        %% p_data used for iterating through CT images
+        B2 -->|Extract p_id & p_img| B3
+        B2 -->|Extract p_id & p_img| B4
+        B3 -->|Filter study_df| B5
+        B5 -->|Create dictionary| B6
+        B5 -->|Provide titles| B6
+        B4 -->|Plotting Images| B6
+    end

@@ -1,0 +1,16 @@
+flowchart TD
+    %% Node: Data Source - Air Quality Dataset
+    A["bigquery-public-data.openaq.global_air_quality"]
+    %% Node: Helper Object Creation
+    B["open_aq: BigQueryHelper"]
+    %% Node: US Cities Data
+    C["us_cities: US cities with air quality measurements"]
+    %% Node: Countries Data
+    D["countries: Countries with non-ppm units"]
+    %% Node: Pollutants Data
+    E["pollutants: Pollutants with value 0"]
+
+    %% Connections: Show flow of data
+    A --> B --> C
+    B --> D
+    B --> E

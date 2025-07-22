@@ -1,0 +1,92 @@
+{
+  "data_sources": [
+    {
+      "file_name": "suicide-rates-overview-1985-to-2016/master.csv",
+      "description": "Contains suicide rates overview from 1985 to 2016."
+    },
+    {
+      "file_name": "million-headlines/abcnews-date-text.csv",
+      "description": "Contains a million news headlines for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the suicide rates from the external CSV."
+    },
+    {
+      "variable_name": "df_es",
+      "description": "DataFrame containing the suicide rates for Spain, aggregated annually."
+    },
+    {
+      "variable_name": "df_es_gender_age",
+      "description": "DataFrame created to track suicide rates by gender and age."
+    },
+    {
+      "variable_name": "df_female",
+      "description": "DataFrame for female suicide rates by age."
+    },
+    {
+      "variable_name": "df_male",
+      "description": "DataFrame for male suicide rates by age."
+    },
+    {
+      "variable_name": "headlines",
+      "description": "DataFrame containing news headlines to analyze their relation to suicide rates."
+    },
+    {
+      "variable_name": "hds",
+      "description": "Filtered DataFrame containing only relevant headlines for Spain."
+    },
+    {
+      "variable_name": "topics",
+      "description": "DataFrame holding the most frequent news topics for each year."
+    },
+    {
+      "variable_name": "summary_country",
+      "description": "DataFrame summarizing the relationship between news topics and suicide rate changes."
+    },
+    {
+      "variable_name": "results_country",
+      "description": "DataFrame with the compiled results showing impact of news on suicide rates."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flow": [ "Used to create df_es and df_es_gender_age" ]
+    },
+    {
+      "variable": "df_es",
+      "creation": "SQL query on df",
+      "flow": [ "Used to plot suicide rates for Spain" ]
+    },
+    {
+      "variable": "df_es_gender_age",
+      "creation": "Aggregation of df based on age and sex",
+      "flow": [ "Used to analyze and plot suicide rates by gender" ]
+    },
+    {
+      "variable": "headlines",
+      "creation": "pd.read_csv()",
+      "flow": [ "Filtered to create hds for analysis of news" ]
+    },
+    {
+      "variable": "hds",
+      "creation": "SQL query on headlines",
+      "flow": [ "Used for topic extraction" ]
+    },
+    {
+      "variable": "topics",
+      "creation": "TF-IDF on headlines",
+      "flow": [ "Used to analyze correlation with suicide rates" ]
+    },
+    {
+      "variable": "summary_country",
+      "creation": "Compilation of topics and suicide rates",
+      "flow": [ "Used for final output showing news impact" ]
+    }
+  ],
+  "models": []
+}

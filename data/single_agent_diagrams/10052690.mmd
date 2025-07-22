@@ -1,0 +1,16 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> From CSV"] --> B["🧹 Clear Data"];
+    B --> C["🔍 Check Null Values"];
+    C --> D["❌ Drop Rows with Too Many Missing Values"];
+    D --> E["📊 Fill Missing Values"];
+    E --> F["📈 Analyze Categorical Data"];
+    F --> G["🔍 Drop Poor Predictor"];
+    G --> H["📊 Define Features & Target"];
+    H --> I["🔄 Split Data into Train & Test Sets"];
+    I --> J["⚖️ Standardize Features"];
+    J --> K["🧠 Train Model - Logistic Regression"];
+    K --> L["🔍 Make Predictions"];
+    L --> M["✅ Evaluate Model Accuracy"];
+    M --> N["📊 Research Model <img src='scatter_plot_template.svg' />"];
+    N --> O["📊 ROC Curve <img src='lineplot_template.svg' />"];

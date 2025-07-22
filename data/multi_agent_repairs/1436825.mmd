@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for the input DataFrame
+    A["df\nDataFrame input for plotting and analysis functions"]
+
+    %% Nodes for the functions that use the DataFrame
+    B["plotHistogram\nGenerates histograms from the data"]
+    C["plotCorrelationMatrix\nProduces a correlation matrix plot"]
+    D["plotScatterMatrix\nCreates a scatter matrix to visualize data relationships"]
+
+    %% Edges showing the flow of data
+    A --> B
+    A --> C
+    A --> D

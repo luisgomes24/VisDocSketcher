@@ -1,0 +1,29 @@
+flowchart TD
+    ds1["/Riddles JSONL Data Source/"] 
+    %% Node representing the data source for the riddles
+    
+    df1[["Dataframe 'df'"]] 
+    %% Node representing the DataFrame used to store riddles and their answers
+    
+    model["/SentenceTransformer Model/"] 
+    %% Node representing the pre-trained SentenceTransformer model
+    
+    sentences[["Sentences List"]]
+    %% Node representing the list of sentences for which embeddings are generated
+    
+    embeddings[["Embeddings List"]]
+    %% Node representing the embeddings generated from sentences
+    
+    finetuner["/FineTuner Instance/"]
+    %% Node representing the instance used to fine-tune the model
+    
+    fintuned_model["/Fine-Tuned Model/"]
+    %% Node representing the fine-tuned model used in place of the original model
+
+    ds1 -->|Load data| df1
+    df1 -->|Use for| finetuner
+    sentences -->|Input for Embedding| model
+    model -->|Generate| embeddings
+    embeddings -->|Use for Similarity Calculation| fintuned_model
+    finetuner -->|Run fine-tuning| fintuned_model
+    fintuned_model -->|Replace model for| embeddings

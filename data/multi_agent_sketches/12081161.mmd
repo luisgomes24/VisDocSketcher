@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["LR-2020-public_LB.csv"] -->|Load CSV| B["public_lb"]
+    A1["Teams.csv"]
+    A2["Competitions.csv"]
+    A3["LR-2020-pvt-LB.htm"] -->|Extract HTML| D["shake_up"]
+    A4["LR-2020-pvt_LB.xlsx"] -->|Load Excel| C["pvt_lb"]
+
+    %% Intermediate Variables
+    B -->|Group and Merge| E["public_Scores"]
+    C -->|Use in plotting| F["plot_candle"]
+    D -->|Update Column| C
+
+    %% Usage in Analysis
+    E -->|Data Validation| G["assert validation"]
+    E -->|Use in Plotting| H["plotting functions"]
+    C -->|Data Display| I["final ranking displays"]
+
+    %% Annotations
+    %% A: Represents the loading of public leaderboard data from CSV.
+    %% B: The DataFrame holding public leaderboard data.
+    %% C: The DataFrame containing private leaderboard data.
+    %% D: The array for shake-up data extracted from HTML.
+    %% E: A DataFrame after grouping and merging public scores.
+    %% F/G/H/I: Utilizations in data validation, plotting and displays.

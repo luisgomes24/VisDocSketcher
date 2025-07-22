@@ -1,0 +1,11 @@
+```
+graph TD;
+    A["📁 Load Data"] --> B["📊 Data Types Definition"];
+    B --> C["📂 Read Train Data<br/><img src='dummy_plots/table.svg' />"];
+    C --> D["📊 Inspect Train Data"];
+    D --> E["📥 Read Example Test Data<br/><img src='dummy_plots/table.svg' />"];
+    E --> F["🔍 Feature Selection"];
+    F --> G["⚙️ Prepare for Modeling"];
+    G --> H["🧠 Train-Test Split"];
+    H --> I["📈 Train LightGBM Model"];
+    I --> J["🔄 Predict on Test Data"];

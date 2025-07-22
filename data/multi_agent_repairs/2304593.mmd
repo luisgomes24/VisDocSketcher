@@ -1,0 +1,21 @@
+```mermaid
+flowchart TD
+  %% Data Sources
+  A["../input/cities.csv"]
+
+  %% Data Variables
+  B["cities"]
+  C["coords"]
+  D["tour"]
+
+  %% Flow of Data
+  A -->|"load from CSV"| B
+  B -->|"extract values"| C
+  B -->|"create tour indices"| D
+
+  %% Model
+  E["Two-Opt Algorithm"]
+  D -->|"initial tour"| E
+  C -->|"city coordinates"| E
+  E -->|"output optimized tour"| D
+```

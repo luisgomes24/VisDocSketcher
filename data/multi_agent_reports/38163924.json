@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "file": "Advertising.csv",
+      "description": "Contains data on advertising costs for TV, Radio, and Newspaper along with sales data"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing advertising costs and corresponding sales"
+    },
+    {
+      "name": "types",
+      "description": "List of advertising types: [TV, Newspaper, Radio]"
+    },
+    {
+      "name": "X",
+      "description": "Numpy array of total_cost (sum of all advertising types)"
+    },
+    {
+      "name": "y",
+      "description": "Numpy array of sales data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "usage": "Used for EDA, visualizations, and analysis of sales versus advertising costs"
+    },
+    {
+      "variable": "types",
+      "creation_method": "List assignment",
+      "usage": "Used in loops for visualizations of spending distribution"
+    },
+    {
+      "variable": "X",
+      "creation_method": "np.array(df['total_cost'])",
+      "usage": "Used for plotting best fit line against sales"
+    },
+    {
+      "variable": "y",
+      "creation_method": "np.array(df['Sales'])",
+      "usage": "Target variable for relationship analysis with total cost"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": ["total_cost"],
+      "target_variable": "Sales",
+      "hyperparameters": {}
+    }
+  ]
+}

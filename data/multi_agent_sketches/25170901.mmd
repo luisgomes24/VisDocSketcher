@@ -1,0 +1,27 @@
+flowchart TD
+
+    %% Data Sources
+    A1["train.csv"] -->|Read CSV| B1["train_data"]
+    A2["test.csv"] -->|Read CSV| B2["test_data"]
+
+    %% Data Transformation
+    B1 -->|Compute survival status for| C1["women"]
+    C1 -->|Calculate rate| D1["rate_women"]
+    B1 -->|Compute survival status for| C2["men"]
+    C2 -->|Calculate rate| D2["rate_men"]
+
+    %% Feature Engineering
+    B1 -->|One-hot encode| E1["X"]
+    B2 -->|One-hot encode| E2["X_test"]
+
+    %% Model Preparation
+    B1 -->|Extract target variable| F1["y"]
+    E1 -->|Train model with| G["RandomForestClassifier"]
+    F1 -->|Target variable for training| G["RandomForestClassifier"]
+
+    %% Model Training and Prediction
+    G -->|Predict using| H["predictions"]
+    E2 -->|Test features for prediction| H
+
+    %% Prepare Output
+    H -->|Prepare submission DataFrame| I["output"]

@@ -1,0 +1,18 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A[Test.csv] -->|Read using pd.read_csv| B[df1]
+    C[Train.csv] -->|Read using pd.read_csv| D[df2]
+
+    %% Nodes for Data Variables
+    B[df1] -->|Used in| E(plotPerColumnDistribution)
+    B[df1] -->|Used in| F(plotCorrelationMatrix)
+    B[df1] -->|Used in| G(plotScatterMatrix)
+
+    D[df2] -->|Used in| E(plotPerColumnDistribution)
+    D[df2] -->|Used in| F(plotCorrelationMatrix)
+    D[df2] -->|Used in| G(plotScatterMatrix)
+
+    %% Comments
+    %% Test.csv holds sample testing data. df1 reads this data.
+    %% Train.csv holds sample training data. df2 reads this data.
+    %% df1 and df2 are DataFrames used for plotting distributions, correlation matrices, and scatter matrices.

@@ -1,0 +1,30 @@
+%% A Mermaid.js Flowchart for the House Prices Advanced Regression Workflow
+flowchart TD
+    %% Start of the workflow
+    start["Start"] --> ds1
+    
+    %% Data Source
+    ds1["Dataset: train.csv"]
+    ds1 -->|"Load data"| df1
+    
+    %% Data Loading and Preprocessing
+    df1["DataFrame: df (raw data)"]
+    df1 -->|"Clean data"| df_clean["DataFrame: df_clean"]
+    df_clean -->|"Extract features"| X["Features: X"]
+    df_clean -->|"Extract target"| y["Target: y"]
+    
+    %% Split Data
+    X -->|"Train-test split"| X_train["X_train"]
+    X -->|"Train-test split"| X_test["X_test"]
+    y -->|"Train-test split"| y_train["y_train"]
+    y -->|"Train-test split"| y_test["y_test"]
+    
+    %% PCA Model
+    subgraph PCA_Model["Model: PCA"]
+        direction TB
+        X_train -->|"Fit and transform"| pca_train["pca_train_results"]
+        X_test -->|"Transform"| pca_test["pca_test_results"]
+    end
+
+    %% Model outputs
+    pca_train & pca_test --> end["End"]

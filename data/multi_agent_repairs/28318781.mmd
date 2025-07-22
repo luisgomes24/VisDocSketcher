@@ -1,0 +1,23 @@
+```mermaid
+graph TD
+    subgraph DataSources
+        DS1["Input: ../input/nvtabular-with-dependencies/nvt_all"] -->|Data source used| DS["Output: Dataset"];
+    end
+
+    subgraph DataPreparation
+        D1["DataFrame: DataFrame with random integers and real numbers"] -->|Created with pd.DataFrame| DS;
+        DS["Dataset: Dataset object for NVTabular"];
+    end
+
+    subgraph DataTransformation
+        subgraph wf["Workflow: containing operations"]
+            G["Output: Groupby operation output features"] --> wf;
+            H["Hashed: Hashed categorical features"] --> wf;
+        end
+        DS --> wf;
+    end
+
+    subgraph WorkflowExecution
+        wf -->|Operation: fit_transform| O["Output: Transformed dataset output"];
+    end
+```

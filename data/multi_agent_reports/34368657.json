@@ -1,0 +1,83 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_meta.parquet",
+      "description": "Contains metadata for training, including batch and event IDs, and the angles (azimuth, zenith) of the neutrinos."
+    },
+    {
+      "file_name": "sensor_geometry.csv",
+      "description": "Details the x, y, and z positions of the 5160 IceCube sensors, with sensor_id as index."
+    },
+    {
+      "file_name": "batch_15.parquet",
+      "description": "Contains training data with pulses recorded by the sensors for specific events."
+    },
+    {
+      "file_name": "sample_submission.parquet",
+      "description": "Template for the submission file, indicating how the final output should be structured."
+    },
+    {
+      "folder": "test",
+      "description": "Folder containing test data batches in parquet format for model evaluation."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "meta_train",
+      "description": "DataFrame holding training metadata, including event IDs and target angle values."
+    },
+    {
+      "name": "geometry",
+      "description": "DataFrame with sensor locations corresponding to the IceCube detector."
+    },
+    {
+      "name": "train",
+      "description": "DataFrame with recorded pulse data for corresponding events in the training dataset."
+    },
+    {
+      "name": "ssub",
+      "description": "DataFrame used for preparing the submission, containing azimuth and zenith predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "meta_train",
+      "creation": "read_parquet from train_meta.parquet",
+      "flows": [
+        "used for visualizing azimuth and zenith angles",
+        "provides metadata for model predictions"
+      ]
+    },
+    {
+      "variable": "geometry",
+      "creation": "read_csv from sensor_geometry.csv",
+      "flows": [
+        "used to plot the sensor locations in 3D",
+        "merged with training data based on sensor_id"
+      ]
+    },
+    {
+      "variable": "train",
+      "creation": "read_parquet from batch_15.parquet",
+      "flows": [
+        "used for modeling and visualizations",
+        "merged with geometry data for accurate event representation"
+      ]
+    },
+    {
+      "variable": "ssub",
+      "creation": "read_parquet from sample_submission.parquet",
+      "flows": [
+        "filled with predicted values before saving to submission.csv"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Line.best_fit",
+      "input_features": "3D coordinates (x, y, z) of pulses from the event",
+      "target_variables": "azimuth, zenith angles",
+      "hyperparameters": "Uses line fitting method from skspatial library"
+    }
+  ]
+}

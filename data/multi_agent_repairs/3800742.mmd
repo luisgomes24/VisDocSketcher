@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Sources
+    A["Cell Images"]:::source
+    %% Variables and Transformations
+    B["Device"]:::variable
+    C["Data Transform"]:::variable
+    D["Cell Dataset"]:::variable
+    E["Dataset Loader"]:::variable
+    F["Trainloader"]:::variable
+    G["Validloader"]:::variable
+    %% Model
+    H["Net3 Model"]:::model
+    I["Criterion - CrossEntropyLoss"]:::variable
+    J["Optimizer - Adam"]:::variable
+    K["Scheduler"]:::variable
+
+    %% Relationships
+    A --> C %% Cell images are input for transformations
+    C --> D %% Transformations are applied to create the cell dataset
+    D --> E %% Dataset loader created from cell dataset
+    E --> F %% Trainloader created from dataset loader
+    E --> G %% Validloader created from dataset loader
+
+    F --> H %% Training datasets are used to train model
+    G --> H %% Validation datasets are used to validate model
+    I --> H %% Loss function used in model training
+    J --> H %% Optimizer updates model weights
+    K --> H %% Scheduler adjusts learning rate
+
+    %% Styles
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#337,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#3b7,stroke-width:2px;

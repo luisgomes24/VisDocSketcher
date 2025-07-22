@@ -1,0 +1,24 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+    %% Node for the data source
+    A[../input/testset.csv]:::dataSource --> B[Read CSV]
+
+    %% Node for the initial data variable
+    B --> C[data]:::dataVariable
+
+    %% Data processing steps
+    C --> D[Extract Year]:::processing
+    D --> E[year_humi]:::dataVariable
+    D --> F[year_heat]:::dataVariable
+    D --> G[year_rain]:::dataVariable
+
+    %% Nodes for data visualization
+    E --> H[Plot Humidity over Years]:::visualization
+    F --> I[Plot Heat Index over Years]:::visualization
+    G --> J[Plot Rainfall over Years]:::visualization
+
+    %% Styling for the nodes
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef processing fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#cfc,stroke:#333,stroke-width:2px;

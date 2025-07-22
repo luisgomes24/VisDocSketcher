@@ -1,0 +1,66 @@
+{
+    "data_sources": [
+        {
+            "file": "train.json",
+            "description": "Training dataset containing RNA structure information."
+        },
+        {
+            "file": "test.json",
+            "description": "Testing dataset containing RNA structure information."
+        },
+        {
+            "file": "bpps/*.npy",
+            "description": "Base Pairing Probability Matrices associated with RNA sequences."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "train",
+            "description": "DataFrame containing training RNA structure data."
+        },
+        {
+            "variable": "test",
+            "description": "DataFrame containing testing RNA structure data."
+        },
+        {
+            "variable": "bppm_paths",
+            "description": "List of file paths for the Base Pairing Probability Matrices."
+        },
+        {
+            "variable": "bppm",
+            "description": "Base Pairing Probability Matrix loaded from corresponding .npy files."
+        },
+        {
+            "variable": "pm",
+            "description": "Adjacency matrix representing RNA structure based on parentheses notation."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "creation": "Loaded using pd.read_json",
+            "flow": "Used for plotting BPPM and structures"
+        },
+        {
+            "variable": "test",
+            "creation": "Loaded using pd.read_json",
+            "flow": "Not used further in model or plot explicitly"
+        },
+        {
+            "variable": "bppm_paths",
+            "creation": "Generated list of file paths",
+            "flow": "Used in loading BPPM files"
+        },
+        {
+            "variable": "bppm",
+            "creation": "Loaded using np.load",
+            "flow": "Used for plotting and visualizing"
+        },
+        {
+            "variable": "pm",
+            "creation": "Created using draw_structure function",
+            "flow": "Used for plotting alongside bppm"
+        }
+    ],
+    "models": []
+}

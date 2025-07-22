@@ -1,0 +1,11 @@
+```
+graph TD;
+    A["🔄 Load Data <img src='file.svg'/> <br/> Load SMS Spam Collection Dataset"] --> B["🧹 Data Cleaning"]
+    B --> C["🗂 Prepare DataFrame <img src='table.svg'/> <br/> Restructure message labels"]
+    C --> D["📊 Frequency Count <img src='barplot_template.svg'/> <br/> Countplot of Labels"]
+    D --> E["✂️ Feature Engineering"]
+    E --> F["🔄 Split Data <img src='row_split.svg'/> <br/> Train-Test Split"]
+    F --> G["🏷️ Train Model <img src='brain.svg'/> <br/> Use Multinomial Naive Bayes"]
+    G --> H["📈 Tune Model <img src='brain.svg'/> <br/> Grid Search for Hyperparameters"]
+    H --> I["📊 Evaluate Model <img src='confusion_matrix.svg'/> <br/> Classification Report"]
+    I --> J["📉 Confusion Matrix <img src='confusion_matrix.svg'/> <br/> Visualize Predictions"]

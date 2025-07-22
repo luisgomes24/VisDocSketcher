@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Inspect Data"]
+    B --> C["🔀 Handle Missing Values"]
+    C --> D["🔠 Convert Data Types"]
+    D --> E["🔍 Analyze Features"]
+    
+    E --> F["📊 Visualize Distributions <img src='dummy_plots/hist_template.svg' /> <br/> Histograms"]
+    
+    F --> G["🔄 Balance Data"]
+    
+    G --> H["📈 Train-Test Split"]
+    H --> I["🧠 Build and Train Model"]
+    I --> J["🖥️ Evaluate Model"]
+    
+    J --> K["📊 Visualize Feature Importances <img src='dummy_plots/barplot_template.svg' /> <br/> Feature Importance"]
+
+    K --> L["📤 Make Predictions"]
+    L --> M["📄 Prepare Submission"]

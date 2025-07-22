@@ -1,0 +1,21 @@
+flowchart TD
+    %% Node representing the data source
+    A["dtrain.parquet"]:::dataSource --> B[train DataFrame]:::dataVar
+    %% Node for initial data processing and feature engineering
+    B --> C{Initial Processing & Feature Engineering}
+    C --> D(X_train):::dataVar
+    C --> E(y_train):::dataVar
+    C --> F(X_valid):::dataVar
+    C --> G(y_valid):::dataVar
+    %% Nodes representing ResNet model training
+    D --> H[ResNet Model Training]:::mlModel
+    E --> H
+    %% Node for ResNet model validation
+    F --> I[Validation]:::process
+    G --> I
+
+    %% Style declarations
+    classDef dataVar fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataSource fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef mlModel fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef process fill:#ff9,stroke:#333,stroke-width:2px;

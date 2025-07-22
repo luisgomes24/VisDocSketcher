@@ -1,0 +1,14 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/database.svg'/> <br/>"] --> B["📊 Data Cleaning & Preprocessing"]
+    B --> C["🔍 Bet Status"]
+    C --> D["📊 Accuracy Evaluation"]
+    D --> E["📈 PSG Qatar Version"]
+    E --> F["📊 Goals & Performance Analysis"]
+    F --> G["📊 Betting Accuracy Analysis"]
+
+    A -->|Load 'Match', 'Team', 'Country'| B
+    B -->|Drop unnecessary columns and handle NaN values| C
+    C -->|Merge countries and calculate betting data| D
+    D -->|Calculate accuracy scores for predictions| E
+    E -->|Analyze PSG's game data and results| F
+    F -->|Visualize goals and streaks performance| G

@@ -1,0 +1,62 @@
+```mermaid
+flowchart TD
+    %% Nodes
+    A["TFRecord file: training10_0"]
+    B["TFRecord file: training10_1"]
+    C["TFRecord file: training10_2"]
+    D["TFRecord file: training10_3"]
+    E["TFRecord file: training10_4"]
+    F["Images List"]
+    G["Labels List"]
+    H["Numpy Array X"]
+    I["Numpy Array y"]
+    J["x_train, y_train"]
+    K["x_val, y_val"]
+    L["x_test, y_test"]
+    M["Artificial Neural Network (ANN)"]
+    N["K Nearest Neighbour Classifier"]
+    O["Support Vector Machine (SVM)"]
+    P["Random Forest Classifier"]
+    Q["AdaBoost Classifier"]
+    R["XGBoost Classifier"]
+    
+    %% Data Source Imports
+    A -->|"read_data"| F
+    B -->|"read_data"| F
+    C -->|"read_data"| F
+    D -->|"read_data"| F
+    E -->|"read_data"| F
+    
+    A -->|"read_data"| G
+    B -->|"read_data"| G
+    C -->|"read_data"| G
+    D -->|"read_data"| G
+    E -->|"read_data"| G
+    
+    %% Data Processing
+    F -->|"Convert to Numpy"| H
+    G -->|"Convert to Numpy"| I
+
+    %% Splitting Data
+    H -->|"train_test_split, 70% Train"| J
+    I -->|"train_test_split, 70% Train"| J
+
+    J -->|"train_test_split, 30% Validation"| K
+    J -->|"train_test_split, 30% Test"| L
+
+    %% Model Training
+    J -->|"Train Model"| M
+    J -->|"Train Model"| N
+    J -->|"Train Model"| O
+    J -->|"Train Model"| P
+    J -->|"Train Model"| Q
+    J -->|"Train Model"| R
+    
+    %% Model Evaluation
+    K -->|"Validation"| M
+    K -->|"Validation"| N
+    K -->|"Validation"| O
+    K -->|"Validation"| P
+    K -->|"Validation"| Q
+    K -->|"Validation"| R
+```

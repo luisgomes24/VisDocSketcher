@@ -1,0 +1,46 @@
+flowchart TD
+    subgraph DataSources
+        A["Gold Price (2013-2023).csv"]
+        %% A: Represents the raw data source containing historical gold prices
+    end
+    subgraph DataPreparation
+        B["DataFrame: df"]
+        C["Train Data: train_data"]
+        D["Test Data: test_data"]
+        E["X_train"]
+        F["y_train"]
+        G["X_test"]
+        H["y_test"]
+        A --> B
+        B --> C
+        B --> D
+        C --> E
+        C --> F
+        D --> G
+        D --> H
+        %% B: Contains cleaned data
+        %% C: Scaled train data from df
+        %% D: Scaled test data from df
+        %% E: Input features for LSTM
+        %% F: Target values for LSTM
+        %% G: Input features for test evaluation
+        %% H: Target values for test evaluation
+    end
+    subgraph ModelTraining
+        I["LSTM Model"]
+        J["Training History: history"]
+        E --> I
+        F --> I
+        I --> J
+        %% I: LSTM model with specified hyperparameters
+        %% J: Training history with loss metrics
+    end
+    subgraph ModelEvaluation
+        K["Model Evaluations: result"]
+        L["Predictions: y_pred"]
+        G --> I
+        H --> K
+        I --> L
+        %% K: Evaluation results showing the model's test loss
+        %% L: Predictions made by the model
+    end

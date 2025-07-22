@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "flu2005trials.csv",
+      "description": "Data regarding flu trials for the year 2005"
+    },
+    {
+      "file_name": "flu2006trials.csv",
+      "description": "Data regarding flu trials for the year 2006"
+    },
+    {
+      "file_name": "flu2007trials.csv",
+      "description": "Data regarding flu trials for the year 2007"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame for the flu2005trials.csv file"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame for the flu2006trials.csv file"
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame for the flu2007trials.csv file"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "used_in": ["plotting distribution graphs", "visualization"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "used_in": ["plotting distribution graphs", "visualization"]
+    },
+    {
+      "variable_name": "df3",
+      "creation_method": "pd.read_csv",
+      "used_in": ["plotting distribution graphs", "visualization"]
+    }
+  ],
+  "models": []
+}

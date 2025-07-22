@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    cbnet["CBNet Model"]
+    yolo["YOLO Model"]
+    
+    %% Variable Initialization
+    iou_thr["iou_thr"]
+    skip_box_thr["skip_box_thr"]
+
+    %% Model Outputs
+    cbnet -->|"Generate bounding boxes and scores"| result_cbnet["result_cbnet"]
+    yolo -->|"Generate bounding boxes and scores"| result_yolo["result_yolo"]
+
+    %% WBF Function
+    subgraph Weighted_Box_Fusion
+        direction TB
+        result_cbnet --> |"Box coordinates"| wbf
+        result_yolo --> |"Box coordinates and scores"| wbf
+        iou_thr --> wbf
+        skip_box_thr --> wbf
+        
+        wbf -->|"Combine results"| boxes["Combined Boxes"]
+        wbf -->|"Confidence Scores"| scores["Scores"]
+        wbf -->|"Labels"| labels["Labels"]
+    end
+    
+    %% Descriptions
+    classDef model fill:#ffcc00;
+    class cbnet,yolo model;
+    classDef variable fill:#ccffcc;
+    class iou_thr,skip_box_thr,result_cbnet,result_yolo,boxes,scores,labels variable;

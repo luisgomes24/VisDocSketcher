@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["🔍 Data Info"]
+    B --> C["🧹 Data Preprocessing"]
+    C --> D["📊 EDA <img src='dummy_plots/corr_template.svg' />"]
+    D --> E["📉 Visualizations"]
+    
+    E --> F["📦 Modeling"]
+    F --> G["✅ Evaluation"]
+
+    E --> H["📊 Size Distribution <img src='dummy_plots/pie_template.svg' />"]
+    E --> I["📊 Fuel Types <img src='dummy_plots/barplot_template.svg' />"]
+    E --> J["🛠️ Scatter Plots <img src='dummy_plots/scatter_plot_template.svg' />"]
+
+    F --> K["🧠 AutoML with EvalML"]

@@ -1,0 +1,6 @@
+flowchart TD
+    csv["<img src='icons/file.svg' width=100 height=100/> <br/> USD_BRL_1994_2021_ANO_MES_DIA.csv"]:::dataSource -->|Load data| df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]:::dataVariable
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]:::dataVariable -->|Filter data for < 2021| df2["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df2"]:::dataVariable
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;

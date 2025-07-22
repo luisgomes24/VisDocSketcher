@@ -1,0 +1,86 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains data for training the model, including features and target variable 'Survived'."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains data for testing the model without the 'Survived' target variable."
+    },
+    {
+      "file_name": "gender_submission.csv",
+      "description": "Sample submission format for the Titanic competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame loaded from train.csv containing training data."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame loaded from test.csv containing testing data."
+    },
+    {
+      "variable_name": "target",
+      "description": "String representing the target variable 'Survived'."
+    },
+    {
+      "variable_name": "automl",
+      "description": "TabularAutoML model instance for training and predictions."
+    },
+    {
+      "variable_name": "oof_pred",
+      "description": "Out-of-fold predictions resulting from model fitting on training data."
+    },
+    {
+      "variable_name": "test_pred",
+      "description": "Predictions on test data made by the trained model."
+    },
+    {
+      "variable_name": "result",
+      "description": "DataFrame to hold the final submission results."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv()",
+      "usage": "Used for fitting the model in automl."
+    },
+    {
+      "variable": "test",
+      "creation_method": "pd.read_csv()",
+      "usage": "Used for making predictions in automl."
+    },
+    {
+      "variable": "automl",
+      "creation_method": "TabularAutoML()",
+      "usage": "Trained using the train DataFrame and then used to predict test data."
+    },
+    {
+      "variable": "oof_pred",
+      "creation_method": "automl.fit_predict()",
+      "usage": "Out-of-Fold predictions; created during model fitting."
+    },
+    {
+      "variable": "test_pred",
+      "creation_method": "automl.predict()",
+      "usage": "Generated predictions for test data."
+    },
+    {
+      "variable": "result",
+      "creation_method": "pd.read_csv() and DataFrame manipulation",
+      "usage": "Final results are saved to CSV file."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "TabularAutoML",
+      "input_features": "All features from the 'train' DataFrame.",
+      "target_variable": "Survived",
+      "hyperparameters": "Metric defined using custom accuracy score function."
+    }
+  ]
+}

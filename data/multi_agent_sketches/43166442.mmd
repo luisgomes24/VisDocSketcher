@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    DEV_IMAGES["Development Images"]
+    DEV_JSON["Development Annotations"]
+    TRAIN_IMAGES["Training Images"]
+    TRAIN_JSON["Training Annotations"]
+
+    %% Data Variables
+    dev_json_file["dev_json_file"]
+    dev_image_dir["dev_image_dir"]
+    train_json_file["train_json_file"]
+    train_image_dir["train_image_dir"]
+    vlsp_dataset["VLSP_Dataset Instance"]
+
+    %% Data Flow and Transformations
+    DEV_JSON -- loads --> dev_json_file
+    DEV_IMAGES -- loads --> dev_image_dir
+    TRAIN_JSON -- loads --> train_json_file
+    TRAIN_IMAGES -- loads --> train_image_dir
+
+    dev_json_file & dev_image_dir --> vlsp_dataset[VLSP_Dataset]
+    vlsp_dataset -- visualization --> VLSP_Visualization["Visualizing Randomly Selected Images"]
+
+    %% Comments
+    class DEV_IMAGES,DEV_JSON,TRAIN_IMAGES,TRAIN_JSON internal-source;
+    class dev_json_file,dev_image_dir,train_json_file,train_image_dir,vlsp_dataset data-variable;
+    classDef internal-source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data-variable fill:#bbf,stroke:#333,stroke-width:2px;

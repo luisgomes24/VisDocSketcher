@@ -1,0 +1,28 @@
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground':'#ffffff', 'primaryColor': '#ffcc00', 'primaryTextColor': '#000000', 'primaryBorderColor': '#ffcc00', 'lineWidth': 2}}}%%
+flowchart TD
+    subgraph Data_Sources
+        A[[Train CSV]]:::data_source
+        B[[Test CSV]]:::data_source
+    end
+    
+    subgraph Data_Variables
+        C[Train_data]:::data_variable
+        D[Test_data]:::data_variable
+        E[dups]:::data_variable
+    end
+    
+    classDef data_source fill:#ffcccc, stroke:#c80000, stroke-width:2px;
+    classDef data_variable fill:#ccffcc, stroke:#00c800, stroke-width:2px;
+
+    %% Data Sources to Data Variables
+    A -->|import via pd.read_csv| C
+    B -->|import via pd.read_csv| D
+
+    %% Variables Flows
+    C -->|Check for duplicates| E
+    
+    %% Description / Comments
+    
+    %% Train_data node represents the loaded training dataset used throughout the analysis process.
+    %% Test_data node represents the testing data loaded, intended for prediction phases.
+    %% dups node identifies duplicate entries within the Train_data dataset.

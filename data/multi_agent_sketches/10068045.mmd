@@ -1,0 +1,45 @@
+flowchart TD
+    %% Node representing the favorite color variable
+    color["color: Favorite color"]
+    
+    %% Node representing the approximate value of pi
+    pi["pi: Value of π"]
+    
+    %% Node representing the diameter of a circle
+    diameter["diameter: Circle's diameter"]
+    
+    %% Radius calculation from diameter
+    diameter -->|"diameter/2"| radius["radius: Derived circle's radius"]
+    
+    %% Area calculation from radius
+    radius -->|"π * radius^2"| area["area: Circle's area"]
+    
+    %% Node for first list variable a
+    a["a: List of numbers"]
+    
+    %% Node for second list to swap values
+    b["b: List to swap with a"]
+    
+    %% Temporary storage for swapping
+    a --> c["c: Temporary swap storage"]
+    
+    %% Swapping process
+    c --> b
+    b --> a
+    
+    %% Node for candies collected by Alice
+    alice_candies["Alice's candies"]
+    
+    %% Node for candies collected by Bob
+    bob_candies["Bob's candies"]
+    
+    %% Node for candies collected by Carol
+    carol_candies["Carol's candies"]
+    
+    %% Total candies and calculation to smash
+    alice_candies & bob_candies & carol_candies -->|"Total Calculation"| to_smash["to_smash: Total candies to smash"]
+    
+    %% Verification checks
+    area -->|"Check with q1.check()"| q1["q1.check()"]
+    color -->|"Check with q0.check()"| q0["q0.check()"]
+    to_smash -->|"Check with q4.check()"| q4["q4.check()"]

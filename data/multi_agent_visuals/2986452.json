@@ -1,0 +1,22 @@
+{
+  "variables": [
+    {
+      "name": "df",
+      "description": "DataFrame for data processing and plotting."
+    }
+  ],
+  "functions": [
+    {
+      "name": "plotPerColumnDistribution",
+      "description": "Generates distribution graphs for each column in df."
+    },
+    {
+      "name": "plotCorrelationMatrix",
+      "description": "Creates a correlation matrix for numerical columns in df."
+    },
+    {
+      "name": "plotScatterMatrix",
+      "description": "Generates scatter and density plots for numerical columns."
+    }
+  ]
+}

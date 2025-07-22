@@ -1,0 +1,15 @@
+graph TD;
+  %% Data Source
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> Crime_Data_from_2020_to_Present.csv"] -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+  
+  %% Data Exploration
+  B -->|Initial exploration| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> .head(), .info(), .describe()"]
+  
+  %% Data Visualization
+  B -->|Data visualization| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Pie charts, Count plots <br/> <img src='dummy_plots/scatter_plot_template.svg'/>"]
+  
+  %% Comments
+  %% A: Node representing the data source file containing crime data.
+  %% B: Node for the main data variable containing the loaded DataFrame.
+  %% C: Node depicting initial data exploration steps for understanding data structure and summary.
+  %% D: Node showing visualization techniques applied on the data to extract insights.

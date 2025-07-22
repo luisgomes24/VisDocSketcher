@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data"] --> B["🛠️ Preprocess Data"]
+    B --> C["📊 Analyze Data"]
+    C --> D["🧠 Model Training"]
+    D --> E["📊 Evaluate Models"]
+    E --> F["🚀 Make Predictions"]
+    F --> G["📥 Save Submission"]
+
+    A --> |"df_train, df_test, df_sample_submission, df_revealed_test, df_census_starter"| B
+    B --> |"Drop unnecessary columns, date conversion"| C
+    C --> |"Correlation heatmap <img src='dummy_plots/heatmap_template.svg'/> <br/> Correlation Analysis"| D
+    D --> |"Grid Search for best model"| E
+    E --> |"Best parameters and MAE"| F
+    F --> |"Predictions from model"| G

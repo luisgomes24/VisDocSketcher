@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/wineQualityReds.csv",
+      "description": "Contains data on red wine quality and its physical and chemical properties."
+    },
+    {
+      "file": "/kaggle/input/wineQualityWhites.csv",
+      "description": "Contains data on white wine quality and its physical and chemical properties."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df1",
+      "description": "DataFrame for red wine quality data loaded from 'wineQualityReds.csv'."
+    },
+    {
+      "variable": "df2",
+      "description": "DataFrame for white wine quality data loaded from 'wineQualityWhites.csv'."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "df1 = pd.read_csv(...) to load red wine data",
+      "flow": "Used in plotting functions to visualize the distribution, correlation, and scatter plots." 
+    },
+    {
+      "variable": "df2",
+      "creation": "df2 = pd.read_csv(...) to load white wine data",
+      "flow": "Used in plotting functions to visualize the distribution, correlation, and scatter plots." 
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,14 @@
+%% Data Source: Stroke prediction dataset
+flowchart TD
+    A["Read Data: healthcare-dataset-stroke-data.csv"] -->|"pd.read_csv"| B["DataFrame: dataset"]
+    %% DataFrame storing the dataset
+    B -->|"Description and Null Check"| C["Descriptive Analysis"]
+    %% Perform descriptive stats and check nulls
+    B -->|"Preprocess: bmi replacement"| D["Data Preprocessing"]
+    %% Handle missing values in BMI
+    B -->|"dataset.corr()"| E["Correlation Matrix: corr"]
+    %% Correlation analysis among variables
+    E -->|"Plot"| F["Correlation Heatmap"]
+    %% Visualize correlations
+    B -->|"Data Visualizations"| G["Visual Data Analysis"]
+    %% Generate plots: heatmaps, distributions

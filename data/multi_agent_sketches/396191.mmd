@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Load Data| B["train_features"]
+    A -->|Extract Labels| C["train_labels"]
+    A -->|Create Test Features| D["test_features"]
+    A -->|Extract Test Labels| E["test_labels"]
+
+    %% Data Processing
+    B -->|Training Input| H["Neural Network"]
+    C -->|Training Target| H
+    D -->|Evaluation Input| H
+    E -->|Evaluation Labels| H
+
+    %% Model Training and Evaluation
+    subgraph Model Training & Evaluation
+        H -->|Compute| I["metrics"]
+        H -->|Cost Tracking| J["costs"]
+    end
+ 
+    %% Annotations
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef processing fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#fbf,stroke:#333,stroke-width:2px;
+    
+    class A dataSource;
+    class B,C,D,E processing;
+    class H, I, J model;

@@ -1,0 +1,11 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> SQL Database"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> CSV File"]
+    C["<img src='dummy_plots/barplot_template.svg'/> <br/> Data Processing"]
+    D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    E["<img src='dummy_plots/lineplot_template.svg'/> <br/> Model Evaluation"]
+
+    A -->|"extracts data from"| B
+    B -->|"dataset preparation"| C
+    C -->|"train & test"| D
+    D -->|"outputs results"| E

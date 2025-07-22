@@ -1,0 +1,133 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/house-prices-advanced-regression-techniques/train.csv",
+      "description": "Training dataset containing house features and prices."
+    },
+    {
+      "file": "../input/house-prices-advanced-regression-techniques/test.csv",
+      "description": "Testing dataset containing house features without prices, used for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training dataset loaded from train.csv."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the testing dataset loaded from test.csv."
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame created by dropping the target variable 'SalePrice' from df_train."
+    },
+    {
+      "name": "y",
+      "description": "Target variable Series containing house prices from df_train."
+    },
+    {
+      "name": "X_train",
+      "description": "Training features split from X for model training."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing features split from X for model evaluation."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target variable split from y for model training."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing target variable split from y for model evaluation."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the processed test features ready for predictions."
+    },
+    {
+      "name": "df_final",
+      "description": "Final DataFrame containing IDs and predicted house prices."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "created": "pd.read_csv",
+      "flows_to": [
+        "df_train.isnull()",
+        "df_train.dropna()",
+        "X",
+        "y"
+      ]
+    },
+    {
+      "variable": "df_test",
+      "created": "pd.read_csv",
+      "flows_to": [
+        "df_test.dropna()",
+        "test"
+      ]
+    },
+    {
+      "variable": "X",
+      "created": "df_train.drop(['SalePrice'], axis=1)",
+      "flows_to": [
+        "train_test_split"
+      ]
+    },
+    {
+      "variable": "y",
+      "created": "df_train['SalePrice']",
+      "flows_to": [
+        "train_test_split"
+      ]
+    },
+    {
+      "variable": "X_train",
+      "created": "train_test_split",
+      "flows_to": [
+        "lr.fit()",
+        "rfr.fit()",
+        "xgb.fit()"
+      ]
+    },
+    {
+      "variable": "X_test",
+      "created": "train_test_split",
+      "flows_to": [
+        "lr_pred",
+        "rfr_pred",
+        "xgb_pred"
+      ]
+    },
+    {
+      "variable": "df_final",
+      "created": "df_test[['Id', 'SalePrice']]",
+      "flows_to": [
+        "df_final.to_csv()"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "name": "Linear Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": null
+    },
+    {
+      "name": "Random Forest Regressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": null
+    },
+    {
+      "name": "XGBoost Regressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": null
+    }
+  ]
+}

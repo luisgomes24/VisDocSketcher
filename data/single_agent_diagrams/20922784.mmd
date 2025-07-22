@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🔍 Explore Data <img src='icons/table.svg'/>"]
+    B --> C["🖼️ Visualize Images <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    C --> D["🛠️ Preprocess Data"]
+    D --> E["⚙️ Data Augmentation"]
+    E --> F["🚚 Load Data into Dataloader"]
+    F --> G["🧠 Define Model"]
+    G --> H["ℹ️ Train Model"]
+    H --> I["📝 Evaluate Model <img src='icons/brain.svg'/>"]
+    I --> J["📊 Visualize Results <img src='dummy_plots/barplot_template.svg'/>"]

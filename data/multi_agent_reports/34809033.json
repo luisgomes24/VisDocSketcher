@@ -1,0 +1,31 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/family-guy-dataset/Family Guy Dataset.csv",
+            "description": "Contains episodes of Family Guy including episode title, original air date, IMDb rating, total votes, synopsis, and other attributes."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "episodes_df",
+            "description": "A DataFrame containing episode details for Family Guy after reading from the CSV file."
+        },
+        {
+            "name": "true_detective_df",
+            "description": "A DataFrame for true detective episodes, but it was restructured from episodes_df."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "episodes_df",
+            "creation": "Created by reading from Family Guy Dataset.csv using pd.read_csv.",
+            "flow": "Used for various analyses and visualizations, including IMDb ratings and running time."
+        },
+        {
+            "variable": "true_detective_df",
+            "creation": "Merged from episodes_df with potentially other attributes (noted in comments).",
+            "flow": "Not utilized in visualizations or modeled further in this notebook."
+        }
+    ],
+    "models": []
+}

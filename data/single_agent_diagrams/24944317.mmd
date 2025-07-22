@@ -1,0 +1,25 @@
+flowchart TD
+    A["📂 Load Training Data <img src='file.svg' />"] --> B["📂 Load Test Data <img src='file.svg' />"]
+    B --> C["🔍 Initial Data Exploration"]
+    
+    C --> D["🧹 Data Preprocessing"]
+    D --> D1["❌ Drop Unnecessary Columns"]
+    D1 --> D2["🔢 Handle Missing Values"]
+    D2 --> D3["🔄 Convert Data Types"]
+    D3 --> D4["🎭 One-Hot Encoding"]
+    
+    D --> E["🛠 Feature Engineering"]
+    E --> E1["🔧 Split Cabin Column"]
+    E1 --> E2["⚙️ Transform Categorical Variables"]
+
+    D --> F["📊 Data Visualization (optional)"]
+    
+    F --> G["🚂 Modeling"]
+    G --> G1["🔄 Train-Test Split"]
+    G1 --> G2["🧠 Train Model with AutoML"]
+    
+    G2 --> H["📈 Model Evaluation"]
+    H --> H1["📋 Classification Report"]
+    H --> H2["📊 Predictions on Test Data"]
+
+    H2 --> I["📁 Save Submission File <img src='file.svg' />"]

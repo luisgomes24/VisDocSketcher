@@ -1,0 +1,32 @@
+```mermaid
+flowchart TD
+    subgraph DataSources["Data Sources"]
+        TrainCSV["train.csv"]
+        ValidCSV["valid.csv"]
+        TestCSV["test.csv"]
+    end
+    subgraph DataPreparation["Data Preparation"]
+        TrainCSV --> |"pd.read_csv"| TrainData["train_data"]
+        ValidCSV --> |"pd.read_csv"| ValData["val_data"]
+        TrainData --> |"Used in iteration"| Labels["labels"]
+        TrainData --> |"Creates Dataset"| Dataset["Dataset"]
+        ValData --> |"Validation"| BertModel
+    end
+    subgraph Model["Model"]
+        Dataset --> BertModel["BertClassifier"]
+    end
+    subgraph Training["Training"]
+        BertModel --> |"Input: Tokenized Text"|
+        BertModel --> |"Target: Intent Labels"|
+    end
+
+    %% Node descriptions
+    TrainCSV:::description --> "Training data for intent classification"
+    ValidCSV:::description --> "Validation data for intent classification"
+    TestCSV:::description --> "Testing data for intent classification"
+    TrainData:::description --> "DataFrame containing the training data"
+    ValData:::description --> "DataFrame containing the validation data"
+    Labels:::description --> "Dictionary mapping intent strings to numeric labels"
+    Dataset:::description --> "Custom dataset class for handling inputs for the model"
+    BertModel:::description --> "BertClassifier with dropout: 0.5, epochs: 15, learning_rate: 2e-5, batch_size: 8"
+```

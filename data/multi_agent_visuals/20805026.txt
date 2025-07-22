@@ -1,0 +1,7 @@
+Graph representing Data Science workflow:
+
+1. Load the Data: Reading 'train.csv' and 'test.csv' into DataFrames.
+2. Create Model: Initialize TabularAutoML with binary classification task and custom accuracy metric.
+3. Fit Model: Train the model on 'train' DataFrame and generate Out-of-Fold predictions.
+4. Predict: Utilize the trained model to make predictions on 'test' DataFrame.
+5. Prepare Submission: Create a results DataFrame and save predictions into 'lightautoml_titanic.csv'.

@@ -1,0 +1,112 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/house-prices-advanced-regression-techniques/train.csv",
+      "description": "Training dataset containing house price information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Primary DataFrame containing the dataset after loading from CSV."
+    },
+    {
+      "variable_name": "df_clean",
+      "description": "Cleaned DataFrame after preprocessing, handling missing values and normalizing numeric data."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature set for modeling containing all relevant features except the target variable."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing house prices."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set of features for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test set of features for model evaluation."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set of target variable for model training."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set of target variable for model evaluation."
+    },
+    {
+      "variable_name": "pca_train_results",
+      "description": "Results of PCA transformation on the training dataset."
+    },
+    {
+      "variable_name": "pca_test_results",
+      "description": "Results of PCA transformation on the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flow": "Used for data analysis and preprocessing."
+    },
+    {
+      "variable": "df_clean",
+      "creation": "Created by dropping unnecessary columns and handling missing values.",
+      "flow": "Used for model training and PCA analysis."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping the target variable from df_clean.",
+      "flow": "Input features used for train-test split and PCA."
+    },
+    {
+      "variable": "y",
+      "creation": "Created by extracting the target variable ('SalePrice') from df_clean.",
+      "flow": "Target variable used for model training."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Generated during the train-test split.",
+      "flow": "Used for model training."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Generated during the train-test split.",
+      "flow": "Used for model evaluation."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Generated during the train-test split.",
+      "flow": "Used for model training."
+    },
+    {
+      "variable": "y_test",
+      "creation": "Generated during the train-test split.",
+      "flow": "Used for model evaluation."
+    },
+    {
+      "variable": "pca_train_results",
+      "creation": "Created by applying PCA on X_train.",
+      "flow": "Used for dimensionality reduction and analysis."
+    },
+    {
+      "variable": "pca_test_results",
+      "creation": "Created by applying PCA on X_test.",
+      "flow": "Used for dimensionality reduction and analysis."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "PCA",
+      "input_features": "X_train (and X_test)",
+      "target_variable": "N/A",
+      "hyperparameters": {
+        "n_components": 10
+      }
+    }
+  ]
+}

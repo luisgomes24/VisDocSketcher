@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    A["cardata.csv"] --> B["car DataFrame"]
+    %% Data Preparation
+    B --> |"Drop 'Car_Name' & 'Selling_Price'"| C["X (Features)"]
+    B --> |"Extract 'Selling_Price'"| D["Y (Target)"]
+    %% Data Splitting
+    C --> E["X_train"]
+    C --> F["X_test"]
+    D --> G["Y_train"]
+    D --> H["Y_test"]
+    %% Model Training
+    E --> |"Train"| I["Linear Regression Model (lrmodel)"]
+    G --> |"Train"| I
+    %% Predictions
+    I --> |"Predict on Training Data"| J["training_data_prediction"]
+    I --> |"Predict on Test Data"| K["Y_pred"]
+    %% Evaluation
+    H --> |"Compare"| K
+    %% EDA
+    B --> L["Correlation Matrix (corr)"]
+    L --> |"Visualize"| M["Heatmap"]

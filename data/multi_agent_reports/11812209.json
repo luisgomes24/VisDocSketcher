@@ -1,0 +1,11 @@
+{
+  "data_sources": [
+    {
+      "file_name": "No files available",
+      "description": "There are currently no CSV files to analyze in the dataset."
+    }
+  ],
+  "data_variables": [],
+  "data_flow": [],
+  "models": []
+}

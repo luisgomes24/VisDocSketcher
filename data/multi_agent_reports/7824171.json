@@ -1,0 +1,133 @@
+{
+  "data_sources": [
+    {
+      "file_name": "UNSW_NB15_training-set.csv",
+      "description": "Contains training data for model training"
+    },
+    {
+      "file_name": "UNSW_NB15_testing-set.csv",
+      "description": "Contains testing data for model evaluation"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing testing data"
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Features used for training"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Target variable for training"
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Features used for testing"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Target variable for testing"
+    },
+    {
+      "variable_name": "categorical_columns",
+      "description": "List of categorical columns in the training set"
+    },
+    {
+      "variable_name": "non_categorical_columns",
+      "description": "List of non-categorical columns in the training set"
+    },
+    {
+      "variable_name": "features",
+      "description": "List of consistent features between training and testing sets"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flow": "Used as input for model training"
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flow": "Used as input for model evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "train.drop(['label'], axis=1)",
+      "flow": "Input features for the training model"
+    },
+    {
+      "variable": "y_train",
+      "creation": "train['label']",
+      "flow": "Target variable for the training model"
+    },
+    {
+      "variable": "x_test",
+      "creation": "test.drop(['label'], axis=1)",
+      "flow": "Input features for evaluation"
+    },
+    {
+      "variable": "y_test",
+      "creation": "test['label']",
+      "flow": "Target variable for evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "feature_engineer(x_train)",
+      "flow": "Processed for model training"
+    },
+    {
+      "variable": "x_test",
+      "creation": "feature_engineer(x_test)",
+      "flow": "Processed for model evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "scaler.fit_transform(x_train[non_categorical_columns])",
+      "flow": "Scaled features for model training"
+    },
+    {
+      "variable": "x_test",
+      "creation": "scaler.transform(x_test[non_categorical_columns])",
+      "flow": "Scaled features for model evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "pd.get_dummies(x_train)",
+      "flow": "Converted to dummy variables for training"
+    },
+    {
+      "variable": "x_test",
+      "creation": "pd.get_dummies(x_test)",
+      "flow": "Converted to dummy variables for evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "x_train[features]",
+      "flow": "Filtered to matched features for training"
+    },
+    {
+      "variable": "x_test",
+      "creation": "x_test[features]",
+      "flow": "Filtered to matched features for evaluation"
+    },
+    {
+      "variable": "x_train",
+      "creation": "x_train.to_csv('train.csv', index=False)",
+      "flow": "Saved as CSV for future use"
+    },
+    {
+      "variable": "x_test",
+      "creation": "x_test.to_csv('test.csv', index=False)",
+      "flow": "Saved as CSV for future use"
+    }
+  ],
+  "models": []
+}

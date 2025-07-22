@@ -1,0 +1,61 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/train_ship_segmentations.csv",
+            "description": "Contains ship segmentation data, including ImageId and binary masks."
+        },
+        {
+            "file_path": "../input/train/",
+            "description": "Directory containing training images."
+        },
+        {
+            "file_path": "../input/test/",
+            "description": "Directory containing test images."
+        },
+        {
+            "file_path": "../input/train/masks/",
+            "description": "Directory containing masks corresponding to training images."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame that holds the dataset of ship segmentations read from the CSV file."
+        },
+        {
+            "name": "train_ids",
+            "description": "Contains the list of image IDs extracted from the DataFrame for training."
+        },
+        {
+            "name": "path_train",
+            "description": "Path to the training image directory."
+        },
+        {
+            "name": "path_test",
+            "description": "Path to the test image directory."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "created_by": "pd.read_csv()",
+            "purpose": "To load ship segmentation data from CSV for analysis."
+        },
+        {
+            "variable": "train_ids",
+            "created_by": "df.ImageId.values",
+            "purpose": "To keep track of image IDs for the training set."
+        },
+        {
+            "variable": "path_train",
+            "created_by": "Defined as a string path",
+            "purpose": "Used to construct file paths for image loading."
+        },
+        {
+            "variable": "path_test",
+            "created_by": "Defined as a string path",
+            "purpose": "Used to construct file paths for image loading."
+        }
+    ],
+    "models": []
+}

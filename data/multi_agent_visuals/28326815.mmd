@@ -1,0 +1,28 @@
+flowchart TD
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/skin-cancer-mnist-ham10000/HAM10000_metadata.csv"]
+    end
+
+    subgraph Variables
+        B["<img src='icons/table.svg' width=100 height=100/> <br/> skin_df"]
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> img_to_class_dict"]
+        D["<img src='icons/row_split.svg' width=100 height=100/> <br/> dls"]
+        E["<img src='icons/brain.svg' width=100 height=100/> <br/> learn"]
+    end
+
+    subgraph Model
+        F["<img src='icons/brain.svg' width=100 height=100/> <br/> ResNet34 model"]
+    end
+
+    A -->|"pd.read_csv"| B
+    B -->|"Mapping image_id to disease"| C
+    C -->|"Encapsulating as DataLoaders"| D
+    D -->|"Initialize Learner"| E
+    E -->|"Train using Fast.ai"| F
+
+    subgraph ModelDetails
+        G["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> Parameters: epochs=3, lr=1e-2"]
+    end
+
+    E -.-> G
+    F -.-> G

@@ -1,0 +1,38 @@
+# Mermaid diagram with visual elements
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Load Data| B[train_data]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] -->|Load Data| D[test_data]
+
+    %% Data Processing
+    B -->|Preprocess| E["<img src='icons/table.svg' width=100 height=100/> <br/> Preprocessed Train Data"]
+    D -->|Preprocess| F["<img src='icons/table.svg' width=100 height=100/> <br/> Preprocessed Test Data"]
+
+    %% Feature Selection
+    E -->|Correlation Analysis| G[top50_corr_var]
+    G -->|Select Features| H[new_vars]
+    H -->|SelectKBest| I[train_data_40]
+    F -->|Based on new_vars| J[test_data_40]
+
+    %% Models
+    I -->|Train Model| K["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestClassifier"]
+    I -->|Train Model| L["<img src='icons/brain.svg' width=100 height=100/> <br/> ExtraTreesClassifier"]
+    I -->|Train Model| M["<img src='icons/brain.svg' width=100 height=100/> <br/> GaussianNB"]
+    I -->|Train Model| N["<img src='icons/brain.svg' width=100 height=100/> <br/> LogisticRegression"]
+    I -->|Train Model| O["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBClassifier"]
+
+    %% Predictions
+    J -->|Predict with RandomForest| K
+    J -->|Predict with ExtraTrees| L
+    J -->|Predict with GaussianNB| M
+    J -->|Predict with LogisticRegression| N
+    J -->|Predict with XGBClassifier| O
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#fbf,stroke:#333,stroke-width:2px;
+
+    class A,C dataSource;
+    class B,D,E,F,G,H,I,J dataProcess;
+    class K,L,M,N,O model;

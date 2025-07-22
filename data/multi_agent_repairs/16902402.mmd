@@ -1,0 +1,51 @@
+flowchart TD
+
+    %% Data Source Node
+    A["KaggleV2-May-2016.csv"] 
+    %% Description: Initial source of data, containing appointment information including patient demographics and attendance status.
+
+    %% DataFrame Node
+    B["df"] 
+    %% Description: DataFrame created from KaggleV2-May-2016.csv via pd.read_csv, used for subsequent data cleaning and analysis.
+
+    %% Variables Nodes
+    C["Show"] 
+    %% Description: Encoded target variable indicating appointment attendance (1 for 'No', 0 for 'Yes').
+
+    D["Male"] 
+    %% Description: Binary gender indicator (1 for male, 0 for female).
+
+    E["Age_bins"] 
+    %% Description: Categorical representation of patient age groups for analysis.
+
+    F["diabetic_hiper"] 
+    %% Description: Interaction term indicating presence of both diabetes and hypertension.
+
+    G["Wait_days"] 
+    %% Description: Numerical feature indicating days between scheduling and the appointment date.
+
+    %% Process Flow
+    A -->|Read CSV| B
+    B -->|Encode Target| C
+    B -->|Encode Gender| D
+    B -->|Categorize Age| E
+    B -->|Create Interaction Term| F
+    B -->|Calculate Wait Days| G
+
+    %% Analytical Methods
+    B -.->|Plot & Explore| B
+    C -.->|Impact Assessment| C
+    D -.->|Impact Analysis| D
+    E -.->|Exploratory Analysis| E
+    F -.->|Influence Analysis| F
+    G -.->|Attendance Impact| G
+
+    %% Model Node
+    H["Pivot Tables"] 
+    %% Description: Utilizes selected features to evaluate their impact on the target variable Show.
+
+    D -->|Feature| H
+    E -->|Feature| H
+    F -->|Feature| H
+    G -->|Feature| H
+    C -->|Target| H

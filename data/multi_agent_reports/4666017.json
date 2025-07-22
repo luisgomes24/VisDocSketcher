@@ -1,0 +1,90 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/creditcard.csv",
+      "description": "Dataset containing transactional data for credit card transactions, with columns including time and amounts."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "Main DataFrame containing the credit card transaction data and labels indicating fraudulent transactions."
+    },
+    {
+      "name": "col_names",
+      "description": "List of column names for the features used in the analysis, initially set to V0 to V28."
+    },
+    {
+      "name": "important_cols",
+      "description": "List of feature names that have been deemed important for model training based on feature importance analysis."
+    },
+    {
+      "name": "percentage",
+      "description": "Percentage calculated to understand the proportion of fraudulent transactions in the dataset."
+    },
+    {
+      "name": "models_names",
+      "description": "List of names for the first layer of models used in the stacking approach."
+    },
+    {
+      "name": "models",
+      "description": "List of instantiated model objects to be used in the first layer of the stacking approach."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "read_csv",
+      "flow": "Used for modeling and feature extraction."
+    },
+    {
+      "variable": "important_cols",
+      "creation": "_build_fl_models",
+      "flow": "Used for training the stacked model and creating meta-features."
+    },
+    {
+      "variable": "models",
+      "creation": "Defined models loaded into a list.",
+      "flow": "Fitted to data in the stacking framework."
+    },
+    {
+      "variable": "percentage",
+      "creation": "Calculated from the 'data' DataFrame.",
+      "flow": "Provides insight into the balance of classes for anomaly detection."
+    }
+  ],
+  "models": [
+    {
+      "model": "XGBClassifier",
+      "features": "important_cols",
+      "target": "Fraud",
+      "hyperparameters": {}
+    },
+    {
+      "model": "EllipticEnvelope",
+      "features": "important_cols",
+      "target": "Fraud",
+      "hyperparameters": {
+        "support_fraction": 0.7
+      }
+    },
+    {
+      "model": "IsolationForest",
+      "features": "important_cols",
+      "target": "Fraud",
+      "hyperparameters": {
+        "behaviour": "new",
+        "contamination": "auto"
+      }
+    },
+    {
+      "model": "LocalOutlierFactor",
+      "features": "important_cols",
+      "target": "Fraud",
+      "hyperparameters": {
+        "novelty": true,
+        "contamination": "auto"
+      }
+    }
+  ]
+}

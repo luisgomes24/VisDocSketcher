@@ -1,0 +1,111 @@
+{
+    "data_sources": [
+        {
+            "file": "/kaggle/input/house-prices-advanced-regression-techniques/train.csv",
+            "description": "Training data containing house features and sale prices."
+        },
+        {
+            "file": "/kaggle/input/house-prices-advanced-regression-techniques/test.csv",
+            "description": "Test data containing house features without sale prices."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train_data",
+            "description": "DataFrame containing the training dataset."
+        },
+        {
+            "name": "test_data",
+            "description": "DataFrame containing the testing dataset."
+        },
+        {
+            "name": "X",
+            "description": "Feature DataFrame from training data excluding the target variable 'SalePrice'."
+        },
+        {
+            "name": "y",
+            "description": "Target variable Series, contains house sale prices from the training data."
+        },
+        {
+            "name": "X_train_full",
+            "description": "Training features DataFrame used to split into training and validation sets."
+        },
+        {
+            "name": "X_valid_full",
+            "description": "Validation features DataFrame."
+        },
+        {
+            "name": "y_train",
+            "description": "Training target variable."
+        },
+        {
+            "name": "y_valid",
+            "description": "Validation target variable."
+        },
+        {
+            "name": "X_train",
+            "description": "Final training dataset after one-hot encoding and alignment."
+        },
+        {
+            "name": "X_valid",
+            "description": "Final validation dataset after one-hot encoding and alignment."
+        },
+        {
+            "name": "X_test",
+            "description": "Final test dataset after one-hot encoding."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_data",
+            "creation": "pd.read_csv",
+            "flows_to": "X (feature DataFrame), y (target Series)"
+        },
+        {
+            "variable": "test_data",
+            "creation": "pd.read_csv",
+            "flows_to": "X_test"
+        },
+        {
+            "variable": "X",
+            "creation": "dropna",
+            "flows_to": "X_train_full, X_valid_full"
+        },
+        {
+            "variable": "y",
+            "creation": "X.SalePrice",
+            "flows_to": "y_train, y_valid"
+        },
+        {
+            "variable": "X_train",
+            "creation": "get_dummies and align",
+            "flows_to": "fitting the model"
+        },
+        {
+            "variable": "X_valid",
+            "creation": "get_dummies and align",
+            "flows_to": "model validation"
+        },
+        {
+            "variable": "X_test",
+            "creation": "get_dummies and align",
+            "flows_to": "prediction output"
+        },
+        {
+            "variable": "output",
+            "creation": "pd.DataFrame.",
+            "flows_to": "output to CSV"
+        }
+    ],
+    "models": [
+        {
+            "model_name": "XGBRegressor",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "n_estimators": 2000,
+                "learning_rate": 0.05
+            }
+        }
+    ]
+}

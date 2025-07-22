@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_features"]
+    A -->|Extract Labels| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> train_labels"]
+    A -->|Create Test Features| D["<img src='icons/table.svg' width=100 height=100/> <br/> test_features"]
+    A -->|Extract Test Labels| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> test_labels"]
+
+    %% Data Processing
+    B -->|Training Input| H["<img src='icons/brain.svg' width=100 height=100/> <br/> Neural Network"]
+    C -->|Training Target| H
+    D -->|Evaluation Input| H
+    E -->|Evaluation Labels| H
+
+    %% Model Training and Evaluation
+    subgraph Model Training & Evaluation
+        H -->|Compute| I["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> metrics"]
+        H -->|Cost Tracking| J["<img src='dummy_plots/barplot_template.svg'/> <br/> costs"]
+    end
+ 
+    %% Annotations
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef processing fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    
+    class A dataSource;
+    class B,C,D,E processing;
+    class H model;
+    class I,J output;

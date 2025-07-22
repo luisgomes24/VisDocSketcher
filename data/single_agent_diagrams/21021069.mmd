@@ -1,0 +1,7 @@
+graph TD;
+    A["📂 Load Data Files"] --> B["📊 Create DataFrame: fruits"];
+    B --> C["📊 Create DataFrame: fruit_sales"];
+    C --> D["📜 Create Series: ingredients"];
+    D --> E["📂 Read CSV: reviews"];
+    E --> F["📊 Create DataFrame: animals"];
+    F --> G["💾 Save DataFrame to CSV"];

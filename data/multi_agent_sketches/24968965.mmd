@@ -1,0 +1,20 @@
+flowchart TD
+    %% This node represents the source of tweet data
+    A["tweets.csv"] --> |"Load tweets"| B["tweets DataFrame"]
+    
+    %% Processing tweets
+    B --> |"Process tweets"| C["tweets: date, text"]
+    
+    %% Parsing tweet text
+    C --> |"Parse text"| D["tweets: date, attempts, guesses, results"]
+    
+    %% Data analysis steps
+    D --> |"Plotting tweet counts"| E["Tweet Counts Plot"]
+    D --> |"Attempts analysis"| F["Attempts Analysis"]
+    D --> |"Calculate average guesses"| G["Average Guesses"]
+    
+    %% Dictionary with Wordle IDs
+    H["answer_dict"]
+    
+    %% Relations and connections
+    D --> |"Use wordle answers"| H

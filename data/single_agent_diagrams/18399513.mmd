@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["🧑‍🔬 Setup Environment"]
+    C --> D["📈 Compare Models <img src='scatter_plot_template.svg'/>"]
+    D --> E["✍️ Create Model"]
+    E --> F["🛠️ Tune Hyperparameters"]
+    F --> G["✅ Finalize Model"]
+    G --> H["💾 Save Model"]
+    H --> I["📥 Load Model"]
+    I --> J["🔍 Make Predictions"]
+    J --> K["📄 Submission File <img src='file.svg'/>"]

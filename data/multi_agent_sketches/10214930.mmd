@@ -1,0 +1,12 @@
+flowchart TD
+    A["cars_dataset.csv"] -- Load Data --> B["df1"]
+    B -- Exploratory Analysis --> C["Distribution Graphs"]
+    B -- Exploratory Analysis --> D["Correlation Matrix"]
+    B -- Exploratory Analysis --> E["Scatter and Density Plots"]
+
+    %% Comments for each node
+    %% A: Represents the data source file containing car specifications and features.
+    %% B: Represents the DataFrame created by loading the CSV file.
+    %% C: Represents the distribution graphs created for understanding data distribution.
+    %% D: Represents the correlation matrix created to see how variables are correlated.
+    %% E: Represents scatter and density plots for visual exploration of relationships between features.

@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["🗃️ Drop Unnecessary Columns <br/>"]
+    B --> C["🔍 Split Features and Targets <br/>"]
+    C --> D["🔄 Normalize Features <br/>"]
+    D --> E["📊 Visualize Attributes <br/> <img src='hist_template.svg' />"]
+    E --> F["🧠 Model Training <br/>"]
+    F --> G["🔍 Predictions <br/>"]
+    G --> H["📊 Visualize Predictions <br/> <img src='scatter_plot_template.svg' />"]
+    
+    H --> I["📈 Model Evaluation <br/>"]

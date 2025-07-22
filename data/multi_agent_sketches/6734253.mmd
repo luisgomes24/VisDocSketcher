@@ -1,0 +1,37 @@
+%% This is a Mermaid.js flowchart for the data science workflow in the provided Jupyter Notebook
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|"Load Data"| B["train DataFrame"]
+    C["test.csv"] -->|"Load Data"| D["test DataFrame"]
+    E["sample_submission.csv"] -->|"Load Structure"| F
+
+    %% Feature Engineering
+    B -->|"Feature Engineering"| G["simple_engineered_feature"]
+    D -->|"Feature Engineering"| H["simple_engineered_feature_test"]
+
+    %% Combine Features
+    G -->|"Concatenate"| I["train_features"]
+    H -->|"Concatenate"| J["test_features"]
+
+    %% Model Training
+    I -->|"Train Model"| K["Sequential Neural Network"]
+    K -->|"Predict"| L["submission"]
+
+    %% Comments on Model
+    subgraph model_details ["Sequential Neural Network Details"]
+        K1["Dense Layer: 512 units, relu activation"]
+        K2["Dense Layer: 128 units, relu activation"]
+        K3["Output Layer: len(target_cols) units, sigmoid activation"]
+        K4["Loss Function: Binary Crossentropy"]
+        K5["Optimizer: Adam"]
+        K6["Early Stopping: Enabled"]
+        K -.-> K1
+        K -.-> K2
+        K -.-> K3
+        K -.-> K4
+        K -.-> K5
+        K -.-> K6
+    end
+
+    %% Predictions
+    J -->|"Make Predictions"| L

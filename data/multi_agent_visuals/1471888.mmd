@@ -1,0 +1,22 @@
+graph TB
+    A[Load Data] --> B[data preprocessing]
+    B -->|cleaned data| C[plotHistogram]
+    B -->|cleaned data| D[plotCorrelationMatrix]
+    B -->|cleaned data| E[plotScatterMatrix]
+    C --> F[Show Histogram] 
+    D --> G[Show Correlation Matrix] 
+    E -->H[Show Scatter Matrix] 
+    style A fill:#87CEEB,stroke:#333,stroke-width:2px;
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px;
+    style C fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    style D fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    style E fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    style F fill:#F2C464,stroke:#333,stroke-width:2px;
+    style G fill:#F2C464,stroke:#333,stroke-width:2px;
+    style H fill:#F2C464,stroke:#333,stroke-width:2px;
+    C --> D[<img src='dummy_plots/hist_template.svg'/> <br/> plotHistogram];
+    D --> B[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotCorrelationMatrix];
+    E --> F[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotScatterMatrix];
+    C --> |Check/Validate| G[Show Histogram];
+    D --> |Check/Validate| H[Show Correlation Matrix];
+    E --> |Check/Validate| I[Show Scatter Matrix];

@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    input_data["911.csv\nContains 911 emergency call data"]
+    
+    %% Data Variables
+    df[["df\nDataFrame holding 911 call data"]]
+    Reason[["Reason\nCategorizes reason for each call"]]
+    Hour[["Hour\nHour extracted from timestamp"]]
+    Month[["Month\nMonth extracted from timestamp"]]
+    DayOfWeek[["DayOfWeek\nDay of week from timestamp"]]
+
+    %% Data Flow
+    input_data -->|"Read CSV"| df
+    df -->|"Derive Reason"| Reason
+    df -->|"Extract Hour"| Hour
+    df -->|"Extract Month"| Month
+    df -->|"Get Day of Week"| DayOfWeek
+    
+    %% Usages
+    df -->|"EDA & Visualizations"| eda["Exploratory Data Analysis"]
+    Reason -->|"Plot & Analyze"| analysis1["Reason-wise Analysis"]
+    Hour -->|"Hourly Analysis"| analysis2["Hour-wise Analysis"]
+    Month -->|"Monthly Trends"| analysis3["Month-wise Analysis"]
+    DayOfWeek -->|"Weekly Patterns"| analysis4["Day-wise Analysis"]

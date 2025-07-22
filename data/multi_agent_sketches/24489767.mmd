@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources 
+    A1["train.csv"] -->|Load Data| B1["train DataFrame"]
+    A2["test.csv"] -->|Load Data| B2["test DataFrame"]
+    
+    %% Data Cleaning and Transformation
+    B1 -->|Drop Duplicates| C1["train_dd DataFrame"]
+    C1 -->|Calculate Biases| C2["biases Dictionary"]
+    C1 -->|Calculate gcd| D1["gcd values"]
+    C2 -->|Adjust Data| D2["train_i DataFrame"]
+    
+    %% Feature Engineering
+    D2 -->|Split by gcd| E1["X_split Dictionary"]
+    D1 -->|Split Train| E1
+    D1 -->|Split Target| E2["y_split Dictionary"]
+    D1 -->|Split Weights| E3["wt_split Dictionary"]
+    B2 -->|Adjust Test Data| D3["test_i DataFrame"]
+    D3 -->|Split Test by gcd| E4["test_split Dictionary"]
+    
+    %% Modeling
+    E1 -->|Fit Models| F1["model_split Dictionary"]
+    E2 --> F1
+    E3 --> F1
+    
+    %% Predictions
+    F1 -->|Generate Predictions| G1["submission DataFrame"]
+    E4 --> G1
+
+    %% Output
+    G1 -->|Save to CSV| H1["submission.csv"]

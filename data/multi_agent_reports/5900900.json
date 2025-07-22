@@ -1,0 +1,41 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "/kaggle/input/test_lAUu6dG.csv",  
+      "description": "Contains sample data for exploratory analysis."  
+    },  
+    {  
+      "file_name": "/kaggle/input/train_ctrUa4K.csv",  
+      "description": "Training data for model building and analysis."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable_name": "df1",  
+      "description": "DataFrame for the sample dataset loaded from the first CSV file."  
+    },  
+    {  
+      "variable_name": "df2",  
+      "description": "DataFrame for the training dataset loaded from the second CSV file."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable_name": "df1",  
+      "creation_method": "pd.read_csv",  
+      "flow": [  
+        "Used for plotting distribution graphs and correlation matrix.",  
+        "Visualization through the functions plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix"  
+      ]  
+    },  
+    {  
+      "variable_name": "df2",  
+      "creation_method": "pd.read_csv",  
+      "flow": [  
+        "Used for plotting distribution graphs and correlation matrix.",  
+        "Visualization through the functions plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix"  
+      ]  
+    }  
+  ],  
+  "models": [] 
+}

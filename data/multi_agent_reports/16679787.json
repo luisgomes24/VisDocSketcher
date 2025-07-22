@@ -1,0 +1,23 @@
+{"data_sources": [
+    {"file_name": "insurance", "description": "Dados simulados de beneficiários e seus gastos com plano de saúde.”}
+],
+"data_variables": [
+    {"name": "dados", "description": "DataFrame contendo informações dos beneficiários e seus gastos.”},
+    {"name": "floresta", "description": "Modelo inicial Random Forest.”},
+    {"name": "floresta_adj", "description": "Modelo Random Forest ajustado.”},
+    {"name": "modelos", "description": "Lista com os melhores modelos selecionados.”},
+    {"name": "modelo_combinado", "description": "Modelo que combina os modelos ajustados.”},
+    {"name": "modelo_final", "description": "Modelo finalizado e pronto para uso.”}
+],
+"data_flow": [
+    {"variable": "dados", "creation_method": "get_data('insurance')", "flows_to": "setup() as input to PyCaret for regression analysis"},
+    {"variable": "floresta", "creation_method": "create_model('rf')", "flows_to": "used for predictions"},
+    {"variable": "floresta_adj", "creation_method": "tune_model(floresta) ", "flows_to": "used for final evaluation and predictions"},
+    {"variable": "modelos", "creation_method": "compare_models()", "flows_to": "used to find top models for final tuning"},
+    {"variable": "modelo_combinado", "creation_method": "blend_models(modelos_tunados)", "flows_to": "used for final prediction"},
+    {"variable": "modelo_final", "creation_method": "finalize_model(modelo_combinado) ", "flows_to": "saved to a file and used for predictions"}
+],
+"models": [
+    {"model_name": "Random Forest", "input_features": ["age", "sex", "bmi", "children", "smoker", "region"], "target_variable": "charges", "hyperparameters": "N/A"},
+    {"model_name": "Blended Model", "input_features": ["age", "sex", "bmi", "children", "smoker", "region"], "target_variable": "charges", "hyperparameters": "N/A"}
+]}

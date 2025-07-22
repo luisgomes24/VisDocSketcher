@@ -1,0 +1,81 @@
+{
+  "data_sources": [
+    {
+      "source": "Toy Data 1",
+      "description": "A small dataset for testing the decision tree classifier consisting of features x1, x2, x3 and target variable y."
+    },
+    {
+      "source": "Breast Cancer Dataset",
+      "description": "A dataset from sklearn containing features and a target variable for breast cancer classification."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "toy_data",
+      "description": "DataFrame containing toy dataset with features x1, x2, x3 and target y."
+    },
+    {
+      "name": "sklearn_datadf",
+      "description": "DataFrame created from sklearn breast cancer dataset containing features and target variable y."
+    },
+    {
+      "name": "sklearn_datadf_train",
+      "description": "Training split of the breast cancer dataset (75% of the data)."
+    },
+    {
+      "name": "sklearn_datadf_test",
+      "description": "Testing split of the breast cancer dataset (25% of the data)."
+    },
+    {
+      "name": "fitted_dt",
+      "description": "The fitted decision tree object from the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "toy_data",
+      "creation": "pd.DataFrame",
+      "flow": "Used in dt.fit() and prediction."
+    },
+    {
+      "variable": "sklearn_datadf",
+      "creation": "pd.DataFrame created from load_breast_cancer",
+      "flow": "Split into training and test sets and used for training and prediction."
+    },
+    {
+      "variable": "sklearn_datadf_train",
+      "creation": "Sampled data from sklearn_datadf",
+      "flow": "Used to fit the decision tree."
+    },
+    {
+      "variable": "sklearn_datadf_test",
+      "creation": "Filtered data not in training set",
+      "flow": "Used for testing predictions."
+    },
+    {
+      "variable": "fitted_dt",
+      "creation": "Returned from dt.fit()",
+      "flow": "Used for making predictions on train and test sets."
+    }
+  ],
+  "models": [
+    {
+      "model": "VanillaDecisionTreeClassifier",
+      "input_features": "x1, x2, x3 (toy_data), features from breast cancer dataset (sklearn_datadf)",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": "4",
+        "min_leaf_size": "2"
+      }
+    },
+    {
+      "model": "DecisionTreeClassifier (from sklearn)",
+      "input_features": "features from breast cancer dataset (sklearn_datadf)",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_depth": "4",
+        "min_samples_leaf": "2"
+      }
+    }
+  ]
+}

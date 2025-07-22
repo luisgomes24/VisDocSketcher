@@ -1,0 +1,13 @@
+```mermaid
+flowchart TD
+    A["Data Source: ../input/lish-moa/train_targets_scored.csv"]
+    B["Training Data: df_train_scored"]
+    C["Targets: targets"]
+    D["Number of Targets: n_targets"]
+    E["Correlation Matrix: cor_targets"]
+
+    A -->|load data| B
+    B -->|extract columns| C
+    C -->|count| D
+    B -->|calculate correlations| E
+```

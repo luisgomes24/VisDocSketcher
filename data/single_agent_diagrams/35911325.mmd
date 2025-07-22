@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["📊 Configurations"]
+    B --> C["📂 Load Submission Data <img src='icons/file.svg' />"]
+    C --> D["🔊 Load Test Sound File <img src='icons/image.svg' />"]
+    D --> E["📊 Inspect Training Data"]
+    E --> F["📊 Analyze Label Counts"]
+    F --> G["📈 Plot Label Counts <img src='dummy_plots/lineplot_template.svg' />"]
+    G --> H["📊 Check for Duplicates & Missing Data"]
+    H --> I["📄 Load Taxonomy Data <img src='icons/file.svg' />"]
+    I --> J["📊 Map Labels <img src='icons/table.svg' />"]
+    J --> K["📈 Plot Family Distribution <img src='dummy_plots/barplot_template.svg' />"]

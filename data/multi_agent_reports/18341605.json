@@ -1,0 +1,127 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with features and target variables."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data without target variables to make predictions."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submitting predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing the testing dataset."
+    },
+    {
+      "name": "features",
+      "description": "List of feature columns used for training the model excluding target variables."
+    },
+    {
+      "name": "X",
+      "description": "Features extracted from train_df for model training."
+    },
+    {
+      "name": "Y",
+      "description": "Target variables extracted from train_df for model training."
+    },
+    {
+      "name": "x_train",
+      "description": "Training features after splitting the dataset into train and test sets."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target values for model training after splitting the dataset."
+    },
+    {
+      "name": "prediction",
+      "description": "Predicted values from the model for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "pd.read_csv",
+      "usage": "Used for exploring data and splitting into features and target."
+    },
+    {
+      "variable": "test_df",
+      "created_by": "pd.read_csv",
+      "usage": "Used for predictions after model training."
+    },
+    {
+      "variable": "features",
+      "created_by": "List comprehension",
+      "usage": "To identify which columns from train_df will be used as input features."
+    },
+    {
+      "variable": "X",
+      "created_by": "train_df[features]",
+      "usage": "Input feature DataFrame for training the model."
+    },
+    {
+      "variable": "Y",
+      "created_by": "train_df[['target_carbon_monoxide', 'target_benzene', 'target_nitrogen_oxides']]",
+      "usage": "Target variable DataFrame containing columns to predict.
+    },
+    {
+      "variable": "x_train",
+      "created_by": "train_test_split",
+      "usage": "Features used to train the model."
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split",
+      "usage": "Target to train the model."
+    },
+    {
+      "variable": "prediction",
+      "created_by": "model.predict",
+      "usage": "Provides predicted responses for the test dataset.
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential Neural Network",
+      "architecture": [
+        {
+          "layer": "Dense",
+          "units": 8,
+          "activation": "relu"
+        },
+        {
+          "layer": "Dense",
+          "units": 10,
+          "activation": "relu"
+        },
+        {
+          "layer": "Dense",
+          "units": 16,
+          "activation": "relu"
+        },
+        {
+          "layer": "Dense",
+          "units": 5,
+          "activation": "relu"
+        },
+        {
+          "layer": "Dense",
+          "units": 3,
+          "activation": "relu"
+        }
+      ],
+      "loss_function": "MeanSquaredLogarithmicError",
+      "optimizer": "Adam",
+      "input_shape": "8"
+    }
+  ]
+}

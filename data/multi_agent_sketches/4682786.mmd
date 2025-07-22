@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+flowchart TD
+    md["md"]:::dataNode
+    %% md node represents dataset.csv loaded into a DataFrame
+    dataset["dataset.csv"]:::dataSource -->|"load CSV"| md
+    players["players"]:::processNode
+    %% players node represents filtered DataFrame with relevant attributes
+    md -.->|"filter"| players
+    X["X"]:::processNode
+    %% X node represents input features excluding 'RightFoot' and 'LeftFoot'
+    players -->|"select features"| X
+    X_foot["X_foot"]:::processNode
+    %% X_foot node represents 'RightFoot' and 'LeftFoot' features for prediction
+    players -->|"select foot features"| X_foot
+    y["y"]:::processNode
+    %% y node represents target variables for prediction
+    players -->|"select target"| y
+    X_normalized["X_normalized"]:::processNode
+    %% X_normalized node represents normalized input features
+    X -->|"normalize"| X_normalized
+    XGRegModel["XGRegModel"]:::modelNode
+    %% XGRegModel node represents MultiOutputRegressor using XGBoost
+    X & y -->|"train XGBoost"| XGRegModel
+    NNetModel["NNetModel"]:::modelNode
+    %% NNetModel node represents Neural Network model using Keras
+    X & y -->|"train keras model"| NNetModel
+
+    classDef dataNode fill:#ccccff,stroke:#000,color:#000;
+    classDef processNode fill:#ccffcc,stroke:#000,color:#000;
+    classDef modelNode fill:#ffcccc,stroke:#000,color:#000;
+    classDef dataSource fill:#ffcc99,stroke:#000,color:#000;

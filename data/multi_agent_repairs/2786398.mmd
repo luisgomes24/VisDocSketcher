@@ -1,0 +1,26 @@
+flowchart TD
+    subgraph Data_Loading
+        direction TB
+        A["Dataset\n(No CSV available)"]
+    end
+    
+    subgraph Data_Processing
+        direction TB
+        B["DataFrame df\n(Assumed to be created)"]
+        A --> B
+        C["Column Names\n(Extracted from df)"]
+    end
+    
+    subgraph Exploratory_Data_Analysis
+        direction TB
+        B --> D["Distribution Graphs\n(Bar/Histogram)"]
+        B --> E["Correlation Matrix\n(Used in plotCorrelationMatrix)"]
+        B --> F["Scatter and Density Plots\n(pd.plotting.scatter_matrix)"]
+    end
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#bfb,stroke:#333,stroke-width:2px;
+    class A dataSource;
+    class B,C dataVariable;
+    class D,E,F dataProcess;

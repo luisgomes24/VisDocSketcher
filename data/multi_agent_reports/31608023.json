@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/nlp-getting-started/train.csv",
+      "description": "Training dataset containing tweets and their associated disaster classification."
+    },
+    {
+      "source": "../input/nlp-getting-started/test.csv",
+      "description": "Testing dataset containing tweets for prediction."
+    },
+    {
+      "source": "../input/nlp-getting-started/sample_submission.csv",
+      "description": "Sample submission format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing the training tweets and their target labels."
+    },
+    {
+      "variable": "texts",
+      "description": "Tokenized and lemmatized text of tweets."
+    },
+    {
+      "variable": "text_sequences",
+      "description": "Sequences of tokenized and padded tweets ready for embedding."
+    },
+    {
+      "variable": "cat_labels",
+      "description": "Categorical labels for training tweets."
+    },
+    {
+      "variable": "E",
+      "description": "Word embedding matrix initialized with pre-trained Twitter embeddings."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing the testing tweets for prediction."
+    },
+    {
+      "variable": "test_text_sequences",
+      "description": "Padded sequences from the test text data prepared for model input."
+    },
+    {
+      "variable": "test_cat_labels",
+      "description": "Predicted target labels for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv",
+      "flows_to": ["texts", "cat_labels"]
+    },
+    {
+      "variable": "texts",
+      "created_by": "Tokenization and lemmatization",
+      "flows_to": ["text_sequences"]
+    },
+    {
+      "variable": "text_sequences",
+      "created_by": "Tokenizer and padding",
+      "flows_to": ["E"]
+    },
+    {
+      "variable": "cat_labels",
+      "created_by": "to_categorical",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "E",
+      "created_by": "build_embedding_matrix",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "model",
+      "created_by": "tf.keras.models.Sequential",
+      "flows_to": ["model fitting"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv",
+      "flows_to": ["test_text_sequences"]
+    },
+    {
+      "variable": "test_text_sequences",
+      "created_by": "Tokenization and padding for test tweets",
+      "flows_to": ["test_cat_labels"]
+    },
+    {
+      "variable": "test_cat_labels",
+      "created_by": "model.predict",
+      "flows_to": ["test_labels"]
+    },
+    {
+      "variable": "test_labels",
+      "created_by": "argmax",
+      "flows_to": ["test['predict']"]
+    },
+    {
+      "variable": "sample_submission",
+      "created_by": "pd.read_csv",
+      "flows_to": ["submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "CNN",
+      "input_features": "text_sequences",
+      "target_variable": "cat_labels",
+      "hyperparameters": {
+        "filters": 514,
+        "kernel_size": 3,
+        "embedding_dim": 25,
+        "num_classes": 2,
+        "epochs": 10,
+        "batch_size": 128
+      }
+    }
+  ]
+}

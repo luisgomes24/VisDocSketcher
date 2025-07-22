@@ -1,0 +1,16 @@
+```mermaid
+flowchart TD
+    DS1["Data Source 1: Model Configuration & Checkpoint"]
+    DS2["Data Source 2: Chart Image Files"]
+    INIT["Initialize Model"]
+    FILENAMES["Load Image Filenames"]
+    INFERENCE["Model Inference"]
+    RESULT["Handle Inference Results"]
+    VISUALIZE["Visualize and Save Results"]
+    DS1 --> INIT
+    DS2 --> FILENAMES
+    INIT --> INFERENCE
+    FILENAMES --> INFERENCE
+    INFERENCE --> RESULT
+    RESULT --> VISUALIZE
+```

@@ -1,0 +1,99 @@
+{
+  "data_sources": [
+    {
+      "file_name": "hotel_id_code_mapping.csv",
+      "description": "CSV containing mapping of hotel IDs to hotel ID codes"
+    },
+    {
+      "file_name": "test_images/",
+      "description": "Folder containing test images for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "SEED",
+      "description": "Seed value for random number generation to ensure reproducibility."
+    },
+    {
+      "name": "IMG_SIZE",
+      "description": "Size to which input images will be resized (256 pixels)."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing image IDs and corresponding hotel IDs from test images."
+    },
+    {
+      "name": "hotel_id_code_df",
+      "description": "DataFrame that contains hotel ID and hotel ID code mappings."
+    },
+    {
+      "name": "hotel_id_code_map",
+      "description": "Dictionary mapping hotel ID codes to hotel IDs."
+    },
+    {
+      "name": "test_dataset",
+      "description": "Dataset object instantiated with test data and transformations."
+    },
+    {
+      "name": "test_loader",
+      "description": "DataLoader for batch processing of test dataset."
+    },
+    {
+      "name": "model",
+      "description": "HotelIdModel object instantiated with a specific architecture and weights loaded from checkpoint."
+    },
+    {
+      "name": "preds",
+      "description": "List of predicted hotel IDs for each image in the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "test_df",
+      "creation_method": "pd.DataFrame",
+      "description": "Constructed from the test images directory, initially contains filenames.",
+      "usage": "Used to create the test dataset for predictions."
+    },
+    {
+      "variable": "hotel_id_code_map",
+      "creation_method": "set_index().to_dict()",
+      "description": "Constructed from hotel_id_code_df for quick lookup of hotel IDs using their code.",
+      "usage": "Used to map model predictions to hotel IDs in submission format."
+    },
+    {
+      "variable": "test_dataset",
+      "creation_method": "HotelImageDataset",
+      "description": "Instantiated with test_df and transformations for model input.",
+      "usage": "Used to create DataLoader for batch processing."
+    },
+    {
+      "variable": "test_loader",
+      "creation_method": "DataLoader",
+      "description": "Wraps test_dataset for batching and processing. Affects loading performance and allows parallel data loading.",
+      "usage": "Passed to the predict function to generate predictions."
+    },
+    {
+      "variable": "model",
+      "creation_method": "get_model",
+      "description": "Loaded from checkpoint to initialize HotelIdModel.", 
+      "usage": "Used in the prediction phase to generate outputs.",
+    },
+    {
+      "variable": "preds",
+      "creation_method": "predict",
+      "description": "Predictions generated for all images in the test_loader.",
+      "usage": "Mapped to hotel IDs for the final submission file."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "HotelIdModel",
+      "input_features": "Input images processed through data transformations.",
+      "target_variable": "Hotel IDs corresponding to images.",
+      "hyperparameters": {
+        "backbone_name": "efficientnet_b0",
+        "n_classes": "number of unique hotel IDs"
+      }
+    }
+  ]
+}

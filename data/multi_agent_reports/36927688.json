@@ -1,0 +1,107 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/intel-image-classification",
+      "description": "Directory containing image data for classification, organized by class."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "TensorFlow dataset created from the training directory, containing images and labels."
+    },
+    {
+      "name": "train_data",
+      "description": "Sub-dataset of 'data' used for training, containing 80% of the samples."
+    },
+    {
+      "name": "val_data",
+      "description": "Sub-dataset of 'data' used for validation, containing 20% of the samples."
+    },
+    {
+      "name": "test_data",
+      "description": "TensorFlow dataset created from the test directory for evaluating the model."
+    },
+    {
+      "name": "hist",
+      "description": "History object containing loss and accuracy metrics for training and validation."
+    },
+    {
+      "name": "pre",
+      "description": "TensorFlow Precision metric for model evaluation."
+    },
+    {
+      "name": "re",
+      "description": "TensorFlow Recall metric for model evaluation."
+    },
+    {
+      "name": "acc",
+      "description": "TensorFlow Binary Accuracy metric for model evaluation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "tf.keras.utils.image_dataset_from_directory",
+      "flows_to": ["train_data", "val_data"]
+    },
+    {
+      "variable": "train_data",
+      "creation_method": "data.take",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "val_data",
+      "creation_method": "data.skip",
+      "flows_to": ["model validation"]
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "tf.keras.utils.image_dataset_from_directory",
+      "flows_to": ["model evaluation"]
+    },
+    {
+      "variable": "hist",
+      "creation_method": "model.fit",
+      "flows_to": ["loss/accuracy plots"]
+    },
+    {
+      "variable": "pre",
+      "creation_method": "Precision()",
+      "flows_to": ["model evaluation"]
+    },
+    {
+      "variable": "re",
+      "creation_method": "Recall()",
+      "flows_to": ["model evaluation"]
+    },
+    {
+      "variable": "acc",
+      "creation_method": "BinaryAccuracy()",
+      "flows_to": ["model evaluation"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "AlexNet",
+      "layers": [
+        {"type": "Conv2D", "filters": 96, "kernel_size": [11, 11], "activation": "relu"},
+        {"type": "MaxPooling2D"},
+        {"type": "Conv2D", "filters": 256, "kernel_size": [5, 5], "activation": "relu"},
+        {"type": "MaxPooling2D"},
+        {"type": "Conv2D", "filters": 124, "kernel_size": [3, 3], "activation": "relu"},
+        {"type": "MaxPooling2D"},
+        {"type": "Flatten"},
+        {"type": "Dense", "units": 256, "activation": "relu"},
+        {"type": "Dropout", "rate": 0.2},
+        {"type": "Dense", "units": 64, "activation": "relu"},
+        {"type": "Dropout", "rate": 0.2},
+        {"type": "Dense", "units": 6, "activation": "softmax"}
+      ],
+      "optimizer": "adam",
+      "loss_function": "sparse_categorical_crossentropy",
+      "epochs": [20, 30],
+      "metrics": ["accuracy"]
+    }
+  ]
+}

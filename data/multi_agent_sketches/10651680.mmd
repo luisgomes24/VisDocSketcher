@@ -1,0 +1,26 @@
+flowchart TD
+    %% Define Data Sources
+    A[("../input/train.csv") Training Data] -->|Load data| B(X[DataFrame with features])
+    A -->|Load data| C(y[Series with SalePrice])
+
+    %% Data Splitting
+    B -->|Split data using train_test_split| D[X_train_full]
+    B -->|Split data using train_test_split| E[X_valid_full]
+    D -->|Feature Engineering using pd.get_dummies| F(X_train[Training features])
+    E -->|Feature Engineering using pd.get_dummies| G(X_valid[Validation features])
+    A -->|Load data| H(X_test[Test features])
+
+    %% Model 1
+    F -->|Train model| I(my_model_1[XGBRegressor, rs=0])
+    I -->|Predict| J(predictions_1[Validation Predictions])
+    J -->|Calculate MAE| K[mae_1]
+
+    %% Model 2
+    F -->|Train model| L(my_model_2[XGBRegressor, est=1000, lr=0.05])
+    L -->|Predict| M(predictions_2[Validation Predictions])
+    M -->|Calculate MAE| N[mae_2]
+
+    %% Model 3
+    F -->|Train model| O(my_model_3[XGBRegressor, est=1])
+    O -->|Predict| P(predictions_3[Validation Predictions])
+    P -->|Calculate MAE| Q[mae_3]

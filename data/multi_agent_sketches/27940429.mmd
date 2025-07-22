@@ -1,0 +1,22 @@
+%% This diagram visualizes the workflow for the Jupyter Notebook located at distil1000/notebooks/27940429.ipynb
+
+flowchart TD
+    %% Node for the data source from WandB Artifacts
+    A["WandB Artifacts"] -->|download experiments| B(EXPERIMENTS)
+    click A href "https://wandb.ai/"
+    
+    %% Node for the EXPERIMENTS variable, which lists experiment IDs
+    B["EXPERIMENTS"] -->|each experiment| C(artifact)
+    
+    %% Node for the artifact derived from each experiment
+    C["artifact"] -->|fetch details| D(artifact_dir)
+    
+    %% Node representing the directory where artifacts are downloaded
+    D["artifact_dir"]
+    
+    %% Each node in the diagram
+    
+    %% A: Source of the model artifacts for the experiments
+    %% B: List identifying different experiments whose artifacts need downloading
+    %% C: Represents individual artifacts downloaded for processing
+    %% D: Path for managing downloaded artifact files and directories

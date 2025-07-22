@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "source": "/kaggle/input/cached/work_dirs/",
+      "description": "Contains model configuration and checkpoint files necessary for initializing the CACHED model."
+    },
+    {
+      "source": "/kaggle/input/benetech-making-graphs-accessible/train/images/*.jpg",
+      "description": "Image files that are used as input for inference, containing chart elements to be detected."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "model",
+      "description": "Initialized object detection model configured to detect chart elements, using MMDetection framework."
+    },
+    {
+      "variable": "filenames",
+      "description": "List of image file paths from the specified directory for processing with the model."
+    },
+    {
+      "variable": "result",
+      "description": "Result of the model inference, containing bounding boxes and confidence scores for detected elements in the charts."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "model",
+      "creation": "init_detector()",
+      "flow": "Used to process the image files and generate results."
+    },
+    {
+      "variable": "filenames",
+      "creation": "glob()",
+      "flow": "Iterated over to perform inference on each image file."
+    },
+    {
+      "variable": "result",
+      "creation": "inference_detector()",
+      "flow": "Passed to model.show_result() to visualize detections and saved as an image."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CACHED",
+      "input_features": "Image data from filenames",
+      "target_variables": "Detected elements in the chart",
+      "hyperparameters": "Utilizes default settings in the provided configuration file." 
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+flowchart TD
+    subgraph DataSources
+        DS1(["PoliceKillingsUS.csv"])
+    end
+    subgraph DataProcessing
+        DP1(["Load Data"])
+        DP2(["Filter Data"])
+        DP3(["Transform Data"])
+    end
+    subgraph Model
+        M1(["Train Model"])
+        M2(["Evaluate Model"])
+    end
+    subgraph Output
+        O1(["Predicted Results"])
+    end
+    DS1 --> DP1
+    DP1 --> DP2
+    DP2 --> DP3
+    DP3 --> M1
+    M1 --> M2
+    M2 --> O1

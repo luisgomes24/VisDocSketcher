@@ -1,0 +1,93 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/bitcoin-historical-data/bitstampUSD_1-min_data_2012-01-01_to_2020-12-31.csv",
+      "description": "Historical Bitcoin price data including Open, Close, High, Low, Volume and Weighted Price."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "btc",
+      "description": "DataFrame containing raw Bitcoin historical data."
+    },
+    {
+      "name": "btc_daily",
+      "description": "DataFrame containing daily averaged Bitcoin price data."
+    },
+    {
+      "name": "daily_data_fb",
+      "description": "DataFrame formatted for use with Prophet, containing columns 'ds' (timestamp) and 'y' (weighted price)."
+    },
+    {
+      "name": "train_fb",
+      "description": "Training set for the model containing 'ds' and 'y' values before the split date."
+    },
+    {
+      "name": "test_fb",
+      "description": "Testing set for the model containing 'ds' and 'y' values after the split date."
+    },
+    {
+      "name": "future_predictions",
+      "description": "Forecasted values using the trained model on the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "btc",
+      "created_by": "read_csv",
+      "flows_to": [
+        "btc_daily"
+      ]
+    },
+    {
+      "variable": "btc_daily",
+      "created_by": "resample",
+      "flows_to": [
+        "fill_missing"
+      ]
+    },
+    {
+      "variable": "daily_data_fb",
+      "created_by": "reset_index and rename",
+      "flows_to": [
+        "train_fb",
+        "test_fb"
+      ]
+    },
+    {
+      "variable": "train_fb",
+      "flows_to": [
+        "automl_model.fit"
+      ]
+    },
+    {
+      "variable": "test_fb",
+      "flows_to": [
+        "future_predictions"
+      ]
+    },
+    {
+      "variable": "future_predictions",
+      "flows_to": [
+        "subm"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "name": "auto_SARIMAX",
+      "input_features": ["ds", "y"],
+      "target_variable": "y",
+      "hyperparameters": {
+        "seasonal_period": 12,
+        "cv": 5
+      }
+    },
+    {
+      "name": "Prophet",
+      "input_features": ["ds", "y"],
+      "target_variable": "y",
+      "hyperparameters": {} 
+    }
+  ]
+}

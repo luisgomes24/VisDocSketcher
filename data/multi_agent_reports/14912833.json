@@ -1,0 +1,20 @@
+{"data_sources": [
+    {"file_name": "landscape-pictures", "description": "Contains landscape images loaded for training the model."},
+    {"file_name": "artstation-landscape-thumbnails", "description": "Contains thumbnails of artworks used for validation."}
+],
+"data_variables": [
+    {"name": "GCS_PATH", "description": "The Google Cloud Storage path for datasets"},
+    {"name": "FILENAMES", "description": "List of image file names loaded from Google Cloud Storage"},
+    {"name": "art_dataset", "description": "Dataset for artwork images prepared for training and validation"},
+    {"name": "example_input", "description": "Example input data for generator model"},
+    {"name": "example_target", "description": "Example target data for generator model"}
+],
+"data_flow": [
+    {"variable": "FILENAMES", "created_from": "tf.io.gfile.glob", "flows_to": "art_dataset and generator input"},
+    {"variable": "art_dataset", "created_from": "tf.data.Dataset.from_tensor_slices and map(data loading function)", "flows_to": "art_dataset_train and art_dataset_val"},
+    {"variable": "generator", "created_from": "Generator function", "flows_to": "model training and image generation"},
+    {"variable": "discriminator", "created_from": "Discriminator function", "flows_to": "model training and loss calculations"}
+],
+"models": [
+    {"model_name": "CycleGAN", "description": "Main model combining generator and discriminator for style transfer", "input_features": ["input_image"], "target_variable": "target", "hyperparameters": {"lambda_cycle": 10}}
+]}

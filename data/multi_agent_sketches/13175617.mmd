@@ -1,0 +1,35 @@
+%% This is a Mermaid.js flowchart representing the workflow of the Jupyter Notebook
+flowchart TD
+    subgraph DataSources[Data Sources]
+        A1["/kaggle/input/kmarket-mlp/feature_cols.dill"]
+        A2["/kaggle/input/kmarket-mlp/val_model.hdf5"]
+    end
+
+    subgraph DataVariables[Data Variables]
+        B1["feature_cols"]
+        B2["model"]
+        B3["test_df"]
+        B4["sample_prediction_df"]
+        B5["X"]
+        B6["action"]
+    end
+
+    subgraph Model[Keras Model]
+        M1["Pre-trained Keras Model for Predictions"]
+        M2["Inputs: feature_cols"]
+        M3["Output: action > 0.5"]
+    end
+
+    A1 --> B1 %% feature_cols loaded from .dill file
+    A2 --> B2 %% model loaded from .hdf5 file
+
+    B1 --> B5 %% feature_cols used to create X
+    B3 --> B5 %% test_df used to create X
+    B5 --> B6 %% X used to predict action
+
+    B2 --> M1 %% Keras model for predictions
+    B5 --> M2 %% Input for the model
+    M3 --> B6 %% Binary decision output of the model
+
+    B6 --> B4 %% action added to sample_prediction_df
+    B4 --> |"env.predict"| submission["Submission"]

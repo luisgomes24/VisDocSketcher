@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_name": "tesla_stocks.csv",
+      "description": "Contains daily stock prices for Tesla"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing Tesla stock prices data"
+    },
+    {
+      "variable_name": "stocks_year",
+      "description": "Mean stock prices grouped by year"
+    },
+    {
+      "variable_name": "stocks_month",
+      "description": "Mean stock prices grouped by month"
+    },
+    {
+      "variable_name": "open_close",
+      "description": "DataFrame including Open, Close prices and price changes"
+    },
+    {
+      "variable_name": "open_close_2020",
+      "description": "DataFrame including Open, Close prices and price changes for 2020"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation": "pd.read_csv",
+      "flows_to": ["stocks_year", "stocks_month", "open_close"]
+    },
+    {
+      "variable_name": "stocks_year",
+      "creation": "df.groupby(by='year').mean()",
+      "flows_to": "Plotting yearly stock prices"
+    },
+    {
+      "variable_name": "stocks_month",
+      "creation": "df.groupby(by='month').mean()",
+      "flows_to": "Plotting monthly stock prices"
+    },
+    {
+      "variable_name": "open_close",
+      "creation": "df[['month_year','Open','Close','year']]",
+      "flows_to": "Plotting Open vs Close price changes"
+    },
+    {
+      "variable_name": "open_close_2020",
+      "creation": "df[['month','Open','Close','year']][open_close_2020['year']==2020]",
+      "flows_to": "Plotting Open vs Close price changes for 2020"
+    }
+  ],
+  "models": []
+}

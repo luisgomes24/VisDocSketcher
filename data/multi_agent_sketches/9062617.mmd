@@ -1,0 +1,20 @@
+flowchart TD
+    %% Node for the training data source
+    A[train.csv] -->|Load Data| B[train DataFrame]
+    %% Node for train DataFrame profiling
+    B -->|Generate Profile| C[ProfileReport for train]
+    C -->|Save and Display| D(ProfileReport_train.html)
+    
+    %% Node for test data source
+    E[test.csv] -->|Load Data| F[test DataFrame]
+    %% Node for test DataFrame profiling
+    F -->|Generate Profile| G[ProfileReport for test]
+    G -->|Save and Display| H(ProfileReport_test.html)
+
+    %% Comments for clarity
+    subgraph Comments
+    A:::comment[Contains training data for prostate cancer grade assessment.]
+    E:::comment[Contains test data for prostate cancer grade assessment.]
+    B:::comment[Dataframe containing the training dataset loaded from train.csv.]
+    F:::comment[Dataframe containing the test dataset loaded from test.csv.]
+    end

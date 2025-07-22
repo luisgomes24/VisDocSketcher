@@ -1,0 +1,8 @@
+flowchart TD
+    A["📥 Load Data<br/><img src='file.svg' />"] --> B["🧹 Preprocess Data"]
+    B --> C["📊 RMSE Calculation (All Zeros)<br/><img src='hist_template.svg' />"]
+    C --> D["📍 Calculate Mean & Std<br/>"]
+    D --> E["📊 RMSE Distribution (All Zeros)<br/><img src='hist_template.svg' />"]
+    E --> F["📊 RMSE Calculation (Train Mean)<br/><img src='hist_template.svg' />"]
+    F --> G["📍 Calculate Mean & Std (Train Mean)<br/>"]
+    G --> H["📊 RMSE Distribution (Train Mean)<br/><img src='hist_template.svg' />"]

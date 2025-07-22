@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/customer-segmentation-tutorial-in-python/Mall_Customers.csv",
+      "description": "Contains customer data including features like Annual Income and Spending Score."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the customer data loaded from CSV."
+    },
+    {
+      "variable": "Q1",
+      "description": "Lower quartile of the Annual Income variable."
+    },
+    {
+      "variable": "Q3",
+      "description": "Upper quartile of the Annual Income variable."
+    },
+    {
+      "variable": "IQR",
+      "description": "Interquartile range for the Annual Income variable."
+    },
+    {
+      "variable": "clus",
+      "description": "Array of features used for clustering (Annual Income and Spending Score)."
+    },
+    {
+      "variable": "Y",
+      "description": "Labels assigned to each data point indicating cluster membership."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": "data analysis, preprocessing steps such as outlier removal, skewness checks, and plotting."
+    },
+    {
+      "variable": "clus",
+      "created_by": "df.iloc[:,[3,4]].values",
+      "flows_to": "KMeans clustering for determining customer segments."
+    },
+    {
+      "variable": "Y",
+      "created_by": "kmeans.fit_predict(clus)",
+      "flows_to": "final plotting of clusters and centroid visualization."
+    }
+  ],
+  "models": [
+    {
+      "model": "KMeans",
+      "parameters": {
+        "n_clusters": 5,
+        "init": "k-means++",
+        "random_state": 42
+      },
+      "input_features": ["Annual Income (k$)", "Spending Score (1-100)"],
+      "target_variable": "Cluster Labels"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+flowchart TD
+    %% Node for raw data source - Bitcoin historical data
+    A["Bitcoin Historical Data\nbitstampUSD_1-min_data_2012-01-01_to_2020-12-31.csv"]
+    %% Node for btc DataFrame creation
+    A -->|"read_csv"| B["btc (DataFrame)\nRaw Bitcoin data"]
+    %% Node for daily resampled Bitcoin data
+    B -->|"resample and average"| C["btc_daily (DataFrame)\nDaily averaged Bitcoin data"]
+    %% Node for missing value handling and formatting for Prophet
+    C -->|"fill_missing"| D["daily_data_fb (DataFrame)\nFormatted for Prophet"]
+    %% Nodes for Creating Train and Test DataFrames
+    D -->|"split into train"| E["train_fb (DataFrame)"]
+    D -->|"split into test"| F["test_fb (DataFrame)"]
+    %% Node for Model Training using auto_SARIMAX
+    E -->|"fit auto_SARIMAX"| G["auto_SARIMAX Model\nFeatures: ds, y"]
+    %% Node for Model Training using Prophet
+    E -->|"fit Prophet"| H["Prophet Model\nFeatures: ds, y"]
+    %% Node for Future Predictions
+    F -->|"forecast"| I["future_predictions (DataFrame)"]
+    %% Node for submission data
+    I -->J["subm (DataFrame)\nSubmission format"]

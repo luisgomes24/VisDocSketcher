@@ -1,0 +1,24 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["📊 Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='dummy_plots/heatmap_template.svg' />"]
+    C --> D["🧠 Model Data"]
+    D --> E["📈 Evaluate Models"]
+    
+    A1["<img src='icons/table.svg' /> Load Attendance Data"] --> A
+    A2["<img src='icons/table.svg' /> Load Salary Data"] --> A
+    A3["<img src='icons/table.svg' /> Load PIE Data"] --> A
+    A4["<img src='icons/table.svg' /> Load Plus-Minus Data"] --> A
+    A5["<img src='icons/table.svg' /> Load Br Stats Data"] --> A
+    A6["<img src='icons/table.svg' /> Load Wikipedia Data"] --> A
+    A7["<img src='icons/table.svg' /> Load Twitter Data"] --> A
+
+    B1["📁 Clean and Merge Data"] --> B
+    B2["📉 Feature Engineering"] --> B
+    
+    C1["📊 Plot Heatmap <img src='dummy_plots/heatmap_template.svg' />"] --> C
+    C2["📈 Scatter Plot <img src='dummy_plots/scatter_plot_template.svg' />"] --> C
+    
+    D1["🧪 OLS Regression Models"] --> D
+    D2["🧠 Model Summary"] --> D
+    
+    E1["📊 Print Model Evaluation <img src='dummy_plots/barplot_template.svg' />"] --> E

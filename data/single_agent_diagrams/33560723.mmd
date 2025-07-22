@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Data"] -->|Download datasets| B["📊 Load DataFrames"]
+    B --> C["🔍 Select Targets"]
+    C --> D["🧪 Preprocess Data"]
+    D --> E["📈 Calculate Spearman's Correlation"]
+    E --> F["📊 Create Summary Stats"]
+    F --> G["📈 Visualize Results"]
+    G --> H["✨ Display Metrics"]
+    H --> I["📊 Barplots Results"] <img src='dummy_plots/barplot_template.svg' /> <br/> "Sharpe Ratios"

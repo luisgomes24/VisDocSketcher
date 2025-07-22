@@ -1,0 +1,26 @@
+graph TD;
+  A["<img src='icons/database.svg' width=100 height=100/> <br/> Training Data"]
+  B["<img src='icons/file.svg' width=100 height=100/> <br/> Test Data"]
+  C["<img src='icons/file.svg' width=100 height=100/> <br/> Country Info"]
+  D["<img src='icons/table.svg' width=100 height=100/> <br/> Data Frames"]
+  E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+  F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train/Test Split"]
+  G["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Model"]
+  H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Predictions"]
+  I["<img src='dummy_plots/boxplot_template.svg'/> <br/> Model Evaluation"]
+  J["<img src='dummy_plots/hist_template.svg'/> <br/> Target Distribution"]
+  K["<img src='dummy_plots/barplot_template.svg'/> <br/> Feature Importance"]
+  L["<img src='dummy_plots/lineplot_template.svg'/> <br/> Learning Curve"];
+
+  A --> D;
+  B --> D;
+  C --> D;
+  D --> E;
+  D --> F;
+  E --> G;
+  F --> G;
+  G --> H;
+  G --> I;
+  G --> J;
+  G --> K;
+  G --> L;

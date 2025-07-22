@@ -1,0 +1,18 @@
+{"data_sources": [
+    {"file_name": "playoff_win_loss.csv", "description": "Contains data about playoff game results in terms of wins and losses."},
+    {"file_name": "playoffs_frac_score.csv", "description": "Contains fractional scores from playoff games."},
+    {"file_name": "Playoffs.csv", "description": "General playoff data with various statistics."}
+],
+"data_variables": [
+    {"variable_name": "df1", "description": "DataFrame for playoff_win_loss.csv containing win/loss data."},
+    {"variable_name": "df2", "description": "DataFrame for playoffs_frac_score.csv containing fractional score data."},
+    {"variable_name": "df3", "description": "DataFrame for Playoffs.csv containing various playoff statistics."}
+],
+"data_flow": [
+    {"variable_name": "df1", "created_by": "pd.read_csv", "uses": ["plotPerColumnDistribution"], "saved_as": "NA"},
+    {"variable_name": "df2", "created_by": "pd.read_csv", "uses": ["plotPerColumnDistribution"], "saved_as": "NA"},
+    {"variable_name": "df3", "created_by": "pd.read_csv", "uses": ["plotPerColumnDistribution"], "saved_as": "NA"}
+],
+"models": [
+    {"model_name": "None", "input_features": "Not applicable", "target_variable": "Not applicable", "hyperparameters": "Not applicable"}
+]}

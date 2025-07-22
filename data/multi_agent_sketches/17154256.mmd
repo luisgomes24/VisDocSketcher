@@ -1,0 +1,21 @@
+flowchart TD
+
+    %% Data Source
+    A[CSV File: WA_Fn-UseC_-Telco-Customer-Churn.csv]
+    %% Data Preparation
+    A -->|Load CSV| B[data]
+    B -->|EDA| C[categorical{Categorical Variables}]
+    %% Model Setup & Training
+    B -->|PyCaret Setup| D[telecom{PyCaret Setup}]
+    D -->|Create AdaBoost Model| E[ada{AdaBoost Model}]
+    E -->|Tune Model| F[tuned_ada{Tuned AdaBoost Model}]
+    %% Finalizing Model
+    F -->|Finalize Model| G[final_ada{Final AdaBoost Model}]
+
+    %% Comments
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef preprocess fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#afa,stroke:#6a6,stroke-width:2px;
+    class A source;
+    class B,C,D preprocess;
+    class E,F,G model;

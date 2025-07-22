@@ -1,0 +1,67 @@
+%%{ init : { 'theme' : 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffe0', 'primaryBorderColor': '#d4aa00', 'primaryTextColor': '#000000', 'tertiaryBorderColor': '#ffeb99'}, 'themeCSS': '.label foreignObject { overflow: visible; } '} }%%
+
+```mermaid
+graph TD
+
+    %% Data Sources
+    A["DatosIbex2020.csv"] -->|"Load CSV"| B["df"]
+    
+    %% DataFrame Creation and Filtering
+    B -->|"Filter Columns ['Fecha', 'Último']"| C["ibex"]
+
+    %% Data Transformation
+    C -->|"Convert Dates and Transform Values"| D["Processed Ibex"]
+    D -->|"Log Transformation"| E["y_log"]
+    D -->|"Differencing"| F["y_log_diff"]
+
+    %% Train-Test Split
+    D -->|"Train-Test Split (90-10)"| G["y_train"]
+    D -->|"Train-Test Split (90-10)"| H["y_test"]
+
+    %% Model Fitting
+    G -->|"Fit SARIMAX Model"| I["SARIMAX Model"]
+    
+    %% Predicting
+    I -->|"Forecast"| J["pred_uc"]
+
+    %% Evaluation
+    J -->|"Predicted Mean"| K["Predicted Values"]
+    J -->|"Confidence Intervals"| L["pred_ci"]
+
+    %% Final Output
+    K -->|"Plot Results"| M(("Final Prediction Plot"))
+    L -->|"Plot Confidence Intervals"| M 
+
+    %% Styling
+    subgraph raw_data ["Raw Data Processing"]
+    A
+    B
+    end
+
+    subgraph data_prep ["Data Preparation"]
+    C
+    D
+    end
+
+    subgraph feature_eng ["Feature Engineering"]
+    E
+    F
+    end
+
+    subgraph modeling ["Modeling & Forecasting"]
+    G
+    H
+    I
+    J
+    K
+    L
+    end
+
+    subgraph results ["Results & Visualization"]
+    M
+    end
+
+    
+    classDef dataNodes fill:#ffeb99,stroke:#d4aa00,stroke-width:2px;
+    classDef processNodes fill:#ffe680,stroke:#d4aa00,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M dataNodes;

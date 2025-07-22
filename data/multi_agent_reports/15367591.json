@@ -1,0 +1,137 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/breast-cancer/breast-cancer.csv",
+            "description": "Contains breast cancer data, formatted for analysis."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "dataset",
+            "description": "DataFrame containing the breast cancer dataset."
+        },
+        {
+            "variable": "data",
+            "description": "Numpy array representation of the dataset for processing."
+        },
+        {
+            "variable": "X",
+            "description": "Features (input variables) extracted from data (all columns except the last)."
+        },
+        {
+            "variable": "y",
+            "description": "Target variable extracted from data (the last column)."
+        },
+        {
+            "variable": "X_train",
+            "description": "Training features after splitting the dataset."
+        },
+        {
+            "variable": "X_test",
+            "description": "Testing features after splitting the dataset."
+        },
+        {
+            "variable": "y_train",
+            "description": "Training target values after splitting the dataset."
+        },
+        {
+            "variable": "y_test",
+            "description": "Testing target values after splitting the dataset."
+        },
+        {
+            "variable": "ordinal_encoder",
+            "description": "Encoder used to convert categorical features into ordinal values."
+        },
+        {
+            "variable": "label_encoder",
+            "description": "Encoder used to convert target variable into numeric format."
+        },
+        {
+            "variable": "model",
+            "description": "Logistic Regression model instantiated for training."
+        },
+        {
+            "variable": "yhat",
+            "description": "Predicted values for the test set."
+        },
+        {
+            "variable": "accuracy",
+            "description": "Accuracy score of the model on the test data."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "dataset",
+            "creation": "read_csv",
+            "flow": "Converted to numpy array 'data'."
+        },
+        {
+            "variable": "data",
+            "creation": "Extracted from 'dataset'.",
+            "flow": "Used to create 'X' and 'y' variables."
+        },
+        {
+            "variable": "X",
+            "creation": "Slicing 'data'.",
+            "flow": "Used for model training and testing."
+        },
+        {
+            "variable": "y",
+            "creation": "Slicing 'data'.",
+            "flow": "Used for model training and evaluating accuracy."
+        },
+        {
+            "variable": "X_train",
+            "creation": "train_test_split",
+            "flow": "Used for training the model."
+        },
+        {
+            "variable": "X_test",
+            "creation": "train_test_split",
+            "flow": "Used for predicting with the trained model."
+        },
+        {
+            "variable": "y_train",
+            "creation": "train_test_split",
+            "flow": "Used for training the model."
+        },
+        {
+            "variable": "y_test",
+            "creation": "train_test_split",
+            "flow": "Used for evaluating model accuracy."
+        },
+        {
+            "variable": "ordinal_encoder",
+            "creation": "OrdinalEncoder()",
+            "flow": "Encodes categorical features for 'X_train' and 'X_test'."
+        },
+        {
+            "variable": "label_encoder",
+            "creation": "LabelEncoder()",
+            "flow": "Encodes categorical target values for 'y_train' and 'y_test'."
+        },
+        {
+            "variable": "model",
+            "creation": "LogisticRegression()",
+            "flow": "Trained on 'X_train' and 'y_train'."
+        },
+        {
+            "variable": "yhat",
+            "creation": "model.predict",
+            "flow": "Used to compute 'accuracy'."
+        },
+        {
+            "variable": "accuracy",
+            "creation": "accuracy_score",
+            "flow": "Printed as final output."
+        }
+    ],
+    "models": [
+        {
+            "model": "LogisticRegression",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "Default hyperparameters used."
+        }
+    ]
+}

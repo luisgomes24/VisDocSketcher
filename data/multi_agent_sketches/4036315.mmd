@@ -1,0 +1,46 @@
+flowchart TD
+
+subgraph DataSources
+    A[Train.csv]:::dataSource -->|Read CSV| B[rawtrain]:::dataVariable
+    C[Test.csv]:::dataSource -->|Read CSV| D[rawtest]:::dataVariable
+end
+
+subgraph Preprocessing
+    B -->|Select Features| E[selected]:::dataVariable
+    E === F[train]:::dataVariable
+    D -->|Select Features| G[test]:::dataVariable
+    F -->|Combine for processing| H[full]:::dataVariable
+end
+
+subgraph FeatureExtraction
+    F -->|Exclude id and target| I[features]:::dataVariable
+    F -->|Extract| J[target]:::dataVariable
+end
+
+subgraph TrainValidationSplit
+    F -->|Split| K[Xtrain]:::dataVariable
+    F -->|Split| L[Xvalid]:::dataVariable
+    J -->|Split| M[ytrain]:::dataVariable
+    J -->|Split| N[yvalid]:::dataVariable
+end
+
+subgraph Modeling
+    I -->|Input| O[GradientBoostingRegressor]:::model
+    M --> O
+    O -->|Validate| P[ypred]:::dataVariable
+    L --> O
+
+    I -->|Input| Q[ExtraTreesRegressor]:::model
+    M --> Q
+    Q -->|Test| R[ytestpred]:::dataVariable
+    G --> Q
+end
+
+P -->|Evaluate| S[RMSE]:::evaluator
+R -->|Save Results| T[submission.csv]:::output
+
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+classDef model fill:#ffeb3b,stroke:#333,stroke-width:2px;
+classDef evaluator fill:#c6f,stroke:#333,stroke-width:2px;
+classDef output fill:#ccffcc,stroke:#333,stroke-width:2px;

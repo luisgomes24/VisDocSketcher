@@ -1,0 +1,20 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> train.csv"] --> B["👀 Preview Data"];
+    B --> C["✂️ Split Data <img src='row_split.svg'/>"];
+    C --> D["⚙️ Preprocess Data"];
+    D --> E["🔠 One-Hot Encode Pieces"];
+    D --> F["🔄 Custom Encoding for Pieces"];
+    F --> G["🔄 Encode Board"];
+    G --> H["🛠️ Encode FEN String"];
+    H --> I["📊 Prepare Train/Validation Sets"];
+    
+    I --> J["🧠 Build Model"];
+    J --> K["📈 Train Model"];
+    
+    K --> L["📉 Plot Training History <img src='lineplot_template.svg'/>"];
+    
+    L --> M["🎮 Inference"];
+    M --> N["📂 Load Test Data <img src='file.svg'/> <br/> test.csv"];
+    N --> O["🤖 Predict Best Move"];
+    O --> P["💾 Save Submission"];

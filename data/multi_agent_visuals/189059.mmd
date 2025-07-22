@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base'}}%%
+flowchart TD
+    subgraph DataSources
+        A1["<img src='../input/sample_images/' width=100 height=100/> <br/> DICOM files of patients' scans"]
+    end
+
+    subgraph DataVariables
+        B1["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> first_patient"]
+        B2["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> first_patient_pixels"]
+        B3["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> pix_resampled"]
+        B4["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> segmented_lungs"]
+        B5["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> segmented_lungs_fill"]
+    end
+
+    subgraph DataFlow
+        A1 --> B1 %% Load scan data to first_patient
+        B1 --> B2 %% Generate HU data for first_patient
+        B2 --> B3 %% Resample pixel data from HU data
+        B3 --> B4 %% Segment lungs from resampled data
+        B3 --> B5 %% Segment lungs with filled structures from resampled data
+    end

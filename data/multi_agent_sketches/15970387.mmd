@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    train_v2["train_v2.csv"]
+    seg_model["seg_model_V10_0.hdf5"]
+    tfrec_paths["train_tfrec_paths"]
+
+    %% Data Variables
+    df_train["df_train"]
+    uid_fold_dict["uid_fold_dict"]
+    AUTO["AUTOTUNE"]
+    image_size["train_image_size | gen_image_size"]
+    batch["batch_size"]
+    jpeg["jpeg_quality"]
+    gen_tfrec["gen_tfrec_file_names"]
+
+    %% Model
+    model["Segmentation Model"]
+
+    %% Data Flow
+    train_v2 -->|read_csv| df_train
+    df_train -->|create| uid_fold_dict
+    tfrec_paths --> gen_tfrec
+
+    df_train -->|used in| tfrec_paths
+    uid_fold_dict -->|used in| tfrec_paths
+
+    %% Model Utilization
+    seg_model -->|pre-trained on| model
+    AUTO -->|used in| model
+    image_size -->|used in| model
+    batch -->|used in| model
+
+    gen_tfrec -->|loaded into| model
+
+    "Images" -->|input to| model
+    "Masks" -->|output from| model
+

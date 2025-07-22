@@ -1,0 +1,30 @@
+%%{init : {'theme' : 'base', 'themeVariables': {'fontSize': '16px'}}}%%
+flowchart TD
+
+%% Data source nodes
+A1["train.csv"]:::source --> B1["df_train"]:::variable
+A2["test.csv"]:::source --> B2["df_test"]:::variable
+A3["sample_submission.csv"]:::source --> B3["df_sample_submission"]:::variable
+A4["revealed_test.csv"]:::source --> B4["df_revealed_test"]:::variable
+A5["census_starter.csv"]:::source --> B5["df_census_starter"]:::variable
+
+%% Variable nodes and transitions
+B1 --> C1["X_train"]:::variable
+B1 --> C2["y_train"]:::variable
+B2 --> C3["X_test"]:::variable
+
+%% Model training nodes
+C1 & C2 --> D1["Linear Regression"]:::model
+C1 & C2 --> D2["Ridge (alpha: 0.001, 0.01, 0.1, 1, 10)"]:::model
+C1 & C2 --> D3["Lasso (alpha: 0.001, 0.01, 0.1, 1, 10)"]:::model
+C1 & C2 --> D4["Random Forest (n_estimators: 5, 10, 50, 100, 200)"]:::model
+C1 & C2 --> D5["K-Nearest Neighbors (n_neighbors: 3, 5, 7)"]:::model
+C1 & C2 --> D6["XGBoost (max_depth: 3, 6, 9; learning_rate: 0.1, 0.01, 0.001)"]:::model
+
+%% Prediction node
+D1 & D2 & D3 & D4 & D5 & D6 --> E["y_pred"]:::variable
+
+%% Style Definitions
+classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#bfb,stroke:#333,stroke-width:2px;

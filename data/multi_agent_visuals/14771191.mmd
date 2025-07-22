@@ -1,0 +1,29 @@
+  graph TD;
+      %% Data Sources
+      A["<img src='icons/database.svg' width=100 height=100/> <br/> TomatoHealth.h5"] --> |Load model| B["<img src='icons/brain.svg' width=100 height=100/> <br/> MyCnn"];
+      C["<img src='icons/file.svg' width=100 height=100/> <br/> classNames.txt"] --> |Load class names| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> classNames"];
+      
+      %% Input Images
+      E["<img src='icons/image.svg' width=100 height=100/> <br/> IMG_20210209_135136229_HDR.jpg"] --> |Input| F["<img src='icons/brain.svg' width=100 height=100/> <br/> Tester"];
+      G["<img src='icons/image.svg' width=100 height=100/> <br/> IMG_20210208_215530576_HDR.jpg"] --> |Input| F;
+      H["<img src='icons/image.svg' width=100 height=100/> <br/> IMG_20210209_135103763_HDR.jpg"] --> |Input| F;
+      I["<img src='icons/image.svg' width=100 height=100/> <br/> IMG_20210209_135154611_HDR.jpg"] --> |Input| F;
+
+      %% Data Flow
+      B --> |Use model| F;
+      D --> |Map prediction indices| F;
+
+      %% Prediction Output
+      F --> |Predict plant health| J["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Prediction Results"];
+  
+  %% Comments for nodes
+  click A "" "Pre-trained CNN model for tomato plant health classification."
+  click C "" "Text file containing the class names for health categories."
+  click E "" "Image of a tomato plant for prediction."
+  click G "" "Image of a tomato plant for prediction."
+  click H "" "Image of a tomato plant for prediction."
+  click I "" "Image of a tomato plant for prediction."
+  click B "" "Loaded CNN model used for predictions."
+  click D "" "Class names for mapping predicted indices."
+  click F "" "Function to test model predictions on images."
+  click J "" "Results of the model's prediction on plant images."

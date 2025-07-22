@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> CSV File"] --> B["🧹 Preprocess Data"]
+    B --> C["📈 Visualize Data Distribution <img src='dummy_plots/hist_template.svg'/>"]
+    B --> D["📊 Joint Plot of Depth & Magnitude <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    B --> E["📅 Time Series of Magnitude <img src='dummy_plots/lineplot_template.svg'/>"]
+    B --> F["📅 Time Series of Depth <img src='dummy_plots/lineplot_template.svg'/>"]
+    B --> G["📅 Add Year & Month Columns"]
+    G --> H["🔍 Filter Significant Earthquakes"]
+    H --> I["🗺️ Visualize Earthquake Locations <img src='icons/image.svg'/>"]

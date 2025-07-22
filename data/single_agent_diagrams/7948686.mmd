@@ -1,0 +1,12 @@
+graph TD;
+    A["📁 Load Data"] --> B["<img src='icons/file.svg'/> <br/> Read db_books.csv"];
+    B --> C["📊 Visualize Data"];
+    C --> D["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Distribution Graphs"];
+    A --> E["📁 Load Data"];
+    E --> F["<img src='icons/file.svg'/> <br/> Read stories.csv"];
+    F --> G["📊 Visualize Data"];
+    G --> H["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Distribution Graphs"];
+    D --> I["📊 Correlation Matrix"];
+    H --> I;
+    I --> J["📈 Scatter Matrix"];
+    J --> K["✅ Conclusion"];

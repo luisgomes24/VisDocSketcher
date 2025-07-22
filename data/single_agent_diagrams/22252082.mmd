@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Test Images <img src='icons/file.svg' />"] --> B["📥 Read Images <img src='table.svg' />"]
+    B --> C["🖼️ Display Test Images <img src='dummy_plots/barplot_template.svg' />"]
+    C --> D["🧠 Keras-OCR <img src='brain.svg' />"]
+    D --> E["📊 Results of Keras-OCR <img src='dummy_plots/boxplot_template.svg' />"]
+    C --> F["📜 EasyOCR <img src='brain.svg' />"]
+    F --> G["📊 Results of EasyOCR <img src='dummy_plots/hist_template.svg' />"]
+    C --> H["🤖 Pytesseract <img src='brain.svg' />"]
+    H --> I["📊 Results of Pytesseract <img src='dummy_plots/scatter_plot_template.svg' />"]
+    E --> J["📌 Conclusions"]
+    G --> J
+    I --> J

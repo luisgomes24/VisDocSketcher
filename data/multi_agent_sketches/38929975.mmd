@@ -1,0 +1,18 @@
+flowchart TD
+    A[Train Data CSV] --> B[Load df DataFrame]
+    %% A represents the training data loaded from CSV
+    C[Test Data CSV] --> D[Load Test DataFrame]
+    %% C represents the test data loaded from CSV
+    B --> E[Define Features]
+    %% E represents the extraction of features from df
+    B --> F[Define Label]
+    %% F represents the extraction of label from df
+    E --> G[LightGBM Model]
+    %% G represents the LightGBM model
+    F --> G
+    G --> H[Final Valid Predictions]
+    %% H represents predictions for validation
+    G --> I[Final Test Predictions]
+    %% I represents predictions for test data
+    G --> J[Balanced Log Loss]
+    %% J represents computation of balanced log loss

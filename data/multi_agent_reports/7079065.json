@@ -1,0 +1,11 @@
+{
+  "data_sources": [
+    {
+      "filename": "kaggle/input",
+      "description": "Directory searched for CSV files, but no files found."
+    }
+  ],
+  "data_variables": [],
+  "data_flow": [],
+  "models": []
+}

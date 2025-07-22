@@ -1,0 +1,116 @@
+{
+    "data_sources": [
+        {
+            "file_name": "20_Victims_of_rape.csv",
+            "description": "Contains details about rape victims in India, including counts by age group."
+        },
+        {
+            "file_name": "30_Auto_theft.csv",
+            "description": "Contains data on auto theft cases in India, including statistics on theft and recovery."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "DataFrame containing data from '20_Victims_of_rape.csv'."
+        },
+        {
+            "variable_name": "df1",
+            "description": "DataFrame containing data from '30_Auto_theft.csv'."
+        },
+        {
+            "variable_name": "Victims_above_50",
+            "description": "Total number of rape victims above 50 years."
+        },
+        {
+            "variable_name": "Victims_30_to_50",
+            "description": "Total number of rape victims aged between 30 and 50 years."
+        },
+        {
+            "variable_name": "Victims_18_to_38",
+            "description": "Total number of rape victims aged between 18 and 30 years."
+        },
+        {
+            "variable_name": "Victims_14_to_18",
+            "description": "Total number of rape victims aged between 14 and 18 years."
+        },
+        {
+            "variable_name": "Victims_10_to_14",
+            "description": "Total number of rape victims aged between 10 and 14 years."
+        },
+        {
+            "variable_name": "Victims_upto_10",
+            "description": "Total number of rape victims aged up to 10 years."
+        },
+        {
+            "variable_name": "stolen_df",
+            "description": "Total number of stolen automobiles."
+        },
+        {
+            "variable_name": "theft_df",
+            "description": "Total number of recovered automobiles."
+        },
+        {
+            "variable_name": "traced_df",
+            "description": "Total number of stolen automobiles traced."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df",
+            "creation": "pd.read_csv('../input/crime-in-india/20_Victims_of_rape.csv')",
+            "flow": ["Used for plotting histograms, pie charts and bar plots for analysis"]
+        },
+        {
+            "variable_name": "df1",
+            "creation": "pd.read_csv('../input/crime-in-india/30_Auto_theft.csv')",
+            "flow": ["Used for plotting histograms, bar plots and pie charts for analysis"]
+        },
+        {
+            "variable_name": "Victims_above_50",
+            "creation": "df['Victims_Above_50_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "Victims_30_to_50",
+            "creation": "df['Victims_Between_30-50_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "Victims_18_to_38",
+            "creation": "df['Victims_Between_18-30_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "Victims_14_to_18",
+            "creation": "df['Victims_Between_14-18_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "Victims_10_to_14",
+            "creation": "df['Victims_Between_10-14_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "Victims_upto_10",
+            "creation": "df['Victims_Upto_10_Yrs'].sum()",
+            "flow": ["Used in pie chart that visualizes the distribution of victims by age group"]
+        },
+        {
+            "variable_name": "stolen_df",
+            "creation": "new['Auto_Theft_Stolen'].sum()",
+            "flow": ["Used in bar and pie charts to visualize the actions taken on stolen automobiles"]
+        },
+        {
+            "variable_name": "theft_df",
+            "creation": "new['Auto_Theft_Recovered'].sum()",
+            "flow": ["Used in bar and pie charts to visualize the actions taken on stolen automobiles"]
+        },
+        {
+            "variable_name": "traced_df",
+            "creation": "new['Auto_Theft_Coordinated/Traced'].sum()",
+            "flow": ["Used in bar and pie charts to visualize the actions taken on stolen automobiles"]
+        }
+    ],
+    "models": []
+}

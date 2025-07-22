@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_name": "time_series_new-3000.csv",
+      "description": "A CSV file containing time series data, with an undefined number of rows and columns. The notebook reads only the first 1000 rows for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "A DataFrame created from reading the CSV file 'time_series_new-3000.csv', containing the time series data."
+    },
+    {
+      "variable_name": "nRowsRead",
+      "description": "An integer specifying the number of rows to read from the CSV file (1000 rows)."
+    },
+    {
+      "variable_name": "nRow",
+      "description": "An integer representing the number of rows in the DataFrame after reading the CSV."
+    },
+    {
+      "variable_name": "nCol",
+      "description": "An integer representing the number of columns in the DataFrame after reading the CSV."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flows_to": [
+        "Used in plots: plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix."
+      ]
+    },
+    {
+      "variable_name": "nRowsRead",
+      "creation": "Defined as a constant with the value 1000.",
+      "flows_to": [
+        "Used to specify the number of rows read in pd.read_csv."
+      ]
+    },
+    {
+      "variable_name": "nRow",
+      "creation": "Created as the number of rows of df1.",
+      "flows_to": [
+        "Printed in output to show the shape of df1."
+      ]
+    },
+    {
+      "variable_name": "nCol",
+      "creation": "Created as the number of columns of df1.",
+      "flows_to": [
+        "Printed in output to show the shape of df1."
+      ]
+    }
+  ],
+  "models": []
+}

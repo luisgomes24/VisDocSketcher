@@ -1,0 +1,20 @@
+flowchart TD
+    A[winemag-data-130k-v2.csv] %% Data Source: Wine reviews dataset
+    A --> B["reviews"] %% Load data into DataFrame
+    B --> C["reviews_written"] %% Group by 'taster_twitter_handle' and count
+    B --> D["best_rating_per_price"] %% Group by 'price' and get max 'points'
+    B --> E["price_extremes"] %% Group by 'variety' and aggregate min and max 'prices'
+    E --> F["sorted_varieties"] %% Sort varieties by price extremes
+    B --> G["reviewer_mean_ratings"] %% Group by 'taster_name' and average 'points'
+    B --> H["country_variety_counts"] %% Group by 'country' and 'variety', count sizes
+```
+
+%% Explanations of nodes and transitions:
+%% A: Represents the CSV file containing the wine review data
+%% B: Represents the reviews DataFrame after loading the CSV
+%% C: Series created by counting reviews per taster
+%% D: Series that maps prices to best wine ratings
+%% E: DataFrame showing the price range for each wine variety
+%% F: Sorted DataFrame of wine varieties by price
+%% G: Average rating per reviewer
+%% H: Count of different wine varieties per country

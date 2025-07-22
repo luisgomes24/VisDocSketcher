@@ -1,0 +1,24 @@
+flowchart TD
+    %% Node for loading the data set
+    A1["heart.csv"] -->|Read CSV| B1["data"]
+    
+    %% Nodes for data preprocessing
+    B1 -->|Split Features and Target| C1["x"]
+    B1 --> C2["y"]
+    
+    %% Nodes for splitting data into training and validation
+    C1 -->|train_test_split| D1["x_train"]
+    C1 -->|train_test_split| D2["x_val"]
+    C2 -->|train_test_split| D3["y_train"]
+    C2 -->|train_test_split| D4["y_val"]
+    
+    %% Nodes for models
+    D1 -->|K-Neighbors Classifier| E1["K-Neighbors Classifier Model"]
+    D3 --> E1
+    D1 -->|Random Forest Classifier| E2["Random Forest Classifier Model"]
+    D3 --> E2
+    D1 -->|XGBoost Classifier| E3["XGBoost Classifier Model"]
+    D3 --> E3
+
+    %% Final model node
+    E3 -->|Trained Model| F1["model"]

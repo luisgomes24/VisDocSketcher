@@ -1,0 +1,30 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "variable_name": "graph",
+      "description": "A graphical representation of Jimmy's slot machine balance over time."
+    },
+    {
+      "variable_name": "full_dataset",
+      "description": "Full dataset of race data for Luigi's analysis of item usage in races."
+    },
+    {
+      "variable_name": "winner_item_counts",
+      "description": "A dictionary mapping items to the number of times they were picked up by first-place finishers."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "graph",
+      "creation_method": "from learntools.python import jimmy_slots\ngraph = jimmy_slots.get_graph()",
+      "used_for": "Visualizing the balance after 500 spins of slot machines."
+    },
+    {
+      "variable_name": "winner_item_counts",
+      "creation_method": "Using best_items function to analyze racers' data.",
+      "used_for": "Determine item counts picked up by first-place finishers."
+    }
+  ],
+  "models": []
+}

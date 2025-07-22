@@ -1,0 +1,86 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/petfinder-pawpularity-score/train.csv",
+      "description": "Contains training image names, metadata, and labels (Pawpularity score)."
+    },
+    {
+      "file": "../input/petfinder-pawpularity-score/test.csv",
+      "description": "Contains test image names and metadata."
+    },
+    {
+      "file": "../input/petfinder-pawpularity-score/sample_submission.csv",
+      "description": "Sample submission file with test image names."
+    },
+    {
+      "folder": "../input/petfinder-pawpularity-score/train/",
+      "description": "Folder with training images."
+    },
+    {
+      "folder": "../input/petfinder-pawpularity-score/test/",
+      "description": "Folder with test images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_df",
+      "description": "DataFrame containing training data with image paths and normalized Pawpularity scores."
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing test data with image paths and initialized Pawpularity scores."
+    },
+    {
+      "name": "model_path",
+      "description": "String indicating the model architecture used ('swin_large_patch4_window7_224')."
+    },
+    {
+      "name": "n_epochs",
+      "description": "Number of epochs for model training (set to 1 in the notebook)."
+    },
+    {
+      "name": "BATCH_SIZE",
+      "description": "Batch size for data loading (set to 8)."
+    },
+    {
+      "name": "fold",
+      "description": "Column in the train DataFrame indicating the fold number for k-fold cross-validation."
+    },
+    {
+      "name": "pred",
+      "description": "Column in the train DataFrame to store predictions after model training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation": "Created by reading 'train.csv' and processing the data.",
+      "flows_to": [
+        "Data loading into DataLoaders",
+        "Model training",
+        "Saving predictions to 'train_df['pred']'."
+      ]
+    },
+    {
+      "variable": "test_df",
+      "creation": "Created by reading 'test.csv' and initializing columns.",
+      "flows_to": [
+        "Model predictions (not explicitly used in this notebook but structure indicates intention to use in inference)"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Swin Transformer (swin_large_patch4_window7_224)",
+      "input_features": "Image paths from train_df.",
+      "target_variable": "Normalized Pawpularity score (norm_score).",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "loss_function": "MSELossFlat",
+        "metrics": "petfinder_rmse",
+        "callbacks": "MixUp, SaveModelCallback, EarlyStoppingCallback"
+      }
+    }
+  ]
+}

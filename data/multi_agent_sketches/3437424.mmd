@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    DS_trainCSV["train.csv"]:::data_source -->|pd.read_csv| df_train
+    DS_testCSV["test.csv"]:::data_source -->|pd.read_csv| df_test
+    DS_glove["glove.6B.200d.txt"]:::data_source -->|Load embeddings| embeddings
+
+    %% Data Preparation
+    df_train -->|Extract Reviews| x_train["x_train"]:::data_variable
+    df_train -->|Extract Labels| y_train["y_train"]:::data_variable
+    df_test -->|Extract Reviews| x_test["x_test"]:::data_variable
+
+    %% Embedding Preparation
+    embeddings -->|Filter embeddings| embedding_matrix["embedding_matrix"]:::data_variable
+
+    %% Model Training
+    x_train -->|Use as input| Model["/Attention-based LSTM Model/"]:::model
+    y_train -->|Use as target| Model
+    embedding_matrix -->|Used in Embedding Layer| Model
+
+    %% Model Details
+    Model -->|Train with parameters| HP["Epochs: 15, Batch Size: 1024"]:::hyperparameters
+
+    %% Styles
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef hyperparameters fill:#9f9,stroke:#333,stroke-width:2px;

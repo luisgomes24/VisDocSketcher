@@ -1,0 +1,143 @@
+{
+    "data_sources": [
+        {
+            "file": "train.csv",
+            "description": "Training dataset containing features related to home sales and their prices."
+        },
+        {
+            "file": "test.csv",
+            "description": "Test dataset containing features related to homes but missing target values (SalePrice)."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "home_data",
+            "description": "DataFrame containing the training data loaded from 'train.csv'."
+        },
+        {
+            "variable": "y",
+            "description": "Target variable representing the SalePrice of homes."
+        },
+        {
+            "variable": "X",
+            "description": "DataFrame containing the selected features used for predicting home prices."
+        },
+        {
+            "variable": "train_X",
+            "description": "Training features after splitting the data."
+        },
+        {
+            "variable": "val_X",
+            "description": "Validation features after splitting the data."
+        },
+        {
+            "variable": "train_y",
+            "description": "Training target variable after splitting the data."
+        },
+        {
+            "variable": "val_y",
+            "description": "Validation target variable after splitting the data."
+        },
+        {
+            "variable": "rf_model",
+            "description": "Random Forest model trained on the training data."
+        },
+        {
+            "variable": "test_data",
+            "description": "DataFrame containing the test data loaded from 'test.csv'."
+        },
+        {
+            "variable": "test_X",
+            "description": "DataFrame containing features from test_data, prepared for predictions."
+        },
+        {
+            "variable": "test_preds",
+            "description": "Predictions made by the Random Forest model on test_X."
+        },
+        {
+            "variable": "output",
+            "description": "DataFrame prepared for submission to Kaggle competition."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "home_data",
+            "creation": "pd.read_csv with 'train.csv',"
+            "flow": "Used to create 'X' and 'y'."
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted from home_data via 'home_data.SalePrice',"
+            "flow": "Used as target in training and validation."
+        },
+        {
+            "variable": "X",
+            "creation": "Subset of home_data based on selected features.",
+            "flow": "Used in model training."
+        },
+        {
+            "variable": "train_X",
+            "creation": "train_test_split on X and y",
+            "flow": "Used to fit Random Forest model."
+        },
+        {
+            "variable": "val_X",
+            "creation": "train_test_split on X and y",
+            "flow": "Used for validation predictions."
+        },
+        {
+            "variable": "train_y",
+            "creation": "train_test_split on X and y",
+            "flow": "Used to fit Random Forest model."
+        },
+        {
+            "variable": "val_y",
+            "creation": "train_test_split on X and y",
+            "flow": "Used to evaluate validation predictions."
+        },
+        {
+            "variable": "rf_model",
+            "creation": "RandomForestRegressor initialized and fitted with training data.",
+            "flow": "Used to make predictions on val_X and test_X."
+        },
+        {
+            "variable": "test_data",
+            "creation": "pd.read_csv with 'test.csv',"
+            "flow": "Used to create 'test_X'."
+        },
+        {
+            "variable": "test_X",
+            "creation": "Subset of test_data based on selected features.",
+            "flow": "Used to make predictions."
+        },
+        {
+            "variable": "test_preds",
+            "creation": "Predictions made by rf_model on test_X.",
+            "flow": "Used to prepare submission."
+        },
+        {
+            "variable": "output",
+            "creation": "DataFrame containing Ids from test_data and predictions.",
+            "flow": "Saved as 'submission.csv' for Kaggle submission."
+        }
+    ],
+    "models": [
+        {
+            "model": "RandomForestRegressor",
+            "features": "LotArea, YearBuilt, 1stFlrSF, 2ndFlrSF, FullBath, BedroomAbvGr, TotRmsAbvGrd",
+            "target": "SalePrice",
+            "hyperparameters": {
+                "random_state": 1
+            }
+        },
+        {
+            "model": "DecisionTreeRegressor",
+            "features": "Same as RandomForest",
+            "target": "SalePrice",
+            "hyperparameters": {
+                "max_leaf_nodes": 100,
+                "random_state": 1
+            }
+        }
+    ]
+}

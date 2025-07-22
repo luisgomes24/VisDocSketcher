@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    DS1["<img src='icons/file.svg' width=100 height=100/> <br/> Dataset from images from Star Wars movies"]
+
+    %% Data Variables
+    V1["<img src='icons/column_split.svg' width=100 height=100/> <br/> path"]:::variable
+    V2["fns"]:::variable
+    V3["failed"]:::variable
+    V4["<img src='icons/table.svg' width=100 height=100/> <br/> data"]:::variable
+    V5["data2"]:::variable
+
+    %% Data Flows and Processing
+    DS1 --> V1
+    V1 -->|get_image_files| V2
+    V2 -->|verify_images| V3
+    V3 -->|filter_invalid_images| V2
+
+    %% ImageDataLoaders
+    V1 -->|ImageDataLoaders.from_folder| V4
+    subgraph Image_Data_Processing
+      V4 --|Images for Training and Validation|--> M1["<img src='icons/brain.svg' width=100 height=100/> <br/> FastAI Vision Model"]:::model
+    end
+    V1 -->|ImageDataLoaders.from_folder| V5
+    subgraph Episode_VI_Processing
+      V5 --> M1
+    end
+
+    %% Models
+    M1["<img src='icons/brain.svg' width=100 height=100/> <br/> FastAI Vision Model"]:::model
+
+    classDef variable fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;

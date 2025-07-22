@@ -1,0 +1,8 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Load Data"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Preprocess Data"];
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    C --> |"Choose Features"| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model"];
+    E --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> Evaluate Model"];
+    F --> G["<img src='icons/table.svg' width=100 height=100/> <br/> Model Output"];
+    G --> H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Results Visualization"];

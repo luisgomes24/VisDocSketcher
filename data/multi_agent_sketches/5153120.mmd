@@ -1,0 +1,32 @@
+%%{ init : { "theme" : "base", "themeVariables" : { "primaryColor" : "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#fff000" } } }%%
+flowchart TD
+    %% Node for the Data Source
+    A["transactions_clean.xlsx"] --> |"Read Excel File"| B(df)
+    
+    %% Node for the DataFrame creation
+    B["DataFrame 'df'"] --> |"Group by Date and Item"| C["Grouped 'g'"]
+
+    %% Creation of totals_df
+    B --> |"Group by Date & Sum"| D["DataFrame 'totals_df'"] 
+    
+    %% Creation of sums_df
+    B --> |"Group by Date+Item & Sum"| E["DataFrame 'sums_df'"] 
+
+    %% Usage of g
+    C --> F["Aggregations & Analyses"]
+
+    %% Usage of totals_df & sums_df
+    D --> |"Calculations"| F
+    E --> |"Calculations & Analysis"| F
+
+    %% Final node combining the analysis
+    F["Final Data Analysis"]
+
+    
+    %% Comments for each node
+    click A "Data source: Excel file with transaction data"
+    click B "Loaded DataFrame from Excel file"
+    click C "DataFrame grouped by date and item for aggregation"
+    click D "Aggregated sums by date for total sales"
+    click E "Aggregated sums by date and item for sales mix per product"
+    click F "Final analysis combining all aggregations, metrics and tables"

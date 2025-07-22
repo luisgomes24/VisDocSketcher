@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Load data| B["DataFrame: home_data"]
+    
+    %% Data Preparation
+    B -->|Extract SalePrice| C["Series: y"]
+    B -->|Select Features| D["DataFrame: X"]
+    
+    %% Model Training
+    D -->|Features| E["DecisionTreeRegressor: iowa_model"]
+    C -->|Target| E
+    
+    %% Predictions
+    E -->|Predict| F["Series: predictions"]
+    
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#6b6,stroke-width:2px;
+    
+    class A dataSource;
+    class B,C,D,F dataVariable;
+    class E model;
+```

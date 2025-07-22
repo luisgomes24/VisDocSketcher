@@ -1,0 +1,147 @@
+{
+  "data_sources": [
+    {
+      "file_name": "FlowerColorImages.h5",
+      "description": "Contains flower color images and their corresponding labels."
+    },
+    {
+      "type": "Synthetic Data",
+      "description": "Generated artificial classification data using make_classification."
+    },
+    {
+      "type": "MNIST Dataset",
+      "description": "Standard handwritten digit dataset used for training and testing models."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "X",
+      "description": "Input features from the synthetic classification data."
+    },
+    {
+      "name": "y",
+      "description": "Labels for the synthetic classification data."
+    },
+    {
+      "name": "X_train",
+      "description": "Training features after shuffling and splitting from X."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing features after shuffling and splitting from X."
+    },
+    {
+      "name": "y_train",
+      "description": "Training labels after shuffling and splitting from y."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing labels after shuffling and splitting from y."
+    },
+    {
+      "name": "train_loader",
+      "description": "DataLoader for the MNIST training dataset."
+    },
+    {
+      "name": "test_loader",
+      "description": "DataLoader for the MNIST testing dataset."
+    },
+    {
+      "name": "train",
+      "description": "Custom dataset class combining features and labels for the flower color images."
+    },
+    {
+      "name": "test",
+      "description": "Custom dataset class for testing the flower color images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation_method": "make_classification",
+      "flow": "Used for training and testing classification models."
+    },
+    {
+      "variable": "y",
+      "creation_method": "make_classification",
+      "flow": "Used as labels for model training."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "array slicing after shuffling",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "array slicing after shuffling",
+      "flow": "Used for evaluating the trained model."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "array slicing after shuffling",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "array slicing after shuffling",
+      "flow": "Used for evaluating the trained model."
+    },
+    {
+      "variable": "train_loader",
+      "creation_method": "DataLoader",
+      "flow": "Used to enable batch training for the MNIST dataset."
+    },
+    {
+      "variable": "test_loader",
+      "creation_method": "DataLoader",
+      "flow": "Used to enable batch testing for the MNIST dataset."
+    },
+    {
+      "variable": "train",
+      "creation_method": "TData class initialization",
+      "flow": "Used for loading training data for color images."
+    },
+    {
+      "variable": "test",
+      "creation_method": "TData class initialization",
+      "flow": "Used for loading testing data for color images."
+    }
+  ],
+  "models": [
+    {
+      "type": "Perceptron",
+      "input_features": "2",
+      "target_variable": "Binary labels",
+      "hyperparameters": {
+        "epochs": 5
+      }
+    },
+    {
+      "type": "Logistic Regression",
+      "input_features": "2",
+      "target_variable": "Binary labels",
+      "hyperparameters": {
+        "epochs": 10,
+        "learning_rate": 0.02
+      }
+    },
+    {
+      "type": "Softmax Regression",
+      "input_features": "784",
+      "target_variable": "Multi-class labels (10 classes)",
+      "hyperparameters": {
+        "epochs": 15,
+        "learning_rate": 0.1
+      }
+    },
+    {
+      "type": "Softmax Regression",
+      "input_features": "49152",
+      "target_variable": "Multi-class labels (10 classes)",
+      "hyperparameters": {
+        "epochs": 25,
+        "learning_rate": 0.01
+      }
+    }
+  ]
+}

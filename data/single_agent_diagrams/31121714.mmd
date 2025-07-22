@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🗃️ Read AlphaFold Data <img src='table.svg'/>"]
+    B --> C["🔍 Explore Wildtype Matches"]
+    C --> D["📂 Read Confidence File <img src='file.svg'/>"]
+    D --> E["📉 Plot Confidence Score <img src='lineplot_template.svg'/>"]
+    D --> F["📊 Min/Max pLDDT Score <img src='lineplot_template.svg'/>"]
+    F --> G["🔎 Explore CIF Files"]
+    G --> H["📂 Read CIF Data <img src='file.svg'/>"]
+    H --> I["🖼️ Display 3D Structure <img src='image.svg'/>"]
+    I --> J["✅ Validate Residues"]
+    J --> K["📊 Load Train Wildtype Groups <img src='table.svg'/>"]
+    K --> L["📈 Get Mutations Count <img src='table.svg'/>"]

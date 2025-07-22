@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart_failure_clinical_records_dataset.csv",
+      "description": "This file contains clinical records related to heart failure patients, which includes features for modeling the mortality risk."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dataset",
+      "description": "DataFrame containing the clinical data read from CSV."
+    },
+    {
+      "variable_name": "x",
+      "description": "Feature matrix extracted from the dataset (all columns except the target)."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable vector (the DEATH_EVENT column)."
+    },
+    {
+      "variable_name": "x_data",
+      "description": "Resampled feature matrix using SMOTE to handle class imbalance."
+    },
+    {
+      "variable_name": "y_data",
+      "description": "Resampled target variable vector using SMOTE."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "dataset",
+      "creation_method": "pd.read_csv",
+      "flows_to": "x and y are extracted from dataset; information provided about dataset."
+    },
+    {
+      "variable_name": "x",
+      "creation_method": "dataset.iloc[:,:-1].values",
+      "flows_to": "Used for model training and evaluation."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "dataset.iloc[:,-1].values",
+      "flows_to": "Used as target variable in model training and evaluation."
+    },
+    {
+      "variable_name": "x_data",
+      "creation_method": "s1.fit_resample(x,y)",
+      "flows_to": "Used for model training and evaluation, replacing x."
+    },
+    {
+      "variable_name": "y_data",
+      "creation_method": "s1.fit_resample(x,y)",
+      "flows_to": "Used for model training and evaluation, replacing y."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LogisticRegression",
+      "input_features": "x_data",
+      "target_variable": "y_data",
+      "hyperparameters": "None specified, using default parameters for Logistic Regression."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+flowchart TD
+    A["📁 Fetch Data"] --> B["🗂️ Load Train Data"]
+    B --> C["🧹 Clean Train Data"]
+    C --> D["🔍 Check Train Labels"]
+    D --> E["📊 Check Train Label Percent"]
+    E --> F["📁 Load Test Data"]
+    F --> G["🧹 Clean Test Data"]
+    G --> H["🔤 Feature Extraction"]
+    H --> I["📊 Get Features"]
+    I --> J["🔄 Cross Validation"]
+    J --> K["🏆 Grid Search for Best Params"]
+    K --> L["💡 Predict Test Data and Get Test Score"]
+    
+    F --> M["🗂️ Load Test Data"]
+    M --> G
+
+    classDef command fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L command;

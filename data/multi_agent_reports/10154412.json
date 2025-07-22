@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/m5-forecasting-accuracy/calendar.csv",
+      "description": "Contains data related to calendar events, including date and various event types."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "calender",
+      "description": "DataFrame containing the original calendar data with event types, weeks, and dates."
+    },
+    {
+      "name": "date_features",
+      "description": "DataFrame with selected features removed from the calender to focus on relevant data for modeling."
+    },
+    {
+      "name": "dates",
+      "description": "DataFrame containing transformed date features, including dummies for weekdays, months, and event types, along with normalized day of month and week of year."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "calender",
+      "creation": "Loaded from calendar.csv using pd.read_csv",
+      "flow": "Used to create date_features, further processed to create dates."
+    },
+    {
+      "variable": "date_features",
+      "creation": "Subset of calender with specific columns selected.",
+      "flow": "Used in further transformations to create dates."
+    },
+    {
+      "variable": "dates",
+      "creation": "Created through concatenation, one-hot encoding, and normalization from calender.",
+      "flow": "Final structure saved as 'data/date_features.csv'."
+    }
+  ],
+  "models": []
+}

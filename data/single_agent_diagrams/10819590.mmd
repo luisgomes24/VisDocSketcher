@@ -1,0 +1,17 @@
+graph TD;
+    A["📂 Load Dataset <img src='dummy_plots/file.svg' /><br/>"] --> B["🛠️ Preprocess Data"];
+    B --> C["📅 Convert Date Format"];
+    C --> D["📊 Filter by Date"];
+    D --> E["📅 Sort Values"];
+    E --> F["🏷️ Rename Columns"];
+    F --> G["🔄 Format Ibex Values"];
+    G --> H["📈 Plot Time Series <img src='dummy_plots/lineplot_template.svg' /><br/>"];
+    H --> I["📉 Log Transformation"];
+    I --> J["📈 Log Difference"];
+    J --> K["🔍 Check for Stationarity"];
+    K --> L["📊 Visualize ACF/PACF <img src='dummy_plots/scatter_plot_template.svg' /><br/>"];
+    L --> M["🏗️ Prepare Train-Test Dataset"];
+    M --> N["🔍 Hyperparameter Optimization"];
+    N --> O["🤖 Fit SARIMAX Model"];
+    O --> P["🔮 Make Predictions"];
+    P --> Q["📈 Plot Predictions <img src='dummy_plots/lineplot_template.svg' /><br/>"];

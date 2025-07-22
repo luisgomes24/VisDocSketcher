@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["🔍 Exploratory Data Analysis"]
+    B -->|Defines plotting functions| C["📊 Distribution Plots <img src='hist_template.svg' />"]
+    B -->|Defines correlation matrix| D["📈 Correlation Matrix <img src='scatter_plot_template.svg' />"]
+    B -->|Defines scatter matrix| E["🔗 Scatter Matrix <img src='scatter_plot_template.svg' />"]
+    C --> F["📅 Visualize Distribution"]
+    D --> G["📊 Visualize Correlation"]
+    E --> H["🔄 Visualize Scatter Matrix"]
+    F --> I["✅ No Automatic Insights"]
+    G --> I
+    H --> I
+    I --> J["🔚 Conclusion"]

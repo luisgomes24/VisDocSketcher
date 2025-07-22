@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-sep-2021/train.csv",
+      "description": "Training dataset containing features and target variable (claim)"
+    },
+    {
+      "file": "../input/tabular-playground-series-sep-2021/test.csv",
+      "description": "Test dataset containing features for prediction"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame holding the training data"
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame holding the test data"
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame derived from the training set"
+    },
+    {
+      "name": "y",
+      "description": "Target variable extracted from the training set"
+    },
+    {
+      "name": "X_test",
+      "description": "Features DataFrame for the test set"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation_method": "df_train.iloc[:, :-1]",
+      "flow": "Used in model training"
+    },
+    {
+      "variable": "y",
+      "creation_method": "df_train.iloc[:, -1]",
+      "flow": "Used as target variable in model training"
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "df_test",
+      "flow": "Used for making predictions"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CatBoostClassifier",
+      "input_features": ["X"],
+      "target_variable": "y",
+      "hyperparameters": {
+        "learning_rate": 0.06,
+        "iterations": 10000,
+        "depth": 3,
+        "l2_leaf_reg": 12.09463399692516,
+        "random_strength": 3.5400249636744014
+      }
+    }
+  ]
+}

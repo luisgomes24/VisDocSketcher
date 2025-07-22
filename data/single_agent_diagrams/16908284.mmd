@@ -1,0 +1,17 @@
+```
+graph TD;
+    A["📂 Load Configs"] --> B["🔤 Load Data"];
+    B --> C["📊 Data Preprocessing"];
+    C --> D["📷 Data to Image Conversion"];
+    D --> E["🤖 Load Models"];
+    E --> F["🦜 Make Predictions"];
+    F --> G["📈 Process Predictions"];
+    G --> H["📤 Submission File"];
+    
+    B --> I["<img src='icons/table.svg'/> <br/> DataFrame Creation"];
+    C --> J["<img src='icons/row_split.svg'/> <br/> Train-Test Split"];
+    J --> K["<img src='icons/column_split.svg'/> <br/> Feature Engineering"];
+    
+    E --> L["<img src='icons/brain.svg'/> <br/> Load Checkpoint Models"];
+    F --> M["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Predictions"];
+    G --> N["<img src='dummy_plots/barplot_template.svg'/> <br/> Predictions DataFrame"];

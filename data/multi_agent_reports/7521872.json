@@ -1,0 +1,22 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "spotify_global_2019_most_streamed_tracks_audio_features.csv",  
+      "description": "Contains audio features and metrics for the most streamed tracks in 2019 globally."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable_name": "df1",  
+      "description": "DataFrame containing the loaded data from the CSV file."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "df1",  
+      "created_by": "pd.read_csv()",  
+      "flow": ["used for various plotting functions", "head() display", "correlation matrix visualization", "scatter matrix visualization"]  
+    }  
+  ],  
+  "models": []  
+}

@@ -1,0 +1,25 @@
+%% Mermaid.js Workflow Diagram for Jupyter Notebook
+%% Sketched based on the analyzed report
+
+flowchart TD
+    
+    %% y is a float initialized
+    A["y: initialized float"] --> B{{"Convert to integer"}}
+    
+    %% z receives converted y
+    B --> C["z: converted integer"]
+    
+    %% Function to calculate house cost
+    D["get_expected_cost function"] --> E{{"Parameters: beds, baths, has_basement"}}
+    
+    %% Parameters used in cost calculation
+    E --> F["value: calculated expected house cost"]
+    
+    %% Rings engraving project
+    G["cost_of_project function"] --> H{{"Parameters: engraving, solid_gold"}}
+    
+    %% Calculate cost for project one
+    H --> I["project_one: cost of solid gold ring"]
+    
+    %% Calculate cost for project two
+    H --> J["project_two: cost of gold plated ring"]

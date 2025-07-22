@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    DS1["DICOM Images"]
+    DS2["CSV Metadata"]
+    DS3["fmi Library"]
+    
+    %% Nodes for Data Variables
+    DICOM_DF["dicom_dataframe"]
+    SORTED_W5["sort_w5"]
+    UNIQUE_PATS["unique_pats"]
+    TEST_5["test_5"]
+    MASK_FILES["mask_files"]
+    
+    %% Process Nodes
+    subgraph Processing
+        CSV_READING["Read CSV and load as DataFrame"]
+        SORT_VALUES["Sort and group images"]
+        DICOM_SELECTION["Select images for each patient"]
+        APPLY_MASKS["Apply masks to images"]
+    end
+    
+    %% Data Flow
+    DS2 --> CSV_READING --> DICOM_DF
+    DICOM_DF --> SORT_VALUES --> SORTED_W5
+    SORTED_W5 --> DICOM_SELECTION --> TEST_5
+    DS1 --> DICOM_SELECTION
+    TEST_5 -->|Subset of Images| MASK_FILES
+    MASK_FILES --> APPLY_MASKS
+    DS3 --> APPLY_MASKS

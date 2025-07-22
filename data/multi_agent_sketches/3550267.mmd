@@ -1,0 +1,21 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A1(bad_case_words.csv):::source -->|Load| B1(df1)
+    A2(contraction_mapping.csv):::source -->|Load| B2(df2)
+    A3(rare_words_mapping.csv):::source -->|Load| B3(df3)
+
+    %% Nodes for Data Variables
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    B1[DataFrame: df1]:::variable -->|Visualize| C1[Distribution and Summary Stats]
+    B2[DataFrame: df2]:::variable -->|Visualize| C2[Distribution and Summary Stats]
+    B3[DataFrame: df3]:::variable -->|Visualize| C3[Distribution and Summary Stats]
+
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    %% A1 - Represents the bad_case_words.csv file as a data source
+    %% A2 - Represents the contraction_mapping.csv file as a data source
+    %% A3 - Represents the rare_words_mapping.csv file as a data source
+    %% B1, B2, B3 - DataFrames created from the respective CSV files
+    %% C1, C2, C3 - Resulting distribution and statistics visualizations for each dataset

@@ -1,0 +1,28 @@
+flowchart TD
+    %% Node for data source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> cbb.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    %% Nodes for data manipulation
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> df"] -->|Select Columns| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_ff"]
+    %% Nodes for correlation analysis
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_ff"] -->|Correlation with 'W'| D{"Check Correlation"}
+    %% Nodes for creating training data
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_ff"] -->|Split Train/Test| E["<img src='icons/brain.svg' width=100 height=100/> <br/> X_train"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_ff"] -->|Split Train/Test| F["y_train"]
+    %% Nodes for training the model
+    E["<img src='icons/brain.svg' width=100 height=100/> <br/> X_train"] -->|Train Linear Regression| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Linear Regression Model"]
+    F["y_train"] -->|Train Model| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Linear Regression Model"]
+    %% Nodes for making predictions
+    G["<img src='icons/brain.svg' width=100 height=100/> <br/> Linear Regression Model"] -->|Predict on Test| H["<img src='dummy_plots/lineplot_template.svg' /> <br/> y_pred"]
+    %% Nodes for evaluation
+    H["<img src='dummy_plots/lineplot_template.svg' /> <br/> y_pred"] -->|Evaluate Model| I["<img src='dummy_plots/barplot_template.svg'/> <br/> Evaluation Metrics"]
+    F["y_train"] -->|Compare| J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> dfd"]
+
+    %% Annotations
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef evalNode fill:#F2C464,stroke:#333,stroke-width:2px;
+
+    class A dataNode;
+    class B,C,E,F,J dataNode;
+    class G modelNode;
+    class H,I evalNode;

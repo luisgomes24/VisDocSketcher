@@ -1,0 +1,39 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"] -->|"Read into"| B1["DataFrame: train"]
+    A2["test.csv"] -->|"Read into"| B2["DataFrame: test"]
+    A3["sample_submission.csv"] -->|"Read into"| B3["DataFrame: sub"]
+
+    %% Data Processing
+    B1 -->|"Extract target"| C1["Y: Binary Target"]
+    B1 -->|"Fit texts"| C2["Tokenizer"]
+    B2 -->|"Texts to sequences"| C2
+
+    %% Model Training
+    C1 -->|"Train LSTM"| D1["Model: LSTM"]
+    C2 -->|"Provide sequences"| D1
+
+    %% Predictions
+    D1 -->|"Predict on test"| E1["predictions"]
+
+    %% Creating Submission
+    E1 -->|"Concat with IDs"| F1["submission"]
+    F1 -->|"Save to CSV"| G1["Submission File"]
+
+    %% Comments
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    class A1,A2,A3,B1,B2,B3 dataNode;
+    class C1,C2,D1,E1,F1,G1 dataNode;
+    %% Nodes explained
+    A1:::dataNode
+    A2:::dataNode
+    A3:::dataNode
+    B1:::dataNode
+    B2:::dataNode
+    B3:::dataNode
+    C1:::dataNode
+    C2:::dataNode
+    D1:::dataNode
+    E1:::dataNode
+    F1:::dataNode
+    G1:::dataNode

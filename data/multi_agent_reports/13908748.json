@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/vinbigdata-chest-xray-abnormalities-detection/train/0108949daa13dc94634a7d650a05c0bb.dicom",
+      "description": "DICOM file containing X-ray data"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "dicom",
+      "description": "DICOM object read from the file"
+    },
+    {
+      "variable": "data",
+      "description": "Normalized image data converted from DICOM pixel data"
+    },
+    {
+      "variable": "img",
+      "description": "Image data ready for visualization"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dicom",
+      "created": "pydicom.read_file",
+      "used_in": "data extraction"
+    },
+    {
+      "variable": "data",
+      "created": "apply_voi_lut / transformations",
+      "used_in": "images for visualization"
+    },
+    {
+      "variable": "img",
+      "created": "read_xray function",
+      "used_in": "plt.imshow for display"
+    }
+  ],
+  "models": []
+}

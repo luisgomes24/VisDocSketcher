@@ -1,0 +1,13 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Read Input Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Split Data"]
+    C --> D["<img src='table.svg'/> <br/> Create Tensor Datasets"]
+    D --> E["<img src='brain.svg'/> <br/> Build Model"]
+    E --> F["<img src='brain.svg'/> <br/> Compile Model"]
+    F --> G["<img src='brain.svg'/> <br/> Train Model"]
+    G --> H["<img src='brain.svg'/> <br/> Evaluate Model"]
+    H --> I["<img src='table.svg'/> <br/> Make Predictions"]
+    I --> J["<img src='scatter_plot_template.svg'/> <br/> Show Predictions"]
+    J --> K["<img src='file.svg'/> <br/> Save Predictions to CSV"]
+
+    A --> J

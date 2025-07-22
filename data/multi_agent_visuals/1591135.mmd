@@ -1,0 +1,35 @@
+%% Define the graph direction
+graph TD;
+
+%% Data Sources
+A1["train.csv"]:::dataSource -->|read_csv| B["home_data"]:::data;
+A2["test.csv"]:::dataSource -->|read_csv| J["test_data"]:::data;
+
+%% Data Transformation
+B -->|Extract SalePrice| C["y"]:::variable; 
+B -->|Select Features| D["X"]:::variable;
+
+%% Train/Test Split
+D -->|train_test_split| E["train_X"]:::variable & F["val_X"]:::variable;
+C -->|train_test_split| G["train_y"]:::variable & H["val_y"]:::variable;
+
+%% Model Training
+E & G -->|fit| I{RandomForestRegressor}:::model;
+I -->|predict| M["test_preds"]:::variable;
+
+%% Using Test Data
+J -->|Select Features| K["test_X"]:::variable;
+I -->|predict| M;
+K -->|predict| M;
+
+%% Submission Preparation
+J -->|extract IDs| L["Ids"]:::variable;
+L & M -->|concat DataFrame| N["output"]:::variable;
+N -->|to_csv| O("submission.csv"):::file;
+
+%% Classes for styles
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+classDef data fill:#bbf,stroke:#333,stroke-width:1px;
+classDef variable fill:#f96,stroke:#333,stroke-width:1px;
+classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+classDef file fill:#ff9,stroke:#333,stroke-width:2px;

@@ -1,0 +1,43 @@
+{
+  "data_sources": [
+    {
+      "source": "BigQuery Dataset",
+      "description": "The dataset contains international education data, specifically the 'international_education' table from the 'world_bank_intl_education' dataset."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "country_spending_results",
+      "description": "DataFrame containing country names and their average education spending as a percentage of GDP from 2010 to 2017."
+    },
+    {
+      "name": "code_count_results",
+      "description": "DataFrame containing indicator codes and names that have at least 175 entries for the year 2016."
+    },
+    {
+      "name": "country_spend_pct_query",
+      "description": "SQL query to obtain average education spending per country."
+    },
+    {
+      "name": "code_count_query",
+      "description": "SQL query to retrieve indicator codes with their names and row counts for the year 2016."
+    },
+    {
+      "name": "client",
+      "description": "BigQuery client used to interact with the Google BigQuery service."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "country_spending_results",
+      "creation": "Result of executing 'country_spend_pct_query' SQL query.",
+      "flow": "Used for analyzing average educational spending by countries."
+    },
+    {
+      "variable": "code_count_results",
+      "creation": "Result of executing 'code_count_query' SQL query.",
+      "flow": "Used for identifying interesting indicator codes to explore further."
+    }
+  ],
+  "models": []
+}

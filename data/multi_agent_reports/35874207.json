@@ -1,0 +1,73 @@
+{
+  "data_sources": [
+    {
+      "source": "BirdCLEF 2023 dataset",
+      "description": "Contains recordings for bird call identification. Audio formats include .ogg and other necessary files for competition submission."
+    },
+    {
+      "source": "sample_submission.csv",
+      "description": "Contains the valid sample submission format with columns for identifiers and predicted probabilities of bird species."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "test_paths",
+      "description": "List of file paths for the test audio recordings."
+    },
+    {
+      "variable": "test_df",
+      "description": "DataFrame holding the details of test audio file paths and their corresponding filenames."
+    },
+    {
+      "variable": "CKPT_PATHS",
+      "description": "List of checkpoints corresponding to trained TensorFlow models for predictions."
+    },
+    {
+      "variable": "CKPTS",
+      "description": "Loaded TensorFlow models into memory for making predictions."
+    },
+    {
+      "variable": "preds",
+      "description": "Array holding the predicted probabilities for bird species for given audio recordings."
+    },
+    {
+      "variable": "ids",
+      "description": "List to keep track of identifiers for each predicted audio chunk."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "test_df",
+      "creation": "pd.DataFrame(test_paths, columns=['filepath'])",
+      "used_for": "Loading and processing audio files for predictions."
+    },
+    {
+      "variable": "audio",
+      "creation": "load_audio(filepath)",
+      "used_for": "Creating audio frames for model input."
+    },
+    {
+      "variable": "specs",
+      "creation": "Audio2Spec(chunks)",
+      "used_for": "Conducting predictions on audio frames."
+    },
+    {
+      "variable": "chunk_preds",
+      "creation": "model(specs, training=False).numpy()",
+      "used_for": "Aggregated predictions across models for the audio."
+    },
+    {
+      "variable": "pred_df",
+      "creation": "pd.DataFrame(ids, columns=['row_id'])",
+      "used_for": "Constructing the final submission DataFrame."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "EfficientNet",
+      "input_features": "Spectrograms converted from audio recordings.",
+      "target_variable": "Predictions of bird species probabilities.",
+      "hyperparameters": "Not specified in the notebook; uses pre-trained weights based on EfficientNet."
+    }
+  ]
+}

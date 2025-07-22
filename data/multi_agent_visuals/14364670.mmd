@@ -1,0 +1,33 @@
+flowchart TD
+    %% Define data sources and variables
+    X["<img src='icons/column_split.svg' width=100 height=100/> <br/> X: Input feature array created with squared random values"] 
+    y["<img src='icons/column_split.svg' width=100 height=100/> <br/> y: Target output based on X with added noise"] 
+    xf["<img src='icons/column_split.svg' width=100 height=100/> <br/> xf: Array of 1000 evenly spaced points for plotting predictions"] 
+    X2["<img src='icons/file.svg' width=100 height=100/> <br/> X2: New input feature array for testing with 20 instances"] 
+    y2["<img src='icons/file.svg' width=100 height=100/> <br/> y2: New target output based on X2 for testing"] 
+    tr_score["<img src='icons/table.svg' width=100 height=100/> <br/> tr_score: List of training scores for polynomial models"]
+    te_score["<img src='icons/table.svg' width=100 height=100/> <br/> te_score: List of testing scores for polynomial models"]
+
+    %% Node for data generation
+    make_data["<img src='icons/brain.svg' width=100 height=100/> <br/> make_data() function"]
+    make_data --> X & y & X2 & y2
+
+    %% Node for ML model
+    model["<img src='icons/brain.svg' width=100 height=100/> <br/> Polynomial Regression | Degrees: 1 to 8"]
+    X & y --> model
+    model --> tr_score & te_score
+
+    %% Predictions plotting
+    model --> xf
+
+    %% Data plotting
+    plt["Matplotlib Plotting"]
+    X & y & X2 & y2 & model & xf --> plt
+
+    %% Comments explaining each component
+    %% X: Input feature array is generated using the make_data() function
+    %% y: Target outputs are calculated from X with noise addition
+    %% xf: Represents points used for plotting predictions
+    %% Model: Polynomial regression model trained on X, y
+    %% tr_score & te_score: Lists storing training and testing scores, respectively.
+    %% matplotlib: Visualization of data flows and model predictions

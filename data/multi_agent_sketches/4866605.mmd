@@ -1,0 +1,23 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#ffcc00"}}}%%
+flowchart TD
+    %% Create BigQuery Client Object
+    A[Client Object] -->|Create| B[Reference crypto_bitcoin Dataset]
+    %% Fetch Dataset & Table
+    B -->|Fetch| C[crypto_bitcoin Dataset]
+    B -->|Reference| D[transactions Table]
+    D -->|Fetch| E[transactions Table]
+    %% SQL Query for Transactions by Date
+    E -->|SQL Query| F[transactions_by_date DataFrame]
+    F -->|Data Visualization| G[Plot Transactions Over Time]
+
+    %% Annotations
+    classDef dataNode fill:#ffcc00,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G dataNode;
+    
+    A:::dataNode
+    B:::dataNode
+    C:::dataNode
+    D:::dataNode
+    E:::dataNode
+    F:::dataNode
+    G:::dataNode

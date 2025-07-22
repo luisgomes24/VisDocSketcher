@@ -1,0 +1,66 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing demographic and worker-related information for 54,000 workers' compensation insurance policies, all of which have had an accident."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Testing dataset containing demographic and worker-related information for 36,000 workers' compensation insurance policies, intended for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "alp_train",
+      "description": "DataFrame containing training data extracted from train.csv"
+    },
+    {
+      "name": "alp_test",
+      "description": "DataFrame containing test data extracted from test.csv"
+    },
+    {
+      "name": "train",
+      "description": "Value counts for a specific column from the training set, used in visualizations"
+    },
+    {
+      "name": "test",
+      "description": "Value counts for a specific column from the test set, used in visualizations"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "alp_train",
+      "creation_method": "pd.read_csv('../input/actuarial-loss-estimation/train.csv')",
+      "flow": "Used for creating plots to visualize data distributions and analysis in the training set"
+    },
+    {
+      "variable_name": "alp_test",
+      "creation_method": "pd.read_csv('../input/actuarial-loss-estimation/test.csv')",
+      "flow": "Used for creating plots to visualize data distributions and analysis in the test set"
+    },
+    {
+      "variable_name": "train",
+      "creation_method": "Value counts from alp_train[column]",
+      "flow": "Used in bar plots for visual display of distributions in training data"
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "Value counts from alp_test[column]",
+      "flow": "Used in bar plots for visual display of distributions in test data"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Prediction of UltimateIncurredClaimCost",
+      "input_features": [
+        "ClaimNumber",
+        "DateTimeOfAccident",
+        "DateReported",
+        "WeeklyWages",
+        "ClaimDescription"
+      ],
+      "target_variable": "UltimateIncurredClaimCost",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

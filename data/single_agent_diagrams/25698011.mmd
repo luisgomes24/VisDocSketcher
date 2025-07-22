@@ -1,0 +1,55 @@
+graph TD;
+    A["🗂️ Load Data <img src='icons/file.svg' />"] --> B["📈 Preprocess Data"];
+    B --> C["🛠️ Feature Engineering"];
+    C --> D["🕒 Create Lagged Features"];
+    D --> E["📊 Model Training"];
+    E --> F["🔍 Hyperparameter Tuning"];
+    F --> G["🧪 Evaluate Model"];
+    G --> H["📤 Post Processing"];
+    H --> I["📊 Submission"];
+
+    subgraph Data Loading
+        A1["📥 Load Train Data"]
+        A2["📥 Load Test Data"]
+        A3["📥 Load Sample Submission"]
+        A --> A1
+        A --> A2
+        A --> A3
+    end
+
+    subgraph Preprocessing
+        B1["🧮 Scale Target Values"]
+        B2["📅 Convert Time to DateTime"]
+        B3["🔗 Combine Location Features"]
+        B --> B1
+        B --> B2
+        B --> B3
+    end
+
+    subgraph Feature Engineering
+        C1["📝 Create Day, Hour, Minute Features"]
+        C2["🔢 Calculate Row-wise Statistics"]
+        C3["📈 Calculate Moving Medians"]
+        C --> C1
+        C --> C2
+        C --> C3
+    end
+
+    subgraph Model Training
+        E1["🤖 Build Neural Network"]
+        E2["🚀 Train Model"]
+        E --> E1
+        E --> E2
+    end
+
+    subgraph Evaluation
+        G1["📝 Validate Predictions"]
+        G --> G1
+    end
+
+    subgraph Post Processing
+        H1["📊 Reshape Predictions"]
+        H2["📄 Submit Results"]
+        H --> H1
+        H --> H2
+    end

@@ -1,0 +1,121 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "Contains training data with features and target variable."
+    },
+    {
+      "file": "test.csv",
+      "description": "Contains test data with features but no target variable."
+    },
+    {
+      "file": "sample_submission.csv",
+      "description": "Provides a sample submission format for the competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame containing the training dataset with features and target."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame containing the test dataset with features only."
+    },
+    {
+      "name": "samp_subm",
+      "description": "DataFrame used to format the submission output."
+    },
+    {
+      "name": "X_train",
+      "description": "DataFrame containing the feature set for training."
+    },
+    {
+      "name": "y_train",
+      "description": "Series containing the target variable for training."
+    },
+    {
+      "name": "X_val",
+      "description": "DataFrame containing the feature set for validation."
+    },
+    {
+      "name": "y_val",
+      "description": "Series containing the target variable for validation."
+    },
+    {
+      "name": "X_test",
+      "description": "DataFrame containing the feature set for testing."
+    },
+    {
+      "name": "model",
+      "description": "XGBRegressor model used for predictions."
+    },
+    {
+      "name": "output",
+      "description": "DataFrame prepared for final submission containing predictions for the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used to create features (X_train) and target (y_train)."
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "pd.read_csv()",
+      "flow": "Used to create features for testing (X_test)."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "DataFrame manipulation",
+      "flow": "Used for model training."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "Series extraction",
+      "flow": "Target variable in model training."
+    },
+    {
+      "variable": "X_val",
+      "creation_method": "train_test_split()",
+      "flow": "Used for validating model performance."
+    },
+    {
+      "variable": "y_val",
+      "creation_method": "Series extraction",
+      "flow": "Target variable for validation."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "DataFrame manipulation",
+      "flow": "Used to generate predictions for the test dataset."
+    },
+    {
+      "variable": "model",
+      "creation_method": "XGBRegressor()",
+      "flow": "Trained on X_train and y_train; used to predict y_val and y_test."
+    },
+    {
+      "variable": "output",
+      "creation_method": "DataFrame manipulation",
+      "flow": "Saved as 'submission.csv' for competition submission."
+    }
+  ],
+  "models": [
+    {
+      "name": "XGBRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "objective": "reg:squarederror",
+        "booster": "gbtree",
+        "eval_metric": "rmse",
+        "tree_method": "gpu_hist",
+        "n_estimators": 1000,
+        "learning_rate": 0.02,
+        "random_state": 2021
+      }
+    }
+  ]
+}

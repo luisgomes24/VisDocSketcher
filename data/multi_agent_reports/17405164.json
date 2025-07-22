@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the Titanic dataset with features like 'Pclass', 'Sex', 'SibSp', 'Parch' and the target variable 'Survived'."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains testing data for the Titanic dataset similar to train.csv but lacking the 'Survived' target variable."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_data",
+      "description": "DataFrame containing the training dataset loaded from train.csv."
+    },
+    {
+      "variable_name": "test_data",
+      "description": "DataFrame containing the testing dataset loaded from test.csv."
+    },
+    {
+      "variable_name": "features",
+      "description": "List of feature names used for model training: 'Pclass', 'Sex', 'SibSp', 'Parch'."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "DataFrame containing the training features after one-hot encoding."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Series containing the target variable 'Survived' from train_data."
+    },
+    {
+      "variable_name": "x_test",
+      "description": "DataFrame containing the testing features after one-hot encoding."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_data",
+      "creation_method": "pd.read_csv",
+      "usage": "Used to extract features and target variables for training."
+    },
+    {
+      "variable_name": "test_data",
+      "creation_method": "pd.read_csv",
+      "usage": "Used to extract features for test predictions."
+    },
+    {
+      "variable_name": "x_train",
+      "creation_method": "DataFrame selection and pd.get_dummies",
+      "usage": "Used for training the RandomForest model."
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "Series selection from train_data",
+      "usage": "Used as the target variable in model training."
+    },
+    {
+      "variable_name": "x_test",
+      "creation_method": "DataFrame selection and pd.get_dummies",
+      "usage": "Used for making predictions with the trained model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "max_depth": 7,
+        "n_estimators": 20
+      }
+    }
+  ]
+}

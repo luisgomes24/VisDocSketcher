@@ -1,0 +1,13 @@
+graph TD; 
+    A["<img src='dummy_plots/lineplot_template.svg'/> <br/> Weight for four in a row score."]:::data 
+    B["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Weight for three in a row score."]:::data 
+    C["<img src='dummy_plots/barplot_template.svg'/> <br/> Weight for two in a row score."]:::data 
+    D["<img src='dummy_plots/hist_template.svg'/> <br/> Weight for opposing two in a row score."]:::data 
+    E["<img src='dummy_plots/boxplot_template.svg'/> <br/> Weight for opposing three in a row score."]:::data
+    A -->|Assigned value of 5| B 
+    B -->|Assigned value of 2| C 
+    C -->|Assigned value of 1| D 
+    D -->|Assigned value of -2| E 
+    E -->|Assigned value of -5| A
+
+classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;

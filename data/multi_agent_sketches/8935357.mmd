@@ -1,0 +1,23 @@
+flowchart TD
+  %% Libraries and Setup
+  A[Import Libraries] --> B(Read CSV Files)
+  
+  %% Data Preparation
+  B --> C[df_countries: Country DataFrame]
+  B --> D[df_states: US State DataFrame]
+
+  %% Data Download
+  C --> |Download Country Reports| E[Download PDF Reports for Countries]
+  D --> |Download State Reports| F[Download PDF Reports for US States]
+
+  %% Data Extraction
+  E --> |Extract PDF Data| G[df_us_country_percent: Mobility Data for Countries]
+  F --> |Extract PDF Data| H[df_us_state_percent: Mobility Data for US States]
+
+  %% Data Export
+  G --> I[Export Country Data to CSV]
+  H --> J[Export State Data to CSV]
+
+  %% Comments
+  classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+  class A,B,C,D,E,F,G,H,I,J default;

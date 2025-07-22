@@ -1,0 +1,36 @@
+```mermaid
+%% This Mermaid diagram illustrates the data flow and model usage in the Jupyter Notebook.
+
+flowchart TD
+    %% Data Sources
+    A["Train CSV"] -->|Load & Preprocess| B["DataFrame df"]
+    A["Train CSV"] -.->|Load| C["Max Words"]
+    D["Test CSV"] -->|Load| E["DataFrame test_df"]
+    
+    %% Data Processing
+    B -->|Create Folds| F["Training Folds"]
+    B -->|Extract Max Words| C
+
+    %% Model Inference
+    F -->|Train & Predict Target| G["Target Prediction Array"]
+    F -->|Train & Predict Error| H["Error Prediction Array"]
+
+    %% Models
+    subgraph Model_Training
+    direction TB
+    I["BertModel with Conv Layers"]
+    I -->|Train| G
+    I -->|Train| H
+    end
+
+    I -->|Use for Tokenization| C
+
+    %% Loss Function
+    subgraph Loss_Function
+    direction TB
+    J["RMSELoss"]
+    end
+
+    G -->|Evaluate Performance| J
+    H -->|Evaluate Performance| J
+```

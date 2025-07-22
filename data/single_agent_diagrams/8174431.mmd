@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> from CSV"] --> B["👁️ Preview Data"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg' /> <br/> of Columns"]
+    C --> D["📉 Correlation Matrix <img src='barplot_template.svg' />"]
+    D --> E["🔍 Scatter and Density Plots <img src='scatter_plot_template.svg' />"]
+
+    subgraph "Data Files"
+        A1["📂 Load /kaggle/input/Processing_time_prediction_Test_1_09_09_19.csv"] --> A
+        A2["📂 Load /kaggle/input/Processing_time_prediction_Train_1_09_09_19.csv"] --> A
+    end

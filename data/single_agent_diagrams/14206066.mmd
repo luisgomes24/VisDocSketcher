@@ -1,0 +1,11 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='column_split.svg'/> <br/> Preprocess & Augment Data"]
+    B --> C["<img src='table.svg'/> <br/> Create Training Dataset"]
+    C --> D["<img src='table.svg'/> <br/> Create Validation Dataset"]
+    D --> E["<img src='table.svg'/> <br/> Create Test Dataset"]
+    E --> F["### MODEL BUILDING"]
+    F --> G["<img src='brain.svg'/> <br/> Build & Compile Model"]
+    G --> H["<img src='scatter_plot_template.svg'/> <br/> Train Model"]
+    H --> I["<img src='barplot_template.svg'/> <br/> Plot Training Metrics"]
+    I --> J["<img src='hist_template.svg'/> <br/> Evaluate Model"]
+    J --> K["<img src='table.svg'/> <br/> Print Final Metrics"]

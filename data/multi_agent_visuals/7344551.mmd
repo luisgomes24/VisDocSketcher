@@ -1,0 +1,9 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> heart.csv"] --> |"Load data"| B["<img src='icons/table.svg' width=100 height=100/> <br/> heart_df"]
+    B --> |"Split features and target"| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> X_training"]
+    C --> |"Scale features"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> X_scaled"]
+    D --> |"Train model"| E["<img src='icons/brain.svg' width=100 height=100/> <br/> model"]
+    E --> |"Make predictions"| F["<img src='icons/brain.svg' width=100 height=100/> <br/> predictions"]
+    F --> |"Evaluate model"| G["<img src='icons/brain.svg' width=100 height=100/> <br/> evaluation"]
+    G --> |"Save results"| H["<img src='icons/file.svg' width=100 height=100/> <br/> results"]
+    H --> |"End"| I["Complete"].

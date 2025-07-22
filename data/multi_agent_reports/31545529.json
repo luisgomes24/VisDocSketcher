@@ -1,0 +1,77 @@
+{"data_sources": [
+    {
+        "file_path": "/kaggle/input/coursera-free-courses-dataset/courserafree.csv",
+        "description": "Dataset containing ratings and other details of free Coursera courses"
+    }
+],
+"data_variables": [
+    {
+        "name": "df",
+        "description": "DataFrame containing the main dataset with courses and their attributes"
+    },
+    {
+        "name": "main_label",
+        "description": "The label column that contains the ratings for the courses"
+    },
+    {
+        "name": "X",
+        "description": "Feature set used for model training excluding the main label"
+    },
+    {
+        "name": "y",
+        "description": "Array of ratings to be predicted"
+    },
+    {
+        "name": "train_pool",
+        "description": "Training pool for CatBoost model"
+    },
+    {
+        "name": "test_pool",
+        "description": "Testing pool for CatBoost model"
+    }
+],
+"data_flow": [
+    {
+        "variable": "df",
+        "creation": "pd.read_csv",
+        "flow": "Used for data transformations, feature engineering, and model training"
+    },
+    {
+        "variable": "main_label",
+        "creation": "Defined as 'ratings'",
+        "flow": "Used to differentiate between features and target during model training"
+    },
+    {
+        "variable": "X",
+        "creation": "df.drop([main_label], axis=1)",
+        "flow": "Used as input features to model training"
+    },
+    {
+        "variable": "y",
+        "creation": "df[main_label].values",
+        "flow": "Used as target variable during model training"
+    },
+    {
+        "variable": "train_pool",
+        "creation": "Pool(X_train, y_train)",
+        "flow": "Used for training the CatBoost model"
+    },
+    {
+        "variable": "test_pool",
+        "creation": "Pool(X_test, y_test)",
+        "flow": "Used for testing predictions of the CatBoost model"
+    }
+],
+"models": [
+    {
+        "model_name": "CatBoostRegressor",
+        "input_features": "X_train",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "iterations": 500,
+            "depth": 5,
+            "learning_rate": 0.02,
+            "loss_function": "RMSE"
+        }
+    }
+]}

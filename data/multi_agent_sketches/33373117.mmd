@@ -1,0 +1,14 @@
+flowchart TD
+    %% Read CSV file containing training data
+    A[Train CSV] -->|load data| B[df DataFrame]
+    
+    %% Preprocessing images
+    B -->|iterate over CSV| C[Preprocess Function]
+    
+    %% Read image from input path
+    C -->|construct path| D[input_file_name]
+    D -->|read DICOM| E[Breast Cancer Image]
+    
+    %% Save image to output path
+    C -->|construct output path| F[output_file_name]
+    E -->|convert to JPEG| G[Output JPEG Image]

@@ -1,0 +1,83 @@
+{
+  "data_sources": [
+    {
+      "file_name": "DATA.csv",
+      "description": "A dataset containing various attributes related to car emissions, including the CO2 emission values, weight, volume, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "Initial DataFrame created by reading the dataset from CSV file."
+    },
+    {
+      "name": "df",
+      "description": "Cleaned DataFrame after dropping the 'Unnamed: 5' column."
+    },
+    {
+      "name": "X",
+      "description": "Feature set containing 'Weight' and 'Volume' used for model training."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing 'CO2' emission values."
+    },
+    {
+      "name": "regr",
+      "description": "Linear regression model used for predicting CO2 emissions based on weight and volume."
+    },
+    {
+      "name": "predictedCO2",
+      "description": "Predicted CO2 emissions for a specific set of input features (2300kg weight and 1300cm3 volume)."
+    },
+    {
+      "name": "predictedCO2_new",
+      "description": "Predicted CO2 emissions for another car configuration (3300kg weight and 1300cm3 volume)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pandas.read_csv",
+      "flows": ["Cleaned to 'df'"]
+    },
+    {
+      "variable": "df",
+      "creation": "df1.drop([...])",
+      "flows": ["Used for analysis and model training"]
+    },
+    {
+      "variable": "X",
+      "creation": "df[['Weight', 'Volume']]",
+      "flows": ["Used as input features in Linear Regression model"]
+    },
+    {
+      "variable": "y",
+      "creation": "df['CO2']",
+      "flows": ["Used as target variable in Linear Regression model"]
+    },
+    {
+      "variable": "regr",
+      "creation": "linear_model.LinearRegression()",
+      "flows": ["Trained using 'X' and 'y', used to make predictions"]
+    },
+    {
+      "variable": "predictedCO2",
+      "creation": "regr.predict([...])",
+      "flows": ["Output of the model prediction"]
+    },
+    {
+      "variable": "predictedCO2_new",
+      "creation": "regr.predict([...])",
+      "flows": ["Output of model prediction for different input"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Linear Regression",
+      "input_features": ["Weight", "Volume"],
+      "target_variable": "CO2",
+      "hyperparameters": {"type": "default"}
+    }
+  ]
+}

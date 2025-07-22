@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Dataset <img src='file.svg'/> <br/> df = pd.read_csv()"] --> B["🔍 Examine Dataset <img src='table.svg'/>"]
+    B --> C["🔢 Identify Numeric Columns <img src='column_split.svg'/>"]
+    B --> D["📊 Identify Categorical Columns <img src='column_split.svg'/>"]
+    C --> E["🌀 Analyze Missing Values <img src='table.svg'/>"]
+    D --> E
+    E --> F["🧹 Data Preprocessing"]
+    F --> G["🗑️ Remove Columns with Excessive Missing Values <img src='column_split.svg'/>"]
+    F --> H["🔄 Fill Missing Values <img src='table.svg'/>"]
+    H --> I["⚙️ Normalize Numeric Columns <img src='column_split.svg'/>"]
+    I --> J["📶 Encode Categorical Variables <img src='column_split.svg'/>"]
+    J --> K["🔄 Train-Test Split <img src='row_split.svg'/>"]
+    K --> L["📊 Modeling with PCA"]
+    L --> M["📱 Analyze PCA Components <img src='scatter_plot_template.svg'/>"]
+    M --> N["📈 Conclusion"]

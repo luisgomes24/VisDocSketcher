@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Preprocess Data"]
+    B --> C["🖼️ Generate Image Data <img src='icon.svg' />"]
+    C --> D["🧠 Build Model <img src='brain.svg' />"]
+    D --> E["🚀 Train Model"]
+    E --> F["📝 Evaluate Model"]
+    F --> G["📊 Visualize Results <img src='barplot_template.svg' />"]
+    G --> H["📂 Save Predictions <img src='file.svg' />"]
+
+    %% Nodes for intermediate steps
+    B -->|Split| B1["✨ Train-Test Split"]
+    C -->|Data Augmentation| C1["🔄 Create Augmented Generator"]
+    E -->|Monitor| E1["🔔 Callbacks"]
+    E -->|Fit Model| E2["⚡ Fit on Training Data"]

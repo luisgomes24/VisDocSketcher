@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/train.csv",
+      "description": "Training dataset containing home sales data including the sale price."
+    },
+    {
+      "file_path": "../input/test.csv",
+      "description": "Test dataset for which predictions need to be made based on the model."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "X_train",
+      "description": "Training features, derived from the training set after cleaning and preprocessing."
+    },
+    {
+      "variable_name": "X_valid",
+      "description": "Validation features used to assess the performance of the model during training."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable (SalePrice) corresponding to the training features."
+    },
+    {
+      "variable_name": "y_valid",
+      "description": "Validation target variable (SalePrice) used to evaluate model predictions during training."
+    },
+    {
+      "variable_name": "predictions_1",
+      "description": "Predictions for the validation set made by model my_model_1."
+    },
+    {
+      "variable_name": "predictions_2",
+      "description": "Predictions for the validation set made by model my_model_2."
+    },
+    {
+      "variable_name": "predictions_3",
+      "description": "Predictions for the validation set made by model my_model_3."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "X_train",
+      "creation_method": "pd.read_csv & preprocessing steps"
+    },
+    {
+      "variable_name": "X_valid",
+      "creation_method": "pd.read_csv & preprocessing steps"
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "Extracted from X_train"
+    },
+    {
+      "variable_name": "y_valid",
+      "creation_method": "Extracted from X_valid"
+    },
+    {
+      "variable_name": "my_model_1",
+      "creation_method": "XGBRegressor()",
+      "used_in": "Train with X_train, y_train and get predictions_1"
+    },
+    {
+      "variable_name": "my_model_2",
+      "creation_method": "XGBRegressor(n_estimators=500, learning_rate=0.05)",
+      "used_in": "Train with X_train, y_train and get predictions_2"
+    },
+    {
+      "variable_name": "my_model_3",
+      "creation_method": "XGBRegressor(n_estimators=800, learning_rate=0.05)"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "my_model_1",
+      "type": "XGBRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "Default settings"
+    },
+    {
+      "model_name": "my_model_2",
+      "type": "XGBRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "n_estimators=500, learning_rate=0.05"
+    },
+    {
+      "model_name": "my_model_3",
+      "type": "XGBRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "n_estimators=800, learning_rate=0.05"
+    }
+  ]
+}

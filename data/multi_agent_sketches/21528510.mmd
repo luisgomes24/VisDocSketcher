@@ -1,0 +1,25 @@
+%% Mermaid diagram for the workflow in the Jupyter Notebook '21528510.ipynb'
+flowchart TD
+    %% Node for the initial file ID list definition
+    A["File ID List"] -->|"Defines file IDs for models"| B["Variable: fid"]
+    
+    %% Node for downloading model files
+    B -->|"Used to generate download link"| C["wget download"]
+
+    %% Node that represents each downloaded model
+    C -->|"Downloads model file"| D["Model File: pytorch_model_0.bin"]
+
+    %% Node for the PyTorch model demarcation
+    D -->|"Is loaded into"| E["Model: PyTorch"]
+
+    %% Node representing for loop for downloading all models
+    F["For Loop Index: i"] -->|"Controls downloading process"| C
+
+    
+    %% Comments for nodes
+    %% A: Represents the list of file IDs for the models to be downloaded
+    %% B: 'fid' variable used to hold the current file ID in each download iteration
+    %% C: Action of downloading the model file using wget
+    %% D: Represents the model file downloaded from Google Drive
+    %% E: Node demarcating that the file serves as a PyTorch model
+    %% F: Represents the loop index variable controlling the downloading of multiple files

@@ -1,0 +1,34 @@
+%% This Mermaid diagram captures the workflow of a Malaria Detection model
+
+flowchart TD
+    %% Data source node
+    A[Images of Blood Cells]-->B
+    
+    %% Data variable nodes
+    B[Path Object pointing to images]
+    B-->C[DataLoaders with Training and Validation Sets]
+    
+    %% Learner node
+    C-->D[Learner: XResNet34]
+    D-->E[Trained Learner 'stage-1']
+    
+    %% Learner interpretation
+    E-->F[Classification Interpretation]
+    F-->G[Confusion Matrix]
+    F-->H[Class Probabilities (Preds)]
+    
+    %% Evaluation
+    H-->I[Classification Report]
+    I-->J[Evaluate Model Performance]
+    
+    %% Descriptions as comments
+    %% A represents the data source of cell images
+    %% B represents the conversion into a Path object
+    %% C represents the loading of data into train/validation sets
+    %% D represents creation of a model learner with XResNet34
+    %% E represents training of the model
+    %% F represents analyzing predictions with the trained model
+    %% G represents visualizing the confusion matrix
+    %% H represents obtaining predicted probabilities
+    %% I represents generating a performance report
+    %% J represents the evaluation of model performance

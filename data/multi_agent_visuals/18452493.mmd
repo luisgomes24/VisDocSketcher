@@ -1,0 +1,21 @@
+graph TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Dataset"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"]
+    C["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train/Test Split"]
+    F["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Models"]
+    G["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"]
+    H["<img src='dummy_plots/barplot_template.svg'/> <br/> Bar Plot"]
+    I["<img src='dummy_plots/lineplot_template.svg'/> <br/> Line Plot"]
+    J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scatter Plot"]
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    D --> F
+    E --> F
+    F --> G
+    G --> H
+    G --> I
+    G --> J

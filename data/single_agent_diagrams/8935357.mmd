@@ -1,0 +1,7 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg' />"] --> B["🌐 Download Country Reports <img src='icons/database.svg' />"]
+    A --> C["🌐 Download US State Reports <img src='icons/database.svg' />"]
+    B --> D["📄 Extract PDF Data <img src='icons/brain.svg' />"]
+    C --> D
+    D --> E["📊 Create DataFrames <img src='icons/table.svg' />"]
+    E --> F["💾 Export Data <img src='icons/file.svg' />"]

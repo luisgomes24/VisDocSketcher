@@ -1,0 +1,23 @@
+flowchart TD
+    A["📁 Load Data from Files <img src='file.svg' />"] --> B["🔍 Explore Data <img src='table.svg' />"]
+    B --> C["📊 Distribution Graphs <img src='dummy_plots/barplot_template.svg' />"]
+    B --> D["📉 Correlation Matrix <img src='dummy_plots/correlation_matrix_template.svg' />"]
+    B --> E["🔗 Scatter and Density Plots <img src='dummy_plots/scatter_plot_template.svg' />"]
+    A1["📁 Load First File"] --> B1["🔍 Examine First File Data"]
+    B1 --> C1["📊 Distribution Graphs for First File"]
+    B1 --> D1["📉 Correlation Matrix for First File"]
+    B1 --> E1["🔗 Scatter and Density Plots for First File"]
+    A2["📁 Load Second File"] --> B2["🔍 Examine Second File Data"]
+    B2 --> C2["📊 Distribution Graphs for Second File"]
+    B2 --> D2["📉 Correlation Matrix for Second File"]
+    B2 --> E2["🔗 Scatter and Density Plots for Second File"]
+    A -->|First File| A1
+    A -->|Second File| A2
+    B --> B1
+    B --> B2
+    C --> C1
+    C --> C2
+    D --> D1
+    D --> D2
+    E --> E1
+    E --> E2

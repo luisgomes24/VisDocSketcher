@@ -1,0 +1,20 @@
+%% Data Sources
+flowchart TD
+    A["transactions_train.csv"] -->|"Load data into DataFrame"| B("transactions_train")
+    C["customers.csv"] -->|"Used for demographics analysis (not shown in flow)"| 
+
+    %% Data Transformation and Aggregation
+    B -->|"Aggregate data by date and sum prices"| D["transactions"]
+
+    %% Prophet Model
+    D -->|"Train Prophet model"| E["Prophet Model"]
+    E -->|"Create future DataFrame"| F["Future DataFrame"]
+    E -->|"Perform Forecast"| G["Forecast Results"]
+    G -->|"Output forecast plot"| H["Plot"]
+
+    %% Cross Validation and Performance
+    G -->|"Cross validate model"| I["Cross Validation Results"]
+    I -->|"Compute performance metrics"| J["Performance Metrics"]
+    
+%% Additional Information
+%% Prophet model uses country_holidays='US' as a hyperparameter for forecasting

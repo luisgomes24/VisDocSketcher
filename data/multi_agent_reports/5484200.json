@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Test.csv",
+      "description": "Contains sample testing data with 3756 rows, reading only the first 1000 for analysis."
+    },
+    {
+      "file_name": "Train.csv",
+      "description": "Contains sample training data with 8766 rows, reading only the first 1000 for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding data from Test.csv"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame holding data from Train.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "uses": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "uses": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

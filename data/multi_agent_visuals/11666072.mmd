@@ -1,0 +1,5 @@
+graph TD;
+    A[Data Source] -->|Reads| B[Database]
+    B -->|Output| C[DataFrame]
+    C -->|Splitting| D[Train-Test Split]
+    D -->|Train Data| E[Model Training]

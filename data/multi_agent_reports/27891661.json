@@ -1,0 +1,140 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/spaceship-titanic/train.csv",
+            "description": "Training data containing information about passengers including features such as HomePlanet, CryoSleep, Age, and whether they were transported."
+        },
+        {
+            "file": "../input/spaceship-titanic/test.csv",
+            "description": "Test data containing similar features as the training data but without the target variable."
+        },
+        {
+            "file": "../input/spaceship-titanic/sample_submission.csv",
+            "description": "Sample submission format for predictions on test data."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "train_data",
+            "description": "DataFrame containing the training data after loading from CSV and preprocessing steps."
+        },
+        {
+            "variable": "test_data",
+            "description": "DataFrame containing the test data after loading from CSV and preprocessing steps."
+        },
+        {
+            "variable": "X",
+            "description": "DataFrame containing feature variables after dropping the target variable 'Transported'."
+        },
+        {
+            "variable": "y",
+            "description": "Series containing the target variable 'Transported' for the training data."
+        },
+        {
+            "variable": "X_train",
+            "description": "Training set of features after splitting the dataset."
+        },
+        {
+            "variable": "X_val",
+            "description": "Validation set of features after splitting the dataset."
+        },
+        {
+            "variable": "y_train",
+            "description": "Training set of target variable after splitting the dataset."
+        },
+        {
+            "variable": "y_val",
+            "description": "Validation set of target variable after splitting the dataset."
+        },
+        {
+            "variable": "pipe",
+            "description": "Pipeline combining data preprocessing (scaling and polynomial features) and Logistic Regression model."
+        },
+        {
+            "variable": "test_pred_LR",
+            "description": "Predictions made on test_data using the trained Logistic Regression model."
+        },
+        {
+            "variable": "LR_results",
+            "description": "DataFrame storing the final predictions to be submitted."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_data",
+            "creation": "Loaded using pd.read_csv() from train.csv.",
+            "flows_to": ["X", "y"]
+        },
+        {
+            "variable": "X",
+            "creation": "Created by dropping the 'Transported' column from train_data.",
+            "flows_to": ["X_train", "X_val"]
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted as the 'Transported' column from train_data.",
+            "flows_to": ["y_train", "y_val"]
+        },
+        {
+            "variable": "X_train",
+            "creation": "Created using train_test_split() on X.",
+            "flows_to": ["pipe"]
+        },
+        {
+            "variable": "X_val",
+            "creation": "Created using train_test_split() on X.",
+            "flows_to": []
+        },
+        {
+            "variable": "y_train",
+            "creation": "Created using train_test_split() on y.",
+            "flows_to": []
+        },
+        {
+            "variable": "y_val",
+            "creation": "Created using train_test_split() on y.",
+            "flows_to": []
+        },
+        {
+            "variable": "pipe",
+            "creation": "Created using Pipeline() combining scaling, polynomial features, and Logistic Regression.",
+            "flows_to": ["pipe_pred_LR"]
+        },
+        {
+            "variable": "pipe_pred_LR",
+            "creation": "Predictions made using pipe.predict(X_val).",
+            "flows_to": ["pipe_rep_LR", "plot_confusion_matrix"]
+        },
+        {
+            "variable": "LR_results",
+            "creation": "Created to combine the predictions with sample_submission DataFrame.",
+            "flows_to": ["submission.csv"]
+        },
+        {
+            "variable": "test_data",
+            "creation": "Loaded using pd.read_csv() from test.csv.",
+            "flows_to": ["test_pred_LR"]
+        },
+        {
+            "variable": "test_pred_LR",
+            "creation": "Predictions made using pipe.predict(test_data).",
+            "flows_to": ["LR_results"]
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Logistic Regression",
+            "input_features": [
+                "HomePlanet",
+                "CryoSleep",
+                "Destination",
+                "VIP",
+                "Age"
+            ],
+            "target_variable": "Transported",
+            "hyperparameters": {
+                "solver": "liblinear"
+            }
+        }
+    ]
+}

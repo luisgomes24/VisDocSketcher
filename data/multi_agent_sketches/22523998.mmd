@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data Source
+    A[Dog Breed Metadata CSV] -->|"Load CSV"| B[DataFrame df]
+    %% Image Folder Node
+    D[[Image Folder]]
+    %% Variables and Data Flow
+    B -->|"Inspect & Clean Data"| C
+    C[DataFrame df] -->|"Save as Pickle"| E((Pickle File))
+    %% Image Dimensions
+    D -->|"Get Dimensions"| F[Width]
+    D -->|"Get Dimensions"| G[Height]
+    F -->|"Calculate"| H[AspectRatio]
+    G -->|"Calculate"| H
+    %% Data Cleaning based on Dimensions
+    H -->|"Filter Invalid Images"| I{Valid?}
+    I -->|"Yes"| J[Valid Images]
+    I -->|"No"| K[Outlier/Invalid Images]

@@ -1,0 +1,11 @@
+graph TD
+    A["<img src='../input/fulllabeldataset/train.csv' width=100 height=100/> <br/> Load Train Data"] --> B["<img src='../input/birdclef-2022/scored_birds.json' width=100 height=100/> <br/> Load Bird Target"]
+    B --> C["<img src='../input/annotationdataset-furu/results.txt' width=100 height=100/> <br/> Load Furu Results"]
+    C --> D["<img src='../input/annotationdataset-furu/results_num1_primary.txt' width=100 height=100/> <br/> Load Furu Num1 Results"]
+    D --> E["<img src='../input/annotationdataset-ishii/results.txt' width=100 height=100/> <br/> Load Ishii Results"]
+    E --> F["<img src='../input/annotationdataset-tadokoro/results.txt' width=100 height=100/> <br/> Load Tadokoro Results"]
+    F --> G["<img src='../input/annotationdataset-takemi/results.txt' width=100 height=100/> <br/> Load Takemi Results"]
+    G --> H["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Processed Training Data"]
+    H --> I["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> Bird Target Mapping"]
+    I --> J["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> LABEL_IDS"]
+    J --> K["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> INV_LABEL_IDS"]

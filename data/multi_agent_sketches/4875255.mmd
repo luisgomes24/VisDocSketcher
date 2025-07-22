@@ -1,0 +1,60 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+
+    %% Nodes for Data Sources
+    DS1["/chicago_taxi_trips dataset/"]:::dataSource
+    %% Commentary
+    %% DS1: Represents the primary data source containing Chicago's taxi trip data.
+
+    %% Nodes for Data Variables
+    var1["dataset_ref"]:::dataVariable
+    %% Commentary
+    %% var1: BigQuery dataset reference to 'chicago_taxi_trips'.
+
+    var2["table_name"]:::dataVariable
+    %% Commentary
+    %% var2: Name of the table within the dataset.
+
+    var3["rides_per_year_query"]:::dataVariable
+    %% Commentary
+    %% var3: SQL query to count taxi trips per year.
+
+    var4["rides_per_month_query"]:::dataVariable
+    %% Commentary
+    %% var4: SQL query to count taxi trips per month in 2017.
+
+    var5["speeds_query"]:::dataVariable
+    %% Commentary
+    %% var5: SQL query to calculate trips and average speed by hour.
+
+    %% Nodes for Data Flow
+    df1["dataset = client.get_dataset(dataset_ref)"]:::dataFlow
+    %% Commentary
+    %% df1: Fetching the dataset from BigQuery API.
+
+    df2["list(client.list_tables(dataset))"]:::dataFlow
+    %% Commentary
+    %% df2: Listing tables to derive 'table_name'.
+
+    df3["Q: rides_per_year (SQL execution)"]:::dataFlow
+    %% Commentary
+    %% df3: Execution of the yearly rides SQL query.
+
+    df4["Q: rides_per_month (SQL execution)"]:::dataFlow
+    %% Commentary
+    %% df4: Execution of the monthly rides SQL query.
+
+    df5["Q: speeds (SQL execution)"]:::dataFlow
+    %% Commentary
+    %% df5: Execution of the speed by hour SQL query.
+
+    %% Connections (Data Flow)
+    DS1 --> var1
+    var1 --> df1 --> df2 --> var2
+    var2 --> var3 --> df3
+    var2 --> var4 --> df4
+    var2 --> var5 --> df5
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef dataFlow fill:#cfc,stroke:#333,stroke-width:2px;

@@ -1,0 +1,55 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/persona-data/persona.csv",
+      "description": "Contains persona data including customer characteristics and pricing information."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the loaded persona data from the CSV file."
+    },
+    {
+      "name": "data",
+      "description": "Copy of the original DataFrame df."
+    },
+    {
+      "name": "agg_df",
+      "description": "Aggregated DataFrame containing summary statistics of prices grouped by customer characteristics."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flow": "Initial data exploration and cleaning steps, then used for further aggregation."
+    },
+    {
+      "variable": "data",
+      "creation": "Created by copying df.",
+      "flow": "Not used after creation; serves as a backup."
+    },
+    {
+      "variable": "agg_df",
+      "creation": "Created by aggregating df on multiple dimensions (COUNTRY, SOURCE, SEX, AGE).",
+      "flow": "Used for deriving customer segments and computing statistics based on pricing."
+    }
+  ],
+  "models": [
+    {
+      "type": "Segmentation",
+      "description": "Based on customer characteristics to classify segments (A, B, C, D) based on prices.",
+      "input_features": [
+        "COUNTRY",
+        "SOURCE",
+        "SEX",
+        "AGE_CAT"
+      ],
+      "target_variable": "PRICE",
+      "hyperparameters": {
+        "segmentation": "qcut into 4 quantiles for segmentation."
+      }
+    }
+  ]
+}

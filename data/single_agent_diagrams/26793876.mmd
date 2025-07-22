@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train.csv & test.csv"] --> B["🗑️ Remove NA Values"]
+    B --> C["🗑️ Remove Uniform Distribution"]
+    C --> D["➕ Add Current Winner Column"]
+    D --> E["🔍 Determine Correlation with Target"]
+    E --> F["📉 Reduce Dataset to 50 Variables"]
+    F --> G["🔄 Transform Data"]
+    G --> H["🔢 Normalize Data"]
+    H --> I["🔄 Cross-validation Function"]
+    I --> J["🧪 Model Evaluation"]
+    J --> K["🔍 Hyperparameter Tuning <img src='brain.svg'/>"]
+    K --> L["📊 Submission <img src='file.svg'/> <br/> Save Predictions to CSV"]

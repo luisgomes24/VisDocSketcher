@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Data"] --> B["🧹 Preprocess Data"]
+    A -->|load| C["<img src='icons/file.svg'/> <br/> Train Data"]
+    A -->|load| D["<img src='icons/file.svg'/> <br/> Train Labels"]
+    A -->|load| E["<img src='icons/file.svg'/> <br/> Test Data"]
+    
+    B --> F["🧪 Train-Test Split"]
+    B -->|sort| C
+    B -->|sort| D
+    
+    F --> G["🧠 Train Model"]
+    G -->|Logistic Regression| H["🎯 Evaluate Model"]
+    
+    H --> I["🔍 Predictions"]
+    I --> J["📝 Generate Flag String"]
+    J --> K["📬 Submit Flag"]

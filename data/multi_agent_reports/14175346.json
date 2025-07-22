@@ -1,0 +1,103 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with features and target variable."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for making predictions."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission that contains expected output format."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_df",
+      "description": "DataFrame containing training data loaded from train.csv."
+    },
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame containing test data loaded from test.csv."
+    },
+    {
+      "variable_name": "cont_nn",
+      "description": "List of continuous feature columns extracted from train_df excluding the target and ID columns."
+    },
+    {
+      "variable_name": "to_nn",
+      "description": "TabularPandas object that holds the training data and processing functions for preparing the model training."
+    },
+    {
+      "variable_name": "dls",
+      "description": "DataLoader objects for training and validation data."
+    },
+    {
+      "variable_name": "learn",
+      "description": "Tabular learner object created for training the model."
+    },
+    {
+      "variable_name": "pred",
+      "description": "Predictions made by the model on the test data."
+    },
+    {
+      "variable_name": "submission_df",
+      "description": "DataFrame that holds the sample submission format with predicted targets."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "creation": "Loaded from train.csv via pd.read_csv",
+      "flow": "Used to create to_nn and dls"
+    },
+    {
+      "variable": "test_df",
+      "creation": "Loaded from test.csv via pd.read_csv",
+      "flow": "Used to generate predictions via learn.get_preds"
+    },
+    {
+      "variable": "cont_nn",
+      "creation": "Derived from train_df",
+      "flow": "Used in creating the TabularPandas object (to_nn)"
+    },
+    {
+      "variable": "to_nn",
+      "creation": "Created using TabularPandas",
+      "flow": "Used to create dls"
+    },
+    {
+      "variable": "dls",
+      "creation": "Created from to_nn",
+      "flow": "Used during model training with learn"
+    },
+    {
+      "variable": "learn",
+      "creation": "Created using tabular_learner",
+      "flow": "Trains the model and generates predictions"
+    },
+    {
+      "variable": "pred",
+      "creation": "Generated from tst_dl using learn.get_preds",
+      "flow": "Stored in submission_df for output"
+    },
+    {
+      "variable": "submission_df",
+      "creation": "Initialized from sample_submission.csv",
+      "flow": "Contains final predictions; saved to submission.csv"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Tabular Neural Network",
+      "input_features": "Continuous variables from train_df",
+      "target_variable": "target",
+      "hyperparameters": {
+        "epochs": 20,
+        "learning_rate": 0.0003
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> PETCT Images"] --> B["📝 Display Projections <img src='dummy_plots/montage2d.svg'/> <br/> CT & SUV"]
+    B --> C["🔍 Superpixel Segmentation <img src='column_split.svg'/> <br/> Basic Segmentation"]
+    C --> D["🔗 Combine PET/CT <img src='dummy_plots/lineplot_template.svg'/> <br/> Full 3D Superpixels"]
+    D --> E["⚙️ Optimize Superpixel Size <img src='brain.svg'/>"]
+    E --> F["🔎 Evaluation of Segments <img src='table.svg'/>"]
+    F --> G["📊 Show Superpixels <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Per Label"]
+    G --> H["📈 Performance Analysis <img src='hist_template.svg'/>"]
+    H --> I["🌐 3D Visualization <img src='image.svg'/>"]

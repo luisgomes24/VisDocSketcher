@@ -1,0 +1,8 @@
+flowchart TD
+    A["/PoliceKillingsUS.csv/"] %% Data node for the source CSV file
+    B["sample_entry Variable"] %% Node for sample_entry data variable
+    C["new_entry Variable"] %% Node for new_entry data variable
+    D["police_killings DataFrame"] %% Node for police_killings DataFrame
+
+    A -->|read into| D
+    B -->|decode and encode| C

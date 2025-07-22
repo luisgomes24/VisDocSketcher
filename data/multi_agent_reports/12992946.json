@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/failas/beer-consumption-per-person.csv",
+      "description": "Contains beer consumption data per person across different countries from 1961 to 2016"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing beer consumption data by year and country"
+    },
+    {
+      "variable_name": "df_r_copy",
+      "description": "Copy of df, containing only 'Entity', 'Year', and 'Consumption' columns"
+    },
+    {
+      "variable_name": "df_LT",
+      "description": "Filtered DataFrame containing data for Lithuania only"
+    },
+    {
+      "variable_name": "df_baltics",
+      "description": "DataFrame containing data for Baltic countries (Lithuania, Latvia, Estonia)"
+    },
+    {
+      "variable_name": "df_baltics_g",
+      "description": "Grouped DataFrame containing average beer consumption by year for Baltic countries"
+    },
+    {
+      "variable_name": "df_nordic",
+      "description": "DataFrame containing data for Nordic countries (Norway, Denmark, Sweden)"
+    },
+    {
+      "variable_name": "df_nordic_g",
+      "description": "Grouped DataFrame containing average beer consumption by year for Nordic countries"
+    },
+    {
+      "variable_name": "df_region",
+      "description": "Concatenated DataFrame of average consumption data for both Baltic and Nordic regions"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Renamed, filtered, and used for visualization"
+    },
+    {
+      "variable_name": "df_r_copy",
+      "creation_method": "df.copy()",
+      "flow": "Filtered for three specific columns and used in further analysis"
+    },
+    {
+      "variable_name": "df_LT",
+      "creation_method": "df_r_copy.loc[df_r_copy.Entity.isin(['Lithuania'])]",
+      "flow": "Used to generate a plot of Lithuania's beer consumption over years"
+    },
+    {
+      "variable_name": "df_baltics",
+      "creation_method": "df[df.Entity.isin(['Lithuania', 'Latvia', 'Estonia'])]",
+      "flow": "Used to calculate average consumption per year"
+    },
+    {
+      "variable_name": "df_baltics_g",
+      "creation_method": "df_baltics.groupby(['Year'])['Consumption'].mean()",
+      "flow": "Used in visualization by region"
+    },
+    {
+      "variable_name": "df_nordic",
+      "creation_method": "df[df.Entity.isin(['Norway', 'Denmark', 'Sweden'])]",
+      "flow": "Used to calculate average consumption per year"
+    },
+    {
+      "variable_name": "df_nordic_g",
+      "creation_method": "df_nordic.groupby(['Year'])['Consumption'].mean()",
+      "flow": "Used in visualization by region"
+    },
+    {
+      "variable_name": "df_region",
+      "creation_method": "pd.concat([df_nordic_g, df_baltics_g])",
+      "flow": "Used for final visualization comparing Baltic and Nordic consumption"
+    }
+  ],
+  "models": []
+}

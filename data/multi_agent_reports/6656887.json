@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training data containing various features for modeling energy consumption."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test data to validate predictions against."
+    },
+    {
+      "file_name": "building_metadata.csv",
+      "description": "Meta-data about each building in the dataset." 
+    },
+    {
+      "file_name": "site1_scrapped_50_buildings.csv",
+      "description": "Scraped building data for site 1, containing energy meter readings and metadata."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "site1_pd",
+      "description": "DataFrame containing scraped information for site 1 buildings."
+    },
+    {
+      "variable_name": "site1_scraped_pd",
+      "description": "DataFrame that combines scraped meter readings for buildings from site 1."
+    },
+    {
+      "variable_name": "train_pd",
+      "description": "Training DataFrame including features and target for energy consumption modeling."
+    },
+    {
+      "variable_name": "test_pd",
+      "description": "Testing DataFrame to validate energy consumption predictions."
+    },
+    {
+      "variable_name": "full_pd",
+      "description": "Combined DataFrame containing both training and testing data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "site1_pd",
+      "creation_method": "pd.read_csv",
+      "usage": "Used to scrape and download building data for site 1."
+    },
+    {
+      "variable_name": "site1_scraped_pd",
+      "creation_method": "download_building_data",
+      "usage": "Contains the processed scraped data ready for merging with training data."
+    },
+    {
+      "variable_name": "train_pd",
+      "creation_method": "pd.read_csv",
+      "usage": "Read in initial training data for energy consumption modeling. Merged with additional metadata and scraped data."
+    },
+    {
+      "variable_name": "test_pd",
+      "creation_method": "pd.read_csv",
+      "usage": "Loaded test data to allow future predictions. Merged with corresponding metadata and scraped data."
+    },
+    {
+      "variable_name": "full_pd",
+      "creation_method": "pd.concat",
+      "usage": "Concatenates train and test DataFrames for comprehensive analysis and modeling."
+    }
+  ],
+  "models": []
+}

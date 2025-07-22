@@ -1,0 +1,26 @@
+{
+  "data_sources": [
+    {
+      "file_name": "exchange-rate.csv",
+      "description": "Contains exchange rates data"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding the exchange rate data read from CSV."
+    },
+    {
+      "variable_name": "nRowsRead",
+      "description": "An integer specifying the number of rows to read from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "created": "pd.read_csv('../input/exchange-rate.csv', delimiter=',', nrows = nRowsRead)",
+      "flow": "Used for plotting (distribution, correlation, scatter plots)"
+    }
+  ],
+  "models": []
+}

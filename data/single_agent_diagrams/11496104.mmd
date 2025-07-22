@@ -1,0 +1,22 @@
+flowchart TD
+    A["📥 Load Data"] --> B["📊 Plot Specific Day <img src='dummy_plots/scatter_plot_template.svg'/> <br/> (31st August)"]
+    A --> C["📊 Plot All Data <img src='dummy_plots/lineplot_template.svg'/> <br/> (29/06/2020 - 22/09/2020)"]
+
+    subgraph DataLoading
+        A1["<img src='icons/file.svg'/> <br/> Load Turkey Map Data"]
+        A2["<img src='icons/file.svg'/> <br/> Load Covid19 Table Data"]
+        A --> A1
+        A --> A2
+    end
+
+    subgraph Preprocessing
+        D["🛠️ Preprocess Data"]
+        A1 --> D
+        A2 --> D
+    end
+
+    B --> E["📍 Visualize Map"]
+    C --> F["📈 Visualize Trends"]
+
+    D --> B
+    D --> C

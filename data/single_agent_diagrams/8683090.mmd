@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🧹 Data Preprocessing <img src='column_split.svg' /> <br/> drop unnecessary columns"]
+    B --> C["📊 Aggregate Data <img src='table.svg' /> <br/> df_reg = df.groupby(...)"]
+    C --> D["📊 Display Table <img src='table.svg' />"]
+    D --> E["📦 Boxplot Results <img src='boxplot_template.svg' />"]
+    E --> F["📈 Pie Chart Cases <img src='pie_chart.svg' />"]
+    E --> G["📈 Pie Chart Deaths <img src='pie_chart.svg' />"]
+    C --> H["📅 Time Series Data <img src='table.svg' /> <br/> df_county = df.groupby(...)"]
+    H --> I["📉 Trend Over Time <img src='lineplot_template.svg' />"]
+    I --> J["🔄 Active Cases Calculation <img src='brain.svg' />"]

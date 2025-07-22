@@ -1,0 +1,18 @@
+flowchart TD
+
+%% Define the IPL_Points_Table.csv data source node
+A[/"IPL_Points_Table.csv"/] 
+%% Description: Contains information on IPL points table
+
+%% Define the DataFrame node with data loading
+B[df1]
+%% Description: Data loaded from IPL_Points_Table.csv
+
+%% Define the processing and analysis nodes
+C["Plotting distributions and correlations"]
+%% Description: Use df1 for generating visual insights
+
+%% Define the data ingestion process
+A -->|Load CSV| B
+%% Define how data from df1 is utilized
+B -->|Analyze| C

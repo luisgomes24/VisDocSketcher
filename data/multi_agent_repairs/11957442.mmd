@@ -1,0 +1,47 @@
+flowchart TD
+    %% Node for CSV Data Source
+    matches_csv["matches.csv"]  
+    
+    %% Node for DataFrame Loading
+    df["DataFrame: df"]
+    
+    %% Preprocessing and cleaning
+    matches["DataFrame: matches"]
+    
+    %% Features and Target extraction
+    X["Features: X"]
+    y["Target: y"]
+
+    %% Train/Test Split
+    X_train["Train Features: X_train"]
+    X_test["Test Features: X_test"]
+    y_train["Train Target: y_train"]
+    y_test["Test Target: y_test"]
+
+    %% Models
+    gnb["Model: Gaussian Naive Bayes"]
+    clf_knn["Model: K-Nearest Neighbors"]
+    acc_gnb["Accuracy: acc_gnb"]
+
+    %% Data Source to DataFrame
+    matches_csv --> df
+
+    %% DataFrame to Cleaned DataFrame
+    df --> matches
+
+    %% Cleaned DataFrame to Features and Target
+    matches --> X
+    matches --> y
+
+    %% Splitting Data
+    X --> X_train & X_test
+    y --> y_train & y_test
+
+    %% Training Models
+    X_train & y_train --> gnb
+    X_train & y_train --> clf_knn
+
+    %% Model Evaluations
+    gnb --> acc_gnb
+    X_test & y_test --> acc_gnb
+    X_test & y_test --> acc_gnb

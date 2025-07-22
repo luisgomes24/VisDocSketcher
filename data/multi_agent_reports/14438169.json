@@ -1,0 +1,82 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "np",
+      "description": "NumPy library used for numerical computations."
+    },
+    {
+      "name": "a",
+      "description": "A NumPy array containing multi-dimensional arrays."
+    },
+    {
+      "name": "data",
+      "description": "A sample NumPy array for demonstration of operations."
+    },
+    {
+      "name": "ones",
+      "description": "Array of ones used in mathematical operations."
+    },
+    {
+      "name": "add",
+      "description": "Result of adding two arrays."
+    },
+    {
+      "name": "sub",
+      "description": "Result of subtracting two arrays."
+    },
+    {
+      "name": "multi",
+      "description": "Result of multiplying two arrays."
+    },
+    {
+      "name": "div",
+      "description": "Result of dividing one array by another."
+    },
+    {
+      "name": "img",
+      "description": "Image read from a file as a NumPy array."
+    },
+    {
+      "name": "img_array",
+      "description": "Normalized image array."
+    },
+    {
+      "name": "img_gray",
+      "description": "Grayscale image representation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "a",
+      "creation_method": "np.array([[...], [...])",
+      "usage": ["Printed", "Checked dimensions", "Reshaped"]
+    },
+    {
+      "variable": "data",
+      "creation_method": "np.array([1,2])",
+      "usage": ["Used for mathematical operations"]
+    },
+    {
+      "variable": "ones",
+      "creation_method": "np.ones(2, dtype=int)",
+      "usage": ["Used for adding, subtracting arrays"]
+    },
+    {
+      "variable": "add",
+      "creation_method": "data + ones",
+      "usage": ["Printed"]
+    },
+    {
+      "variable": "img",
+      "creation_method": "cv2.imread('../input/dog-images/dog.jpg')",
+      "usage": ["Displayed using plt.imshow()"]
+    },
+    {
+      "variable": "img_gray",
+      "creation_method": "img_array @ [0.2126, 0.7152, 0.0722]",
+      "usage": ["Displayed using plt.imshow() with grayscale"]
+    }
+  ],
+  "models": []
+}

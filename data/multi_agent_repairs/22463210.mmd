@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+    %% Data Source Node
+    A["playstation_4_games.csv"] --> |"Load data into"| B["DataFrame: df"]
+    
+    %% DataFrame Node
+    B --> |"Generate value counts"| C["DataFrame: vc"]
+    B --> |"Extract and process genres"| D["List: Genres"]
+    
+    %% Visualizations
+    C --> |"Used for visualizations"| E["Publisher Distribution"]
+    C --> |"Used for visualizations"| F["Developer Distribution"]
+    C --> |"Used for visualizations"| G["Release Year Distribution"]
+    D --> |"Used for visualizing"| H["Genre Popularity"]
+
+    %% Comments for detailed insights
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#bfb,stroke:#333,stroke-width:2px;
+    
+    class A dataSource;
+    class B dataVariable;
+    class C dataVariable;
+    class D dataVariable;
+    class E visualization;
+    class F visualization;
+    class G visualization;
+    class H visualization;
+```

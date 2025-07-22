@@ -1,0 +1,39 @@
+flowchart TD
+    A1([Database: database.sqlite]):::dataSource --> B1[Matches DataFrame]:::dataVar
+    A1 --> B2[Teams DataFrame]:::dataVar
+    A1 --> B3[Countries DataFrame]:::dataVar
+    
+    B1 --> C1[Filter PSG Games]:::transformation
+    C1 --> B4[PSG_games DataFrame]:::dataVar
+    B4 --> C2[Calculate PSG Goals]:::transformation
+    B4 --> C3[Calculate Opponent Goals]:::transformation
+    
+    B1 --> C4[Calculate League-Seasons Betting Accuracies]:::transformation
+    C4 --> B5[League_Seasons_Accuracies DataFrame]:::dataVar
+    
+    B4 --> C5[Assess PSG Streaks]:::transformation
+    C5 --> B6[PSG_streaks DataFrame]:::dataVar
+    
+    B4 --> C6[Assess PSG Bets Accuracy]:::transformation
+    C6 --> B7[PSG_bets DataFrame]:::dataVar
+    
+    B1 --> D1[Accuracy Model]:::model
+    B5 --> D1
+    B6 --> D1
+    B7 --> D1
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef transformation fill:#fbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+    
+    %% Node Descriptions
+    %% A1: SQLite Database source containing all relevant data
+    %% B1, B2, B3: DataFrames created from database fetching
+    %% B4, B5, B6, B7: Resultant DataFrames from different transformations and analyses
+    %% C1: Filtering operations to get PSG specific games
+    %% C2, C3: Calculations of goals for PSG and opponents
+    %% C4: Calculation logic to obtain betting accuracies
+    %% C5: Logic to determine PSG's streak statistics
+    %% C6: Betting accuracy calculation based on PSG
+    %% D1: Application of the Accuracy Score model

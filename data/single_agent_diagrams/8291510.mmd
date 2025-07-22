@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Dataset <img src='file.svg' />"] --> B["🔍 Preview Data"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg' />"]
+    C --> D["📈 Correlation Matrix <img src='boxplot_template.svg' />"]
+    D --> E["📊 Scatter and Density Plots <img src='scatter_plot_template.svg' />"]
+
+    A --> F["📊 Define Plotting Functions"]
+    F --> C
+    F --> D
+    F --> E

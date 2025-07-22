@@ -1,0 +1,15 @@
+```
+graph TD;
+    A["📁 Load DICOM File <br/> <img src='icons/file.svg' />"] --> B["🔍 Read Pixel Array with Pydicom <br/> <img src='icons/table.svg' />"];
+    A --> C["🔍 Read DICOM with TensorFlow I/O <br/> <img src='icons/table.svg' />"];
+    
+    B --> D["✨ Image Max Values <br/> "];
+    C --> D;
+    
+    D --> E["🎨 Visualize Images <br/> <img src='dummy_plots/boxplot_template.svg' />"];
+    
+    B --> F["📏 Crop Pydicom Image <br/> "];
+    C --> G["📏 Crop TensorFlow Image <br/> "];
+    
+    F --> H["🎨 Visualize Cropped Images <br/> <img src='dummy_plots/scatter_plot_template.svg' />"];
+    G --> H;

@@ -1,0 +1,94 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "oyuncu.csv",  
+      "description": "Contains player statistics from which various analyses will be conducted."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "name": "df",  
+      "description": "DataFrame containing the data imported from the CSV file 'oyuncu.csv'."  
+    },  
+    {  
+      "name": "aybars",  
+      "description": "A DataFrame that holds mean statistics grouped by player names."  
+    },  
+    {  
+      "name": "cat_deg",  
+      "description": "List of categorical variables identified in the dataset."  
+    },  
+    {  
+      "name": "num_deg",  
+      "description": "List of numerical variables identified in the dataset."  
+    },  
+    {  
+      "name": "car_deg",  
+      "description": "List of cardinal categorical variables identified in the dataset."  
+    },  
+    {  
+      "name": "pca",  
+      "description": "PCA object used for dimensionality reduction to two components."  
+    },  
+    {  
+      "name": "df_pca",  
+      "description": "DataFrame containing PCA transformed data with two features and player names."  
+    },  
+    {  
+      "name": "kmeans",  
+      "description": "KMeans object used for clustering the players based on selected features."  
+    },  
+    {  
+      "name": "kumeler",  
+      "description": "Labels assigned by the KMeans clustering algorithm to each player."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "df",  
+      "creation": "pd.read_csv('../input/oyuncu-csv/oyuncu.csv')",  
+      "flow": "Processed through functions to create summaries and performed clustering."  
+    },  
+    {  
+      "variable": "aybars",  
+      "creation": "df.groupby('Player_name').mean().reset_index()",  
+      "flow": "Used to transform numerical features and perform KMeans clustering."  
+    },  
+    {  
+      "variable": "cat_deg, num_deg, car_deg",  
+      "creation": "degisken_tiplerine_ayirma function",  
+      "flow": "Categorical and numerical types are categorized for further analysis."  
+    },  
+    {  
+      "variable": "df_pca",  
+      "creation": "pca.fit_transform(aybars[num_deg])",  
+      "flow": "Used for visualizations of player distribution after PCA transformation."  
+    },  
+    {  
+      "variable": "kmeans",  
+      "creation": "KMeans(n_clusters=10)",  
+      "flow": "Trained on normalized data and PCA transformed data for clustering players."  
+    },  
+    {  
+      "variable": "kumeler",  
+      "creation": "kmeans.labels_",  
+      "flow": "Assigned to players in aybars and df_pca DataFrames for clustering results."  
+    }  
+  ],  
+  "models": [  
+    {  
+      "model_name": "KMeans",  
+      "input_features": "Numerical features from aybars after standardization.",  
+      "hyperparameters": {  
+        "n_clusters": 10  
+      }  
+    },  
+    {  
+      "model_name": "PCA",  
+      "input_features": "Numerical features from aybars.",  
+      "hyperparameters": {  
+        "n_components": 2  
+      }  
+    }  
+  ]  
+}  

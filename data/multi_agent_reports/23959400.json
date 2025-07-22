@@ -1,0 +1,50 @@
+{
+  "data_sources": [
+    {
+      "file_name": "StudentsPerformance.csv",
+      "description": "Contains students' performance details including scores in math, reading, writing, and demographic information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "Pandas DataFrame containing the dataset of student performance."
+    },
+    {
+      "variable_name": "features_cat",
+      "description": "List of categorical features including gender, race/ethnicity, parental level of education, test preparation course, and lunch."
+    },
+    {
+      "variable_name": "features_num",
+      "description": "List of numerical features including math score, reading score, writing score, and total sum of scores."
+    },
+    {
+      "variable_name": "data_with_clusters",
+      "description": "DataFrame containing original data with added column for clusters assigned by KMeans."
+    },
+    {
+      "variable_name": "identified_clusters",
+      "description": "Array of cluster labels assigned to each student based on KMeans clustering."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "data = pd.read_csv('../input/students-performance-in-exams/StudentsPerformance.csv')",
+      "flow": "Used for exploratory data analysis (EDA), feature engineering, and visualizations."
+    },
+    {
+      "variable": "data_with_clusters",
+      "creation": "data_with_clusters['Clusters'] = identified_clusters",
+      "flow": "Used for further analysis grouped by clusters and visualizing cluster statistics."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": "StandardScaler of numerical features",
+      "target_variable": "Cluster Labels",
+      "hyperparameters": "n_clusters=7"
+    }
+  ]
+}

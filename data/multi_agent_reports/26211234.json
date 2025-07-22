@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cardio_train.csv",
+      "description": "A CSV containing data on patients including their cardiovascular disease status and various health metrics"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the loaded patient data"
+    },
+    {
+      "variable_name": "h",
+      "description": "Series containing the height values of patients"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Used for data exploration, analysis, and plotting"
+    },
+    {
+      "variable_name": "h",
+      "creation_method": "df['height']",
+      "flow_destination": "Used for height analysis and corrections"
+    }
+  ],
+  "models": []
+}

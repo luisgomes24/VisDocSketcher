@@ -1,0 +1,13 @@
+flowchart TD
+    A[Read CSV File] --> B[Initial DataFrame]
+    %% A node for reading the input CSV file
+    B --> C[Sampled DataFrame]
+    %% B node representing the initial DataFrame creation
+    C -->|Drop NaN| D[Filtered DataFrame]
+    %% C node shows creating a sampled DataFrame
+    D --> E[Incident Count by Box]
+    %% D node for filtering data by dropping NaN values
+    E --> F[High-Risk Boxes]
+    %% E node for counting incidents per Box
+    F --> G[Plot Scatterplots]
+    %% F node for identifying high-risk boxes

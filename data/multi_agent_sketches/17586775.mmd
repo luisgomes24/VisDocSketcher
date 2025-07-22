@@ -1,0 +1,36 @@
+%% Workflow for the Jupyter Notebook
+flowchart TD;
+
+    %% Data Sources
+    A1[Train Images]:::dataSource -->|load| B1
+    A2[Test Images]:::dataSource -->|load| B2
+
+    %% Image Data Generators
+    B1((ImageDataGenerator)):::process -->|flow_from_directory| C1
+    B2((ImageDataGenerator)):::process -->|flow_from_directory| C2
+
+    %% Training and Testing Data
+    C1[images_tr & labels_tr]:::data --> D[Dataset]
+    C2[images_te & labels_te]:::data --> D
+    D -->|split| E(train_test_split)
+
+    %% Splitting Data
+    E --> F1[X_model & y_model]:::data
+    E --> F2[X_test & y_test]:::data
+
+    %% CNN Model
+    F1 -->|train| G1[CNN Model]:::model
+    style G1 stroke-width:2px,stroke-dasharray: 5,5
+    G1 -.->|evaluate| G2[Evaluation]
+    F2 -->|evaluate| G1
+
+    %% Transfer Learning Model
+    F1 -->|train| H1[InceptionV3 Model]:::model
+    style H1 stroke-width:2px,stroke-dasharray: 5,5
+    H1 -.->|evaluate| H2[Evaluation]
+    F2 -->|evaluate| H1
+
+    classDef data fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef dataSource fill:#ffc,stroke:#333,stroke-width:1px;

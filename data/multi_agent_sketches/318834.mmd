@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph InputData
+        A1["guide_to_files.csv"]
+        A2["Individual dialog files"]
+    end
+
+    A1 --> B1
+    A2 --> B2
+
+    %% Node for list_children DataFrame
+    B1["list_children DataFrame"] --> |"Add columns: pauses, ums, interrupts"| B3["Updated list_children"]
+
+    %% Calculations and Data Transformations
+    B2["Analyzing individual dialog files"] --> B3
+    B3 --> C1["Calculate dif_time"]
+    B3 --> C2["Calculate pauses"]
+    B3 --> C3["Calculate ums"]
+    B3 --> C4["Calculate interrupts"]
+
+    %% Imperfections Calculation
+    C2 --> D["Calculate imperfections"]
+    C3 --> D
+    C4 --> D
+
+    %% Usage of dif_time
+    C1 --> E1["Analyze timings and plot histogram"]
+
+    %% Final data usage for analyses
+    D --> E2["Correlation analysis and final plots"]

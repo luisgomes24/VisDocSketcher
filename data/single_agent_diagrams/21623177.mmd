@@ -1,0 +1,11 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Data Overview"]
+    B --> C["<img src='icons/brain.svg'/> <br/> Profiling Report"]
+    C --> D["<img src='icons/column_split.svg'/> <br/> Feature Engineering"]
+    D --> E["<img src='icons/column_split.svg'/> <br/> Drop Unnecessary Columns"]
+    E --> F["<img src='table.svg'/> <br/> Final Data Cleanup"]
+    F --> G["<img src='icons/brain.svg'/> <br/> Model Training"]
+    G --> H["<img src='icons/brain.svg'/> <br/> Model Evaluation"]
+    
+    E --> I["<img src='icons/table.svg'/> <br/> Updated Profiling Report"]
+    F --> J["<img src='icons/table.svg'/> <br/> Final Profiling Report"]

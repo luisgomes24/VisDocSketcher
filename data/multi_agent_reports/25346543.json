@@ -1,0 +1,87 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains annotations and location of features in patient notes."
+    },
+    {
+      "file_name": "features.csv",
+      "description": "Contains feature details corresponding to the cases."
+    },
+    {
+      "file_name": "patient_notes.csv",
+      "description": "Contains patient history notes for the cases."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing combined training data with annotations and patient notes."
+    },
+    {
+      "variable_name": "features",
+      "description": "DataFrame containing additional feature information."
+    },
+    {
+      "variable_name": "patient_notes",
+      "description": "DataFrame containing raw text patient history notes."
+    },
+    {
+      "variable_name": "train_data_X",
+      "description": "Array of input_ids and attention masks for training data."
+    },
+    {
+      "variable_name": "train_data_Y",
+      "description": "Array of labels corresponding to the training data."
+    },
+    {
+      "variable_name": "valid_data",
+      "description": "Validation data split into input_ids and attention masks."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv()",
+      "flow": "Merged with features and patient_notes and then used for training and validation splits."
+    },
+    {
+      "variable": "features",
+      "creation_method": "pd.read_csv()",
+      "flow": "Merged into train DataFrame for additional feature information."
+    },
+    {
+      "variable": "patient_notes",
+      "creation_method": "pd.read_csv()",
+      "flow": "Merged into train DataFrame for patient notes information."
+    },
+    {
+      "variable": "train_data_X",
+      "creation_method": "create_data()",
+      "flow": "Used as input data for training a model."
+    },
+    {
+      "variable": "train_data_Y",
+      "creation_method": "create_data()",
+      "flow": "Used as labels for training the model."
+    },
+    {
+      "variable": "valid_data",
+      "creation_method": "train_test_split()",
+      "flow": "Used for validation of model training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DeBERTa",
+      "input_features": ["input_ids", "attention_mask"],
+      "target_variable": "labels",
+      "hyperparameters": {
+        "batch_size": 8,
+        "epochs": 10,
+        "learning_rate": 2e-5,
+        "clip_norm": 1000
+      }
+    }
+  ]
+}

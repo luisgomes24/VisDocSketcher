@@ -1,0 +1,9 @@
+graph TD;
+  A["Input Data"] --> B["Data Cleaning"];
+  B --> C["Feature Engineering"];
+  C --> D["Model Training"];
+  D --> E["Model Evaluation"];
+  E --> F["Model Deployment"];
+  F --> G["User Interaction"];
+  G --> H["Feedback Analysis"];
+  H --> B;

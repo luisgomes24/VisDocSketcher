@@ -1,0 +1,12 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] -->|"Extract"| B["<img src='icons/file.svg' width=100 height=100/> <br/> File Data"];
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Pandas DataFrame"];
+    C --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+    D --> E["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Feature Distribution"];
+    D --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"];
+    F -->|"Train"| G["<img src='icons/image.svg' width=100 height=100/> <br/> Model Output"];
+    G --> H["<img src='icons/image.svg' width=100 height=100/> <br/> Visualize Results"];
+    E --> I["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    I --> J["<img src='icons/brain.svg' width=100 height=100/> <br/> Retraining Model"];
+    J --> K["<img src='icons/image.svg' width=100 height=100/> <br/> Final Model Output"];
+    K --> L["<img src='icons/image.svg' width=100 height=100/> <br/> Final Visualization"];

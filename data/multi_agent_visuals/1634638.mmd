@@ -1,0 +1,32 @@
+flowchart TD
+    %% Node for the CSV data source
+    A["CSV File: Train_rev1.csv"] 
+    %% Node for DataFrame 'df'
+    B["DataFrame: df"]
+    %% Node for the sampled DataFrame 'train'
+    C["Sampled DataFrame: train"]
+    %% Node for Cleaned Job Descriptions
+    D["Cleaned Descriptions: train['Clean_Full_Descriptions']"]
+    %% Node for Target Variable
+    E["Target Variable: train['Salary_Target']"]
+    %% Node for Multinomial Naive Bayes Model
+    F["Multinomial Naive Bayes Model"]
+    %% Node for Bernoulli Naive Bayes Model
+    G["Bernoulli Naive Bayes Model"]
+
+    %% Data source to DataFrame 'df'
+    A -->|pd.read_csv| B 
+    %% DataFrame 'df' to sampled DataFrame 'train'
+    B -->|sample| C
+    %% sampled DataFrame 'train' to Cleaned Descriptions
+    C -->|cleaning functions| D
+    %% sampled DataFrame 'train' to Target Variable
+    C -->|np.where| E
+    %% Cleaned Descriptions to Multinomial Naive Bayes Model
+    D --> F
+    %% Target Variable to Multinomial Naive Bayes Model
+    E --> F
+    %% Dummy Variables to Bernoulli Naive Bayes Model
+    D --> G
+    %% Target Variable to Bernoulli Naive Bayes Model
+    E --> G

@@ -1,0 +1,43 @@
+flowchart TD
+  %% Data Source Nodes
+  DS_anime_csv["Anime CSV
+'title, genre, rating'\ndata source"]
+  DS_rating_csv["Rating CSV\n'user_id, anime_id, rating'\ndata source"]
+
+  %% Data Variables Nodes
+  dv1["df1\nDataFrame with anime details"]
+  dv2["df2\nDataFrame with user ratings"]
+  dv["df\nMerged DataFrame"]
+  sample_df["sample_df\nSubset DataFrame with selected anime IDs"]
+  user_anime_df["user_anime_df\nUser-Item pivot table"]
+  sdf["data\nSurprise Dataset format"]
+  trainset["trainset\nTraining dataset"]
+  testset["testset\nTest dataset"]
+
+  %% Model Nodes
+  svd_model["svd_model\nTrained SVD model"]
+  predictions["predictions\nPredicted ratings"]
+  gs["GridSearchCV\nHyperparameter tuning"]
+
+  %% Data Flow Connections
+  DS_anime_csv --> dv1
+  DS_rating_csv --> dv2
+  dv1 --> dv
+  dv2 --> dv
+  dv --> sample_df
+  dv --> user_anime_df
+  sample_df --> user_anime_df
+  user_anime_df --> sdf
+  sdf --> trainset
+  sdf --> testset
+  trainset --> svd_model
+  svd_model --> predictions
+  testset --> predictions
+  sdf --> gs
+  gs --> svd_model
+
+  %% ML Model Description
+  svd_model_desc["SVD Model
+Input: user_id, anime_id
+Output: Predicted ratings"]
+  svd_model --> svd_model_desc

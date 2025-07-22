@@ -1,0 +1,27 @@
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground':'#ffffff', 'nodeBorder':'#000000', 'tertiaryColor': '#FFF5EE'}}}%%
+graph TD;
+    %% Train.csv Data Source Node
+    A["train.csv \nContains Id and Pawpularity columns"] --> B;
+
+    %% DataFrame Node
+    B["DataFrame df \nLoaded using pandas read_csv"] --> C;
+    B --> D;
+    
+    %% DataLoaders Node
+    C["DataBlock & DataLoaders dls \nSplits DataFrame into train and validation sets"] --> E;
+    
+    %% Learner Node
+    D --> D1;
+    E["Learner learn \nUses ResNet18 for training with DataLoaders"] --> F;
+
+    %% Prediction Node
+    D1["ResNet18 Model \nInput: Images, Output: Pawpularity"]--> F["pred Values \nPrediction on test set images"];
+    
+    %% sample_submission.csv Data Source Node
+    G["sample_submission.csv \nFormat for submission with Pawpularity"] --> H;
+    
+    %% Submission Node
+    F --> H["Submission sub \nContains predicted Pawpularity for test images"];
+
+    %% Test.csv Data Source Node
+    A1["test.csv \nContains Id column for test images"];

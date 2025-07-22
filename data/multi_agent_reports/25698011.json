@@ -1,0 +1,92 @@
+{
+    "data_sources": [
+        {
+            "file": "/kaggle/input/tabular-playground-series-mar-2022/train.csv",
+            "description": "Training data containing timestamps, x-y coordinates, direction, and congestion."
+        },
+        {
+            "file": "/kaggle/input/tabular-playground-series-mar-2022/test.csv",
+            "description": "Test data structured similarly to the training data, but with target congestion not included."
+        },
+        {
+            "file": "/kaggle/input/tabular-playground-series-mar-2022/sample_submission.csv",
+            "description": "Sample submission format for the competition."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train_y",
+            "description": "DataFrame containing the training target values after processing."
+        },
+        {
+            "name": "test_y",
+            "description": "DataFrame containing the test target values structured similarly to train_y."
+        },
+        {
+            "name": "train_X",
+            "description": "Features DataFrame for training, includes lagged features."
+        },
+        {
+            "name": "test_X",
+            "description": "Features DataFrame for testing, includes lagged features."
+        },
+        {
+            "name": "val_X",
+            "description": "Validation features taken from train_X for model evaluation."
+        },
+        {
+            "name": "val_y",
+            "description": "Validation target values corresponding to val_X."
+        },
+        {
+            "name": "FEATURES",
+            "description": "List of selected feature names used in the neural network."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_y",
+            "creation": "Loaded from train.csv, processed to wide format.",
+            "flows": "Used for model training (train_y) and for creating validation target variables (val_y)."
+        },
+        {
+            "variable": "test_y",
+            "creation": "Loaded from test.csv, processed to maintain the same format as train_y.",
+            "flows": "Used for generating test predictions."
+        },
+        {
+            "variable": "train_X",
+            "creation": "Derived from train_y with one-day lag features.",
+            "flows": "Used in training the neural network."
+        },
+        {
+            "variable": "test_X",
+            "creation": "Derived from test_y with one-day lag features.",
+            "flows": "Used to generate predictions for test set."
+        },
+        {
+            "variable": "val_X",
+            "creation": "Subset of train_X based on time-stamp for validation.",
+            "flows": "Input data for model evaluation during training."
+        },
+        {
+            "variable": "val_y",
+            "creation": "Subset of train_y corresponding to val_X.",
+            "flows": "Target data for model evaluation."
+        }
+    ],
+    "models": [
+        {
+            "name": "Vanilla Neural Network",
+            "input_features": "Features from train_X including RAW_FEATURES, HM_MOVING_MEDIANS, ONE_HOUR_MEAN, etc.",
+            "target_variable": "RAW_FEATURES (congestion)",
+            "hyperparameters": {
+                "dropout_level": 0.12292871613987645,
+                "first_dropout": 0.4302064801787497,
+                "num_neurons": [4526],
+                "num_hidden_layers": 1,
+                "learning_rate": 0.0030322842074454745
+            }
+        }
+    ]
+}

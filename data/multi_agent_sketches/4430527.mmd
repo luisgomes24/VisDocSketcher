@@ -1,0 +1,28 @@
+flowchart TD
+
+  subgraph DS1 [Data Source]
+    direction TB
+    file1(["../input/submission.csv"])
+    %% Data source node representing the CSV file read into the notebook
+  end
+
+  subgraph D1 [DataFrame]
+    direction TB
+    df1["df1"]
+    %% DataFrame node representing the subset of the CSV data
+  end
+
+  subgraph P1 [Processes]
+    direction TB
+    process1["Read CSV with nrows = 1000"]
+    process2["Plot Distributions"]
+    process3["Plot Correlation Matrix"]
+    process4["Plot Scatter/Density"]
+    %% Nodes representing various data processing and plotting functions
+  end
+
+  %% Connections between nodes
+  DS1 -->|Read first 1000 rows| D1
+  D1 -->|Pass DataFrame| P1
+  P1 -->|df1 used for plotting| P2["Plot Outputs"]
+  %% Descriptive comment about the flow of data and process

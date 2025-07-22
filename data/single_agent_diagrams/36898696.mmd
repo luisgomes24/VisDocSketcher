@@ -1,0 +1,8 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> train_clinical_data.csv"] --> B["🔍 Preprocess Data"];
+    B --> C["🔍 Fill Missing Values"];
+    C --> D["📊 Visualize Distribution <img src='hist_template.svg' /> <br/> Histogram of UPDRS-1"];
+    D --> E["🔍 Identify Control Group"];
+    E --> F["📊 Visualize Control Group Distribution <img src='hist_template.svg' /> <br/> Histogram of UPDRS-2"];
+    F --> G["📊 Visualize UPDRS Scores <img src='hist_template.svg' />"];
+    G --> H["🧐 Evaluate Results"];

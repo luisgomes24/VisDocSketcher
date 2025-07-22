@@ -1,0 +1,15 @@
+%% This Mermaid diagram represents the data flow and processing in a Jupyter Notebook for a data science project.
+flowchart TD
+    %% Node for data source
+    A["/kaggle/input/indian-startups-top-300/Startups1.csv"] 
+    %% Node for loading data into a raw DataFrame
+    B["data: Raw DataFrame"]
+    %% Node for processed DataFrame
+    C["X: Processed DataFrame"]
+    %% Node for color palette used in plotting
+    D["cp: Color Palette"]
+    
+    %% Data flow connections
+    A -->|"pd.read_csv"| B
+    B -->|"preprocess_inputs"| C
+    C -->|"Plotted charts and analysis"| D

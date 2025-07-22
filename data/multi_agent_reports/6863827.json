@@ -1,0 +1,40 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/candy.csv",
+            "description": "Contains survey results of favorite candies with columns describing candy properties like sugar content, price percentage, and win percentage."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "candy_data",
+            "description": "DataFrame containing the candy survey data loaded from the CSV file."
+        },
+        {
+            "name": "more_popular",
+            "description": "Stores the name of the candy that is more popular: '3 Musketeers'."
+        },
+        {
+            "name": "more_sugar",
+            "description": "Stores the name of the candy with higher sugar content: 'Air Heads'."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "candy_data",
+            "creation": "Read from CSV file using pd.read_csv",
+            "flows_to": "Used for plotting and analysis to derive insights about candies."
+        },
+        {
+            "variable": "more_popular",
+            "creation": "Assigned directly using predefined values",
+            "flows_to": "Used for answering question about popularity."
+        },
+        {
+            "variable": "more_sugar",
+            "creation": "Assigned directly using predefined values",
+            "flows_to": "Used for answering question about sugar content."
+        }
+    ],
+    "models": []
+}

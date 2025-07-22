@@ -1,0 +1,25 @@
+```
+graph TD;
+    A["📂 Load Data <img src='../input/montcoalert/911.csv' /> "] --> B["🧾 Data Info"];
+    B --> C["🔠 Count Top Zip Codes"];
+    C --> D["🌍 Count Township-wise Calls"];
+    D --> E["🔍 Count Unique Titles"];
+    E --> F["✂️ Feature Engineering"];
+    F --> G["📊 Count Reason Occurrences"];
+    G --> H["📊 Countplot Reasons <img src='dummy_plots/countplot_template.svg' /> "];
+    H --> I["📅 Create Hour Column"];
+    I --> J["📅 Create Month Column"];
+    J --> K["📅 Create DayOfWeek Column"];
+    K --> L["💡 Map Day Names"];
+    L --> M["📈 Count of Calls by DayOfWeek <img src='dummy_plots/countplot_template.svg' />"];
+    M --> N["📈 Count of Calls by Month <img src='dummy_plots/countplot_template.svg' />"];
+    N --> O["📅 Group by Month"];
+    O --> P["📈 Monthly Calls Plot <img src='dummy_plots/lineplot_template.svg' />"];
+    P --> Q["📈 Daily Calls Plot <img src='dummy_plots/lineplot_template.svg' />"];
+    Q --> R["📉 Traffic Calls Trend <img src='dummy_plots/lineplot_template.svg' />"];
+    R --> S["📉 Fire Calls Trend <img src='dummy_plots/lineplot_template.svg' />"];
+    S --> T["📉 EMS Calls Trend <img src='dummy_plots/lineplot_template.svg' />"];
+    T --> U["🌈 Heatmap of Calls <img src='dummy_plots/heatmap_template.svg' />"];
+    U --> V["🌈 Clustermap of Calls <img src='dummy_plots/heatmap_template.svg' />"];
+    V --> W["🌈 Heatmap of Calls by Month"];
+    W --> X["🌈 Clustermap of Calls by Month"];

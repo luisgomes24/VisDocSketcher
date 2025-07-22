@@ -1,0 +1,17 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Train Data"] --> B["<img src='icons/file.svg'/> <br/> Load Test Data"]
+    B --> C["<img src='icons/table.svg'/> <br/> Data Overview"]
+    C --> D["<img src='icons/column_split.svg'/> <br/> Data Preprocessing"]
+    D --> E["<img src='icons/brain.svg'/> <br/> Model Training"]
+    E --> F["<img src='icons/brain.svg'/> <br/> Prediction"]
+    F --> G["<img src='icons/table.svg'/> <br/> Submit Results"]
+
+    C --> H["📊 Data Info"]
+    D --> I["📊 Encode Features"]
+    D --> J["📊 Memory Reduction"]
+
+    H --> K["📊 Value Counts"]
+    
+    J --> L["<img src='icons/brain.svg'/> <br/> Train-Test Split"]
+    L --> M["<img src='icons/brain.svg'/> <br/> AutoML"]
+    M --> N["📊 Model Evaluation"]

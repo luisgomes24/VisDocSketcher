@@ -1,0 +1,20 @@
+flowchart TD
+    OBS["obs"]
+    CONFIG["config"]
+    VALID_MOVES["valid_moves"]
+    NEXT_GRID["next_grid"]
+    AGENT_Q1["Agent Q1"]
+    AGENT_Q2["Agent Q2"]
+    MY_AGENT["My Agent"]
+
+    OBS -->|used to check state & legality| VALID_MOVES
+    CONFIG -->|parameters for game| VALID_MOVES
+    VALID_MOVES -->|determines| AGENT_Q1
+    VALID_MOVES -->|determines| AGENT_Q2
+    VALID_MOVES -->|determines| MY_AGENT
+    NEXT_GRID -->|used to determine winning moves| AGENT_Q1
+    NEXT_GRID -->|used to determine winning or blocking moves| AGENT_Q2
+
+    AGENT_Q1 -->|select move| NEXT_GRID
+    AGENT_Q2 -->|select move| NEXT_GRID
+    MY_AGENT -->|select move randomly| NEXT_GRID

@@ -1,0 +1,31 @@
+flowchart TD
+  %% Nodes
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/Data_Entry_2017.csv"]
+  B["<img src='icons/table.svg' width=100 height=100/> <br/> all_xray_df"]
+  C["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_df"]
+  D["<img src='icons/row_split.svg' width=100 height=100/> <br/> valid_df"]
+  E["<img src='icons/brain.svg' width=100 height=100/> <br/> train_gen"]
+  F["<img src='icons/brain.svg' width=100 height=100/> <br/> valid_gen"]
+  G["<img src='icons/brain.svg' width=100 height=100/> <br/> multi_disease_model"]
+
+  %% Node Descriptions
+  A:::source
+  B:::variable
+  C:::variable
+  D:::variable
+  E:::variable
+  F:::variable
+  G:::model
+
+  %% Transitions
+  A -->|pd.read_csv| B %% CSV data is read into a dataframe
+  B -->|train_test_split| C %% Dataframe split into training data
+  B -->|train_test_split| D %% Dataframe split into validation data
+  C -->|flow_from_dataframe| E %% Training images loaded and augmented
+  D -->|flow_from_dataframe| F %% Validation images loaded
+  E -->|fit_generator| G %% Model training on augmented images
+  F -->|fit_generator| G %% Model validation on loaded images
+
+  classDef source fill:#f96,stroke:#333,stroke-width:2px;
+  classDef variable fill:#9f6,stroke:#333,stroke-width:2px;
+  classDef model fill:#6f9,stroke:#333,stroke-width:2px;

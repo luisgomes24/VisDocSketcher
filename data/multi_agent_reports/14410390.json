@@ -1,0 +1,107 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "Training data containing passenger information and survival status."
+    },
+    {
+      "file": "/kaggle/input/titanic/test.csv",
+      "description": "Test data containing passenger information, without survival status."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame holding the training dataset."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame holding the test dataset."
+    },
+    {
+      "name": "corr_matrix",
+      "description": "Correlation matrix for the training data, used to identify relationships among features."
+    },
+    {
+      "name": "y",
+      "description": "Series of the target variable 'Survived' from the training data."
+    },
+    {
+      "name": "X",
+      "description": "DataFrame holding the features selected for model training."
+    },
+    {
+      "name": "X_test",
+      "description": "DataFrame holding the features from test data for predictions."
+    },
+    {
+      "name": "rf_model",
+      "description": "RandomForestClassifier model instantiated for the training."
+    },
+    {
+      "name": "rf_gs",
+      "description": "GridSearchCV object for hyperparameter tuning of the Random Forest model."
+    },
+    {
+      "name": "predictions",
+      "description": "Array holding the predicted survival status for test data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "pd.read_csv('/kaggle/input/titanic/train.csv')",
+      "flows_to": ["Exploratory Data Analysis", "Feature Engineering", "Model Training (X, y)"]
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "pd.read_csv('/kaggle/input/titanic/test.csv')",
+      "flows_to": ["Feature Engineering", "Predictions (X_test)"]
+    },
+    {
+      "variable": "y",
+      "creation_method": "train_data['Survived']",
+      "flows_to": ["Model Training"]
+    },
+    {
+      "variable": "X",
+      "creation_method": "train_data[features]",
+      "flows_to": ["Model Training"]
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "test_data[features]",
+      "flows_to": ["Predictions"]
+    },
+    {
+      "variable": "rf_model",
+      "creation_method": "RandomForestClassifier()",
+      "flows_to": ["Hyperparameter tuning (rf_gs)"]
+    },
+    {
+      "variable": "rf_gs",
+      "creation_method": "GridSearchCV(rf_model, rf_params)",
+      "flows_to": ["Model Training"]
+    },
+    {
+      "variable": "predictions",
+      "creation_method": "rf_gs.predict(X_test)",
+      "flows_to": ["Output (CSV file)"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Random Forest",
+      "input_features": ["Pclass", "Sex", "Fare", "SibSp", "Parch", "FamilySize", "Embarked", "IsAlone"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "bootstrap": "[True, False]",
+        "max_depth": "[10, None]",
+        "max_features": "['auto', 'sqrt']",
+        "min_samples_leaf": "[1, 2, 4]",
+        "min_samples_split": "[2, 5, 10]",
+        "n_estimators": "[100]"
+      }
+    }
+  ]
+}

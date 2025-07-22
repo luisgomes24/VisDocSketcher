@@ -1,0 +1,23 @@
+flowchart TD
+    A["🗄️ Load Data"] --> B["📥 Load Train Labels"]
+    B --> C["🔄 Process Labels"]
+    C --> D["🧪 Prepare Multi-target Y"]
+    D --> E["🔍 Load Protein IDs"]
+    E --> F["🔄 Prepare Features"]
+    F --> G["🔍 Load Protein Features"]
+    G --> H["🔄 Sanity Check"]
+    H --> I["🧑‍🏫 Train-Test Split"]
+    I --> J["📉 Model Training"]
+    J --> K["📊 Model Evaluation"]
+    K --> L["📈 Visualize Scores"]
+    L --> M["⚙️ Retrain Model"]
+    M --> N["📤 Submission Prep Step 1"]
+    N --> O["📤 Submission Prep Step 2"]
+    O --> P["🗂️ Save Submission"]
+    P --> Q["✅ Completion Check"]
+    
+    C -->|conditional| R["🏷️ Select Most Frequent Labels"]
+    D -->|results in| S["✅ Labels Ready"]
+    J -->|outputs| T["📝 Summary Statistics"]
+    
+    K --> U["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Hist Results"]

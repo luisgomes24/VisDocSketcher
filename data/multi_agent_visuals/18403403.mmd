@@ -1,0 +1,19 @@
+%%{ init : { "theme" : "default" } }%%
+flowchart TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> chicago_crime dataset"]:::data
+    %% Represents the source dataset
+    A -->|"Fetch tables"| B["<img src='icons/table.svg' width=100 height=100/> <br/> tables"]:::data
+    %% 'tables' variable is fetched from the dataset
+    B -->|"Count tables"| C["<img src='dummy_plots/barplot_template.svg'/> <br/> num_tables"]:::plot
+    %% 'num_tables' derived by counting 'tables'
+    B -->|"Fetch crime table schema"| D["<img src='icons/table.svg' width=100 height=100/> <br/> table"]:::data
+    %% 'table' represents fetched schema of crime table
+    D -->|"Calculate TIMESTAMP fields"| E["<img src='dummy_plots/hist_template.svg'/> <br/> num_timestamp_fields"]:::plot
+    %% 'num_timestamp_fields' derived by examining schema
+    subgraph Plotting_Requirements
+        F["<img src='dummy_plots/lineplot_template.svg'/> <br/> fields_for_plotting"]:::plot
+        %% Hardcoded fields for plotting crime data
+    end
+
+    classDef data fill:#87CEEB;
+    classDef plot fill:#FFCDD2;

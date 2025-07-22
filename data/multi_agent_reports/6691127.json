@@ -1,0 +1,134 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/ashrae-energy-prediction/train.csv",
+      "description": "Contains training data for multiple buildings including timestamp and meter readings."
+    },
+    {
+      "file": "../input/ashrae-energy-prediction/test.csv",
+      "description": "Contains test data for multiple buildings including timestamps."
+    },
+    {
+      "file": "../input/ashrae-energy-prediction/weather_train.csv",
+      "description": "Contains weather data corresponding to the training dataset."
+    },
+    {
+      "file": "../input/ashrae-energy-prediction/weather_test.csv",
+      "description": "Contains weather data corresponding to the test dataset."
+    },
+    {
+      "file": "../input/ashrae-energy-prediction/building_metadata.csv",
+      "description": "Contains metadata about buildings, including their IDs and site IDs."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_",
+      "description": "Initial training dataset."
+    },
+    {
+      "name": "test_",
+      "description": "Initial test dataset."
+    },
+    {
+      "name": "metadata",
+      "description": "Metadata containing building and site information."
+    },
+    {
+      "name": "building_id",
+      "description": "ID of the building selected for prediction."
+    },
+    {
+      "name": "train",
+      "description": "Filtered training dataset for a specific building."
+    },
+    {
+      "name": "test",
+      "description": "Filtered test dataset for a specific building."
+    },
+    {
+      "name": "weather_train",
+      "description": "Filtered weather data corresponding to the training site."
+    },
+    {
+      "name": "weather_test",
+      "description": "Filtered weather data corresponding to the test site."
+    },
+    {
+      "name": "future",
+      "description": "DataFrame used to hold future timestamps for forecasting."
+    },
+    {
+      "name": "X_train",
+      "description": "Training dataset with additional columns added for forecasting."
+    },
+    {
+      "name": "X_test",
+      "description": "Test dataset prepared for temperature predictions with additional weather features."
+    },
+    {
+      "name": "preds",
+      "description": "Predicted values from the forecast model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_",
+      "creation": "Read from CSV file",
+      "flow": "Filtered to create train and test datasets for a specific building."
+    },
+    {
+      "variable": "train",
+      "creation": "Filtered from train_ based on building_id",
+      "flow": "Used for model training"
+    },
+    {
+      "variable": "weather_train",
+      "creation": "Filtered from weather_train_ based on site_id",
+      "flow": "Used to add meteorological features to the training data"
+    },
+    {
+      "variable": "future",
+      "creation": "Created from concatenated existing timestamps and X_valid",
+      "flow": "Used for prediction with fitted Prophet model"
+    },
+    {
+      "variable": "X_train",
+      "creation": "Merged train and weather_train",
+      "flow": "Fitted into the Prophet model for training"
+    },
+    {
+      "variable": "X_test",
+      "creation": "Merged test and weather_test",
+      "flow": "Used for making predictions with the trained Prophet model"
+    },
+    {
+      "variable": "preds",
+      "creation": "Generated from the predictive model using X_test",
+      "flow": "Plotted to visualize predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Prophet",
+      "input_features": [
+        "ds (timestamp)",
+        "floor (minimum meter reading)",
+        "cap (maximum meter reading)",
+        "air_temperature",
+        "cloud_coverage",
+        "dew_temperature",
+        "precip_depth_1_hr",
+        "sea_level_pressure",
+        "wind_direction",
+        "wind_speed"
+      ],
+      "target_variable": "y (meter reading)",
+      "hyperparameters": {
+        "growth": "logistic",
+        "changepoint_prior_scale": 0.03,
+        "holidays": "included holiday DataFrame"
+      }
+    }
+  ]
+}

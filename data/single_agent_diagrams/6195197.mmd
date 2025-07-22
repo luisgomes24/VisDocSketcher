@@ -1,0 +1,30 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🔄 Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='dummy_plots/hist_template.svg'/>"]
+    C --> D["🧠 Build Model <img src='icons/brain.svg'/>"]
+    D --> E["🔄 Train Model"]
+    E --> F["📈 Evaluate Model"]
+    F --> G["📊 Plot Results <img src='dummy_plots/scatter_plot_template.svg'/>"]
+
+    subgraph Data Loading
+        A1["🔄 Read CSV"]
+        A2["🔄 Prepare DataLoader"]
+        A3["🔄 Transform Data"]
+    end
+    A --> A1
+    A1 --> A2
+    A2 --> A3
+
+    subgraph Data Preprocessing
+        B1["🧹 Cleaning Data"]
+        B2["🗂️ Splitting Data"]
+    end
+    B --> B1
+    B1 --> B2
+
+    subgraph Model Training
+        E1["🛠️ Optimize Model"]
+        E2["🏄 Perform Training"]
+    end
+    E --> E1
+    E1 --> E2

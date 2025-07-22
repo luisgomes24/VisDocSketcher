@@ -1,0 +1,25 @@
+flowchart TD;
+    %% Data sources and loading
+    DataFile1(("Data Source 1")) -->|load data| LoadData1
+    DataFile2(("Data Source 2")) -->|load data| LoadData2
+    
+    %% Data loading
+    LoadData1[["Load Data 1"]] -->|store in| Dataset1["dataset1"]
+    LoadData2[["Load Data 2"]] -->|store in| Dataset2["dataset2"]
+    
+    %% Data Preprocessing
+    Dataset1 -->|clean data| CleanedDataset1["cleaned_dataset1"]
+    Dataset2 -->|merge data| MergedDataset["merged_dataset"]
+    CleanedDataset1 -->|merge data| MergedDataset
+    
+    %% Feature Engineering
+    MergedDataset -->|generate features| Features["features"]
+    
+    %% Modeling
+    Features -->|train model| ModelTraining[["Train Model"]]
+    ModelTraining -->|RandomForest| RandomForestModel["random_forest_model"]
+    
+    %% Evaluation
+    RandomForestModel -->|predict| Predictions["predictions"]
+    Predictions -->|evaluate| ModelEvaluation[["Evaluate Model"]]
+    ModelEvaluation -->|output metrics| EvaluationMetrics["evaluation metrics"]

@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-jan-2022/train.csv",
+      "description": "Training dataset containing features and target variable (num_sold)"
+    },
+    {
+      "file": "../input/tabular-playground-series-jan-2022/test.csv",
+      "description": "Test dataset for making predictions"
+    },
+    {
+      "file": "../input/tabular-playground-series-jan-2022/sample_submission.csv",
+      "description": "Sample submission format for predictions"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the training data after loading from CSV"
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data after loading from CSV"
+    },
+    {
+      "name": "predictions",
+      "description": "DataFrame storing predictions made on the test data"
+    },
+    {
+      "name": "sol",
+      "description": "DataFrame prepared for submission containing the final predictions"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Loaded from train.csv using pd.read_csv",
+      "flow": ["setup() function in PyCaret", "predict_model()"]
+    },
+    {
+      "variable": "test",
+      "creation": "Loaded from test.csv using pd.read_csv",
+      "flow": ["predict_model()"]
+    },
+    {
+      "variable": "predictions",
+      "creation": "Generated from predict_model() using final model",
+      "flow": ["Processed for submission"]
+    },
+    {
+      "variable": "sol",
+      "creation": "Loaded from sample_submission.csv",
+      "flow": ["Final predictions saved to CSV"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Decision Tree",
+      "type": "tuned Decision Tree model",
+      "features": "All features in DataFrame except 'num_sold'",
+      "target": "num_sold",
+      "hyperparameters": "Configured with various preprocessing options" 
+    }
+  ]
+}

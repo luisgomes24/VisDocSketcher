@@ -1,0 +1,43 @@
+flowchart TD
+
+    %% Data Sources
+    A1["train_sales.csv"]:::file -->|Load Data| B1["train_df"]:::data
+    A2["test_sales.csv"]:::file -->|Load Data| B2["test_df"]:::data
+    A3["stores.csv"]:::file -->|Load Data| B3["stores_df"]:::data
+    A4["features.csv"]:::file -->|Load Data| B4["features_df"]:::data
+
+    %% Data Merging
+    B1 -->|Merge Data| C1["train_large_df"]:::data
+    B2 -->|Merge Data| C2["test_large_df"]:::data
+    B3 -->|Merge with Train| C1
+    B3 -->|Merge with Test| C2
+    B4 -->|Merge with Train| C1
+    B4 -->|Merge with Test| C2
+
+    %% Processing Train Data
+    C1 -->|Concat Data| D1["train_test_large_df"]:::data
+    D1 -->|Split Data| E1["train_x_df"]:::data
+    D1 -->|Split Data| E2["valid_x_df"]:::data
+
+    %% Training Data Preparation
+    E1 -->|Prepare Dataset| F1["dtrain"]:::model_data
+    E2 -->|Prepare Dataset| F2["dvalid"]:::model_data
+    G1["train_y"]:::data --> F1
+    G2["valid_y"]:::data --> F2
+
+    %% Model Training
+    F1 -->|Train Model| H1["LightGBM Model"]:::model
+    F2 -->|Validate Model| H1
+
+    %% Predictions
+    C2 -->|Model Prediction| I1["test_pred"]:::data
+    H1 --> I1
+
+    %% Submission Preparation
+    I1 -->|Create Submission| J1["sub_df"]:::data
+    J1 -->|Save to CSV| K1["submission.csv"]:::file
+
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef model_data fill:#ffb,stroke:#333,stroke-width:2px;

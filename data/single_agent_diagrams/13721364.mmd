@@ -1,0 +1,25 @@
+```
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["📊 Create Graph <img src='dummy_plots/lineplot_template.svg'/>"]
+    C --> D["🛠️ Modify Graph <img src='dummy_plots/barplot_template.svg'/>"]
+    D --> E["🔍 Analyze Results"]
+    E --> F["🧪 Implement Functionality"]
+    F --> G["📈 Evaluate Performance"]
+    G --> H["✅ Finished All Exercises"]
+
+    subgraph Exercise1["## Exercise 1"]
+        AA["💡 Graph Setup"] --> AB["🖼️ Plot Balance"]
+        AB --> AC["✍️ Format Graph"]
+    end
+
+    subgraph Exercise2["## Exercise 2"]
+        BA["📈 Data Analysis"] --> BB["⚙️ Function Logic"]
+    end
+
+    subgraph Exercise3["## Exercise 3"]
+        CA["🔍 Hand Comparison"] --> CB["💻 Function Implementation"]
+    end
+
+    A -->|Starts| Exercise1 --> H
+    Exercise1 -->|Next| Exercise2 -->|Next| Exercise3 -->|Complete| H

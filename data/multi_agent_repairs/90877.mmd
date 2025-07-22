@@ -1,0 +1,11 @@
+```mermaid
+flowchart TD
+    DS1["nflplaybyplay2015.csv"] -->|load CSV| DV_all_plays
+    DV_all_plays -->|filter 4th downs| DV_fourth_plays
+    DV_fourth_plays -->|categorize attempts| DV_attempts
+    DV_fourth_plays -->|categorize punts| DV_punts
+    DV_fourth_plays -->|categorize field goals| DV_field_goals
+    DS2["standings2015.csv"] -->|load CSV| DV_standings15
+    DV_standings15 -->|merge| DV_fourth_plays
+    DV_attempts -->|feat: PercentAttempts target: Win| Model1["OLS Regression"]
+```

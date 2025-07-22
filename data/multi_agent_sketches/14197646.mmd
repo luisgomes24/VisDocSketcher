@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1["/Train Data - Chest X-rays/"] -->|Preprocessing| B1[X_train]
+    A2["/Test Data - Chest X-rays/"] -->|Preprocessing| B2[X_test]
+    A3["/Validation Data - Chest X-rays/"] -->|Preprocessing| B3[Validation Data]
+
+    %% Data Variables
+    B1 --> D1["/y_train - Labels/"]
+    B2 --> D2["/y_test - Labels/"]
+
+    %% CNN Model
+    F1["CNN Model"]
+    F1:::model
+    B1 -->|Inputs| F1
+    D1 -->|Target| F1
+
+    %% Training and Evaluation
+    F1 -->|Training| H1[Fit Model]
+    F1 -->|Evaluation| H2[Evaluate Model]
+    H1 --> B2
+    H2 --> D2
+
+    %% Data Flow
+    classDef model fill:#bbf,stroke:#333,stroke-width:4px;
+
+    %% Comments
+    %% A1, A2, A3 - Source of Chest X-ray Images
+    %% B1, B2, B3 - Processed Image Data for CNN Input
+    %% D1, D2 - Labels associated with Image Data
+    %% F1 - The Core CNN Model Defined and Trained
+    %% H1, H2 - Fit/Evaluate the Model using Data

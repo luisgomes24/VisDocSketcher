@@ -1,0 +1,23 @@
+graph TD
+    A[Data Collection] -->|🔄 Collects Data| B[Data Preprocessing]
+    A -->|📊 SQL/NoSQL| database[<img src='icons/database.svg' width=100 height=100/> <br/> Database]
+    B -->|🔄 Cleans Data| C[Feature Selection]
+    B -->|🗂️ DataFrame| table[<img src='icons/table.svg' width=100 height=100/> <br/> Table]
+    C -->|🔍 Selects Features| D[Train-Test Split]
+    C -->|📂 Split Columns| column_split[<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Split]
+    D -->|🔄 Splits Data| E[Model Training]
+    D -->|📉 Splits Rows| row_split[<img src='icons/row_split.svg' width=100 height=100/> <br/> Row Split]
+    E -->|🤖 Trains Model| F[Model Evaluation]
+    E -->|🧠 Neural Network| brain[<img src='icons/brain.svg' width=100 height=100/> <br/> Neural Model]
+    F -->|📊 Evaluates Model| G[Model Deployment]
+    F -->|📄 File Output| output_file[<img src='icons/file.svg' width=100 height=100/> <br/> File Output]
+    G -->|📦 Deploys Model| model_deployment[<img src='icons/file.svg' width=100 height=100/> <br/> Deployment]
+    subgraph Legend
+    direction LR
+    icon1[<img src='icons/database.svg' width=50 height=50/> <br/> Database]
+    icon2[<img src='icons/table.svg' width=50 height=50/> <br/> Table]
+    icon3[<img src='icons/column_split.svg' width=50 height=50/> <br/> Column Split]
+    icon4[<img src='icons/row_split.svg' width=50 height=50/> <br/> Row Split]
+    icon5[<img src='icons/brain.svg' width=50 height=50/> <br/> Neural Model]
+    icon6[<img src='icons/file.svg' width=50 height=50/> <br/> File Output]
+    end

@@ -1,0 +1,104 @@
+{
+  "data_sources": [
+    {
+      "file_name": "flavors_of_cacao.csv",
+      "description": "Contains data on various cacao products and their ratings."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing all the data loaded from the CSV file."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature set excluding the target variable (Rating)."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable representing the Rating."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set of features."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Test set of features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set of target variable."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set of target variable."
+    },
+    {
+      "variable_name": "rfc",
+      "description": "Random Forest Classification model."
+    },
+    {
+      "variable_name": "rfc_pred",
+      "description": "Predicted labels obtained from the Random Forest model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_step": "pd.read_csv('../input/cacaos/flavors_of_cacao.csv')",
+      "uses": ["Data exploration", "Data cleaning", "Feature engineering"]
+    },
+    {
+      "variable": "X",
+      "creation_step": "df.drop('Rating', axis=1')",
+      "uses": ["Input feature for model training"]
+    },
+    {
+      "variable": "y",
+      "creation_step": "df['Rating']",
+      "uses": ["Target variable for model training"]
+    },
+    {
+      "variable": "X_train",
+      "creation_step": "train_test_split(X, y, test_size=0.30, random_state=7)",
+      "uses": ["Training model"]
+    },
+    {
+      "variable": "X_test",
+      "creation_step": "train_test_split(X, y, test_size=0.30, random_state=7)",
+      "uses": ["Testing model"]
+    },
+    {
+      "variable": "y_train",
+      "creation_step": "train_test_split(X, y, test_size=0.30, random_state=7)",
+      "uses": ["Training model"]
+    },
+    {
+      "variable": "y_test",
+      "creation_step": "train_test_split(X, y, test_size=0.30, random_state=7)",
+      "uses": ["Testing model"]
+    },
+    {
+      "variable": "rfc",
+      "creation_step": "RandomForestClassifier(n_estimators=5000, min_weight_fraction_leaf= 0)",
+      "uses": ["Model training and prediction"]
+    },
+    {
+      "variable": "rfc_pred",
+      "creation_step": "rfc.predict(X_test)",
+      "uses": ["Evaluation of model accuracy"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "n_estimators": 5000,
+        "min_weight_fraction_leaf": 0
+      }
+    }
+  ]
+}

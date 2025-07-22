@@ -1,0 +1,11 @@
+graph TD;
+    A["Load Dataset"] --> B["Data Preprocessing"];
+    B --> C["Split Data"];
+    C --> D["Model Training"];
+    D --> E["Model Evaluation"];
+    E --> F["Visualizations"];
+    F --> G["Results"];
+    A --> H["Data Summary"];
+    H --> I["Descriptive Statistics"];
+    I --> J["Correlations"];
+    J --> G;

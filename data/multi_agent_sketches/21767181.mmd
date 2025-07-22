@@ -1,0 +1,42 @@
+flowchart TD
+%% Data Source
+A["heart.csv"]:::source
+
+%% Data Preparation
+A --> B["Read CSV into data DataFrame"]:::data
+B --> C["Exploratory Data Analysis"]:::eda
+B --> D["Split: Features (X) and Target (y)"]:::data
+
+%% Features and Target Split
+D --> |Features| E["X DataFrame"]:::features
+D --> |Target| F["y Series"]:::target
+
+%% Model Training
+E --> G["CatBoostClassifier Model"]:::model
+F --> G
+G --> H["Cross-Validation"]:::process
+H --> I["Hyperparameter Optimization with Optuna"]:::optimization
+
+%% Predictions
+G --> J["Predict on Test Set"]:::predict
+
+%% Evaluation
+J --> K["Accuracy Scoring"]:::evaluation
+J --> L["Classification Report"]:::evaluation
+
+%% Feature Importance
+G --> M["Feature Importances"]:::feature_importance
+M --> N["Visualization of Feature Importances"]:::visualization
+
+classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+classDef prediction fill:#fbbd08,stroke:#333,stroke-width:2px;
+classDef evaluation fill:#f96,stroke:#333,stroke-width:2px;
+classDef process fill:#ffcc00,stroke:#333,stroke-width:2px;
+classDef optimization fill:#ff6666,stroke:#333,stroke-width:2px;
+classDef eda fill:#ccffcc,stroke:#333,stroke-width:2px;
+classDef features fill:#66ccff,stroke:#333,stroke-width:2px;
+classDef target fill:#ff6666,stroke:#333,stroke-width:2px;
+classDef feature_importance fill:#ffdd57,stroke:#333,stroke-width:2px;
+classDef visualization fill:#ccccff,stroke:#333,stroke-width:2px;

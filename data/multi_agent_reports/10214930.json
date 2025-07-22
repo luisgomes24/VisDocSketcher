@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cars_dataset.csv",
+      "description": "Dataset containing car specifications and features."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the loaded car dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for exploratory analysis and various visualizations."
+    }
+  ],
+  "models": []
+}

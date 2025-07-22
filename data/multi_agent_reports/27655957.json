@@ -1,0 +1,26 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/air-quality-data-in-india/air-quality-india.csv",
+      "description": "Air Quality data containing PM2.5 levels over time."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "aqi_data",
+      "description": "DataFrame containing the air quality data.",
+      "columns": [
+        "Timestamp",
+        "PM2.5"
+      ]
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "aqi_data",
+      "creation_method": "pd.read_csv",
+      "usage": "Plotted in time series."
+    }
+  ],
+  "models": []
+}

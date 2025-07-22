@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cell_cycle_genes_reactome_extended.txt",
+      "description": "List of cell cycle genes from Reactome extended"
+    },
+    {
+      "file_name": "processed_h5ad files",
+      "description": "Processed cell line data in h5ad format from Broad Institute"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "S_phase_genes_Tirosh",
+      "description": "List of genes associated with the S phase of the cell cycle"
+    },
+    {
+      "name": "G2_M_genes_Tirosh",
+      "description": "List of genes associated with the G2 and M phases of the cell cycle"
+    },
+    {
+      "name": "cell_cycle_genes_reactome_extended",
+      "description": "List of unique cell cycle genes from Reactome extended"
+    },
+    {
+      "name": "df_stat",
+      "description": "DataFrame containing statistics on correlation between G1S and G2M phases for each dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "cell_cycle_genes_reactome_extended",
+      "created_by": "pd.read_csv",
+      "description": "Read from the URL of cell cycle genes",
+      "flow": "Used in PCA analysis"
+    },
+    {
+      "variable": "adata_orig",
+      "created_by": "sc.read",
+      "description": "Read processed data for each h5ad file",
+      "flow": "Cloned to adata for further analysis"
+    },
+    {
+      "variable": "df_stat",
+      "created_by": "DataFrame from statistics",
+      "description": "Stores correlation statistics and cell counts for visualizations",
+      "flow": "Output to CSV and plotted for analysis"
+    }
+  ],
+  "models": []
+}

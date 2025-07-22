@@ -1,0 +1,9 @@
+flowchart TD;
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🛠️ Preprocess Data"];
+    B --> C["📷 Display Sample Image"];
+    C --> D["🔍 Detect Faces Using MTCNN"];
+    D --> E["🖼️ Overlay Detection Results <img src='dummy_plots/boxplot_template.svg'/> <br/> Face Detection"];
+    E --> F["📦 Extract and Save Faces"];
+    F --> G["📊 Analyze Excluded Images"];
+    G --> H["📁 Generate Grid of Processed Images"];
+    H --> I["📦 Zip Downloadable Dataset <img src='icons/file.svg'/>"];

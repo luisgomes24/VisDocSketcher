@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Sources
+    A1["../input/gtsrb-german-traffic-sign/Train/"] %% Training images directory
+    A2["../input/gtsrb-german-traffic-sign/Test/"] %% Test images directory
+    A3["../input/gtsrb-german-traffic-sign/Test.csv"] %% Test images CSV
+
+    %% Data Preparation
+    B1["train_dataset"] %% Training dataset variable
+    B2["test_dataset"] %% Test dataset variable
+    B3["X_test"] %% Preprocessed test images
+
+    %% Models
+    C1["Custom CNN"] %% Custom CNN Model
+    C2["MobileNetV2"] %% MobileNetV2 Model
+    C3["VGG19"] %% VGG19 Model
+
+    %% Training Histories
+    D1["history"] %% History of Custom CNN
+    D2["mob_history"] %% History of MobileNetV2
+    D3["vgg_history"] %% History of VGG19
+
+    %% Data Flow
+    A1 -->|flow_from_directory| B1
+    A2 -->|flow_from_directory| B2
+    A3 -->|preprocessing (cv2, PIL)| B3
+
+    B1 -->|Training| C1
+    B1 -->|Training| C2
+    B1 -->|Training| C3
+
+    B2 -->|Validation| C1
+    B2 -->|Validation| C2
+    B2 -->|Validation| C3
+
+    %% Model Training and Results
+    C1 -->|Produces| D1
+    C2 -->|Produces| D2
+    C3 -->|Produces| D3
+
+    %% Visualization
+    D1 -->|Plotting and Visualization| E1["Performance Analysis"]
+    D2 -->|Plotting and Visualization| E1
+    D3 -->|Plotting and Visualization| E1

@@ -1,0 +1,21 @@
+flowchart TD
+    %%% Data Sources %%%
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> Video File<br>019d5b34_1.mp4]:::dataSource -->|Input Frames| B[<img src='icons/brain.svg' width=100 height=100/> <br/> YOLOv5 Model<br>yolov5l6_trained_600images.pt]
+    B-->C[<img src='icons/table.svg' width=100 height=100/> <br/> BOX DataFrame<br/><img src='dummy_plots/boxplot_template.svg'/>]:::dataVariable
+
+    %%% Data Variables %%%
+    C-->D[<img src='icons/column_split.svg' width=100 height=100/> <br/> Filter Confidence<br>>0.65<br/><img src='dummy_plots/scatter_plot_template.svg'/>]:::process
+    D-->E[<img src='icons/table.svg' width=100 height=100/><br/> data0 DataFrame]:::dataVariable
+    
+    A-->F[<img src='icons/row_split.svg' width=100 height=100/> <br/> Extract Frames]:::process
+    F-->G[<img src='icons/file.svg' width=100 height=100/> <br/> image_dir]:::dataVariable
+
+    %%% Processes and Visualization %%%
+    G-->H[<img src='icons/brain.svg' width=100 height=100/> <br/> Read Images<br/> for Visualization<br/><img src='dummy_plots/hist_template.svg'/>]:::process
+    E-->H
+    C-.->I[Visualize Detection Information]:::process
+    
+    %%% Styles and Classes %%%
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;

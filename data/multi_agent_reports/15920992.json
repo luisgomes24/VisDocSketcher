@@ -1,0 +1,166 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/digit-recognizer/train.csv",
+      "description": "Contains training data for the MNIST digit recognizer, with images of digits and corresponding labels."
+    },
+    {
+      "file": "../input/digit-recognizer/test.csv",
+      "description": "Contains test data for the MNIST digit recognizer, with images of digits without labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training dataset loaded from 'train.csv'."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test dataset loaded from 'test.csv'."
+    },
+    {
+      "name": "X",
+      "description": "DataFrame with features (images) created by dropping the 'label' column from the training set."
+    },
+    {
+      "name": "y",
+      "description": "Series containing the labels (digits) extracted from the training set."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features after splitting from X."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set labels after splitting from y."
+    },
+    {
+      "name": "X_val",
+      "description": "Validation set features obtained from splitting X_train."
+    },
+    {
+      "name": "y_val",
+      "description": "Validation set labels obtained from splitting y_train."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features normalized and reshaped for predictions."
+    },
+    {
+      "name": "cnn_model",
+      "description": "Convolutional Neural Network model built using Keras for digit recognition."
+    },
+    {
+      "name": "cnn_history",
+      "description": "Object storing the training history of the cnn_model (loss and accuracy)."
+    },
+    {
+      "name": "val_pred",
+      "description": "Predictions made by the cnn_model on the validation set."
+    },
+    {
+      "name": "conf_mat",
+      "description": "Confusion matrix obtained from comparing actual vs predicted labels on the validation set."
+    },
+    {
+      "name": "test_pred",
+      "description": "Predictions made by the cnn_model on the test set."
+    },
+    {
+      "name": "results",
+      "description": "DataFrame created to store ImageId and corresponding predicted label for test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Loaded from 'train.csv'.",
+      "flow": "Used to create X and y variables."
+    },
+    {
+      "variable": "test",
+      "creation": "Loaded from 'test.csv'.",
+      "flow": "Used for final predictions."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping 'label' from train DataFrame.",
+      "flow": "Used to create training and validation sets."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from train DataFrame.",
+      "flow": "Used to create training and validation labels."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Split from X DataFrame.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Split from y Series.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "X_val",
+      "creation": "Split from X_train.",
+      "flow": "Used in model validation."
+    },
+    {
+      "variable": "y_val",
+      "creation": "Split from y_train.",
+      "flow": "Used in model validation."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Loaded and normalized from test DataFrame.",
+      "flow": "Used for final predictions."
+    },
+    {
+      "variable": "cnn_model",
+      "creation": "Built using Keras Sequential API.",
+      "flow": "Compiled and trained on X_train and y_train."
+    },
+    {
+      "variable": "cnn_history",
+      "creation": "Output of the model.fit() method.",
+      "flow": "Used to plot learning history and analyze training performance."
+    },
+    {
+      "variable": "val_pred",
+      "creation": "Predicted using cnn_model on X_val.",
+      "flow": "Used to create confusion matrix."
+    },
+    {
+      "variable": "conf_mat",
+      "creation": "Generated using sklearn's confusion_matrix function.",
+      "flow": "Visualized to assess validation performance."
+    },
+    {
+      "variable": "test_pred",
+      "creation": "Predicted using cnn_model on X_test.",
+      "flow": "Stored in results DataFrame for submission."
+    },
+    {
+      "variable": "results",
+      "creation": "Created to store submission data with predicted labels.",
+      "flow": "Saved to 'Submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "name": "cnn_model",
+      "type": "Convolutional Neural Network",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "optimizer": "nadam",
+        "loss_function": "sparse_categorical_crossentropy",
+        "epochs": 50,
+        "batch_size": 64,
+        "callbacks": "EarlyStopping"
+      }
+    }
+  ]
+}

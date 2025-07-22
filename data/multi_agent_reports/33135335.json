@@ -1,0 +1,82 @@
+{
+  "data_sources": [
+    {
+      "file_path": "train_dir",
+      "description": "Directory containing training images of cats and dogs."
+    },
+    {
+      "file_path": "test_dir",
+      "description": "Directory containing test images of cats and dogs."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_generator",
+      "description": "Generator for training data with images and categorical labels."
+    },
+    {
+      "variable_name": "validation_generator",
+      "description": "Generator for validation data with images and categorical labels."
+    },
+    {
+      "variable_name": "test_generator",
+      "description": "Generator for test data with images and categorical labels."
+    },
+    {
+      "variable_name": "history",
+      "description": "Training history object containing metrics like loss and accuracy."
+    },
+    {
+      "variable_name": "nb_train_samples",
+      "description": "Number of training samples processed by the generator."
+    },
+    {
+      "variable_name": "nb_validation_samples",
+      "description": "Number of validation samples processed by the generator."
+    },
+    {
+      "variable_name": "nb_test_samples",
+      "description": "Number of test samples processed by the generator."
+    },
+    {
+      "variable_name": "num_classes",
+      "description": "The number of classes (categories) in the dataset, which is 2: cats and dogs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_generator",
+      "creation": "Created using ImageDataGenerator flow_from_directory method.",
+      "flows_to": "Model training (model.fit)."
+    },
+    {
+      "variable_name": "validation_generator",
+      "creation": "Created using ImageDataGenerator flow_from_directory method.",
+      "flows_to": "Model validation during training (model.fit)."
+    },
+    {
+      "variable_name": "test_generator",
+      "creation": "Created using ImageDataGenerator flow_from_directory method.",
+      "flows_to": "Model evaluation."
+    },
+    {
+      "variable_name": "history",
+      "creation": "Created when model.fit is called.",
+      "flows_to": "Learning curves visualisation and evaluation metrics."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "InceptionResNetV2",
+      "input_features": "Images of size 299x299 (3 channels).",
+      "target_variable": "Categorical labels (cats or dogs).",
+      "hyperparameters": {
+        "optimizer": "Adam",
+        "loss_function": "categorical_crossentropy",
+        "epochs": 5,
+        "batch_size": 16,
+        "patience": 5
+      }
+    }
+  ]
+}

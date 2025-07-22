@@ -1,0 +1,25 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 EDA <img src='table.svg'/>"]
+    B --> C["🔄 Handle Missing Values"]
+    C --> D["🧼 Data Cleaning"]
+    D --> E["📚 Prepare Vocabulary"]
+    E --> F["🧠 Model Training"]
+    F --> G["🔮 Predictions"]
+    G --> H["📈 Submit Predictions <img src='file.svg'/>"]
+    
+    subgraph Preprocessing
+        C
+        D
+        E
+    end
+    
+    subgraph Model
+        F
+        G
+    end
+    
+    A -->|Read from CSV| B
+    D -->|Transform & Clean Text| E
+    E -->|Vectorization| F
+    F -->|Train Model| G
+    G -->|Generate Output| H

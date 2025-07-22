@@ -1,0 +1,7 @@
+graph LR
+    A["Wine Dataset"] -->|load_wine()| B["wine_dataset"]
+    B -->|pd.DataFrame(wine_dataset['data'])| C["X"]
+    C -->|train_test_split()| D["Train/Test Split"]
+    D -->|Model.fit()| E["Model"]
+    E -->|Model.predict()| F["Predictions"]
+    F -->|output_results()| G["Output"] 

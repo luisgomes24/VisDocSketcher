@@ -1,0 +1,29 @@
+Diagram of the Data Science Workflow:
+1. **Data Sources**
+   - *train_audio/abethr1/XC128013.ogg*
+   - *train_audio/abhori1/XC127317.ogg*
+   - *train_metadata.csv*
+   - *sample_submission.csv*
+   - *test_soundscapes/*.ogg*
+
+2. **Data Variables**
+   - *audio_abe* - Audio data for Abethi bird.
+   - *audio_abh* - Audio data for Abhori bird.
+   - *model* - Pre-trained classification model.
+   - *train_metadata* - Metadata DataFrame.
+   - *competition_classes* - List of competition classes.
+   - *competition_class_map* - Class mapping variable.
+   - *sample_sub* - DataFrame for submission probabilities.
+
+3. **Data Flow**
+   - *audio_abe* -> Played and analyzed.
+   - *audio_abh* -> Played and analyzed.
+   - *model* -> Used for predictions.
+   - *train_metadata* -> Extracts classes and mapping.
+   - *sample_sub* -> Holds predictions and saved as *submission.csv*.
+
+4. **Model**
+   - *Bird Vocalization Classifier*
+      - Input features: Audio samples.
+      - Target variable: Bird species.
+      - Hyperparameters: Uses probabilities from logits.

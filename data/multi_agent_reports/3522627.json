@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/20_Victims_of_rape.csv",
+      "description": "Contains data on victims of rape across different states in India."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "vic_df",
+      "description": "DataFrame containing the raw data from the input CSV file."
+    },
+    {
+      "name": "state_df",
+      "description": "DataFrame holding data grouped by area and subgroup to analyze rape cases by state."
+    },
+    {
+      "name": "Delhi_df",
+      "description": "DataFrame containing rape case data specifically for Delhi."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "vic_df",
+      "creation_method": "pd.read_csv",
+      "usage": "Used to create state_df and Delhi_df for further analysis and plotting."
+    },
+    {
+      "variable": "state_df",
+      "creation_method": "vic_df[['Area_Name', 'Victims_of_Rape_Total', 'Subgroup']]",
+      "usage": "Used for plotting total rape cases by state and subgroup."
+    },
+    {
+      "variable": "Delhi_df",
+      "creation_method": "vic_df[vic_df['Area_Name']=='Delhi']",
+      "usage": "Used for detailed analysis of rape cases specifically in Delhi and for plotting."
+    }
+  ],
+  "models": []
+}

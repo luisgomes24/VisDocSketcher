@@ -1,0 +1,68 @@
+flowchart TD
+  subgraph DataSources[Data Sources]
+    train_csv(("train.csv")):::dataset
+    test_csv(("test.csv")):::dataset
+    sample_submission_csv(("sample_submission.csv")):::dataset
+  end
+
+  subgraph DataVariables[Data Variables]
+    train_y((train_y)):::variable --> |"Processed from train.csv"| train_csv
+    test_y((test_y)):::variable --> |"Processed from test.csv"| test_csv
+    train_X((train_X)):::variable --> |"Derived from train_y with lags"| train_y
+    test_X((test_X)):::variable --> |"Derived from test_y with lags"| test_y
+    val_X((val_X)):::variable --> |"Subset of train_X"| train_X
+    val_y((val_y)):::variable --> |"Subset of train_y"| train_y
+  end
+
+  subgraph Processes[Processes]
+    trainModel("Train Model"):::process
+    evaluateModel("Evaluate Model"):::process
+    generatePredictions("Generate Predictions"):::process
+  end
+
+  subgraph Models
+    VanillaNN["Vanilla Neural Network"]:::model
+  end
+
+  classDef dataset fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef process fill:#bfb,stroke:#333,stroke-width:2px;
+  classDef model fill:#ffb,stroke:#333,stroke-width:2px;
+
+  trainModel --> VanillaNN
+  evaluateModel --> VanillaNN
+  generatePredictions --> VanillaNN
+
+  train_X --> trainModel
+  train_y --> trainModel
+
+  val_X --> evaluateModel
+  val_y --> evaluateModel
+
+  test_X --> generatePredictions
+
+  classDef datasets fill:#c6e2ff,stroke:#3b6ea5,stroke-width:2px;
+  classDef variables fill:#d5f5e3,stroke:#2e8b57,stroke-width:2px;
+  classDef processes fill:#f7c6c7,stroke:#b22222,stroke-width:2px;
+  classDef models fill:#fdd835,stroke:#ffb300,stroke-width:2px;
+
+  %% Dataset nodes
+  train_csv:::datasets
+  test_csv:::datasets
+  sample_submission_csv:::datasets
+
+  %% Variable nodes
+  train_y:::variables
+  test_y:::variables
+  train_X:::variables
+  test_X:::variables
+  val_X:::variables
+  val_y:::variables
+
+  %% Process nodes
+  trainModel:::processes
+  evaluateModel:::processes
+  generatePredictions:::processes
+
+  %% Model nodes
+  VanillaNN:::models

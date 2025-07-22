@@ -1,0 +1,29 @@
+flowchart TD
+    %% Node for Train CSV
+    A[Train CSV]
+    %% Node for Test CSV
+    B[Test CSV]
+    %% Node for Training Data
+    C[train]
+    %% Node for Test Data
+    D[test]
+    %% Node for Features (X_train)
+    E[X_train]
+    %% Node for Target (Y_train)
+    F[Y_train]
+    %% Node for Random Forest Model
+    G[Random Forest Classifier]
+    %% Node for Prediction
+    H[Prediction]
+    %% Node for Output
+    I[Output]
+
+    %% Data flow connections
+    A -->|load data| C
+    B -->|load data| D
+    C -->|prepare features| E
+    C -->|select target| F
+    E -->|train model| G
+    F -->|train model| G
+    G -->|predict| H
+    H -->|create submission| I

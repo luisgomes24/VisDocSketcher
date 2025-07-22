@@ -1,0 +1,54 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/audio-detection-soliset-201/submission.csv",
+      "description": "Submission file for SoliSet Kernel"
+    },
+    {
+      "file_path": "../input/inference-resnest-rfcx-audio-detection/submission.csv",
+      "description": "Submission file for ResNest RFCX Audio Detection"
+    },
+    {
+      "file_path": "../input/minimal-fastai-solution-score-0-61/submission.csv",
+      "description": "Submission file for a minimal FastAI solution"
+    },
+    {
+      "file_path": "../input/all-in-one-rfcx-baseline-for-beginners/submission.csv",
+      "description": "All-in-one RFCX baseline for beginners"
+    },
+    {
+      "file_path": "../input/rfcx-train-resnet50-with-tpu/submission.csv",
+      "description": "Submission file for training resnet50 with TPU"
+    },
+    {
+      "file_path": "../input/rfcx-resnet50-tpu/submission.csv",
+      "description": "Submission file for ResNet50 using TPU"
+    },
+    {
+      "file_path": "../input/resnet34-more-augmentations-mixup-tta-inference/submission.csv",
+      "description": "Submission file for ResNet34 with more augmentations"
+    },
+    {
+      "file_path": "../input/inference-tpu-rfcx-audio-detection-fast/submission.csv",
+      "description": "Fast inference for RFCX Audio Detection"
+    },
+    {
+      "file_path": "../input/rfcx-bagging-with-different-weights-0871-score/submission.csv",
+      "description": "Bagging submission with different weights"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "ked",
+      "description": "A DataFrame that contains kernel details including ID, Symbol, Score, and File Path"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ked",
+      "creation": "Created as a Pandas DataFrame from hardcoded data.",
+      "flow": "Used to instantiate multiple Kernel objects and accessed for data description and visualization."
+    }
+  ],
+  "models": []
+}

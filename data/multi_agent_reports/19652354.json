@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Year 2010-2011.csv",
+      "description": "Sales data of an online retail store containing invoice information and customer details for the year 2010-2011."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "InvoiceNo",
+      "description": "Unique identification number for each purchase invoice."
+    },
+    {
+      "name": "StockCode",
+      "description": "Unique code assigned to each item in the inventory."
+    },
+    {
+      "name": "Description",
+      "description": "Name or description of the item being sold."
+    },
+    {
+      "name": "Quantity",
+      "description": "Number of items included in the purchase invoice."
+    },
+    {
+      "name": "InvoiceDate",
+      "description": "Date and time when the purchase was made."
+    },
+    {
+      "name": "UnitPrice",
+      "description": "Price of a single item in the purchase."
+    },
+    {
+      "name": "CustomerID",
+      "description": "Unique identifier for each customer."
+    },
+    {
+      "name": "Country",
+      "description": "Country where the customer is located."
+    },
+    {
+      "name": "TotalPrice",
+      "description": "Total price calculated as Quantity multiplied by UnitPrice."
+    },
+    {
+      "name": "recency",
+      "description": "Number of days since the customer's last purchase."
+    },
+    {
+      "name": "frequency",
+      "description": "Number of unique purchases made by the customer."
+    },
+    {
+      "name": "monetary",
+      "description": "Total money spent by the customer."
+    },
+    {
+      "name": "RFM_SCORE",
+      "description": "Combined score based on recency, frequency, and monetary metrics."
+    },
+    {
+      "name": "Segment",
+      "description": "Categorization of customers based on their RFM scores."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used in exploratory data analysis (EDA), cleaned, and transformed into rfm_df for RFM analysis."
+    },
+    {
+      "variable": "rfm_df",
+      "creation_method": "Aggregation of df by Customer ID",
+      "flow": "Used to calculate RFM scores and categorize customers into segments."
+    }
+  ],
+  "models": []
+}

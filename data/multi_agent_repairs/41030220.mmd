@@ -1,0 +1,27 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["diabetes.csv"]:::data_source --> B["data{\"Pandas DataFrame\"}"]:::variable
+
+    %% Data loading
+    B --> C["X, Y"]:::variable
+
+    %% Data Splitting
+    C -->|train_test_split| D["X_train, X_test"]:::variable
+    C -->|train_test_split| E["Y_train, Y_test"]:::variable
+
+    %% Data Preprocessing
+    F["scaler{\"StandardScaler\"}"]:::variable --> G["standardized_data"]:::variable
+    G --> C
+
+    %% Model Training and Prediction
+    D & E --> H["SVM{\"Support Vector Classifier\"}"]:::model
+    H --> I["y_predict"]:::variable
+
+    %% Model Evaluation
+    I --> J["cnf_matrix{\"Confusion Matrix\"}"]:::variable
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+```

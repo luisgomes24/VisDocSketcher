@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    CSV1[<img src='icons/file.svg' width=100 height=100/> <br/> fatal-police-shootings-data.csv] -->|Read| DF[<img src='icons/table.svg' width=100 height=100/> <br/> df]
+    CSV2[<img src='icons/file.svg' width=100 height=100/> <br/> State Populations.csv]
+    
+    %% Data Variables
+    DF -->|Extract Year| Year[<img src='icons/column_split.svg' width=100 height=100/> <br/> year]
+    DF -->|Group by state| StateGrouped[<img src='icons/row_split.svg' width=100 height=100/> <br/> state_grouped]
+    
+    %% Data Usage
+    DF -->|Gender & Race Analysis| Analysis1[<img src='icons/brain.svg' width=100 height=100/> <br/> Analysis]
+    DF -->|Visualization| Plots1[<img src='icons/graph.svg' width=100 height=100/> <br/> Visualization]
+    Year -->|Time Period Analysis| Plots2[<img src='dummy_plots/lineplot_template.svg'/> <br/> Year Analysis]
+    StateGrouped -->|State-wise Analysis| Plots3[<img src='dummy_plots/barplot_template.svg'/> <br/> state-wise Analysis]
+
+    %% Comments for explanation
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    class CSV1 comment;
+    class CSV2 comment;
+    class DF comment;
+    class Year comment;
+    class StateGrouped comment;

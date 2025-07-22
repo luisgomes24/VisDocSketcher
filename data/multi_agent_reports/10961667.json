@@ -1,0 +1,38 @@
+{
+  "data_sources": [
+    {"file_name": "train.csv", "description": "Contains tweets along with their sentiment labels."},
+    {"file_name": "glove.6B.50d.txt", "description": "Pre-trained GloVe word embeddings for text representation."}
+  ],
+  "data_variables": [
+    {"variable_name": "df_total", "description": "DataFrame containing the dataset of tweets and their labels."},
+    {"variable_name": "max_length", "description": "Maximum length of the preprocessed tweets for padding."},
+    {"variable_name": "vocab_size", "description": "Number of unique words in the processed tweet dataset."},
+    {"variable_name": "padded_tweets", "description": "Padded sequences of tweets for input into the model."}
+  ],
+  "data_flow": [
+    {"variable_name": "df_total", "creation": "Read from CSV file", "flow": "Processed to create 'preprocessedTweet' column, and used for training/testing splitting."},
+    {"variable_name": "max_length", "creation": "Computed from 'preprocessedTweet' length", "flow": "Used for padding sequences in 'padded_tweets'."},
+    {"variable_name": "padded_tweets", "creation": "Created using Tokenizer and padding", "flow": "Used as input to the model during training and testing."}
+  ],
+  "models": [
+    {
+      "model_name": "Sequential LSTM", 
+      "input_features": "padded_tweets", 
+      "target_variable": "y_train", 
+      "hyperparameters": {"layers": [
+        {"type": "Embedding", "parameters": {"input_dim": "vocab_size", "output_dim": 50}},
+        {"type": "Bidirectional LSTM", "parameters": {"units": 20, "return_sequences": true}},
+        {"type": "Dropout", "parameters": {"rate": 0.2}},
+        {"type": "BatchNormalization", "parameters": {}},
+        {"type": "Bidirectional LSTM", "parameters": {"units": 20, "return_sequences": true}},
+        {"type": "Dropout", "parameters": {"rate": 0.2}},
+        {"type": "BatchNormalization", "parameters": {}},
+        {"type": "Bidirectional LSTM", "parameters": {"units": 20}},
+        {"type": "Dropout", "parameters": {"rate": 0.2}},
+        {"type": "BatchNormalization", "parameters": {}},
+        {"type": "Dense", "parameters": {"units": 64, "activation": "relu"}},
+        {"type": "Dense", "parameters": {"units": 64, "activation": "relu"}},
+        {"type": "Dense", "parameters": {"units": 1, "activation": "sigmoid"}}
+      ]}}
+  ]
+}

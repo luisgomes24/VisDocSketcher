@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A[index.json]:::data_source -->|Loaded JSON| B[char_index]
+    C[train.npy]:::data_source 
+    D[train.pickle]:::data_source
+    
+    %% Data Variables
+    E[train_df]:::variable -->|Extract Sequence IDs| F[sequence_id_list]
+    E -->|Create Labels| G[label_list]
+    B -->|Create Reverse Mapping| H[index_char]
+    F -->|Process Data| I[start_list] & J[length_list] & K[train_npy]
+
+    %% Data Processing and Output
+    J & K -->|Fill Training Data| L[train.npy Output]
+    G & I & J -->|Create Training Data| M[train.pickle Output]
+    H -->|Write to JSON| A
+    
+    %% Style Declarations
+    classDef data_source fill:#f96,stroke:#333,stroke-width:2;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2;

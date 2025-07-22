@@ -1,0 +1,114 @@
+{
+    "data_sources": [
+        {
+            "file_name": "train.csv",
+            "description": "Contains training data with text and target labels for disaster tweets."
+        },
+        {
+            "file_name": "test.csv",
+            "description": "Contains test data with text to predict disaster tweets' target labels."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "train",
+            "description": "DataFrame containing the training dataset."
+        },
+        {
+            "variable_name": "test",
+            "description": "DataFrame containing the test dataset."
+        },
+        {
+            "variable_name": "text_data",
+            "description": "Processed text data from the training set after cleaning and stopword removal."
+        },
+        {
+            "variable_name": "X",
+            "description": "Feature variable containing the treated text from the training set."
+        },
+        {
+            "variable_name": "Y",
+            "description": "Target variable with ground truth labels from the training set."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Training split of the feature data."
+        },
+        {
+            "variable_name": "X_val",
+            "description": "Validation split of the feature data."
+        },
+        {
+            "variable_name": "y_train",
+            "description": "Training split of the target data."
+        },
+        {
+            "variable_name": "y_val",
+            "description": "Validation split of the target data."
+        },
+        {
+            "variable_name": "test_text",
+            "description": "Processed text data from the test set for prediction."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "created_by": "pd.read_csv",
+            "used_in": "Data preparation and analysis"
+        },
+        {
+            "variable": "test",
+            "created_by": "pd.read_csv",
+            "used_in": "Data preparation and prediction"
+        },
+        {
+            "variable": "text_data",
+            "created_by": "train['text'].apply",
+            "used_in": "Feature transformation and vectorization"
+        },
+        {
+            "variable": "X",
+            "created_by": "train['text_treated']",
+            "used_in": "Training and validation splits"
+        },
+        {
+            "variable": "Y",
+            "created_by": "train['target']",
+            "used_in": "Training and validation splits"
+        },
+        {
+            "variable": "X_train",
+            "created_by": "train_test_split",
+            "used_in": "Model training"
+        },
+        {
+            "variable": "X_val",
+            "created_by": "train_test_split",
+            "used_in": "Model evaluation"
+        },
+        {
+            "variable": "y_train",
+            "created_by": "train_test_split",
+            "used_in": "Model training"
+        },
+        {
+            "variable": "y_val",
+            "created_by": "train_test_split",
+            "used_in": "Model evaluation"
+        },
+        {
+            "variable": "test_text",
+            "created_by": "test['text'].apply",
+            "used_in": "Prediction"
+        }
+    ],
+    "models": [
+        {
+            "model_name": "MultinomialNB",
+            "input_features": "X_train_tf",
+            "target_variable": "y_train",
+            "hyperparameters": "None specified"
+        }
+    ]
+}

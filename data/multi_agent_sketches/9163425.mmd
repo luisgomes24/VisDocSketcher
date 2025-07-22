@@ -1,0 +1,45 @@
+%% Mermaid.js Flowchart for Jupyter Notebook
+flowchart TD
+    
+    %% Data Sources
+    subgraph sources ["Data Sources"]
+      GCS[[GCS Bucket]]
+    end
+
+    %% Data Variables
+    subgraph variables ["Data Variables"]
+      GCS_BASE_PATH[GCS Base Path]
+      IMG_SIZE[Image Size]
+      BATCH_SIZE[Batch Size]
+      CLASSES[Flower Classes]
+      TRAINING_FILENAMES[Training Filenames]
+      VALIDATION_FILENAMES[Validation Filenames]
+      TEST_FILENAMES[Test Filenames]
+    end
+
+    %% Data Flow
+    subgraph dataflow ["Data Flow"]
+      training_dataset[Training Dataset]
+      validation_dataset[Validation Dataset]
+      test_dataset[Test Dataset]
+      model[EfficientNetB0 Model]
+    end
+    
+    %% Workflow Relationships
+    GCS-->|"accesses"|GCS_BASE_PATH
+    GCS_BASE_PATH-->|"used to fetch"|TRAINING_FILENAMES
+    GCS_BASE_PATH-->|"used to fetch"|VALIDATION_FILENAMES
+    GCS_BASE_PATH-->|"used to fetch"|TEST_FILENAMES
+    
+    TRAINING_FILENAMES-->training_dataset["get_batched_dataset(TRAINING_FILENAMES, labeled=True, train=True)"]
+    VALIDATION_FILENAMES-->validation_dataset["get_batched_dataset(VALIDATION_FILENAMES, labeled=True)"]
+    TEST_FILENAMES-->test_dataset["get_batched_dataset(TEST_FILENAMES, labeled=False)"]
+    
+    training_dataset-->model
+    validation_dataset-->|"used during training"|model
+    test_dataset-->|"used for evaluation"|model
+
+    %% Model Node
+    subgraph models ["Machine Learning Models"]
+      model
+    end

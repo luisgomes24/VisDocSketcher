@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "path": "../input/pytorch-model-cpu/model_pytorch_cpu.pth",
+      "description": "Pre-trained PyTorch model file."
+    },
+    {
+      "path": "../input/dataset/data/test/1355932/054fcbe075ba5934004e3d0e25d8fd54cbae76f5.jpg",
+      "description": "Test image for making predictions.
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "pytorch_model",
+      "description": "The loaded PyTorch model."
+    },
+    {
+      "name": "image",
+      "description": "The test image after loading and transforming into a tensor."
+    },
+    {
+      "name": "prediction",
+      "description": "The output prediction from the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "pytorch_model",
+      "creation": "torch.load(PATH)",
+      "usage": "Used for making predictions."
+    },
+    {
+      "variable": "image",
+      "creation": "torchvision.io.read_image(path_to_image) and transformations",
+      "usage": "Input to the model for prediction."
+    },
+    {
+      "variable": "prediction",
+      "creation": "pytorch_model.forward(image.unsqueeze(1).permute(1,0,2,3))",
+      "usage": "Output is the prediction result, provided by argmax to identify the predicted class."
+    }
+  ],
+  "models": [
+    {
+      "name": "PyTorch Model",
+      "input_features": "Processed image tensor.",
+      "target_variable": "Predicted class.",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

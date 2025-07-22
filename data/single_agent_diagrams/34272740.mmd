@@ -1,0 +1,23 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> population.csv"] --> B["🔍 Data Analysis"]
+    B --> C["📊 View Head <img src='table.svg' />"]
+    B --> D["📊 View Tail <img src='table.svg' />"]
+    B --> E["📊 Describe Data"]
+    B --> F["📊 Check Info"]
+    B --> G["🛠️ Check Nulls"]
+    B --> H["🔎 Column Names"]
+    B --> I["📂 Create Sub DataFrame"]
+    
+    I --> J["📊 Yearly Growth Plot (Top 100) <img src='lineplot_template.svg' />"]
+    I --> K["📊 Yearly Growth Plot (Lowest 100) <img src='lineplot_template.svg' />"]
+    I --> L["📈 Top 20 Populated Countries (2020) <img src='barplot_template.svg' />"]
+    I --> M["📉 Least 20 Populated Countries (2020) <img src='barplot_template.svg' />"]
+    
+    I --> N["📈 Top 20 Ranked Countries (2020) <img src='barplot_template.svg' />"]
+    I --> O["📉 Least 20 Ranked Countries (2020) <img src='barplot_template.svg' />"]
+    
+    I --> P["📈 Top 20 % Change (2020) <img src='barplot_template.svg' />"]
+    I --> Q["📉 Least 20 % Change (2020) <img src='barplot_template.svg' />"]
+    
+    I --> R["📊 Median Age Distribution (Top 30) <img src='hist_template.svg' />"]
+    I --> S["📊 Age vs Fertility Rate (Top 30) <img src='scatter_plot_template.svg' />"]

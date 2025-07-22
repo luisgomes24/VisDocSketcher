@@ -1,0 +1,28 @@
+flowchart TD
+    %% This is the CSV data used as input
+    CSV["monthly_sale_data.csv"]:::data_source
+    
+    %% This is the DataFrame created by reading the CSV file
+    DF["DataFrame: df"]:::data_variable
+    
+    %% Prophet model used for forecasting based on df
+    PM["Prophet Model: model"]:::model
+    
+    %% Manual input data for the last year
+    LY["Last Year's Data: last_1year"]:::data_variable
+    
+    %% Manual input data for the next year
+    NY["Next Year's Data: next_year"]:::data_variable
+    
+    %% Forecast DataFrame containing predicted values
+    F["Forecast DataFrame: forecast"]:::data_variable
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#abb,stroke:#333,stroke-width:2px;
+    
+    CSV -->|Load CSV| DF
+    DF -->|Fit Model| PM
+    LY -->|Provide last_1year| F
+    NY -->|Provide next_year| F
+    PM -->|Predict| F

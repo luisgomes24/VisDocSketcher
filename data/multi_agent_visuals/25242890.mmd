@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+        B["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"]
+    end
+
+    %% Data Frames
+    subgraph DataFrames
+        C["<img src='icons/table.svg' width=100 height=100/> <br/> train_df" ]
+        D["<img src='icons/table.svg' width=100 height=100/> <br/> ss_df"]
+    end
+
+    %% Environment Setup
+    subgraph Environment
+        E["<img src='icons/database.svg' width=100 height=100/> <br/> DATA_DIR"]
+        F["<img src='icons/database.svg' width=100 height=100/> <br/> N_REPLICAS"]
+    end
+
+    %% Model
+    subgraph Model
+        G["<img src='icons/brain.svg' width=100 height=100/> <br/> tfgan Model"]
+    end
+
+    %% Data Flow
+    A -->|"Load data into"| C
+    B -->|"Load data into"| D
+    E -->|"Provide paths to"| C
+    E -->|"Provide paths to"| D
+    F -->|"Setup"| G
+    C -->|"Training data for"| G
+    D -->|"Generate predictions for"| G

@@ -1,0 +1,28 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train.csv & test.csv"] --> B["🔍 Data Overview"]
+    B --> C["🧹 Preprocess Data"]
+    C --> D["🧩 Handle Missing Values"]
+    D --> E["📊 Visualizations"]
+    E --> F["📊 Countplot Survived"]
+    E --> G["📊 Fare Distribution"]
+    E --> H["📊 Age Distribution"]
+    C --> I["🧩 Feature Engineering"]
+    I --> J["📊 One-Hot Encoding"]
+    J --> K["🧠 Model Building"]
+    K --> L["🚀 Train Model"]
+    L --> M["🧪 Make Predictions"]
+    M --> N["📁 Save Output <img src='file.svg'/> <br/> titanic.csv"]
+    
+    A -->|load data| B
+    B -->|check data| C
+    C -->|clean data| D
+    D -->|visualize insights| E
+    E -->|data visualization| F
+    E -->|data visualization| G
+    E -->|data visualization| H
+    C -->|process data| I
+    I -->|prepare features| J
+    J -->|create model| K
+    K -->|fit model| L
+    L -->|predict outcomes| M
+    M -->|export results| N

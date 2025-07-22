@@ -1,0 +1,11 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🧹 Data Preprocessing"];
+    B --> C["🔢 Tokenization"];
+    C --> D["📝 Padding Sequences"];
+    D --> E["📦 Train-Validation Split"];
+    E --> F["📊 Load GloVe Embeddings"];
+    F --> G["🛠 Build Model"];
+    G --> H["📈 Train Model"];
+    H --> I["🤖 Predict"];
+    I --> J["📊 Evaluate with F1"];
+    J --> K["📤 Save Predictions"];

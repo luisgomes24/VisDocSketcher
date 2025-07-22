@@ -1,0 +1,25 @@
+flowchart TD
+    %% Node for data source
+    A["../input/home-data-for-ml-course/train.csv"] -->|Read CSV| B["home_data"]
+    
+    %% Nodes for variables derived from data source
+    B -->|Extract SalePrice| C["y"]
+    B -->|Extract features| D["X"]
+    
+    %% Node for model
+    C & D -->|Train| E["iowa_model: DecisionTreeRegressor"]
+    
+    %% Node for predictions
+    E -->|Predict| F["predictions"]
+    
+    %% Node for evaluation
+    F -->|Evaluate predictions| G["evaluation"]
+
+    %% Additional comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class A dataSource;
+    class B,C,D,F dataVariable;
+    class E model;

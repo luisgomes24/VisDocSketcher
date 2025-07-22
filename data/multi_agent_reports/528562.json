@@ -1,0 +1,46 @@
+{"data_sources": [
+    {"file_name": "../input/train.csv", "description": "Contains pixel data for 28x28 images of handwritten digits for training."},
+    {"file_name": "../input/test.csv", "description": "Contains pixel data for 28x28 images of handwritten digits for testing."}
+],
+"data_variables": [
+    {"variable_name": "df_train", "description": "DataFrame containing training data loaded from train.csv."},
+    {"variable_name": "train_images", "description": "Numpy array of reshaped training images used for training the GAN."},
+    {"variable_name": "df_test", "description": "DataFrame containing test data loaded from test.csv."},
+    {"variable_name": "test_images", "description": "Numpy array of reshaped test images used for evaluating the GAN."},
+    {"variable_name": "X_train_real", "description": "Preprocessed training images ready for training the GAN."},
+    {"variable_name": "X_test_real", "description": "Preprocessed test images ready for evaluation of the GAN."},
+    {"variable_name": "losses", "description": "List to store loss values during training for both generator and discriminator."},
+    {"variable_name": "gan", "description": "The overall GAN model, combining the generator and discriminator."},
+    {"variable_name": "generator", "description": "The generator part of the GAN responsible for generating images."},
+    {"variable_name": "discriminator", "description": "The discriminator part of the GAN responsible for differentiating between real and fake images."}
+],
+"data_flow": [
+    {"variable_name": "df_train", "flow": "Loaded from train.csv, used to create train_images and X_train_real."},
+    {"variable_name": "train_images", "flow": "Processes into X_train_real for GAN training."},
+    {"variable_name": "X_train_real", "flow": "Used in the training loop for both the generator and discriminator."},
+    {"variable_name": "gan", "flow": "Used for training by the generator and discriminator during each epoch."},
+    {"variable_name": "losses", "flow": "Stores the loss values every epoch which are later visualized."}
+],
+"models": [
+    {
+        "model_type": "GAN",
+        "generator": {
+            "input_features": "Latent samples (random noise)",
+            "target_variable": "Generated images",
+            "hyperparameters": {
+                "hidden_size": 784,
+                "activation": "LeakyReLU",
+                "learning_rate": "0.0001"
+            }
+        },
+        "discriminator": {
+            "input_features": "Real or Fake images",
+            "target_variable": "Binary classification of images (real = 1, fake = 0)",
+            "hyperparameters": {
+                "hidden_size": 128,
+                "activation": "LeakyReLU",
+                "learning_rate": "0.0005"
+            }
+        }
+    }
+]}

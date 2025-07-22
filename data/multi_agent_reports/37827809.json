@@ -1,0 +1,54 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/retinal-disease-opacity-detection/train.csv",
+      "description": "Training data containing file names and opacity labels."
+    },
+    {
+      "file": "/kaggle/input/retinal-disease-opacity-detection/test.csv",
+      "description": "Testing data containing file names."
+    },
+    {
+      "file": "/kaggle/input/resnet50-retinal-disease-opacity-detection/ResNet50",
+      "description": "Pre-trained ResNet50 model for opacity detection."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data including file names and opacity labels."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing testing data including file names."
+    },
+    {
+      "variable": "result",
+      "description": "List of predicted opacity classes based on the model predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "read_csv",
+      "flow": "Used to create predictions and generate classification report."
+    },
+    {
+      "variable": "test",
+      "creation": "read_csv",
+      "flow": "Used to create predictions and then saved to CSV."
+    },
+    {
+      "variable": "result",
+      "creation": "List comprehension using model to predict on resized image",
+      "flow": "Used to assign predictions to train and test datasets."
+    }
+  ],
+  "models": [
+    {
+      "model": "ResNet50",
+      "input_features": "Resized RGB images from file paths.",
+      "target_variable": "Opacity class (0 or 1)."
+    }
+  ]
+}

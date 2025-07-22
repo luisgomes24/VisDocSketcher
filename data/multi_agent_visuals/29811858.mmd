@@ -1,0 +1,18 @@
+flowchart TD
+    %% Data sources
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> bigquery-public-data.github_repos.sample_commits"] --> B["<img src='table.svg' width=100 height=100/> <br/> sample_commits_table"]
+    C["<img src='icons/database.svg' width=100 height=100/> <br/> bigquery-public-data.github_repos.languages"] --> D["<img src='table.svg' width=100 height=100/> <br/> languages_table"]
+
+    %% Data transformations and flows
+    B --> E["<img src='file.svg' width=100 height=100/> <br/> max_commits_query" ]
+    D --> F["<img src='file.svg' width=100 height=100/> <br/> pop_lang_query"]
+    D --> G["<img src='file.svg' width=100 height=100/> <br/> all_langs_query"]
+    
+    %% Comments
+    %% A: Table containing a sample of GitHub commits
+    %% C: Table containing programming languages used in different repositories
+    %% B: DataFrame containing a sample of GitHub commits
+    %% D: DataFrame containing information about programming languages used in repositories
+    %% E: SQL query to retrieve number of commits by user for the year 2016
+    %% F: SQL query to retrieve the most popular programming languages in repositories
+    %% G: SQL query for languages used in the 'polyrabbit/polyglot' repository

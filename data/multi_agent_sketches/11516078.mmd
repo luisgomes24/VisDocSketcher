@@ -1,0 +1,11 @@
+flowchart TD
+    %% CSV File Node
+    A["sentiment3.csv"]
+    %% Load CSV to DataFrame
+    A -->|"read_csv"| B["df1"]
+    
+    %% Data Exploration Nodes
+    B --> |"head()"| C["Preview First 5 Rows"]
+    B --> |"plotPerColumnDistribution(df1, 10, 5)"| D["Column Distribution Plots"]
+    B --> |"plotCorrelationMatrix(df1, 8)"| E["Correlation Matrix"]
+    B --> |"plotScatterMatrix(df1, 6, 15)"| F["Scatter and Density Plots"]

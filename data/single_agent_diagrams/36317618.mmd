@@ -1,0 +1,17 @@
+flowchart TD
+    A["📂 Load Datasets <img src='icons/file.svg' />"] --> B["🔗 Combine Datasets"]
+    B --> C["📊 Exclude Rare Movies <img src='icons/row_split.svg' />"]
+    C --> D["🔀 Create Pivot Table <img src='icons/table.svg' />"]
+    D --> E["👤 Choose Random User ID"]
+    E --> F["🎬 Select Most Recent Movie Rated"]
+    F --> G["🔍 Find Correlation with Other Movies"]
+    G --> H["🎥 Recommend Top 5 Movies <img src='dummy_plots/barplot_template.svg' />"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#f9f,stroke:#333,stroke-width:2px;
+    style C fill:#f9f,stroke:#333,stroke-width:2px;
+    style D fill:#f9f,stroke:#333,stroke-width:2px;
+    style E fill:#f9f,stroke:#333,stroke-width:2px;
+    style F fill:#f9f,stroke:#333,stroke-width:2px;
+    style G fill:#f9f,stroke:#333,stroke-width:2px;
+    style H fill:#f9f,stroke:#333,stroke-width:2px;

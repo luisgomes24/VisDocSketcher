@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> pd.read_csv()"] --> B["🧪 Check Data <img src='table.svg' /> <br/> data.tail()"];
+    B --> C["✅ Check for Missing Values <img src='missingno.svg' /> <br/> msno.matrix(data)"];
+    C --> D["🔄 Preprocess Data <img src='column_split.svg' /> <br/> Rename and Scale Features"];
+    D --> E["📊 Visualize Features <img src='hist_template.svg' /> <br/> Histograms"];
+    E --> F["📈 Feature Importance <img src='barplot_template.svg' /> <br/> XGBoost Model"];
+    F --> G["🧮 Correlation Analysis <img src='boxplot_template.svg' /> <br/> Correlation Heatmap"];
+    G --> H["🧠 Define Models <img src='brain.svg' /> <br/> Stacked Learning Models"];
+    H --> I["🧪 Train Models <img src='brain.svg' /> <br/> stratified K-Fold Cross-Validation"];
+    I --> J["📊 Model Evaluation <img src='barplot_template.svg' /> <br/> Precision, Recall, F1"];
+    J --> K["📈 ROC Curve <img src='lineplot_template.svg' /> <br/> plot_roc()"];
+    K --> L["✅ KS Test <img src='scatter_plot_template.svg' /> <br/> plot_ks_statistic()"];

@@ -1,0 +1,27 @@
+{"data_sources": [
+    {"file_name": "train.csv", "description": "Training data containing various features and SalePrice for each house."},
+    {"file_name": "test.csv", "description": "Test data containing the same features without SalePrice."}
+],
+"data_variables": [
+    {"variable_name": "X_full", "description": "DataFrame containing full training data after reading train.csv."},
+    {"variable_name": "X_test_full", "description": "DataFrame containing test data after reading test.csv."},
+    {"variable_name": "y", "description": "Series representing the target variable, SalePrice."},
+    {"variable_name": "features", "description": "List of selected feature names used for predictions."},
+    {"variable_name": "X", "description": "DataFrame containing the features selected from X_full for training."},
+    {"variable_name": "X_train", "description": "Training set for features after splitting from X."},
+    {"variable_name": "X_valid", "description": "Validation set for features after splitting from X."},
+    {"variable_name": "y_train", "description": "Training set for target variable after splitting from y."},
+    {"variable_name": "y_valid", "description": "Validation set for target variable after splitting from y."},
+    {"variable_name": "preds_test", "description": "Array of predicted values based on the test data."},
+    {"variable_name": "output", "description": "DataFrame for the final submission containing test predictions."}
+],
+"data_flow": [
+    {"variable": "X_full", "created_by": "pd.read_csv('../input/train.csv', index_col='Id')", "flows": ["X_train", "X_valid", "y_train", "y_valid"]},
+    {"variable": "X_test_full", "created_by": "pd.read_csv('../input/test.csv', index_col='Id')", "flows": ["X_test"]},
+    {"variable": "y", "created_by": "X_full.SalePrice", "flows": ["y_train", "y_valid"]},
+    {"variable": "X", "created_by": "X_full[features].copy()", "flows": ["X_train", "X_valid"]},
+    {"variable": "output", "created_by": "pd.DataFrame({'Id': X_test.index, 'SalePrice': preds_test})", "flows": ["submission.csv"]}
+],
+"models": [
+    {"model_name": "RandomForestRegressor", "configurations": [{"model_id": "model_1", "parameters": {"n_estimators": 50, "random_state": 0}}, {"model_id": "model_2", "parameters": {"n_estimators": 100, "random_state": 0}}, {"model_id": "model_3", "parameters": {"n_estimators": 100, "criterion": "mae", "random_state": 0}}, {"model_id": "model_4", "parameters": {"n_estimators": 200, "min_samples_split": 20, "random_state": 0}}, {"model_id": "model_5", "parameters": {"n_estimators": 100, "max_depth": 7, "random_state": 0}}], "best_model": "model_3"}
+]}

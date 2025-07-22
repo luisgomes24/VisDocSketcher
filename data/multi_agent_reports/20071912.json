@@ -1,0 +1,132 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/crime-in-los-angeles-data-from-2020-to-present/Crime_Data_from_2020_to_Present.csv",
+      "description": "Crime data in Los Angeles from 2020 to present"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "crimes",
+      "description": "DataFrame containing all crime records"
+    },
+    {
+      "name": "crimes_distribution",
+      "description": "Subset of 'crimes' for plotting distribution of key features"
+    },
+    {
+      "name": "crimes_scaled",
+      "description": "MinMax scaled version of crimes data for visualization"
+    },
+    {
+      "name": "train_features",
+      "description": "Features used for training the model, excluding non-numeric data"
+    },
+    {
+      "name": "train_label",
+      "description": "Target variable, primarily 'Crm Cd Log' for regression"
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features after splitting"
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features after splitting"
+    },
+    {
+      "name": "y_train",
+      "description": "Training set labels after splitting"
+    },
+    {
+      "name": "y_test",
+      "description": "Test set labels after splitting"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "crimes",
+      "creation_method": "pd.read_csv",
+      "uses": [
+        "Data preprocessing (drop columns, handling NaN values)",
+        "Visualization (Distribution, Heatmaps)",
+        "Model training and evaluation"
+      ]
+    },
+    {
+      "variable": "crimes_distribution",
+      "creation_method": "Subset of crimes",
+      "uses": ["Used for plotting distribution of features"]
+    },
+    {
+      "variable": "crimes_scaled",
+      "creation_method": "MinMaxScaler",
+      "uses": [
+        "Used for Correlation Heatmap",
+        "Used for barplots grouped by month and day"
+      ]
+    },
+    {
+      "variable": "train_features",
+      "creation_method": "DataFrame creation from crimes",
+      "uses": ["Used in model training"]
+    },
+    {
+      "variable": "train_label",
+      "creation_method": "Extracting column from crimes",
+      "uses": ["Used in model training"]
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "uses": ["Input to models for training"]
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "uses": ["Input to models for testing"]
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "uses": ["Output labels for training evaluation"]
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "uses": ["Output labels for testing evaluation"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"solver": "liblinear"}
+    },
+    {
+      "model_name": "Decision Tree Regressor",
+      "input_features": "train_features",
+      "target_variable": "train_label",
+      "hyperparameters": {"max_depth": 4}
+    },
+    {
+      "model_name": "Random Forest Regressor",
+      "input_features": "train_features",
+      "target_variable": "train_label",
+      "hyperparameters": {"n_estimators": 1000}
+    },
+    {
+      "model_name": "Gradient Boosting Regressor",
+      "input_features": "train_features",
+      "target_variable": "train_label",
+      "hyperparameters": {"n_estimators": 1000}
+    },
+    {
+      "model_name": "LightGBM Regressor",
+      "input_features": "train_features",
+      "target_variable": "train_label",
+      "hyperparameters": {"n_estimators": 1000}
+    }
+  ]
+}

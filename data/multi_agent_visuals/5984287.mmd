@@ -1,0 +1,17 @@
+flowchart TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> stage_1_train.csv"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> stage_1_sample_submission.csv"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> train_dataset"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> data_loader_train"]
+    E["<img src='icons/row_split.svg' width=100 height=100/> <br/> data_loader_test"]
+    F["<img src='icons/brain.svg' width=100 height=100/> <br/> model"]
+    G["<img src='icons/image.svg' width=100 height=100/> <br/> submission"]
+
+    A --> B
+    A --> C
+    B --> G
+    C --> D
+    C --> E
+    D --> F
+    E --> F
+    F --> G

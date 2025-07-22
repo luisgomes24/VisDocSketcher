@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph DataSources
+        A["/kaggle/input/advertisingcsv/Advertising.csv"]
+    end
+    
+    subgraph DataPreparation
+        B["Load data into df"]
+        C["Split df into X (features) and y (target)"]
+    end
+    
+    subgraph DataSplitting
+        D["Split X and y into X_train, X_test, y_train, y_test"]
+    end
+
+    subgraph ModelTraining
+        E["Train Linear Regression model lin_model using X_train and y_train"]
+    end
+    
+    subgraph Prediction
+        F["Use lin_model to predict predicted_sales_1"]
+        G["Use lin_model to predict predicted_sales_2"]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    E --> G

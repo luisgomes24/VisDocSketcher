@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "db_books.csv",
+      "description": "Database of books with various attributes."
+    },
+    {
+      "file_name": "stories.csv",
+      "description": "Database of stories with attributes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame for db_books.csv containing up to 1000 rows."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame for stories.csv containing up to 1000 rows."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "created_by": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotPerColumnDistribution"]
+    },
+    {
+      "variable": "df2",
+      "created_by": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotPerColumnDistribution"]
+    }
+  ],
+  "models": []
+}

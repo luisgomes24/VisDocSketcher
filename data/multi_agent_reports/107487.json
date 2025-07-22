@@ -1,0 +1,22 @@
+{
+    "data_sources": [
+        {
+            "file_name": "train.csv",
+            "description": "Training data containing features and loss values."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "train",
+            "description": "DataFrame containing the training data loaded from train.csv."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "train",
+            "creation_method": "pandas.read_csv",
+            "usage": "Used in feature loss plotting for each continuous feature related to the prediction task."
+        }
+    ],
+    "models": []
+}

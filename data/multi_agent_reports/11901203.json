@@ -1,0 +1,114 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/ipl-data-set/Players.xlsx",
+      "description": "Contains player information including batting hands and countries."
+    },
+    {
+      "file": "/kaggle/input/ipl-data-set/matches.csv",
+      "description": "Contains match data including toss decisions and match outcomes."
+    },
+    {
+      "file": "/kaggle/input/ipl-data-set/most_runs_average_strikerate.csv",
+      "description": "Contains statistics of the top run getters including strike rates and averages."
+    },
+    {
+      "file": "/kaggle/input/ipl-data-set/deliveries.csv",
+      "description": "Contains detailed delivery data of IPL matches."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "players_data",
+      "description": "DataFrame containing players' details."
+    },
+    {
+      "name": "batting_hand",
+      "description": "Series containing batting hand information of players."
+    },
+    {
+      "name": "lh",
+      "description": "Count of left-handed batsmen."
+    },
+    {
+      "name": "rh",
+      "description": "Count of right-handed batsmen."
+    },
+    {
+      "name": "player_country",
+      "description": "Series containing countries of the players."
+    },
+    {
+      "name": "match_data",
+      "description": "DataFrame containing match information."
+    },
+    {
+      "name": "toss",
+      "description": "Series containing toss decisions."
+    },
+    {
+      "name": "decision_bat",
+      "description": "Count of times teams chose to bat first."
+    },
+    {
+      "name": "decision_field",
+      "description": "Count of times teams chose to field first."
+    },
+    {
+      "name": "strike_rate",
+      "description": "DataFrame containing statistics about batsmen's strike rates and averages."
+    },
+    {
+      "name": "delivery_data",
+      "description": "DataFrame containing detailed delivery data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "players_data",
+      "creation": "pd.read_excel",
+      "flows_to": ["batting_hand", "player_country"]
+    },
+    {
+      "variable": "batting_hand",
+      "creation": "Extracted from players_data",
+      "flows_to": ["lh", "rh"]
+    },
+    {
+      "variable": "lh",
+      "creation": "Calculated from batting_hand",
+      "flows_to": ["print"]
+    },
+    {
+      "variable": "rh",
+      "creation": "Calculated from batting_hand",
+      "flows_to": ["print"]
+    },
+    {
+      "variable": "player_country",
+      "creation": "Extracted from players_data",
+      "flows_to": ["data_country"]
+    },
+    {
+      "variable": "match_data",
+      "creation": "pd.read_csv",
+      "flows_to": ["toss"]
+    },
+    {
+      "variable": "toss",
+      "creation": "Extracted from match_data",
+      "flows_to": ["decision_bat", "decision_field"]
+    },
+    {
+      "variable": "strike_rate",
+      "creation": "pd.read_csv",
+      "flows_to": ["scatter", "bar"]
+    },
+    {
+      "variable": "delivery_data",
+      "creation": "pd.read_csv",
+      "flows_to": []
+    }
+  ],
+  "models": []
+}

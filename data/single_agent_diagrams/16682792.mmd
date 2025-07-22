@@ -1,0 +1,13 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["📄 Merge Train/Dev Data"];
+    B --> C["📈 Preprocess Data"];
+    C --> D["🧪 Train/Test Split"];
+    D --> E["🎯 Load Model"];
+    E --> F["🔍 Evaluate Model"];
+    F --> G["📊 Evaluation Results <img src='dummy_plots/barplot_template.svg'/>"];
+    G --> H["✅ Finished!"];
+    
+    A --> I["📥 Write to JSON"];
+    B --> I;
+    F --> J["📥 Merge Outcomes"];
+    J --> H;

@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base'}}%%
+flowchart TD
+    subgraph DataSources
+        A1["../input/sample_images/"] %% DICOM files of patients' scans
+    end
+
+    subgraph DataVariables
+        B1["first_patient"] %% The DICOM scans of the first patient loaded as slices
+        B2["first_patient_pixels"] %% Hounsfield Units (HU) for the first patient's scans
+        B3["pix_resampled"] %% Resampled pixel data for the first patient's scans
+        B4["segmented_lungs"] %% Binary segmentation of the lungs without filling structures
+        B5["segmented_lungs_fill"] %% Binary segmentation of the lungs with filled structures
+    end
+
+    subgraph DataFlow
+        A1 --> B1 %% Load scan data to first_patient
+        B1 --> B2 %% Generate HU data for first_patient
+        B2 --> B3 %% Resample pixel data from HU data
+        B3 --> B4 %% Segment lungs from resampled data
+        B3 --> B5 %% Segment lungs with filled structures from resampled data
+    end

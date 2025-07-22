@@ -1,0 +1,10 @@
+```
+graph TD
+    A["💻 Load Images <img src='icons/file.svg'/>"] --> B["🗄️ Load Image Metadata <img src='icons/table.svg'/>"]
+    B --> C["🧩 Preprocess Image Data"]
+    C --> D["⚖️ Generate Feature Database"]
+    D --> E["📊 Generate Feature Vectors"]
+    E --> F["🔍 Image Matching"]
+    F --> G["📈 Plot Matches <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    G --> H["📋 Compile Results <img src='icons/table.svg'/>"]
+    H --> I["💾 Save Results <img src='icons/file.svg'/>"]

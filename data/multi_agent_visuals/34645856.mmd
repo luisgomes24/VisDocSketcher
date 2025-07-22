@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A1[train.csv]:::source%% Training data containing house prices and features
+    A2[test.csv]:::source%% Testing data for house prices prediction
+    A3[sample_submission.csv]:::source%% Sample submission file format for predictions
+    
+    %% Data Preparation
+    B1[X, y]:::process -- make_regression --> B2[X_train, X_test]:::process
+    B1 -- make_regression --> B3[y_train, y_test]:::process
+    
+    %% Training Data
+    B2 --> C1[X_train, y_train]:::data%% Training datasets
+    B3
+    
+    %% Testing Data
+    B2 --> C2[X_test, y_test]:::data%% Testing datasets
+    
+    %% Model Training - DecisionTreeRegressor
+    D1[DecisionTreeRegressor]:::model
+    C1 --> D1
+    D1 -- max_depth=1, random_state=42 --> E1[Trees]:::data
+    
+    %% Loss Tracking
+    F1[Loss]:::data%% List holding mean squared error for each iteration
+    C1 --> F1
+    
+    %% Testing Phase
+    C2 --> F2[Test Predictions]:::process
+    E1 --> F2
+    
+    %% Results
+    F2 --> G1[Evaluate MSE]:::process
+    G1 --> F1
+
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef data fill:#bfb,stroke:#090,stroke-width:2px;
+    classDef model fill:#fbf,stroke:#f09,stroke-width:2px;

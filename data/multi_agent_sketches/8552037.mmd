@@ -1,0 +1,25 @@
+%% Begin of Flowchart Definition
+flowchart TD
+    %% Node Definitions
+    subgraph DataSources
+        A["Mental-Health-on-Campus-Survey.csv"]
+        %% Represents the source CSV file containing mental health survey data
+    end
+
+    subgraph DataVariables
+        B["df1"]
+        %% Represents the DataFrame holding the loaded survey data
+        C["nRowsRead"]
+        %% Specifies the number of rows to read from the CSV file
+    end
+
+    subgraph DataFlow
+        A -->|Reads| B
+        %% Data from the CSV is read into the DataFrame df1
+        B -->|Used in| D["Plotting Functions"]
+        %% Data in df1 is used for various plotting functions
+    end
+
+    %% Visualize the overall flow
+    DataSources --> DataVariables
+    DataVariables --> DataFlow

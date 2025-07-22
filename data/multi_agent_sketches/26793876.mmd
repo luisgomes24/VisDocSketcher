@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Load Data| B[train_data]
+    C["test.csv"] -->|Load Data| D[test_data]
+
+    %% Data Processing
+    B -->|Preprocess| E["Preprocessed Train Data"]
+    D -->|Preprocess| F["Preprocessed Test Data"]
+
+    %% Feature Selection
+    E -->|Correlation Analysis| G[top50_corr_var]
+    G -->|Select Features| H[new_vars]
+    H -->|SelectKBest| I[train_data_40]
+    F -->|Based on new_vars| J[test_data_40]
+
+    %% Models
+    I -->|Train Model| K(RandomForestClassifier)
+    I -->|Train Model| L(ExtraTreesClassifier)
+    I -->|Train Model| M(GaussianNB)
+    I -->|Train Model| N(LogisticRegression)
+    I -->|Train Model| O(XGBClassifier)
+
+    %% Predictions
+    J -->|Predict with RandomForest| K
+    J -->|Predict with ExtraTrees| L
+    J -->|Predict with GaussianNB| M
+    J -->|Predict with LogisticRegression| N
+    J -->|Predict with XGBClassifier| O
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#fbf,stroke:#333,stroke-width:2px;
+
+    class A,C dataSource;
+    class B,D,E,F,G,H,I,J dataProcess;
+    class K,L,M,N,O model;

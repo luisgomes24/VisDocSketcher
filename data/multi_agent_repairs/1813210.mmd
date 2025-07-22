@@ -1,0 +1,27 @@
+```mermaid
+%% The overall workflow for analyzing construction spending data
+flowchart TD
+    %% Node for reading total private construction spending CSV
+    A["../input/total-private-construction-spending.csv"] -->|"Load data into DataFrame"| B["df1"]
+    %% Node for distribution plotting using df1
+    B -->|"Plot distributions"| G["Distribution Plots"]
+    
+    %% Node for reading commercial construction spending CSV
+    C["../input/total-private-construction-spending-commercial.csv"] -->|"Load data into DataFrame"| D["df2"]
+    %% Node for distribution plotting using df2
+    D -->|"Plot distributions"| G
+    
+    %% Node for reading lodging construction spending CSV
+    E["../input/total-private-construction-spending-lodging.csv"] -->|"Load data into DataFrame"| F["df3"]
+    %% Node for distribution plotting using df3
+    F -->|"Plot distributions"| G
+
+    %% Data for distribution plots
+    G --> H["plotPerColumnDistribution"]
+    
+    %% Descriptions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;  %% Style for data source nodes
+    classDef process fill:#ccf,stroke:#333,stroke-width:2px;  %% Style for process nodes
+    class A,C,E dataSource;
+    class B,D,F,H,G process;
+```

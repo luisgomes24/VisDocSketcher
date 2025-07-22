@@ -1,0 +1,11 @@
+```mermaid
+flowchart TD
+    A["Import Data"] --> B["DataFrame: cars"]
+    B --> C["DataFrame: cars_updated"]
+    C --> D["DataFrame: cars_encoded"]
+    D --> E["Training Data: x_train, y_train"]
+    D --> F["Testing Data: x_test, y_test"]
+    E --> G["Model: Linear Regression"]
+    F --> H["Predictions: y_pred"]
+    H --> I["Compute RMSE"]
+```

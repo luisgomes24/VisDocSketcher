@@ -1,0 +1,15 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/> <br/> train, test, labels"] --> B["🔍 EDA <img src='boxplot_template.svg'/> <br/> Data Overview"]
+    B --> C["⚙️ Preprocessing"]
+    C --> D["🧑‍💻 Feature Engineering <img src='column_split.svg'/> <br/> Prep for DNN & XGB"]
+    D --> E["🏗️ Scale Features"]
+    E --> F["🧪 Model Training"]
+    F --> G1["📈 XGB Model Training <img src='brain.svg'/> <br/> Optuna Tuning"]
+    G1 --> H1["📊 Evaluate XGB <img src='scatter_plot_template.svg'/> <br/> Mean AUC"]
+    H1 --> I["📤 Save Predictions"]
+    F --> G2["🔬 DNN Model Training <img src='brain.svg'/> <br/> TPU Utilization"]
+    G2 --> H2["📊 Evaluate DNN <img src='scatter_plot_template.svg'/> <br/> Mean AUC"]
+    H2 --> J["📤 Save Predictions"]
+    I --> K["🔁 Blending Models"]
+    J --> K
+    K --> L["📤 Final Submission"]

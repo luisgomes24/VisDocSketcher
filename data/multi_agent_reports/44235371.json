@@ -1,0 +1,44 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/monthly-food-price-estimates/WLD_RTFP_country_2023-10-02.csv",
+      "description": "Contains monthly food price estimates by country, including columns for Open, Close, High, Low prices and Inflation."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the data imported from the CSV file, which includes prices and inflation data."
+    },
+    {
+      "name": "unique_countries",
+      "description": "Array of unique country names extracted from the DataFrame 'df'."
+    },
+    {
+      "name": "country_data",
+      "description": "Subset of DataFrame 'df' for a specific country to visualize price and inflation trends."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file using pd.read_csv.",
+      "flow": [
+        "Data cleaning by filling NaN values with mode.",
+        "Datetime conversion and setting date as index.",
+        "Used for plotting time series graphs for overall prices and individual countries."
+      ]
+    },
+    {
+      "variable": "unique_countries",
+      "creation": "Extracted unique countries from 'df'.",
+      "flow": "Used to loop through and analyze individual country data."
+    },
+    {
+      "variable": "country_data",
+      "creation": "Subset of 'df' for each country in unique_countries.",
+      "flow": "Used for plotting individual country price trends and inflation."
+    }
+  ],
+  "models": []
+}

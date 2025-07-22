@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Dunnetts_Table.csv",
+      "description": "Provides critical values for various values of alpha for the two-tailed Dunnett’s test."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the raw Dunnett's values read from the CSV file."
+    },
+    {
+      "variable_name": "df_001",
+      "description": "DataFrame containing the table of values for alpha=0.01."
+    },
+    {
+      "variable_name": "df_005",
+      "description": "DataFrame containing the table of values for alpha=0.05."
+    },
+    {
+      "variable_name": "df_01",
+      "description": "DataFrame containing the table of values for alpha=0.1."
+    },
+    {
+      "variable_name": "agg",
+      "description": "DataFrame containing aggregated statistics (count, mean, std) for control and experimental groups."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flow": "Used to present data and compute Dunnett's test statistics."
+    },
+    {
+      "variable": "df_001",
+      "created_by": "df.loc[a]",
+      "flow": "Used as a subset of df for alpha=0.01 cases."
+    },
+    {
+      "variable": "df_005",
+      "created_by": "df.loc[a]",
+      "flow": "Used as a subset of df for alpha=0.05 cases."
+    },
+    {
+      "variable": "df_01",
+      "created_by": "df.loc[a]",
+      "flow": "Used as a subset of df for alpha=0.1 cases."
+    },
+    {
+      "variable": "agg",
+      "created_by": "df.agg",
+      "flow": "Used to pass statistics to f_test and dunnetts_test functions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Dunnett's Test",
+      "input_features": "Aggregated statistics from control and experimental data.",
+      "target_variable": "Statistical differences in exam scores.",
+      "hyperparameters": "Control group is defined as the basis for comparisons."
+    }
+  ]
+}

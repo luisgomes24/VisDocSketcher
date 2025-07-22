@@ -1,0 +1,33 @@
+flowchart TD
+    subgraph DataSources
+        A["../input/house-prices-advanced-regression-techniques/train.csv"] --> B{{train_house}}
+        C["../input/house-prices-advanced-regression-techniques/test.csv"] --> D{{test_house}}
+    end
+
+    subgraph DataProcessing
+        B --> E[setup\(\)]
+        E --> |Produces preprocessed data| F{{regression_setup}}
+    end
+
+    subgraph ModelTraining
+        F --> |Train model| G[LightGBM Model]
+        G --> |Predict holdout| H{{lgbm_holdout_pred}}
+    end
+
+    subgraph Prediction
+        D --> |Predict test data| I{{house_prediction}}
+    end
+
+    G --> |Predict on new data| I
+
+    %% Node Descriptions
+    A:::comment("Training dataset")
+    B:::comment("DataFrame of training data")
+    C:::comment("Test dataset")
+    D:::comment("DataFrame of test data")
+    E:::comment("Setup for regression")
+    F:::comment("Regression Environment Configuration")
+    G:::comment("Train LightGBM Model")
+    H:::comment("Predictions on holdout data")
+    I:::comment("Predictions for test data")
+

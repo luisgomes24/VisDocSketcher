@@ -1,0 +1,30 @@
+%% Mermaid.js workflow diagram for the Jupyter Notebook
+flowchart TD
+    %% Data Sources
+    A[train.csv] --> |Load data| B[train_df]
+    C[test.csv] --> |Load data| D[test_df]
+    E[sample_submission.csv] --> F[submission_df]
+
+    %% Data Preparation
+    B --> |Extract features| G[cont_nn]
+    B --> |Create TabularPandas| H[to_nn]
+    H --> |Create DataLoader| I[dls]
+
+    %% Model Training
+    I --> |Train model| J[learn]
+
+    %% Predictions
+    J --> |Get predictions| K[pred]
+    D --> |Get predictions| K
+
+    %% Submission
+    K --> |Store predictions| F
+    F --> |Output to CSV| L[submission.csv]
+
+    %% Model Details
+    classDef model fill:#f9f,stroke:#333,stroke-width:2px;
+    J:::model
+    subgraph Tabular_Neural_Network_Model
+        direction TB
+        G & H & I & J
+    end

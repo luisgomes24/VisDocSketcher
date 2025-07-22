@@ -1,0 +1,37 @@
+flowchart TD
+  %% Nodes
+  A[sample_documents] -->|"Contains encoded document vectors"| B[documents]
+  B --> C[model] 
+  C -->|"Generates embeddings for"| D[encoded_data]
+  D -->|"Populates"| E[index]
+  E -.-> F["Serialized CS index"]
+  F -->|"Uses"| G[query]
+  G -->|"Performs search"| H[results]
+
+  %% Document creation
+  %% Node B represents the main data input
+  B:::data_source
+  
+  %% Pre-trained Model Loading
+  %% Node C uses the SentenceTransformer from Hugging Face
+  C:::model 
+
+  %% Document Embedding
+  %% Node D shows where the document embeddings are created
+  D:::dataflow
+
+  %% Index Population
+  %% Node E represents the step where the FAISS index is created
+  E:::dataflow
+
+  %% Query and Search Process
+  %% Node G signifies where the query is issued and Node H shows search results
+  G:::query
+  H:::search_result
+
+  %% Styles
+  classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef dataflow fill:#af9,stroke:#333,stroke-width:2px;
+  classDef query fill:#ffa,stroke:#333,stroke-width:2px;
+  classDef search_result fill:#fab,stroke:#333,stroke-width:2px;

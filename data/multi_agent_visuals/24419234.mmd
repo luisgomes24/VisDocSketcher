@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Source Nodes
+    subgraph Sources
+        A1["train.csv"]
+        A2["test.csv"]
+        A3["sample_submission.csv"]
+    end
+
+    %% Data Processing Nodes
+    subgraph Data
+        B1["train\nDataFrame"]
+        B2["test\nDataFrame"]
+        B3["Score_cols\nList of '_Score' columns"]
+        B4["test_fake\nSample for test creation"]
+        B5["predictions\nPrediction Results"]
+        B6["sol\nSubmission DataFrame"]
+    end
+
+    %% Model Node
+    subgraph Model
+        C1["Extra Trees Classifier (ET)"]
+    end
+
+    %% Data Source to Data Processing
+    A1 --> |"pd.read_csv"| B1
+    A2 --> |"pd.read_csv"| B2
+    A3 --> |"pd.read_csv"| B6
+
+    %% Data Processing Paths
+    B1 --> |"Identify '_Score' columns"| B3
+    B1 --> |"train.sample"| B4
+    B1 --> C1
+    B2 --> C1
+    B4 --> C1
+    C1 --> |"predict_model"| B5
+
+    %% Predictions to Solution
+    B5 --> B6

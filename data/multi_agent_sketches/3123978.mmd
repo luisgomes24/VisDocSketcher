@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    DS1[Test Data File] -->|pd.read_csv| D1[test]
+    DS2[Sample Submission File] -->|Format reference| S1
+
+    %% Data Variables and Flow
+    D1 -->|Prediction| M1[Logistic Regression Model]
+    D1 -->|Extract Features| M2[Coreference Models]
+    M1 -->|Predict Probabilities| P1[probabilities]
+    M2 -->|Predict Classes| P1
+    P1 -->|Combine| C1[res]
+    C1 -->|Write Submission| S1
+    
+    %% Models
+    subgraph Models
+        M1
+        M2
+    end
+
+    %% Submission
+    S1 -->|Final Output| OP1[Submission File]

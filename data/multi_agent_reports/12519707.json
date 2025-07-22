@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file": "embold_train.json",
+      "description": "Contains GitHub commit messages with titles, bodies, and corresponding labels (Bugs, Features, Questions)."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the training data with combined title and body of GitHub messages and their labels."
+    },
+    {
+      "name": "df_bug",
+      "description": "Subset of df containing messages labeled as Bugs."
+    },
+    {
+      "name": "df_feature",
+      "description": "Subset of df containing messages labeled as Features."
+    },
+    {
+      "name": "df_question",
+      "description": "Subset of df containing messages labeled as Questions."
+    },
+    {
+      "name": "train_data_loader",
+      "description": "DataLoader object providing batches of training data for model training."
+    },
+    {
+      "name": "testing_data_loader",
+      "description": "DataLoader object providing batches of testing data for model evaluation."
+    },
+    {
+      "name": "val_data_loader",
+      "description": "DataLoader object providing batches of validation data for model validation."
+    },
+    {
+      "name": "bug_predictor_model",
+      "description": "The BERT-based model used to classify GitHub commit messages."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_json",
+      "flow": "Creates bug, feature, and question subsets; preprocessed and used to create data loaders."
+    },
+    {
+      "variable": "df_bug",
+      "creation_method": "df[df['label']==0]",
+      "flow": "Used for plotting most common words associated with Bugs."
+    },
+    {
+      "variable": "df_feature",
+      "creation_method": "df[df['label']==1]",
+      "flow": "Used for plotting most common words associated with Features."
+    },
+    {
+      "variable": "df_question",
+      "creation_method": "df[df['label']==2]",
+      "flow": "Used for plotting most common words associated with Questions."
+    },
+    {
+      "variable": "train_data_loader",
+      "creation_method": "create_data_loader",
+      "flow": "Used to fetch training batches during model training."
+    },
+    {
+      "variable": "testing_data_loader",
+      "creation_method": "create_data_loader",
+      "flow": "Used to evaluate the model performance on the testing data."
+    },
+    {
+      "variable": "val_data_loader",
+      "creation_method": "create_data_loader",
+      "flow": "Used to validate model performance during training."
+    },
+    {
+      "variable": "bug_predictor_model",
+      "creation_method": "BugPredictor",
+      "flow": "Trained on the provided data loaders, saved if best performing."
+    }
+  ],
+  "models": [
+    {
+      "name": "BERT",
+      "input_features": ["commit_message"],
+      "target_variable": "label",
+      "hyperparameters": {
+        "dropout": 0.3,
+        "learning_rate": 2e-5,
+        "epochs": 5
+      }
+    }
+  ]
+}

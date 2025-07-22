@@ -1,0 +1,7 @@
+flowchart TD;
+    A["📥 Load Dataset <img src='file.svg' /> <br/> car=pd.read_csv(...)"] --> B["🔍 EDA <img src='table.svg' /> <br/> car.head(), car.info(), car.isnull().sum()"];
+    B --> C["🔄 Encode Columns <img src='column_split.svg' />"];
+    C --> D["📊 Plot Correlation <img src='dummy_plots/heatmap_template.svg' />"];
+    D --> E["🔄 Split Dataset <img src='row_split.svg' />"];
+    E --> F["🧠 Train Model <img src='brain.svg' />"];
+    F --> G["📈 Predict and Evaluate <img src='dummy_plots/scatter_plot_template.svg' />"];

@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Source Node
+    A["/processes.csv/"] 
+
+    %% Data Loading Node
+    B[df1]
+    A --> B
+    %% Description for B
+    %% B: DataFrame created by reading processes.csv with pd.read_csv(). 
+
+    %% Usage 1: Plot Per Column Distribution
+    C[plotPerColumnDistribution]
+    B --> C
+    %% Description for C
+    %% C: Function that generates distribution graphs for each column in df1.
+
+    %% Usage 2: Plot Correlation Matrix
+    D[plotCorrelationMatrix]
+    B --> D
+    %% Description for D
+    %% D: Function that uses df1 to create a correlation matrix.
+
+    %% Usage 3: Plot Scatter Matrix
+    E[plotScatterMatrix]
+    B --> E
+    %% Description for E
+    %% E: Function that uses df1 to create scatter and density plots.

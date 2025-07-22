@@ -1,0 +1,9 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> item = pd.read_csv('../input/itemLicitacao.csv')"] --> B["📝 Data Structure Overview <br/> item.shape, item.index, item.columns, item.info(), item.count()"];
+    B --> C["📈 Summary Statistics <br/> item.describe()"];
+    C --> D["📊 Generate Visuals <img src='barplot_template.svg' /> <br/> sns.countplot(y='modalidade', data=licit)"];
+    D --> E["📊 Plot Results"];
+    A2["📂 Load Licitation Data <img src='file.svg' /> <br/> licit = pd.read_csv('../input/licitacao.csv')"] --> B2["🔍 Data Analysis"];
+    D2["💡 Exercises"] --> E2["🖼️ Visualize Data"];
+    E --> F["✅ Evaluation"];
+    F --> G["📑 Review"];

@@ -1,0 +1,59 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/russian-invasion-of-ukraine-live-news-dataset/news.csv",
+      "description": "Dataset containing live news about the Russian invasion of Ukraine."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "news_df",
+      "description": "DataFrame containing the news data after filtering for non-null text and dates from 2023 onwards."
+    },
+    {
+      "variable": "docs",
+      "description": "List of news text entries extracted from the 'news_df' DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "news_df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to generate list of documents and train the topic model."
+    },
+    {
+      "variable": "docs",
+      "creation_method": "news_df.text.to_list()",
+      "flow": "Used as input to the BERTopic model for training and visualization."
+    },
+    {
+      "variable": "topic_model",
+      "creation_method": "BERTopic.fit",
+      "flow": "Contains fitted topic information and is used for visualizations."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "BERTopic",
+      "input_features": "docs",
+      "target_variable": "Topics identified in the news data",
+      "hyperparameters": {
+        "umap_model": {
+          "n_neighbors": 12,
+          "n_components": 5,
+          "metric": "cosine",
+          "low_memory": false
+        },
+        "vectorizer_model": "CountVectorizer with Russian and English stop words",
+        "hdbscan_model": {
+          "min_cluster_size": 35,
+          "min_samples": 20,
+          "metric": "euclidean"
+        },
+        "nr_topics": 150,
+        "top_n_words": 10,
+        "language": "multilingual"
+      }
+    }
+  ]
+}

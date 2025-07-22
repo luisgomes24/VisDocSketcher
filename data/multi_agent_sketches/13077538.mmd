@@ -1,0 +1,15 @@
+flowchart TD
+    A[features.csv]\n    subgraph Data Source
+        A
+    end
+    %% This node represents the data source for features.
+
+    B[features DataFrame]\n    subgraph Data Preparation
+        A -->|pd.read_csv| B
+    end
+    %% This node represents the DataFrame created with features from the CSV file.
+
+    C[Data Visualizations]\n    subgraph Data Analysis
+        B -->|px.imshow / px.bar| C
+    end
+    %% This node shows the data visualizations created to analyze relationships and distributions.

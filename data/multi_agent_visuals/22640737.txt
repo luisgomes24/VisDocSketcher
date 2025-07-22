@@ -1,0 +1,6 @@
+The notebook contains code to:
+1. Install necessary libraries.
+2. Load sales data from a CSV file into a DataFrame.
+3. Generate visualizations and an EDA report on the DataFrame.
+
+It is focused on analyzing Bandcamp sales data through different plots and reports.

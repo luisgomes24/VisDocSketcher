@@ -1,0 +1,18 @@
+flowchart TD
+    %% Node for Data Source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/mayo-clinic-strip-ai/test/*.tif"]
+    click A "../input/mayo-clinic-strip-ai/test/" "TIF images from Mayo Clinic strip AI test dataset."
+    %% Node for image_paths
+    B["<img src='icons/column_split.svg' width=100 height=100/> <br/> image_paths"]
+    click B "." "List of paths to the TIF images."
+    %% Node for image
+    C["<img src='icons/image.svg' width=100 height=100/> <br/> image"]
+    click C "." "Single image loaded from the image_paths."
+    %% Node for tiles
+    D["<img src='icons/table.svg' width=100 height=100/> <br/> tiles"]
+    click D "." "Array of image tiles created from the loaded image."
+
+    %% Data flow connections
+    A -->|"list TIF files"| B
+    B -->|"load images for processing"| C
+    C -->|"create tiles"| D

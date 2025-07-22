@@ -1,0 +1,17 @@
+```mermaid
+graph TD
+    A["Oxford Pets Dataset"] --> B["dataset"]
+    B --> |"load using tfds.load()"| C["train"]
+    C --> |"dataset['train'].map(load_image_train)"| D["train_dataset"]
+    
+    B --> |"dataset['test'].map(load_image_test)"| E["test"]
+    E --> |"batch data"| F["test_dataset"]
+    
+    D --> |"train model"| G["U-Net Model"]
+    F --> |"validate model"| G
+    G --> |"fit model and create history"| H["model_history"]
+
+    subgraph Model_Training
+        G
+    end
+```

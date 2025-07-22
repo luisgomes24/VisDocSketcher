@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"] -->|Read| B1["train_data"]
+    A2["test.csv"] -->|Read| B2["test_data"]
+    A3["sample_submission.csv"] -->|Read| B3["sub"]
+
+    %% Data Preparation
+    B1 -->|Extract Target| C1["Y"]
+    B1 -->|Extract Features| C2["X"]
+
+    %% Splitting Data
+    C2 -->|Train Features| D1["x_train"]
+    C2 -->|Validation Features| D2["x_validation"]
+    C1 -->|Train Target| D3["y_train"]
+    C1 -->|Validation Target| D4["y_validation"]
+
+    %% Model 1: MLPClassifier
+    D1 & D3 -->|Train| E1["MLPClassifier"]
+    E1 -->|Predict| F1["predictCLF"]
+    F1 -->|Evaluate| G1["acc_CLF"]
+
+    %% Model 2: TabularAutoML
+    B2 & B1 -->|AutoML Features & Target| E2["TabularAutoML"]
+    E2 -->|Predict| F2["sub[\"target\""]"]
+
+    %% Output and Submission
+    F2 -->|Write| B3 -->|Submit| H1["sub.to_csv"]
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    class A1,A2,A3 dataSource;
+    
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    class B1,B2,B3,C1,C2,D1,D2,D3,D4,F1,G1,F2,H1 dataVar;
+
+    classDef model fill:#ffc,stroke:#333,stroke-width:2px;
+    class E1,E2 model;

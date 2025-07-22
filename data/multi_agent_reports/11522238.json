@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/lish-moa/train_targets_scored.csv",
+      "description": "Training data containing the target variables for the MOA competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df_train_scored",
+      "description": "DataFrame containing the training data loaded from CSV, with multiple target variables."
+    },
+    {
+      "variable": "targets",
+      "description": "List of target variable names extracted from the DataFrame, representing various biological assays."
+    },
+    {
+      "variable": "n_targets",
+      "description": "Number of target variables in the DataFrame."
+    },
+    {
+      "variable": "cor_targets",
+      "description": "Correlation matrix of all target variables showing their pairwise correlations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train_scored",
+      "creation": "pd.read_csv('../input/lish-moa/train_targets_scored.csv')",
+      "flow": "Used for correlation analysis and plots."
+    },
+    {
+      "variable": "targets",
+      "creation": "df_train_scored.columns[1:207]",
+      "flow": "Used for calculating correlations and generating summary statistics."
+    },
+    {
+      "variable": "n_targets",
+      "creation": "len(targets)",
+      "flow": "Used for loop iterations to analyze correlations."
+    },
+    {
+      "variable": "cor_targets",
+      "creation": "df_train_scored.corr(method='pearson')",
+      "flow": "Used for visualization of target correlations."
+    }
+  ],
+  "models": []
+}

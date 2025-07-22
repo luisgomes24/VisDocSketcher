@@ -1,0 +1,54 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/pizza-sales/Data Model - Pizza Sales.xlsx",
+      "description": "Contains pizza sales data including order dates and quantities."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "_",
+      "description": "DataFrame containing summarized pizza sales data grouped by order date."
+    },
+    {
+      "name": "monthly_sales",
+      "description": "DataFrame containing total sales quantities grouped by each month."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "_",
+      "creation": "Read from Excel file and grouped by 'order_date'",
+      "flow": "Used for analysis, visualization, ADF test, and ARIMA modeling."
+    },
+    {
+      "variable": "monthly_sales",
+      "creation": "Grouped from _ DataFrame by 'order_month'.",
+      "flow": "Used for monthly sales plotting."
+    }
+  ],
+  "models": [
+    {
+      "name": "ARIMA",
+      "order": "(1,0,1)",
+      "features": ["quantity"],
+      "target": "quantity",
+      "hyperparameters": {
+        "p": 1,
+        "d": 0,
+        "q": 1
+      }
+    },
+    {
+      "name": "ARIMA",
+      "order": "(0,0,1)",
+      "features": ["quantity"],
+      "target": "quantity",
+      "hyperparameters": {
+        "p": 0,
+        "d": 0,
+        "q": 1
+      }
+    }
+  ]
+}

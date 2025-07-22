@@ -1,0 +1,20 @@
+%% This Mermaid diagram represents the data flow and model usage in the notebook 24561297
+flowchart TD
+    %% Data Sources
+    A["Train Data\n(train.csv)"] -->|load data| B["DataFrame\ndata_train"]
+    A1["Test Data\n(test.csv)"] -->|load data| B1["DataFrame\ndata_test"]
+    
+    %% Data Preparation
+    B -->|drop 'Class/ASD'| C["Features\nX"]
+    B -->|select 'Class/ASD'| D["Target\ny"]
+
+    %% Model Training
+    C -->|train model| E["RandomForestClassifier\nrfc_model\nn_estimators: 150"]
+    D -->|train target| E
+
+    %% Prediction
+    E -->|predict values| F["Predictions\npred_df"]
+    B1 -->|use data| E
+
+    %% Output
+    F -->|save results| G["submission.csv"]

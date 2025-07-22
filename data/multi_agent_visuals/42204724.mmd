@@ -1,0 +1,38 @@
+flowchart TD
+
+%% Data Sources
+A1["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/cifar-10/train.7z"]
+A2["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/cifar-10/test.7z"]
+A3["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/cifar-10/trainLabels.csv"]
+
+%% Data Preparation
+B1["<img src='dummy_plots/lineplot_template.svg' /> <br/> train_data\nArray of Training Images"]
+B2["<img src='dummy_plots/lineplot_template.svg' /> <br/> test_data\nArray of Testing Images"]
+B3["<img src='dummy_plots/lineplot_template.svg' /> <br/> label\nLabels from CSV"]
+B4["<img src='dummy_plots/lineplot_template.svg' /> <br/> label_img\nOne-hot Encoded Labels"]
+
+%% Model Data
+C1["<img src='dummy_plots/lineplot_template.svg' /> <br/> x_train"]
+C2["<img src='dummy_plots/lineplot_template.svg' /> <br/> x_test"]
+C3["<img src='dummy_plots/lineplot_template.svg' /> <br/> y_train"]
+C4["<img src='dummy_plots/lineplot_template.svg' /> <br/> y_test"]
+
+%% ML Model
+D1["<img src='icons/brain.svg' width=100 height=100/> <br/> Sequential CNN\nConvolutional Layers: 6\nDense Layers: 3\nActivation: relu, softmax"]
+
+%% Data Flow
+A1 --> |"Read and Resize to 48x48"| B1
+A2 --> |"Read and Resize to 48x48"| B2
+A3 --> |"Read CSV"| B3
+B3 --> |"One-hot Encoding"| B4
+
+B1 --> |"Shuffle and Split"| C1
+B1 --> |"Shuffle and Split"| C2
+B4 --> |"Shuffle and Split"| C3
+B4 --> |"Shuffle and Split"| C4
+
+%% Model Training and Evaluation
+C1 --> |"Input for Training"| D1
+C2 --> |"Input for Evaluation"| D1
+C3 --> |"Output for Training"| D1
+C4 --> |"Output for Evaluation"| D1

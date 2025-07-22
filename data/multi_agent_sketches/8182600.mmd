@@ -1,0 +1,25 @@
+flowchart TD
+    %% Begin data source
+    A[../input/rapido-rides/ct_rr.csv]:::dataSource --> B[input_data]
+    %% Describe data source
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    %% input_data description
+    classDef inputData fill:#ff9,stroke:#333,stroke-width:2px;
+
+    %% input_data to data
+    B --> |Clean & Feature Engineer| C[data]
+    
+    %% Calculate distance
+    C --> |Calculate Distance| D[distance]
+    %% Calculate ride_minutes
+    D --> |Based on Distance| E[ride_minutes]
+    
+    %% New month variable
+    C --> |Feature Engineering| F[new_month]
+    
+    %% Calculate ride_price
+    D --> |Pricing| G[ride_price]
+    
+    %% Styles for other classes
+    classDef calculatedData fill:#bbf,stroke:#333,stroke-width:2px;
+    class B,C,D,E,F,G calculatedData;

@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/tabular-playground-series-feb-2021/train.csv",
+      "description": "Training dataset containing features and target variable."
+    },
+    {
+      "file_path": "/kaggle/input/tabular-playground-series-feb-2021/test.csv",
+      "description": "Test dataset containing features for prediction."
+    },
+    {
+      "file_path": "/kaggle/input/tabular-playground-series-feb-2021/sample_submission.csv",
+      "description": "Sample submission file format to demonstrate expected submissions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training data with features and the target variable."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing test data with features."
+    },
+    {
+      "name": "train_ohe",
+      "description": "One-hot encoded version of categorical features in training data."
+    },
+    {
+      "name": "test_ohe",
+      "description": "One-hot encoded version of categorical features in test data."
+    },
+    {
+      "name": "train_x",
+      "description": "Concatenated DataFrame of numerical features and one-hot encoded features for training."
+    },
+    {
+      "name": "test_x",
+      "description": "Concatenated DataFrame of numerical features and one-hot encoded features for testing."
+    },
+    {
+      "name": "train_y",
+      "description": "Target variable extracted from the training DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "read_csv from train.csv",
+      "flows": "Used for model training and predictions."
+    },
+    {
+      "variable": "df_test",
+      "creation": "read_csv from test.csv",
+      "flows": "Used for generating submission."
+    },
+    {
+      "variable": "train_ohe",
+      "creation": "OneHotEncoder transformation of categorical features from df_train",
+      "flows": "Combined with numerical features to create train_x."
+    },
+    {
+      "variable": "test_ohe",
+      "creation": "OneHotEncoder transformation of categorical features from df_test",
+      "flows": "Combined with numerical features to create test_x."
+    },
+    {
+      "variable": "train_x",
+      "creation": "Concatenation of numerical features and train_ohe",
+      "flows": "Used to train LightGBM model."
+    },
+    {
+      "variable": "test_x",
+      "creation": "Concatenation of numerical features and test_ohe",
+      "flows": "Used for predictions and generating submission."
+    },
+    {
+      "variable": "train_y",
+      "creation": "Selection from df_train",
+      "flows": "Used as target for model training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LightGBM",
+      "input_features": "train_x",
+      "target_variable": "train_y",
+      "hyperparameters": {
+        "objective": "regression",
+        "metric": "root_mean_squared_error",
+        "learning_rate": 0.005,
+        "num_iterations": 20000,
+        "early_stopping_round": 200
+      }
+    }
+  ]
+}

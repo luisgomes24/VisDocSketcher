@@ -1,0 +1,70 @@
+{ 
+  "data_sources": [
+    {"file":"../input/aptos2019-blindness-detection/train.csv", "description":"Training data with labels for diabetic retinopathy diagnosis."},
+    {"file":"../input/aptos2019-blindness-detection/test.csv", "description":"Test data without labels."}
+  ],
+  "data_variables": [
+    {"variable":"train", "description":"DataFrame containing training data and diagnosis labels."},
+    {"variable":"test", "description":"DataFrame containing test data without diagnosis labels."},
+    {"variable":"train_generator", "description":"Data generator for training images with augmentation."},
+    {"variable":"valid_generator", "description":"Data generator for validation images."},
+    {"variable":"test_generator", "description":"Data generator for test images."},
+    {"variable":"model", "description":"Keras model built using ResNet50 architecture for predicting diabetic retinopathy."},
+    {"variable":"history", "description":"Dictionary containing training and validation loss and accuracy metrics."},
+    {"variable":"train_preds", "description":"Predicted labels for training data after model evaluation."},
+    {"variable":"predictions", "description":"Predicted labels for test data."}
+  ],
+  "data_flow": [
+    {
+      "variable":"train",
+      "created":"pd.read_csv('../input/aptos2019-blindness-detection/train.csv')",
+      "flow":"Used to create training dataset for model." 
+    },
+    {
+      "variable":"test",
+      "created":"pd.read_csv('../input/aptos2019-blindness-detection/test.csv')",
+      "flow":"Used to create test dataset for model." 
+    },
+    {
+      "variable":"train_generator",
+      "created":"ImageDataGenerator().flow_from_dataframe()",
+      "flow":"Used for training the model by providing batches of training images." 
+    },
+    {
+      "variable":"valid_generator",
+      "created":"ImageDataGenerator().flow_from_dataframe()",
+      "flow":"Used for validating the model during training." 
+    },
+    {
+      "variable":"model",
+      "created":"create_model()",
+      "flow":"Trained using fit_generator()." 
+    },
+    {
+      "variable":"train_preds",
+      "created":"model.predict_generator()",
+      "flow":"Used to evaluate model performance on training data." 
+    },
+    {
+      "variable":"predictions",
+      "created":"model.predict_generator()",
+      "flow":"Output for submission to submit predictions on test data." 
+    }
+  ],
+  "models": [
+    {
+      "model_name":"ResNet50",
+      "input_features":"Image data processed through image generators.",
+      "target_variable":"Diagnosis classes (0-4).",
+      "hyperparameters": {
+        "BATCH_SIZE": 8,
+        "EPOCHS": 20,
+        "LEARNING_RATE": 1e-4,
+        "WARMUP_EPOCHS": 2,
+        "DECAY_DROP": 0.5,
+        "ES_PATIENCE": 5,
+        "RLROP_PATIENCE": 3
+      }
+    }
+  ]
+}

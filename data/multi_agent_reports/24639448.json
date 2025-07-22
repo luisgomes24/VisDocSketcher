@@ -1,0 +1,51 @@
+{
+    "data_sources": [],
+    "data_variables": [
+        {"name": "result_cbnet", "description": "Output from the first object detection model."},
+        {"name": "result_yolo", "description": "Output from the second object detection model."},
+        {"name": "iou_thr", "description": "Intersection over union threshold for box matching."},
+        {"name": "skip_box_thr", "description": "Confidence score threshold for skipping boxes."},
+        {"name": "boxes", "description": "Combined bounding boxes after applying weighted box fusion."},
+        {"name": "scores", "description": "Confidence scores of the combined boxes."},
+        {"name": "labels", "description": "Labels associated with the combined boxes."}
+    ],
+    "data_flow": [
+        {
+            "variable": "result_cbnet",
+            "created_by": "Output from the first model.",
+            "flow_location": "Used in the `wbf` function to extract box coordinates."
+        },
+        {
+            "variable": "result_yolo",
+            "created_by": "Output from the second model.",
+            "flow_location": "Used in the `wbf` function to extract box coordinates and confidence scores."
+        },
+        {
+            "variable": "boxes",
+            "created_by": "Result from the weighted_boxes_fusion function.",
+            "flow_location": "Returned from the `wbf` function for final results."
+        },
+        {
+            "variable": "scores",
+            "created_by": "Result from the weighted_boxes_fusion function.",
+            "flow_location": "Returned from the `wbf` function for final results."
+        },
+        {
+            "variable": "labels",
+            "created_by": "Result from the weighted_boxes_fusion function.",
+            "flow_location": "Returned from the `wbf` function for final results."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "cbnet",
+            "features": "Boxes predicted by the model.",
+            "target": "Bounding box coordinates and confidence scores."
+        },
+        {
+            "model_name": "yolo",
+            "features": "Boxes predicted by the model.",
+            "target": "Bounding box coordinates and confidence scores."
+        }
+    ]
+}

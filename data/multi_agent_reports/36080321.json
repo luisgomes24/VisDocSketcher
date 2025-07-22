@@ -1,0 +1,61 @@
+{
+  "data_sources": [
+    {
+      "file_name": "cookie_cats.csv",
+      "description": "Data for A/B testing of a mobile game, including player retention and game rounds."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing player data, including their version group and game metrics."
+    },
+    {
+      "name": "userid",
+      "description": "Unique identifier for each player."
+    },
+    {
+      "name": "version",
+      "description": "Indicates whether the player is in the control group or the test group."
+    },
+    {
+      "name": "sum_gamerounds",
+      "description": "Total number of game rounds played by the player in the first 14 days."
+    },
+    {
+      "name": "retention_1",
+      "description": "Indicates if the player returned to play 1 day after installation."
+    },
+    {
+      "name": "retention_7",
+      "description": "Indicates if the player returned to play 7 days after installation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": ["data_summary_check", "plots", "hypothesis_tests", "A/B tests"]
+    },
+    {
+      "variable": "sum_gamerounds",
+      "flow": ["normality_checks", "A/B_tests"]
+    },
+    {
+      "variable": "retention_1",
+      "flow": ["retention_analysis"]
+    },
+    {
+      "variable": "retention_7",
+      "flow": ["retention_analysis"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Mann Whitney U test",
+      "input_features": ["sum_gamerounds"],
+      "target": ["version"],
+      "hypotheses": ["H0: M1 = M2", "H1: M1 != M2"]
+    }
+  ]
+}

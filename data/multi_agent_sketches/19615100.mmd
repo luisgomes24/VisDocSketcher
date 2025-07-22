@@ -1,0 +1,42 @@
+%% This Mermaid diagram represents the workflow of the provided Jupyter Notebook
+
+flowchart TD
+    %% Define the data sources
+    photo_jpg["Content Images (photo_jpg)"]
+    monet_jpg["Style Images (monet_jpg)"]
+    
+    %% Define the variables
+    base_path["Base Path"]
+    content_path["Content Path"]
+    style_path["Style Path"]
+    output_path["Output Path"]
+    image_size["Image Size"]
+    num_outputs["Number of Outputs"]
+    style_images["Style Images Array"]
+    content_images["Content Images Array"]
+    hub_module["Style Transfer Model from TFHub"]
+    output_images["Output Stylized Images"]
+
+    %% Data flow connections
+    photo_jpg -->|Load Content Images| content_images
+    monet_jpg -->|Load Style Images| style_images
+    style_images -->|Used in| hub_module
+    content_images -->|Used in| hub_module
+    image_size -->|Parameter| hub_module
+    num_outputs -->|Parameter| hub_module
+    hub_module -->|Generates| output_images
+    output_images -->|Visualize| output_path
+
+    %% Model details
+    subgraph Arbitrary_Image_Stylization
+    direction TB
+    hub_module
+    image_size
+    num_outputs
+    end
+    
+    %% Additional connections
+    base_path --> content_path
+    base_path --> style_path
+    base_path --> output_path
+    

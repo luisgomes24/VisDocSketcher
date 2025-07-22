@@ -1,0 +1,14 @@
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["📊 Preprocess Data"];
+    B --> C["🔄 Merge Data"];
+    C --> D["💡 Calculate Ball Influence"];
+    D --> E["📈 Train Classifier"];
+    E --> F["📝 Evaluate Model"];
+    F --> G["📊 Visualize Results"];
+    G --> H["🏟️ Defensive Coverage Analysis"];
+    H --> I["📊 Average Ball Influence Heatmap <img src='dummy_plots/heatmap_template.svg'/> <br/>"];
+
+    A1["📊 Data Exploration"] --> A;
+    E1["🏁 Model Training"] --> E;
+    F1["👁️ Model Evaluation"] --> F;
+    G1["📉 Feature Importance"] --> G;

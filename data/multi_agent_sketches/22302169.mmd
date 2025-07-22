@@ -1,0 +1,27 @@
+flowchart TD
+    subgraph Input
+        A["train.csv"]
+        %% Training data containing Pawpularity scores for pet images
+    end
+    subgraph DataPreparation
+        A --> B["train DataFrame"]
+        %% DataFrame containing the training data loaded from the CSV file
+    end
+    subgraph Analysis
+        B --> C["mean_target"]
+        %% Mean Pawpularity score from the training data
+        C --> E["RMSE calculations"]
+        B --> E
+        E --> F["rmse_values"]
+        %% List to store computed RMSE values from simulations
+        F --> G["mc_mean"]
+        %% Mean of the computed RMSE values from Monte Carlo simulations
+        F --> H["mc_std"]
+        %% Standard deviation of the computed RMSE values from simulations
+    end
+    subgraph Simulation
+        G --> I["Monte Carlo Mean RMSE"]
+        %% Display mean of RMSE distributions
+        H --> J["Monte Carlo Std Dev RMSE"]
+        %% Display standard deviation of RMSE distributions
+    end

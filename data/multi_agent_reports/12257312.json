@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/montcoalert/911.csv",
+      "description": "Contains 911 emergency call data including timestamps, reasons for calls, and location information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame holding the 911 call data loaded from CSV."
+    },
+    {
+      "variable_name": "Reason",
+      "description": "A new column derived from the title of the calls which categorizes the reason for each emergency call."
+    },
+    {
+      "variable_name": "Hour",
+      "description": "A new column created from the timestamp indicating the hour of each call."
+    },
+    {
+      "variable_name": "Month",
+      "description": "A new column indicating the month when each call was made, extracted from the timestamp."
+    },
+    {
+      "variable_name": "DayOfWeek",
+      "description": "A new column signifying the day of the week when the call was made, mapped from integers to actual day names."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for exploratory data analysis, creating new columns, plotting, and visualizations."]
+    },
+    {
+      "variable": "Reason",
+      "creation_method": "df['title'].apply(lambda x: x.split(':')[0])",
+      "flow": ["Used for counting occurrences and plotting distributions based on the reason for calls."]
+    },
+    {
+      "variable": "Hour",
+      "creation_method": "df['timeStamp'].apply(lambda x: x.hour)",
+      "flow": ["Used for analysis of call volume by hour, visualized in various plots."]
+    },
+    {
+      "variable": "Month",
+      "creation_method": "df['timeStamp'].apply(lambda x: x.month)",
+      "flow": ["Used for analysis of call volume by month, visualized in various plots."]
+    },
+    {
+      "variable": "DayOfWeek",
+      "creation_method": "df['timeStamp'].apply(lambda time: time.dayofweek)",
+      "flow": ["Used to analyze and visualize call patterns based on the day of the week."]
+    }
+  ],
+  "models": []
+}

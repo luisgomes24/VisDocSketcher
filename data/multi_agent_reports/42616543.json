@@ -1,0 +1,39 @@
+{
+  "data_sources": [
+    {
+      "file": "N/A",
+      "description": "No external input files used; data is generated from HTTP requests to Kaggle URLs."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "kaggle_urls",
+      "description": "List of URLs to primary Kaggle pages to measure response times."
+    },
+    {
+      "variable": "num_requests",
+      "description": "Number of request attempts made to each URL (100)."
+    },
+    {
+      "variable": "response_times",
+      "description": "Dictionary to store response times for each URL."
+    },
+    {
+      "variable": "df",
+      "description": "DataFrame that contains the gathered response times from Kaggle URLs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "response_times",
+      "creation": "Populated in a loop that sends requests to each URL.",
+      "flow": "Stored in the 'response_times' dictionary as lists of response times."
+    },
+    {
+      "variable": "df",
+      "creation": "Created from 'response_times' using pd.DataFrame.",
+      "flow": "Displayed at the end of the notebook."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,19 @@
+flowchart TD
+    A[CSV File: Logistic-Regression-Classification-data.csv] --> B[Read into DataFrame df]
+    B -- X0, X1, Y --> C[Logistic Regression Model]
+    %% This node represents the input data for the Logistic Regression model
+    subgraph df_nodes [ ]
+        D[Data: scores] --> E[Scatter Plot]
+        F[Data: passed] --> C
+    end
+    C -- Train & Predict --> G[Model Predictions]
+    G --> H[Evaluation: model.score()]
+
+    %% Comments for clarity
+    %% Node A represents the data source - a CSV file containing features and the target variable
+    %% Node B represents the DataFrame that reads the CSV data for further processing
+    %% The df_nodes subgraph represents the data variables used in the notebook
+    %% Node C represents the logistic regression model, highlighting its role and dependencies
+    %% Node E depicts the visual representation of scores using a scatter plot
+    %% Node G shows where predictions from the model are made and evaluated in node H
+

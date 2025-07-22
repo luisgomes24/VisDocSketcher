@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file": "WiDS Datathon 2020 Dictionary.csv",
+      "description": "Contains data entries for the WiDS Datathon 2020, including descriptions that are profiled for sentiment analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "Initial DataFrame containing data from the CSV file."
+    },
+    {
+      "name": "profiled_df",
+      "description": "DataFrame containing the results of applying text profiling on the 'Description' column of df, including sentiment metrics."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created": "read_csv",
+      "used_in": "applied text profiling to get profiled_df"
+    },
+    {
+      "variable": "profiled_df",
+      "created": "apply_text_profiling",
+      "used_in": "numerical analysis and visualization of sentiment metrics"
+    }
+  ],
+  "models": []
+}

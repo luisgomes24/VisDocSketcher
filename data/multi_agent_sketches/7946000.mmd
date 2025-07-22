@@ -1,0 +1,26 @@
+flowchart TD
+
+    %% Data Source Nodes
+    DS["/"Data Source\n(description: No CSV files)"/"] -->|No explicit data loading| DF
+
+    %% Data Variables
+    PD["pd\n(Pandas library for data processing)"]:::library
+    NP["np\n(Numpy library for numerical operations)"]:::library
+    PLT["plt\n(Matplotlib library for plotting)"]:::library
+
+    %% Data Flow
+    DF["df\n(Dataframe for analysis)"]:::data
+    DF -->|Used in plotting functions| PlotFuncs
+
+    %% Functions
+    PlotFuncs["Plot Functions\n(PlotPerColumnDistribution, PlotCorrelationMatrix,\nPlotScatterMatrix)"]
+
+    %% Styles
+    classDef library fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    %% DS: Represents lack of explicit data source, as no CSV files are found or mentioned.
+    %% PD, NP, PLT: Libraries imported for data processing (Pandas, Numpy) and plotting (Matplotlib).
+    %% DF: Primary data storing variable though not explicitly set from a data source.
+    %% PlotFuncs: Collection of functions using df for generating plots.

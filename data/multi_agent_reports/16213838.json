@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_name": "dc-wikia-data.csv",
+      "description": "A dataset containing information about comic characters, including identity, status, hair and eye color, gender, alignment, and appearances."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "my_data",
+      "description": "DataFrame containing comic character data loaded from a CSV file."
+    },
+    {
+      "name": "ID",
+      "description": "Grouped dataFrame that counts characters by their ID."
+    },
+    {
+      "name": "alive",
+      "description": "Grouped dataFrame that counts characters based on their alive status."
+    },
+    {
+      "name": "top_10",
+      "description": "The top 10 characters with the highest appearances."
+    },
+    {
+      "name": "per_year",
+      "description": "Grouped dataFrame that counts the number of characters appearing each year."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "my_data",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["ID", "alive", "top_10", "per_year"]
+    },
+    {
+      "variable": "ID",
+      "creation_method": "my_data.groupby(my_data['ID']).count()",
+      "flows_to": ["used in plotting"]
+    },
+    {
+      "variable": "alive",
+      "creation_method": "my_data.groupby(my_data['ALIVE']).count()",
+      "flows_to": ["used in plotting"]
+    },
+    {
+      "variable": "top_10",
+      "creation_method": "my_data.sort_values(by='APPEARANCES', ascending=False).head(10)",
+      "flows_to": ["used in plotting"]
+    },
+    {
+      "variable": "per_year",
+      "creation_method": "my_data.groupby(my_data['YEAR']).count()",
+      "flows_to": ["used in plotting"]
+    }
+  ],
+  "models": []
+}

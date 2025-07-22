@@ -1,0 +1,161 @@
+{
+  "data_sources": [
+    {
+      "file_name": "insurance.csv",
+      "description": "Contains information about insurance claims including beneficiary's age, gender, BMI, number of children, smoking status, region of residence, and medical charges."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame that contains the raw data read from the CSV file."
+    },
+    {
+      "name": "df_encoded",
+      "description": "DataFrame that contains the one-hot encoded version of the original DataFrame, with categorical variables transformed into binary variables."
+    },
+    {
+      "name": "X",
+      "description": "Features used for training the model, including age, bmi, number of children, and binary variables for sex, region, and smoking status."
+    },
+    {
+      "name": "y",
+      "description": "Target variable (dependent variable) representing the individual medical costs billed by health insurance."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set of features used to train the model."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing set of features used to evaluate the model's performance."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set of target values."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing set of target values."
+    },
+    {
+      "name": "model",
+      "description": "Linear regression model for predicting insurance charges based on the provided features."
+    },
+    {
+      "name": "train_loss",
+      "description": "List to store loss values for training data across iterations."
+    },
+    {
+      "name": "test_loss",
+      "description": "List to store loss values for testing data across iterations."
+    },
+    {
+      "name": "y_train_pred",
+      "description": "Predicted target values for the training set."
+    },
+    {
+      "name": "y_test_pred",
+      "description": "Predicted target values for the testing set."
+    },
+    {
+      "name": "train_score",
+      "description": "Model score on the training set."
+    },
+    {
+      "name": "test_score",
+      "description": "Model score on the testing set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flows": "Processed for feature engineering."
+    },
+    {
+      "variable": "df_encoded",
+      "creation": "pd.get_dummies()",
+      "flows": "Used to select features X and target y."
+    },
+    {
+      "variable": "X",
+      "creation": "df_encoded[['age', 'bmi', 'children', 'sex_female', 'sex_male', 'region_northeast', 'region_northwest', 'region_southeast', 'region_southwest', 'smoker_no', 'smoker_yes']]",
+      "flows": "Used for training and testing the model."
+    },
+    {
+      "variable": "y",
+      "creation": "df_encoded['charges']",
+      "flows": "Used as the target for training and testing the model."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flows": "Used to train the model."
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flows": "Used to evaluate the model."
+    },
+    {
+      "variable": "y_train",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flows": "Used to train the model."
+    },
+    {
+      "variable": "y_test",
+      "creation": "train_test_split(X, y, test_size=0.2)",
+      "flows": "Used to evaluate the model."
+    },
+    {
+      "variable": "model",
+      "creation": "LinearRegression()",
+      "flows": "Fitted on X_train and y_train, used to predict y_train_pred and y_test_pred."
+    },
+    {
+      "variable": "train_loss",
+      "creation": "List initialized for storing training loss over iterations.",
+      "flows": "Used to plot training loss."
+    },
+    {
+      "variable": "test_loss",
+      "creation": "List initialized for storing testing loss over iterations.",
+      "flows": "Used to plot testing loss."
+    },
+    {
+      "variable": "y_train_pred",
+      "creation": "model.predict(X_train)",
+      "flows": "Used for plotting the prediction line and residual plot."
+    },
+    {
+      "variable": "y_test_pred",
+      "creation": "model.predict(X_test)",
+      "flows": "Used for plotting the prediction line and residual plot."
+    },
+    {
+      "variable": "train_score",
+      "creation": "model.score(X_train, y_train)",
+      "flows": "Used to assess the performance of the training set."
+    },
+    {
+      "variable": "test_score",
+      "creation": "model.score(X_test, y_test)",
+      "flows": "Used to assess the performance of the testing set."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": [
+        "age", "bmi", "children", "sex_female", "sex_male",
+        "region_northeast", "region_northwest", "region_southeast",
+        "region_southwest", "smoker_no", "smoker_yes"
+      ],
+      "target_variable": "charges",
+      "hyperparameters": {
+        "iterations": 100
+      }
+    }
+  ]
+}

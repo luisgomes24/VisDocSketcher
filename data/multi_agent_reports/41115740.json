@@ -1,0 +1,86 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Not specified in the code",
+      "description": "Input files are read using os.walk from a specified directory. Actual file names are not explicitly stated."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "n_reapts",
+      "description": "Number of repetition for model training"
+    },
+    {
+      "variable_name": "n_splits",
+      "description": "Number of splits for TimeSeries CV"
+    },
+    {
+      "variable_name": "random_state_list",
+      "description": "List of random seeds for reproducibility"
+    },
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data"
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature DataFrame excluding target variable"
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable for training"
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame used to store submission results"
+    },
+    {
+      "variable_name": "test_preds",
+      "description": "Array to store predictions for the test dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv()",
+      "flows_to": ["X", "y", "submission"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv()",
+      "flows_to": ["test_preds"]
+    },
+    {
+      "variable": "X",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "y",
+      "flows_to": ["model training"]
+    },
+    {
+      "variable": "test_preds",
+      "flows_to": ["submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CatBoostRegressor",
+      "input_features": "All feature columns from DataFrame X",
+      "target_variable": "num_sold",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "learning_rate": 0.0775,
+        "depth": 7,
+        "l2_leaf_reg": 8.125,
+        "subsample": 0.43,
+        "colsample_bylevel": 0.675,
+        "random_state": 42
+      }
+    }
+  ]
+}

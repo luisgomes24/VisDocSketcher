@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Load data| B(Train DataFrame)
+    A2["test.csv"] -->|Load data| B2(Test DataFrame)
+    A3["gender_submission.csv"] -->|Load data| I(Submission Template)
+
+    %% Data Preparation
+    B -->|Create bin/ordinal features| C["df_bin"]
+    B -->|Create continuous features| D["df_con"]
+
+    %% Feature Engineering
+    C -->|Encode features| E["df_bin_enc"]
+    D -->|Encode features| F["df_con_enc"]
+    F -->|Remove 'Survived' column| G[X_train]
+    F -->|Extract 'Survived' column| H[y_train]
+
+    %% Model Training
+    subgraph Training
+        G -->|Features| J[CatBoostClassifier]
+        H -->|Target| J
+    end
+    J -->|Predict| K[Predictions]
+
+    %% Results
+    B2 -->|Use IDs| L(PassengerId)
+    L -->|Combine| M(Submission DataFrame)
+    K -->|Combine| M
+    M -->|Save to CSV| N[catboost_submission.csv]

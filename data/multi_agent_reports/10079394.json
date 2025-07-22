@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "None",
+      "description": "There are no CSV files in the current version of the dataset."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame variable that holds the dataset for analysis. Specific contents are not detailed as there are no CSV files loaded."
+    },
+    {
+      "name": "nunique",
+      "description": "Holds the count of unique values in each column of the DataFrame. Used for filtering columns in visualizations."
+    },
+    {
+      "name": "corr",
+      "description": "Correlation matrix computed from the DataFrame. Shows the correlation coefficients between numeric columns."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Initial placeholder for loaded dataset, though no specific data is loaded as no CSV file exists.",
+      "flow": "Used in plot functions for generating visualizations."
+    },
+    {
+      "variable": "nunique",
+      "creation": "Calculated using df.nunique() in plotting functions.",
+      "flow": "Used to filter columns for plotting."
+    },
+    {
+      "variable": "corr",
+      "creation": "Calculated using df.corr() in the correlation matrix plotting function.",
+      "flow": "Used in plotting the correlation matrix."
+    }
+  ],
+  "models": []
+}

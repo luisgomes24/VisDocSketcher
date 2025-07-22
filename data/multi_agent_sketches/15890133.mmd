@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    A1[codes4.db] -->|Contains HS codes and country codes| A2(Country Data Retrieval)
+    B1[ym_2019_2021.db] -->|Contains trade data (2019-2021)| B2(Trade Data Retrieval)
+    
+    %% Data Retrieval
+    A2 -->|Retrieve English names| C1(country_eng_df)
+    A2 -->|Retrieve Japanese names| C2(country_jpn_df)
+    B2 -->|Retrieve Trade Values| C3(df)
+
+    %% Data Processing
+    subgraph Data_Processing
+        C1 -->|Merge with trade data| C3
+        C2 -->|Used for visualizing| D1[Country Visualizations]
+        C3 -->|Used for visualizing| D2[Bar & Scatter Plots]
+    end
+
+    %% Utility Functions
+    E1[Utility object 'ut'] -->|Assists in plotting| D1
+    E1 -->|Assists in plotting| D2
+    
+    %% Node Comments
+    classDef classA fill:#f9f,stroke:#333,stroke-width:2px;
+    class A1 classA;
+    class B1 classA;
+    class C2 classA;

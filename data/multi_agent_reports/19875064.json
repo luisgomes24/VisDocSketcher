@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data samples with pixel values for digits and their corresponding labels."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data samples with pixel values for digits without labels."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission with predicted labels of test data samples."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "TrainData",
+      "description": "DataFrame containing the training dataset of digit samples."
+    },
+    {
+      "variable_name": "TestData",
+      "description": "DataFrame containing the test dataset of digit samples."
+    },
+    {
+      "variable_name": "Label",
+      "description": "Series extracted from TrainData containing the labels (digits) for training."
+    },
+    {
+      "variable_name": "DS1",
+      "description": "Training dataset after splitting and reshaping for model input."
+    },
+    {
+      "variable_name": "DS2",
+      "description": "Validation dataset after splitting and reshaping for model input."
+    },
+    {
+      "variable_name": "L1",
+      "description": "One-hot encoded labels for the training dataset."
+    },
+    {
+      "variable_name": "L2",
+      "description": "One-hot encoded labels for the validation dataset."
+    },
+    {
+      "variable_name": "L2Predict",
+      "description": "Predicted labels for the validation dataset based on the model's predictions."
+    },
+    {
+      "variable_name": "result",
+      "description": "Predicted labels for the test dataset based on the model's predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "TrainData",
+      "created_by": "pd.read_csv",
+      "flows_to": ["Label", "DS1", "DS"]
+    },
+    {
+      "variable_name": "TestData",
+      "created_by": "pd.read_csv",
+      "flows_to": ["result"]
+    },
+    {
+      "variable_name": "Label",
+      "created_by": "TrainData.pop",
+      "flows_to": ["L1", "L2"]
+    },
+    {
+      "variable_name": "DS1",
+      "created_by": "train_test_split",
+      "flows_to": ["L1"]
+    },
+    {
+      "variable_name": "DS2",
+      "created_by": "train_test_split",
+      "flows_to": ["L2", "L2Predict"]
+    },
+    {
+      "variable_name": "L1",
+      "created_by": "tf.one_hot",
+      "flows_to": ["ImageModifier.flow"]
+    },
+    {
+      "variable_name": "L2",
+      "created_by": "tf.one_hot",
+      "flows_to": ["Model.evaluate", "ConfusionMatrix"]
+    },
+    {
+      "variable_name": "L2Predict",
+      "created_by": "Model.predict",
+      "flows_to": ["error", "ConfusionMatrix"]
+    },
+    {
+      "variable_name": "result",
+      "created_by": "Model.predict",
+      "flows_to": ["Submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Convolutional Neural Network",
+      "input_features": "28x28 pixel images",
+      "target_variable": "predicted digits (0-9)",
+      "hyperparameters": {
+        "layers": [
+          "InputLayer",
+          "Conv2D",
+          "MaxPooling2D",
+          "Flatten",
+          "Dense"
+        ],
+        "neurons": [128, 64],
+        "epochs": 50,
+        "optimizer": "Adam",
+        "loss_function": "Categorical Crossentropy",
+        "callbacks": ["ReduceLR", "MyCallback"]
+      }
+    }
+  ]
+}

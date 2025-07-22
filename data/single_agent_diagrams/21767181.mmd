@@ -1,0 +1,11 @@
+flowchart TD
+    A["🗄️ Load Data <img src='file.svg' /> <br/> Read CSV"] --> B["📊 EDA: Target Feature Distribution <img src='dummy_plots/hist_template.svg' />"]
+    B --> C["📈 EDA: Numerical Features <img src='dummy_plots/hist_template.svg' />"]
+    C --> D["📊 EDA: Categorical Features <img src='dummy_plots/barplot_template.svg' />"]
+    D --> E["🧠 Model Training: CatBoost Initialization"]
+    E --> F["📊 Model Evaluation: Cross-Validation Score"]
+    F --> G["🔍 Hyperparameter Tuning with Optuna"]
+    G --> H["🏆 Best Parameters"]
+    H --> I["📊 Model Evaluation: Accuracy After Optimization"]
+    I --> J["📈 Final Predictions"]
+    J --> K["📊 Feature Importance Visualization <img src='dummy_plots/barplot_template.svg' />"]

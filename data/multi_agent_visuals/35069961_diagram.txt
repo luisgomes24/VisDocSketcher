@@ -1,0 +1,9 @@
+Diagram structure and flow based on 35069961 notebook would be visualized incorporating components of data sources, variables, data flow and models.
+- Data Sources: car_price_prediction.csv
+- Important Variables: data, X_train, Y_train, X_test, Y_test
+- Data Flow: Describes how data moves from reading in the CSV, through preprocessing, and into model training/testing
+- Models: KNeighborsRegressor, LinearRegression, RandomForestClassifier, SVC, DecisionTreeRegressor
+
+All components interact as data is processed, prepared, and used to train various models, YOLO.
+
+Visual representation is in progress to follow the above structure and show direct relations.

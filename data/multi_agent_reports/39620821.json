@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "ds_salaries.csv",
+      "description": "Contains the salary information of data scientists, including work year, experience level, employment type, job title, salary, salary currency, salary in USD, employee residence, remote ratio, and company location."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "Data_science",
+      "description": "DataFrame containing the salary data for data science positions."
+    },
+    {
+      "name": "DS_file_path",
+      "description": "Path to the CSV file containing data science salaries."
+    },
+    {
+      "name": "dtypes",
+      "description": "DataFrame containing the data types of each column in the Data_science DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "Data_science",
+      "creation_method": "read_csv",
+      "flow": "Used for exploratory data analysis and various plotting functions."
+    },
+    {
+      "variable_name": "dtypes",
+      "creation_method": "Data_science.dtypes",
+      "flow": "Used to check data types of the features in the dataset."
+    }
+  ],
+  "models": []
+}

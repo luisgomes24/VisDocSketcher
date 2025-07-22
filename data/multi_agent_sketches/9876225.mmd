@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A1["/Airplane_Crashes_and_Fatalities_Since_1908.csv/"] %% Airplane crash dataset
+        A2["/API_IS.AIR.PSGR_DS2_en_csv_v2.csv/"] %% Air passengers dataset
+    end
+
+    %% Data Variables and Processing
+    subgraph DataProcessing
+        B1[Data] -->|Read CSV| A1
+        B2[Temp] -->|Group By & Count| B1
+        B3[Fatalities] -->|Group By & Sum| B1
+        B4[Totals] -->|Concatenate| B2 & B3
+    end
+
+    %% Data Usage
+    subgraph DataUsage
+        B1 -->|Analysis & Visualization| C1[Aggregate Analysis]
+        B2 -->|Visualize| C2[Accidents by Year]
+        B3 -->|Visualize| C3[Fatalities by Year]
+        B4 -->|Visualize Ratio| C4[Fatalities vs Passengers]
+    end

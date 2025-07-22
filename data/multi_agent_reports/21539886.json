@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "Iris dataset",
+      "description": "The iris dataset contains features and target labels for different iris species."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "iris",
+      "description": "The iris dataset loaded from sklearn datasets, containing data and target."
+    },
+    {
+      "name": "model",
+      "description": "Logistic Regression model initialized with a maximum of 1000 iterations."
+    },
+    {
+      "name": "loo",
+      "description": "Leave-One-Out cross-validator initialized for the model evaluation."
+    },
+    {
+      "name": "scores",
+      "description": "Array of scores resulting from cross-validation of the model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "iris",
+      "creation": "Loaded using load_iris()",
+      "flow": "Used in model training and evaluation."
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized as LogisticRegression(max_iter=1000)",
+      "flow": "Used in model training and evaluated using cross-validation."
+    },
+    {
+      "variable": "loo",
+      "creation": "Initialized as LeaveOneOut()",
+      "flow": "Used as a cross-validation strategy in cross_val_score."
+    },
+    {
+      "variable": "scores",
+      "creation": "Calculated using cross_val_score() with 'model', 'iris.data', and 'iris.target'",
+      "flow": "Output is printed as the mean score."
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "iris.data",
+      "target_variable": "iris.target",
+      "hyperparameters": {
+        "max_iter": 1000
+      }
+    }
+  ]
+}

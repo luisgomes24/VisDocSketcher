@@ -1,0 +1,27 @@
+```mermaid
+%% Start of the workflow diagram
+flowchart TD
+    %% Data Sources
+    A1[Test Data \"test.csv\"]
+    %% Comment: Represents the test data source
+    A2[Train Data \"train.csv\"]
+    %% Comment: Represents the train data source
+
+    %% Data Import
+    B1[df1 - First 1000 rows from test.csv]
+    %% Comment: DataFrame containing data from test.csv
+    B2[df2 - First 1000 rows from train.csv]
+    %% Comment: DataFrame containing data from train.csv
+
+    %% Data Flow Connections
+    A1 -->|pd.read_csv| B1
+    %% Comment: Reading test.csv into df1
+    A2 -->|pd.read_csv| B2
+    %% Comment: Reading train.csv into df2
+
+    %% Data Usage
+    B1 --> C1[Plotting Functions]
+    %% Comment: df1 used in plotting distributions, correlations, and scatter matrices
+    B2 --> C2[Plotting Functions]
+    %% Comment: df2 used in plotting distributions, correlations, and scatter matrices
+```

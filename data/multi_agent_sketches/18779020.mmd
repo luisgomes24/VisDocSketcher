@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A1["Images of Ripe Bananas"]
+    A2["Images of Unripe Bananas"]
+    
+    %% Data Preprocessing
+    B1["Make Train Data Function"]
+    B2["Create Labels"]
+    B3["One-hot Encoding"]
+    
+    %% Train-Test Split
+    C1["Train-Test Split"]
+    
+    %% Model Development
+    D1["Create CNN Model"]
+    D2["Train CNN Model"]
+    
+    %% Model Output
+    E1["Save Trained Model"]
+
+    %% Data Flow and Dependencies
+    A1 --> B1
+    A2 --> B1
+    B1 -->|Creates X| C1
+    B2 -->|Creates Z| B3
+    B3 -->|Creates Y| C1
+    C1 -->|Creates x_train, y_train| D1
+    C1 -->|Creates x_test, y_test| D2
+    D1 -->|Trains with x_train, y_train| D2
+    D2 --> E1

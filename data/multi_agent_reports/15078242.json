@@ -1,0 +1,80 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "train.feather",  
+      "description": "Training data containing various features along with binary responses and weights. It is used as input for model training."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "name": "train",  
+      "description": "DataFrame containing cleaned and filtered training data, with additional columns for returns and actions."  
+    },  
+    {  
+      "name": "features",  
+      "description": "List of feature column names extracted from the training DataFrame, used as inputs for the model."  
+    },  
+    {  
+      "name": "resp_cols",  
+      "description": "List of response column names to predict in the training DataFrame."  
+    },  
+    {  
+      "name": "action_cols",  
+      "description": "List of action column names created from the responses, indicating the binary action taken for each response."  
+    },  
+    {  
+      "name": "lcs",  
+      "description": "List of LinearCombination instances for each fold, used to optimize weights based on predicted actions and their utility scores."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "train",  
+      "creation": "read_feather('../input/janestreetmarketprediction/train.feather')",  
+      "flow": [  
+        "cleaned and filtered data for training",  
+        "used for K-fold cross-validation and model training"  
+      ]  
+    },  
+    {  
+      "variable": "features",  
+      "creation": "['feature' in c for c in train.columns]",  
+      "flow": [  
+        "Provides model input features",  
+        "Used in model fitting"  
+      ]  
+    },  
+    {  
+      "variable": "preds_list",  
+      "creation": "model predictions based on validation data",  
+      "flow": [  
+        "Stored for utility score optimization using LinearCombination"  
+      ]  
+    },  
+    {  
+      "variable": "lcs",  
+      "creation": "train_fold_i()" ,  
+      "flow": [  
+        "Contains optimized LinearCombination weights for actions",  
+        "Used to evaluate utility scores across folds"  
+      ]  
+    }  
+  ],  
+  "models": [  
+    {  
+      "model_type": "Neural Network",  
+      "input_features": "features",  
+      "target": "action_cols",  
+      "hyperparameters": {  
+        "n_units": [256, 256],  
+        "dropouts": [0.1, 0.5, 0.5],  
+        "learning_rate": 1e-3,  
+        "label_smoothing": 1e-2,  
+        "weight_decay": 1e-5,  
+        "batch_size": 4096,  
+        "epochs": 300,  
+        "patience": 10  
+      }  
+    }  
+  ]  
+}

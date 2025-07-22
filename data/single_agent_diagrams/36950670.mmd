@@ -1,0 +1,12 @@
+```
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> df = pd.read_csv('train.csv')"] --> B["🔍 Data Info <img src='table.svg' />"]
+    B --> C["📊 Check Null Values"]
+    C --> D["🔧 Handle Nulls <br/> df.fillna(\" \")"]
+    D --> E["✂️ Create Content Column <br/> df['content'] = df['title'] + df['author']"]
+    E --> F["🛠️ Stemming <br/> df['content'] = df['content'].apply(stemming)"]
+    F --> G["🔄 Convert Text to Numeric <br/> TF-IDF"]
+    G --> H["🧪 Split Data into Train & Test <br/> train_test_split"]
+    H --> I["🧠 Train Models"]
+    I --> J["🔍 Evaluate Models"]
+    J --> K["📈 Model Comparison <img src='barplot_template.svg' /> <br/> sns.barplot"]

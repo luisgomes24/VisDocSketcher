@@ -1,0 +1,14 @@
+%% This diagram shows the workflow of a data science project involving house price prediction.
+flowchart TD
+    A[train.csv] -->|Load Data| B[train]
+    C[test.csv] -->|Load Data| D[test]
+    E[sample_submission.csv] -->|Load Data| F[sample]
+    B -->|Split Data| G[X_train]
+    B -->|Split Data| H[X_test]
+    B -->|Split Data| I[y_train]
+    B -->|Split Data| J[y_test]
+    G -->|Train Model| K(ExtraTreesRegressor)
+    I -->|Train Model| K
+    K -->|Feature Selection| L[selected_features]
+    L -->|Use for Prediction| D
+    D -->|Create Submission| F

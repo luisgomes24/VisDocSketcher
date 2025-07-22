@@ -1,0 +1,61 @@
+```mermaid
+flowchart TD
+    % Data sources
+    image_data_yes[/"Brain MRI Images with Tumors"/]
+    image_data_no[/"Brain MRI Images without Tumors"/]
+    
+    % Data loading and preprocessing
+    dataset{{"dataset"}}
+    target{{"target"}}
+    dataset_np[("dataset as NumPy Array")]
+    target_np[("target as NumPy Array")]
+    
+    % Data Split
+    X_train{{"X_train"}}
+    X_test{{"X_test"}}
+    Y_train{{"Y_train"}}
+    Y_test{{"Y_test"}}
+    
+    % ML Models
+    subgraph ResNet Models
+        resNet["ResNet Model 1"]
+        resNet_2["ResNet Model 2"]
+    end
+    
+    % Data flow connections
+    image_data_yes -->|Resize| dataset
+    image_data_no -->|Resize| dataset
+    dataset -->|Convert to NumPy| dataset_np
+    target -->|Convert to NumPy| target_np
+    dataset_np -->|Train-Test Split| X_train & X_test
+    target_np -->|Train-Test Split| Y_train & Y_test
+    
+    % ResNet Model 1
+    X_train -->|Input| resNet
+    Y_train -->|Target| resNet
+    
+    % ResNet Model 2
+    X_train -->|Input| resNet_2
+    Y_train -->|Target| resNet_2
+
+    %% Comments for nodes
+    classDef sourceNode fill:#f0f0ff,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#fffbde,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#dff0d8,stroke:#333,stroke-width:2px;
+
+    class image_data_yes,image_data_no sourceNode;
+    class dataset,dataset_np,target,target_np,X_train,X_test,Y_train,Y_test dataNode;
+    class resNet,resNet_2 modelNode;
+
+    %% specific comments for each node
+    click image_data_yes "Directory containing images of brain MRIs confirmed to have tumors."
+    click image_data_no "Directory containing images of brain MRIs confirmed not to have tumors."
+    click dataset "Array containing the resized MRI images (64x64) for training and testing."
+    click target "Array containing labels (1 for tumor, 0 for no tumor) corresponding to the MRI images."
+    click X_train "Training data split of the dataset."
+    click Y_train "Training labels split corresponding to X_train."
+    click X_test "Testing data split of the dataset."
+    click Y_test "Testing labels split corresponding to X_test."
+    click resNet "First ResNet model created for image classification."
+    click resNet_2 "Second ResNet model created for fine-tuning the first model for better performance."
+```

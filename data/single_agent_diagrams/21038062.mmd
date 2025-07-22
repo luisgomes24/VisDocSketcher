@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["📝 Load Metadata"]
+    B --> C["📊 Create DataBlock"]
+    C --> D["📥 Get DataLoaders <img src='icons/table.svg'/>"]
+    D --> E["🧠 Define Model"]
+    E --> F["🔍 Find Learning Rate"]
+    F --> G["⚙️ Train Model"]
+    G --> H["🔍 Inference <img src='icons/database.svg'/>"]
+    H --> I["📤 Submit Predictions <img src='icons/database.svg'/>"]
+
+    A -->|load train.csv| B
+    C -->|use get_x() and get_y()| D
+    D -->|show batch| E
+    E -->|one_batch()| F
+    F -->|fine_tune()| G
+    G -->|get_preds()| H

@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/gendered-pronoun-resolution/test_stage_1.tsv",
+      "description": "Test data containing text samples and corresponding pronoun references"
+    },
+    {
+      "file": "../input/gendered-pronoun-resolution/sample_submission_stage_1.csv",
+      "description": "Sample submission file format for predictions"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "test",
+      "description": "DataFrame containing test samples'
+    },
+    {
+      "name": "probabilties",
+      "description": "Predicted probabilities for each class (A, B, NEITHER)"
+    },
+    {
+      "name": "res",
+      "description": "DataFrame containing final predictions and their corresponding probabilities"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "out_uses": ["model predictions", "visualizations", "submission"]
+    },
+    {
+      "variable": "probabilties",
+      "creation": "clf.predict_proba",
+      "out_uses": ["submission", "visualizations"]
+    },
+    {
+      "variable": "res",
+      "creation": "pd.concat",
+      "out_uses": ["visualizations", "submission"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "A and B class votes",
+      "target_variable": "label",
+      "hyperparameters": {
+        "penalty": "l1",
+        "C": 0.05,
+        "max_iter": 30
+      }
+    },
+    {
+      "name": "Various coreference models",
+      "input_features": "Multiple heuristic and off-the-shelf coref models",
+      "target_variable": "A, B, NEITHER class labels"
+    }
+  ]
+}

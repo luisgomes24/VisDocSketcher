@@ -1,0 +1,24 @@
+%% Workflow Diagram for Jupyter Notebook
+flowchart TD
+    %% Node for Data Source
+    data_source["<img src='icons/file.svg' width=100 height=100/> <br/> GloVe Embeddings File"]
+    %% Node for loading data
+    load_embeddings["<img src='icons/brain.svg' width=100 height=100/> <br/> Load GloVe Embeddings"]
+    %% Node representing embeddings dictionary
+    embeddings_dict_glove["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> embeddings_dict_glove"]
+    %% Node for initialization of Latin Similar characters
+    latin_similar["latin_similar"]
+    %% Node for initialization of White List
+    white_list["white_list"]
+    %% Node for creating Glove Characters
+    glove_chars["<img src='dummy_plots/boxplot_template.svg'/> <br/> glove_chars"]
+    %% Node for creating Glove Symbols
+    glove_symbols["<img src='dummy_plots/lineplot_template.svg'/> <br/> glove_symbols"]
+
+    %% Connections and Data Flow
+    data_source -->|Load with pickle| load_embeddings
+    load_embeddings -->|Creates| embeddings_dict_glove
+    embeddings_dict_glove -->|Used for| glove_chars
+    glove_chars -->|Filter with white_list| glove_symbols
+    white_list -->|Used for filtering| glove_symbols
+    latin_similar -->|Part of| white_list

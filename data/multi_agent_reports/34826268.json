@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/predict-student-performance-from-game-play/train.csv",
+      "description": "Training dataset containing game log data to predict student performance."
+    },
+    {
+      "file_path": "/kaggle/input/predict-student-performance-from-game-play/train_labels.csv",
+      "description": "Labels associated with the training dataset indicating the performance of students."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training game log data."
+    },
+    {
+      "variable_name": "labels",
+      "description": "DataFrame containing the labels for predicting the performance of students."
+    },
+    {
+      "variable_name": "CFG",
+      "description": "Configuration class holding file paths and data loader configurations."
+    },
+    {
+      "variable_name": "batch_users",
+      "description": "Subset of the training dataset representing a batch of users for further analysis or modeling."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data analysis and visualization; also input for predictive modeling."
+    },
+    {
+      "variable": "labels",
+      "creation_method": "pd.read_csv",
+      "flow": "Used as target variable for training machine learning models predicting student performance."
+    },
+    {
+      "variable": "batch_users",
+      "creation_method": "DataFrame filtering",
+      "flow": "Used to analyze a batch of user data based on the sampled session IDs."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,23 @@
+flowchart TD
+    A((💽 Data Source))
+    B((📁 Data File))
+    C["<img src='dummy_plots/hist_template.svg' /> <br/> Data Processing"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    E((🤖 Machine Learning Model))
+    F["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Model Training"]
+    G((🎯 Model Predictions))
+
+    A -->|Load Data| B
+    B -->|Process Data| C
+    C -->|Select Features| D
+    D -->|Train Model| E
+    E -->|Make Predictions| F
+    F -->|Output| G
+
+    style A fill:#87CEEB, stroke:#333, stroke-width:2px;
+    style B fill:#87CEEB, stroke:#333, stroke-width:2px;
+    style C fill:#FFCDD2, stroke:#333, stroke-width:2px;
+    style D fill:#C6F4D6, stroke:#333, stroke-width:2px;
+    style E fill:#C6F4D6, stroke:#333, stroke-width:2px;
+    style F fill:#F2C464, stroke:#333, stroke-width:2px;
+    style G fill:#F2C464, stroke:#333, stroke-width:2px;

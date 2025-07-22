@@ -1,0 +1,38 @@
+flowchart TD
+    subgraph DataSources
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> Porosity Image J.xlsx"]
+    end
+    subgraph Preprocessing
+        B1["<img src='icons/table.svg' width=100 height=100/> <br/> batch_train"] -->|"Read from Excel"| A
+        B2["<img src='icons/table.svg' width=100 height=100/> <br/> batch_test"] -->|"Read from Excel"| A
+        C1["<img src='icons/column_split.svg' width=100 height=100/> <br/> ds_train"] -->|"Create Dataset"| B1
+        C2["<img src='icons/column_split.svg' width=100 height=100/> <br/> ds_test"] -->|"Create Dataset"| B2
+    end
+    subgraph Augmentation
+        D["<img src='icons/brain.svg' width=100 height=100/> <br/> data_augmentation"]
+    end
+    subgraph Training
+        E["<img src='icons/brain.svg' width=100 height=100/> <br/> model"] -->|"Keras Model with Xception"| C1
+        E --> D
+    end
+    subgraph Evaluation
+        F["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> history"] -->|"Model Fit"| E
+        F -->|"Store Training History"| C2
+    end
+
+    click A "Porosity Image J.xlsx" "Data source file"
+    click B1 "pandas.read_excel" "Training data extraction"
+    click B2 "pandas.read_excel" "Testing data extraction"
+    click C1 "tf.data.Dataset.from_tensor_slices" "Create training TensorFlow Dataset"
+    click C2 "tf.data.Dataset.from_tensor_slices" "Create testing TensorFlow Dataset"
+    click D "keras.Sequential" "Image data augmentation"
+    click E "keras.Model" "Xception model creation and training"
+    click F "model.fit" "Training history storage"
+
+    %% Comments for each node
+    %% A represents the initial Excel data source used for training and testing data.
+    %% B1 and B2 are the DataFrames created by reading the Excel source.
+    %% C1 and C2 are TensorFlow datasets created from the data frames for training and validation.
+    %% D represents the data augmentation setup for expanding the training data.
+    %% E is the Keras model creation step using a pre-trained Xception network, trained with the training data.
+    %% F stores the history of the training process, which includes metrics such as accuracy and loss.

@@ -1,0 +1,67 @@
+flowchart TD
+    %% Data Sources
+    subgraph Input
+        A1["fashion-mnist_train.csv"]
+        A2["fashion-mnist_test.csv"]
+    end
+    
+    %% Data Preprocessing
+    subgraph Preprocessing
+        B1["Load train_data"]
+        B2["Load test_data"]
+        B1 --> B3["train_data_x, train_data_y"]
+        B2 --> B4["test_data_x, test_data_y"]
+        B3 --> B5["Scaled train_data_x"]
+        B4 --> B6["Scaled test_data_x"]
+        B5 --> B7["train_x"]
+        B3 --> B8["train_y"]
+        B6 --> B9["test_x"]
+        B4 --> B10["test_y"]
+        B7 --> B11["Reshape train_x"]
+        B9 --> B12["Reshape test_x"]
+        B8 --> B13["One-hot encode train_y"]
+        B10 --> B14["One-hot encode test_y"]
+        B11 --> B15["Split train_x into cv_x"]
+        B13 --> B16["Split train_y into cv_y"]
+    end
+
+    %% Model
+    subgraph Model
+        C1["Convolutional Neural Network"]
+        C2["Conv Layers: 32, 64 filters"]
+        C3["Dense Layer: 1024 units"]
+        C4["Dropout Layer: 0.2 rate"]
+        C5["Learning: Adam Optimizer"]
+        C6["Train using train_x, train_y"]
+        C7["Validate using cv_x, cv_y"]
+        C8["Evaluate using test_x, test_y"]
+        C1 --> C2
+        C2 --> C3
+        C3 --> C4
+        C4 --> C5
+        C5 --> C6
+        C6 --> C7
+        C7 --> C8
+    end
+
+    %% Diagram flow
+    A1 --> B1
+    A2 --> B2
+    B15 --> C6
+    B16 --> C6
+    C6 --> C7
+    C8 -->|"Output accuracy"| D1["Results & Visualization"]
+    D1 -->|"Predictions on test set"| E1["Display predictions"]
+
+    %% Visualization
+    subgraph Visualization
+        E2["Random test samples"]
+        E1 --> E2
+    end
+
+    %% Commentary
+    %% A1 and A2: Data sources.
+    %% B1 to B16: Data loading and preprocessing steps.
+    %% C1 to C8: CNN building, training, and evaluation.
+    %% D1: Capturing performance output and visualization insights.
+    %% E1 to E2: Showcasing predictions on the test dataset.

@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["snakeeyes_{:02d}.dat"] 
+    A-->|"Data source with pixel data of small images"| B
+    
+    %% Variables
+    subgraph Variables
+    B["vector_length = 400"]
+    C["Ntrees = 1 (initial)"]
+    D["Ntrees = 10"]
+    E["t: AnnoyIndex, Trees = 1"]
+    F["tbig: AnnoyIndex, Trees = 10"]
+    G["tbad: AnnoyIndex, Trees = var small"]
+    end
+    
+    %% Data Flow
+    A --> E
+    A --> F
+    A --> G
+    
+    %% Model Training
+    E-->|"Trained with small data, analyzed for neighbors"|H["Neighbor Analysis: t"]
+    F-->|"Trained with larger data, analyzed for neighbors"|I["Neighbor Analysis: tbig"]
+    G-->|"Demonstrates performance degradation"|J["Neighbor Analysis: tbad"]
+
+    %% Model Information
+    subgraph Models
+    K["Annoy: Approximate Nearest Neighbor"]
+    K --> H
+    K --> I
+    K --> J
+    end
+```

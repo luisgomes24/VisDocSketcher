@@ -1,0 +1,39 @@
+flowchart TD
+  %% Data Source Node
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> /filename.csv/"] -->|Read CSV| B[data]
+  %% Data Node
+  B[data] -->|Select Columns| C["<img src='icons/table.svg' width=100 height=100/> <br/> Filtered Data"]
+  C["<img src='icons/row_split.svg' width=100 height=100/> <br/> Filtered Data"] -->|Clean Data| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Cleaned Tweets"]
+  D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Cleaned Tweets"] -->|Sentiment Analysis| E["<img src='icons/brain.svg' width=100 height=100/> <br/> Sentiment Scored Data"]
+  
+  %% Sentiment Analysis Model
+  E -->|Use SentimentIntensityAnalyzer| F{"Sentiment Scores"}
+  
+  %% Sentiment Scores to Data Variables
+  F -->|Positive| G["Positive"]
+  F -->|Negative| H["Negative"]
+  F -->|Neutral| I["Neutral"]
+  
+  %% Visualization Nodes
+  D --> |Join for WordCloud| J["text"]
+  J --> |Generate WordCloud Visualization| K(("<img src='dummy_plots/wordcloud_template.svg'/> <br/> WordCloud Image"))
+  G --> |Filter for Positive WordCloud| L["Positive Text"]
+  L --> |Generate Positive WordCloud| M(("<img src='dummy_plots/wordcloud_template.svg'/> <br/> Positive WordCloud Image"))
+  H --> |Filter for Negative WordCloud| N["Negative Text"]
+  N --> |Generate Negative WordCloud| O(("<img src='dummy_plots/wordcloud_template.svg'/> <br/> Negative WordCloud Image"))
+  
+  %% Comments Section
+  %% Comment for Data Nodes
+  B:::comment -- Extract| C:::comment
+  C:::comment -- Data Cleaning| D:::comment
+  D:::comment -- Analysis| E:::comment
+
+  %% Comment for Sentiment Analysis Model
+  E:::comment -- Model Applied for Sentiment| F:::comment
+
+  %% Comment for Visualization Nodes
+  J:::comment -- Combine Tweets| K:::comment
+  L:::comment -- Filtered Positive| M:::comment
+  N:::comment -- Filtered Negative| O:::comment
+
+  classDef comment fill:#f9f,stroke:#333,stroke-width:2px; 

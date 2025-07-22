@@ -1,0 +1,13 @@
+graph TD;
+    A["Dataset"] -- Load --> B["Data Preprocessing"];
+    A -->|"<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"| Data0;
+    A -->|"<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"| Data1;
+    A -->|"<img src='icons/file.svg' width=100 height=100/> <br/> train_kfold5.csv"| Data2;
+    B -- Process --> C["Feature Engineering"];
+    C -- Train Test Split --> D["Model Training"];
+    D -->|"<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"| Model0;
+    D -- Predict --> E["Output"];
+    E -->|"<img src='dummy_plots/barplot_template.svg' /> <br/> Plot 1"| Plot0;
+    E -->|"<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Plot 2"| Plot1;
+    E -->|"<img src='dummy_plots/lineplot_template.svg' /> <br/> Plot 3"| Plot2;
+    E -->|"<img src='dummy_plots/hist_template.svg' /> <br/> Plot 4"| Plot3;

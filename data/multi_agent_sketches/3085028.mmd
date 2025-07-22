@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Source
+    A[fashion-mnist_train.csv] --> B[fashion_data]
+    %% Load Data
+    B --> |load file| C{np.loadtxt}
+    %% Data Preparation
+    C --> |prep_data| D[x and y]
+    D --> |normalized images| E{x}
+    D --> |categorical labels| F{y}
+    %% Model 1: fashion_model
+    E --> |input data| G[fashion_model]
+    F --> |target class| G[fashion_model]
+    G --> |sequential model creation & training| H[Fashion Model Layers]
+    %% Description of Layers
+    H --> I[Conv2D: 12 filters]
+    H --> J[Conv2D: 20 filters]
+    H --> K[Conv2D: 20 filters]
+    H --> L[Flatten]
+    H --> M[Dense: 100 neurons]
+    H --> N[Dense: 10 softmax]
+    %% Model 2: second_fashion_model
+    E --> |input data| O[second_fashion_model]
+    F --> |target class| O[second_fashion_model]
+    O --> |sequential model creation & training| P[Second Fashion Model Layers]
+    %% Description of Layers
+    P --> Q[Conv2D: 10 filters]
+    P --> R[Conv2D: 20 filters]
+    P --> S[Conv2D: 20 filters]
+    P --> T[Conv2D: 20 filters]
+    P --> U[Flatten]
+    P --> V[Dense: 150 neurons]
+    P --> W[Dense: 10 softmax]

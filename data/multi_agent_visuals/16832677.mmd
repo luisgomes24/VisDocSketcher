@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]:::dataSource --> B1["train DataFrame"]:::dataVariable
+    A2["test.csv"]:::dataSource --> B2["test DataFrame"]:::dataVariable
+    A3["sample_submission.csv"]:::dataSource --> B3["sample_submission DataFrame"]:::dataVariable
+
+    %% Data Variables
+    B1 --> C1["target (Numpy Array)"]:::dataVariable
+    B1 --> C2["X_train (Preprocessed)"]:::dataVariable
+    B1 --> C3["X_val (Validation features)"]:::dataVariable
+    C1 --> D1["y_train (Categorical)"]:::dataVariable
+    C1 --> D2["y_val (Validation Labels)"]:::dataVariable
+
+    %% Model Training
+    C2 & D1 --> E1["Model1: ANN"]:::model
+    C2 & D1 --> E2["Model2: ANN"]:::model
+
+    %% Predictions
+    E1 & E2 --> B2
+    B2 --> B3
+
+    %% Submission
+    B3 --> F1["submission.csv"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;

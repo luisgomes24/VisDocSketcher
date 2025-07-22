@@ -1,0 +1,33 @@
+flowchart TD
+
+  %% Data Sources
+  A1["train.csv"]:::ds -->|pd.read_csv| B1["train DataFrame"]
+  A2["test.csv"]:::ds -->|pd.read_csv| B2["test DataFrame"]
+  A3["sample_submission.csv"]:::ds -->|pd.read_csv| B3["sample submission DataFrame"]
+
+  %% Data Preparation
+  subgraph Preparation
+    B1 -->|train_test_split| C1["x_train, x_val, y_train, y_val"]
+    C1 -->|pd.concat| D1["train_data"]
+    C1 -->|pd.concat| D2["val_data"]
+  end
+
+  %% Image Data Generators
+  D1 -->|flow_from_dataframe| E1["train_img_gen"]
+  D2 -->|flow_from_dataframe| E2["val_img_gen"]
+
+  %% Model Creation
+  subgraph Model
+      E1 -->|fit_generator| F1["ResNet101 CNN Model"]:::ml
+      E2 -->|validation| F1
+  end
+
+  %% Styles
+  classDef ds fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef ml fill:#bbf,stroke:#333,stroke-width:2px;
+
+  %% Model Details
+  subgraph Model Details
+    F1 -->|ResNet101 with seeds defined| G1["Input: Resized images"]
+    G1 --> H1["focal_loss, Adam optimizer"]:::ml
+  end

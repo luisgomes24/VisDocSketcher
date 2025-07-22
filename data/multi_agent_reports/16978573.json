@@ -1,0 +1,74 @@
+{
+"data_sources": [
+    {
+        "file_path": "../input/vehicle-detection-image-set/data/vehicles/*",
+        "description": "Images containing vehicles"
+    },
+    {
+        "file_path": "../input/vehicle-detection-image-set/data/non-vehicles/*",
+        "description": "Images not containing vehicles"
+    }
+],
+"data_variables": [
+    {
+        "name": "df",
+        "description": "DataFrame storing images and labels"
+    },
+    {
+        "name": "train_img",
+        "description": "Training images after converting to numpy array"
+    },
+    {
+        "name": "train_label",
+        "description": "Labels for training images"
+    },
+    {
+        "name": "test_img",
+        "description": "Test images after converting to numpy array"
+    },
+    {
+        "name": "test_label",
+        "description": "Labels for test images"
+    },
+    {
+        "name": "model",
+        "description": "Convolutional Neural Network model"
+    }
+],
+"data_flow": [
+    {
+        "variable": "df",
+        "creation": "DataFrame created from images",
+        "flows_to": "train_img, train_label, test_img, test_label"
+    },
+    {
+        "variable": "train_img",
+        "creation": "Changed dimension of training images",
+        "flows_to": "model.fit"
+    },
+    {
+        "variable": "test_img",
+        "creation": "Changed dimension of test images",
+        "flows_to": "model.predict_classes"
+    },
+    {
+        "variable": "model",
+        "creation": "Sequential model constructed and compiled",
+        "flows_to": "model.fit"
+    }
+],
+"models": [
+    {
+        "name": "Convolutional Neural Network",
+        "input_features": "Images",
+        "target_variable": "Labels (0 or 1)",
+        "hyperparameters": {
+            "layers": ["Conv2D", "MaxPool2D", "BatchNormalization", "Flatten", "Dense"],
+            "neurons": [128, 64, 1],
+            "activation": ["relu", "sigmoid"],
+            "epochs": 10,
+            "batch_size": 100
+        }
+    }
+] 
+}

@@ -1,0 +1,12 @@
+graph TD;
+    A["📂 Load Data from CSV files <img src='icons/file.svg' /> <br/> /kaggle/input/SARS.csv"] --> B["📊 Display Dataframe Head <img src='dummy_plots/table.svg' />"];
+    B --> C["📈 Plot Distributions <img src='dummy_plots/hist_template.svg' />"];
+    C --> D["📉 Plot Correlation Matrix <img src='dummy_plots/corr_template.svg' />"];
+    D --> E["🔮 Plot Scatter Matrix <img src='dummy_plots/scatter_plot_template.svg' />"];
+    
+    F["📂 Load Data from CSV files <img src='icons/file.svg' /> <br/> /kaggle/input/SARSFLU.csv"] --> G["📊 Display Dataframe Head <img src='dummy_plots/table.svg' />"];
+    G --> H["📈 Plot Distributions <img src='dummy_plots/hist_template.svg' />"];
+    H --> I["📉 Plot Correlation Matrix <img src='dummy_plots/corr_template.svg' />"];
+    I --> J["🔮 Plot Scatter Matrix <img src='dummy_plots/scatter_plot_template.svg' />"];
+
+    A --> F;

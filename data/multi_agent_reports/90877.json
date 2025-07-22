@@ -1,0 +1,82 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/nflplaybyplay2015.csv",
+      "description": "Play-by-play data for the 2015 NFL Season"
+    },
+    {
+      "file": "../input/standings2015.csv",
+      "description": "Team standings and performance metrics for the 2015 NFL Season"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "all_plays",
+      "description": "DataFrame containing all plays from the NFL dataset with play types mapped."
+    },
+    {
+      "name": "fourth_plays",
+      "description": "DataFrame containing only the 4th down plays."
+    },
+    {
+      "name": "attempts",
+      "description": "DataFrame containing 4th down attempt plays."
+    },
+    {
+      "name": "punts",
+      "description": "DataFrame containing 4th down punt plays."
+    },
+    {
+      "name": "field_goals",
+      "description": "DataFrame containing 4th down field goal plays."
+    },
+    {
+      "name": "other_plays",
+      "description": "DataFrame containing other types of 4th down plays."
+    },
+    {
+      "name": "standings15",
+      "description": "DataFrame containing team standings merged with 4th down plays information."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "all_plays",
+      "creation": "pd.read_csv('../input/nflplaybyplay2015.csv')",
+      "flow": "Mapped play types and categorized by distance to go."
+    },
+    {
+      "variable": "fourth_plays",
+      "creation": "all_plays[all_plays['down'] == 4]",
+      "flow": "Used for further analysis of 4th down plays and conversion rates."
+    },
+    {
+      "variable": "attempts",
+      "creation": "fourth_plays[fourth_plays['Play'] == 'Play Attempt (Pass/Run/Sack)']",
+      "flow": "Analyzed for wins correlation and visualizations."
+    },
+    {
+      "variable": "punts",
+      "creation": "fourth_plays[fourth_plays['Play'] == 'Punt']",
+      "flow": "Analyzed in context with other 4th down play types."
+    },
+    {
+      "variable": "field_goals",
+      "creation": "fourth_plays[fourth_plays['Play'] == 'Field Goal']",
+      "flow": "Analyzed for distance and other metrics."
+    },
+    {
+      "variable": "standings15",
+      "creation": "pd.read_csv('../input/standings2015.csv')",
+      "flow": "Merged with fourth down plays for team performance analysis."
+    }
+  ],
+  "models": [
+    {
+      "model": "OLS regression",
+      "input_features": ["PercentAttempts"],
+      "target_variable": "Win",
+      "hyperparameters": {}
+    }
+  ]
+}

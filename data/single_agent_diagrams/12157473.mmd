@@ -1,0 +1,18 @@
+flowchart TD
+    A["📂 Load Data from API"] --> B["🧩 Extract Pokemon Names and URLs"]
+    B --> C["📝 Fetch Pokemon Details"]
+    C --> D["🧹 Clean and Preprocess Data"]
+    D --> E["📊 Preliminary Exploratory Data Analysis"]
+    E --> F["💾 Download Processed Dataset"]
+
+    A -->|URL: 'https://pokeapi.co/api/v2/pokemon/'| B
+    B -->|Collects names and URLs| C
+    C -->|Combines two data sources| D
+    D -->|Removes unnecessary columns and organizes data| E
+    
+    E --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 📈 Weight vs Height"]
+    E --> H["<img src='dummy_plots/boxplot_template.svg'/> <br/> 📊 Type vs Power"]
+    E --> I["<img src='dummy_plots/hist_template.svg'/> <br/> 🎭 Attributes Distribution"]
+    E --> J["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Base Total Distribution"]
+
+    F -->|Saves dataframe to 'pokemon.csv'| G

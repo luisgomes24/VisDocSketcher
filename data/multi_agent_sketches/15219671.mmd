@@ -1,0 +1,41 @@
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'fontFamily': 'arial',
+      'fontSize': '16px',
+      'primaryColor': '#ffcc00',
+      'edgeLabelBackground':'#ffffff',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+flowchart TD
+
+    %% Data Source
+    A["daily-total-female-births-CA.csv"] 
+    %% Data Source node: A
+    click A "Daily total female births in California for 1959" _blank
+
+    %% Data Preprocessing
+    B["df: DataFrame with 'ds' and 'y'"] 
+    %% Represents the DataFrame created by reading the CSV file
+
+    A --pd.read_csv--> B
+    
+    subgraph Prophet_Model
+      I("Prophet Model Details")
+      direction TB
+      D("forecast: Predicted Values")
+      E("m: Prophet model instance")
+      F("future: Future periods DataFrame")
+      B --> E 
+      E -- fitted with --> B
+      E -- m.make_future_dataframe --> F
+      E -- m.predict --> D
+    end
+
+    %% Additional Prophet Details
+    E -- "yearly_seasonality: true\ndaily_seasonality: false\nchangepoint_range: 0.9\nchangepoint_prior_scale: 0.5\nseasonality_mode: multiplicative" --> I
+    
+    B -- Used for plotting --> G["Initial Graph"]

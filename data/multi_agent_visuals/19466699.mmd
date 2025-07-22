@@ -1,0 +1,67 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#F0F0F0'}}}%%
+%%|Data Dependencies|%%
+
+flowchart TD
+    A[Start] --> B[Load Data]
+    %% Loading data from the CSV file
+    B -->|Read CSV| C[df]
+    <img src='icons/table.svg' width=100 height=100/> <br/> DataFrame
+
+    %% DataFrame created from loaded data
+    C --> D{Filter NA}
+    %% Dropped NA values to create filtered DataFrame
+    D -->|Drop NA| E[hist_df]
+    <img src='icons/table.svg' width=100 height=100/> <br/> Filtered DataFrame
+
+    %% Mapping dictionary creation
+    F[Define Mapping] --> G[dictionary]
+    <img src='icons/column_split.svg' width=100 height=100/> <br/> Mapping Dictionary
+
+    %% Applying mapping to DataFrame
+    C --> H[Apply Mapping]
+    H --> G
+    G --> I[Map to Columns]
+    I --> J{Create New Columns}
+    J -->|New numeric columns| K[df with numbers]
+
+    %% Preparing data for visualization
+    K --> L[Prepare hist_data]
+    L --> M[Append values]
+    M -->|Histogram| N[hist_data]
+    hist_df --> L
+
+    %% Plotting and Analysis
+    N --> O[Create Distribution Plot]
+    <img src='icons/column_split.svg' width=100 height=100/> <br/> Create Histogram
+    O --> P[Visualize Distribution Plot]
+    <img src='icons/brain.svg' width=100 height=100/> <br/> Distribution Visualization
+
+    %% Specific Stand Analysis
+    K --> Q[Filter for 'Stone Free']
+    Q --> R[x for Stone Free]
+    R --> S[Create Scatter Polar]
+    S --> T[Plot Stand Stats]
+    <img src='icons/image.svg' width=100 height=100/> <br/> Polar Plot for Stone Free
+
+    K --> U[Filter for 'Gold Experience']
+    U --> V[x for Gold Experience]
+    V --> W[Create Scatter Polar]
+    W --> X[Plot Stand Stats]
+    <img src='icons/image.svg' width=100 height=100/> <br/> Polar Plot for Gold Experience
+
+    %% Sunburst Plots
+    K --> Y[Create Sunburst for PWR]
+    Y --> Z[Show Sunburst PWR]
+    K --> AA[Create Sunburst for SPD]
+    AA --> AB[Show Sunburst SPD]
+    Z & AB --> AC
+
+    %% Split Pie Chart
+    K --> AD[Create Subplots]
+    AD --> AE[Add DEV Pie]
+    AD --> AF[Add PWR Pie]
+    AE & AF --> AG[Configure Pie Layout]
+    AG --> AH[Show Pie Charts]
+    AH --> Stop[End]
+
+    %% No ML models are used in this notebook

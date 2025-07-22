@@ -1,0 +1,9 @@
+```mermaid
+flowchart TD
+    DS1["/adcc_historical_data.csv"]:::source -->|Read CSV| V1["dados"]
+    V1 -->|Count 'submission' and 'weight_class'| V2["counts"]
+    V2 -->|Bar Plots| A1["Visualize Submissions and Matches"]
+    V1 -->|Analyze Win Types| A2["Analyze Over Years"]
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+```

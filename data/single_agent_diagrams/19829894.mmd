@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/> <br/> Fish Dataset"] --> B["📊 Data Preparation <img src='icons/table.svg'/>"]
+    B --> C["🔄 Shuffle & Split Data <img src='icons/row_split.svg'/>"]
+    C --> D["🖼️ Visualize Sample Images <img src='dummy_plots/barplot_template.svg'/>"]
+    D --> E["🧠 MLP Model Definition <img src='icons/brain.svg'/>"]
+    E --> F["📈 Compile and Train MLP <img src='icons/brain.svg'/>"]
+    F --> G["📉 Evaluate MLP Results <img src='dummy_plots/hist_template.svg'/>"]
+    G --> H["🧠 Build CNN Model <img src='icons/brain.svg'/>"]
+    H --> I["📈 Compile and Train CNN <img src='icons/brain.svg'/>"]
+    I --> J["📉 Evaluate CNN Results <img src='dummy_plots/hist_template.svg'/>"]
+    J --> K["🔍 Compare MLP and CNN Results"]

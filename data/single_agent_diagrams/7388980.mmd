@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data"] --> B["📊 Data Overview"]
+    B --> C["🛠️ Preprocess Data"]
+    C --> D["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg'/> <br/>"]
+    D --> E["🗂️ Feature Selection"]
+    E --> F["🔍 PCA Analysis"]
+    F --> G["📊 PCA Explained Variance <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    G --> H["📊 PCA Scatter Plot <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    H --> I["🤖 Model Training"]
+    I --> J["📈 Evaluation"]
+    J --> K["📊 Result Visualization <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    K --> L["📑 Submission File Generation"]

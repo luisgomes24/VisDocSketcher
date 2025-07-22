@@ -1,0 +1,9 @@
+# Jupyter Notebook Workflow Diagram
+
+- Import libraries
+- Load dataset from a CSV file
+- Preprocess and filter data
+- Create a list of documents for modeling
+- Instantiate UMAP, CountVectorizer, and HDBSCAN models
+- Fit BERTopic model on the documents
+- Visualize topics and clusters

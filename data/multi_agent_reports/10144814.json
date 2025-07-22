@@ -1,0 +1,35 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "variable_name": "plt",
+      "description": "Matplotlib library used for plotting data."
+    },
+    {
+      "variable_name": "pd",
+      "description": "Pandas library used for data processing and manipulation."
+    },
+    {
+      "variable_name": "np",
+      "description": "NumPy library for mathematical operations and handling arrays."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "plotPerColumnDistribution",
+      "creation": "Defined as a function",
+      "flow": "Used to create distribution graphs for the columns in a DataFrame."
+    },
+    {
+      "variable_name": "plotCorrelationMatrix",
+      "creation": "Defined as a function",
+      "flow": "Used to plot the correlation matrix for numerical columns in a DataFrame."
+    },
+    {
+      "variable_name": "plotScatterMatrix",
+      "creation": "Defined as a function",
+      "flow": "Used to plot scatter and density plots for numerical columns in a DataFrame."
+    }
+  ],
+  "models": []
+}

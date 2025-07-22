@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📄 Read Text File <img src='../input/hackathon/task_1-google_search_txt_files_v2/PE/Peru-es-result-18.txt'/> <br/> Open Text File"]
+    B --> C["📊 Display Text Snippet <img src='../input/hackathon/task_1-google_search_txt_files_v2/PE/Peru-es-result-18.txt'/> <br/> Show First 2000 Characters"]
+    A --> D["📊 Load Tuberculosis Data"]
+    D --> E["📝 Profile Data <img src='../input/hackathon/task_2-Tuberculosis_infection_estimates_for_2018.csv'/> <br/> Create Profile Report"]
+    A --> F["📊 Load Covid Data"]
+    F --> G["📊 Filter Data for Peru"]
+    G --> H["📊 Barplot Total Cases vs Life Expectancy <img src='dummy_plots/barplot_template.svg'/>"]
+    G --> I["📊 Distribution Plots <img src='dummy_plots/hist_template.svg'/> <br/> Total Cases, Deaths"]
+    G --> J["📊 Violin and Box Plots <img src='dummy_plots/boxplot_template.svg'/> <br/> Total Cases Analysis"]
+    G --> K["📈 Trend Analysis <img src='dummy_plots/lineplot_template.svg'/> <br/> Total Cases Over Time"]
+    H --> L["📊 Display All Cases Count <img src='dummy_plots/barplot_template.svg'/>"]
+    K --> M["📈 Final Line Plot <img src='dummy_plots/lineplot_template.svg'/> <br/> Total Cases Over Time"]

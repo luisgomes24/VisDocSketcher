@@ -1,0 +1,68 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "train.csv",  
+      "description": "Contains training data including features and target variable."  
+    },  
+    {  
+      "file_name": "test.csv",  
+      "description": "Contains test data without target variable used for predictions."  
+    },  
+    {  
+      "file_name": "sample_submission.csv",  
+      "description": "Sample format for submission containing an 'id' and target variable."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable_name": "train_df",  
+      "description": "DataFrame containing training data with features and target."  
+    },  
+    {  
+      "variable_name": "test_df",  
+      "description": "DataFrame containing test data without target variable."  
+    },  
+    {  
+      "variable_name": "submission_df",  
+      "description": "DataFrame meant for outputting predictions in a submission file."  
+    },  
+    {  
+      "variable_name": "train_target",  
+      "description": "Series containing the target variable from the training dataset."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable_name": "train_df",  
+      "creation": "read_csv from train.csv",  
+      "flows_to": ["train_target", "X_train", "X_test"]  
+    },  
+    {  
+      "variable_name": "test_df",  
+      "creation": "read_csv from test.csv",  
+      "flows_to": ["submission_df"]  
+    },  
+    {  
+      "variable_name": "submission_df",  
+      "creation": "read_csv from sample_submission.csv and predictions",  
+      "flows_to": ["saved as submission.csv"]  
+    },  
+    {  
+      "variable_name": "train_target",  
+      "creation": "Extracted from train_df",  
+      "flows_to": ["X_train", "X_test"]  
+    }  
+  ],  
+  "models": [  
+    {  
+      "model_name": "CatBoostClassifier",  
+      "input_features": "Features from train_df after dropping 'id' and 'target'.",  
+      "target_variable": "train_target",  
+      "hyperparameters": {  
+        "iterations": "50 to 300 selected by Optuna",  
+        "learning_rate": "0.01 to 0.3 selected by Optuna",  
+        "depth": "4 to 10 selected by Optuna"  
+      }  
+    }  
+  ]  
+}

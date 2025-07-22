@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Start of the Diagram
+    subgraph DataSources
+    DS1["Image Path"]
+    end
+    
+    subgraph DataVariables
+    DV1["training_images"]
+    DV2["original_image"]
+    DV3["image"]
+    DV4["edges"]
+    DV5["fill"]
+    DV6["hough_radii"]
+    DV7["hough_res"]
+    DV8["centers"]
+    DV9["accums"]
+    DV10["radii"]
+    DV11["circles"]
+    DV12["circle_img"]
+    end
+    
+    subgraph DataFlow
+    DS1 -->|glob| DV1
+    DV1 -->|for each image| DV2
+    DV2 -->|imread| DV3
+    DV3 -->|rescale| DV4
+    DV4 -->|canny and convolve| DV5
+    DV5 -->|ndi.binary_fill_holes| DV6
+    DV6 -->|canny again| DV7
+    DV7 -->|hough_circle| DV8
+    DV8 -->|peak_local_max| DV9
+    DV9 -->|sort and append| DV10
+    end
+    %% End of the Diagram
+```

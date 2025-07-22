@@ -1,0 +1,11 @@
+flowchart TD
+    A[test_lung_mask.csv] -->|Load Data| B(df1)
+    B -->|Exploratory Analysis| C[Plots]
+    C -->|Base data analysis| D[train_lung_mask.csv] -->|Load Data| E(df2)
+    E -->|Exploratory Analysis| C
+    %% Comments for each node
+    %% A: Represents the source file for test lung mask data
+    %% B: DataFrame for test lung mask data
+    %% C: Represents the plotting for exploratory data analysis
+    %% D: Represents the source file for train lung mask data
+    %% E: DataFrame for train lung mask data

@@ -1,0 +1,44 @@
+flowchart TD
+    subgraph DataSources
+        A1["Train.csv"]:::dataSource
+        A2["Unicode Translation.csv"]:::dataSource
+        A3["Train Images"]:::dataSource
+        A4["Test Images"]:::dataSource
+    end
+    
+    subgraph DataPreparation
+        B1["df_train"]:::dataVariable
+        B2["unicode_trans"]:::dataVariable
+        B3["labels"]:::dataVariable
+        B4["unicode_map"]:::dataVariable
+        B5["nan_df"]:::dataVariable
+        B6["unicode_trans_only_labels"]:::dataVariable
+    end
+    
+    subgraph DataFlow
+        C1["df_train loaded from Train.csv"]:::process --> B1
+        C2["unicode_trans loaded from Unicode Translation.csv"]:::process --> B2
+        C3["Extract labels from df_train"]:::process --> B3
+        C4["Create unicode_map from unicode_trans"]:::process --> B4
+        C5["Filter nan_df from df_train where labels are NaN"]:::process --> B5
+        C6["Calculate unicode_trans_only_labels"]:::process --> B6
+    end
+
+    %% Data source nodes
+    A1 -->|Read CSV| B1
+    A2 -->|Read CSV| B2
+    A3 -->|Images Dir| C1
+    A4 -->|Images Dir| C1
+
+    %% Data transformation and flow
+    B1 -->|Derive labels| B3
+    B1 -->|Check nulls and analyze| B5
+    B2 -->|Create map| B4
+    B3 -->|Analyze unique labels| C3
+    B4 -->|Map Unicode codepoints| C4
+    B5 -->|Investigate data quality| C5
+    B6 -->|Validate against unicode_translation| C6
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#ccf,stroke:#333,stroke-width:2px;

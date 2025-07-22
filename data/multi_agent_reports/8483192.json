@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/19-03-20/Coronavirus testing data/test_data_19_03_2020.csv",
+      "description": "Testing data for Coronavirus on 19 March 2020"
+    },
+    {
+      "file_path": "/kaggle/input/19-03-20/Coronavirus live data/19_03_20_live_data.csv",
+      "description": "Live Coronavirus data on 19 March 2020"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the testing data, limited to the first 1000 rows"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing the live data, limited to the first 1000 rows"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in plotPerColumnDistribution", "used in plotCorrelationMatrix"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in plotPerColumnDistribution", "used in plotCorrelationMatrix", "used in plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

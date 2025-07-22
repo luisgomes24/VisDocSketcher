@@ -1,0 +1,21 @@
+```mermaid
+flowchart TD
+    A["customer_segmentation_10k.csv"] -->|"Read CSV"| B["dataset_10k"]
+    %% A: This node represents the raw data source file containing customer data.
+    %% B: This node represents the DataFrame created by reading the CSV file.
+
+    B -->|"PyCaret Setup"| C_kmeans_frequency["KMeans Clustering Frequency"]
+    B -->|"PyCaret Setup"| C_kmeans_recency["KMeans Clustering Recency"]
+    B -->|"PyCaret Setup"| C_kmeans_monetary["KMeans Clustering Monetary"]
+    %% C: These nodes represent the clustering models applied to different aspects of the customer data.
+
+    C_kmeans_frequency -->|"Assign Model"| D_frequency["result_frequency"]
+    C_kmeans_recency -->|"Assign Model"| D_recency["result_recency"]
+    C_kmeans_monetary -->|"Assign Model"| D_monetary["result_monetary"]
+    %% D: These nodes represent the outputs from the clustering models, containing RFM segmentation scores.
+
+    D_frequency -->|"Generate Score"| E_vc_df["vc_df"]
+    D_recency -->|"Generate Score"| E_vc_df["vc_df"]
+    D_monetary -->|"Generate Score"| E_vc_df["vc_df"]
+    %% E: This node represents the aggregation of scored data into a DataFrame for analysis of RFM scores distribution.
+```

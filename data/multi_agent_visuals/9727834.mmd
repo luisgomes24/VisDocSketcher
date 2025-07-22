@@ -1,0 +1,12 @@
+flowchart TD
+    A["March_2019_ontime.csv"] -->|Load Data| B["df1"]
+    A["March_2020_ontime.csv"] -->|Load Data| C["df2"]
+    %% Data loading nodes
+    B -->|First 1000 rows| D["<img src='dummy_plots/barplot_template.svg'/> <br/> plotPerColumnDistribution(df1, 10, 5)"]
+    B --> E["<img src='dummy_plots/boxplot_template.svg'/> <br/> plotCorrelationMatrix(df1, 8)"]
+    B --> F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotScatterMatrix(df1, 20, 10)"]
+    %% Plotting data from df1
+    C -->|First 1000 rows| G["<img src='dummy_plots/barplot_template.svg'/> <br/> plotPerColumnDistribution(df2, 10, 5)"]
+    C --> H["<img src='dummy_plots/boxplot_template.svg'/> <br/> plotCorrelationMatrix(df2, 8)"]
+    C --> I["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotScatterMatrix(df2, 20, 10)"]
+    %% Plotting data from df2

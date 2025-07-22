@@ -1,0 +1,17 @@
+graph TD;
+    A["📂 Load Data <img src='../input/persona-data/persona.csv' />"] --> B["📋 Data Overview: df.head(), df.info(), df.describe()"];
+    B --> C["🔍 EDA"];
+    C --> D["🧩 Identify Numeric & Categorical Columns"];
+    D --> E["🌡️ Correlation Matrix <img src='dummy_plots/heatmap_template.svg' />"];
+    D --> F["📊 Value Counts for Categorical Columns"];
+    D --> G["📊 Countplots for Categorical Columns"];
+    D --> H["📈 Pie Chart of Country Distribution <img src='dummy_plots/pie_chart_template.svg' />"];
+    D --> I["📊 Histograms, Boxplots, KDEs for Numeric Columns"];
+    I --> J["💵 Aggregated Price Analysis"];
+    J --> K["📈 Price by Country, Source"];
+    K --> L["📊 Segment New Customers"];
+    L --> M["🔍 Analyze Customer Segments"];
+    M --> N["📊 Customers Level Based Analysis"];
+    N --> O["📰 Price Distribution by Segment"];
+    O --> P["📈 Prediction"];
+    P --> Q["👤 Classify New Customers"];

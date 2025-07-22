@@ -1,0 +1,23 @@
+flowchart TD
+
+  %% Data Sources
+  A[SARS.csv]:::dataSource -->|Read 1000 rows| B[df1]
+  C[SARSFLU.csv]:::dataSource -->|Read 1000 rows| D[df2]
+
+  %% DataFrames
+  B[df1]:::data -->E[plotPerColumnDistribution(df1, 10, 5)]
+  B -->F[plotCorrelationMatrix(df1, 8)]
+  B -->G[plotScatterMatrix(df1, 15, 10)]
+
+  D[df2]:::data -->H[plotPerColumnDistribution(df2, 10, 5)]
+  D -->I[plotCorrelationMatrix(df2, 8)]
+  D -->J[plotScatterMatrix(df2, 15, 10)]
+
+  %% Styles
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef action fill:#f96,stroke:#333,stroke-width:2px;
+
+  class A,C dataSource;
+  class B,D data;
+  class E,F,G,H,I,J action;

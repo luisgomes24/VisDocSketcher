@@ -1,0 +1,86 @@
+{
+  "data_sources": [
+    {
+      "file_name": "results.csv",
+      "description": "Contains image names and their corresponding captions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data_dir",
+      "description": "Path to the images and the results.csv file."
+    },
+    {
+      "name": "image_dir",
+      "description": "Path exclusively to the images."
+    },
+    {
+      "name": "csv_file",
+      "description": "Path to the results.csv file."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing the image names and captions after cleaning and preprocessing."
+    },
+    {
+      "name": "train_cap, val_cap, test_cap",
+      "description": "Tokenized and padded caption vectors split into training, validation, and test sets."
+    },
+    {
+      "name": "train_img, val_img, test_img",
+      "description": "Image paths split into training, validation, and test sets."
+    },
+    {
+      "name": "train_ds, val_ds, test_ds",
+      "description": "TensorFlow datasets combining images and captions into zipped datasets for training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "description": "Read the CSV file containing image names and captions.",
+      "flow": "Used for analysis, to create train/validation/test splits, and tokenizing captions."
+    },
+    {
+      "variable": "train_cap, val_cap, test_cap",
+      "creation_method": "tokenizer.texts_to_sequences + pad_sequences",
+      "description": "Tokenized captions padded to a uniform length.",
+      "flow": "Used in model training as target variable."
+    },
+    {
+      "variable": "train_img, val_img, test_img",
+      "creation_method": "df['image_name']",
+      "description": "Paths to images derived from DataFrame.",
+      "flow": "Used in model training as input variable."
+    },
+    {
+      "variable": "train_ds, val_ds, test_ds",
+      "creation_method": "tf.data.Dataset.zip",
+      "description": "Combined TensorFlow datasets of images and captions.",
+      "flow": "Used in training, validation, and testing of the model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CNN_Encoder",
+      "model_type": "Convolutional Neural Network",
+      "input_features": "Image inputs",
+      "output_features": "Image feature representations",
+      "hyperparameters": {
+        "embedding_dim": 100
+      }
+    },
+    {
+      "model_name": "RNN_Decoder",
+      "model_type": "Recurrent Neural Network",
+      "input_features": "Caption inputs and initial hidden state from encoder",
+      "output_features": "Generated captions",
+      "hyperparameters": {
+        "embedding_dim": 100,
+        "units": 256,
+        "vocab_size": 5000
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Data Preprocessing"]
+    B --> C["📈 Visualize Driver Standings"]
+    B --> D["📈 Visualize Constructor Standings"]
+    C --> E["<img src='dummy_plots/lineplot_template.svg'/> <br/> Driver Championship Traces"]
+    D --> F["<img src='dummy_plots/lineplot_template.svg'/> <br/> Constructor Championship Traces"]
+    E --> G["📋 Show Driver Results"]
+    F --> H["📋 Show Constructor Results"]
+    G --> I["🏁 Show Race Traces"]
+    H --> I
+    I --> J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Race Trace Visualizations"]

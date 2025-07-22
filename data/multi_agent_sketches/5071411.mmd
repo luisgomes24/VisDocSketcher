@@ -1,0 +1,20 @@
+%% This Mermaid.js diagram visualizes the workflow of the analyzed Jupyter Notebook.
+
+flowchart TD
+    A[imagelist.csv] -->|Read CSV| B[df1]
+    %% Node A represents the data source: imagelist.csv
+    %% Node B represents the DataFrame df1 created from the CSV file
+
+    B -->|Data Preview| C[Display df1.head()]
+    %% Node C represents the operation of displaying the head of the DataFrame
+
+    B -->|Distribution Plot| D[plotPerColumnDistribution]
+    %% Node D represents the analysis step for plotting distribution per column
+
+    B -->|Correlation Matrix| E[plotCorrelationMatrix]
+    %% Node E represents the analysis step for plotting the correlation matrix
+
+    B -->|Scatter Matrix| F[plotScatterMatrix]
+    %% Node F represents the analysis step for plotting the scatter matrix
+
+    %% This workflow describes the sequence of data processing and analysis steps starting from reading the CSV to various data visualizations without ML models.

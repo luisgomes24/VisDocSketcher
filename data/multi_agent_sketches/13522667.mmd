@@ -1,0 +1,31 @@
+graph TD;
+    %%% Data Sources %%%
+    A1["Raw Data"]:::dataSource;
+    
+    %%% Data Preparation %%%
+    A1 -->|"Load CSV"| A2["data"]:::dataVar;
+    A2 -->|"Standardize 'Amount' & 'Time'"| A3["data_clean"]:::dataVar;
+    A3 -->|"Define Features"| A4["X"]:::dataVar;
+    A3 -->|"Define Target"| A5["y"]:::dataVar;
+    A4 -->|"Train/Test Split"| A6["X_train"]:::dataVar;
+    A4 -->|"Train/Test Split"| A7["X_test"]:::dataVar;
+    A5 -->|"Train/Test Split"| A8["y_train"]:::dataVar;
+    A5 -->|"Train/Test Split"| A9["y_test"]:::dataVar;
+
+    %%% Handle Imbalance %%%
+    A6 -->|"Random Under Sampling"| A10["X_rus"]:::dataVar;
+    A8 -->|"Random Under Sampling"| A11["y_rus"]:::dataVar;
+
+    %%% ML Models %%%
+    A10 -->|"Train Logistic Regression"| B1["model_log"]:::model;
+    A11 -->|"Train Logistic Regression"| B1;
+    A10 -->|"Train Decision Tree"| B2["model_tree"]:::model;
+    A11 -->|"Train Decision Tree"| B2;
+
+    %%% Predictions and Evaluations %%%
+    B1 -->|"Predict"| B3["y_pred_log"]:::dataVar;
+    B2 -->|"Predict"| B4["y_pred_tree"]:::dataVar;
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#9f6,stroke:#333,stroke-width:2px;

@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🔍 Check for Null Values"]
+    B --> C["✅ No Null Values"]
+    C --> D["🗃️ Preprocess Data"]
+    D --> E["🔄 Train-Test Split"]
+    E --> F["🧠 Baseline Model"]
+    F --> G["🔧 Hyperparameter Tuning with Optuna"]
+    G --> H["📊 Visualize Tuning Results"]
+    H --> I["📈 Best Parameters Found"]
+    I --> J["📝 Make Predictions"]
+    J --> K["📦 Create Submission File"]
+    K --> L["📊 Submission Preview"]

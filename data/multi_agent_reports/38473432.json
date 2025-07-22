@@ -1,0 +1,127 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the model."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data to predict outcomes."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Structure for submission results."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data after initial preprocessing."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data after initial preprocessing."
+    },
+    {
+      "variable_name": "X",
+      "description": "Features used for model training extracted from the training DataFrame (excluding 'Class')."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable containing the 'Class' column from the training DataFrame."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing features after splitting the dataset."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable after splitting the dataset."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing target variable after splitting the dataset."
+    },
+    {
+      "variable_name": "model",
+      "description": "The LightGBM classifier instance used for training and prediction."
+    },
+    {
+      "variable_name": "sample_submission",
+      "description": "DataFrame prepared for submission containing predicted probabilities."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X", "y", "X_train", "X_test", "y_train", "y_test"]
+    },
+    {
+      "variable_name": "test",
+      "created_by": "pd.read_csv",
+      "flows_to": ["model.predict_proba", "sample_submission"]
+    },
+    {
+      "variable_name": "X",
+      "created_by": "train[col]",
+      "flows_to": ["X_train"]
+    },
+    {
+      "variable_name": "y",
+      "created_by": "train[['Class']]",
+      "flows_to": ["y_train"]
+    },
+    {
+      "variable_name": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable_name": "X_test",
+      "created_by": "train_test_split",
+      "flows_to": ["classification_report"]
+    },
+    {
+      "variable_name": "y_train",
+      "created_by": "train_test_split",
+      "flows_to": ["model.fit"]
+    },
+    {
+      "variable_name": "y_test",
+      "created_by": "train_test_split",
+      "flows_to": ["classification_report"]
+    },
+    {
+      "variable_name": "model",
+      "created_by": "lgbm.LGBMClassifier",
+      "flows_to": ["model.predict_proba", "sample_submission['class_1']", "sample_submission['class_0']"]
+    },
+    {
+      "variable_name": "sample_submission",
+      "created_by": "pd.read_csv",
+      "flows_to": ["sample_submission.to_csv"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LightGBM Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 97,
+        "num_leaves": 33,
+        "min_child_samples": 8,
+        "learning_rate": 0.3848454051107216,
+        "log_max_bin": 9,
+        "colsample_bytree": 1.0,
+        "reg_alpha": 0.002010966076190542,
+        "reg_lambda": 0.3138652985500363
+      }
+    }
+  ]
+}

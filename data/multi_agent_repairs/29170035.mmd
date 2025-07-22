@@ -1,0 +1,34 @@
+%%{init: {"themeVariables": {"fontFamily": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"}}}%%
+%% Workflow Diagram for Jupyter Notebook 29170035.ipynb %%
+
+flowchart TD
+    %% Data Sources %%
+    A["train_LZV4RXX.csv"] -->|load| B["train DataFrame"]
+    A1["test_4zJg83n.csv"] -->|load| C["test DataFrame"]
+    A2["sample_submission_tbPU9qQ.csv"] -->|load| H["sol DataFrame"]
+
+    %% Data Processing %%
+    B -->|drop 'loan_default'| D["X (Features)"]
+    B -->|pop 'loan_default'| E["y (Target)"]
+    C --> F["X_test"]
+    D -->|Split| G["X_train"]
+    D -->|Split| G["X_test"]
+    E -->|Split| I["y_train"]
+    E -->|Split| I["y_test"]
+
+    %% Modeling %%
+    subgraph Model_Training ["FLAML AutoML"]
+      direction TB
+      G -->|train with| J["AutoML Model"]
+      I -->|train with| J
+    end
+
+    %% Prediction %%
+    C -->|Predict| K["y_pred"] --> L["df with Predictions"]
+    L -->|format for| H["sol DataFrame"]
+
+    %% Comments %%
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef processNode fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,A1,A2,B,C,D,E,F,G,H,I,J,K,L,M class dataNode;
+    class B,D,E,G,I,J class processNode;

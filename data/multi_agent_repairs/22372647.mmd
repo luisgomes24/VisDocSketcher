@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+
+    subgraph DataSources
+        DS1["/Food_Product_Emissions.csv/"]:::dataSource
+    end
+    
+    subgraph DataFlow
+        DF1["df: Initial DataFrame from CSV"]:::dataVariable
+        DF2["df1: Processed DataFrame"]:::dataVariable
+        DF3["df_viz: DataFrame for Visualization"]:::dataVariable
+        DF4["df_meat: Meat Products DataFrame"]:::dataVariable
+    end
+    
+    subgraph MLModels
+        KMeans["KMeans: Clustering"]:::model
+    end
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px
+    classDef dataVariable fill:#ccf,stroke:#f66,stroke-width:2px
+    classDef model fill:#fc9,stroke:#339,stroke-width:2px
+    
+    DS1 --> DF1 
+    DF1 --> DF2
+    DF1 --> DF3
+    DF1 --> DF4
+    DF4 -->|Clustering with num_clusters=4| KMeans
+    
+    %% Comments for Each Node
+    DS1:::comment: Contains data on food product emissions.
+    DF1:::comment: DataFrame containing the food product emissions data.
+    DF2:::comment: Processed DataFrame with unnecessary columns removed.
+    DF3:::comment: DataFrame loaded for AutoViz visualizations.
+    DF4:::comment: DataFrame containing only meat product data.
+    KMeans:::comment: Clustering model used for food product clustering.
+```

@@ -1,0 +1,82 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data including filenames and labels"
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data including filenames"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing the training dataset"
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame containing the test dataset"
+    },
+    {
+      "variable_name": "file_names",
+      "description": "List of audio file paths from the training dataset"
+    },
+    {
+      "variable_name": "spectra",
+      "description": "2D array representing the scaled spectra of audio signals"
+    },
+    {
+      "variable_name": "df_frq",
+      "description": "DataFrame containing frequency domain features derived from the audio signals"
+    },
+    {
+      "variable_name": "df",
+      "description": "Combined DataFrame containing training dataset and frequency features"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_method": "pd.read_csv(data_path.train_csv)",
+      "flow": "Used for training and plotting"
+    },
+    {
+      "variable_name": "df_test",
+      "creation_method": "pd.read_csv(data_path.test_csv)",
+      "flow": "Used for predictions if required"
+    },
+    {
+      "variable_name": "file_names",
+      "creation_method": "df_train['file_path'].tolist()",
+      "flow": "Used for loading audio files"
+    },
+    {
+      "variable_name": "spectra",
+      "creation_method": "minmax_scale(helper.spectra, axis=1)",
+      "flow": "Used as input features for further embedding and plotting"
+    },
+    {
+      "variable_name": "df_frq",
+      "creation_method": "pd.DataFrame(spectra)",
+      "flow": "Concatenated with df_train to form df"
+    },
+    {
+      "variable_name": "df",
+      "creation_method": "pd.concat([df_train.reset_index(drop=True), df_frq], axis=1)",
+      "flow": "Used for visualizations and further processing"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "t-SNE",
+      "input_features": "Extracted features from df.iloc[:, 8:]",
+      "target_variable": "df['Target']"
+    },
+    {
+      "model_name": "UMAP",
+      "input_features": "Extracted features from df.iloc[:, 8:]",
+      "target_variable": "df['Target']"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources Nodes
+    A[train_transaction.csv] -->|Read| B[train_transaction]
+    A1[train_identity.csv] -->|Read| C[train_identity]
+    A2[test_transaction.csv] -->|Read| D[test_transaction]
+    A3[test_identity.csv] -->|Read| E[test_identity]
+    A4[sample_submission.csv] -->|Read| F[sample_submission]
+
+    %% Data Processing Nodes
+    B -->|Calculate| G[numOf_fraud]
+    G -->|Calculate| H[per_Fraud]
+
+    %% Predictions
+    I[np.zeros] -->|Initialize| J[pred_non_F]
+    J -->|Fill| F
+
+    %% Outputs
+    F -->|Save as| K[sample_submission.csv]
+
+    %% Comments for clarity
+    B:::comment -->|"Contains transaction data for training"| B
+    C:::comment -->|"Contains identity information for training"| C
+    D:::comment -->|"Contains transaction data for testing"| D
+    E:::comment -->|"Contains identity information for testing"| E
+    F:::comment -->|"Structured for submission, including predictions"| F
+    G:::comment -->|"Total count of fraudulent transactions"| G
+    H:::comment -->|"Percentage of transactions that are fraudulent"| H
+    J:::comment -->|"Array for predictions of non-fraudulence"| J
+
+    classDef comment fill:#f9f,stroke:#333,stroke-width:1px,color:#333;

@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data"] --> B["<img src='file.svg'/> <br/> Read Parquet"]
+    A --> C["<img src='file.svg'/> <br/> Read CSV"]
+    B --> D["📊 Explore Data"]
+    C --> D
+    D --> E["✍️ Data Cleaning"]
+    E --> F["🚀 Text Preprocessing"]
+    F --> G["🔤 Lemmatization & Stemming"]
+    F --> H["📈 Generate Word Cloud"]
+    H --> I["📊 Top Tweets Visualization"]
+    I --> J["📊 Correlation Matrix"]
+    J --> K["🧠 Topic Modeling"]
+    K --> L["🔍 Evaluate Topics"]

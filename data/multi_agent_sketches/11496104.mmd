@@ -1,0 +1,36 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffe0'}}}%%
+flowchart TD
+    subgraph DataSources
+        A1["Shapefile: turkey.shp"]
+        A2["CSV: turkey_covid19.csv"]
+    end
+
+    subgraph DataVariables
+        B1["turkey_map"]
+        B2["table"]
+        B3["date"]
+    end
+
+    A1 -->|gpd.read_file| B1
+    A2 -->|pd.read_csv| B2
+    B3 -->|Assigned Date| B3
+
+    subgraph DataFlow
+        C1["Plot Covid19 cases over time"]
+        C2["Map cases on specific date"]
+    end
+
+    B1 -->|Input to| C2
+    B2 -->|Input to| C1
+    B2 -->|Input to| C2
+    B3 -->|Input to| C2
+    
+    %% Node descriptions
+    %% A1 represents the shapefile data source for Turkey regions map
+    %% A2 represents the CSV data source for Covid19 statistics in Turkey
+    %% B1 represents the variable holding the shapefile data
+    %% B2 represents the DataFrame holding Covid19 data
+    %% B3 represents the date variable for filtering the data
+    %% C1 represents the process of plotting Covid19 cases based on time
+    %% C2 represents the process of mapping Covid19 cases on a specific date
+    

@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /processed_train.csv/"]:::data_source --> B
+
+    %% Data Loading
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> /Load Data: df1/"]:::data --> C
+
+    %% Data Usage
+    %% Distribution plots
+    C["<img src='dummy_plots/hist_template.svg' /> <br/> Plot Distributions"]:::plot
+    B --> D
+    
+    %% Correlation matrix
+    D["<img src='dummy_plots/correlation_matrix.svg' /> <br/> Plot Correlation Matrix"]:::plot
+    B --> E
+
+    %% Scatter and Density plots
+    E["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Plot Scatter and Density"]:::plot
+
+    %% Styling
+    classDef data_source fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef data fill:#C6F4D6,stroke:#f66,stroke-width:2px;
+    classDef plot fill:#F2C464,stroke:#333,stroke-width:2px;

@@ -1,0 +1,34 @@
+flowchart TD
+    %% Node for Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> KHI.csv" style="background-color: #87CEEB;"] 
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> IHI.csv" style="background-color: #87CEEB;"] 
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> MHI.csv" style="background-color: #87CEEB;"]
+
+    %% Nodes for DataFrames
+    D["<img src='icons/table.svg' width=100 height=100/> <br/> KHI DataFrame" style="background-color: #C6F4D6;"]
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> IHI DataFrame" style="background-color: #C6F4D6;"]
+    F["<img src='icons/table.svg' width=100 height=100/> <br/> MHI DataFrame" style="background-color: #C6F4D6;"]
+
+    %% Nodes for Closing Price DataFrames
+    G["<img src='dummy_plots/lineplot_template.svg'/> <br/> KHI_M DataFrame" style="background-color: #FFCDD2;"]
+    H["<img src='dummy_plots/lineplot_template.svg'/> <br/> IHI_M DataFrame" style="background-color: #FFCDD2;"]
+    I["<img src='dummy_plots/lineplot_template.svg'/> <br/> MHI_M DataFrame" style="background-color: #FFCDD2;"]
+
+    %% Data Flow
+    A -->|"Read with Pandas"| D
+    B -->|"Read with Pandas"| E
+    C -->|"Read with Pandas"| F
+
+    D -->|"Drop columns"| G
+    E -->|"Drop columns"| H
+    F -->|"Drop columns"| I
+
+    %% Closing price calculations and plots
+    D -->|"Closing price plots"| G
+    E -->|"Closing price plots"| H
+    F -->|"Closing price plots"| I
+
+    %% Recovery calculations
+    D -->|"Recovery calculations"| G
+    E -->|"Recovery calculations"| H
+    F -->|"Recovery calculations"| I

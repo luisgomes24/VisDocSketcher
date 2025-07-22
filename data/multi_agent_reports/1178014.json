@@ -1,0 +1,22 @@
+{
+    "data_sources": [
+        {
+            "file_name": "train.csv",
+            "description": "Contains training data used for model training."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "sample",
+            "description": "DataFrame containing the contents of the train.csv file."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "sample",
+            "creation_method": "pd.read_csv('../input/train.csv')",
+            "flow": "Used for analysis and model training"
+        }
+    ],
+    "models": []
+}

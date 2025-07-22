@@ -1,0 +1,18 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg'/>"] --> B["🧹 Data Cleaning"]
+    B --> C["🔄 String Remover Function"]
+    C --> D["📊 Correlation Analysis"]
+    D --> E["🔄 Cleaned Train Data"]
+    D --> F["🔄 Cleaned Test Data"]
+    E --> G["⚖️ Train-Test Split"]
+    G --> H["🧠 Model Selection <img src='brain.svg'/>"]
+    H --> I["🔍 Feature Selection"]
+    I --> J["💡 Fit Model"]
+    J --> K["🔮 Prediction"]
+    K --> L["📈 Model Evaluation"]
+    L --> M["📤 Prediction Submission File"]
+    
+    E --> D
+    G --> H
+    J --> K
+    K --> L

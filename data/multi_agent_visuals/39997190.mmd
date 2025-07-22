@@ -1,0 +1,13 @@
+%% Diagram of the data workflow in the given Jupyter Notebook
+
+flowchart TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> RMSE USA Yield Data"] -->|Load CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame sol0"]  %% Node for USA Yield data
+    A1["<img src='icons/database.svg' width=100 height=100/> <br/> RMSE Cotton Yield Data"] -->|Load CSV| C["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame sol1"]  %% Node for Cotton Yield data
+    A2["<img src='icons/database.svg' width=100 height=100/> <br/> Cotton Price Data"] -->|Load CSV| D["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame sol2"]  %% Node for Cotton Price data
+    
+    B -->|Merge| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Main DataFrame sol"]  %% Merge USA data into main dataframe
+    C -->|Merge| E  %% Merge Cotton data into main dataframe
+    D -->|Merge| E  %% Merge Price data into main dataframe
+    
+    E -->|Fill NaN| F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Cleaned DataFrame sol"]  %% Node for Data cleaning
+    F -->|Save CSV| G["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Output CSV"]

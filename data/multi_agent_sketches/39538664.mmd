@@ -1,0 +1,17 @@
+flowchart TD
+    %% Diagram for the Jupyter Notebook
+
+    %% Data Source
+    A[/"example_file.csv"/] %% Represents the data file being read
+    %% Data Loading
+    B[df] %% Main DataFrame loaded with data
+    A -->|pd.read_csv()| B %% Transition from file reading to dataframe
+
+    %% Data Usage
+    B --> C{Data Analysis} %% Data is used for analysis
+    B --> D{Model Training} %% Data is used for model training
+
+    %% Model Details
+    D --> E[RandomForest Model] %% RandomForest model is used
+    E -->|Input features: feature1, feature2| F(Target: target) %% Details inside the model
+    E -->|Hyperparameters: n_estimators=100, max_depth=10| F %% Hyperparameters configuration

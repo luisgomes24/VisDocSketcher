@@ -1,0 +1,47 @@
+flowchart TD
+    %% Node for data source
+    DS1["CSV: rdany_conversations_2016-03-01"]
+    note right of DS1
+      This is the original dataset containing conversations.
+    end note
+
+    %% Node for DataFrame 'df'
+    DF1["DataFrame: df"]
+
+    %% Node for train/test split
+    DF1 -->|pd.read_csv| DF2["DataFrame: df (Cleaned)"]
+    DF2 -->|train_test_split| TR["Train Dataset"]
+    DF2 -->|train_test_split| TE["Test Dataset"]
+
+    %% Nodes for TF-IDF features
+    TR -->|TfidfVectorizer| TF1["TF-IDF: train_features"]
+    TE -->|TfidfVectorizer| TF2["TF-IDF: test_features"]
+
+    %% Nodes for ML models
+    TF1 -->|train LogisticRegression| LR["Logistic Regression Model"]
+    TF1 -->|train DecisionTreeClassifier| DT["Decision Tree Classifier Model"]
+    TF1 -->|train RandomForestClassifier| RF["Random Forest Model"]
+    TF1 -->|train GradientBoostingClassifier| GB["Gradient Boosting Model"]
+
+    %% Use features for prediction
+    TF2 -->|predict| LR
+    TF2 -->|predict| DT
+    TF2 -->|predict| RF
+    TF2 -->|predict| GB
+
+    %% Specify hyperparameters in notes
+    note below of LR 
+      Hyperparameters: C=5, max_iter=200, random_state=42
+    end note
+
+    note below of DT
+      Hyperparameters: min_samples_leaf=1, random_state=42
+    end note
+
+    note below of RF
+      Hyperparameters: n_estimators=100, n_jobs=-1, random_state=42
+    end note
+
+    note below of GB
+      Hyperparameters: n_estimators=100, learning_rate=0.3, random_state=42
+    end note

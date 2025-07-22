@@ -1,0 +1,31 @@
+flowchart TD
+  %% Nodes
+  A["../input/Data_Entry_2017.csv"] %% Data source node
+  B["all_xray_df"] %% Dataframe node
+  C["train_df"] %% Training dataframe node
+  D["valid_df"] %% Validation dataframe node
+  E["train_gen"] %% Training data generator node
+  F["valid_gen"] %% Validation data generator node
+  G["multi_disease_model"] %% Keras model node
+
+  %% Node Descriptions
+  A:::source
+  B:::variable
+  C:::variable
+  D:::variable
+  E:::variable
+  F:::variable
+  G:::model
+
+  %% Transitions
+  A -->|pd.read_csv| B %% CSV data is read into a dataframe
+  B -->|train_test_split| C %% Dataframe split into training data
+  B -->|train_test_split| D %% Dataframe split into validation data
+  C -->|flow_from_dataframe| E %% Training images loaded and augmented
+  D -->|flow_from_dataframe| F %% Validation images loaded
+  E -->|fit_generator| G %% Model training on augmented images
+  F -->|fit_generator| G %% Model validation on loaded images
+
+  classDef source fill:#f96,stroke:#333,stroke-width:2px;
+  classDef variable fill:#9f6,stroke:#333,stroke-width:2px;
+  classDef model fill:#6f9,stroke:#333,stroke-width:2px;

@@ -1,0 +1,39 @@
+%% This diagram illustrates the data flow and machine learning process
+flowchart TD;
+
+    %% Input Data Source
+    A[Start] --> B(Load Data)
+    B --> C{Data Source}
+    C -->|load csv| Data_Framingham["Framingham Dataset"]
+    
+    %% Data Cleaning and Preprocessing Steps
+    Data_Framingham --> D{Data Cleaning}
+    D --> E[Cleaned Dataset]
+    E --> F{Feature Engineering}
+    F --> G[X["Features"]]
+    F --> H[y["Target"]]
+    
+    %% Splitting Data for Training and Testing
+    G --> I{Train Test Split}
+    H --> I
+    I -->|x_train,y_train| J[Train Data]
+    I -->|x_test, y_test| K[Test Data]
+    
+    %% Model Training
+    subgraph Model Training
+    J --> L["Logistic Regression Model"]
+    end
+    
+    %% Model Prediction and Evaluation
+    subgraph Model Evaluation
+    L --> M[Predict Test Data]
+    M --> N[Predicted Labels]
+    N --> O{Model Evaluation}
+    O --> P[ROC AUC Score]
+    end
+    
+    %% Overall Flow
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style L fill:#bbf,stroke:#f66,stroke-width:2px;
+    style O fill:#f96,stroke:#333,stroke-width:2px;
+

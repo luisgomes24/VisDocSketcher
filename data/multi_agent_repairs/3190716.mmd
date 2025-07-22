@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+
+    %% Input Variables
+    X["X: Input data for NN"]
+    Y["Y: True label vector"]
+    layers_dims["layers_dims: Size of each layer"]
+
+    %% Neural Network Model
+    subgraph NeuralNetwork
+        direction TB
+        X -->|"Train using Adam Optimizer"| parameters["parameters: Updated Params"]
+    end
+
+    %% Data Transformations
+    parameters -->|"Used in Prediction"| Y
+
+    %% Tracking Variables
+    subgraph Tracking
+        direction TB
+        costs["costs: Track Training Cost"]
+        parameters --> costs
+    end
+
+    %% Comments
+    %% X: Represents the input data for the neural network.
+    %% Y: Represents the true labels used for training.
+    %% layers_dims: Specifies the neural network architecture.
+    %% parameters: The network parameters updated through training.
+    %% costs: Tracks the cost during training to monitor performance.
+    %% NeuralNetwork: The main model training process.

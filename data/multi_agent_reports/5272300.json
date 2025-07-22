@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "2009.csv",
+      "description": "Data from the year 2009"
+    },
+    {
+      "file_name": "2010.csv",
+      "description": "Data from the year 2010"
+    },
+    {
+      "file_name": "2011.csv",
+      "description": "Data from the year 2011"
+    }
+    // Additional files can be included similarly
+  ],
+  "data_variables": [
+    { "name": "df1", "description": "Dataframe holding data from 2009.csv" },
+    { "name": "df2", "description": "Dataframe holding data from 2010.csv" },
+    { "name": "df3", "description": "Dataframe holding data from 2011.csv" }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv('../input/2009/2009.csv')",
+      "flows_to": ["plotPerColumnDistribution"]
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv('../input/2010/2010.csv')",
+      "flows_to": ["plotPerColumnDistribution"]
+    },
+    {
+      "variable": "df3",
+      "creation": "pd.read_csv('../input/2011/2011.csv')",
+      "flows_to": ["plotPerColumnDistribution"]
+    }
+  ],
+  "models": []
+}

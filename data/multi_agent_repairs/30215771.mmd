@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Define the data sources
+    A1["coursea_data.csv"]:::dataSource
+    A2["Coursera_reviews.csv"]:::dataSource
+
+    %% Initial dataframe loading and operations
+    A1 --> B1["Load df"]:::process
+    B1 --> B2["Data exploration and visualization"]:::process
+    B2 --> B3["Drop column Unnamed"]:::process
+    B3 --> B4["Modify df to df_fe1"]:::process
+    B4 --> D1["Feature Engineering on df_fe1"]:::process
+    D1 --> D2["Modify course_students_enrolled"]:::process
+    D2 --> D3["Modify course_difficulty"]:::process
+
+    %% Data loading and processing for reviews
+    A2 --> C1["Load reviews (r)"]:::process
+    C1 --> C2["Sentiment Analysis"]:::evaluation
+
+    %% Group and aggregation operations
+    B4 --> E1["GroupBy g_uni on df_fe1"]:::process
+    C2 --> F1["GroupBy course_wise on r"]:::process
+
+    %% Visualizations & Analysis
+    E1 --> G1["Visualize course organization metrics"]:::evaluation
+    F1 --> H1["Sentiment correlation with ratings"]:::evaluation
+    
+    classDef dataSource fill:#f96,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef evaluation fill:#6f6,stroke:#333,stroke-width:2px;
+```

@@ -1,0 +1,45 @@
+%% Mermaid.js Flowchart for Jupyter Notebook
+flowchart TD
+    
+    %% Data Sources
+    subgraph sources ["Data Sources"]
+      GCS[[<img src='icons/database.svg' width=100 height=100/> <br/> GCS Bucket]]
+    end
+
+    %% Data Variables
+    subgraph variables ["Data Variables"]
+      GCS_BASE_PATH[[<img src='icons/column_split.svg' width=100 height=100/> <br/> GCS Base Path]]
+      IMG_SIZE[[<img src='icons/file.svg' width=100 height=100/> <br/> Image Size]]
+      BATCH_SIZE[[<img src='icons/file.svg' width=100 height=100/> <br/> Batch Size]]
+      CLASSES[[<img src='icons/file.svg' width=100 height=100/> <br/> Flower Classes]]
+      TRAINING_FILENAMES[[<img src='icons/file.svg' width=100 height=100/> <br/> Training Filenames]]
+      VALIDATION_FILENAMES[[<img src='icons/file.svg' width=100 height=100/> <br/> Validation Filenames]]
+      TEST_FILENAMES[[<img src='icons/file.svg' width=100 height=100/> <br/> Test Filenames]]
+    end
+
+    %% Data Flow
+    subgraph dataflow ["Data Flow"]
+      training_dataset[[<img src='dummy_plots/boxplot_template.svg'/> <br/> Training Dataset]]
+      validation_dataset[[<img src='dummy_plots/boxplot_template.svg'/> <br/> Validation Dataset]]
+      test_dataset[[<img src='dummy_plots/boxplot_template.svg'/> <br/> Test Dataset]]
+      model[[<img src='icons/brain.svg' width=100 height=100/> <br/> EfficientNetB0 Model]]
+    end
+    
+    %% Workflow Relationships
+    GCS-->|"accesses"|GCS_BASE_PATH
+    GCS_BASE_PATH-->|"used to fetch"|TRAINING_FILENAMES
+    GCS_BASE_PATH-->|"used to fetch"|VALIDATION_FILENAMES
+    GCS_BASE_PATH-->|"used to fetch"|TEST_FILENAMES
+    
+    TRAINING_FILENAMES-->training_dataset["get_batched_dataset(TRAINING_FILENAMES, labeled=True, train=True)"]
+    VALIDATION_FILENAMES-->validation_dataset["get_batched_dataset(VALIDATION_FILENAMES, labeled=True)"]
+    TEST_FILENAMES-->test_dataset["get_batched_dataset(TEST_FILENAMES, labeled=False)"]
+    
+    training_dataset-->model
+    validation_dataset-->|"used during training"|model
+    test_dataset-->|"used for evaluation"|model
+
+    %% Model Node
+    subgraph models ["Machine Learning Models"]
+      model
+    end

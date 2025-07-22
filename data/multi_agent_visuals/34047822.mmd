@@ -1,0 +1,21 @@
+flowchart TD
+    DS1["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> combined_data_1.txt"]:::dataSource
+    DS2["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> combined_data_2.txt"]:::dataSource
+    DS3["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> combined_data_3.txt"]:::dataSource
+    DS4["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> combined_data_4.txt"]:::dataSource 
+
+    DS1 --> A["Data Cleaning"]:::process
+    DS2 --> A
+    DS3 --> A
+    DS4 --> A
+
+    A --> B["Average Ratings"]:::output
+    A --> C["Ratings Count"]:::output
+
+    B --> D["Plot Average Ratings"]:::plot
+    C --> E["Plot Ratings Count"]:::plot
+
+    classDef dataSource fill:#87CEEB;
+    classDef process fill:#C6F4D6;
+    classDef output fill:#F2C464;
+    classDef plot fill:#FFCDD2;

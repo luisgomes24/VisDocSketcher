@@ -1,0 +1,64 @@
+%% The main workflow diagram for the Jupyter Notebook
+flowchart TD
+  %% Nodes for data sources
+  A1["train_transaction.csv"]
+  A2["test_transaction.csv"]
+  A3["train_identity.csv"]
+  A4["test_identity.csv"]
+  
+  %% Nodes for dataframes
+  B1["train_transaction DataFrame"]
+  B2["test_transaction DataFrame"]
+  B3["train_identity DataFrame"]
+  B4["test_identity DataFrame"]
+  
+  %% Nodes for merged data
+  C1["train_df - Merged training data"]
+  C2["test_df - Merged testing data"]
+  
+  %% Nodes for model input data
+  D1["X_train - Features for training"]
+  D2["X_val - Validation feature set"]
+  D3["y_train - Training target"]
+  D4["y_val - Validation target"]
+  
+  %% Machine learning models
+  E1["GradientBoostingRegressor"]
+  E2["LGBMRegressor"]
+  E3["CatBoostRegressor"]
+  E4["RandomForestRegressor - Final Model"]
+  
+  %% Data source to DataFrame 
+  A1 -->|"Load CSV"| B1
+  A2 -->|"Load CSV"| B2
+  A3 -->|"Load CSV"| B3
+  A4 -->|"Load CSV"| B4
+  
+  %% Merging transaction and identity data
+  B1 & B3 -->|"Merge DataFrames"| C1
+  B2 & B4 -->|"Merge DataFrames"| C2
+  
+  %% Preparing training and validation sets
+  C1 --> |"Extract and prepare features \nand target"| D1
+  C1 --> |"Extract and prepare features \nand target"| D3
+  D1 --> |"Split for validation"| D2
+  D3 --> |"Split for validation"| D4
+  
+  %% Model training
+  D1 --> E1
+  D1 --> E2
+  D1 --> E3
+  D3 --> E1
+  D3 --> E2
+  D3 --> E3
+  
+  %% Final model
+  E1 & E2 & E3 -->|"Stacked predictions"| E4
+  D3 --> E4
+
+  %% Adding explanation comments  
+  %% A1-A4 are the source CSV files that are loaded into dataframes.
+  %% B1-B4 are initial dataframes containing transaction and identity information.
+  %% C1 and C2 are merged datasets for training and testing phase respectively.
+  %% D1-D4 represent feature and target splits for training and validation.
+  %% E1-E4 represent various models being trained and the final stacking model.

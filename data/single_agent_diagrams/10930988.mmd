@@ -1,0 +1,7 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> train_house, test_house"] --> B["📝 Profiling Report <img src='icons/table.svg' /> <br/> ProfileReport(train_house)"]
+    B --> C["📊 Data Preprocessing <img src='icons/column_split.svg' /> <br/> setup()"]
+    C --> D["🤖 Create Model <img src='icons/brain.svg' /> <br/> create_model('lightgbm')"]
+    D --> E["🔍 Evaluate Model <img src='icons/brain.svg' /> <br/> evaluate_model(lgbm)"]
+    E --> F["📈 Predict Holdout <img src='icons/image.svg' /> <br/> predict_model(lgbm)"]
+    F --> G["📊 Final Predictions <img src='file.svg' /> <br/> Write to CSV"]

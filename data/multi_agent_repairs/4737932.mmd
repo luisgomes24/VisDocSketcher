@@ -1,0 +1,36 @@
+```mermaid
+%% Mermaid.js Flowchart for 4737932.ipynb
+flowchart TD
+
+    %% Data Source Nodes
+    subgraph DataSources [Data Sources]
+        wine_reviews_csv["../input/wine-reviews/winemag-data_first150k.csv"]
+        pitchfork_sqlite["../input/pitchfork-data/database.sqlite"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables [Data Variables]
+        fruits_df["fruits DataFrame"]
+        fruit_sales_df["fruit_sales DataFrame"]
+        ingredients_series["ingredients Series"]
+        reviews_df["reviews DataFrame"]
+        animals_df["animals DataFrame"]
+        music_reviews_df["music_reviews DataFrame"]
+    end
+
+    %% Data Creation
+    wine_reviews_csv --> |"Load CSV"| reviews_df
+    pitchfork_sqlite --> |"Load from SQL"| music_reviews_df
+
+    %% Manual Data Assignment
+    fruits_df[/(Manual Data Entry)/]
+    fruit_sales_df[/(Manual Data Entry)/]
+    ingredients_series[/(Manual Data Entry)/]
+    animals_df[/(Manual Data Entry)/]
+
+    %% Data Flow and Usage
+    reviews_df --> |"Analysis Exercises"| fruits_df
+    music_reviews_df --> |"SQL Exercises"| fruit_sales_df
+    ingredients_series --> |"Series Structure Understanding"| fruits_df
+    animals_df --> |"Export to CSV"| wine_reviews_csv
+```

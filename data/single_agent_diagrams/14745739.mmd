@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["<img src='file.svg'/> <br/> Load Datasets"] --> B["Preprocess Data 📜"];
+    B --> C["Tokenization & Padding ✍️"];
+    C --> D["Create Attention Masks 🛡️"];
+    D --> E["Train-Test Split 🔀"];
+    E --> F["<img src='database.svg'/> <br/> Create Datasets"];
+    F --> G["Load & Define BERT Model 🧠"];
+    G --> H["Training Loop 🔄"];
+    H --> I["Run Predictions on Test-Set 🧪"];
+    I --> J["Save Submission 📝"];
+    J --> K["<img src='scatter_plot_template.svg'/> <br/> Show ROC Curves 📊"];

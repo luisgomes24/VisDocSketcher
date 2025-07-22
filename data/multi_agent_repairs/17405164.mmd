@@ -1,0 +1,37 @@
+```mermaid
+flowchart TD
+    subgraph DataSources["Data Sources"]
+        A1["train.csv"]
+        A2["test.csv"]
+    end
+    
+    subgraph DataPreparation["Data Preparation"]
+        B1["train_data = pd.read_csv('train.csv')"]
+        B2["test_data = pd.read_csv('test.csv')"]
+        B1 --> C1
+        B2 --> C2
+    end
+    
+    subgraph FeatureEngineering["Feature Engineering"]
+        C1["x_train, y_train
+        Features: Pclass, Sex, SibSp, Parch"]
+        C2["x_test
+        Features: Pclass, Sex, SibSp, Parch"]
+    end
+
+    subgraph ModelTraining["Model Training"]
+        D1["RandomForestClassifier\nmax_depth=7, n_estimators=20"]
+    end
+
+    subgraph Predictions["Predictions"]
+        E1["predictions = model.predict(x_test)"]
+        E2["output.to_csv('my_submission.csv')"]
+    end
+
+    A1 --> B1
+    A2 --> B2
+    C1 --> D1
+    C2 --> E1
+    D1 --> E1
+    E1 --> E2
+```

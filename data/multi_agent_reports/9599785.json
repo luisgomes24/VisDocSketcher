@@ -1,0 +1,12 @@
+{"data_sources": [
+    {"file_name": "20200520_datamartlaw.csv", "description": "Contains word frequencies related to the Decreto-Legge published on May 19, 2020, regarding COVID-19."},
+    {"file_name": "20200520_datamartlaw.png", "description": "An associated image for the word frequencies from the aforementioned document."}
+],
+"data_variables": [
+    {"variable_name": "df", "description": "DataFrame containing the data read from '20200520_datamartlaw.csv'."}
+],
+"data_flow": [
+    {"variable": "df", "creation_method": "pd.read_csv()", "flows_to": ["Data visualization with histograms and plots."]}
+],
+"models": []
+}

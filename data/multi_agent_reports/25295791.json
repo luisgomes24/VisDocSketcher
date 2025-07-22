@@ -1,0 +1,98 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-mar-2022/train.csv",
+      "description": "Training dataset containing time series data for traffic congestion prediction."
+    },
+    {
+      "file": "../input/tabular-playground-series-mar-2022/test.csv",
+      "description": "Test dataset for predicting traffic congestion."
+    },
+    {
+      "file": "../input/tabular-playground-series-mar-2022/sample_submission.csv",
+      "description": "Sample submission file providing the expected format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training data after dropping 'row_id' and filtering by date."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing test data after dropping 'row_id'."
+    },
+    {
+      "name": "y",
+      "description": "Target variable for training, representing the traffic congestion levels."
+    },
+    {
+      "name": "xtrain",
+      "description": "Training features DataFrame for model training after splitting."
+    },
+    {
+      "name": "xval",
+      "description": "Validation features DataFrame for model performance evaluation."
+    },
+    {
+      "name": "ytrain",
+      "description": "Training target DataFrame for model training."
+    },
+    {
+      "name": "yval",
+      "description": "Validation target DataFrame for model performance evaluation."
+    },
+    {
+      "name": "ypred",
+      "description": "Predicted congestion levels for the test dataset."
+    },
+    {
+      "name": "sample",
+      "description": "DataFrame containing the sample submission format."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Created by reading the CSV file with pd.read_csv",
+      "flows": ["Filtered for dates, dropped 'row_id' and scaled 'time'"]
+    },
+    {
+      "variable": "test",
+      "creation": "Created by reading the CSV file with pd.read_csv",
+      "flows": ["Dropped 'row_id' and scaled 'time'"]
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from 'train' DataFrame by popping the 'congestion' column",
+      "flows": ["Used for model training and evaluation"]
+    },
+    {
+      "variable": "xtrain",
+      "creation": "Created by splitting 'train' DataFrame when fitting the model",
+      "flows": ["Used in training a RandomForestRegressor"]
+    },
+    {
+      "variable": "xval",
+      "creation": "Created by splitting 'train' DataFrame for validation",
+      "flows": ["Used for validating model performance"]
+    },
+    {
+      "variable": "ypred",
+      "creation": "Predicted from 'test' DataFrame using the trained model",
+      "flows": ["Stored in the 'sample' DataFrame for submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "features": "xtrain",
+      "target": "y",
+      "hyperparameters": {
+        "random_state": 5,
+        "n_jobs": -1,
+        "max_depth": 10
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{"data_sources": [
+    {"file": "bigquery-public-data.github_repos.sample_commits", "description": "Table containing a sample of GitHub commits"},
+    {"file": "bigquery-public-data.github_repos.languages", "description": "Table containing programming languages used in different repositories"}
+],
+"data_variables": [
+    {"name": "sample_commits_table", "description": "DataFrame containing a sample of GitHub commits"},
+    {"name": "languages_table", "description": "DataFrame containing information about programming languages used in repositories"},
+    {"name": "max_commits_query", "description": "SQL query to retrieve number of commits by user for the year 2016"},
+    {"name": "pop_lang_query", "description": "SQL query to retrieve the most popular programming languages in repositories"},
+    {"name": "all_langs_query", "description": "SQL query for languages used in the 'polyrabbit/polyglot' repository"}
+],
+"data_flow": [
+    {"variable": "sample_commits_table", "creation": "fetched from BigQuery dataset", "flows_to": ["max_commits_query"]},
+    {"variable": "languages_table", "creation": "fetched from BigQuery dataset", "flows_to": ["pop_lang_query", "all_langs_query"]}
+],
+"models": []
+}

@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Source Node
+    A[("Dataset: ASL Alphabet Train")] -->|Contains images of 29 ASL signs| B[/"Load images from data_dir"/]
+    
+    %% Data Variables and Generators
+    B --> C[/"Image Resizing to target_dims 64x64x3"/]
+    C -.->|Used by| D[/"Train Generator"/]
+    C -.->|Used by| E[/"Validation Generator"/]
+    
+    %% Model Definition and Training
+    F[/"Keras Sequential Model: my_model"/] --> G[/"Convolutional Layers"/]
+    G --> H[/"Dropout Layers"/]
+    H --> I[/"Dense Layers"/]
+    
+    D -->|Provides training data| J[/"Model Fitting: Train"/]
+    E -->|Provides validation data| J
+    
+    J -->|Uses optimizer: adam, loss: categorical_crossentropy| K[/"Evaluate on Validation Set with Metrics: Accuracy"/]
+
+    %% Comments for clarity
+    classDef classA fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K classA;

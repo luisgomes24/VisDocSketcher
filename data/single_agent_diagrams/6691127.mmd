@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Data"]
+    B["📊 Preprocess Data"]
+    C["📈 Visualize Data <img src='dummy_plots/lineplot_template.svg'/> <br/> Train Data"]
+    D["🧠 Model Building"]
+    E["🔍 Evaluate Model"]
+    F["📊 Predict Test Data"]
+    G["📊 Visualization of Predictions <img src='dummy_plots/lineplot_template.svg'/> <br/> Predictions"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G

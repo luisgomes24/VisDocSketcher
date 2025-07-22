@@ -1,0 +1,13 @@
+flowchart TD
+
+%% Input Data Source
+A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/"]:::start -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> Data variable <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+
+%% Data Variable Creation
+B -->|Create Drawing| C["<img src='icons/brain.svg' width=100 height=100/> <br/> draw.Drawing <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+
+%% Data Flow within the Drawing
+C -->|Add Shapes| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Polygons, Rectangles, etc."]
+
+%% Styles
+classDef start fill:#f9f,stroke:#333,stroke-width:2px;

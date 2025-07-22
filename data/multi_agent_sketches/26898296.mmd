@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Source
+    A[Ecommerce Customers.csv]:::data_source --> B[Load DataFrame: df]:::data_variable
+    
+    %% Data Preparation
+    B --> C[Extract Features: X]:::data_variable
+    B --> D[Extract Target: y]:::data_variable
+    
+    %% Train-Test Split
+    C -->|train_test_split| E[X_train]:::data_variable
+    C -->|train_test_split| F[X_test]:::data_variable
+    D -->|train_test_split| G[y_train]:::data_variable
+    D -->|train_test_split| H[y_test]:::data_variable
+    
+    %% Model Training
+    E --> I[Train Linear Regression Model: model_lr]:::model
+    G --> I
+    
+    %% Prediction
+    I -->|predict| J[Predictions: predictions]:::data_variable
+    F --> J
+    
+    %% Node Styles
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#afa,stroke:#333,stroke-width:2px;
+
+    %% Node Descriptions
+    click A "Data source containing customer information"
+    click B "DataFrame containing the loaded eCommerce data"
+    click C "Features for model training"
+    click D "Target variable for model training"
+    click E "Training subset of features"
+    click F "Testing subset of features"
+    click G "Training subset of target variable"
+    click H "Testing subset of target variable"
+    click I "Linear Regression model used for prediction"
+    click J "Predicted Yearly Amount Spent values"

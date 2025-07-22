@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/students-performance-in-exams/StudentsPerformance.csv",
+      "description": "This CSV file contains student scores and demographic information, including gender, ethnicity, parental education level, and the completion status of a test preparation course."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "Pandas DataFrame containing the students' performance data from the CSV file."
+    },
+    {
+      "variable": "cat_data",
+      "description": "List of categorical column names in the DataFrame."
+    },
+    {
+      "variable": "num_data",
+      "description": "List of numerical column names in the DataFrame."
+    },
+    {
+      "variable": "cat_entries",
+      "description": "Number of unique entries in each categorical column in the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for descriptive statistics, visualizations, and hypothesis testing."
+    },
+    {
+      "variable": "cat_data",
+      "creation_method": "list comprehension",
+      "flow": "Facilitates identifying categorical columns for analysis."
+    },
+    {
+      "variable": "num_data",
+      "creation_method": "list comprehension",
+      "flow": "Facilitates identifying numerical columns for analysis."
+    },
+    {
+      "variable": "cat_entries",
+      "creation_method": "map and zip",
+      "flow": "Used to analyze unique entries for categorical columns."
+    }
+  ],
+  "models": []
+}

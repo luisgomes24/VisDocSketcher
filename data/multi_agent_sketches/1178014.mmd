@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground':'#ffffff', 'edgeLabelForeground':'#000000'}}}%%
+
+```mermaid
+flowchart TD
+    %% Node for the data source train.csv
+    A["train.csv"]:::source
+    %% Node for sample variable
+    B["sample DataFrame"]:::variable
+
+    %% Define styles for the nodes
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    
+    %% Connection between nodes with comments
+    A -->|"Load data into"| B

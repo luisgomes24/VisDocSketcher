@@ -1,0 +1,32 @@
+flowchart TD
+    A["📥 Load Libraries"] --> B["🤖 Load Sentiment Analysis Pipeline"]
+    B --> C["📝 Analyze Sentiment"]
+    C --> D["📈 Print Results"]
+    
+    A --> E["📥 Load Text Generation Pipeline"]
+    E --> F["📝 Generate Text"]
+    F --> G["📈 Print Generated Text"]
+    
+    A --> H["📥 Load Zero-shot Classification"]
+    H --> I["📝 Classify Text"]
+    I --> J["📈 Print Classification Results"]
+    
+    A --> K["📥 Load Conversational Pipeline"]
+    K --> L["💬 Chatbot Conversation"]
+    L --> M["📈 Display Conversation"]
+    
+    A --> N["📥 Load Image Generation Pipeline"]
+    N --> O["📸 Generate Image"]
+    O --> P["🌆 Display Image"]
+    
+    N --> Q["📥 Generate Image with Prompt"]
+    Q --> R["🌆 Display Generated Image"]
+    
+    A --> S["🔍 Tokenizer & Model Loading"]
+    S --> T["🧩 Tokenization"]
+    T --> U["💻 PyTorch Processing"]
+    U --> V["📈 Model Predictions"]
+    V --> W["📝 Display Predictions"]
+    
+    A --> X["💾 Save Model & Tokenizer"]
+    X --> Y["📁 Save to Directory"]

@@ -1,0 +1,115 @@
+{
+  "data_sources": [
+    {
+      "path": "/kaggle/input/deepmindmath/mathematics_dataset-v1.0/train-hard/probability__swr_p_sequence.txt",
+      "description": "A dataset containing pairs of mathematical questions and their answers, retrieved from a text file."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "training_paths",
+      "description": "List of paths for training data files, categorizing them into arithmetic and probability."
+    },
+    {
+      "name": "interpolate_paths",
+      "description": "List of paths for interpolation data files, also categorized into arithmetic and probability."
+    },
+    {
+      "name": "extrapolate_paths",
+      "description": "List of paths for extrapolation data files, categorized similarly to the others."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame containing the first 1000 questions and answers parsed from the text file."
+    },
+    {
+      "name": "pairs",
+      "description": "List of tuples containing original questions, answers, segmented text, and equations processed from df."
+    },
+    {
+      "name": "train_pairs",
+      "description": "Training data pairs obtained after splitting the pairs into training and testing for k-fold validation."
+    },
+    {
+      "name": "test_pairs",
+      "description": "Testing data pairs created from the pairs not included in the training phase."
+    },
+    {
+      "name": "stats",
+      "description": "Dictionary to hold accumulated statistics during training including loss and accuracies."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "training_paths",
+      "creation": "Populated through os.walk to identify files in the input directory.",
+      "flow": "Used to categorize training data into arithmetic and probability for further processing."
+    },
+    {
+      "variable": "df",
+      "creation": "Constructed from reading lines in a text file, parsing them into questions and answers.",
+      "flow": "Used to generate 'pairs' consisting of input questions and goals for model training."
+    },
+    {
+      "variable": "pairs",
+      "creation": "Created from the DataFrame by structuring questions and answers.",
+      "flow": "Used to configure train_pairs and test_pairs for model training and evaluation."
+    },
+    {
+      "variable": "train_pairs",
+      "creation": "Derived from 'pairs' divided for k-fold cross-validation.",
+      "flow": "Trained using encoder, predict, generate, and merge models."
+    },
+    {
+      "variable": "test_pairs",
+      "creation": "Created from the remaining pairs after train_pairs selection.",
+      "flow": "Used for model evaluation during the testing phase to compute accuracy stats."
+    },
+    {
+      "variable": "stats",
+      "creation": "Initialized to track loss and accuracy metrics during training.",
+      "flow": "Updated with training metrics after each epoch and used for plotting results."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "EncoderSeq",
+      "input_features": "questions from the training dataset.",
+      "target_variable": "correct answer/output for the questions.",
+      "hyperparameters": {
+        "embedding_size": 128,
+        "hidden_size": 512,
+        "n_layers": 2,
+        "batch_size": 64,
+        "learning_rate": 1e-3
+      }
+    },
+    {
+      "model_name": "Prediction",
+      "input_features": "internal outputs from the Encoder.",
+      "target_variable": "predictions of math problem resolutions.",
+      "hyperparameters": {
+        "hidden_size": 512,
+        "op_nums": 5
+      }
+    },
+    {
+      "model_name": "GenerateNode",
+      "input_features": "outputs from the Prediction model.",
+      "target_variable": "final generated equations for the problems.",
+      "hyperparameters": {
+        "hidden_size": 512,
+        "embedding_size": 128
+      }
+    },
+    {
+      "model_name": "Merge",
+      "input_features": "intermediate outputs from models.",
+      "target_variable": "integrated output for final answer generation.",
+      "hyperparameters": {
+        "hidden_size": 512,
+        "embedding_size": 128
+      }
+    }
+  ]
+}

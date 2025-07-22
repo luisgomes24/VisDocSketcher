@@ -1,0 +1,10 @@
+graph TD;
+    A["📁 Load Data <img src='file.svg'/> <br/> df = pd.read_csv(...)"] --> B["🔍 Explore Data <img src='table.svg'/> <br/> df.head()"];
+    B --> C["📊 Data Overview <img src='table.svg'/> <br/> df.info(), df.describe()"];
+    C --> D["⚠️ Check Missing Values <img src='table.svg'/> <br/> df.isnull().sum()"];
+    D --> E["🔄 Data Preprocessing: Type Changes"];
+    E --> F["💡 Feature Engineering: Total Charges <img src='column_split.svg'/>"];
+    F --> G["💰 Customer Lifetime Value Calculation <img src='brain.svg'/>"];
+    G --> H["📊 Segment Analysis <img src='table.svg'/> <br/> final_df.groupby(...)"];
+    H --> I["📊 Summary of Segments <img src='table.svg'/>"];
+    I --> J["📉 Final Insights & Conclusion"];

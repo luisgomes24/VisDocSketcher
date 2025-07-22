@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Variables
+    A["nums"] -->|Check for lucky number| B["has_lucky_number()"]
+    %% Description for nums: A list of numbers to check for lucky numbers.
+
+    L["L"] -->|Compare elements| C["elementwise_greater_than()"]
+    C -->|With threshold| thresh["thresh"]
+    %% Description for L: A list of numbers for element-wise comparison.
+    %% Description for thresh: The threshold number for comparison.
+
+    meals["meals"] -->|Check consecutive meals| D["menu_is_boring()"]
+    %% Description for meals: A list of meals served over time for consecutive check.
+
+    n_runs["n_runs"] -->|Simulate runs| E["estimate_average_slot_payout()"]
+    %% Description for n_runs: Number of runs to simulate for slot machine payout estimation.
+
+    %% Outputs
+    B --> F{"Result: Lucky Number Check"}
+    C --> G{"Result: Greater Than Comparison"}
+    D --> H{"Result: Boring Menu Check"}
+    E --> I{"Result: Slot Machine Payout Estimate"}

@@ -1,0 +1,27 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🛠️ Define Heuristic <img src='brain.svg'/>"]
+    B --> C["💻 Define Agent <img src='brain.svg'/>"]
+    C --> D["🎮 Play Game <img src='image.svg'/>"]
+    D --> E["📊 Evaluate Performance <img src='barplot_template.svg'/>"]
+    E --> F["📤 Submit Agent <img src='image.svg'/>"]
+
+    subgraph Data Loading
+        A
+    end
+
+    subgraph Heuristic Definition
+        B
+    end
+
+    subgraph Agent Definition
+        C
+    end
+
+    subgraph Game Play
+        D
+    end
+
+    subgraph Evaluation
+        E
+        F
+    end

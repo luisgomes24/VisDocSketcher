@@ -1,0 +1,11 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Database"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Data File"];
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Table
+    <img src='dummy_plots/barplot_template.svg'/> <br/> Bar Plot"]; 
+    C --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Column Selection"];
+    C --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Row Split"];
+    D --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model
+    <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Scatter Plot"];  
+    F --> O["<img src='icons/image.svg' width=100 height=100/> <br/> Output Image
+    <img src='dummy_plots/lineplot_template.svg'/> <br/> Image Plot"];  
+    E --> F;

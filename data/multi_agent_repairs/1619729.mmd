@@ -1,0 +1,21 @@
+```mermaid
+flowchart TD
+
+%% Data Variables
+A["df"] -->|DataFrame for plotting| B["Plotting Functions"]
+
+%% Variables used in plotting
+subgraph Parameters
+  C["nHistogramShown"]
+  D["nHistogramPerRow"]
+  E["graphWidth"]
+  F["plotSize"]
+  G["textSize"]
+end
+
+B --> C
+B --> D
+B --> E
+B --> F
+B --> G
+```

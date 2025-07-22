@@ -1,0 +1,49 @@
+%% This is a Mermaid diagram representing the data flow and processing pipeline 
+flowchart TD
+
+    %% Data Sources
+    A1["train.csv"]:::dataSource --> B1["Load Train Data"]
+    A2["test.csv"]:::dataSource --> B2["Load Test Data"]
+
+    %% Data Preparation and Cleaning
+    B1 --> C1["Convert Text to Lowercase"]
+    C1 --> C2["Remove Special Characters"]
+    C2 --> C3["Remove Stopwords"]
+    C3 --> C4["Stemming"]
+    C4 --> C5["TF-IDF Vectorization"]
+
+    %% Data Variables
+    C5 --> D1["X: Feature Variables (Train)"]
+    B1 --> D2["Y: Target Variables"]
+
+    %% Splitting Data
+    D1 --> E1["Split: X_train, X_val"]
+    D2 --> E2["Split: y_train, y_val"]
+
+    %% Model Training
+    E1 --> F1["MultinomialNB Model"]
+    F1 --> G1["Train Model with X_train_tf, y_train"]
+    G1 --> H1["Evaluate Model with X_val_tf, y_val"]
+
+    %% Predictions
+    B2 --> I1["Preprocess Test Text"]
+    I1 --> J1["TF-IDF on Test Data"]
+    J1 --> K1["Predict with Model"]
+    K1 --> L1["Generate Submission CSV"]
+
+    %% Styling the nodes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#555,stroke-width:2px;
+    class A1,A2,d1,e1,g1,h1 process;
+```
+
+%% Comments for each node
+%% A1 & A2: Represent the data sources, i.e., the CSV files
+%% B1 & B2: Load the data using pandas read_csv
+%% C1-C4: Steps for cleaning and pre-processing text data
+%% D1 & D2: Assign data to feature and target variables
+%% E1 & E2: Train-test split for model evaluation
+%% F1: Multinomial Naive Bayes, a classification model used
+%% G1 & H1: Steps for model training and evaluation
+%% I1-J1: Steps to preprocess and vectorize test data for prediction
+%% K1 & L1: Model prediction and output result to CSV

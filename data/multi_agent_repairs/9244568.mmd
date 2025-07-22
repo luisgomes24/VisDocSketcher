@@ -1,0 +1,46 @@
+```mermaid
+flowchart TD
+    subgraph data_sources [Data Sources]
+        ds1(["ca_train.csv"]):::file -->|Training dataset| train
+        ds2(["ca_test.csv"]):::file -->|Testing dataset| test
+        ds3(["ca_submission.csv"]):::file -->|Submission template| submission
+    end
+    subgraph data_preparation [Data Preparation]
+        train -->|Filter ConfirmedCases>0| train_new
+        train_new -->|Feature Engineering| X
+        train_new -->|Target Extraction| y
+        test --> test_data
+    end
+    subgraph modeling [Modeling]
+        subgraph confirmed_cases_model [Confirmed Cases Models]
+            X & y -->|KNeighborsRegressor| confirmed_cases
+            X & y -->|LinearRegression| confirmed_cases
+            X & y -->|RandomForestRegressor| confirmed_cases
+            X & y -->|DecisionTreeRegressor| confirmed_cases
+            X & y -->|BayesianRidge| confirmed_cases
+            X & y -->|Lasso| confirmed_cases
+        end
+        subgraph fatalities_model [Fatalities Models]
+            X & y -->|GradientBoostingRegressor| confirmed_death
+            X & y -->|LinearRegression| confirmed_death
+            X & y -->|RandomForestRegressor| confirmed_death
+            X & y -->|DecisionTreeRegressor| confirmed_death
+            X & y -->|BayesianRidge| confirmed_death
+            X & y -->|Lasso| confirmed_death
+        end
+    end
+    subgraph evaluation [Model Evaluation]
+        confirmed_cases -->|R^2 Score| confirmed_cases
+        confirmed_death -->|R^2 Score| confirmed_death
+    end
+    subgraph prediction [Prediction]
+        test_data -->|Predict ConfirmedCases| test_data
+        test_data -->|Predict Fatalities| test_data
+    end
+    subgraph submission [Submission]
+        test_data -->|Prepare Submission| submission
+        submission -->|Save Predictions| ds3
+    end
+
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+```

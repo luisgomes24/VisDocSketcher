@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["⚙️ Preprocess Data"]
+    B --> C["📊 Exploratory Data Analysis <img src='dummy_plots/countplot_template.svg' />"]
+    C --> D["🔍 Text Processing"]
+    D --> E["🔄 Train-Test Split"]
+    E --> F["🧮 Feature Extraction using Count Vectorizer"]
+    F --> G["🤖 Model Training with Naive Bayes"]
+    G --> H["📊 Predictions <img src='dummy_plots/boxplot_template.svg' />"]
+    H --> I["📈 Evaluation <img src='icons/brain.svg' />"]
+    I --> J["📊 Visualization of Results <img src='dummy_plots/hist_template.svg' />"]
+    J --> K["📣 Summary of Findings"]

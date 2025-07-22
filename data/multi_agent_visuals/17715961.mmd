@@ -1,0 +1,16 @@
+flowchart TD
+    %% Node for Data Source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /train.csv/"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> home_data"]
+    %% Node for home_data
+    B -->|Calculate| C["<img src='dummy_plots/lineplot_template.svg'/> <br/> /avg_lot_size/"]
+    B -->|Calculate| D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> /newest_home_age/"]
+    %% Nodes for Calculated Variables
+    C -->|Used for analysis| E["<img src='dummy_plots/barplot_template.svg'/> <br/> Questions about dataset"]
+    D -->|Used for analysis| E
+    
+    %% Comments for clarification
+    %% A: Data source containing house prices from Iowa
+    %% B: DataFrame derived from CSV, containing features like lot size, year built, etc.
+    %% C: Calculated average lot size from home_data
+    %% D: Age of the newest home calculated from home_data
+    %% E: Analysis and queries based on calculated data

@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/nflplaybyplay2009to2016/NFL Play by Play 2009-2017 (v4).csv",
+      "description": "Dataset containing play-by-play data from NFL games from 2009 to 2017."
+    },
+    {
+      "file_path": "../input/building-permit-applications-data/Building_Permits.csv",
+      "description": "Dataset containing records of building permits issued in San Francisco."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "nfl_data",
+      "description": "DataFrame containing NFL play-by-play data."
+    },
+    {
+      "variable_name": "sf_permits",
+      "description": "DataFrame containing San Francisco building permit application data."
+    },
+    {
+      "variable_name": "missing_values_count",
+      "description": "Series containing the count of missing values in each column of nfl_data."
+    },
+    {
+      "variable_name": "total_missing",
+      "description": "Total number of missing values in the nfl_data DataFrame."
+    },
+    {
+      "variable_name": "columns_with_na_dropped",
+      "description": "DataFrame version of nfl_data after dropping all columns with missing values."
+    },
+    {
+      "variable_name": "subset_nfl_data",
+      "description": "Subset of nfl_data, selected to view a smaller portion of columns."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "nfl_data",
+      "creation_method": "read_csv",
+      "flow": "Explored for missing values, processed (dropping columns/rows), used for filling missing values."
+    },
+    {
+      "variable_name": "sf_permits",
+      "creation_method": "read_csv",
+      "flow": "Explored similarly to nfl_data for missing values."
+    },
+    {
+      "variable_name": "missing_values_count",
+      "creation_method": "isnull().sum()",
+      "flow": "Used to assess how many values are missing in the nfl_data."
+    },
+    {
+      "variable_name": "total_missing",
+      "creation_method": "sum()",
+      "flow": "Calculated to provide an overview of total missing values."
+    },
+    {
+      "variable_name": "columns_with_na_dropped",
+      "creation_method": "dropna(axis=1)",
+      "flow": "Displayed after processing to show impact of dropping columns."
+    },
+    {
+      "variable_name": "subset_nfl_data",
+      "creation_method": "loc[]",
+      "flow": "Created for specific analysis of sample data showing how to handle missing values."
+    }
+  ],
+  "models": []
+}

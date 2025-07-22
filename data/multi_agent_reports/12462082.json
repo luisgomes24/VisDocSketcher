@@ -1,0 +1,88 @@
+{
+  "data_sources": [
+    {
+      "file_name": "list_attr_celeba.csv",
+      "description": "Contains attributes of images in the CelebA dataset"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "device",
+      "description": "Indicates the device used for computation (CPU or CUDA)"
+    },
+    {
+      "variable_name": "hidden_dim",
+      "description": "Size of the hidden layers in the neural network"
+    },
+    {
+      "variable_name": "batch_size",
+      "description": "Number of samples processed before the model is updated"
+    },
+    {
+      "variable_name": "max_epochs",
+      "description": "Maximum number of training epochs"
+    },
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data"
+    },
+    {
+      "variable_name": "val",
+      "description": "DataFrame containing validation data"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test data"
+    },
+    {
+      "variable_name": "classif",
+      "description": "Neural network model for classification"
+    },
+    {
+      "variable_name": "classif_loss",
+      "description": "Loss function used for training the model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Sampled and divided into training, validation, and test sets"
+    },
+    {
+      "variable_name": "train",
+      "creation_method": "df.iloc",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable_name": "val",
+      "creation_method": "df.iloc",
+      "flow": "Used for validation during training"
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "df.iloc",
+      "flow": "Used for testing the model after training"
+    },
+    {
+      "variable_name": "classif",
+      "creation_method": "Classif()",
+      "flow": "Trained using batches from training data and validation checks"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Classif",
+      "input_features": "Image tensors from CelebA dataset",
+      "target_variable": "Attributes associated with images",
+      "hyperparameters": {
+        "hidden_layers": [
+          "make_classif_block with hidden_dim",
+          "make_classif_block with hidden_dim * 2",
+          "make_classif_block with hidden_dim * 4"
+        ],
+        "final_layer": "Tanh activation"
+      }
+    }
+  ]
+}

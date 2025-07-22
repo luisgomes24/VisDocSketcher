@@ -1,0 +1,14 @@
+```mermaid
+flowchart TD
+    A["Titanic Dataset CSV"] --> |"Read CSV"| B["titanic"]
+    B --> |"Select Columns"| C["df"]
+    C --> |"Drop Sex & Encode Gender"| D["df1"]
+    D --> |"Define Target Variable"| E["y"]
+    D --> |"Define Features"| F["X"]
+    F --> |"Split Data"| G["X_train, X_test"]
+    D --> |"Split Target"| H["y_train, y_test"]
+    H --> |"Fit Model"| I["DecisionTreeClassifier"]
+    G --> |"Predict"| J["y_pred"]
+    J --> |"Confusion Matrix"| K["cm"]
+    K --> |"Visualize Results"| L["Heatmap"]
+```

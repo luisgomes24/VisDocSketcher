@@ -1,0 +1,26 @@
+```mermaid
+flowchart TD
+    %% Data source node
+    A["../input/f.csv"] --> |"Read 1000 Rows"| B["df1"]
+    
+    %% Data reading nodes
+    B --> |"Calculate Shape"| C["nRow, nCol"]
+    B --> |"Generate Graphs"| D["Distribution Graphs"]
+    B --> |"Create Matrix"| E["Correlation Matrix"]
+    B --> |"Create Plots"| F["Scatter and Density Plots"]
+    
+    %% Comments for nodes
+    subgraph comments
+    A_comment["Contains data for analysis."]
+    B_comment["DataFrame created by reading CSV."]
+    nRowsRead_comment["Number of rows to read."]
+    C_comment["Number of rows and columns."]
+    
+    end
+    
+    %% Linking comments to nodes
+    A_comment --> A
+    B_comment --> B
+    nRowsRead_comment --> |"Used in reading CSV"| B
+    C_comment --> C
+```

@@ -1,0 +1,44 @@
+%% This diagram visualizes the data processing and machine learning workflow of the notebook.
+
+flowchart TD
+
+    %% Data Sources
+    A["/US_Crime_Data.csv/"]:::data_source --> B
+
+    %% Data Import
+    B["/data\nRaw DataFrame/"]:::data_var
+    %% Explanation: Initial DataFrame containing raw CSV data.
+    
+    B --> |pd.read_csv| C["/df\n'Title' Column DataFrame/"]:::data_var
+    %% Explanation: Extracts 'Title' column and drops missing values.
+
+    %% Text Processing
+    C --> |clean_text| D["/tokens\nTokenized Titles/"]:::data_var
+    %% Explanation: Contains cleaned, lowercased, and tokenized headlines.
+
+    %% Sequence Preparation
+    D --> |tf.keras.preprocessing| E["/x\nInput Sequences/"]:::data_var
+    %% Explanation: Input sequence preparation for model training.
+
+    D --> |tf.keras.utils| F["/y\nOutput Labels/"]:::data_var
+    %% Explanation: One-hot encoded output labels for training.
+
+    %% Model Training
+    E --> |model.fit| G["LSTM Model"]:::model
+    F --> |model.fit| G
+    %% Explanation: LSTM neural network model with specified architecture.
+
+    %% Vocabulary Processing
+    D --> H["/vocab_size\nVocabulary Size/"]:::data_var
+    %% Explanation: Total number of unique words.
+
+    D --> I["/vocab_array\nVocabulary Array/"]:::data_var
+    %% Explanation: Array of unique words for predictions.
+
+    %% Model Saving
+    G --> |Save to| J["model.h5"]:::data_var
+    %% Explanation: The trained model is saved for future use.
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef model fill:#f96,stroke:#333,stroke-width:3px;

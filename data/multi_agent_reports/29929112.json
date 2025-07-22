@@ -1,0 +1,127 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/automobilepartsindentification/Automobile-parts",
+      "description": "Dataset containing images of automobile parts categorized in folders."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_transform",
+      "description": "Transformations applied to training images, including resizing and random flips."
+    },
+    {
+      "variable_name": "test_transform",
+      "description": "Transformations applied to test images, mainly resizing."
+    },
+    {
+      "variable_name": "main_image",
+      "description": "Dataset containing all images along with their class labels."
+    },
+    {
+      "variable_name": "train_loader",
+      "description": "DataLoader for training dataset, shuffling and batching data for training."
+    },
+    {
+      "variable_name": "test_loader",
+      "description": "DataLoader for test dataset, batching data for evaluation."
+    },
+    {
+      "variable_name": "model",
+      "description": "The ResNet-50 model used for image classification after modifying the final layer."
+    },
+    {
+      "variable_name": "optimizer",
+      "description": "Adam optimizer for model training."
+    },
+    {
+      "variable_name": "criterion",
+      "description": "Loss function (Cross-Entropy Loss) used to evaluate model performance."
+    },
+    {
+      "variable_name": "scheduler",
+      "description": "Learning rate scheduler that reduces the learning rate when a metric stops improving."
+    },
+    {
+      "variable_name": "train_plot",
+      "description": "List to store training loss values for each epoch."
+    },
+    {
+      "variable_name": "test_plot",
+      "description": "List to store test loss values for each epoch."
+    },
+    {
+      "variable_name": "acc_plot",
+      "description": "List to store accuracy values for each epoch."
+    },
+    {
+      "variable_name": "loss_data",
+      "description": "Loss values obtained through linear interpolation between two models during analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "main_image",
+      "creation_method": "torchvision.datasets.ImageFolder",
+      "flow": "Split into train and test sets; used in DataLoader."
+    },
+    {
+      "variable_name": "train_image",
+      "creation_method": "train_test_split",
+      "flow": "Used in train_loader for training the model."
+    },
+    {
+      "variable_name": "test_image",
+      "creation_method": "train_test_split",
+      "flow": "Used in test_loader for evaluating the model."
+    },
+    {
+      "variable_name": "train_loader",
+      "creation_method": "torch.utils.data.DataLoader",
+      "flow": "Used for training the model; iterated over within training loop."
+    },
+    {
+      "variable_name": "test_loader",
+      "creation_method": "torch.utils.data.DataLoader",
+      "flow": "Used for testing the model; evaluated after training loop."
+    },
+    {
+      "variable_name": "model",
+      "creation_method": "torchvision.models.resnet50"
+      "flow": "Trained using inputs from train_loader and optimizer for weight updates."
+    },
+    {
+      "variable_name": "train_plot",
+      "creation_method": "list initialization",
+      "flow": "Filled with training losses during training loop."
+    },
+    {
+      "variable_name": "test_plot",
+      "creation_method": "list initialization",
+      "flow": "Filled with test losses during testing phase."
+    },
+    {
+      "variable_name": "acc_plot",
+      "creation_method": "list initialization",
+      "flow": "Filled with accuracy for each epoch during training."
+    },
+    {
+      "variable_name": "loss_data",
+      "creation_method": "loss_landscapes.linear_interpolation",
+      "flow": "Utilized for analyzing model loss behavior during training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNet-50",
+      "input_features": "Image data transformed by train_transform",
+      "target_variable": "Class labels for automobile parts",
+      "hyperparameters": {
+        "learning_rate": "0.003",
+        "optimizer": "Adam",
+        "epochs": "10",
+        "scheduler_patience": "5"
+      }
+    }
+  ]
+}

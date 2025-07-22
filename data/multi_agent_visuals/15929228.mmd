@@ -1,0 +1,29 @@
+flowchart TD
+    %% Node for data source with icon
+    A["<img src='icons/file.svg' width=100 height=100/> <br/>📂<br/>train.csv"]
+    
+    %% Node for data transformation
+    A -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/>🔍<br/>home_data"];
+    
+    %% Nodes for extracted variables
+    B -->|Extract SalePrice| C["<img src='icons/column_split.svg' width=100 height=100/> <br/>💰<br/>y"];
+    B -->|Extract features| D["<img src='icons/column_split.svg' width=100 height=100/> <br/>📊<br/>X"];
+    
+    %% Node for model
+    C & D -->|Train| E["<img src='icons/brain.svg' width=100 height=100/> <br/>🧠<br/>iowa_model: DecisionTreeRegressor"];
+    
+    %% Node for predictions
+    E -->|Predict| F["<img src='icons/table.svg' width=100 height=100/> <br/>🔮<br/>predictions"];
+    
+    %% Node for evaluation
+    F -->|Evaluate predictions| G["<img src='dummy_plots/barplot_template.svg'/> <br/>📈<br/>evaluation"];
+
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef evaluation fill:#FFCDD2,stroke:#333,stroke-width:2px;
+
+    class A dataSource;
+    class B,C,D,F dataVariable;
+    class E model;
+    class G evaluation;

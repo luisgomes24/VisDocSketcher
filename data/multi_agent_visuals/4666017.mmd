@@ -1,0 +1,12 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='dummy_plots/hist_template.svg'/> <br/> Dataset"]
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Engineering"]
+    C --> D["<img src='dummy_plots/hist_template.svg'/> <br/> Preprocessed Data"]
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBClassifier"]
+    D --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> EllipticEnvelope"]
+    D --> G["<img src='icons/brain.svg' width=100 height=100/> <br/> IsolationForest"]
+    D --> H["<img src='icons/brain.svg' width=100 height=100/> <br/> LocalOutlierFactor"]
+    E --> I["<img src='dummy_plots/hist_template.svg'/> <br/> Output"]
+    F --> I
+    G --> I
+    H --> I

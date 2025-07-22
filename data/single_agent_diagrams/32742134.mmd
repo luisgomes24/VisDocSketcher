@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["📊 Load Images into DocumentArray"]
+    B --> C["🔍 Preprocess Images <img src='icons/brain.svg' />"]
+    C --> D["📸 Embed Images with Model"]
+    D --> E["🔍 Match Query Image <img src='icons/column_split.svg' />"]
+    E --> F["🔍 Display Similar Images <img src='icons/image.svg' />"]
+    
+    F --> G["🖼️ Launch Gradio Interface <img src='icons/brain.svg' />"]

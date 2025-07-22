@@ -1,0 +1,81 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/miniddsm2/MINI-DDSM-Complete-JPEG-8/DataWMask.xlsx",
+      "description": "Excel file containing metadata about breast cancer images and corresponding masks."
+    },
+    {
+      "folder": "../input/miniddsm2/MINI-DDSM-Complete-JPEG-8/",
+      "description": "Folder containing breast cancer images."
+    },
+    {
+      "folder": "../input/miniddsm2/Data-MoreThanTwoMasks/",
+      "description": "Folder containing additional masks for the images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the content of the Excel file including image paths and their status."
+    },
+    {
+      "name": "CFG",
+      "description": "Configuration class holding various settings such as paths and ratios for data splitting."
+    },
+    {
+      "name": "path_result",
+      "description": "Base path for storing results, including images and labels."
+    },
+    {
+      "name": "mapping",
+      "description": "Dictionary mapping status labels to corresponding numeric values for YOLO format."
+    },
+    {
+      "name": "yolo_txt",
+      "description": "Formatted string containing detected bounding boxes in YOLO format for a specific image."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "created": "pd.read_excel(CFG.path_xlsx, engine='openpyxl')",
+      "flows_to": "Used in image processing and YOLO format labeling."
+    },
+    {
+      "variable": "CFG",
+      "created": "Class definition.",
+      "flows_to": "Defines paths and configuration settings used across the notebook."
+    },
+    {
+      "variable": "path_result",
+      "created": "String definition for results storage.",
+      "flows_to": "Directories created to store images and labels according to their processing."
+    },
+    {
+      "variable": "yolo_txt",
+      "created": "Formed during bounding box extraction from masks.",
+      "flows_to": "Saved as .txt files corresponding to images."
+    }
+  ],
+  "models": [
+    {
+      "model": "YOLOv5",
+      "input_features": [
+        "Breast cancer images",
+        "Bounding boxes from masks"
+      ],
+      "target_variable": "Image status (Benign, Cancer, Normal)",
+      "hyperparameters": {
+        "img": "CFG.IMG_SIZE",
+        "batch": 8,
+        "epochs": 1000,
+        "data": "./data/breast_cancer.yaml",
+        "weights": "yolov5m.pt",
+        "save_period": 1,
+        "project": "breast_cancer",
+        "name": "runrun",
+        "workers": 8
+      }
+    }
+  ]
+}

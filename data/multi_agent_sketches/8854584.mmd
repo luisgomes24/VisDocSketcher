@@ -1,0 +1,12 @@
+flowchart TD
+    
+    %% Load the wine dataset
+    A[Wine Dataset] -->|load_wine()| B{{"wine_dataset"}}
+    
+    %% Create variables for features and target
+    B -->|pd.DataFrame(wine_dataset['data'])| C{{"X"}}
+    B -->|pd.DataFrame(wine_dataset['target'])| D{{"y"}}
+    
+    %% Use the data for visualization
+    C -->|Visualizations| E[Visualize Data]
+    D -->|Visualizations| E

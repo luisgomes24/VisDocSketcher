@@ -1,0 +1,30 @@
+%% Data Sources
+- **child_wishlist.csv**: Contains children's gift preferences.
+- **gift_goodkids.csv**: Contains available gifts and their quantities.
+
+%% Data Variables
+- **child_prefs**: Preferences of children for gifts (numpy array).
+- **gift_prefs**: Types and quantities of gifts available (numpy array).
+- **twins**: Used to identify twin children (integer).
+- **n_children**: Total number of children.
+- **n_gift_type**: Total number of gift types.
+- **n_gift_quantity**: Total quantities of each gift type available.
+- **gift_matches**: Tuples of child indices and their corresponding chosen gift indices.
+- **gift_counter**: Counts how many of each gift type have been allocated to children.
+- **p**: Holds the final gift assignments for each child (DataFrame).
+
+%% Data Flow
+1. **Load Data**
+   - Load `child_prefs` from **child_wishlist.csv**
+   - Load `gift_prefs` from **gift_goodkids.csv**
+
+2. **Initialization**
+   - Initialize `gift_counter` to track allocation.
+   - Prepare `gift_matches` to store matched results.
+
+3. **Processing**
+   - Iterate over `child_prefs` to allocate gifts based on preferences and availability (`gift_counter`).
+   - Record results in `gift_matches`.
+
+4. **Save Results**
+   - Convert `gift_matches` to DataFrame `p` and save to 'nice_inversion_benchmark.csv'.

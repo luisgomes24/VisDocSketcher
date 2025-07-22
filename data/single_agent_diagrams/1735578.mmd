@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> 'Competitions.csv'"] --> B["🛠️ Preprocess Data"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg'/> <br/> of Columns"]
+    C --> D["🔗 Correlation Matrix <img src='boxplot_template.svg'/>"]
+    D --> E["📈 Scatter Matrix <img src='scatter_plot_template.svg'/>"]
+    E --> F["📂 Load Data <img src='file.svg'/> <br/> 'CompetitionTags.csv'"]
+    F --> B
+    F --> C
+    F --> D
+    F --> E
+    E --> G["📂 Load Data <img src='file.svg'/> <br/> 'Datasets.csv'"]
+    G --> B
+    G --> C
+    G --> D
+    G --> E

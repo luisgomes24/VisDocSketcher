@@ -1,0 +1,26 @@
+flowchart TD
+  %% Nodes for data sources and models
+  A1["pipeline('sentiment-analysis')"] -- Classifier\nPerforms sentiment analysis on text --> C1("Classifier")
+  A2["pipeline('text-generation')"] -- Generator\nGenerates text based on input prompt --> C2("Generator")
+  A3["pipeline('conversational', model='microsoft/DialoGPT-medium')"] -- Chatbot\nFacilitates a conversation with user input --> C3("Chatbot")
+  A4["DiffusionPipeline.from_pretrained('google/ddpm-cifar10-32')"] -- Pipe\nGenerates images based on prompts --> C4("Pipe")
+
+  %% ML Model and Tokenizer for sentiment analysis
+  B1["AutoModelForSequenceClassification.from_pretrained(model_name)"] -- DistilBERT\nModel for sentiment analysis --> D1("Model")
+  B2["AutoTokenizer.from_pretrained(model_name)"] -- Tokenizer\nProcesses inputs for model --> D2("Tokenizer")
+  D2 --> |Tokenizes| D3["Batch\nTokenized Inputs"]
+  
+  %% Sentiment Analysis Flow
+  D3 --> |Input to Model| D1 --> |Generates Outputs| D4["Outputs\nInference Results"]
+  D4 --> |Softmax| D5["Predictions\nProbabilities per Class"]
+  D5 --> |Argmax| D6["Labels\nPredicted Sentiment"]
+
+  %% Relationships between components
+  linkStyle default stroke:#0070f3,stroke-width:2px;
+
+  %% Comments
+  subgraph S0 [Sentiment Analysis]
+    D1 --> D4
+    D4 --> D5
+    D5 --> D6
+  end

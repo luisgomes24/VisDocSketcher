@@ -1,0 +1,13 @@
+flowchart TD
+    A[eegout777.csv] -->|Read CSV| B[df]
+    B[df] -->|Create| C[x]
+    B[df] -->|Create Plot| E[gp]
+    B[df] -->|Drop Columns| B1[Cleaned df]
+    B1 -->|Rename Columns| B2[Renamed df]
+    C[x] -->|Analyze| C1[Analysis of Null Values]
+    E[gp] -->|Plot| E1[EEG Voltage Over Time]
+    %% Comments for clarity
+    %%   click A "This node represents the EEG data source, a CSV file" 
+    %%   click B "DataFrame containing raw EEG voltage data with timestamps"
+    %%   click C "Variable for counting null values"
+    %%   click E "Graph plot showing voltage data over time"

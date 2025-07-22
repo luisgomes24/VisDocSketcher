@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/step01-csv-parquet/dtrain.parquet",
+      "description": "Training data containing market prediction data."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the processed training data after initial cleaning and feature engineering."
+    },
+    {
+      "name": "X_train",
+      "description": "Features used for training, extracted from the training DataFrame."
+    },
+    {
+      "name": "y_train",
+      "description": "Target labels for training, indicating whether the reward is positive or not."
+    },
+    {
+      "name": "X_valid",
+      "description": "Features used for validation, extracted from the valid DataFrame."
+    },
+    {
+      "name": "y_valid",
+      "description": "Target labels for validation."
+    },
+    {
+      "name": "f_mean",
+      "description": "Mean values of the training features for filling missing values in the test dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_parquet() and subsequent queries and feature engineering.",
+      "flow": "Used to derive X_train, y_train, X_valid, and y_valid."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Extracted from train DataFrame.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Extracted from train DataFrame.",
+      "flow": "Used as target labels in model training."
+    },
+    {
+      "variable": "X_valid",
+      "creation": "Extracted from valid DataFrame.",
+      "flow": "Used for validation during model training."
+    },
+    {
+      "variable": "y_valid",
+      "creation": "Extracted from valid DataFrame.",
+      "flow": "Used as target labels during validation."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "ResNet",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "hidden_size": 256,
+        "dropout_rate": 0.2,
+        "label_smoothing": 0.005,
+        "learning_rate": 0.001
+      }
+    }
+  ]
+}

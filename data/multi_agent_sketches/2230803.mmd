@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A[CSV: Music EEG Data] 
+    B[CSV: Reading EEG Data]
+
+    %% Data Variables
+    C[df1] 
+    D[df2]
+
+    %% Data Flow
+    E[Exploratory Plots]
+    F[Plot Per Column Distribution]
+    G[Plot Correlation Matrix]
+    H[Plot Scatter Matrix]
+
+    %% Relationships
+    %% Load CSV Data into DataFrames
+    A -->|pd.read_csv| C
+    B -->|pd.read_csv| D
+
+    %% DataFrame Usage
+    C -->|Used for| E
+    C -->|Input to| F
+    C -->|Input to| G
+    C -->|Input to| H
+
+    D -->|Used for| E
+    D -->|Input to| F
+    D -->|Input to| G
+    D -->|Input to| H

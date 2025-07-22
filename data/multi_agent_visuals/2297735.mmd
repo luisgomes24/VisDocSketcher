@@ -1,0 +1,18 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> df_train"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> df_test"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_month_counts_train"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_month_counts_test"]
+    E["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_month_means"]
+    F["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_train_new"]
+    G["<img src='icons/column_split.svg' width=100 height=100/> <br/> df_feature_groups"]
+    
+    A -->|"Read"| C
+    A -->|"Read"| F
+    B -->|"Read"| D
+    B -->|"Read"| E
+    C -->|"Counts by Month"| G
+    D -->|"Counts by Month"| G
+    E -->|"Mean Target"| G
+    F -->|"Cleaned For Analysis"| G
+

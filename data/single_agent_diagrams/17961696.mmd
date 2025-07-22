@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🔎 Data Analysis <img src='table.svg' /> <br/> df.head()"]
+    B --> C1["🌐 Data Shape <img src='table.svg' /> <br/> df.shape"]
+    B --> C2["🔍 Data Types <img src='table.svg' /> <br/> df.info()"]
+    B --> C3["❌ Null Values <img src='table.svg' /> <br/> df.isnull().sum()"]
+    C3 --> D["🛠️ Data Preprocessing <img src='column_split.svg' /> <br/> df.fillna(...), df.dropna()"]
+    D --> E["📊 Visualization <img src='barplot_template.svg' /> <br/> amVdf('Year')"]
+    E --> F["📈 Visualization Summary <img src='scatter_plot_template.svg' /> <br/> Total Injuries & Deaths"]
+    F --> G["📋 Report <img src='table.svg' /> <br/> pp.ProfileReport(df)"]
+    G --> H["💡 Conclusion <img src='image.svg' /> <br/> Total Body Count"]

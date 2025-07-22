@@ -1,0 +1,46 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/itemLicitacao.csv",
+      "description": "Dataset containing information about bidding items."
+    },
+    {
+      "file": "../input/licitacao.csv",
+      "description": "Dataset containing information about bidding processes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "item",
+      "description": "DataFrame containing details about items in bidding processes."
+    },
+    {
+      "name": "licit",
+      "description": "DataFrame containing details about bidding processes."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "item",
+      "created": "pd.read_csv('../input/itemLicitacao.csv')",
+      "flows_to": [
+        "item.shape()",
+        "item.index",
+        "item.columns",
+        "item.info()",
+        "item.count()",
+        "item.describe()"
+      ]
+    },
+    {
+      "variable": "licit",
+      "created": "pd.read_csv('../input/licitacao.csv')",
+      "flows_to": [
+        "licit.modalidade.value_counts()",
+        "sns.countplot(y='modalidade', data=licit)",
+        "sns.countplot(y='situacao', data=licit)"
+      ]
+    }
+  ],
+  "models": []
+}

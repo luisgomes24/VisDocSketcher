@@ -1,0 +1,14 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg'/>"] --> B["📊 EDA & Dataset Overview"];
+    B --> C["📊 Barplot Class Distribution <img src='barplot_template.svg'/>"];
+    C --> D["🚨 Data Imbalance Observations"];
+    D --> E["💻 Data Preprocessing"];
+    E --> F["❌ Drop Unnecessary Features"];
+    F --> G["🔄 Encode Categorical Variables"];
+    G --> H["🧪 Model Definition"];
+    H --> I["🧪 Training & Testing Split"];
+    I --> J["🔍 Build Random Forest Model"];
+    J --> K["📈 Fit the Model"];
+    K --> L["🔮 Predict Test Values"];
+    L --> M["📊 Evaluate Model <img src='barplot_template.svg'/>"];
+    M --> N["📤 Save Predictions"];

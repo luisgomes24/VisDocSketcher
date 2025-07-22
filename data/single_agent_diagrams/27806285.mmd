@@ -1,0 +1,15 @@
+graph TD;
+    A["📂 Load Data"] --> B["<img src='icons/file.svg'/> <br/> Load Train Data"];
+    A --> C["<img src='icons/file.svg'/> <br/> Load Test Data"];
+    B --> D["📊 Data Overview"];
+    C --> D;
+    D --> E["🧹 Data Preprocessing"];
+    E --> F["🧼 Handle Missing Values"];
+    F --> G["🗂 Drop Columns with High Nulls"];
+    G --> H["🎨 Exploratory Data Analysis"];
+    H --> I["📊 Visualizations"];
+    I --> J["📉 Train/Test Split"];
+    J --> K["🧠 Train Models"];
+    K --> L["🔍 Evaluate Models"];
+    L --> M["📊 Model Predictions"];
+    M --> N["📥 Save Output"];

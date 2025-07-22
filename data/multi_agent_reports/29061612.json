@@ -1,0 +1,151 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/titanic/train.csv",
+      "description": "Training dataset containing passengers' details and survival outcome."
+    },
+    {
+      "file": "/kaggle/input/titanic/test.csv",
+      "description": "Test dataset containing passengers' details without survival outcome."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training data loaded from train.csv."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing test data loaded from test.csv."
+    },
+    {
+      "name": "IDtest",
+      "description": "Series containing PassengerId from the test dataset."
+    },
+    {
+      "name": "dataset",
+      "description": "Combined DataFrame of training and test datasets."
+    },
+    {
+      "name": "Y_train_with_outliers",
+      "description": "Series containing the target variable (Survived) from the training data with outliers."
+    },
+    {
+      "name": "X_train_with_outliers",
+      "description": "DataFrame containing features from the training data with outliers."
+    },
+    {
+      "name": "train_without_outliers",
+      "description": "DataFrame for training data after the removal of outliers."
+    },
+    {
+      "name": "Y_train_without_outliers",
+      "description": "Series containing the target variable from the training data without outliers."
+    },
+    {
+      "name": "X_train_without_outliers",
+      "description": "DataFrame containing features from the training data without outliers."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Read from train.csv",
+      "flow": "Input for training models"
+    },
+    {
+      "variable": "test",
+      "creation": "Read from test.csv",
+      "flow": "Used for predicting outcomes, does not train the model"
+    },
+    {
+      "variable": "dataset",
+      "creation": "Concatenation of train and test DataFrames",
+      "flow": "Cleaned and engineered data used for model training"
+    },
+    {
+      "variable": "Y_train_with_outliers",
+      "creation": "Extracted from train_with_outliers",
+      "flow": "Used as target variable for model training with outliers"
+    },
+    {
+      "variable": "X_train_with_outliers",
+      "creation": "Features from train_with_outliers",
+      "flow": "Used as features for model training with outliers"
+    },
+    {
+      "variable": "train_without_outliers",
+      "creation": "Dropped outliers from train_with_outliers",
+      "flow": "Input for further model training"
+    },
+    {
+      "variable": "Y_train_without_outliers",
+      "creation": "Extracted from train_without_outliers",
+      "flow": "Used as target variable for model training without outliers"
+    },
+    {
+      "variable": "X_train_without_outliers",
+      "creation": "Features from train_without_outliers",
+      "flow": "Used as features for model training without outliers"
+    }
+  ],
+  "models": [
+    {
+      "name": "Support Vector Classifier (SVC)",
+      "input_features": "X_train_with_outliers, X_train_without_outliers",
+      "target_variable": "Y_train_with_outliers, Y_train_without_outliers",
+      "hyperparameters": [
+        {
+          "kernel": "rbf",
+          "gamma": "tuned",
+          "C": "tuned"
+        }
+      ]
+    },
+    {
+      "name": "Random Forest Classifier",
+      "input_features": "X_train_with_outliers, X_train_without_outliers",
+      "target_variable": "Y_train_with_outliers, Y_train_without_outliers",
+      "hyperparameters": [
+        {
+          "max_depth": "None",
+          "max_features": "tuned",
+          "min_samples_split": "tuned",
+          "min_samples_leaf": "tuned",
+          "bootstrap": "False",
+          "n_estimators": "tuned",
+          "criterion": "gini"
+        }
+      ]
+    },
+    {
+      "name": "AdaBoost Classifier",
+      "input_features": "X_train_with_outliers, X_train_without_outliers",
+      "target_variable": "Y_train_with_outliers, Y_train_without_outliers",
+      "hyperparameters": [
+        {
+          "base_estimator__criterion": "tuned",
+          "base_estimator__splitter": "tuned",
+          "algorithm": "SAMME or SAMME.R",
+          "n_estimators": "tuned",
+          "learning_rate": "tuned"
+        }
+      ]
+    },
+    {
+      "name": "Gradient Boosting Classifier",
+      "input_features": "X_train_with_outliers, X_train_without_outliers",
+      "target_variable": "Y_train_with_outliers, Y_train_without_outliers",
+      "hyperparameters": [
+        {
+          "loss": "deviance",
+          "n_estimators": "tuned",
+          "learning_rate": "tuned",
+          "max_depth": "tuned",
+          "min_samples_leaf": "tuned",
+          "max_features": "tuned"
+        }
+      ]
+    }
+  ]
+}

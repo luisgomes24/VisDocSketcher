@@ -1,0 +1,49 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "X",
+      "description": "Input data for the neural network, shaped (2, number of examples)."
+    },
+    {
+      "name": "Y",
+      "description": "True label vector indicating the class (1 for blue dot, 0 for red dot), shaped (1, number of examples)."
+    },
+    {
+      "name": "layers_dims",
+      "description": "List containing the size of each layer in the deep neural network."
+    },
+    {
+      "name": "parameters",
+      "description": "Dictionary containing the updated parameters for the neural network after training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "parameters",
+      "creation": "Created via the function initialize_parameters with the specified layers dimensions.",
+      "flow": "Updated during model training in the optimization loop."
+    },
+    {
+      "variable": "costs",
+      "creation": "Initialized as an empty list to track the cost during training.",
+      "flow": "Populated every 100 epochs to monitor learning progress."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Neural Network",
+      "input_features": ["X"],
+      "target_variable": "Y",
+      "hyperparameters": {
+        "learning_rate": 0.0007,
+        "mini_batch_size": 64,
+        "num_epochs": 10000,
+        "beta": 0.9,
+        "beta1": 0.9,
+        "beta2": 0.999,
+        "epsilon": 1e-8
+      }
+    }
+  ]
+}

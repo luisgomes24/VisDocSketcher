@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing various feature columns and target variables."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing feature columns used for predicting target variables."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission template containing the format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test data."
+    },
+    {
+      "variable_name": "ss",
+      "description": "DataFrame for sample submission."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature variables from the train dataset, excluding date_time and target columns."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variables from the train dataset, including target_carbon_monoxide, target_benzene, and target_nitrogen_oxides."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Feature variables from the test dataset, excluding date_time."
+    },
+    {
+      "variable_name": "reg1, reg2, reg3",
+      "description": "Linear regression models fitted for each of the target variables."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation": "Loaded from train.csv using pd.read_csv.",
+      "flow": "Used to define features X and targets y."
+    },
+    {
+      "variable_name": "test",
+      "creation": "Loaded from test.csv using pd.read_csv.",
+      "flow": "Used to define feature set X_test and for generating predictions."
+    },
+    {
+      "variable_name": "ss",
+      "creation": "Loaded from sample_submission.csv using pd.read_csv.",
+      "flow": "Updated with predictions and saved as sub_lr.csv."
+    },
+    {
+      "variable_name": "X",
+      "creation": "Derived from train by dropping some columns.",
+      "flow": "Used as input features for model training."
+    },
+    {
+      "variable_name": "y",
+      "creation": "Derived from train by selecting target columns.",
+      "flow": "Used as target variable for model training."
+    },
+    {
+      "variable_name": "X_test",
+      "creation": "Derived from test by dropping date_time.",
+      "flow": "Used as input features for making predictions."
+    },
+    {
+      "variable_name": "reg1, reg2, reg3",
+      "creation": "Created using LinearRegression and fitting on X and respective y columns.",
+      "flow": "Used to predict target variables for test data, results stored in ss."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "LinearRegression",
+      "input_features": "X",
+      "target_variables": "target_carbon_monoxide, target_benzene, target_nitrogen_oxides",
+      "hyperparameters": "Default parameters used."
+    }
+  ]
+}

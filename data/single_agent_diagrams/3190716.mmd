@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["📥 Load Data"] --> B["🔧 Preprocess Data"];
+    B --> C["💡 Initialize Parameters"];
+    C --> D["🔁 Loop for num_iterations"];
+    D --> E["➡️ Forward Propagation"];
+    E --> F["📉 Compute Cost"];
+    F --> G["↩️ Backward Propagation"];
+    G --> H["🛠️ Update Parameters"];
+    D -->|Next Iteration| D; 
+    H --> I["🔍 Predict Labels"];
+    I --> J["📊 Plot Cost <img src='dummy_plots/hist_template.svg'/> <br/> Cost over Epochs"];

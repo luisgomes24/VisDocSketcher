@@ -1,0 +1,32 @@
+```mermaid
+flowchart TD
+    %% Data source node
+    A["Intel Image Classification Dataset"]
+    
+    %% Data directory used
+    A --> B["data_dir"]
+    
+    %% Class names derived from directories
+    B --> C["class_name"]
+    
+    %% Dataset nodes for training, validation, and testing
+    B --> D["train_data"]
+    B --> E["val_data"]
+    B --> F["test_data"]
+    
+    %% Model building and data flow through the model
+    D --> G["Sequential CNN Model"]
+    E --> G
+    F -. Evaluated by .-> G
+    
+    %% Model training process
+    G --> H["Training History (hist)"]
+    
+    %% Commentary nodes
+    %% A represents the initial dataset for image classification
+    %% B represents the path where data is stored
+    %% C represents extraction of class names based on folder names
+    %% D, E, F show the split of data into respective datasets
+    %% G represents the training and evaluation of the Sequential CNN model
+    %% H signifies the captured training metrics for performance visualization
+```

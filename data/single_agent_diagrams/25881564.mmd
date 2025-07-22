@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> apps = pd.read_csv(...)"] --> B["🔍 Data Overview <img src='table.svg'/> <br/> apps.head()"]
+    B --> C["🧹 Preprocessing Data <img src='column_split.svg'/>"]
+    C --> D["🗓️ Date Formatting <img src='column_split.svg'/>"]
+    D --> E["📉 Handle Missing Values <img src='column_split.svg'/>"]
+    E --> F["📏 Feature Engineering <img src='column_split.svg'/>"]
+    F --> G["📊 Visualization <img src='barplot_template.svg'/> <br/> sns.heatmap()"]
+    G --> H["🧠 Model Training <img src='brain.svg'/>"]
+    H --> I["✅ Model Evaluation <img src='table.svg'/>"]
+    I --> J["💾 Save Model <img src='database.svg'/>"]

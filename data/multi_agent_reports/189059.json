@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/sample_images/",
+      "description": "Contains DICOM files of patients' scans."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "first_patient",
+      "description": "The DICOM scans of the first patient loaded as slices."
+    },
+    {
+      "name": "first_patient_pixels",
+      "description": "Hounsfield Units (HU) for the first patient's scans."
+    },
+    {
+      "name": "pix_resampled",
+      "description": "Resampled pixel data for the first patient's scans."
+    },
+    {
+      "name": "segmented_lungs",
+      "description": "Binary segmentation of the lungs without filling structures."
+    },
+    {
+      "name": "segmented_lungs_fill",
+      "description": "Binary segmentation of the lungs with filled structures."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "first_patient",
+      "creation": "load_scan function",
+      "flow": "Used to create first_patient_pixels, pix_resampled" 
+    },
+    {
+      "variable": "first_patient_pixels",
+      "creation": "get_pixels_hu function",
+      "flow": "Used to create pix_resampled" 
+    },
+    {
+      "variable": "pix_resampled",
+      "creation": "resample function",
+      "flow": "Used in plot_3d, segment_lung_mask" 
+    },
+    {
+      "variable": "segmented_lungs",
+      "creation": "segment_lung_mask function",
+      "flow": "Used in plot_3d" 
+    },
+    {
+      "variable": "segmented_lungs_fill",
+      "creation": "segment_lung_mask function",
+      "flow": "Used in plot_3d" 
+    }
+  ],
+  "models": []
+}

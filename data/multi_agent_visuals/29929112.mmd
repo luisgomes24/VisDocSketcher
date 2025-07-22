@@ -1,0 +1,20 @@
+flowchart TD
+    A["../input/automobilepartsindentification<br>Automobile-parts Dataset"]
+    subgraph preprocessing ["Data Preprocessing"]
+        B["Load Data"]
+        C["Clean Data"]
+        D["Transform Data"]
+    end
+    subgraph modeling ["Model Building"]
+        E["Select Model"]
+        F["Train Model"]
+         G["Evaluate Model"]
+     end
+    subgraph evaluation ["Model Evaluation"]
+        H["Performance Metrics"]
+     I["Visualizations"]
+    end
+    A --> preprocessing
+    preprocessing --> modeling
+    modeling --> evaluation
+    evaluation --> H

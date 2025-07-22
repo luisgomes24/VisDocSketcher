@@ -1,0 +1,11 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Train Data"] --> B["<img src='file.svg'/> <br/> Load Weather Data"]
+    B --> C["<img src='table.svg'/> <br/> Merge Data"]
+    C --> D["<img src='column_split.svg'/> <br/> Preprocess Data"]
+    D --> E["<img src='boxplot_template.svg'/> <br/> Check Null Values"]
+    E --> F["<img src='column_split.svg'/> <br/> Feature Engineering"]
+    F --> G["<img src='table.svg'/> <br/> Drop Unimportant Features"]
+    G --> H["<img src='table.svg'/> <br/> Prepare X and y"]
+    H --> I["<img src='row_split.svg'/> <br/> Train-Test Split"]
+    I --> J["<img src='brain.svg'/> <br/> Model Training with LazyRegressor"]
+    J --> K["<img src='table.svg'/> <br/> Evaluate Models"]

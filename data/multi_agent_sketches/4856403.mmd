@@ -1,0 +1,24 @@
+flowchart TD
+    %% This node represents user's input for their favorite color
+    A["/User Input Color/"] -->|Provides input| B(User's Favorite Color)
+    B --> C[Check Color Answer]
+    
+    %% This node calculates the radius based on a given diameter
+    D["/Calculate Radius from Diameter/"] --> E[Radius]
+    E --> F[Calculate Area]
+    
+    %% This node calculates the area of a circle using radius
+    F --> G[Area of Circle]
+    G -->|Check the area| H[Check Area Answer]
+    
+    %% Variables for swapping exercise
+    I["/Input first List a/"] --> J[List a]
+    K["/Input second List b/"] --> L[List b]
+    J --> M[Swapping Variables]
+    L --> M
+    
+    %% Candies distribution and calculations
+    N["/Sum Candies/"] --> O[Total Sum 'summ']
+    O --> P[Calculate Equal Division 'div']
+    P --> Q[Calculate Remainder 'to_smash']
+    Q --> R[Check Smash Calculation]

@@ -1,0 +1,82 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing house features and prices."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing house features without prices."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file to format predictions for submission."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing training data after reading from train.csv and preprocessing steps."
+    },
+    {
+      "variable_name": "df_test",
+      "description": "DataFrame containing test data after reading from test.csv and preprocessing steps."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Features used for training the model derived from df_train."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Target variable for training, which is SalePrice in log scale."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Features in the test dataset that will be used for prediction."
+    },
+    {
+      "variable_name": "final_predict",
+      "description": "Predicted SalePrice after transforming from log scale back to original scale."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_methods": ["pd.read_csv"],
+      "usage": ["preprocessing", "model training"]
+    },
+    {
+      "variable_name": "df_test",
+      "creation_methods": ["pd.read_csv"],
+      "usage": ["preprocessing", "making predictions"]
+    },
+    {
+      "variable_name": "X_train",
+      "creation_methods": ["df_train.drop"],
+      "usage": ["model training"]
+    },
+    {
+      "variable_name": "y_train",
+      "creation_methods": ["df_train['SalePrice_log']"],
+      "usage": ["model training"]
+    },
+    {
+      "variable_name": "predictions_lm",
+      "creation_methods": ["lm.predict"],
+      "usage": ["final predictions"]
+    },
+    {
+      "variable_name": "final_predict",
+      "creation_methods": ["np.exp"],
+      "usage": ["making output usable for submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

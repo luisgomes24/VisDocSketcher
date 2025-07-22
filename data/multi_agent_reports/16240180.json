@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file": "None",
+      "description": "The notebook does not read from any external files but generates data internally."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "N_x",
+      "description": "Number of unique x values; set to 5."
+    },
+    {
+      "name": "N_epsilon",
+      "description": "Number of measurements per x value; set to 1000."
+    },
+    {
+      "name": "N",
+      "description": "Total number of data points generated; calculated as N_x * N_epsilon."
+    },
+    {
+      "name": "x_",
+      "description": "Array of x values, repeated for each measurement."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame holding x values, coefficients (alpha, beta), and the calculated values (y, y_measure)."
+    },
+    {
+      "name": "epsilon",
+      "description": "Random normal errors added to the measurements of y."
+    },
+    {
+      "name": "y",
+      "description": "Calculated y values based on the linear equation."
+    },
+    {
+      "name": "y_measure",
+      "description": "Measured y values including the errors."
+    },
+    {
+      "name": "lambda_eq",
+      "description": "Lambda function representing the linear relationship."
+    },
+    {
+      "name": "lambda_eq_probabalitic",
+      "description": "Lambda function representing the probabilistic relationship with error."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created as a DataFrame with calculated y and error values.",
+      "flow": "Used for plotting y and y_measure, grouping by x."
+    },
+    {
+      "variable": "y",
+      "creation": "Calculated using the linear equation based on x, alpha, and beta.",
+      "flow": "Used in plotting and to represent true values."
+    },
+    {
+      "variable": "y_measure",
+      "creation": "Calculated by adding random errors to y using the probabilistic equation.",
+      "flow": "Used in plots to assess distribution and measurement error."
+    },
+    {
+      "variable": "epsilon",
+      "creation": "Generated as random normal values to simulate measurement error.",
+      "flow": "Used to calculate y_measure."
+    },
+    {
+      "variable": "lambda_eq",
+      "creation": "Converted from sympy expression to Python method.",
+      "flow": "Used to compute y based on x."
+    },
+    {
+      "variable": "lambda_eq_probabalitic",
+      "creation": "Converted from sympy expression to Python method with error.",
+      "flow": "Used to compute y_measure based on x and epsilon."
+    }
+  ],
+  "models": [
+    {
+      "model": "Linear Regression",
+      "description": "Theoretically represented as Y = α + β * x + ε,
+      "input_features": ["x"],
+      "target_variables": ["y", "y_measure"],
+      "hyperparameters": {
+        "alpha": "10",
+        "beta": "60"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A["WiDS Datathon 2020 Dictionary.csv"]
+        %% Node representing the data source CSV file
+    end
+
+    subgraph DataPreparation
+        B["Load DataFrame df"]
+        %% Node for loading CSV data into DataFrame
+        C["Text Profiling to Create profiled_df"]
+        %% Node for applying text profiling on df
+    end
+
+    subgraph DataAnalysis
+        D["Numerical Analysis"]
+        %% Node representing analysis of sentiment metrics
+        E["Visualization"]
+        %% Node representing visualization of sentiment analysis results
+    end
+
+    A -->|"read_csv"| B
+    B -->|"apply_text_profiling"| C
+    C -->|"analysis"| D
+    C -->|"visualization"| E
+```

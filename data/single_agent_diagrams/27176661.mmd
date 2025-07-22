@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> df = pd.read_csv()"] --> B["🚿 Data Preprocessing"]
+    B --> C["🔍 Filter Columns <img src='column_split.svg'/>"]
+    C --> D["✅ Drop Duplicates"]
+    D --> E["⚠️ Check for Missing Values"]
+    E --> F["🧪 One-Hot Encoding"]
+    F --> G["📈 Visualize Distributions <img src='hist_template.svg'/>"]
+    G --> H["📊 Standardization"]
+    H --> I["🛠️ Elbow Method for Clustering <img src='barplot_template.svg'/>"]
+    I --> J["🤖 KMeans Clustering"]
+    J --> K["📊 Visualize Clusters <img src='scatter_plot_template.svg'/>"]
+    K --> L["📊 Group and Aggregate Results"]
+    L --> M["🔝 Sort and Present Top Groups"]

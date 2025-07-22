@@ -1,0 +1,109 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/dapprojekt22/train.csv",
+      "description": "Training dataset containing historical match statistics."
+    },
+    {
+      "file": "../input/dapprojekt22/test.csv",
+      "description": "Testing dataset for predicting match outcomes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame containing the training data after preprocessing."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame containing the test data after preprocessing."
+    },
+    {
+      "name": "top50_corr_var",
+      "description": "List of the top 50 variables correlated with CURRENT_WINNER."
+    },
+    {
+      "name": "new_vars",
+      "description": "List of the selected features for model training."
+    },
+    {
+      "name": "train_data_40",
+      "description": "Reduced DataFrame with the top 40 features for model training."
+    },
+    {
+      "name": "test_data_40",
+      "description": "Reduced DataFrame for test data corresponding to train_data_40."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "created_from": "pd.read_csv('../input/dapprojekt22/train.csv')",
+      "flows_to": "Model training and predictions"
+    },
+    {
+      "variable": "test_data",
+      "created_from": "pd.read_csv('../input/dapprojekt22/test.csv')",
+      "flows_to": "Model predictions"
+    },
+    {
+      "variable": "top50_corr_var",
+      "created_from": "Correlation analysis",
+      "flows_to": "Feature selection"
+    },
+    {
+      "variable": "new_vars",
+      "created_from": "top50_corr_var + selected identifiers",
+      "flows_to": "Data preparation for training\n"
+    },
+    {
+      "variable": "train_data_40",
+      "created_from": "Feature selection using SelectKBest",
+      "flows_to": "Model training"
+    },
+    {
+      "variable": "test_data_40",
+      "created_from": "Selection from test_data based on new_vars",
+      "flows_to": "Final predictions"
+    }
+  ],
+  "models": [
+    {
+      "type": "RandomForestClassifier",
+      "input_features": "Selected features from train_data_40",
+      "target_variable": "NEXT_WINNER",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "min_samples_split": 5,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt",
+        "max_depth": 10,
+        "bootstrap": true
+      }
+    },
+    {
+      "type": "ExtraTreesClassifier",
+      "input_features": "Initially selected features",
+      "target_variable": "NEXT_WINNER",
+      "hyperparameters": "None applied"
+    },
+    {
+      "type": "GaussianNB",
+      "input_features": "Initially selected features",
+      "target_variable": "NEXT_WINNER",
+      "hyperparameters": "None applied"
+    },
+    {
+      "type": "LogisticRegression",
+      "input_features": "Initially selected features",
+      "target_variable": "NEXT_WINNER",
+      "hyperparameters": "None applied"
+    },
+    {
+      "type": "XGBClassifier",
+      "input_features": "Initially selected features",
+      "target_variable": "NEXT_WINNER",
+      "hyperparameters": "None applied"
+    }
+  ]
+}

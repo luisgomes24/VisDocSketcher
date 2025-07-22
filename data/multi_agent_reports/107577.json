@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/techcrunch_posts.csv",
+      "description": "This CSV file contains posts from TechCrunch with details such as authors, tags, topics, and content."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the loaded data from the CSV, with columns for authors, tags, topics, and content."
+    },
+    {
+      "name": "clean_content",
+      "description": "List containing pre-processed content from each article, stripped of non-alphabetic characters and stopwords."
+    },
+    {
+      "name": "tfidf",
+      "description": "TfidfVectorizer object that converts the cleaned content into a TF-IDF feature matrix."
+    },
+    {
+      "name": "knn",
+      "description": "KNN model initialized for finding nearest neighbors based on content similarity."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Loaded using pandas read_csv method.",
+      "flows_to": [
+        "Data pre-processing steps to clean up authors, tags, and content.",
+        "Used to fit the KNN model after converting content to TF-IDF."
+      ]
+    },
+    {
+      "variable": "clean_content",
+      "creation": "Populated by applying a function to clean content data.",
+      "flows_to": [
+        "Used to fit the TfidfVectorizer."
+      ]
+    },
+    {
+      "variable": "features",
+      "creation": "Constructed using the fit_transform method of TfidfVectorizer applied to clean_content.",
+      "flows_to": [
+        "Used as input data for the KNN model."
+      ]
+    },
+    {
+      "variable": "knn_fit",
+      "creation": "Fitted KNN model using the features.",
+      "flows_to": [
+        "Used in the recommendation function to find similar articles."
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "K-Nearest Neighbors",
+      "input_features": "TF-IDF feature matrix derived from article content.",
+      "target_variable": "Not applicable in unsupervised KNN context.",
+      "hyperparameters": {
+        "n_neighbors": 30,
+        "algorithm": "brute",
+        "metric": "cosine"
+      }
+    }
+  ]
+}

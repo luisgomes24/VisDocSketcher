@@ -1,0 +1,20 @@
+flowchart TD
+  subgraph Data Sources
+    DS1["bigquery-public-data.openaq.global_air_quality"]:::dataSource
+  end
+
+  subgraph Data Processing
+    P1["global_air"]:::component
+    P2["country"]:::component
+  end
+
+  DS1 -->|Accessed to obtain global air quality data| P1
+  P1 -->|Execute SQL query to extract| P2
+
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef component fill:#bbf,stroke:#333,stroke-width:2px;
+
+  %% Comments for clarity
+  %% DS1: Represents the external data source containing global air quality data.
+  %% P1: Represents the BigQueryHelper instance used to interact with the dataset.
+  %% P2: Represents the DataFrame containing the country data extracted from the dataset.

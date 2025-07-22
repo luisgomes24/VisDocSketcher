@@ -1,0 +1,41 @@
+{
+  "data_sources": [
+    {
+      "file_name": "liver.csv",
+      "description": "Contains liver-related data for analysis. The data is read with a limit of 1000 rows."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Dataframe containing the loaded liver data."
+    },
+    {
+      "variable_name": "nRowsRead",
+      "description": "Number of rows read from the CSV file."
+    },
+    {
+      "variable_name": "nRow",
+      "description": "Number of rows in the dataframe after loading."
+    },
+    {
+      "variable_name": "nCol",
+      "description": "Number of columns in the dataframe after loading."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "used_for": ["EDA (Exploratory Data Analysis), visualizations"],
+      "additional_notes": "Data inspected with df.head() and null values checked with df.isnull().sum()"
+    },
+    {
+      "variable": "nRowsRead",
+      "creation_method": "set manually",
+      "used_for": ["Limit rows for reading data"],
+      "additional_notes": "This defines how many rows are read from the CSV file."
+    }
+  ],
+  "models": []
+}

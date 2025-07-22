@@ -1,0 +1,120 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-may-2021/train.csv",
+      "description": "Training data containing features and target labels."
+    },
+    {
+      "file": "../input/tabular-playground-series-may-2021/test.csv",
+      "description": "Test data containing features for prediction."
+    },
+    {
+      "file": "../input/tabular-playground-series-may-2021/sample_submission.csv",
+      "description": "Sample submission file format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame holding the training data after dropping the 'id' column."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame holding the test data after dropping the 'id' column."
+    },
+    {
+      "name": "sample_submission",
+      "description": "DataFrame for storing predictions in the correct submission format."
+    },
+    {
+      "name": "target",
+      "description": "Numpy array containing the target variables from the training data."
+    },
+    {
+      "name": "X_train",
+      "description": "Numpy array of training features after preprocessing."
+    },
+    {
+      "name": "X_val",
+      "description": "Numpy array of validation features after splitting the training data."
+    },
+    {
+      "name": "y_train",
+      "description": "Numpy array of training labels in categorical format."
+    },
+    {
+      "name": "y_val",
+      "description": "Numpy array of validation labels in categorical format."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Read from CSV file",
+      "flow": "Preprocessed to create X_train and y_train."
+    },
+    {
+      "variable": "test",
+      "creation": "Read from CSV file",
+      "flow": "Used for making predictions after model training."
+    },
+    {
+      "variable": "sample_submission",
+      "creation": "Read from CSV file",
+      "flow": "Updated with predictions and saved to CSV file."
+    },
+    {
+      "variable": "target",
+      "creation": "Mapped from training DataFrame 'train'.",
+      "flow": "Used as training labels for ANN models."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Preprocessed from 'train'.",
+      "flow": "Used for training the models."
+    },
+    {
+      "variable": "X_val",
+      "creation": "Split from 'train'.",
+      "flow": "Used for validation during model training."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Categorical conversion of 'target'.",
+      "flow": "Used for training the models."
+    },
+    {
+      "variable": "y_val",
+      "creation": "Split from 'target'.",
+      "flow": "Used for validating the models."
+    }
+  ],
+  "models": [
+    {
+      "name": "model1",
+      "type": "Artificial Neural Network (ANN)",
+      "input_features": "X_train, y_train",
+      "target": "Predictions for sample_submission.",
+      "hyperparameters": {
+        "hidden_units_1": "[9, 99]",
+        "hidden_units_2": "[9, 99]",
+        "hidden_units_3": "[9, 150]",
+        "dropout_rate": "[0.01, 0.5]",
+        "activation": "softmax/sigmoid"
+      }
+    },
+    {
+      "name": "model2",
+      "type": "Artificial Neural Network (ANN)",
+      "input_features": "X_train, y_train",
+      "target": "Predictions for sample_submission.",
+      "hyperparameters": {
+        "hidden_units_1": "[9, 99]",
+        "hidden_units_2": "[9, 99]",
+        "hidden_units_3": "[9, 150]",
+        "dropout_rate": "[0.01, 0.5]",
+        "activation": "softmax/sigmoid"
+      }
+    }
+  ]
+}

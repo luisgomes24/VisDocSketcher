@@ -1,0 +1,18 @@
+%% This is a Mermaid Diagram representing the workflow.
+flowchart TD
+    %% Node for Data Source
+    A["basic1.csv"]
+    %% Node for importing the CSV file into a DataFrame
+    B["DataFrame df"]
+    %% Node for creating df2 as a cumulative sum of specific conditions
+    C["Series df2: Cumsum of 'f1' where 'f2' == 1"]
+    %% Node for filling NaN values in df2
+    D["Fill NaN in df2 using next valid value (bfill)"]
+    %% Node for calculating and printing the mean
+    E["Calculate mean of df2 and print"]
+
+    %% Define the data flow
+    A --> B
+    B --> C
+    C --> D
+    D --> E

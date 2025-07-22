@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training data containing details of passengers.",
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test data for making predictions without target variable.",
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission with PassengerId and Transported columns.",
+    }
+  ],
+
+  "data_variables": [
+    {
+      "variable_name": "train_data",
+      "description": "DataFrame containing training passenger data."
+    },
+    {
+      "variable_name": "test_data",
+      "description": "DataFrame containing test passenger data."
+    },
+    {
+      "variable_name": "sample_submission",
+      "description": "DataFrame template for submission results."
+    },
+    {
+      "variable_name": "data",
+      "description": "Combined DataFrame of train and test data for processing."
+    }
+  ],
+
+  "data_flow": [
+    {
+      "variable_name": "train_data",
+      "creation_method": "pd.read_csv()",
+      "flow_usage": "Used for training data processing."
+    },
+    {
+      "variable_name": "test_data",
+      "creation_method": "pd.read_csv()",
+      "flow_usage": "Used for prediction purposes in evaluation."
+    },
+    {
+      "variable_name": "sample_submission",
+      "creation_method": "pd.read_csv()",
+      "flow_usage": "Generated output based on model predictions."
+    },
+    {
+      "variable_name": "data",
+      "creation_method": "pd.concat()",
+      "flow_usage": "Used for preprocessing and model training."
+    }
+  ],
+
+  "models": [
+    {
+      "model_name": "CatBoostClassifier",
+      "input_features": "Numerical and categorical features after preprocessing.",
+      "target_variable": "Transported",
+      "hyperparameters": "random_state=42, verbose=False"
+    }
+  ]
+}

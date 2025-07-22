@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        DS1["bank.csv"]
+        %% DS1: Contains details about bank marketing campaigns including customer demographics, job types, and their bank account balance.
+    end
+
+    subgraph DataPreparation
+        DF["df"]
+        %% DF: Initial DataFrame containing the bank marketing dataset processed to drop duplicates and unnecessary columns.
+        df_OH["df_OH"]
+        %% df_OH: DataFrame with one-hot encoded categorical features and standardized continuous variables.
+    end
+
+    subgraph Clustering
+        KMeans["KMeans Clustering"]
+        %% KMeans: Applying KMeans clustering algorithm with specified hyperparameters.
+        Clusters["clusters"]
+        %% Clusters: Array containing the cluster labels assigned to each data point based on KMeans clustering.
+    end
+
+    subgraph Analysis
+        Groups["groups"]
+        %% Groups: Aggregated DataFrame showing cluster statistics including min, median, mean, max, and total sum of balances by clusters.
+    end
+
+    DS1 -->|"Read CSV"| DF
+    DF -->|"One-Hot Encoding\n& Standardization"| df_OH
+    df_OH -->|"Fit to KMeans"| KMeans
+    KMeans -->|"Predict Clusters"| Clusters
+    Clusters -->|"Assign to df"| DF
+    Clusters -->|"Assign to df_OH"| df_OH
+    Clusters -->|"Group by Cluster"| Groups
+```

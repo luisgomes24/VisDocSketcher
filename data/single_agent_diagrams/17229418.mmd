@@ -1,0 +1,19 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> Heart Disease Dataset"] --> B["🔍 Data Overview <br/> Show Head & Info"]
+    B --> C["📊 Data Visualization"]
+    C --> C1["<img src='dummy_plots/pie_chart_template.svg'/> <br/> 📊 Pie Chart of Disease Presence"]
+    C --> C2["<img src='dummy_plots/barplot_template.svg'/> <br/> 📊 Chest Pain Types Counts"]
+    C --> C3["<img src='dummy_plots/barplot_template.svg'/> <br/> 📊 Gender vs Heart Disease"]
+    
+    C3 --> D["⚙️ Train-Test Split <br/> Prepare Features & Target"]
+    
+    D --> E["🔗 Model Selection & Hyperparameter Tuning"]
+    E --> E1["🏷️ KNN"]
+    E1 --> E1a["⚙️ Grid Search KNN"]
+    E --> E2["🏷️ XGBoost"]
+    E2 --> E2a["⚙️ Grid Search XGBoost"]
+    E --> E3["🏷️ Random Forest"]
+    E3 --> E3a["⚙️ Grid Search Random Forest"]
+
+    E3a --> F["🧠 Model Training"]
+    F --> G["📈 Model Evaluation <br/> Performance Metrics"]

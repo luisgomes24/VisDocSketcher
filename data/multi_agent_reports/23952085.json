@@ -1,0 +1,82 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/tabular-playground-series-jan-2022/train.csv",
+            "description": "Training dataset containing historical sales data."
+        },
+        {
+            "file": "../input/tabular-playground-series-jan-2022/test.csv",
+            "description": "Test dataset for predictions based on the training data."
+        },
+        {
+            "file": "../input/tabular-playground-series-jan-2022/sample_submission.csv",
+            "description": "Sample submission format for the predictions."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train",
+            "description": "DataFrame containing the training data after loading from a CSV file."
+        },
+        {
+            "name": "test",
+            "description": "DataFrame containing the test data after loading from a CSV file."
+        },
+        {
+            "name": "reg",
+            "description": "Setup object from pycaret containing the regression setup."
+        },
+        {
+            "name": "pred",
+            "description": "DataFrame containing predictions made by the lightgbm model on the test set."
+        },
+        {
+            "name": "submission",
+            "description": "DataFrame prepared for submission containing the predictions."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "creation_method": "pd.read_csv",
+            "usage": "Undergoes feature engineering, one-hot encoding, and setup for model training."
+        },
+        {
+            "variable": "test",
+            "creation_method": "pd.read_csv",
+            "usage": "Undergoes feature engineering and one-hot encoding before predictions."
+        },
+        {
+            "variable": "reg",
+            "creation_method": "setup() from pycaret",
+            "usage": "Contains configurations for model training."
+        },
+        {
+            "variable": "pred",
+            "creation_method": "predict_model(lightgbm, data=test)",
+            "usage": "Stores the predictions from the lightgbm model."
+        },
+        {
+            "variable": "submission",
+            "creation_method": "pd.DataFrame",
+            "usage": "Used to prepare the final output CSV for submission."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "Light Gradient Boosting Machine",
+            "input_features": "All features from the training data after preprocessing.",
+            "target_variable": "num_sold",
+            "hyperparameters": {
+                "train_size": 0.75,
+                "normalize": true,
+                "normalize_method": "robust",
+                "transform_target": true,
+                "data_split_shuffle": false,
+                "feature_interaction": true,
+                "fold": 5,
+                "n_jobs": -1
+            }
+        }
+    ]
+}

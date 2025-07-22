@@ -1,0 +1,23 @@
+```mermaid
+flowchart TD
+    A["Start"] --> B["Scrape Data from https://www.w3schools.com/browsers/default.asp"]
+    B --> C["Create DataFrame: data"]
+    %% C: Node representing the initial data scraped and stored in a DataFrame
+    C --> D["Sliced DataFrame: data_2022"]
+    C --> E["Sliced DataFrame: data_2021"]
+    C --> F["Sliced DataFrame: data_2020"]
+    %% Nodes D, E, F: DataFrames for each respective year
+    D --> G["Cleaned and Transformed for Visualizations: data_2022"]
+    E --> H["Cleaned and Transformed for Visualizations: data_2021"]
+    F --> I["Cleaned and Transformed for Visualizations: data_2020"]
+    %% G, H, I: cleaned and prepared data for each year
+    G --> J["Merge DataFrames: final_df"]
+    H --> J
+    I --> J
+    %% J: Merged DataFrames from all years
+    J --> K["Melt for Plotting: final_df"]
+    K --> L["Create Copy for Plotting: final_df_copy"]
+    %% L: Copy of data used for creating visualizations
+    L --> M["Generate Animated Bar Charts"]
+    M --> N["End"]
+```

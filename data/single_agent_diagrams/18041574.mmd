@@ -1,0 +1,32 @@
+flowchart TD
+    A["📄 Load Data<br/><img src='file.svg' />"] --> B["🔍 Data Overview<br/>df.head()"]
+    B --> C["📊 Summary Info<br/>df.info()"]
+    C --> D["❓ Check Missing Values<br/>df.isnull().sum()"]
+    D --> E["📊 Describe Data<br/>df.describe()"]
+    E --> F["📊 Value Counts<br/>School Type<br/>df['school_type'].value_counts()"]
+    F --> G["📊 Value Counts<br/>School Setting<br/>df['school_setting'].value_counts()"]
+    G --> H["🔍 Check Outliers<br/>np.percentile()"]
+    H --> I["🗑️ Remove Unwanted Columns<br/>df.drop()"]
+    I --> J["📊 Data Visualization"]
+    
+    J --> K["📊 Countplot School Settings<br/><img src='dummy_plots/barplot_template.svg' />"]
+    J --> L["📊 Countplot Teaching Methods<br/><img src='dummy_plots/barplot_template.svg' />"]
+    J --> M["📊 Boxplot Posttest<br/><img src='dummy_plots/boxplot_template.svg' />"]
+    J --> N["📊 Boxplot Pretest<br/><img src='dummy_plots/boxplot_template.svg' />"]
+    J --> O["📊 Scatterplot Pretest vs Posttest<br/><img src='dummy_plots/scatter_plot_template.svg' />"]
+    J --> P["📈 KDE Plot of Pretest & Posttest<br/><img src='dummy_plots/hist_template.svg' />"]
+    
+    P --> Q["🛠️ Data Preparation"]
+    Q --> R["🔄 Feature Encoding<br/>pd.get_dummies()"]
+    R --> S["🔄 Train-Test Split<br/>train_test_split()"]
+    S --> T["🔄 Scale Features<br/>StandardScaler()"]
+    
+    T --> U["🧠 Model Training"]
+    U --> V["🌲 Train Random Forest<br/>RandomForestRegressor()"]
+    U --> W["🌲 Train Decision Tree<br/>DecisionTreeRegressor()"]
+    
+    V --> X["✅ Model Evaluation"]
+    W --> X
+    
+    X --> Y["📊 Random Forest Metrics"]
+    X --> Z["📊 Decision Tree Metrics"]

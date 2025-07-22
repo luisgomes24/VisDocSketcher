@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/top-10-annual-best-selling-albums-by-length/Top 10 Albums By Year Tracks - Album Length.csv",
+      "description": "Contains track details from top albums, including album names and their respective durations."
+    },
+    {
+      "file": "/kaggle/input/top-10-annual-best-selling-albums-by-length/Top 10 Albums By Year Album Length - Sheet1.csv",
+      "description": "Contains annual data on top albums, including year, album title, artist, duration, and worldwide sales."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataset_track",
+      "description": "DataFrame containing track details from the top 10 albums by year."
+    },
+    {
+      "name": "dataset_length",
+      "description": "DataFrame containing album details such as year, artist, tracks, minutes, and worldwide sales."
+    },
+    {
+      "name": "df1",
+      "description": "DataFrame summarizing total worldwide sales by year."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame summarizing the count of top album appearances by artist."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset_track",
+      "creation": "Imported using pd.read_csv",
+      "flows": "Used for analysis in plotting but not saved."
+    },
+    {
+      "variable": "dataset_length",
+      "creation": "Imported using pd.read_csv",
+      "flows": "Used in multiple visualizations to plot relationships with sales, duration, and rankings."
+    },
+    {
+      "variable": "df1",
+      "creation": "Created by grouping dataset_length by Year and sum of Worldwide Sales",
+      "flows": "Used to plot the trend between year and worldwide sales."
+    },
+    {
+      "variable": "df",
+      "creation": "Created by grouping dataset_length by Artist and count for appearances",
+      "flows": "Used to plot distribution of artist appearances in top 30 rankings."
+    }
+  ],
+  "models": []
+}

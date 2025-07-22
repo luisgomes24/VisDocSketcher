@@ -1,0 +1,76 @@
+```mermaid
+flowchart TD
+    %% Node for loading data
+    subgraph data_loading
+        A1["Fraud.csv"]
+    end
+    
+    %% Node for initial dataset
+    A2["data: Original Dataset"]
+    
+    %% Node for filtering merchant data
+    A3["new_data: Filtered Dataset"]
+    
+    %% Nodes for feature and target variable selection
+    A4["X: Feature Set"]
+    A5["y: Target Variable"]
+    
+    %% Nodes for handling class imbalance
+    B1["X_resampled: Balanced Features"]
+    B2["y_resampled: Balanced Target"]
+    
+    %% Nodes for model training and testing split
+    C1["X_train: Training Features"]
+    C2["X_test: Testing Features"]
+    C3["y_train: Training Target"]
+    C4["y_test: Testing Target"]
+    
+    %% Node for RandomForest model
+    D1["RandomForest: Model Training"]
+    
+    %% Nodes for predictions
+    E1["y_val_pred: Validation Predictions"]
+    E2["y_pred: Test Predictions"]
+    
+    %% Nodes for metrics
+    F1["accuracy_val: Validation Accuracy"]
+    F2["accuracy: Test Accuracy"]
+    F3["precision: Test Precision"]
+    F4["recall: Test Recall"]
+    F5["f1: Test F1 Score"]
+    
+    %% Data Loading
+    A1 -->|pd.read_csv| A2
+    
+    %% Data cleaning and preparation
+    A2 -->|Filtering nameDest| A3
+    
+    %% Feature and Target Selection
+    A3 -->|Selecting Features| A4
+    A3 -->|Selecting Target| A5
+    
+    %% Handling Class Imbalance
+    A4 -->|RandomUnderSampler| B1
+    A5 -->|RandomUnderSampler| B2
+    
+    %% Splitting Data for Training and Testing
+    B1 -->|train_test_split| C1
+    B1 -->|train_test_split| C2
+    B2 -->|train_test_split| C3
+    B2 -->|train_test_split| C4
+    
+    %% Model Training
+    C1 -->|Training| D1
+    C3 -->|Training| D1
+    
+    %% Model Predictions
+    D1 -->|Predict| E1
+    D1 -->|Predict| E2
+    
+    %% Evaluate Model
+    E1 -->|accuracy_score| F1
+    E2 -->|accuracy_score| F2
+    E2 -->|precision_score| F3
+    E2 -->|recall_score| F4
+    E2 -->|f1_score| F5
+```

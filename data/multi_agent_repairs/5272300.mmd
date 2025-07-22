@@ -1,0 +1,32 @@
+```mermaid
+%%{ init : { 'theme' : 'default' }}%%
+flowchart TD
+    subgraph Load_Data
+        direction TB
+        DS_2009["2009.csv Data"]
+        DS_2010["2010.csv Data"]
+        DS_2011["2011.csv Data"]
+    end
+
+    subgraph DataFrames
+        direction TB
+        DF1["df1"]
+        DF2["df2"]
+        DF3["df3"]
+    end
+    
+    subgraph Processing
+        direction TB
+        Plot["plotPerColumnDistribution"]
+    end
+
+    %%% Data Loading %%%
+    DS_2009 -->|"load via pd.read_csv"| DF1
+    DS_2010 -->|"load via pd.read_csv"| DF2
+    DS_2011 -->|"load via pd.read_csv"| DF3
+
+    %%% Data Processing and Analysis %%%
+    DF1 -->|"analyzed by"| Plot
+    DF2 -->|"analyzed by"| Plot
+    DF3 -->|"analyzed by"| Plot
+```

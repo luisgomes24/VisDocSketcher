@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load DICOM Data <img src='icons/database.svg'/>"] --> B["🔍 Preprocess Images"]
+    B --> C["📊 Histogram of Hounsfield Units <img src='dummy_plots/hist_template.svg'/>"]
+    C --> D["🖼️ Show Sample Slice <img src='dummy_plots/boxplot_template.svg'/>"]
+    D --> E["🔄 Resample Image"]
+    E --> F["🔍 3D Plot of Resampled Image <img src='dummy_plots/lineplot_template.svg'/>"]
+    F --> G["🫁 Segment Lung Mask"]
+    G --> H["🔍 3D Plot of Segmented Lungs <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    H --> I["🖼️ Plot Comparison of Filled vs Non-Filled Segmentation <img src='dummy_plots/barplot_template.svg'/>"]
+    I --> J["✨ Normalize and Zero-center Images"]

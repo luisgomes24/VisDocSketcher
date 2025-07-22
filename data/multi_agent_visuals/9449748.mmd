@@ -1,0 +1,27 @@
+%% Mermaid.js Flowchart Definition
+flowchart TD
+
+    %% Data Sources
+    A1["wrangledfinal.csv"] --> B1["df1"]
+    A2["IMDB_socio_demographic_ratings.csv"] --> B2["df2"]
+    A3["IMDB_general_ratings.csv"] --> B3["df3"]
+
+    %% DataFrames Creation
+    B1["df1"] --> C1["plotPerColumnDistribution"]
+    B1 --> C2["plotCorrelationMatrix"]
+    B1 --> C3["plotScatterMatrix"]
+
+    B2["df2"] --> D1["plotPerColumnDistribution"]
+    B2 --> D2["plotCorrelationMatrix"]
+    B2 --> D3["plotScatterMatrix"]
+
+    B3["df3"] --> E1["plotPerColumnDistribution"]
+    B3 --> E2["plotCorrelationMatrix"]
+    B3 --> E3["plotScatterMatrix"]
+
+    %% Comments for clarification
+    B1:::comment  %% df1: DataFrame containing data from wrangledfinal.csv.
+    B2:::comment  %% df2: DataFrame containing data from IMDB_socio_demographic_ratings.csv.
+    B3:::comment  %% df3: DataFrame containing data from IMDB_general_ratings.csv.
+
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;

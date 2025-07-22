@@ -1,0 +1,27 @@
+flowchart TD
+    subgraph "Data Sources"
+        train_labels["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/train_labels.csv"]
+        sample_submission["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/sample_submission.csv"]
+    end
+    subgraph "Variables"
+        df["<img src='icons/table.svg' width=100 height=100/> <br/> df (DataFrame)"]
+        df_unique["<img src='icons/table.svg' width=100 height=100/> <br/> df_unique (Unique Labels)"]
+        path["<img src='icons/column_split.svg' width=100 height=100/> <br/> path (Dataset Directory)"]
+        data["<img src='icons/image.svg' width=100 height=100/> <br/> data (Image and Labels)"]
+        learn["<img src='icons/brain.svg' width=100 height=100/> <br/> learn (Learner Object)"]
+        preds["<img src='icons/brain.svg' width=100 height=100/> <br/> preds (Model Predictions)"]
+        df_sub["<img src='icons/table.svg' width=100 height=100/> <br/> df_sub (Submission DataFrame)"]
+        fname_cleaned["<img src='icons/table.svg' width=100 height=100/> <br/> fname_cleaned (Cleaned Filenames)"]
+    end
+    train_labels --> |"read_csv"| df
+    df --> |"pd.unique"| df_unique
+    df --> |"ImageItemList.from_csv"| data
+    data --> |"create_cnn"| learn
+    learn --> |"get_preds"| preds
+    sample_submission --> |"read_csv"| df_sub
+    df_sub --> |"write submission"| fname_cleaned
+    subgraph "Model"
+        CNN["<img src='icons/brain.svg' width=100 height=100/> <br/> DenseNet161 CNN Model"]
+    end
+    data --> |"train with"| CNN
+    CNN --> |"evaluate, get_preds"| preds

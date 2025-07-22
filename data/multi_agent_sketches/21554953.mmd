@@ -1,0 +1,63 @@
+flowchart TD
+  subgraph Load_Data
+    A1[train.csv] --> A2[Load train DataFrame]
+    B1[test.csv] --> B2[Load test DataFrame]
+    C1[sample_submission.csv] --> C2[Load submission template]
+  end
+  
+  subgraph Feature_Engineering
+    A2 --> D1[Add features to train]
+    B2 --> D2[Add features to test]
+    D1 --> E[Extract 'pressure' as targets]
+    E --> F1[Drop unnecessary columns from train]
+    D2 --> F2[Drop unnecessary columns from test]
+  end
+
+  subgraph Preprocessing
+    F1 --> G1[RobustScaler on train]
+    F2 --> G2[RobustScaler on test]
+    G1 --> H1[Reshape train]
+    G2 --> H2[Reshape test]
+  end
+  
+  subgraph Modeling
+    H1 ---> I1[Initialize KFold Cross-validation]
+    I1 --> J1[ModelTrunk - Transformer model]
+    subgraph ModelTrunk
+      direction LR
+      J2[Input Features] --> |Attention Blocks| J3[Process with Attention Mechanism]
+      J3 --> |Bidirectional LSTM| J4[Output Predictions]
+    end
+    J4 --> K1[Collect predictions per fold]
+  end
+
+  subgraph Postprocessing
+    K1 --> L1[Average predictions from folds]
+    L1 --> M1[Load submission DataFrame]
+    M1 --> N1[Assign predictions]
+    N1 --> O1[Adjust to submission format]
+  end
+
+  O1 --> P1[submission.csv]
+
+  %% Node comments
+  %% A1: Source training data file.
+  %% A2: DataFrame created from train.csv.
+  %% B1: Source test data file.
+  %% B2: DataFrame created from test.csv.
+  %% C1: Source submission template file.
+  %% C2: DataFrame created from sample_submission.csv.
+  %% D1/D2: Enhance features using domain-specific knowledge.
+  %% E: Transformation of 'pressure' column.
+  %% F1/F2: Remove unnecessary columns for model input.
+  %% G1/G2: Scale input features.
+  %% H1/H2: Format data to required shapes for model.
+  %% I1: Split data into folds for cross-validation.
+  %% J1: Training of specified neural network model.
+  %% J4: Predicted outputs from the model.
+  %% K1: Aggregation of predictions across all folds.
+  %% L1: Average out predictions to smooth results.
+  %% M1: Prepare DataFrame for submission output.
+  %% N1: Insert finalized predictions into submission.
+  %% O1: Final touch-ups for submission compliance.
+  %% P1: Export model predictions to CSV for competition.

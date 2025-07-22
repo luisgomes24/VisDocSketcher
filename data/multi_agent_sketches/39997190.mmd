@@ -1,0 +1,13 @@
+%% Diagram of the data workflow in the given Jupyter Notebook
+
+flowchart TD
+    A[RMSE USA Yield Data] -->|Load CSV| B[DataFrame sol0]  %% Node for USA Yield data
+    A1[RMSE Cotton Yield Data] -->|Load CSV| C[DataFrame sol1]  %% Node for Cotton Yield data
+    A2[Cotton Price Data] -->|Load CSV| D[DataFrame sol2]  %% Node for Cotton Price data
+    
+    B -->|Merge| E[Main DataFrame sol]  %% Merge USA data into main dataframe
+    C -->|Merge| E  %% Merge Cotton data into main dataframe
+    D -->|Merge| E  %% Merge Price data into main dataframe
+    
+    E -->|Fill NaN| F[Cleaned DataFrame sol]  %% Node for Data cleaning
+    F -->|Save CSV| G[Output CSV]

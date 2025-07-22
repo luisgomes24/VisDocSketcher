@@ -1,0 +1,88 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/brain-mri-images-for-brain-tumor-detection/no/",
+      "description": "Images without brain tumor"
+    },
+    {
+      "source": "../input/brain-mri-images-for-brain-tumor-detection/yes/",
+      "description": "Images with brain tumor"
+    }
+  ],
+  "data_variables": [
+    {"name":"filepaths", "description":"List of image file paths"},
+    {"name":"labels", "description":"Corresponding labels indicating the presence or absence of brain tumors"},
+    {"name":"df", "description":"DataFrame combining filepaths and labels"},
+    {"name":"train_generator", "description":"Data generator for the training set"},
+    {"name":"validation_generator", "description":"Data generator for the validation set"},
+    {"name":"test_generator", "description":"Data generator for the test set"},
+    {"name":"model", "description":"Keras model incorporating InceptionResNetV2"},
+    {"name":"history", "description":"Contains training loss and accuracy over epochs"},
+    {"name":"y_pred", "description":"Predicted labels for the test set"}
+  ],
+  "data_flow": [
+    {
+      "variable":"filepaths",
+      "creation_method":"os.listdir() to collect image paths",
+      "flows_to":"df, train_generator, validation_generator, test_generator"
+    },
+    {
+      "variable":"labels",
+      "creation_method":"Manual assignment based on image directory",
+      "flows_to":"df, train_generator, validation_generator, test_generator"
+    },
+    {
+      "variable":"df",
+      "creation_method":"pd.concat() to merge filepaths and labels",
+      "flows_to":"train_test_split() for splitting into train, validation, test sets"
+    },
+    {
+      "variable":"x_train, x_val, x_test",
+      "creation_method":"train_test_split() on df",
+      "flows_to":"train_generator, validation_generator, test_generator"
+    },
+    {
+      "variable":"train_generator",
+      "creation_method":"ImageDataGenerator.flow_from_dataframe()",
+      "flows_to":"model training"
+    },
+    {
+      "variable":"validation_generator",
+      "creation_method":"ImageDataGenerator.flow_from_dataframe()",
+      "flows_to":"model validation"
+    },
+    {
+      "variable":"test_generator",
+      "creation_method":"ImageDataGenerator.flow_from_dataframe()",
+      "flows_to":"model evaluation"
+    },
+    {
+      "variable":"model",
+      "creation_method":"Sequential() model with InceptionResNetV2 as base",
+      "flows_to":"model training"
+    },
+    {
+      "variable":"history",
+      "creation_method":"model.fit()",
+      "flows_to":"analysis of training and validation performance"
+    },
+    {
+      "variable":"y_pred",
+      "creation_method":"model.predict() on test_generator",
+      "flows_to":"classification report, confusion matrix"
+    }
+  ],
+  "models": [
+    {
+      "model_name":"InceptionResNetV2",
+      "input_features":"150x150x3 image inputs",
+      "target_variable":"Binary classification (brain tumor present/absent)",
+      "hyperparameters":{
+        "learning_rate":"0.0001",
+        "epochs":"30",
+        "steps_per_epoch":"10",
+        "validation_steps":"6"
+      }
+    }
+  ]
+}

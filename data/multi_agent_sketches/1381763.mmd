@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A[nys-school-tax-relief-star-reimbursement-by-county-beginning-levy-year-1998.csv] -->|read_csv| B[df1]
+    A[nys-school-tax-relief-star-reimbursement-by-school-district-beginning-levy-year-1998.csv] -->|read_csv| C[df2]
+
+    %% Data Variables
+    B[df1] -- used in --> D[plotHistogram]
+    B[df1] -- used in --> E[plotCorrelationMatrix]
+    B[df1] -- used in --> F[plotScatterMatrix]
+    B[df1] -- used in --> G[plotPCA]
+    
+    C[df2] -- used in --> D[plotHistogram]
+    C[df2] -- used in --> E[plotCorrelationMatrix]
+    C[df2] -- used in --> F[plotScatterMatrix]
+    C[df2] -- used in --> G[plotPCA]
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#f96,stroke:#333,stroke-width:2px;
+
+    class A dataSource;
+    class B,C dataVariable;
+    class D,E,F,G process;

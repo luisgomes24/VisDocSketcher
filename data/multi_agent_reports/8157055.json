@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Advertising.csv",
+      "description": "This CSV file contains advertising data including expenditures on TV, Radio, and Newspaper ads along with corresponding Sales."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the advertising data including TV, Radio, Newspaper expenditures and corresponding Sales."
+    },
+    {
+      "name": "corr",
+      "description": "Correlation matrix showing the relationship between different features in the dataset."
+    },
+    {
+      "name": "a",
+      "description": "Expenditures on TV advertisements."
+    },
+    {
+      "name": "b",
+      "description": "Sales data corresponding to the expenditures."
+    },
+    {
+      "name": "c",
+      "description": "Expenditures on Radio advertisements."
+    },
+    {
+      "name": "d",
+      "description": "Expenditures on Newspaper advertisements."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "pd.read_csv('../input/tvradionewspaperadvertising/Advertising.csv')",
+      "flow": "Used in various visualizations and analyses throughout the notebook."
+    },
+    {
+      "variable": "corr",
+      "creation": "data.corr(method='pearson')",
+      "flow": "Used to visualize correlation between features in a heatmap."
+    },
+    {
+      "variable": "a",
+      "creation": "data['TV']",
+      "flow": "Used in the histogram visualization."
+    },
+    {
+      "variable": "b",
+      "creation": "data['Sales']",
+      "flow": "Used in the jointplot visualization."
+    },
+    {
+      "variable": "c",
+      "creation": "data['Radio']",
+      "flow": "Used in the histogram visualization."
+    },
+    {
+      "variable": "d",
+      "creation": "data['Newspaper']",
+      "flow": "Used in the histogram visualization."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,24 @@
+graph TD;
+    A["📜 Load Data <img src='icons/file.svg' />"] --> B["🔍 Data Understanding <img src='icons/table.svg' />"];
+    B --> C["📊 Summary Statistics <img src='dummy_plots/boxplot_template.svg'/>"];
+    C --> D["📈 Retention Analysis <img src='dummy_plots/barplot_template.svg'/>"];
+    D --> E["⚖️ Apply Hypothesis Testing"];
+    E --> F["✅ Evaluate Results"];
+    F --> G["📋 Conclusions"];
+
+    subgraph "Preprocessing"
+    B -->|Inspect & Clean| P1["🧹 Check for Missing Values"];
+    P1 --> P2["🔧 Handle Outliers"];
+    end
+
+    subgraph "A/B Testing Before Removing Outliers"
+    E -->|Test Normality| T1["📊 Shapiro-Wilk Test"];
+    T1 --> T2["⚖️ Levene's Test"];
+    T2 --> T3["🧮 Mann-Whitney U Test"];
+    end
+
+    subgraph "A/B Testing After Removing Outliers"
+    F -->|Test Normality| T4["📊 Shapiro-Wilk Test"];
+    T4 --> T5["⚖️ Levene's Test"];
+    T5 --> T6["🧮 Mann-Whitney U Test"];
+    end

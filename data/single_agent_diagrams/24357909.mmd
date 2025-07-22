@@ -1,0 +1,13 @@
+graph TD;
+    A["📥 Load Data"] --> B["<img src='icons/table.svg' /> <br/> Read Train/Test Data"];
+    B --> C["⏱️ Measure Read Time"];
+    C --> D["📈 Compare Reading Time"];
+    D --> E["📦 Preprocess Data"];
+    E --> F["🔍 Train-Test Split"];
+    F --> G["🧠 Bayesian Optimization"];
+    G --> H["🧪 Model Selection"];
+    H --> I["⚙️ Train Model with Optimized Params"];
+    I --> J["🏁 Evaluate Model Performance"];
+    J --> K["📊 Predictions"];
+    K --> L["💾 Save Submission"];
+    L --> M["✅ Conclusion"];

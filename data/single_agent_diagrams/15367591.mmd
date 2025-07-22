@@ -1,0 +1,11 @@
+```
+graph TD
+    A["📁 Load Dataset <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["🔄 One Hot Encoding"]
+    C --> D["🧠 Train Model"]
+    D --> E["📊 Evaluate Model <img src='barplot_template.svg'/>"]
+
+    A -->|read_csv| B
+    B -->|train_test_split| C
+    C -->|OrdinalEncoder & LabelEncoder| D
+    D -->|Logistic Regression| E

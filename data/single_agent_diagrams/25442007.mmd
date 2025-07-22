@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load MNIST Dataset <img src='icons/file.svg' />"] --> B["🔄 Reshape & Normalize Data"]
+    B --> C["🔍 PCA Implementation"]
+    C --> D["🔄 Fit PCA Model"]
+    D --> E["📊 2D Plot of the Projected Dataset <img src='dummy_plots/scatter_plot_template.svg' />"]
+    E --> F["📊 3D Plot of the Projected Dataset <img src='dummy_plots/scatter_plot_template.svg' />"]
+    F --> G["🔄 Scikit-Learn PCA Implementation"]
+    G --> H["📊 2D Plot using Scikit-Learn <img src='dummy_plots/scatter_plot_template.svg' />"]
+    H --> I["📊 3D Plot using Scikit-Learn <img src='dummy_plots/scatter_plot_template.svg' />"]

@@ -1,0 +1,22 @@
+{
+    "data_sources": [
+        {"file_name": "LR-2020-public_LB.csv", "description": "Public leaderboard data containing teams' scores."},
+        {"file_name": "LR-2020-pvt_LB.xlsx", "description": "Private leaderboard data containing teams' details and change in ranks."},
+        {"file_name": "LR-2020-pvt-LB.htm", "description": "HTML file used to extract shake-up data for teams."},
+        {"file_name": "Teams.csv", "description": "Metadata about the teams competing in the competitions."},
+        {"file_name": "Competitions.csv", "description": "Metadata about competitions including details such as deadlines and hosts."}
+    ],
+    "data_variables": [
+        {"variable": "public_lb", "description": "DataFrame containing the public leaderboard data after loading from CSV."},
+        {"variable": "public_Scores", "description": "DataFrame containing the highest scores for each team from the public leaderboard."},
+        {"variable": "pvt_lb", "description": "DataFrame containing the private leaderboard data after loading from Excel."},
+        {"variable": "shake_up", "description": "Numpy array containing the changes in ranks (shake-ups) extracted from HTML."}
+    ],
+    "data_flow": [
+        {"variable": "public_lb", "creation_method": "do_read_csv", "flows_to": ["public_scores", "public_Scores"]},
+        {"variable": "public_Scores", "creation_method": "groupby and merge operations", "flows_to": ["assert validation", "plotting functions"]},
+        {"variable": "pvt_lb", "creation_method": "pd.read_excel", "flows_to": ["plot_candle", "final ranking displays"]},
+        {"variable": "shake_up", "creation_method": "read_html", "flows_to": ["pvt_lb['shake']", "plot_candle"]}
+    ],
+    "models": [],
+}

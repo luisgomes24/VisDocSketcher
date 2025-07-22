@@ -1,0 +1,31 @@
+%% This Mermaid diagram represents the workflow of the Jupyter Notebook analysis
+flowchart TD
+    %% Data Source
+    A["../input/indian-universities-rankings-2020/dental.csv"] --> B["df"]
+    %% Analysis starts with reading data into DataFrame
+    %% Data preparation step with descriptions
+    B --> H["ProfileReport (report_df)"]
+    B --> C["train_heat"]
+    subgraph Data_Preparation
+        C --> D["Removing nulls and 'perception'"]
+    end
+    %% Data Exploration and Visualization
+    H --> E["Exploratory Data Analysis"]
+    D --> F["Correlation Heatmap"]
+    E --> F
+    %% Pycaret Model Setup
+    B --> G["exp_reg (Pycaret setup)"]
+    G --> I["Pycaret Regression"]
+    I --> |input: [tlr, rpc, go, oi]| J["Target: perception"]
+    J --> I
+    
+    style A fill:#fff2cc,stroke:#f96;
+    style B fill:#white,stroke:#f66,stroke-width:2px;
+    style C fill:#ccf2ff,stroke:#ccf;
+    style D fill:#ffcccc,stroke:#f00;
+    style E fill:#ffffcc,stroke:#ff9;
+    style H fill:#f0f8ff,stroke:#ccc,stroke-width:2px;
+    style F fill:#ffebcc,stroke:#f90;
+    style G fill:#e6ffee,stroke:#9f9;
+    style I fill:#e0ffe0,stroke:#6d6;
+    style J fill:#f0fff0,stroke:#afa;

@@ -1,0 +1,37 @@
+flowchart TD
+
+    %% Data Sources
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> ../input/museum_visitors.csv]
+    %% This node represents the CSV file containing monthly visitor data to four museums.
+    
+    %% Data Variables
+    B[<img src='icons/table.svg' width=100 height=100/> <br/> museum_data]
+    %% This node represents the DataFrame containing museum visitor data.
+    
+    C[<img src='icons/database.svg' width=100 height=100/> <br/> ca_museum_jul18]
+    %% This node represents the number of visitors to the Chinese American Museum in July 2018.
+    
+    D[<img src='icons/database.svg' width=100 height=100/> <br/> avila_oct18]
+    %% This node represents the number of visitors to the Avila Adobe museum in October 2018.
+    
+    %% Data Flow
+    A -->|Read CSV| B
+    %% The CSV file is read into the museum_data DataFrame.
+    
+    B -->|Use for plotting| E[<img src='icons/brain.svg' width=100 height=100/> <br/> Plot Line Charts]
+    %% The museum_data is utilized to generate line charts reflecting visitor trends.
+    
+    B -->|Analyze| F[<img src='icons/brain.svg' width=100 height=100/> <br/> Answer Questions]
+    %% The museum_data is analyzed to derive answers to specific questions.
+    
+    B -->|Extract Info| C
+    %% Data for the Chinese American Museum in July 2018 is extracted post-inspection.
+    
+    B -->|Extract Info| D
+    %% Data for the Avila Adobe in October 2018 is extracted post-inspection.
+    
+    C -->|Validation| F
+    %% The extracted data for ca_museum_jul18 is used to answer specific questions.
+    
+    D -->|Validation| F
+    %% The extracted data for avila_oct18 is used to answer specific questions.

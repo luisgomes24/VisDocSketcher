@@ -1,0 +1,29 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff","tertiaryColor": "#fff000"}}}%%
+flowchart TD
+
+    subgraph DataSources
+        direction TB
+        A["Felicia3Fights_addedFeatures.csv"]
+        %% Felicia3Fights_addedFeatures.csv: Source CSV file containing features of Felicia's fights
+    end
+
+    subgraph DataLoading
+        direction TB
+        B["Read CSV into df1"]
+        %% df1: DataFrame containing the loaded data from the CSV file
+    end
+
+    subgraph DataVisualizations
+        direction TB
+        C1["plotPerColumnDistribution(df1)"]
+        %% Plotting: Visualize per column distribution of the data in df1
+        C2["plotCorrelationMatrix(df1)"]
+        %% Plotting: Visualize correlation matrix of the data in df1
+        C3["plotScatterMatrix(df1)"]
+        %% Plotting: Visualize scatter matrix of the data in df1
+    end
+
+    A -->|Read CSV| B
+    B -->|Data for Visualization| C1
+    B -->|Data for Visualization| C2
+    B -->|Data for Visualization| C3

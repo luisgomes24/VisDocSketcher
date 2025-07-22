@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file_name": "segmentation-data.csv",
+      "description": "Data contains segmentation data of 2000 customers including age and income."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_segmentation",
+      "description": "DataFrame containing customer segmentation data loaded from CSV."
+    },
+    {
+      "name": "segmentation_std",
+      "description": "Standardized version of df_segmentation."
+    },
+    {
+      "name": "kmeans",
+      "description": "KMeans model used to perform clustering on standardized data."
+    },
+    {
+      "name": "scores_pca",
+      "description": "PCA transformed scores used for KMeans clustering."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_segmentation",
+      "creation": "pd.read_csv",
+      "flow": "Descriptive analysis, correlation calculation, and initial visualization."
+    },
+    {
+      "variable": "segmentation_std",
+      "creation": "StandardScaler",
+      "flow": "Clustering with KMeans."
+    },
+    {
+      "variable": "kmeans",
+      "creation": "KMeans(n_clusters=4)",
+      "flow": "Assigns segments to df_segm_kmeans."
+    },
+    {
+      "variable": "scores_pca",
+      "creation": "pca.fit(segmentation_std) & pca.transform(segmentation_std)",
+      "flow": "Used in KMeans clustering with PCA results."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": "scores_pca or segmentation_std",
+      "target_variable": "Segment K-means or Segment K-means PCA",
+      "hyperparameters": "n_clusters=4"
+    },
+    {
+      "model_name": "PCA",
+      "input_features": "segmentation_std",
+      "target_variable": "scores_pca",
+      "hyperparameters": "n_components=3"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+%%{ init : { "theme" : "default" } }%%
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> BX-Users.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> BX-Books.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> BX-Book-Ratings.csv"]
+
+    %% Initial DataFrames
+    B1["<img src='icons/table.svg' width=100 height=100/> <br/> users"]
+    B2["<img src='icons/table.svg' width=100 height=100/> <br/> books"]
+    B3["<img src='icons/table.svg' width=100 height=100/> <br/> ratings"]
+
+    %% Merged DataFrame
+    C1["<img src='icons/table.svg' width=100 height=100/> <br/> dataset"]
+
+    %% Processed DataFrame
+    D1["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+
+    %% Final Processed for Model
+    E1["<img src='icons/table.svg' width=100 height=100/> <br/> new_data"]
+
+    %% Features and Target
+    F1["X"]
+    F2["y"]
+
+    %% Dataset Splits
+    G1["X_train, X_test"]
+    G2["y_train, y_test"]
+
+    %% Model Training
+    H1["<img src='icons/brain.svg' width=100 height=100/> <br/> MultinomialNB Model"]
+
+    %% Data Source to DataFrame
+    A1 --> |"pd.read_csv"| B1
+    A2 --> |"pd.read_csv"| B2
+    A3 --> |"pd.read_csv"| B3
+
+    %% DataFrames to Merged Dataset
+    B1 --> |"merge into"| C1
+    B2 --> |"merge into"| C1
+    B3 --> |"merge into"| C1
+
+    %% Merged to Processed Data
+    C1 --> |"DataFrame transformations"| D1
+
+    %% Processed Data to Final Form
+    D1 --> |"filtering operation"| E1
+
+    %% Final Form to Model Features
+    E1 --> |"create features and target"| F1
+    E1 --> |"create features and target"| F2
+
+    %% Dataset Splits
+    F1 --> |"train_test_split"| G1
+    F2 --> |"train_test_split"| G2
+
+    %% Model Training
+    G1 --> |"fit"| H1
+    G2 --> |"fit"| H1

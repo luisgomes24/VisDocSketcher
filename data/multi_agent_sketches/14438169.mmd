@@ -1,0 +1,40 @@
+flowchart TD
+    %% This node represents the importation of the NumPy library
+    np["/np: NumPy library initialized/"]
+
+    %% Node representing the creation of 'a' as a multi-dimensional array
+    a["/a: np.array([[...],[...]])/"]
+    np --> a
+
+    %% Node representing the creation of the 'data' sample array
+    data["/data: np.array([1,2])/"]
+    np --> data
+
+    %% Node representing the creation of 'ones' array
+    ones["/ones: np.ones(2, dtype=int)/"]
+    np --> ones
+
+    %% Add Node: Addition operation on 'data' and 'ones'
+    add["/add: data + ones/"]
+    data --> add
+    ones --> add
+
+    %% Subtraction Node: Subtraction operation (Although unused or missing in flow)
+    sub["/sub: data - ones/"]
+
+    %% Multiplication Node: Multiplication operation (Although unused or missing in flow)
+    multi["/multi: data * ones/"]
+
+    %% Division Node: Division operation (Although unused or missing in flow)
+    div["/div: data / ones/"]
+
+    %% Node for image reading using OpenCV
+    img["/img: Image Read (cv2.imread)/"]
+
+    %% Node for image normalization
+    img_array["/img_array: Normalized image/"]
+    img --> img_array
+
+    %% Grayscale Image Conversion
+    img_gray["/img_gray: Grayscale image/"]
+    img_array --> img_gray

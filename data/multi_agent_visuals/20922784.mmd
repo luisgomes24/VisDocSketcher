@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> training_set"] -->|"Used for training dataset"| B
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test_set"] -->|"Used for validation dataset"| B
+
+    %% Data Variables
+    B{{"<img src='icons/database.svg' width=100 height=100/> <br/> DATA_DIR"}} -->|"Needed for defining paths"| D
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> trn_dir"] -->|"Defines path to training images"| E
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> train_ds"] -->|"ImageFolder for training set"| F["<img src='icons/brain.svg' width=100 height=100/> <br/> train_dl"]
+
+    D -->|"Defines path to validation images"| H
+    H["<img src='icons/column_split.svg' width=100 height=100/> <br/> val_dir"] -->|"ImageFolder for validation set"| I
+    I["<img src='icons/table.svg' width=100 height=100/> <br/> valid_dl"] -->|"DataLoader for validation"| J["<img src='icons/brain.svg' width=100 height=100/> <br/> valid_dl"]
+
+    %% Processes
+    subgraph TrainingProcess
+        E --> |"Transform and load images"| F
+    end
+
+    subgraph ValidationProcess
+        I --> |"Transform and load images"| J
+    end

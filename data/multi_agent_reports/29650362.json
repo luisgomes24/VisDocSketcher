@@ -1,0 +1,141 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/insurance/insurance.csv",
+      "description": "Insurance dataset containing features related to individuals, such as age, sex, bmi, children, smoker status, region, and charges."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "Initial DataFrame containing raw insurance data."
+    },
+    {
+      "variable": "encoded_data",
+      "description": "DataFrame containing the one-hot encoded version of the categorical variables from the original data."
+    },
+    {
+      "variable": "clean_data",
+      "description": "DataFrame with outliers removed based on BMI values."
+    },
+    {
+      "variable": "X",
+      "description": "DataFrame containing features used for model training, excluding the target variable ('charges')."
+    },
+    {
+      "variable": "y",
+      "description": "Series containing the target variable, ('charges')."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set of features."
+    },
+    {
+      "variable": "X_test",
+      "description": "Test set of features."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set of target variable."
+    },
+    {
+      "variable": "y_test",
+      "description": "Test set of target variable."
+    },
+    {
+      "variable": "r2_scores",
+      "description": "List containing R^2 scores for each regression model evaluated."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "created_by": "pd.read_csv",
+      "flows_to": ["encoded_data", "clean_data", "X", "y"]
+    },
+    {
+      "variable": "encoded_data",
+      "created_by": "pd.get_dummies",
+      "flows_to": ["clean_data"]
+    },
+    {
+      "variable": "clean_data",
+      "created_by": "Data cleaning process (outlier removal)",
+      "flows_to": ["X", "y", "X_train", "X_test", "y_train", "y_test"]
+    },
+    {
+      "variable": "X",
+      "created_by": "DataFrame.drop",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created_by": "clean_data["charges"]",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["r2_scores"]
+    },
+    {
+      "variable": "X_test",
+      "created_by": "train_test_split",
+      "flows_to": ["r2_scores"]
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split",
+      "flows_to": ["r2_scores"]
+    },
+    {
+      "variable": "y_test",
+      "created_by": "train_test_split",
+      "flows_to": ["r2_scores"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "None"
+    },
+    {
+      "model_name": "KNeighborsRegressor",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "n_neighbors=7"
+    },
+    {
+      "model_name": "DecisionTreeRegressor",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "max_depth=3"
+    },
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "max_depth=3, n_estimators=500"
+    },
+    {
+      "model_name": "AdaBoostRegressor",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "n_estimators=50, learning_rate=0.01"
+    },
+    {
+      "model_name": "GradientBoostingRegressor",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "max_depth=2, n_estimators=100, learning_rate=0.2"
+    },
+    {
+      "model_name": "XGBoost",
+      "input_features": "All features except 'charges'",
+      "target_variable": "y",
+      "hyperparameters": "max_depth=3, n_estimators=50, learning_rate=0.2, objective='reg:squarederror'"
+    }
+  ]
+}

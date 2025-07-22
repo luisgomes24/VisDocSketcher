@@ -1,0 +1,13 @@
+```
+flowchart TD;
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🧹 Preprocessing <img src='icons/column_split.svg' />"];
+    B --> C["📊 Visualization <img src='dummy_plots/heatmap_template.svg' />"];
+    C --> D["🧠 Modeling <img src='icons/brain.svg' />"];
+    D --> E["📏 Evaluation <img src='icons/table.svg' />"];
+    
+    A["📁 Load Data <img src='icons/file.svg' />"] --> F["📊 Sample Data Check"];
+    B --> G["🔄 Data Transformation"];
+    G --> C;
+
+    E --> H["📉 Brier Score Calculation"];
+    H --> I["📊 Brier Score Results"];

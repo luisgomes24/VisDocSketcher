@@ -1,0 +1,80 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing id, excerpt (text), target (reading score), and standard_error (error estimate)."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing id and excerpt (text) for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing training data after reading from train.csv and preprocessing steps.
+  "
+    },
+    {
+      "name": "test_df",
+      "description": "DataFrame containing test data after reading from test.csv."
+    },
+    {
+      "name": "max_words",
+      "description": "Maximum number of words in any excerpt from the training data, used for max length during tokenization."
+    },
+    {
+      "name": "target_prediction",
+      "description": "Array to store target predictions from the model for training data and test data.
+    },
+    {
+      "name": "error_prediction",
+      "description": "Array to store error predictions from the model for training data and test data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv("../input/commonlitreadabilityprize/train.csv", ...)" ,
+      "flow": "filtered, created kfolds, used in training"  
+    }, 
+    {
+      "variable": "test_df",
+      "creation": "pd.read_csv("../input/commonlitreadabilityprize/test.csv", ...)" ,
+      "flow": "used for testing/prediction"  
+    }, 
+    {
+      "variable": "max_words",
+      "creation": "df["excerpt"].apply(lambda x: len(x.split())).max()", 
+      "flow": "used in tokenization" 
+    },
+    {
+      "variable": "target_prediction",
+      "creation": "np.zeros(df.shape[0])", 
+      "flow": "incremented during model inference and used for plotting" 
+    },
+    {
+      "variable": "error_prediction",
+      "creation": "np.zeros(df.shape[0])", 
+      "flow": "incremented during model inference and used for plotting" 
+    }
+  ],
+  "models": [
+    {
+      "name": "BertModel",
+      "description": "BERT model implemented with additional convolutional layers for feature extraction.",
+      "input_features": ["excerpt text"],
+      "target_variable": "target and standard_error",
+      "hyperparameters": {
+        "batch_size": 16,
+        "epochs": 100,
+        "linear_layers_output": 2,
+        "learning_rate": 5e-5
+      }
+    },
+    {
+      "name": "RMSELoss",
+      "description": "Customized loss function based on root mean squared error to evaluate model performance."
+    }
+  ]
+}

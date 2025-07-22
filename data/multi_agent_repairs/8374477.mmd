@@ -1,0 +1,24 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["Video_Store.csv"]
+    click A href "../input/Video_Store.csv" "Opens Video Store CSV"
+    
+    %% Data Loading
+    A -->|Load CSV| B["video_pandas"]
+    A -->|Load CSV| C["vp"]
+    
+    %% Data Transformation
+    B -->|Query Income > 30K| D["video_sub"]
+    C -->|Z-score Age| E["Age_Z"]
+    C -->|Z-score Income| F["Income_Z"]
+    C -->|Z-score Rentals| G["Rentals_Z"]
+    C -->|Z-score Avg Per Visit| H["Avg_Per_Visit_Z"]
+    
+    %% Genre Handling
+    C -->|Dummy Variables| I["Genre_dummy"]
+    C -->|Crosstab Gender by Genre| J["video_cross"]
+    
+    %% Outputs
+    J -->|Plot Bar Chart| K["Visualization"]
+```

@@ -1,0 +1,9 @@
+flowchart TD
+    A["💾 Load Data\n<img src='icons/file.svg'/> <br/> load train/test"] --> B["🔢 Preprocess Data\n<img src='icons/column_split.svg'/> <br/> encode text features"]
+    B --> C["🧠 Define Models\n<img src='icons/brain.svg'/> <br/> classifier configurations"]
+    C --> D["🏗️ Initialize TPOT\n<img src='icons/brain.svg'/> <br/> create and configure model"]
+    D --> E["📈 Fit Model\n<img src='icons/brain.svg'/> <br/> training the model"]
+    E --> F["📤 Export Model\n<img src='icons/file.svg'/> <br/> save model to file"]
+    F --> G["🔮 Predict\n<img src='icons/brain.svg'/> <br/> make predictions on test data"]
+    G --> H["📊 Create Submission\n<img src='icons/table.svg'/> <br/> generate submission file"]
+    H --> I["📊 Visualize Predictions\n<img src='dummy_plots/hist_template.svg'/> <br/> histogram of predictions"]

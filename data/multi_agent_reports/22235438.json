@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains annotations and metadata for training images related to the Great Barrier Reef project."
+    },
+    {
+      "file_name": "video_0",
+      "description": "Folder containing image frames used for creating animations."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame storing the training data read from train.csv."
+    },
+    {
+      "name": "train0",
+      "description": "Filtered DataFrame containing data for video_id 0 from the train DataFrame."
+    },
+    {
+      "name": "DICT0",
+      "description": "List of dictionaries containing bounding box annotations for each image."
+    },
+    {
+      "name": "impaths",
+      "description": "List of file paths for images corresponding to the train0 DataFrame entries."
+    },
+    {
+      "name": "images0",
+      "description": "List of images read from impaths without annotations."
+    },
+    {
+      "name": "images1",
+      "description": "List of images with annotations drawn on them by the draw_box function."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create train0 DataFrame."
+    },
+    {
+      "variable": "train0",
+      "creation_method": "Filtering train DataFrame",
+      "flow": "Used to extract annotations for video_id 0 and create DICT0 and impaths."
+    },
+    {
+      "variable": "DICT0",
+      "creation_method": "List comprehension and ast.literal_eval",
+      "flow": "Used to create images1 list with annotated images."
+    },
+    {
+      "variable": "impaths",
+      "creation_method": "List comprehension",
+      "flow": "Used to read images in the images0 and images1 lists."
+    },
+    {
+      "variable": "images0",
+      "creation_method": "Reading images using cv2.imread",
+      "flow": "Used for displaying images without annotations."
+    },
+    {
+      "variable": "images1",
+      "creation_method": "Using draw_box function on images0,",
+      "flow": "Used for creating an animated visualization."
+    }
+  ],
+  "models": []
+}

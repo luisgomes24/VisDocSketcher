@@ -1,0 +1,34 @@
+flowchart TD
+    %%% Node definitions and comments for a data science project workflow
+    
+    %% Data Sources
+    ds1["train.csv"]
+    ds2["results.txt"]
+    ds3["results_num1_primary.txt"]
+    ds4["ishii_results.txt"]
+    ds5["tadokoro_results.txt"]
+    ds6["takemi_results.txt"]
+    ds7["furusec_results_sec1.txt"]
+    ds8["ishiisec_results_sec1.txt"]
+    ds9["ishiisec_results_sec2.txt"]
+    ds10["ishiisec_results_sec3_1.txt"]
+    ds11["takemisec_results_sec1.txt"]
+    ds12["ishiisec_results_sec3_2.txt"]
+    ds13["takemisec2_results_sec3.txt"]
+
+    %% Data Processing and Variable Creation
+    subgraph rawInput["Data Input"]
+        ds1 --> train{{"train DataFrame"}}
+        train --> LABEL_IDS["LABEL_IDS"]
+    end
+    
+    %% Label Processing
+    subgraph processData["Data Processing"]
+        LABEL_IDS --> df_label{{"df_label DataFrame"}}
+        train --> df_nolabel{{"df_nolabel DataFrame"}}
+        df_label --> processed_train["Processed Labels"]
+        df_nolabel --> train
+    end
+    
+    %% Outputs
+    processed_train --> out1["handlabeltrain.csv"]

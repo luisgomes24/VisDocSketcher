@@ -1,0 +1,29 @@
+{
+  "data_sources": [
+    {
+      "file_name": "N/A",
+      "description": "No input CSV files detected."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the dataset for plotting and analysis, typically structured from a CSV."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "N/A",
+      "flow": "Prepared for plotting and analysis through various defined functions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "N/A",
+      "input_features": "N/A",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

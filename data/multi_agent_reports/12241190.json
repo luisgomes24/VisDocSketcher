@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file_name": "bluemarble.png",
+      "description": "A NASA blue marble image used as a map background."
+    },
+    {
+      "file_name": "etopo.png",
+      "description": "An etopo relief image used as a map background."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "fig",
+      "description": "Figure object created for plotting maps."
+    },
+    {
+      "variable_name": "ax",
+      "description": "Axis object where the map is drawn."
+    },
+    {
+      "variable_name": "img",
+      "description": "Image data read from file for plotting."
+    },
+    {
+      "variable_name": "img_extent",
+      "description": "Extent for image placement on the map."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "fig",
+      "created_by": "plt.figure",
+      "usage": "Used for creating the figure to display map images."
+    },
+    {
+      "variable": "ax",
+      "created_by": "fig.add_subplot",
+      "usage": "Used as the main area to draw the map in the figure."
+    },
+    {
+      "variable": "img",
+      "created_by": "plt.imread",
+      "usage": "Image data used in ax.imshow for displaying the bluemarble and etopo images."
+    },
+    {
+      "variable": "img_extent",
+      "created_by": "Defined as a tuple",
+      "usage": "Defines the geographical extent of the image on the map."  
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Read CSV| B["df"]
+    %% Data Preparation
+    B -->|Slicing| C["train"]
+    B -->|Slicing| D["test"]
+    C --> E["train_y"]
+    C --> F["train_X"]
+    D --> G["test_y"]
+    D --> H["test_X"]
+    B -->|Prepare Data| I["train_keras"]
+    B -->|Prepare Data| J["test_keras"]
+    %% Model Creation
+    K["Keras Model"]
+    K -->|Fit Model| I
+    K -->|Predict Model| J
+    %% Model Training and Prediction
+    I -->|Train| L["model_fit"]
+    J -->|Predict| M["model_predict"]
+    L --> N["Model Output"]
+    M --> O["Predictions"]
+    
+    %% Node Descriptions
+    classDef dataNode fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O dataNode;
+    class K modelNode;
+```

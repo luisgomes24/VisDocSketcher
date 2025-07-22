@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_name": "vad-go-stereo-44100.wav",
+      "description": "Input audio file used for augmentations."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "input_audio",
+      "description": "File path of the input audio file."
+    },
+    {
+      "name": "aug_audio",
+      "description": "Augmented audio output after apply audio transformations."
+    },
+    {
+      "name": "sr",
+      "description": "Sample rate of the audio signal."
+    },
+    {
+      "name": "meta",
+      "description": "List to hold metadata related to audio augmentations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "input_audio",
+      "creation": "Defined by joining the TEST_URI path to the input audio file name.",
+      "flow": "Used as the input for various audio augmentation functions."
+    },
+    {
+      "variable": "aug_audio",
+      "creation": "Created by applying audio augmentations such as pitch shifting, time stretching, and peaking equalizer.",
+      "flow": "Displayed using IPython Audio component."
+    },
+    {
+      "variable": "sr",
+      "creation": "Derived from augmentation function outputs.",
+      "flow": "Used as a sample rate for displaying augmented audio.",
+    },
+    {
+      "variable": "meta",
+      "creation": "Initialized as an empty list before passing to augmentation functions.",
+      "flow": "Gets populated with metadata after each audio transformation.",
+    }
+  ],
+  "models": []
+}

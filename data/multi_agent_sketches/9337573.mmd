@@ -1,0 +1,36 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#F0F0F0'}}}%%
+
+flowchart TD
+    %% Node for Antecedent: Quality
+    quality["Quality (0-10)"]
+    note for quality: Antecedent variable representing the quality score
+
+    %% Node for Antecedent: Service
+    service["Service (0-10)"]
+    note for service: Antecedent variable representing the service score
+
+    %% Node for Fuzzy Logic Control System
+    flcs[["Fuzzy Logic Control System"]]
+    note for flcs: System using defined rules for tip calculation
+
+    %% Node for Consequent: Tip
+    tip["Tip (0-25)"]
+    note for tip: Consequent variable representing the tip amount
+
+    %% Node for Control System Simulation
+    tipping[["Control System Simulation: tipping"]]
+    note for tipping: Executes compute method to evaluate output
+
+    %% Edges
+    quality --> flcs
+    service --> flcs
+    flcs --> tip
+    tip --> tipping
+
+    %% Explanation for Fuzzy Logic Control System rules
+    rule1(Fuzzy Logic Rules)
+    flcs --> rule1
+    note for rule1: 
+        "1. If quality is poor or service is poor, then tip is low
+         2. If service is average, then tip is medium
+         3. If service is good or quality is good, then tip is high"

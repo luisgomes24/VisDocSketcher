@@ -1,0 +1,9 @@
+flowchart TD;
+    %% Node for CSV Data Source
+    A["USD_BRL_1994_2021_ANO_MES_DIA.csv"] -->|Read CSV| B["df"];
+    
+    %% Node for df DataFrame
+    B["df"] -->|Filter: Records before 2021| C["df2"];
+    
+    %% Node for df2 DataFrame used for plotting
+    C["df2"] -->|Used for| D["Plotting Exchange Rates"];

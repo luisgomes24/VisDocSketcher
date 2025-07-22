@@ -1,0 +1,27 @@
+{ 
+  "data_sources": [
+    {
+      "filename": "/kaggle/input/Leads.csv",
+      "description": "CSV file containing Leads data, likely related to customer interactions or marketing leads."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "Pandas DataFrame storing the first 1000 rows of Leads.csv for analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "usage": [
+        "Head of the DataFrame displayed with df1.head(5)",
+        "Distribution graphs plotted with plotPerColumnDistribution(df1, 10, 5)",
+        "Correlation matrix plotted with plotCorrelationMatrix(df1, 8)",
+        "Scatter and density plots with plotScatterMatrix(df1, 20, 10)"
+      ]
+    }
+  ],
+  "models": []
+}

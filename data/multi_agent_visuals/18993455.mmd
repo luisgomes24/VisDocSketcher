@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> Train Data CSV] -->|Import| B[<img src='icons/table.svg' width=100 height=100/> <br/> Train Data]    
+    A -->|Import| D[<img src='icons/file.svg' width=100 height=100/> <br/> Test Data]
+    B -->|Transform| C{<img src='icons/column_split.svg' width=100 height=100/> <br/> Logarithmic Transformation}
+    D -->|Transform| E{<img src='icons/column_split.svg' width=100 height=100/> <br/> Logarithmic Transformation}
+    C -->|Prepare| F[<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Training Dataset]
+    E -->|Prepare| G[<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Testing Dataset]
+    F -->|Train| H[<img src='icons/brain.svg' width=100 height=100/> <br/> TabularPredictor Model]
+    G -->|Predict| J[<img src='icons/brain.svg' width=100 height=100/> <br/> Prediction]
+    H -->|Use Model to Predict| J
+    J -->|Create Submission| K{<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> Submission Dataframe}
+
+    %% Node Descriptions
+    B:::data -- "Contains training data after preprocessing" --> C
+    D:::data -- "Contains testing data after preprocessing" --> E
+    F:::intermediate -- "Data prepared for model training" --> H
+    G:::intermediate -- "Data prepared for prediction with trained model" --> J
+    J:::data -- "Predictions from trained machine learning model" --> K
+    K:::output -- "Output CSV file for submission"
+    
+    %% Styles
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef intermediate fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;

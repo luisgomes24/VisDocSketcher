@@ -1,0 +1,26 @@
+```mermaid
+%% Diagram of the data workflow
+flowchart TD
+
+    %% Data Sources
+    A["events.csv"] -->|Read CSV| B["DataFrame: df_events"]
+    C["gender_age_train.csv"] -->|Read CSV| D["DataFrame: df_gender_age"]
+
+    %% Data Transformations
+    %% Filtering for specific coordinates to isolate Beijing events
+    B -->|Filter for Beijing| E["DataFrame: df_events_beijing"]
+    
+    %% Merging datasets on device_id
+    E -->|Merge on device_id| F["DataFrame: df_joined"]
+    D -->|Merge on device_id| F
+
+    %% Filtering data by demographic attributes
+    F -->|Filter female| G["DataFrame: df_female"]
+    F -->|Filter male| H["DataFrame: df_male"]
+    F -->|Filter age < 30| I["DataFrame: df_under"]
+    F -->|Filter 30 <= age < 40| J["DataFrame: df_between"]
+    F -->|Filter age >= 40| K["DataFrame: df_over"]
+
+    %% Filtering for specific timeframes
+    F -->|Filter Friday night| L["DataFrame: df_friday_night"]
+```

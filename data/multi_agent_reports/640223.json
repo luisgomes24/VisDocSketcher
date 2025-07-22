@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "source": "open_aq",
+      "description": "Dataset containing air quality data from various locations around the world."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "us_cities",
+      "description": "DataFrame containing U.S. cities from the OpenAQ dataset where the country is 'US'."
+    },
+    {
+      "variable": "country_unit_not_ppm",
+      "description": "Query to retrieve countries that measure pollution in a unit other than 'ppm'."
+    },
+    {
+      "variable": "zero_pollutants",
+      "description": "DataFrame containing pollutants that have a value of exactly 0."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "us_cities",
+      "creation_method": "Query to select all cities where the country is 'US'.",
+      "flow": "Used for data analysis and counting measurements by city."
+    },
+    {
+      "variable": "country_unit_not_ppm",
+      "creation_method": "SQL query filtering countries based on measurement unit.",
+      "flow": "Result of the query used to count and display countries."
+    },
+    {
+      "variable": "zero_pollutants",
+      "creation_method": "SQL query to select pollutants with a value of 0.",
+      "flow": "Result used for displaying information on pollutants with zero values."
+    }
+  ],
+  "models": []
+}

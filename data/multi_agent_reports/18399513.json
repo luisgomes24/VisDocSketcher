@@ -1,0 +1,78 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/titanic/train.csv",
+      "description": "Training dataset containing information about passengers on the Titanic."
+    },
+    {
+      "file": "../input/titanic/test.csv",
+      "description": "Test dataset used to make predictions on passengers not included in the training set."
+    },
+    {
+      "file": "../input/titanic/gender_submission.csv",
+      "description": "Submission file containing the expected format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "titanic",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test dataset."
+    },
+    {
+      "name": "sub",
+      "description": "DataFrame used for creating the submission file."
+    },
+    {
+      "name": "predictions",
+      "description": "DataFrame that contains the predicted survival labels for test dataset."
+    },
+    {
+      "name": "mymodel",
+      "description": "Classifier model created and optimized using PyCaret."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "titanic",
+      "creation": "Read from train.csv using pd.read_csv",
+      "flow": "Used in model training and setup."
+    },
+    {
+      "variable": "test",
+      "creation": "Read from test.csv using pd.read_csv",
+      "flow": "Used for predictions after loading the model."
+    },
+    {
+      "variable": "sub",
+      "creation": "Read from gender_submission.csv using pd.read_csv",
+      "flow": "Used to save the predictions into a CSV file for submission."
+    },
+    {
+      "variable": "mymodel",
+      "creation": "Generated through model comparison and creation in PyCaret",
+      "flow": "Used for training, tuning, finalizing, and saving the model."
+    },
+    {
+      "variable": "predictions",
+      "creation": "Created by calling predict_model on mymodel and test dataset.",
+      "flow": "Stored predictions are used to update the submission DataFrame."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Best model from compare_models",
+      "input_features": "All features except 'PassengerId' and 'Name'",
+      "target_variable": "Survived",
+      "hyperparameters": [
+        {
+          "name": "tuning",
+          "description": "Hyperparameters tuned using tune_model function."
+        }
+      ]
+    }
+  ]
+}

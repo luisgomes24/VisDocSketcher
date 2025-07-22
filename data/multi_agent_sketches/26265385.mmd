@@ -1,0 +1,25 @@
+flowchart TD
+    
+    %% Node for data source
+    A["heart_2020_cleaned.csv"] -->|"Load CSV"| B["DataFrame: df"]
+    
+    %% Nodes for DataFrame operations
+    B -->|"Select Numeric Columns"| C["Numeric Columns: float1"]
+    B -->|"Select Categorical Columns"| D["Categorical Columns: obj1"]
+    
+    %% Exploratory Data Analysis and Visualization
+    B --> E["Exploratory Data Analysis"]
+    C --> F["Numeric Data Visualization"]
+    D --> G["Categorical Data Visualization"]
+    
+    %% There are no models in the notebook
+    
+    
+    %% Comments for clarity
+    %% A: This is the data source CSV file
+    %% B: DataFrame created by loading the CSV
+    %% C: Numeric columns extracted from the DataFrame
+    %% D: Categorical columns extracted from the DataFrame
+    %% E: Exploratory Analysis performed on the DataFrame
+    %% F: Visualizations created for numeric data
+    %% G: Visualizations created for categorical data

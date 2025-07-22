@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Dataset from BigQuery <img src='icons/database.svg'/> <br/>"]
+    B["🔍 Count Tables in Dataset"]
+    C["📝 Explore Table Schema"]
+    D["🗺️ Create Crime Map <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    E["✅ Check Answers"]
+
+    A --> B
+    B --> E
+    B --> C
+    C --> E
+    C --> D
+    D --> E

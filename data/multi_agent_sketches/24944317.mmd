@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data sources
+    A1["train.csv"]:::dataSource -->|load| B1["train DataFrame"]:::dataVar
+    A2["test.csv"]:::dataSource -->|load| B2["test DataFrame"]:::dataVar
+
+    %% Data processing and feature engineering
+    B1 -->|drop PassengerId, Name columns| C1["Processed Train Data"]:::dataVar
+    B2 -->|drop PassengerId, Name columns| C2["Processed Test Data"]:::dataVar
+    C1 -->|split 'Cabin'| D1["Cabin Features (Train)"]:::dataVar
+    C2 -->|split 'Cabin'| D2["Cabin Features (Test)"]:::dataVar
+    D1 -->|convert categorical to numeric| E1["Encoded Deck Feature (Train)"]:::dataVar
+    D2 -->|convert categorical to numeric| E2["Encoded Deck Feature (Test)"]:::dataVar
+
+    %% Data imputation and transformation
+    E1 -->|impute and scale features| F1["Train Imputed Data"]:::dataVar
+    E2 -->|impute and scale features| F2["Test Imputed Data"]:::dataVar
+    F1 -->|extract 'Transported'| G1["Target Variable y"]:::dataVar
+    F1 -->|exclude 'Transported'| G2["Feature Set X"]:::dataVar
+
+    %% Model training
+    G2 -->|train/test split| H1["X_train, X_test"]:::dataVar
+    G1 -->|train/test split| H2["y_train, y_test"]:::dataVar
+    H1 -->|train AutoML model| I1["AutoML Model"]:::model
+    H2 -->|train AutoML model| I1
+
+    %% Prediction
+    I1 -->|predict| J1["Predictions on Test Data"]:::dataVar
+    J1 --> K1["Final Predictions CSV"]:::output
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb, stroke:#333, stroke-width:2px;
+    classDef output fill:#ff9,stroke:#333,stroke-width:2px;

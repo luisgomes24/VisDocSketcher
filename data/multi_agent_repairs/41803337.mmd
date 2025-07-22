@@ -1,0 +1,48 @@
+%%{init: {"theme": "base", "themeVariables": {"edgeLabelBackground":"#ffffff","clusterBkg":"#cde498","clusterBorder":"#4b8600","tertiaryColor":"#cde498"}}}%%
+%% Data Sources and Variables
+flowchart TD
+  subgraph data_sources ["Data Sources"]
+    direction TB
+    train["train"]
+    %% Represents training data saved as TFRecords.
+    validation["validation"]
+    %% Represents validation data saved as TFRecords.
+    train_df_csv["train_df.csv"]
+    %% CSV file containing DataFrame derived from 'train' directory.
+    valid_df_csv["valid_df.csv"]
+    %% CSV file containing DataFrame derived from 'validation' directory.
+  end
+
+  subgraph data_variables ["Data Variables"]
+    direction TB
+    train_df["train_df"]
+    %% DataFrame containing record IDs for training data.
+    valid_df["valid_df"]
+    %% DataFrame containing record IDs for validation data.
+    correlation_matrix["correlation_matrix"]
+    %% Matrix representing band correlations.
+    band_labels["band_labels"]
+    %% List of band identifiers.
+    band_labels_nickname["band_labels_nickname"]
+    %% Friendly names for band identifiers.
+  end
+
+  %% Data Flow and Transformations
+  train -->|"Create train_df"| train_df
+  validation -->|"Create valid_df"| valid_df
+  train_df -->|"Save to CSV"| train_df_csv
+  valid_df -->|"Save to CSV"| valid_df_csv
+  correlation_matrix -->|"Use for plotting"| correlation_matrix["Plotting Correlations"]
+
+  %% Model used
+  subgraph models_used ["ML Models"]
+    direction TB
+    correlation_analysis["Correlation Analysis"]
+    %% Analysis of band correlations to contrail presence.
+  end
+
+  %% ML Model Data Flow
+  band_labels --> correlation_analysis
+  correlation_analysis --> correlation_matrix
+  models_used -->|"Data Influence"| band_labels_nickname
+  models_used -->|"Data Influence"| correlation_matrix

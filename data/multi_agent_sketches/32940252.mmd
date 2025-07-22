@@ -1,0 +1,27 @@
+%% Mermaid Diagram for Jupyter Notebook workflow
+flowchart TD
+    %% DICOM file node
+    DICOM_File["DICOM File (train_images/10006/462822612.dcm)"]
+    
+    %% Data processing using Pydicom
+    Pydicom_Processing["Process with Pydicom"]
+    Display_Pydicom["Display Pydicom Image"]
+    Max_Pydicom["Max value of Pydicom Image"]
+    
+    %% Data processing using TensorFlow I/O
+    TFIO_Processing["Process with TensorFlow I/O"]
+    Display_TFIO["Display TensorFlow I/O Image"]
+    Max_TFIO["Max value of TFIO Image"]
+    
+    %% Lossy processing using TensorFlow I/O
+    TFIO_Lossy_Processing["Process with TF I/O Lossy (uint8)"]
+    Display_TFIO_Lossy["Display Lossy Image"]
+    Max_TFIO_Lossy["Max value of TFIO Lossy Image"]
+
+    %% Defining the data flow
+    DICOM_File --> Pydicom_Processing --> |"pydicom_img"| Display_Pydicom
+    Pydicom_Processing --> Max_Pydicom
+    DICOM_File --> TFIO_Processing --> |"tfio_image"| Display_TFIO
+    TFIO_Processing --> Max_TFIO
+    DICOM_File --> TFIO_Lossy_Processing --> |"tfio_lossy_image"| Display_TFIO_Lossy
+    TFIO_Lossy_Processing --> Max_TFIO_Lossy

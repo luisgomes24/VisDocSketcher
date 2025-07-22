@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/tmdb-top-10000-popular-movies-dataset/TMDb_updated.CSV",
+      "description": "Dataset of the top 10,000 popular movies from TMDb"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the movie dataset"
+    },
+    {
+      "name": "df1",
+      "description": "Grouped DataFrame by 'original_language' summing numerical features"
+    },
+    {
+      "name": "example_overview",
+      "description": "Overview of the first movie in the dataset"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv",
+      "flows": ["Used in data cleaning, analysis, and visualizations."]
+    },
+    {
+      "variable": "df1",
+      "creation": "df.groupby('original_language').sum()",
+      "flows": ["Used to analyze aggregated data by language."]
+    },
+    {
+      "variable": "example_overview",
+      "creation": "df['overview'][0]",
+      "flows": ["Used for text processing and further analysis."]
+    }
+  ],
+  "models": []
+}

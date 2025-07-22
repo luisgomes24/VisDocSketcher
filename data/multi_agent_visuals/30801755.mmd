@@ -1,0 +1,22 @@
+graph TD
+    y["<img src='path/to/plot.svg'/> <br/> Float Variable: 1.0"];
+    z["<img src='path/to/plot.svg'/> <br/> Integer version of y"];
+    beds["<img src='path/to/plot.svg'/> <br/> Number of Bedrooms"];
+    baths["<img src='path/to/plot.svg'/> <br/> Number of Bathrooms"];
+    has_basement["<img src='path/to/plot.svg'/> <br/> Basement Present?"];
+    value["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Expected House Cost"];
+    engraving["<img src='path/to/plot.svg'/> <br/> Engraving String"];
+    solid_gold["<img src='path/to/plot.svg'/> <br/> Is Solid Gold?"];
+    cost["<img src='dummy_plots/barplot_template.svg'/> <br/> Cost Calculation"];
+    project_one["<img src='dummy_plots/lineplot_template.svg'/> <br/> Cost of Project One"];
+    project_two["<img src='dummy_plots/lineplot_template.svg'/> <br/> Cost of Project Two"];
+    
+    % Flow between nodes
+y --> z
+    beds --> value
+    baths --> value
+    has_basement --> value
+    engraving --> cost
+    solid_gold --> cost
+    cost --> project_one
+    cost --> project_two

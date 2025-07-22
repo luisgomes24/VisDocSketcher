@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Source Node
+    A["/petrol_data.csv/"] 
+    %% Description: Contains petrol price data by district, including date and rates.
+
+    %% Data Import
+    A -->|pd.read_csv| B[petrol]
+    %% Description: DataFrame containing all petrol price data imported from CSV.
+
+    %% Filtered DataFrame
+    B -->|Filter by City| C[city]
+    %% Description: Filtered DataFrame containing petrol prices for a specific city.
+
+    %% Extract Rate Data
+    C -->|Extract 'rate'| D[data]
+    %% Description: Series containing the petrol rate data extracted from the 'city' DataFrame.
+
+    %% Setup Experiment
+    C -->|Exp setup| E[TimeSeriesExperiment]
+    D -->|Input Feature| E
+    %% Description: TimeSeriesExperiment from pycaret with input features from 'data' and target variable 'rate'.
+    %% Model Hyperparameters: session_id: 42, fh: 30

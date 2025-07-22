@@ -1,0 +1,47 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DataSources["Data Sources"]
+        csv_file["Palestine Body Count.csv"]
+    end
+
+    %% Variables
+    subgraph DataVariables["Data Variables"]
+        df["DataFrame: Body Count Data"]
+        p_injured["Total Palestinians Injured"]
+        p_killed["Total Palestinians Killed"]
+        i_injured["Total Israelis Injured"]
+        i_killed["Total Israelis Killed"]
+    end
+
+    %% Data Processing and Flow
+    csv_file -->|Read CSV| df
+    df -->|Calculate Sum| p_injured
+    df -->|Calculate Sum| p_killed
+    df -->|Calculate Sum| i_injured
+    df -->|Calculate Sum| i_killed
+
+    %% Data Usage
+    subgraph Usage["Usage"]
+        data_cleaning["Data Cleaning"]
+        visualization["Visualization"]
+        analysis["Analysis"]
+        print_output["Print Output"]
+    end
+
+    df --> data_cleaning
+    df --> visualization
+    df --> analysis
+
+    p_injured --> print_output
+    p_injured --> visualization
+
+    p_killed --> print_output
+    p_killed --> visualization
+
+    i_injured --> print_output
+    i_injured --> visualization
+
+    i_killed --> print_output
+    i_killed --> visualization
+```

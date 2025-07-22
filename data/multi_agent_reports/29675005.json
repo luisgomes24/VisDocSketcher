@@ -1,0 +1,45 @@
+{
+  "data_sources": [
+    {"file":"train","description":"Contains training images for the model."},
+    {"file":"valid","description":"Contains validation images for the model."},
+    {"file":"test","description":"Contains test images for inference."}
+  ],
+  "data_variables": [
+    {"name":"comp","description":"Competition name for accessing dataset"},
+    {"name":"path","description":"Path to the competition dataset"},
+    {"name":"trn_path","description":"Path to the training data"},
+    {"name":"files","description":"List of image files in the training set"},
+    {"name":"dls","description":"Data loaders for training and validation data"},
+    {"name":"learn","description":"Learner object for the model"},
+    {"name":"tst_files","description":"List of test image files"},
+    {"name":"probs","description":"Predicted probabilities for test images"},
+    {"name":"idxs","description":"Predicted class indices"},
+    {"name":"mapping","description":"Mapping from class indices to class labels"},
+    {"name":"reverse_mapping","description":"Reverse mapping from class labels back to indices"},
+    {"name":"results","description":"Final results of predictions mapped to labels"},
+    {"name":"testY","description":"True labels for test data"}
+  ],
+  "data_flow": [
+    {"variable":"path","creation":"setup_comp() to initialize the competition dataset.","flow":"Used to get the dataset path and as input to data loaders."},
+    {"variable":"trn_path","creation":"Defined as path/'train'.","flow":"Used to get training files list and create data loaders."},
+    {"variable":"files","creation":"get_image_files() to fetch training images.","flow":"Used to create image sizes and for training data loaders."},
+    {"variable":"dls","creation":"ImageDataLoaders.from_folder() to create loaders for training and validation images.","flow":"Used as input to the model learner."},
+    {"variable":"learn","creation":"vision_learner() to create a model learner using specified architecture.","flow":"Trained with fine_tune(), used for predictions on test data."},
+    {"variable":"tst_files","creation":"get_image_files() for test images.","flow":"Used to create test data loaders for inference."},
+    {"variable":"probs","creation":"learn.get_preds() for making predictions.","flow":"Contains model predictions for test data."},
+    {"variable":"results","creation":"pd.Series() to map predictions.","flow":"Final output shown in results variable for analysis."},
+    {"variable":"testY","creation":"Compares predicted and actual labels.","flow":"Used to evaluate model performance using classification_report."}
+  ],
+  "models": [
+    {
+      "model_name":"resnet26d",
+      "input_features":"Training images from data loaders.",
+      "target_variable":"Class labels of the images.",
+      "hyperparameters": {
+        "batch_size":"128",
+        "epochs":"3",
+        "learning_rate":"0.01"
+      }
+    }
+  ]
+}

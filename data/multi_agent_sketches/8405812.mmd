@@ -1,0 +1,7 @@
+flowchart TD
+  %% Node for Data Source
+  A1["ionosphere_data.csv"] -->|Read CSV| B1["df1"]
+  %% Node for Data Variable
+  B1 -->|Used in| C1["plotPerColumnDistribution"]
+  B1 -->|Used in| D1["plotCorrelationMatrix"]
+  B1 -->|Used in| E1["plotScatterMatrix"]

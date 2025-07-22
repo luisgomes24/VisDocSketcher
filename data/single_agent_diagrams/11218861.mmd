@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg'/> <br/>"] --> B["🧹 Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    C --> D["🧠 Build Model"]
+    D --> E["⚙️ Train Model"]
+    E --> F["📉 Evaluate Model"]
+
+    B --> G["🧩 Split Data"]
+    G --> D
+    D --> E

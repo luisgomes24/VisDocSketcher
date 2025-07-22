@@ -1,0 +1,46 @@
+flowchart TD
+    %% Data Sources
+    A["/student_clustering.csv/"]:::dataSource
+
+    %% Data Variables
+    B1["data"]:::dataVar
+    B2["x"]:::dataVar
+    B3["y_means"]:::dataVar
+    B4["cluster_1, cluster_2, cluster_3, cluster_4"]:::dataVar
+    B5["wcss"]:::dataVar
+
+    %% Processes
+    C1["Read CSV"]:::process
+    C2["Extract Features"]:::process
+    C3["KMeans Clustering"]:::process
+    C4["Create Cluster DataFrames"]:::process
+    C5["Calculate WCSS"]:::process
+
+    %% Data Source to Variable
+    A -->|Read using pd.read_csv| B1
+    B1 -->|Used for| C1
+
+    %% Data Variable Transformations
+    B1 -->|Extract features using iloc| C2
+    C2 -->|Creates| B2
+    B2 -->|Input for| C3
+
+    %% Model Usage
+    C3 -->|fit_predict to get clusters| B3
+    C3 -.-> KMeans{"KMeans Model"}
+    KMeans -->|Input: CGPA, IQ\nn_clusters: 4| C3
+
+    %% Cluster DataFrames Creation
+    B3 -->|Slice into clusters| C4
+    C4 -->|Creates| B4
+    B4 -->|Visualization| D["Plot Clusters"]
+
+    %% WCSS Calculation
+    B2 -->|Input for| C5
+    C5 -->|Elbow method| B5
+    B5 -->|To determine optimal clusters| E["Elbow Plot"]
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bfb,stroke:#333,stroke-width:2px;

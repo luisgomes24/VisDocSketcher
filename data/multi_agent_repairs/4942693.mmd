@@ -1,0 +1,12 @@
+```mermaid
+flowchart TD
+    A["BigQuery Dataset"] -->|Query using SQL| B["Country Spend Percent Query"]
+    A -->|Query using SQL| C["Code Count Query"]
+    B -->|Execute Query| D["Country Spending Results"]
+    C -->|Execute Query| E["Code Count Results"]
+    subgraph Processing_Steps
+        direction TB
+        D -->|Analyze| F["Analyze Avg Edu Spending by Country"]
+        E -->|Identify| G["Identify Indicator Codes >= 175 Entries for 2016"]
+    end
+```

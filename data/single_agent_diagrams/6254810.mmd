@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> Read diamonds.csv"] --> B["📊 Display Data <img src='table.svg' /> <br/> Show first few rows"]
+    B --> C["📝 Data Info <img src='table.svg' /> <br/> Info about columns"]
+    C --> D["✂️ Drop Unnecessary Column <img src='column_split.svg' /> <br/> Remove 'clarity'"]
+    D --> E["❓ Check for Missing Values <img src='table.svg' /> <br/> Sum of NaN values"]
+    E --> F["💡 Data Exploration <img src='hist_template.svg' /> <br/> Visualizations of 'depth', 'table', 'price'"]
+    F --> G["📊 Mean and Mode of Price <img src='statistics.svg' /> <br/> Calculate price statistics"]
+    G --> H["🔍 Exploratory Analysis <img src='scatter_plot_template.svg' /> <br/> Relationship between color and price"]

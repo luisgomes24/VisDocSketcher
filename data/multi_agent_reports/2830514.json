@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/training_ratings_for_kaggle_comp.csv",
+      "description": "Contains training ratings data with around 500100 rows, only the first 1000 rows are read for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame containing the training ratings data imported from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Read using pd.read_csv with nrows=1000 to limit the loading.",
+      "flow": "Used for generating various plots including column distributions, correlation matrix, and scatter density plots."
+    }
+  ],
+  "models": []
+}

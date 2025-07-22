@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/database.svg' />"] --> B["📊 EDA"]
+    B --> C["📂 Dataset <img src='icons/table.svg' />"]
+    C --> D["🧩 Preprocess Data"]
+    D --> E["🔍 Create DataBlock"]
+    E --> F["🔄 Data Loaders"]
+    F --> G["🧠 Model Building <img src='icons/brain.svg' />"]
+    G --> H["🏋️‍♂️ Fine-tune Model"]
+    H --> I["💾 Save Model"]
+    I --> J["📊 Confusion Matrix <img src='icons/table.svg' />"]
+    J --> K["📈 Predictions"]
+    K --> L["📄 Classification Report"]
+    L --> M["🎉 Show Results"]

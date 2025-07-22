@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "dc-wikia-data.csv",
+      "description": "Contains data related to DC comic characters for visualization."
+    },
+    {
+      "file_name": "marvel-wikia-data.csv",
+      "description": "Contains data related to Marvel comic characters for visualization."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "my_filepath",
+      "description": "Path string for the selected CSV file."
+    },
+    {
+      "variable_name": "my_data",
+      "description": "DataFrame that holds the loaded CSV data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "my_filepath",
+      "creation_method": "Manually assigned with the CSV file path.",
+      "usage": "Passed as an argument to load data into my_data."
+    },
+    {
+      "variable_name": "my_data",
+      "creation_method": "Read from CSV using the file path specified in my_filepath.",
+      "usage": "Used to visualize data stories through plots."
+    }
+  ],
+  "models": []
+}

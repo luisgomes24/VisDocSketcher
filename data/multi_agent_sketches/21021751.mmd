@@ -1,0 +1,33 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A["/Mall_Customers.csv/"]:::dataSource
+    %% Nodes for Data Variables
+    B[df]:::dataVar
+    C[Q1]:::dataVar
+    D[Q3]:::dataVar
+    E[IQR]:::dataVar
+    F[clus]:::dataVar
+    G[Y]:::dataVar
+    %% Nodes for Processes
+    H[Data Loading]:::process
+    I[Data Analysis & Preprocessing]:::process
+    J[KMeans Clustering]:::process
+    K[Plotting & Visualization]:::process
+    %% Node for ML Model
+    L[KMeans Model]:::mlModel
+    %% Relationships among nodes
+    A -->|load_csv| B
+    B -->|preprocess| I
+    I -->|determine_quartiles| C
+    I -->|determine_quartiles| D
+    I -->|compute_IQR| E
+    I --IQR_uses--> F
+    F -->|select_features| J
+    J -->|fit_predict| G
+    G -->|visualize_clusters| K
+    G -->|learn_clusters| L
+    %% Styles for nodes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bb8,stroke:#333,stroke-width:2px;
+    classDef mlModel fill:#f96,stroke:#333,stroke-width:2px;

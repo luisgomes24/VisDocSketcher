@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Froza_Horizon_Cars.csv",
+      "description": "Contains data on various cars in the game Forza Horizon 5 including their in-game price, handling, acceleration, speed, and images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the complete dataset of cars from Forza Horizon 5."
+    },
+    {
+      "name": "df1",
+      "description": "Filtered DataFrame capturing only the In_Game_Price, handling, acceleration, and speed columns from df."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame containing the top 10 easy to handle cars for beginners based on handling."
+    },
+    {
+      "name": "df3",
+      "description": "DataFrame containing the top 10 high-speed cars for advanced players based on speed."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file",
+      "flow": "Used to create df1, df2, and df3 and for data analysis and visualizations"
+    },
+    {
+      "variable": "df1",
+      "creation": "Filtered columns from df",
+      "flow": "Used for data cleaning, correlation analysis, and to determine top cars based on speed, handling, and acceleration"
+    },
+    {
+      "variable": "df2",
+      "creation": "Filtered df to get top cars from df1",
+      "flow": "Displayed as an HTML table for easy visibility of top easy to handle cars"
+    },
+    {
+      "variable": "df3",
+      "creation": "Filtered df to get top speed cars from df1",
+      "flow": "Displayed as an HTML table for easy visibility of top high-speed cars"
+    }
+  ],
+  "models": []
+}

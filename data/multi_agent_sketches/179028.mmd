@@ -1,0 +1,13 @@
+flowchart TD
+    A[Start] --> B[data/mental-heath-in-tech-2016_20161114.csv]
+    B -- Read CSV --> C[df]
+    
+    %% Data Source Node
+    B[/mental-heath-in-tech-2016_20161114.csv/] 
+    %% Represents the CSV file being read, containing mental health data.
+    
+    %% Data Variable Node
+    C[df{DataFrame}]
+    %% Represents the DataFrame created by reading the CSV file and is used for further analysis.
+
+    C --> D[End]

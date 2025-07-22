@@ -1,0 +1,15 @@
+flowchart TD
+    %% Node for the CSV file data source
+    A["Wine Reviews CSV"] -->|load data| B[Reviews DataFrame]
+    %% Node for fruits DataFrame
+    C["Fruits DataFrame"] -->|demonstration| D[Initial DataFrame Creation]
+    %% Node for fruit_sales DataFrame
+    E["Fruit Sales DataFrame"] -->|demonstration| F[Multiple Index DataFrames]
+    %% Node for ingredients Series
+    G["Ingredients Series"] -->|demonstration| H[Series Creation]
+    %% Node for animals DataFrame
+    I["Animals DataFrame"] -->|save as CSV| J[Saved as cows_and_goats.csv]
+
+    %% Add explanations
+    classDef csv fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    class A csv;

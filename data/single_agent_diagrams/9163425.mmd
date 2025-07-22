@@ -1,0 +1,14 @@
+```
+graph TD
+  A["📂 Load Data"] --> B["🔍 Preprocess Data"]
+  B --> C["🖼️ Display Sample Images"]
+  C --> D["🧠 Build Model"]
+  D --> E["🔥 Train Model"]
+  E --> F["📈 Visualize Training Curves"]
+  F --> G["💾 Save Model"]
+  G --> H["🔄 Convert to TFLite"]
+  H --> I["🌐 Save TFLite Model"]
+
+  A -->|Use TFRecords| B
+  B -->|Data Augmentation| C
+  E -->|Monitor Validation Accuracy| F

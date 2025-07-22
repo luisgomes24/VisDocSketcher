@@ -1,0 +1,28 @@
+%% Workflow diagram for data science notebook 36113780
+flowchart TD
+    %% Data source nodes
+    A["train.csv"] -->|"Load data"| B["train_df"]  %% Train data loaded and id column dropped
+    A1["test.csv"] -->|"Load data"| B1["test_df"]  %% Test data loaded and id column dropped
+    
+    %% Feature and target variables
+    B -->|"Extract features"| C["X"]
+    B -->|"Extract target"| D["y"]
+    
+    %% Models
+    C -->|"Train XGBoost"| E["XGBoost Model"]
+    D -->|"Train target XGBoost"| E
+    C -->|"Train LightGBM"| F["LightGBM Model"]
+    D -->|"Train target LightGBM"| F
+    C -->|"Train CatBoost"| G["CatBoost Model"]
+    D -->|"Train target CatBoost"| G
+    
+    %% Predictions
+    B1 -->|"Predict with XGBoost"| H["pred_xgb"]
+    B1 -->|"Predict with CatBoost"| I["pred_cat"]
+    B1 -->|"Predict with LightGBM"| J["pred_lgb"]
+    
+    %% Submission preparation
+    K["sample_submission.csv"] -->|"Create submission format"| L["submission"]
+    H -->|"Add to submission"| L
+    I -->|"Add to submission"| L
+    J -->|"Add to submission"| L

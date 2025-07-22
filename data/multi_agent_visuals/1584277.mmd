@@ -1,0 +1,10 @@
+graph TD;
+    A["Data Sources"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> IDACountry.csv"];
+    A --> C["<img src='icons/database.svg' width=100 height=100/> <br/> IDACountry-Series.csv"];
+    A --> D["<img src='icons/database.svg' width=100 height=100/> <br/> IDAData.csv"];
+    B --> E["df1<br/><img src='dummy_plots/barplot_template.svg'/> "];
+    C --> F["df2<br/><img src='dummy_plots/scatter_plot_template.svg'/> "];
+    D --> G["df3<br/><img src='dummy_plots/lineplot_template.svg'/> "];
+    E --> H["<img src='icons/row_split.svg' width=100 height=100/> <br/> Plot Functions"];
+    F --> H;
+    G --> H;

@@ -1,0 +1,13 @@
+flowchart TD
+ %% DataFrame Node
+ DF["<img src='icons/table.svg' width=100 height=100/> <br/> df"]:::dataVar
+ classDef dataVar fill:#87CEEB,stroke:#333,stroke-width:2px;
+ %% Functions Nodes
+ DISTFUNC["<img src='dummy_plots/boxplot_template.svg' width=100 height=100/> <br/> plotPerColumnDistribution"]:::function
+ CORRFUNC["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> plotCorrelationMatrix"]:::function
+ SCATTTERFUNC["<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> plotScatterMatrix"]:::function
+ classDef function fill:#C6F4D6,stroke:#333,stroke-width:2px;
+ %% Data Flow
+ DF --> DISTFUNC
+ DF --> CORRFUNC
+ DF --> SCATTTERFUNC

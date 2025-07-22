@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_name": "datasets_228_482_diabetes.csv",
+      "description": "PIMA Indian Diabetes dataset, containing information related to various health metrics pertinent to the diabetes condition."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "pima",
+      "description": "DataFrame containing the entire dataset loaded from the specified CSV file."
+    },
+    {
+      "variable_name": "m1",
+      "description": "Mean value of BMI from the dataset."
+    },
+    {
+      "variable_name": "m2",
+      "description": "Median value of BMI from the dataset."
+    },
+    {
+      "variable_name": "m3",
+      "description": "Mode value of BMI from the dataset."
+    },
+    {
+      "variable_name": "corr_matrix",
+      "description": "Correlation matrix for the first eight numeric features of the dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "pima",
+      "creation_method": "pd.read_csv",
+      "flow": "loaded into DataFrame, inspected using tail(), head(), shape(), size(), info(), and isnull() methods. Used for various visualizations and descriptive statistics." 
+    },
+    {
+      "variable": "m1",
+      "creation_method": "pima['BMI'].mean()",
+      "flow": "used for analysis of BMI statistics."
+    },
+    {
+      "variable": "m2",
+      "creation_method": "pima['BMI'].median()",
+      "flow": "used for analysis of BMI statistics."
+    },
+    {
+      "variable": "m3",
+      "creation_method": "pima['BMI'].mode()",
+      "flow": "used for analysis of BMI statistics."
+    },
+    {
+      "variable": "corr_matrix",
+      "creation_method": "pima.iloc[:,0:8].corr()",
+      "flow": "used to generate a heatmap visualization to show correlations between features." 
+    }
+  ],
+  "models": []
+}

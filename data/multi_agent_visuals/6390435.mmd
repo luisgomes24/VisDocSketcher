@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for the data source
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> lemonade_clean.csv] -->|Load CSV| B[<img src='icons/table.svg' width=100 height=100/> <br/> dat DataFrame] 
+    B -->|Descriptive Statistics| C[<img src='dummy_plots/hist_template.svg'/> <br/> Statistics Report]
+    B -->|Pair Plots| D[<img src='dummy_plots/pairplot_template.svg'/> <br/> Visualize Relationships]
+    B -->|Line Plots| E[<img src='dummy_plots/lineplot_template.svg'/> <br/> Visualize Trends]
+    
+    %% Comments explaining each node
+    %% lemonade_clean.csv: CSV file as the data source
+    %% dat DataFrame: Loaded data from CSV
+    %% Descriptive Statistics: Generating summary statistics for the data
+    %% Pair Plots: Plotting to show relationships between variables
+    %% Line Plots: Plotting to show trends over time

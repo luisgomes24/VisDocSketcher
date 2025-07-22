@@ -1,0 +1,16 @@
+flowchart TD
+    A["📁 Load Data"] --> B["🗃️ DataFrame Train & Test"]
+    B --> C["🔍 Preprocess Data"]
+    C --> D["🧪 Train-Test Split"]
+    D --> E["🧠 Model Training"]
+    E --> F["📈 Model Evaluation"]
+    F --> G["📊 Predictions"]
+    G --> H["📄 Save Submission"]
+    
+    A -->|Read CSV| B["<img src='icons/file.svg'/> <br/> 📁 Load Data"]
+    B -->|Drop Labels| C["<img src='icons/table.svg'/> <br/> 🔍 Preprocess Data"]
+    C -->|Train-Test Split| D["<img src='icons/row_split.svg'/> <br/> 🧪 Train-Test Split"]
+    D -->|Fit Random Forest| E["<img src='icons/brain.svg'/> <br/> 🧠 Model Training"]
+    E -->|Accuracy & Scores| F["📈 Model Evaluation"]
+    F -->|Predict Test Data| G["<img src='icons/table.svg'/> <br/> 📊 Predictions"]
+    G -->|Submit to CSV| H["<img src='icons/file.svg'/> <br/> 📄 Save Submission"]

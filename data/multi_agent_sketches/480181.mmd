@@ -1,0 +1,24 @@
+flowchart TD
+
+    %% Nodes for Data Sources
+    A1["train.csv"]
+    %% Node for Initial Data Loading
+    B1["house_train"] %% DataFrame with housing data from train.csv
+    
+    %% Data Transformation and Sampling
+    B1 -->|Sample 300 rows| C1["sample"] %% Random sample for Chi-Square Tests
+    C1 -->|Create Crosstable with| D1["cross_table"] %% Contingency table for Chi-Square tests
+
+    %% Chi-Squared Test Process
+    C1 --> E1["Chi-Square Test on BldgType"] %% Step for Chi-Square test on BldgType
+    C1 --> E2["Chi-Square Test on HeatingQC"] %% Step for Chi-Square test on HeatingQC
+
+    %% Independence Test
+    D1 --> F1["Chi-Square Independence Test"] %% Chi-Square test for independence
+
+    %% Visualization Part
+    C1 --> G1["Visualization Plots"] %% Visualizations using seaborn countplot
+
+    %% Explanation Comments
+    classDef sourceNode fill:#f9f,stroke:#333,stroke-width:2px;
+    class A1 sourceNode;

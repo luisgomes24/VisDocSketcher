@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv",
+      "description": "Contains data about customer churn in a telecommunications company, including customer demographics and service usage."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "The main DataFrame containing customer data after loading the CSV."
+    },
+    {
+      "name": "categorical",
+      "description": "List of categorical variables from the DataFrame to be used for analysis."
+    },
+    {
+      "name": "telecom",
+      "description": "The PyCaret setup object that contains the processed dataset prepared for model training and evaluation."
+    },
+    {
+      "name": "ada",
+      "description": "The AdaBoost model created using PyCaret for classification tasks."
+    },
+    {
+      "name": "tuned_ada",
+      "description": "The tuned version of the AdaBoost model optimized for maximum MCC (Matthews correlation coefficient)."
+    },
+    {
+      "name": "final_ada",
+      "description": "The finalized AdaBoost model ready for predictions on test data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "pd.read_csv",
+      "flow": ["EDA", "Data Preparation"]
+    },
+    {
+      "variable": "categorical",
+      "creation_method": "Derived from data columns",
+      "flow": ["EDA"]
+    },
+    {
+      "variable": "telecom",
+      "creation_method": "setup() from PyCaret",
+      "flow": ["Model Training"]
+    },
+    {
+      "variable": "ada",
+      "creation_method": "create_model('ada')",
+      "flow": ["Model Training"]
+    },
+    {
+      "variable": "tuned_ada",
+      "creation_method": "tune_model(ada)",
+      "flow": ["Model Training", "Model Evaluation"]
+    },
+    {
+      "variable": "final_ada",
+      "creation_method": "finalize_model(tuned_ada)",
+      "flow": ["Final Model"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "AdaBoost",
+      "input_features": "Derived from the DataFrame 'data' after setup.",
+      "target_variable": "Churn",
+      "hyperparameters": "Optimized for MCC during tuning."
+    }
+  ]
+}

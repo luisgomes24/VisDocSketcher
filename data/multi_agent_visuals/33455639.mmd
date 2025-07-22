@@ -1,0 +1,7 @@
+graph TD;
+A["<img src='icons/file.svg' width=100 height=100/> <br/> sample_submission.csv"] -->|"load and modify"| B["<img src='icons/file.svg' width=100 height=100/> <br/> topics.csv"];
+B -->|"contains topic IDs"| C["<img src='icons/file.svg' width=100 height=100/> <br/> content.csv"];
+C -->|"contains content data"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> predicts"];
+D -->|"contains predicted content IDs"| E["<img src='icons/table.svg' width=100 height=100/> <br/> sub_df"];
+E -->|"sub_df contains predictions"| F["<img src='icons/table.svg' width=100 height=100/> <br/> topics_df"];
+E -->|"sub_df contains topics"| G["<img src='icons/table.svg' width=100 height=100/> <br/> content_df"];

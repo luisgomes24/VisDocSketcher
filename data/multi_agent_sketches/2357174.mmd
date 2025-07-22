@@ -1,0 +1,55 @@
+flowchart TD
+    %% Node for Train Data Source
+    A[Start: Load Train Data] -->|Load train.csv| B[Training DataFrame]
+    B -->|Clean Text| C[Cleaned Training Data]
+    C -->|Train-Val Split| D[Train X, Val X, Train Y, Val Y]
+    
+    %% Node for Test Data Source
+    A1[Start: Load Test Data] -->|Load test.csv| B1[Test DataFrame]
+    B1 -->|Clean Text| C1[Cleaned Test Data]
+    
+    %% Node for Tokenization
+    D -->|Tokenize| E[Tokenized Train X, Val X]
+    C1 -->|Tokenize| E1[Tokenized Test X]
+    
+    %% Node for Padding
+    E -->|Pad Sequences| F[Padded Train X, Val X]
+    E1 -->|Pad Sequences| F1[Padded Test X]
+    
+    %% Node for Load Embeddings
+    A2[Start: Load GloVe Embeddings] -->|Load glove.840B.300d.txt| B2[GloVe Embeddings]
+    B2 -->|Create Embedding Matrix| G[Embedding Matrix]
+    
+    %% Node for Model Training
+    F & G -->|Input to LSTM Model| H[LSTM Model with Attention]
+    H -->|Train Model| I[Trained Model]
+    I -->|Predict on Val| J[Val Predictions]
+    I -->|Predict on Test| L[Test Predictions]
+    
+    %% Node for Thresholding
+    J -->|Optimize F1| K[Optimal F1 Score]
+    K -->|Apply Threshold| M[Final Test Predictions]
+    
+    %% Node for Submission
+    M -->|Save Predictions| N[Submission File]
+
+    %% Node Comments
+    %% A: Load training data from CSV file
+    %% B: Create DataFrame from training data
+    %% C: Clean and preprocess training questions
+    %% D: Split cleaned data into training and validation sets
+    %% A1: Load test data from CSV file
+    %% B1: Create DataFrame from test data
+    %% C1: Clean and preprocess test questions
+    %% E: Convert questions to sequences of tokens
+    %% F: Pad sequences to ensure uniform input size
+    %% A2: Start loading GloVe pre-trained embeddings
+    %% B2: Process GloVe embeddings
+    %% G: Generate embedding matrix for words in word index
+    %% H: Define LSTM model with bidirectional layers and attention
+    %% I: Train the model with the training data
+    %% J: Predict validation targets
+    %% L: Predict test targets
+    %% K: Calculate F1 score and find optimal threshold
+    %% M: Apply threshold to ensure 0/1 predictions for test data
+    %% N: Export the final predictions to a CSV file for submission

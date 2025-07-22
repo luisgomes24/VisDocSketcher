@@ -1,0 +1,38 @@
+```mermaid
+graph TD
+    %% Data Source Nodes
+    A["train_clean_kalman.csv"] -->|"Load training data"| B["train DataFrame"]
+    C["test_clean_kalman.csv"] -->|"Load test data"| D["test DataFrame"]
+    E["sample_submission.csv"] -->|"Load submission format"| F["df_subm DataFrame"]
+
+    %% Data Transformation Nodes
+    B -->|"Extract true_state"| G["true_state Array"]
+    B -->|"Extract signal"| H["signal Array"]
+
+    %% Model Training and Prediction Nodes
+    G -->|"Input to Viterbi models"| I["ViterbiClassifier Model Instances"]
+    H -->|"Input to Viterbi models"| I
+    I -->|"Make predictions"| J["train_predictions Array"]
+    I -->|"Predict test open_channels"| K["Predicted test open_channels"]
+    D -->|"Segment test data"| K
+
+    %% Output Nodes
+    J -->|"Accuracy and F1 Score Calculation"| L["Final Performance Metrics"]
+    K -->|"Fill submission"| F
+    F -->|"Save predictions"| M["viterbi.csv"]
+
+    %% Comments for clarity and maintenance
+    %% A: Training dataset with signals and channel openings
+    %% B: DataFrame holding the training dataset
+    %% C: Test dataset that needs channel opening predictions
+    %% D: DataFrame holding the test dataset
+    %% E: Format for submission predictions
+    %% F: DataFrame to store submission predictions
+    %% G: Actual channel openings from training data
+    %% H: Signal values from training data
+    %% I: Viterbi model instances trained on signal and true state
+    %% J: Predictions made on the training data
+    %% K: Predictions for open channels on test data
+    %% L: Overall model performance metrics
+    %% M: File containing predicted open channels
+```

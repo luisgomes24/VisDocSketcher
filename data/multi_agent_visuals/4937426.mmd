@@ -1,0 +1,5 @@
+flowchart TD
+    A[funda_train.csv] -->|Read 1000 rows using pd.read_csv| B[df1]
+    B -->|Used for visualization| C["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution Plots"]
+    B -->|Used for visualization| D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Correlation Matrix"]
+    B -->|Used for visualization| E["<img src='dummy_plots/correlation_template.svg'/> <br/> Scatter Matrix"]

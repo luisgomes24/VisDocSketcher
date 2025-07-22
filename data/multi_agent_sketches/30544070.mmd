@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Source Node
+    A[Salary Dataset CSV]:::dataSource --> B[DataFrame 'data']:::dataVariable
+
+    %% DataFrame to Feature/Target Nodes
+    B --> C[Features 'x']:::dataVariable
+    B --> D[Target 'y']:::dataVariable
+
+    %% Splitting Data
+    C & D --> E[train_test_split]:::process
+    E --> F[xtrain, xtest, ytrain, ytest]:::dataVariable
+
+    %% ML Model Creation
+    F --> G[Linear Regression Model 'L']:::model
+    G --> H[L.fit(xtrain, ytrain)]:::process
+
+    %% Prediction Node
+    H --> I[y_pred = L.predict(xtest)]:::dataVariable
+
+    %% Data Nodes Styles
+    classDef dataVariable fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataSource fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#fb8,stroke:#333,stroke-width:2px;
+    classDef model fill:#b8f,stroke:#333,stroke-width:2px;

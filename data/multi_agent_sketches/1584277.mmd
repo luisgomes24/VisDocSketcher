@@ -1,0 +1,27 @@
+flowchart TD
+    A[IDACountry.csv] --> |Read CSV| B[df1]
+    A:::comment
+    class A[White];
+    
+    C[IDACountry-Series.csv] --> |Read CSV| D[df2]
+    C:::comment
+    class C[White];
+    
+    E[IDAData.csv] --> |Read CSV| F[df3]
+    E:::comment
+    class E[White];
+    
+    B --> |Used in| G[plotHistogram]
+    B --> |Used in| H[plotCorrelationMatrix]
+    B --> |Used in| I[plotScatterMatrix]
+    
+    D --> |Used in| G
+    D --> |Used in| H
+    D --> |Used in| I
+    
+    F --> |Used in| G
+    F --> |Used in| H
+    F --> |Used in| I
+    
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef default fill:#fff,stroke:#333,stroke-width:2px;

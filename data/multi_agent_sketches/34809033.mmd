@@ -1,0 +1,25 @@
+flowchart TD
+    % Data Sources
+    episodes_file["Family Guy Dataset.csv"]
+    
+    % Data Variables
+    episodes_df["DataFrame: episodes_df"]
+    true_detective_df["DataFrame: true_detective_df"]
+    
+    % Data Flow
+    episodes_file -->|"pd.read_csv"| episodes_df
+    episodes_df -->|"Merged into"| true_detective_df
+    
+    % Data Usage
+    episodes_df -->|"Used for analyses and visualizations"| A["Analysis & Vis"]
+    true_detective_df -- No direct use --> B["Unused"]
+    
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataFlow fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef model fill:#ff9,stroke:#333,stroke-width:2px;
+
+    class episodes_file dataSource;
+    class episodes_df,true_detective_df dataVariable;
+    class A,B dataFlow;

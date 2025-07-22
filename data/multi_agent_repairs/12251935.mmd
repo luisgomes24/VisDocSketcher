@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+  subgraph Data_Sources
+    DS1["url1-combined.txt"]
+    DS2["url2-combined.txt"]
+    DS3["url3-combined.txt"]
+  end
+  
+  subgraph Unigrams_Creation
+    stop_words["Stop Words List"]
+    stop_words -->|Used to filter| process_text
+    
+    process_text["Process Text"]
+    DS1 -->|Text Processing| url1_unigrams["Unigrams URL 1"]
+    DS2 -->|Text Processing| url2_unigrams["Unigrams URL 2"]
+    DS3 -->|Text Processing| url3_unigrams["Unigrams URL 3"]
+  end
+
+  subgraph Bigrams_Creation
+    bigram_list["Create Bigrams"]
+    url1_unigrams -->|Generate Bigrams| url1_bigrams["Bigrams URL 1"]
+    url2_unigrams -->|Generate Bigrams| url2_bigrams["Bigrams URL 2"]
+    url3_unigrams -->|Generate Bigrams| url3_bigrams["Bigrams URL 3"]
+  end
+
+  subgraph Visualization
+    top_df["Top N DataFrame"]
+    url1_bigrams -->|Select Top Bigrams| df_url1["Top Bigrams DF URL 1"]
+    url2_bigrams -->|Select Top Bigrams| df_url2["Top Bigrams DF URL 2"]
+    url3_bigrams -->|Select Top Bigrams| df_url3["Top Bigrams DF URL 3"]
+
+    df_url1 -->|Visualize & Interpret| visualization1["Visualize for URL 1"]
+    df_url2 -->|Visualize & Interpret| visualization2["Visualize for URL 2"]
+    df_url3 -->|Visualize & Interpret| visualization3["Visualize for URL 3"]
+  end
+```

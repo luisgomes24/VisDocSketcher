@@ -1,0 +1,109 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Finland.csv",
+      "description": "Contains sales data for Finland."
+    },
+    {
+      "file_name": "Norway.csv",
+      "description": "Contains sales data for Norway."
+    },
+    {
+      "file_name": "Sweden.csv",
+      "description": "Contains sample submission data."
+    },
+    {
+      "file_name": "train.csv",
+      "description": "Train dataset containing sales information."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset for validation purposes."
+    },
+    {
+      "file_name": "submission.csv",
+      "description": "Sample submission file."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "fi_df",
+      "description": "DataFrame containing sales data for Finland."
+    },
+    {
+      "variable_name": "no_df",
+      "description": "DataFrame containing sales data for Norway."
+    },
+    {
+      "variable_name": "se_df",
+      "description": "DataFrame containing sales data for Sweden."
+    },
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing train dataset."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing test dataset."
+    },
+    {
+      "variable_name": "best_df",
+      "description": "DataFrame with processed sales data."
+    },
+    {
+      "variable_name": "holidays",
+      "description": "Contains holiday sales data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "fi_df",
+      "creation": "pd.read_csv(file_name)",
+      "flows_to": "Holidays and visualization plots."
+    },
+    {
+      "variable_name": "no_df",
+      "creation": "pd.read_csv(file_name)",
+      "flows_to": "Holidays and visualization plots."
+    },
+    {
+      "variable_name": "se_df",
+      "creation": "pd.read_csv(file_name)",
+      "flows_to": "Holidays and visualization plots."
+    },
+    {
+      "variable_name": "df",
+      "creation": "pd.read_csv(file_name)",
+      "flows_to": "best_df and visualization plots."
+    },
+    {
+      "variable_name": "test",
+      "creation": "pd.read_csv(file_name)",
+      "flows_to": "X_valid for potential model testing."
+    },
+    {
+      "variable_name": "best_df",
+      "creation": "df.set_index(['date', 'hybrid']).unstack()['num_sold']",
+      "flows_to": "holidays and visualization plots."
+    },
+    {
+      "variable_name": "holidays",
+      "creation": "best_df.loc[best_df.index.intersection(inter2)]",
+      "flows_to": "final visualization plots."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "Various derived features from sales datasets.",
+      "target": "Sales predictions.",
+      "hyperparameters": "None specified."
+    },
+    {
+      "model_name": "XGBoost Regressor",
+      "input_features": "Best_df and other derived sales features.",
+      "target": "Sales predictions.",
+      "hyperparameters": "None specified."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+"data_sources": [
+    {
+        "file_path": "../input/home-data-for-ml-course/train.csv",
+        "description": "Dataset containing home sale data, used for prediction."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "home_data",
+        "description": "DataFrame containing the entire dataset loaded from the CSV."
+    },
+    {
+        "variable_name": "y",
+        "description": "Target variable representing the sale price of the homes, extracted from the home_data DataFrame."
+    },
+    {
+        "variable_name": "X",
+        "description": "DataFrame containing selected feature variables used for prediction."
+    },
+    {
+        "variable_name": "predictions",
+        "description": "Array holding model predictions based on the input features in X."
+    }
+],
+"data_flow": [
+    {
+        "variable": "home_data",
+        "creation_method": "pd.read_csv",
+        "flows_to": ["y", "X"]
+    },
+    {
+        "variable": "y",
+        "creation_method": "home_data['SalePrice']",
+        "flows_to": ["iowa_model"]
+    },
+    {
+        "variable": "X",
+        "creation_method": "home_data[feature_names]",
+        "flows_to": ["iowa_model", "predictions"]
+    },
+    {
+        "variable": "predictions",
+        "creation_method": "iowa_model.predict(X)",
+        "flows_to": ["evaluation"]
+    }
+],
+"models": [
+    {
+        "model_name": "DecisionTreeRegressor",
+        "input_features": "X",
+        "target_variable": "y",
+        "hyperparameters": {"random_state": 1}
+    }
+]
+}

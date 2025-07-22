@@ -1,0 +1,52 @@
+flowchart TD
+    %% Data Source
+    A[heart.csv] -->|Load Dataset| B[df]
+    
+    %% DataFrame Creation
+    B[df] -->|Group by HeartDisease = 1| C[group1]
+    B[df] -->|Group by HeartDisease = 0| D[group0]
+    
+    %% Usage of DataFrames for Analysis and Visualization
+    C[group1] -->|Analysis & Visualization| E[Analyze Group 1]
+    D[group0] -->|Analysis & Visualization| F[Analyze Group 0]
+    
+    %% Machine Learning Model
+    B -->|Select Features & Target| G[Input Features: Age, Sex, etc.]
+    G -->|Train| H[RandomForestClassifier] 
+    H -->|Predict| I[HeartDisease Outcome]
+    
+    %% Comments
+    A:::source
+    click A href "Data source [heart.csv]: The dataset containing heart failure data."
+    
+    B:::df
+    click B href "DataFrame [df]: Loaded dataset for analysis."
+
+    C:::group
+    click C href "Grouped DataFrame [group1]: Patients with heart disease."
+
+    D:::group
+    click D href "Grouped DataFrame [group0]: Patients without heart disease."
+
+    E:::usage
+    click E href "Data Analysis & Visualization: Exploration and visualization of patients with heart disease."
+
+    F:::usage
+    click F href "Data Analysis & Visualization: Exploration and visualization of patients without heart disease."
+
+    G:::features
+    click G href "Feature Selection: Important features for ML model."
+
+    H:::model
+    click H href "Random Forest Classifier: Trained on the dataset to predict heart disease."
+
+    I:::outcome
+    click I href "Predicted Outcome: Predicted heart disease outcomes using the trained model."
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef df fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef group fill:#fb5,stroke:#333,stroke-width:2px;
+    classDef usage fill:#efe,stroke:#333,stroke-width:2px;
+    classDef features fill:#ffc,stroke:#333,stroke-width:2px;
+    classDef model fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef outcome fill:#cfc,stroke:#333,stroke-width:2px;

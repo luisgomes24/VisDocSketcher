@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "None",
+      "description": "This notebook does not utilize external data sources but contains user input for program execution."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "Colors",
+      "description": "List containing color names."
+    },
+    {
+      "variable_name": "Fruits",
+      "description": "List containing fruit names."
+    },
+    {
+      "variable_name": "Animals",
+      "description": "List containing animal names."
+    },
+    {
+      "variable_name": "Result",
+      "description": "List containing the results of exam attempts ('Pass' or 'Fail')."
+    },
+    {
+      "variable_name": "marks_list",
+      "description": "List containing the marks for five tests."
+    },
+    {
+      "variable_name": "Distance",
+      "description": "Constant indicating the total distance of a race (50 km)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "Colors",
+      "creation_method": "Defined directly in the notebook as a list.",
+      "flow": "Used as a reference for user input classification."
+    },
+    {
+      "variable_name": "Fruits",
+      "creation_method": "Defined directly in the notebook as a list.",
+      "flow": "Used as a reference for user input classification."
+    },
+    {
+      "variable_name": "Animals",
+      "creation_method": "Defined directly in the notebook as a list.",
+      "flow": "Used as a reference for user input classification."
+    },
+    {
+      "variable_name": "Result",
+      "creation_method": "Defined directly in the notebook as a list.",
+      "flow": "Used in a loop to count the number of 'Pass' instances."
+    },
+    {
+      "variable_name": "marks_list",
+      "creation_method": "Defined directly in the notebook as a list.",
+      "flow": "Used for checking user input against test scores."
+    },
+    {
+      "variable_name": "Distance",
+      "creation_method": "Constant value defined directly.",
+      "flow": "Used in a loop to simulate race progression."
+    }
+  ],
+  "models": []
+}

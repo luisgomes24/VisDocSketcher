@@ -1,0 +1,23 @@
+graph TD;
+    A["Data Sources"] --> B["Training Data"];
+    A --> C["Test Data"];
+    A --> D["Pre-trained Embeddings"];
+    B --> E["Cleaning and Preprocessing"];
+    C --> F["Cleaning Test Data"];
+    B --> G["Tokenization"];
+    G --> H["Training Input"];
+    G --> I["Validation Input"];
+    G --> J["Test Input"];
+    B --> K["Target Variable"];
+    K --> L["Predictions"];
+    L --> M["Evaluation"];
+    L --> N["Submission"];
+    subgraph Model Architecture
+        O["Embedding Layer"];
+        P["LSTM Layers"];
+        Q["Attention Layer"];
+        R["Output Layer"];
+    end
+    H --> O;
+    I --> O;
+    J --> O;

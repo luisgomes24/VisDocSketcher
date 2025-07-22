@@ -1,0 +1,25 @@
+%%{ init : { "theme" : "base", "themeVariables" : { "edgeLabelBackground":"#ffffff" }}}%%
+flowchart TD
+
+%% Data Sources
+A1(["train.csv"]):::dataSource -->|Load Data| B1
+A2(["test.csv"]):::dataSource -->|Load Data| B2
+A3(["sample_submission.csv"]):::dataSource %% Sample Submission not used in the pipeline
+
+%% Data Processing
+B1["df_train"]:::dataVariable -->|One-Hot Encode| C1
+B2["df_test"]:::dataVariable -->|One-Hot Encode| C2
+C1["train_ohe"]:::dataVariable -->|Concatenate| D1
+C2["test_ohe"]:::dataVariable -->|Concatenate| D2
+B1 -->|Extract Target| D3
+
+D1["train_x"]:::dataVariable -->|Train| E1
+D2["test_x"]:::dataVariable -->|Predict| E1
+D3["train_y"]:::dataVariable -->|Train| E1
+
+%% Model
+E1["LightGBM"]:::model
+
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#f96,stroke:#333,stroke-width:2px;

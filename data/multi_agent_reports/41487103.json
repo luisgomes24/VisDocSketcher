@@ -1,0 +1,66 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains patient_id and injury indicators for each of the 3,147 patients"
+    },
+    {
+      "file_name": "DICOM Images",
+      "description": "Nested directory containing DICOM images labeled with abdominal trauma information"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_csv",
+      "description": "DataFrame containing patient IDs and injury symptoms"
+    },
+    {
+      "variable_name": "image_file",
+      "description": "Path to a specific DICOM image file for reading"
+    },
+    {
+      "variable_name": "organ_columns",
+      "description": "List of organ columns representing different types of injuries"
+    },
+    {
+      "variable_name": "organ_counts",
+      "description": "DataFrame containing count of injuries for different organs"
+    },
+    {
+      "variable_name": "sample_files",
+      "description": "List of sample DICOM file paths for visualization"
+    },
+    {
+      "variable_name": "sample_vid",
+      "description": "List of pixel arrays extracted from the sample DICOM images"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_csv",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data exploration and counting injury instances"
+    },
+    {
+      "variable_name": "ds",
+      "creation_method": "pydicom.read_file",
+      "flow": "Used for reading a specific DICOM image"
+    },
+    {
+      "variable_name": "organ_counts",
+      "creation_method": "DataFrame creation",
+      "flow": "Used for visualizing the distribution of injuries"
+    },
+    {
+      "variable_name": "sample_vid",
+      "creation_method": "pydicom.dcmread",
+      "flow": "Used for creating a video animation of sample DICOM images"
+    },
+    {
+      "variable_name": "train_list",
+      "creation_method": "os.listdir",
+      "flow": "Used to loop through train images for preprocessing"
+    }
+  ],
+  "models": []
+}

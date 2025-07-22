@@ -1,0 +1,133 @@
+{
+  "data_sources": [
+    {
+      "filename": "hot-dog-not-hot-dog/train",
+      "description": "Training images categorized into hot dog and non-hot dog."
+    },
+    {
+      "filename": "hot-dog-not-hot-dog/test",
+      "description": "Test images categorized into hot dog and non-hot dog."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "images_tr",
+      "description": "Training images loaded from the train data generator."
+    },
+    {
+      "name": "labels_tr",
+      "description": "Labels for training images (0 for non-hot dog, 1 for hot dog)."
+    },
+    {
+      "name": "images_te",
+      "description": "Test images loaded from the test data generator."
+    },
+    {
+      "name": "labels_te",
+      "description": "Labels for test images (0 for non-hot dog, 1 for hot dog)."
+    },
+    {
+      "name": "X_model",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing features after splitting the dataset."
+    },
+    {
+      "name": "y_model",
+      "description": "Training labels after splitting the dataset."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing labels after splitting the dataset."
+    } 
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data_tr",
+      "creation": "ImageDataGenerator with flow_from_directory",
+      "flow": "Used to create training images and labels."
+    },
+    {
+      "variable_name": "data_te",
+      "creation": "ImageDataGenerator with flow_from_directory",
+      "flow": "Used to create test images and labels."
+    },
+    {
+      "variable_name": "images_tr",
+      "creation": "next(data_tr)",
+      "flow": "Concatenated with images_te for final dataset."
+    },
+    {
+      "variable_name": "labels_tr",
+      "creation": "next(data_tr)",
+      "flow": "Concatenated with labels_te for final dataset."
+    },
+    {
+      "variable_name": "images_te",
+      "creation": "next(data_te)",
+      "flow": "Concatenated with images_tr for final dataset."
+    },
+    {
+      "variable_name": "labels_te",
+      "creation": "next(data_te)",
+      "flow": "Concatenated with labels_tr for final dataset."
+    },
+    {
+      "variable_name": "X_model",
+      "creation": "train_test_split(images, labels)",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable_name": "X_test",
+      "creation": "train_test_split(images, labels)",
+      "flow": "Used for evaluating the model."
+    },
+    {
+      "variable_name": "y_model",
+      "creation": "train_test_split(images, labels)",
+      "flow": "Used for training the model."
+    },
+    {
+      "variable_name": "y_test",
+      "creation": "train_test_split(images, labels)",
+      "flow": "Used for evaluating the model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CNN",
+      "input_features": "images",
+      "target_variable": "labels",
+      "hyperparameters": {
+        "layers": [
+          "Conv2D: 64 filters, (3,3)",
+          "MaxPooling2D: pool_size=(2, 2)",
+          "Conv2D: 32 filters, (3,3)",
+          "MaxPooling2D: pool_size=(2, 2)",
+          "Dense: 32 units",
+          "Dense: 1 unit with sigmoid activation"
+        ],
+        "batch_size": 50,
+        "epochs": 100
+      }
+    },
+    {
+      "model_name": "Transfer Learning (InceptionV3)",
+      "input_features": "images",
+      "target_variable": "labels",
+      "hyperparameters": {
+        "layers": [
+          "GlobalAveragePooling2D",
+          "Dense: 2048 units",
+          "Dense: 1024 units",
+          "Dense: 512 units",
+          "Dense: 1 unit with sigmoid activation"
+        ],
+        "batch_size": 128,
+        "epochs": 50
+      }
+    }
+  ]
+}

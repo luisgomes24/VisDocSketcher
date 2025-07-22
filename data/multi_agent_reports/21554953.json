@@ -1,0 +1,83 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the pressure prediction task."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for the pressure prediction task."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Contains sample template for submission, with expected format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame representing the training dataset after loading from CSV."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame representing the test dataset after loading from CSV."
+    },
+    {
+      "name": "targets",
+      "description": "Numpy array containing the pressure target values, reshaped for model training."
+    },
+    {
+      "name": "COLS",
+      "description": "Array of column names from the training DataFrame for reference."
+    },
+    {
+      "name": "test_preds",
+      "description": "List to hold model predictions during k-fold cross-validation."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame used to format and store final predictions for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Loaded from 'train.csv' using pd.read_csv.",
+      "flow": "Passed to the 'add_features' function for feature engineering."
+    },
+    {
+      "variable": "test",
+      "creation": "Loaded from 'test.csv' using pd.read_csv.",
+      "flow": "Passed to the 'add_features' function for feature engineering."
+    },
+    {
+      "variable": "targets",
+      "creation": "Extracted from the 'pressure' column in 'train' DataFrame.",
+      "flow": "Used in model training and validation during k-fold cross-validation."
+    },
+    {
+      "variable": "test_preds",
+      "creation": "Initialized as an empty list.",
+      "flow": "Populated with predictions from each fold during k-fold cross-validation."
+    },
+    {
+      "variable": "submission",
+      "creation": "Loaded from 'sample_submission.csv' using pd.read_csv.",
+      "flow": "Final predictions stored and exported to CSV."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ModelTrunk",
+      "input_features": "Trained with features from the processed DataFrames.",
+      "target_variable": "Pressure values extracted as targets.",
+      "hyperparameters": {
+        "num_heads": 2,
+        "head_size": 128,
+        "ff_dim": 256,
+        "num_layers": 2,
+        "dropout": 0.0
+      }
+    }
+  ]
+}

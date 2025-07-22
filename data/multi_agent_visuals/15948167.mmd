@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data Sources %%
+    A1["<img src='icons/database.svg' width=100 height=100/> <br/> ../input/cat-and-dog/training_set/training_set"]:::datasource
+    A2["<img src='icons/database.svg' width=100 height=100/> <br/> ../input/cat-and-dog/test_set/test_set"]:::datasource
+
+    %% Data Variables %%
+    B1([train_datagen]):::variable
+    B2([test_datagen]):::variable
+    B3([training_set]):::variable
+    B4([test_set]):::variable
+    B5([cnn]):::variable
+
+    %% Model %%
+    C1{{"<img src='icons/brain.svg' width=100 height=100/> <br/> Convolutional Neural Network (CNN)"}}:::model
+
+    %% Data Flows %%
+    subgraph DataAugmentation
+        A1 -->|Rescale & Augment| B1
+        A2 -->|Rescale| B2
+    end
+    subgraph DataCreation
+        B1 -->|flow_from_directory| B3
+        B2 -->|flow_from_directory| B4
+    end
+    subgraph ModelProcess
+        C1 -->|Include layers: Conv2D, MaxPool2D, Flatten, Dense| B5
+        B3 -->|Train model| B5
+        B4 -->|Validate model| B5
+        B5 -->|Predict on new data| A3["<img src='icons/image.svg' width=100 height=100/> <br/> ../input/single-cat/cat_or_dog_2.jpg"]:::datasource & A4["<img src='icons/image.svg' width=100 height=100/> <br/> ../input/singledog/cat_or_dog_1.jpg"]:::datasource
+    end
+
+    classDef datasource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef variable fill:#F0E442,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:3px;

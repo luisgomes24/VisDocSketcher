@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> cars.csv"] --> B["🔍 Preview Data <img src='table.svg' /> <br/> cars.head()"]
+    B --> C["📊 Check Missing Values <img src='table.svg' />"]
+    C --> D["🗑️ Drop Missing Values"]
+    D --> E["📂 Column Selection <img src='column_split.svg' />"]
+    E --> F["⚙️ Label Encoding <img src='brain.svg' />"]
+    F --> G["📊 Exploratory Data Analysis <img src='scatter_plot_template.svg' />"]
+    G --> H["📈 Linear Regression Model"]
+    H --> I["🎯 Split Data <img src='row_split.svg' />"]
+    I --> J["📈 Fit Model"]
+    J --> K["🔮 Predict <img src='brain.svg' />"]
+    K --> L["📉 Evaluate Model <img src='hist_template.svg' />"]

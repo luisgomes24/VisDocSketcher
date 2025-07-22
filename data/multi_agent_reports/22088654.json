@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "submission.csv",
+      "description": "The final submission output containing three strings with emojis replacing the original numbers."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "solution",
+      "description": "A long string that consists of the minimal superpermutation solution for 7 symbols.
+      "
+    },
+    {
+      "name": "split_id",
+      "description": "Indexes to split the main solution string into three approximately equal parts."
+    },
+    {
+      "name": "t1, t2",
+      "description": "Variables holding the split indexes for dividing the permuted string."
+    },
+    {
+      "name": "strings",
+      "description": "The resulting three strings after splitting and adding required permutations." 
+    },
+    {
+      "name": "required_permutaions",
+      "description": "A list of required permutations that start with '12', to be added to each of the three strings." 
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "solution",
+      "creation": "Defined as a lengthy string containing the solutions to the problem.",
+      "flow": "Used to create a list 'strings' and find permutations" 
+    },
+    {
+      "variable": "strings",
+      "creation": "Created by splitting the 'solution' variable.",
+      "flow": "Used as the primary output to validate the problem and as input for the completion of further steps and optimizations.",
+      "outputs": "Final results are stored in 'sub' which is written to a 'submission.csv' file."
+    }
+  ],
+  "models": [
+    {
+      "type": "Heuristic optimization过程",
+      "input_features": "The initial min_superpermutation string and various configurations of characters/permutations.",
+      "hyperparameters": "Parameters vary while conducting random searches and adjustments to the split points."
+    }
+  ]
+}

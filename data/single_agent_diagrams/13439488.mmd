@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/>"] --> B["🔍 Preprocess Data"]
+    B --> C["📊 Plot Data <img src='lineplot_template.svg' /> <br/>"]
+    C --> D["📈 Test for Stationarity"]
+    D --> E["⚙️ Decide Order of VARMA"]
+    E --> F["🔄 Transform Data"]
+    F --> G["🔍 Train-Test Split"]
+    G --> H["🧠 Fit VARMA Model"]
+    H --> I["🔮 Predict Values"]
+    I --> J["🔄 Invert Transformations"]
+    J --> K["📈 Plot Forecast Results <img src='lineplot_template.svg' /> <br/>"]
+    K --> L["📊 Evaluate Model <img src='scatter_plot_template.svg' /> <br/>"]

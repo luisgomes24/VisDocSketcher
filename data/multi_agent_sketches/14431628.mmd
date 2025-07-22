@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A1(["train.csv"]):::dataSource -->|"pd.read_csv()"| B1["train"]
+    A2(["label_num_to_disease_map.json"]):::dataSource -->|"pd.read_json()"| B2["diseases"]
+    A3(["sample_submission.csv"]):::dataSource --> C1["submission"]
+
+    %% Data Generators
+    B1 -->|"ImageDataGenerator.flow_from_dataframe()"| C2["train_generator"]
+    B1 -->|"ImageDataGenerator.flow_from_dataframe()"| C3["val_generator"]
+    C2 --> D1["history"]
+    C3 --> D1
+
+    %% ML Model
+    classDef model fill:#f9f,stroke:#333,stroke-width:2px;
+    E1["InceptionResNetV2"]:::model --> D1
+    D1 -->|"model.predict()"| F1["preds"]
+    F1 --> C1
+
+    %% Classes for styling
+    classDef dataSource fill:#bbf,stroke:#333,stroke-width:2px;

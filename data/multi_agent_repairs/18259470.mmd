@@ -1,0 +1,26 @@
+flowchart TD
+  %% Data Sources
+  A["train.csv"] -->|Load| B["train DataFrame"]
+  C["test.csv"] -->|Load| D["test DataFrame"]
+  E["sample_submission.csv"] -->|Load| F["sample_submission DataFrame"]
+  
+  %% Data Preparation
+  B -->|Extract Features & Targets| G["X (features)"]
+  B -->|Extract Targets| H["y (targets)"]
+  D -->|Prepare Features| I["X_test (features)"]
+  
+  %% Model Training
+  G -->|Train reg1| J["Linear Regression reg1"]
+  H -->|Target for reg1| J
+  G -->|Train reg2| K["Linear Regression reg2"]
+  H -->|Target for reg2| K
+  G -->|Train reg3| L["Linear Regression reg3"]
+  H -->|Target for reg3| L
+  
+  %% Prediction
+  J -->|Predict target_carbon_monoxide| F
+  K -->|Predict target_benzene| F
+  L -->|Predict target_nitrogen_oxides| F
+  
+  %% Output
+  F -->|Save as sub_lr.csv| M["sub_lr.csv"]

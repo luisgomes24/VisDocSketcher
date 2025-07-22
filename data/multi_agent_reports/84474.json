@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {"file_name": "events.csv", "description": "Contains all event data with device_id, longitude, latitude, and timestamp."},
+    {"file_name": "gender_age_train.csv", "description": "Training dataset containing user demographics including gender and age."}
+  ],
+  "data_variables": [
+    {"variable_name": "df_events", "description": "DataFrame containing all events from the events dataset."},
+    {"variable_name": "df_events_beijing", "description": "Filtered DataFrame containing events that occurred in Beijing."},
+    {"variable_name": "df_gender_age", "description": "DataFrame containing user demographics such as gender and age."},
+    {"variable_name": "df_joined", "description": "Merged DataFrame that combines gender/age data with Beijing event data."},
+    {"variable_name": "df_female", "description": "DataFrame containing events related to female users in the merged dataset."},
+    {"variable_name": "df_male", "description": "DataFrame containing events related to male users in the merged dataset."},
+    {"variable_name": "df_under", "description": "DataFrame containing events related to users under 30 years of age."},
+    {"variable_name": "df_between", "description": "DataFrame containing events related to users between 30 and 40 years of age."},
+    {"variable_name": "df_over", "description": "DataFrame containing events related to users over 40 years of age."},
+    {"variable_name": "df_friday_night", "description": "Filtered DataFrame containing events that occurred on Friday night."}
+  ],
+  "data_flow": [
+    {"variable_name": "df_events", "creation": "pd.read_csv()", "flow": "Filtered to create df_events_beijing, used to plot event distributions."},
+    {"variable_name": "df_events_beijing", "creation": "Filtering df_events for Beijing coordinates", "flow": "Used to analyze event distributions, merged with df_gender_age to create df_joined."},
+    {"variable_name": "df_gender_age", "creation": "pd.read_csv()", "flow": "Merged with df_events_beijing to create df_joined."},
+    {"variable_name": "df_joined", "creation": "pd.merge()", "flow": "Used to analyze events by gender and age, created df_female, df_male, df_under, df_between, df_over."},
+    {"variable_name": "df_female", "creation": "Filtering df_joined", "flow": "Used to plot female events distribution by hour."},
+    {"variable_name": "df_male", "creation": "Filtering df_joined", "flow": "Used to plot male events distribution by hour."},
+    {"variable_name": "df_under", "creation": "Filtering df_joined", "flow": "Used to plot under-30 events distribution by hour."},
+    {"variable_name": "df_between", "creation": "Filtering df_joined", "flow": "Used to plot 30-something events distribution by hour."},
+    {"variable_name": "df_over", "creation": "Filtering df_joined", "flow": "Used to plot over-40 events distribution by hour."},
+    {"variable_name": "df_friday_night", "creation": "Filtering df_joined", "flow": "Used to analyze unique users and events on Friday nights."}
+  ],
+  "models": []
+}

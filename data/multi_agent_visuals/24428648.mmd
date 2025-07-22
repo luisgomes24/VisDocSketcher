@@ -1,0 +1,9 @@
+graph TD;
+    A["<img src='../icons/database.svg' width=100 height=100/> <br/> Train Data (train.csv)"]:::data -->|"Read CSV"| B["<img src='../icons/database.svg' width=100 height=100/> <br/> Asset Details (asset_details.csv)"]:::data;
+    B -->|"Create Asset Details Plot"| C["<img src='../data/dummy_plots/boxplot_template.svg'/> <br/> Asset Count Plot"]:::output;
+    B -->|"Filter for Bitcoin"| D["<img src='../data/dummy_plots/candle_plot_template.svg'/> <br/> Bitcoin Candle Plot"]:::output;
+    B -->|"Filter for Ethereum"| E["<img src='../data/dummy_plots/candle_plot_template.svg'/> <br/> Ethereum Candle Plot"]:::output;
+    B -->|"Filter for Litecoin"| F["<img src='../data/dummy_plots/candle_plot_template.svg'/> <br/> Litecoin Candle Plot"]:::output;
+    D -->|"Display Candlestick Chart"| G["<img src='../data/dummy_plots/lineplot_template.svg'/> <br/> Time Series Predictions"]:::output;
+    classDef data fill:#87CEEB;
+    classDef output fill:#F2C464;

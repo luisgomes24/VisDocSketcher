@@ -1,0 +1,6 @@
+flowchart TD
+  MovieCSV["movie.csv"]
+  MovieCSV -->|"reads"| DataProcessing["Data Processing"]
+  DataProcessing -->|"outputs to"| ModelTraining["Model Training"]
+  ModelTraining -->|"generates"| Results["Results"]
+  Results -->|"saves to"| OutputCSV["output.csv"]

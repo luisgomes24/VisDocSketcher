@@ -1,0 +1,17 @@
+flowchart TD
+    A["📂 Load Data"] --> B["<img src='file.svg'/> <br/> Load RMSE CSV"];
+    A --> C["<img src='file.svg'/> <br/> Load Cotton Yield CSV"];
+    A --> D["<img src='file.svg'/> <br/> Load Cotton Price CSV"];
+    A --> E["<img src='file.svg'/> <br/> Load Submission CSV"];
+
+    B --> F["📊 Check Data Shape"];
+    C --> F;
+    D --> F;
+    E --> F;
+
+    F --> G["📈 Merge Data"];
+    G --> H["🧩 Data Info"];
+    H --> I["🧹 Data Preprocessing"];
+    I --> J["📝 Handle Missing Values"];
+    
+    J --> K["💾 Save Cleaned Data"];

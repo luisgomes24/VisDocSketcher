@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data read from CSV
+    A["diabetes.csv"] -->|Read CSV| B["df"]
+    
+    %% Data preprocessing steps
+    B -->|Data type adjustments| B1["df with adjusted types"]
+    B1 -->|Decimal format correction| B2["df with corrected decimals"]
+    B2 -->|Split data| C["train"]
+    B2 -->|Split data| D["test"]
+
+    %% QLattice model creation
+    E["QLattice Connected"] -->|Find models| F["models"]
+
+    %% ML Model Nodes
+    G["Random Forest"]
+    H["Gradient Boosting"]
+    I["Logistic Regression"]
+
+    %% Training and Evaluation
+    C -->|Train QLattice| F
+    C -->|Train RF Model| G
+    C -->|Train GB Model| H
+    C -->|Train LR Model| I
+    
+    D -->|Test Models| G
+    D -->|Test Models| H
+    D -->|Test Models| I
+    D -->|Evaluate QLattice| F
+
+    %% Annotations
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;
+    class A,B,B1,B2,C,D,E,G,H,I class dataSource;
+    class F class model;

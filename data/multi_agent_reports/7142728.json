@@ -1,0 +1,29 @@
+{
+  "data_sources": [
+    {
+      "source": "None",
+      "description": "There are no CSV files in the current dataset."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame variable used for various plotting functions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Not specified, would typically be read from CSV or similar",
+      "flow": ["Used in plot functions"]
+    }
+  ],
+  "models": [
+    {
+      "model": "None",
+      "input_features": "None",
+      "target_variable": "None",
+      "hyperparameters": "None"
+    }
+  ]
+}

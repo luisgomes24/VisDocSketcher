@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Load Data <img src='../input/ballon-dor-2021-images/file.svg' />"] --> B["🔄 Create DataLoaders"]
+    B --> C["🧠 Train Model <img src='path/to/model.png' />"]
+    C --> D["📊 Find Learning Rate <img src='path/to/lr_find.png' />"]
+    D --> E["🏋️ Fine-tune Model"]
+    E --> F["📊 Show Results <img src='../data/dummy_plots/barplot_template.svg' />"]
+    F --> G["📈 Interpretation <img src='../data/dummy_plots/boxplot_template.svg' />"]
+    G --> H["🔍 Predict <img src='path/to/prediction.png' />"]
+    H --> I["💾 Save Model <img src='path/to/save.png' />"]
+    I --> J["🔄 Reload Model <img src='path/to/reload.png' />"]
+    J --> K["🎉 Enjoy!"]

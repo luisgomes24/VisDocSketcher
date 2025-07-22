@@ -1,0 +1,39 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/stroke-prediction-dataset/healthcare-dataset-stroke-data.csv",
+      "description": "Stroke prediction dataset containing patient health information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "dataset",
+      "description": "A DataFrame containing the stroke prediction dataset with various health indicators."
+    },
+    {
+      "variable": "corr",
+      "description": "Correlation matrix derived from the dataset to analyze relationships between variables."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "created_by": "pd.read_csv",
+      "flows_to": [
+        "Descriptive statistics (describe)",
+        "Null values check (isnull)",
+        "Data preprocessing (bmi replacement)",
+        "Correlation analysis (corr)",
+        "Data visualizations (heatmaps, count plots, distributions)"
+      ]
+    },
+    {
+      "variable": "corr",
+      "created_by": "dataset.corr()",
+      "flows_to": [
+        "Plotting correlations in a heatmap"
+      ]
+    }
+  ],
+  "models": []
+}

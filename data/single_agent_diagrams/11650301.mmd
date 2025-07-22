@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> Leads.csv"] --> B["📊 Preview Data <img src='table.svg'/>"];
+    B --> C["📈 Distribution Graphs <img src='hist_template.svg'/>"];
+    B --> D["📉 Correlation Matrix <img src='boxplot_template.svg'/>"];
+    B --> E["🔍 Scatter Matrix <img src='scatter_plot_template.svg'/>"];
+    
+    A["📂 Load Data <img src='file.svg'/> <br/> Leads.csv"] -->|Reads| F["📝 Show Info <img src='table.svg'/>"];
+    C --> G["🖼️ Display Plots <img src='image.svg'/>"];
+    D --> G;
+    E --> G;
+
+    G --> H["✅ Conclusion"];

@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/fatal-police-shootings-in-the-us/PoliceKillingsUS.csv",
+      "description": "Dataset containing information about police killings in the US"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "sample_entry",
+      "description": "A byte string representing a sample entry before decoding."
+    },
+    {
+      "name": "new_entry",
+      "description": "A byte string obtained after encoding the decoded sample entry to UTF-8."
+    },
+    {
+      "name": "encoding",
+      "description": "The detected encoding of the CSV file using chardet."
+    },
+    {
+      "name": "police_killings",
+      "description": "DataFrame created by reading the PoliceKillingsUS.csv file with the detected encoding."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sample_entry",
+      "created_by": "Hardcoded byte string",
+      "flows_to": "Checked the type and printed the sample"
+    },
+    {
+      "variable": "new_entry",
+      "created_by": "Encoding operation from sample_entry",
+      "flows_to": "Used to check correctness"
+    },
+    {
+      "variable": "encoding",
+      "created_by": "Reading the PoliceKillingsUS.csv file in binary mode",
+      "flows_to": "Used to read the file into a DataFrame"
+    },
+    {
+      "variable": "police_killings",
+      "created_by": "pd.read_csv with detected encoding",
+      "flows_to": "Saved to UTF-8 encoded CSV file"
+    }
+  ],
+  "models": []
+}

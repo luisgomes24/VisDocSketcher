@@ -1,0 +1,62 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "Axes3D",
+      "description": "Used for creating 3D plots."
+    },
+    {
+      "name": "StandardScaler",
+      "description": "Scikit-learn's method for standardizing features by removing the mean and scaling to unit variance."
+    },
+    {
+      "name": "plt",
+      "description": "Matplotlib's pyplot module for creating static, animated, and interactive visualizations in Python."
+    },
+    {
+      "name": "np",
+      "description": "NumPy's namespace for linear algebra operations and numerical computations."
+    },
+    {
+      "name": "os",
+      "description": "Python's standard library for interacting with the operating system; used for file path manipulations."
+    },
+    {
+      "name": "pd",
+      "description": "Pandas' namespace for data processing and handling CSV file input/output."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "Axes3D",
+      "creation": "imported from mpl_toolkits.mplot3d",
+      "flow": "used in 3D plotting functions."
+    },
+    {
+      "variable": "StandardScaler",
+      "creation": "imported from sklearn.preprocessing",
+      "flow": "can be used for feature scaling (though not explicitly shown here)."
+    },
+    {
+      "variable": "plt",
+      "creation": "imported from matplotlib.pyplot",
+      "flow": "used for all visualizations including histograms, correlation matrices, and scatter plots."
+    },
+    {
+      "variable": "np",
+      "creation": "imported as numpy",
+      "flow": "used for numerical operations throughout the plotting functions."
+    },
+    {
+      "variable": "os",
+      "creation": "imported as os",
+      "flow": "used to check for CSV files in the directory."
+    },
+    {
+      "variable": "pd",
+      "creation": "imported as pandas",
+      "flow": "used for data processing and analyzing DataFrames."
+    }
+  ],
+  "models": []
+}

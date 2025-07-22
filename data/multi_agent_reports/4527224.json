@@ -1,0 +1,94 @@
+{
+    "data_sources": [
+        {
+            "source": "BigQuery public dataset",
+            "description": "Hacker News comments data used for analysis."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "client",
+            "description": "BigQuery client to interact with Google Cloud BigQuery service."
+        },
+        {
+            "name": "dataset_ref",
+            "description": "Reference to the Hacker News dataset within the BigQuery service."
+        },
+        {
+            "name": "dataset",
+            "description": "Fetched dataset reference from BigQuery."
+        },
+        {
+            "name": "table_ref",
+            "description": "Reference to the 'comments' table within the Hacker News dataset."
+        },
+        {
+            "name": "table",
+            "description": "Fetched table reference from BigQuery containing comments."
+        },
+        {
+            "name": "prolific_commenters_query",
+            "description": "SQL query string to select authors with more than 10,000 posts."
+        },
+        {
+            "name": "safe_config",
+            "description": "Configuration to limit maximum bytes billed for the query."
+        },
+        {
+            "name": "query_job",
+            "description": "Job configured to run the SQL query on BigQuery."
+        },
+        {
+            "name": "prolific_commenters",
+            "description": "DataFrame containing authors who have posted more than 10,000 comments."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "client",
+            "created_by": "bigquery.Client()",
+            "flows_to": "Used to fetch datasets and tables."
+        },
+        {
+            "variable": "dataset_ref",
+            "created_by": "client.dataset()",
+            "flows_to": "Used to construct references to datasets."
+        },
+        {
+            "variable": "dataset",
+            "created_by": "client.get_dataset()",
+            "flows_to": "Used to fetch the dataset from BigQuery."
+        },
+        {
+            "variable": "table_ref",
+            "created_by": "dataset_ref.table()",
+            "flows_to": "Used to construct references to specific tables."
+        },
+        {
+            "variable": "table",
+            "created_by": "client.get_table()",
+            "flows_to": "Preview data and run queries."
+        },
+        {
+            "variable": "prolific_commenters_query",
+            "created_by": "String with SQL query",
+            "flows_to": "Used in API request to run the BigQuery SQL."
+        },
+        {
+            "variable": "safe_config",
+            "created_by": "bigquery.QueryJobConfig()",
+            "flows_to": "Sets query constraints."
+        },
+        {
+            "variable": "query_job",
+            "created_by": "client.query()",
+            "flows_to": "Result stored in a DataFrame."
+        },
+        {
+            "variable": "prolific_commenters",
+            "created_by": "query_job.to_dataframe()",
+            "flows_to": "Output of the query, ready for analysis."
+        }
+    ],
+    "models": []
+}

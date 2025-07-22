@@ -1,0 +1,12 @@
+flowchart TD
+    A["🗂️ Load Data"] --> B["🧹 Preprocess Data"]
+    B --> C["🧠 Specify Model"]
+    C --> D["🔧 Compile Model"]
+    D --> E["📊 Fit Model"]
+    E --> F["📈 Evaluate Model"]
+    
+    A -->|Data from directory| B
+    B -->|Preprocessing steps| C
+    C -->|ResNet50 Architecture| D
+    D -->|Compile with optimizer, loss, metrics| E
+    E -->|Training and validation results| F

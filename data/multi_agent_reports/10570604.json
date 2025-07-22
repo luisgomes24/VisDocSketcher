@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_name": "tests_state_wise.csv",
+      "description": "Contains state-wise COVID-19 testing data including total tests, positive cases, negative cases, and quarantine statistics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "The main DataFrame containing the raw state-wise COVID-19 data."
+    },
+    {
+      "variable_name": "df",
+      "description": "Aggregated DataFrame grouped by state, summing up the test results and containing computed columns."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data",
+      "creation_method": "pd.read_csv",
+      "flow":"Cleaned and modified, then summarized into df for plotting."
+    },
+    {
+      "variable_name": "df",
+      "creation_method": "data.groupby('State').sum()",
+      "flow":"Used for all visualizations of testing and positivity rates."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,25 @@
+{"data_sources": [
+    {"source": "hacker_news.comments", "description": "Comments data from the Hacker News dataset containing details about user comments."}
+],
+"data_variables": [
+    {"variable_name": "client", "description": "BigQuery Client object for interacting with Google BigQuery API."},
+    {"variable_name": "dataset_ref", "description": "Reference to the Hacker News dataset in BigQuery."},
+    {"variable_name": "table_ref", "description": "Reference to the comments table in BigQuery."},
+    {"variable_name": "table", "description": "Fetched comments table object from BigQuery."},
+    {"variable_name": "prolific_commenters_query", "description": "SQL query to select authors with more than 10,000 posts."},
+    {"variable_name": "deleted_posts_query", "description": "SQL query to count the number of deleted comments."},
+    {"variable_name": "prolific_commenters", "description": "DataFrame containing authors with more than 10,000 posts and their post counts."},
+    {"variable_name": "deleted_posts", "description": "DataFrame to store the count of deleted posts."}
+],
+"data_flow": [
+    {"variable": "client", "creation_method": "bigquery.Client()", "flows_to": "dataset_ref, table_ref"},
+    {"variable": "dataset_ref", "creation_method": "client.dataset()", "flows_to": "table_ref"},
+    {"variable": "table_ref", "creation_method": "dataset_ref.table()", "flows_to": "table"},
+    {"variable": "table", "creation_method": "client.get_table()", "flows_to": "prolific_commenters_query, deleted_posts_query"},
+    {"variable": "prolific_commenters_query", "creation_method": "raw SQL string", "flows_to": "prolific_commenters"},
+    {"variable": "prolific_commenters", "creation_method": "client.query().to_dataframe()", "flows_to": "output/display"},
+    {"variable": "deleted_posts_query", "creation_method": "raw SQL string", "flows_to": "deleted_posts"},
+    {"variable": "deleted_posts", "creation_method": "client.query().to_dataframe()", "flows_to": "output/display"}
+],
+"models": []
+}

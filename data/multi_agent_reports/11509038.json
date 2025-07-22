@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Pre_restaurants.csv",
+      "description": "Data on pre-Covid restaurant locations in NYC, including latitude, longitude, borough, and income level."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the pre-covid restaurant data loaded from the CSV file."
+    },
+    {
+      "variable_name": "g",
+      "description": "Seaborn lmplot object for visualizing latitude and longitude with hue by borough."
+    },
+    {
+      "variable_name": "fig_px",
+      "description": "Plotly express figure for scatter mapbox representation of the restaurants."
+    },
+    {
+      "variable_name": "fig",
+      "description": "Plotly express bar figure for visualizing the number of restaurants by grade date."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv", 
+      "usage": ["visualized in g, fig and fig_px"]
+    },
+    {
+      "variable_name": "g",
+      "creation_method": "sns.lmplot", 
+      "usage": ["shown with plt.show()"]
+    },
+    {
+      "variable_name": "fig_px",
+      "creation_method": "px.scatter_mapbox",
+      "usage": ["shown with fig_px.show()"]
+    },
+    {
+      "variable_name": "fig",
+      "creation_method": "px.bar",
+      "usage": ["shown with fig.show()"]
+    }
+  ],
+  "models": []
+}

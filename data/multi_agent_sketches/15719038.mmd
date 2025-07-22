@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffecb3'}}}%%
+flowchart TD
+    %% Raw training data from CSV
+    A["raw_data"] -->|splits into| B["train_features"]
+    A -->|splits into| C["train_labels"]
+    A -->|splits into| D["val_features"]
+    A -->|splits into| E["val_labels"]
+    %% Training dataset creation
+    B --> F["training_ds"]
+    F --> G["train_dataset"]
+    C --> G
+    %% Validation dataset creation
+    D --> H["val_dataset"]
+    E --> H
+    %% Test data processing
+    I["test_ds"] --> J["test_data"]
+    %% Model prediction
+    J --> K["predictions"]
+    %% Final predictions
+    K --> L["preds"]
+    L --> M["pred_df for submission"]
+    %% Sequential Model Details
+    subgraph Model["Sequential Model"]
+    direction TB
+    RS["Rescaling layer"] --> CV1["Conv2D layer (16 filters)"] --> MP1["MaxPooling2D"] --> DO1["Dropout layer"] --> CV2["Conv2D layer (32 filters)"] --> MP2["MaxPooling2D"] --> DO2["Dropout layer"] --> CV3["Conv2D layer (64 filters)"] --> MP3["MaxPooling2D"] --> DO3["Dropout layer"] --> FL["Flatten layer"] --> D1["Dense layer (128 neurons)"] --> D2["Dense layer (10 neurons)"]
+    end
+    G -->|training| Model -->|predicts| K
+    H -->|validation| Model
+    

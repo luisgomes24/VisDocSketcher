@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "lemonade_clean.csv",
+      "description": "Contains cleaned data of lemonade sales with variables like price, flyers, and sales."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dat",
+      "description": "DataFrame holding the lemonade sales data with various features such as flyers, price, and sales."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dat",
+      "creation": "pd.read_csv('../input/lemonadesales/lemonade_clean.csv')",
+      "flow": ["used for descriptive statistics", "visualized through pair plots and line plots"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,23 @@
+graph TD;
+    C["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"]
+    D["<img src='icons/file.svg' width=100 height=100/> <br/> File Input"]
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> Data in Tabular Form"]
+    F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]
+    G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"]
+    H["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    I["<img src='icons/image.svg' width=100 height=100/> <br/> Image Input"]
+    K["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Predictions"]
+    L["<img src='dummy_plots/barplot_template.svg'/> <br/> Loss over Epochs"]
+    M["<img src='dummy_plots/hist_template.svg'/> <br/> Distribution of Outputs"]
+    N["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Final Comparisons"]
+
+    C --> D;
+    D --> E;
+    E --> F;
+    E --> G;
+    G --> H;
+    H --> I;
+    I --> K;
+    H --> L;
+    K --> N;
+    K --> M;

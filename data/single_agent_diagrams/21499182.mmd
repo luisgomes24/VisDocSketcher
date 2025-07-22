@@ -1,0 +1,10 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg'/> <br/> Data from CSV"] --> B["🔍 Inspect Data <img src='table.svg'/> <br/> acc.head()"];
+    B --> C["📊 Check Null Values <img src='table.svg'/> <br/> null_cols"];
+    C --> D["🧹 Preprocess Data <img src='column_split.svg'/> <br/> Clean Data"];
+    D --> E["📅 Map Months <img src='column_split.svg'/> <br/> MonthDict"];
+    E --> F["📊 Determine Clusters <img src='lineplot_template.svg'/> <br/> Plot Costs"];
+    F --> G["🧠 Fit Model <img src='brain.svg'/> <br/> KPrototypes"];
+    G --> H["📊 Assign Clusters <img src='column_split.svg'/> <br/> df['cluster_id']"];
+    H --> I["📈 Visualize Age by Cluster <img src='boxplot_template.svg'/> <br/> sns.boxplot()"];
+    H --> J["📊 Crash Type Distribution <img src='barplot_template.svg'/> <br/> bar plot"];

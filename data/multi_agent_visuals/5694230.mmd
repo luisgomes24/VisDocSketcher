@@ -1,0 +1,13 @@
+flowchart TD
+  %% Node representing the dataset
+  A[specialized_bikes_2019.csv] --> |Read CSV| B[df1]
+    <img src='icons/file.svg' width=100 height=100/> <br/> Dataset: specialized_bikes_2019
+  
+  %% Node and transition representing the DataFrame creation
+  B[df1] --> |Display Head & Plot Distribution| C[Usage in Visualizations]
+    <img src='icons/table.svg' width=100 height=100/> <br/> DataFrame Created
+  
+  %% Comments
+  %% A: Represents the dataset containing specialized bike data for 2019
+  %% B: Represents the DataFrame created by reading the CSV file
+  %% C: Represents the use of the DataFrame in plotting and displaying data

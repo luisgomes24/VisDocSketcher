@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "config.json",
+      "description": "Configuration file that holds various settings for the analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "Content read from the config.json file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation": "Read from config.json file",
+      "flow": "Used for storing configuration (not specified how it's used further in analysis)"
+    }
+  ],
+  "models": []
+}

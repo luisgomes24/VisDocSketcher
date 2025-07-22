@@ -1,0 +1,10 @@
+flowchart TD
+    %% Node to read the CSV data source
+    A[Dataset3.csv] -->|pd.read_csv| B[data]
+    %% Node for data cleaning and processing
+    B -->|Drop unused columns\nMap categorical variables| C[data cleaned]
+    %% Node for country mapping
+    C -->|Mapping from Country column| D[country]
+    %% Nodes representing various analyses and visualizations
+    C --> E[Bar plots and correlation analysis]
+    D -->|Used in analyses| E

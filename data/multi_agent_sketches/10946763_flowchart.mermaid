@@ -1,0 +1,10 @@
+flowchart TD;
+    A["Input: shootings.csv"] --> B["Load Data"];
+    B --> C["DataFrame df1"];
+    C --> D["Plot Distribution"];
+    C --> E["Plot Correlation Matrix"];
+    C --> F["Plot Scatter Matrix"];
+    G["End"];
+    D --> G;
+    E --> G;
+    F --> G;

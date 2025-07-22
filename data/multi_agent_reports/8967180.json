@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file for predictions."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Data file containing test samples."
+    },
+    {
+      "file_name": "train_kfold5.csv",
+      "description": "Training set used for model training, with K-Fold for cross-validation."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame for the sample submission file.",
+      "n_rows": 1000
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame for the test CSV file.",
+      "n_rows": 1000
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame for the training set with K-Fold cross-validation.",
+      "n_rows": 1000
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

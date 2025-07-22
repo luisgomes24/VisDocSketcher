@@ -1,0 +1,54 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff000'}}}%%
+%% Flowchart for Jupyter Notebook 19552302
+
+flowchart TD
+    %% Data source definition
+    subgraph DataSource
+        DS1["Full_Race_Data"]
+    end
+    
+    %% Data preprocessing and initial variables
+    subgraph Preprocessing
+      PR1["Sample creation for tests"]-->|"Data Input"| B1
+    end
+
+    %% Data Variables
+    subgraph DataVariables
+      B1["sample"]
+      B2["winner_item_counts"]
+      B3["graph"]
+      B4["total1"]
+      B5["total2"]
+
+    end
+
+    %% Functions
+    subgraph Functions
+      F1["best_items()"]
+      F2["blackjack_hand_greater_than()"]
+      F3["jimmy_slots.get_graph()"]
+      F4["prettify_graph()"]
+    end
+
+
+    DS1 --> B1
+    B1 -- "input sample" --> F1
+    F1 -- "output" --> B2
+
+    B4["total1"] --> F2
+    B5["total2"] --> F2
+
+
+    F3 -- "create graph" --> B3
+    B3 -- "modify graph" --> F4
+
+    %% Annotating edges with descriptions
+    classDef dataSource fill:#ffcccc,stroke:#333,stroke-width:2px;
+    classDef preprocessing fill:#ccffcc,stroke:#333,stroke-width:2px;
+    classDef dataVariables fill:#ccccff,stroke:#333,stroke-width:2px;
+    classDef functions fill:#ffffcc,stroke:#333,stroke-width:2px;
+
+    class DS1 dataSource;
+    class PR1 preprocessing;
+    class B1,B2,B3,B4,B5 dataVariables;
+    class F1,F2,F3,F4 functions;

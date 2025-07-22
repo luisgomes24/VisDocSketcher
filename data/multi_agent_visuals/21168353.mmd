@@ -1,0 +1,16 @@
+flowchart TD
+    A1["cell_cycle_genes_reactome_extended.txt"]:::dataSource
+    A2["processed_h5ad files"]:::dataSource
+    A3["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> S Phase Genes"]:::dataNode
+    A4["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> G2/M Phase Genes"]:::dataNode
+    A5["<img src='dummy_plots/boxplot_template.svg' /> <br/> PCA Results"]:::plotNode
+    A6["<img src='dummy_plots/barplot_template.svg' /> <br/> UMAP Results"]:::plotNode
+    A1 -->|"Reads"| A3
+    A2 -->|"Uses"| A4
+    A3 -->|"Provides input"| A5
+    A4 -->|"Provides input"| A5
+    A5 -->|"Visualizes"| A6
+
+    classDef dataSource fill:#87CEEB;
+    classDef dataNode fill:#87CEEB;
+    classDef plotNode fill:#FFCDD2;

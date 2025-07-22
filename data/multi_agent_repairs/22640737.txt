@@ -1,0 +1,1 @@
+The notebook performs exploratory data analysis (EDA) on a dataset of Bandcamp sales. Key components include reading the data from a CSV file, generating visualizations, and creating a report on the dataset.

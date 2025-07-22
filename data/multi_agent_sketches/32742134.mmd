@@ -1,0 +1,43 @@
+flowchart TD
+    subgraph LoadAndPrepData
+        A["/DATA_DIR/"] -->|used to create| B["DATA_PATH"]
+        B --> C["/docs/"]:::docsInfo
+        D["/QUERY_IMAGE/"]:::queryImageInfo --> E["/query_doc/"]:::queryDocInfo --> F["/query_docs/"]:::queryDocsInfo
+    end
+
+    subgraph Preprocessing
+        C --> G[[Preproc: Image Preprocessing]]
+        F --> G
+    end
+
+    subgraph ModelEmbedding
+        G --> H["/ResNet50: Model/"]:::modelInfo
+    end
+
+    subgraph MatchingAndOutput
+        H --> I{Embed documents}
+        I -->|Query| J["query_docs.embed()"]
+        I -->|Docs| K["docs.embed()"]
+        J --> L{Match}
+        K --> L
+        L --> M["query_docs.match()"]
+    end
+
+    classDef docsInfo fill:#f96,stroke:#333,stroke-width:2px;
+    classDef queryImageInfo fill:#8fa,stroke:#333,stroke-width:2px;
+    classDef queryDocInfo fill:#8fa,stroke:#333,stroke-width:2px;
+    classDef queryDocsInfo fill:#8fa,stroke:#333,stroke-width:2px;
+    classDef modelInfo fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Explanation
+    %% A: Root directory for images
+    %% B: Path constructed using DATA_DIR
+    %% C: DocumentArray with images loaded
+    %% D: Query image file path
+    %% E: Document for the query image
+    %% F: DocumentArray containing the query document
+    %% G: Image preprocessing function
+    %% H: ResNet50 model for embedding
+    %% I: Creating embeddings for documents
+    %% L: Matching query document with the dataset
+    %% M: Matching result output

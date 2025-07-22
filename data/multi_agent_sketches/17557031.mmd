@@ -1,0 +1,47 @@
+%% Nodes for Data Sources
+classDiagram
+    class X {
+        "Feature matrix created using mglearn.datasets.make_forge() for binary classification."
+    }
+    class y {
+        "Target variable created using mglearn.datasets.make_forge() for binary classification."
+    }
+    class cancer {
+        "Dataset loaded using load_breast_cancer() method from sklearn.datasets."
+    }
+
+%% Nodes for Data Splits
+classDiagram
+    class X_train {
+        "Training set features derived from the Breast Cancer dataset after splitting."
+    }
+    class X_test {
+        "Test set features derived from the Breast Cancer dataset after splitting."
+    }
+    class y_train {
+        "Training set labels derived from the Breast Cancer dataset after splitting."
+    }
+    class y_test {
+        "Test set labels derived from the Breast Cancer dataset after splitting."
+    }
+
+%% Nodes for Models
+classDiagram
+    class LogisticRegression {
+        "Logistic Regression models trained with various hyperparameters."
+    }
+    class LinearSVC {
+        "LinearSVC model fitted on make_blobs dataset for multi-class classification."
+    }
+
+%% Data Flow
+X "input" --> LinearSVC
+X "input" --> LogisticRegression
+cancer "loaded, then split" --> X_train
+cancer "loaded, then split" --> X_test
+cancer "loaded, then split" --> y_train
+cancer "loaded, then split" --> y_test
+X_train "train features" --> LogisticRegression
+X_test "test features" --> LogisticRegression
+y_train "train labels" --> LogisticRegression
+y_test "test labels" --> LogisticRegression

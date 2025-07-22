@@ -1,0 +1,15 @@
+```
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🔄 Data Preprocessing <img src='icons/table.svg'/>"]
+    B --> C["📊 Analyze Data Leakage <img src='icons/brain.svg'/>"]
+    C --> D["💡 Model Design <img src='icons/brain.svg'/>"]
+    D --> E["🏆 Model Evaluation <img src='icons/brain.svg'/>"]
+    E --> F["📥 Deployment <img src='icons/brain.svg'/>"]
+    
+    subgraph steps["Steps"]
+        direction TB
+        A -->|Input Data| C
+        C --> D
+        D -->|Model Output| E
+        E -->|Deploy Model| F
+    end

@@ -1,0 +1,132 @@
+{
+"data_sources": [
+    {
+        "file_name": "train.csv",
+        "description": "Training dataset containing features and target variable for model training."
+    },
+    {
+        "file_name": "test.csv",
+        "description": "Test dataset to be used for predictions."
+    },
+    {
+        "file_name": "sample_submission.csv",
+        "description": "Template for submission containing example output format."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "df",
+        "description": "DataFrame for training dataset after data cleaning and preprocessing."
+    },
+    {
+        "variable_name": "test_df",
+        "description": "DataFrame for test dataset after data cleaning and preprocessing."
+    },
+    {
+        "variable_name": "X",
+        "description": "Feature set extracted from training dataset, excluding the target variable."
+    },
+    {
+        "variable_name": "y",
+        "description": "Target variable from the training dataset (Credit Default)."
+    },
+    {
+        "variable_name": "X_train",
+        "description": "Training feature set after splitting the data."
+    },
+    {
+        "variable_name": "X_test",
+        "description": "Testing feature set after splitting the data."
+    },
+    {
+        "variable_name": "y_train",
+        "description": "Training target variable after splitting the data."
+    },
+    {
+        "variable_name": "y_test",
+        "description": "Testing target variable after splitting the data."
+    },
+    {
+        "variable_name": "model_cat",
+        "description": "CatBoost classifier model for predicting credit default."
+    },
+    {
+        "variable_name": "prediction",
+        "description": "Predicted outcomes based on the test_df dataset using the trained model."
+    },
+    {
+        "variable_name": "submit",
+        "description": "DataFrame to save the prediction result in the required submission format."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "df",
+        "creation": "pd.read_csv(TRAIN_DATASET_PATH)",
+        "flow": "Described, cleaned, and processed for model training."
+    },
+    {
+        "variable_name": "test_df",
+        "creation": "pd.read_csv(TEST_DATASET_PATH)",
+        "flow": "Described, cleaned, and processed for predictions."
+    },
+    {
+        "variable_name": "X",
+        "creation": "df.drop(columns=target_name)",
+        "flow": "Used to train the model."
+    },
+    {
+        "variable_name": "y",
+        "creation": "df[target_name]",
+        "flow": "Used as the target for model training."
+    },
+    {
+        "variable_name": "X_train",
+        "creation": "train_test_split(X, y, test_size=0.2)",
+        "flow": "Used to fit the model."
+    },
+    {
+        "variable_name": "X_test",
+        "flow": "Used to evaluate the model predictions."
+    },
+    {
+        "variable_name": "y_train",
+        "flow": "Used to fit the model."
+    },
+    {
+        "variable_name": "y_test",
+        "flow": "Used to evaluate the model predictions."
+    },
+    {
+        "variable_name": "model_cat",
+        "creation": "catb.CatBoostClassifier()",
+        "flow": "Trained using the X_train, y_train data."
+    },
+    {
+        "variable_name": "prediction",
+        "creation": "model_cat.predict(test_df)",
+        "flow": "Used in 'submit' DataFrame for saving results."
+    },
+    {
+        "variable_name": "submit",
+        "creation": "pd.read_csv(SAMPLE_PREDICTION_PATH)",
+        "flow": "Final DataFrame ready for output submission."
+    }
+],
+"models": [
+    {
+        "model_type": "CatBoostClassifier",
+        "input_features": "X_train",
+        "target_variable": "y_train",
+        "hyperparameters": {
+            "iterations": 300,
+            "max_depth": 7,
+            "class_weights": [1, disbalance],
+            "silent": True,
+            "random_state": 21,
+            "eval_metric": 'F1',
+            "early_stopping_rounds": 20
+        }
+    }
+]
+}

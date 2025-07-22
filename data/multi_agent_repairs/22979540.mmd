@@ -1,0 +1,14 @@
+```mermaid
+%% This diagram shows the data flow and processing steps in a data science project
+flowchart TD;
+    A["CSV File: Premier League Matches 2014-2020"] --> |"Read data from CSV"| B["DataFrame: data0"];
+    B --> |"Preprocess: Label Encoding, Score-Diff Calculation"| C["DataFrame: data1"];
+    C --> |"Split data into features and target"| D["Features: trainX"];
+    C --> E["Target: trainY0"];
+    C --> F["Features: testX"];
+    C --> G["Target: testY0"];
+    D & E --> |"Train LGBMClassifier"| H["LGBMClassifier Model"];
+    F & G --> |"Evaluate model"| H;
+    H --> |"Model Hyperparameters and Configurations"| I["num_leaves, objective, max_depth, learning_rate, lambda_l1, lambda_l2, bagging_freq, bagging_fraction"];
+    I --> |"Optimized using Optuna"| I;
+```

@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Read CSV| B1["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] -->|Read CSV| E["<img src='icons/table.svg' width=100 height=100/> <br/> test"]
+    
+    %% Data Preprocessing
+    B1 -->|Data Cleaning & Preprocessing| C1["Feature Preparation"]
+    C1 -->|Extract Features| D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> X"]
+    C1 -->|Extract Labels| F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Y"]
+    
+    %% Model Training
+    D -->|Input Features| G["<img src='icons/brain.svg' width=100 height=100/> <br/> ANN Model Training"]
+    F -->|Target Variable| G
+    
+    %% Model Details
+    subgraph model_details["Artificial Neural Network"]
+        direction TB
+        layer1["Dense Layer: units=10, activation='relu'"]
+        layer2["Dense Layer: units=10, activation='relu'"]
+        layer3["Dense Layer: units=10, activation='relu'"]
+        output_layer["Output Layer: units=1, activation='sigmoid'"]
+        optimizer["Optimizer: adam"]
+        loss["Loss: binary_crossentropy"]
+        metrics["Metrics: accuracy"]
+    end
+    
+    G -->|Train with |- model_details
+    G -->|Predict on Test Data| H["<img src='icons/file.svg' width=100 height=100/> <br/> predictions"]
+    
+    %% Save Predictions
+    H -->|Save CSV| I["output.csv"]

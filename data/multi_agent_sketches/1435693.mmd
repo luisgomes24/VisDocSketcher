@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Source Node
+    A["winemag-data-130k-v2.csv"]
+    
+    %% Data Loading Node
+    B["Load CSV to DataFrame: reviews"]
+    
+    %% Review Analysis Nodes
+    C["Common Wine Reviewers"]
+    D["Best Wine by Price"]
+    E["Wine Price Extremes"]
+    F["Reviewer Mean Ratings"]
+    G["Wine Price Range"]
+    H["Country Variety Pairs"]
+    
+    %% Flow Connections
+    A --> B
+    B --> C
+    B --> D
+    B --> E
+    B --> F
+    B --> G
+    B --> H
+
+    %% Comments for Nodes
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    
+    class A data_source; %% CSV file containing wine reviews
+    class B process; %% Load data from CSV into DataFrame
+    class C process; %% Group by taster to count reviews
+    class D process; %% Find maximum points by wine price
+    class E process; %% Calculate min/max prices for wine varieties
+    class F process; %% Compute average ratings by reviewers
+    class G process; %% Determine price ranges for wine varieties
+    class H process; %% Count combinations of country and wine variety

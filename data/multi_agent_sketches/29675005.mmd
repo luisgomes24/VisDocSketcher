@@ -1,0 +1,40 @@
+flowchart TD
+    subgraph Raw_Data
+        A1["train"]
+        A2["valid"]
+        A3["test"]
+    end
+    
+    subgraph Data_Variables
+        B1["comp :: Competition name"]
+        B2["path :: Dataset path"]
+        B3["trn_path :: Training data path"]
+        B4["files :: Training image files"]
+        B5["dls :: Data loaders"]
+        B6["learn :: Learner object"]
+        B7["tst_files :: Test image files"]
+        B8["probs :: Predicted probabilities"]
+        B9["results :: Final predictions"]
+        B10["testY :: True labels"]
+    end
+    
+    subgraph ML_Model
+        C1["ResNet26d Model"]
+    end
+    
+    A1 --> |"Used in conjunction with valid images to create data loaders"| B5
+    A2 --> |"Used with train images to create data loaders"| B5
+    A3 --> |"Used to fetch test image files"| B7
+    
+    B3 --> |"Fetch image files"| B4
+    B4 --> |"Create data loaders"| B5
+    B5 --> |"Serves as input to the learner"| B6
+    
+    B6 --> |"ResNet26d architecture"| C1
+    
+    C1 --> |"Train model"| B8
+    B7 --> |"Fetch for prediction"| B8
+    B8 --> |"Map predictions to labels"| B9
+    B10 --> |"Evaluate model with predictions"| B8
+    
+    B9 --> |"Final results visualization"| B10

@@ -1,0 +1,40 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+
+    subgraph DataSources
+        CSV["otto-recommender-system_kernels.csv"] %% Data source containing kernel statistics
+    end
+
+    subgraph Variables
+        DF["df"] %% DataFrame created from the CSV file
+        F["forks"] %% DataFrame containing fork details
+        VD["votes_dict"] %% Dictionary mapping kernel IDs to votes
+        NSTS["nodes_subtree_size"] %% Dictionary for subtree sizes
+        NCV["nodes_cum_votes"] %% Dictionary for cumulative votes
+    end
+
+    subgraph Processes
+        ReadCSV["pd.read_csv"] %% Reading the CSV file into DataFrame
+        CreateForksDF["Creating forks DataFrame"] %% Creating the 'forks' DataFrame
+        CreateVotesDict["Creating votes_dict"] %% Creating the dictionary from DataFrame
+        ComputeSubtreeSize["Compute Subtree Sizes"] %% Calculating subtree sizes
+        ComputeCumVotes["Calculate Cumulative Votes"] %% Calculating cumulative votes
+    end
+
+    subgraph DataFlow
+        DF -->|flows to| DataAnalysis["Data Analysis Process"]
+        DF -->|flows to| Visualization["Visualization Process"]
+        F -->|flows to| VotesCalc["Cumulative Votes Calculation"]
+        F -->|flows to| ForkStats["Forks Statistics"]
+        VD -->|used in| CumulativeVotesCalculation["Calculate Cumulative Votes"]
+        NSTS -->|flows to| ForksDF["Forks Data"]
+        NCV -->|flows to| ForksDF
+    end
+
+    CSV -->|load| ReadCSV -->|create| DF
+    DF -->|select columns| CreateForksDF -->|create| F
+    F -->|zip| CreateVotesDict -->|create| VD
+    F -->|DFS tree| ComputeSubtreeSize -->|use for| NSTS
+    F &VD -->|subtree nodes| ComputeCumVotes -->|create| NCV
+
+    VoteAnalysis["Analyze Voting Patterns"] -->|depends on| DF

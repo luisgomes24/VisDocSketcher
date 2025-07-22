@@ -1,0 +1,38 @@
+```mermaid
+%% Workflow for data science project based on Jupyter Notebook analysis
+flowchart TD
+  
+  %% Data Sources
+  A["train.csv"] -->|read_csv| B["X_full"]
+  A1["test.csv"] -->|read_csv| B1["X_test_full"]
+  
+  %% Data Preparation
+  B["X_full"] -->|Select Features| C["X"]
+  C["X"] -->|Train-Test Split| D{"Split"}
+  D -->|Train Features| E["X_train"]
+  D -->|Validation Features| F["X_valid"]
+  B -->|Extract Target| G["y"]
+  G["y"] -->|Train-Test Split| H{"Split"}
+  H -->|Train Target| I["y_train"]
+  H -->|Validation Target| J["y_valid"]
+  
+  %% Model Training
+  subgraph Training
+    E --> K1["RandomForestRegressor\nmodel_1"]
+    E --> K2["RandomForestRegressor\nmodel_2"]
+    E --> K3["RandomForestRegressor\nmodel_3"]
+    E --> K4["RandomForestRegressor\nmodel_4"]
+    E --> K5["RandomForestRegressor\nmodel_5"]
+  end
+  
+  %% Best Model Selection
+  K3 -->|Selected| M["Best Model - model_3"]
+  
+  %% Prediction
+  B1["X_test_full"] -->|Predict with Best Model| N["preds_test"]
+  
+  %% Output
+  N["preds_test"] -->|Create Submission| O["output DataFrame"]
+  O -->|Save to CSV| P["submission.csv"]
+
+```

@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "file_name": "weatherAUS.csv",
+      "description": "Contains weather data including temperature, rain, and humidity in Australia."
+    }
+  ],
+  "data_variables": [
+    {"name": "df", "description": "The original DataFrame after loading the data from the CSV."},
+    {"name": "new_df", "description": "Cleaned and preprocessed DataFrame ready for analysis."},
+    {"name": "X", "description": "Features used for model training, excluding target variable."},
+    {"name": "y", "description": "Target variable (RainTomorrow) to predict."},
+    {"name": "labels_1", "description": "Labels obtained from KMeans clustering algorithm."},
+    {"name": "kmeans", "description": "KMeans clustering model fitted with specific number of clusters."}
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv",
+      "flow": "Used for data cleaning and transformation into new_df."
+    },
+    {
+      "variable": "new_df",
+      "creation": "Transformations applied and categorical encoding done.",
+      "flow": "Used for data visualization and model training (X and y) as well as KMeans clustering.
+    },
+    {
+      "variable": "X",
+      "creation": "Extracted from new_df by dropping RainTomorrow.",
+      "flow": "Feeding into KMeans clustering and models for prediction."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from new_df as target variable RainTomorrow.",
+      "flow": "Used for training and evaluation of the model."
+    },
+    {
+      "variable": "labels_1",
+      "creation": "Assigned from KMeans.",
+      "flow": "Used for analysis of clustering results."
+    },
+    {
+      "variable": "kmeans",
+      "creation": "Initialized and fitted with specified parameters.",
+      "flow": "Utilized for clustering data in x and visualization of clusters."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": "Humidity3pm, RISK_MM",
+      "target_variable": "None",
+      "hyperparameters": "n_clusters=2, random_state=100"
+    }
+  ]
+}

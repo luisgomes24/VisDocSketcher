@@ -1,0 +1,15 @@
+{
+  "data_sources": [
+    { "file_name": "test_lAUu6dG.csv", "description": "First dataset, contains sample data for exploratory analysis" },
+    { "file_name": "train_ctrUa4K.csv", "description": "Second dataset, used for training and analysis" }
+  ],
+  "data_variables": [
+    { "variable_name": "df1", "description": "DataFrame containing the first dataset content" },
+    { "variable_name": "df2", "description": "DataFrame containing the second dataset content" }
+  ],
+  "data_flow": [
+    { "variable_name": "df1", "creation_method": "pd.read_csv('/kaggle/input/test_lAUu6dG.csv')", "flow_destination": "Used in visualization functions" },
+    { "variable_name": "df2", "creation_method": "pd.read_csv('/kaggle/input/train_ctrUa4K.csv')", "flow_destination": "Used in visualization functions" }
+  ],
+  "models": []
+}

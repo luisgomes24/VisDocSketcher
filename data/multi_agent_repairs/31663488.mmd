@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["Social_Network_Ads.csv"] 
+    %% Load Data
+    A -->|Load CSV| B["data: DataFrame"] 
+    %% Data Preprocessing
+    B -->|Data Preprocessing| C["X: Features DataFrame"]
+    B -->|Data Preprocessing| D["y: Target Series"]
+    %% Train/Test Split
+    C -->|train_test_split| E["X_train"]
+    C -->|train_test_split| F["X_test"]
+    D -->|train_test_split| G["y_train"]
+    D -->|train_test_split| H["y_test"]
+    %% Random Forest Model
+    E -->|Train Model| I["Random Forest Model"]
+    G -->|Train Model| I
+    I -->|Predict| J["y_pred: Predictions"]
+    J -->|Evaluation| K["Evaluate Random Forest"]
+    %% XGBoost Model
+    E -->|Train Model| L["XGBoost Model"]
+    G -->|Train Model| L
+    L -->|Predict| M["y_pred_xgb: Predictions"]
+    M -->|Evaluation| N["Evaluate XGBoost"]
+```

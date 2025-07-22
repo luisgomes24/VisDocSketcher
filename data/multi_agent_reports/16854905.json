@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "source": "train.csv",
+      "description": "Training dataset containing employee information and promotion status."
+    },
+    {
+      "source": "test.csv",
+      "description": "Test dataset containing employee information for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training data after cleaning and encoding."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing test data after cleaning and encoding."
+    },
+    {
+      "name": "X",
+      "description": "Features used for training the model (all features except target)."
+    },
+    {
+      "name": "Y",
+      "description": "Target variable indicating promotion status (is_promoted)."
+    },
+    {
+      "name": "Y_pred",
+      "description": "Predictions made by the Random Forest Classifier on the test data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": "Cleaned and used for training model."
+    },
+    {
+      "variable": "df_test",
+      "creation_method": "pd.read_csv",
+      "flow": "Cleaned for predictions, used for generating submission file."
+    },
+    {
+      "variable": "X",
+      "creation_method": "df_train.drop",
+      "flow": "Input features for the model training."
+    },
+    {
+      "variable": "Y",
+      "creation_method": "pd.DataFrame",
+      "flow": "Target for model training and predictions."
+    },
+    {
+      "variable": "Y_pred",
+      "creation_method": "rfc.predict",
+      "flow": "Used to create the submission DataFrame."
+    }
+  ],
+  "models": [
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "X",
+      "target_variable": "Y",
+      "hyperparameters": "Default parameters used (not specified in code)."
+    }
+  ]
+}

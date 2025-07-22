@@ -1,0 +1,31 @@
+%% Mermaid diagram for the Jupyter Notebook Workflow
+
+flowchart TD
+
+    %% Data Sources
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Train Data \n train.csv"] -->|Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame \n train"]
+    C["<img src='icons/database.svg' width=100 height=100/> <br/> Test Data \n test.csv"] -->|Load Data| D["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame \n test"]
+
+    %% Model Initialization
+    E["<img src='icons/brain.svg' width=100 height=100/> <br/> Initialize Model \n TabularAutoML"] 
+    B -->|Train Model| E
+
+    %% Model Training
+    E -->|Fit Model| F["<img src='icons/table.svg' width=100 height=100/> <br/> Out-of-Fold Predictions \n oof_pred"]
+    E -->|Predict| G["<img src='icons/table.svg' width=100 height=100/> <br/> Model Predictions \n test_pred"]
+
+    %% Prepare Submission
+    G -->|Prepare Results| H["<img src='icons/table.svg' width=100 height=100/> <br/> Results DataFrame \n result"]
+    H -->|Save to CSV| I["<img src='icons/file.svg' width=100 height=100/> <br/> Submission File \n lightautoml_titanic.csv"]
+
+    %% Additional Nodes
+    J["<img src='icons/file.svg' width=100 height=100/> <br/> Gender Submission \n gender_submission.csv"]
+
+    style A fill:#87CEEB,stroke:#008000,stroke-width:2px
+    style C fill:#87CEEB,stroke:#008000,stroke-width:2px
+    style E fill:#C6F4D6,stroke:#008000,stroke-width:2px
+    style F fill:#C6F4D6,stroke:#008000,stroke-width:2px
+    style G fill:#C6F4D6,stroke:#008000,stroke-width:2px
+    style H fill:#F2C464,stroke:#FFD700,stroke-width:2px
+    style I fill:#F2C464,stroke:#FFD700,stroke-width:2px
+    style J fill:#F2C464,stroke:#FFD700,stroke-width:2px

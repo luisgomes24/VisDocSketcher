@@ -1,0 +1,43 @@
+{
+  "data_sources": [
+    {
+      "file_name": "russia_losses_equipment.csv",
+      "description": "Data on the equipment losses of Russian forces during the Ukraine War."
+    },
+    {
+      "file_name": "russia_losses_personnel.csv",
+      "description": "Data on the personnel losses of Russian forces during the Ukraine War."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_equipment",
+      "description": "DataFrame containing the Russian equipment losses over time."
+    },
+    {
+      "name": "df_personnel",
+      "description": "DataFrame containing the Russian personnel losses over time."
+    },
+    {
+      "name": "column_equipment",
+      "description": "The column name for the type of equipment to visualize (e.g., drones)."
+    },
+    {
+      "name": "column_date",
+      "description": "The column name representing the date in DataFrames."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_equipment",
+      "creation_method": "pd.read_csv",
+      "flow": "Cleaned and prepared for plotting."
+    },
+    {
+      "variable": "df_personnel",
+      "creation_method": "pd.read_csv",
+      "flow": "Cleaned and prepared for plotting."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,90 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Melbourne_housing_extra_data.csv",
+      "description": "Contains data about Melbourne housing including features like price, type, date, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataframe",
+      "description": "DataFrame containing all the housing data loaded from CSV"
+    },
+    {
+      "name": "X",
+      "description": "Input features for the model after feature selection and preprocessing"
+    },
+    {
+      "name": "y",
+      "description": "Target variable, housing prices to be predicted"
+    },
+    {
+      "name": "X_train",
+      "description": "Training set of input features"
+    },
+    {
+      "name": "X_test",
+      "description": "Test set of input features"
+    },
+    {
+      "name": "y_train",
+      "description": "Training set of target values"
+    },
+    {
+      "name": "y_test",
+      "description": "Test set of target values"
+    },
+    {
+      "name": "lm",
+      "description": "Linear regression model instance"
+    },
+    {
+      "name": "predictions",
+      "description": "Predicted values for the test set"
+    },
+    {
+      "name": "coeff_df",
+      "description": "DataFrame containing coefficients of the linear regression model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataframe",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting, feature generation, and model training"
+    },
+    {
+      "variable": "X",
+      "creation_method": "Feature selection and preprocessing",
+      "flow": "Used as the input features in train_test_split, then passed to the model for training"
+    },
+    {
+      "variable": "y",
+      "creation_method": "dataframe_dr['Price']",
+      "flow": "Used as the target variable in train_test_split and model training"
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "flow": "Used in model fitting"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flow": "Used in model fitting"
+    },
+    {
+      "variable": "predictions",
+      "creation_method": "lm.predict",
+      "flow": "Compared against y_test for performance metrics"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "LinearRegression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "None specfied or default settings"
+    }
+  ]
+}

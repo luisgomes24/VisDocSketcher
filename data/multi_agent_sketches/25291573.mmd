@@ -1,0 +1,43 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffccaa'}}}%%
+flowchart TD
+    subgraph DataSources
+        direction TB
+        ds1["russia_losses_equipment.csv"]
+        ds2["russia_losses_personnel.csv"]
+    end
+
+    subgraph DataVariables
+        direction TB
+        dv1["russian_equipment"]
+        dv2["russian_personnel"]
+        dv3["russian_personnel_copy"]
+        dv4["imputed_data"]
+    end
+
+    subgraph Processing
+        direction TB
+        p1["Read CSV: russia_losses_equipment.csv"]
+        p2["Read CSV: russia_losses_personnel.csv"]
+        p3["Drop 'date' column"]
+        p4["Fill NaN with mean"]
+        p5["Replace NaN with zero"]
+    end
+
+    subgraph Visualizations
+        direction TB
+        v1["Plot: Equipment Losses"]
+        v2["Plot: Personnel Losses"]
+    end
+
+    %% Data Source to Variable Connections
+    ds1 -->|"Read into"| p1 -->|"Create"| dv1
+    ds2 -->|"Read into"| p2 -->|"Create"| dv2
+
+    %% Data Processing
+    dv2 -->|"Copy and Drop 'date' column"| p3 -->|"Create"| dv3
+    dv3 -->|"Fill NaN with mean"| p4 -->|"Results"| dv4
+    dv4 -->|"Replace NaN with zero"| p5 -->|"Updated"| dv3
+
+    %% Data Visualization
+    dv1 -->|"Use for plotting"| v1
+    dv3 -->|"Use for plotting"| v2

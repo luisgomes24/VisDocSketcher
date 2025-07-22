@@ -1,0 +1,91 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and target variable (Attrition)"
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Testing dataset for making predictions (not used directly in training)"
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Example submission format (not used in modeling)"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data"
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test data"
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame for the submission format"
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable series (Attrition) extracted from the training data"
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature DataFrame containing Age, DistanceFromHome, and TotalWorkingYears"
+    },
+    {
+      "variable_name": "lr",
+      "description": "Logistic Regression model instance trained on features and target"
+    },
+    {
+      "variable_name": "y_train_predictions",
+      "description": "Predicted values of Attrition for the training data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create y and X, and to get predictions"
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.read_csv",
+      "flow": "Not used in model training; located in the directory"
+    },
+    {
+      "variable_name": "submission",
+      "creation_method": "pd.read_csv",
+      "flow": "Not used in model training; located in the directory"
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "train['Attrition']",
+      "flow": "Used as target variable for training the model"
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "train[['Age', 'DistanceFromHome', 'TotalWorkingYears']]",
+      "flow": "Used as features for training the model"
+    },
+    {
+      "variable_name": "lr",
+      "creation_method": "LogisticRegression",
+      "flow": "Trained with X and y; used to generate predictions"
+    },
+    {
+      "variable_name": "y_train_predictions",
+      "creation_method": "lr.predict(X)",
+      "flow": "Generated predictions that are added to the train DataFrame and exported"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LogisticRegression",
+      "input_features": ["Age", "DistanceFromHome", "TotalWorkingYears"],
+      "target_variable": "Attrition",
+      "hyperparameters": {"class_weight": "balanced"}
+    }
+  ]
+}

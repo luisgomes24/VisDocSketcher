@@ -1,0 +1,136 @@
+{
+    "data_sources": [
+        {
+            "file": "/kaggle/input/heart-attack-analysis-prediction-dataset/heart.csv",
+            "description": "A dataset containing various attributes related to heart health and a target variable indicating the presence of heart disease."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "DataFrame containing the heart dataset."
+        },
+        {
+            "name": "x",
+            "description": "Feature set extracted from the dataset (first 13 columns)."
+        },
+        {
+            "name": "y",
+            "description": "Target variable indicating the presence of heart disease (last column)."
+        },
+        {
+            "name": "x_train",
+            "description": "Training set features."
+        },
+        {
+            "name": "x_test",
+            "description": "Test set features."
+        },
+        {
+            "name": "y_train",
+            "description": "Training set target variable."
+        },
+        {
+            "name": "y_test",
+            "description": "Test set target variable."
+        },
+        {
+            "name": "model_lr",
+            "description": "Logistic Regression model."
+        },
+        {
+            "name": "model_dt",
+            "description": "Decision Tree Classifier model."
+        },
+        {
+            "name": "model_rf",
+            "description": "Random Forest Classifier model."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "Read from CSV file.",
+            "flow": "Used to create variables x and y; visualizations; and the train-test split."
+        },
+        {
+            "variable": "x",
+            "creation": "Extracted from df using DataFrame indexing.",
+            "flow": "Used as input for model training."
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted from df using DataFrame indexing.",
+            "flow": "Used as target for model training."
+        },
+        {
+            "variable": "x_train",
+            "creation": "Created by train_test_split function.",
+            "flow": "Used to train models."
+        },
+        {
+            "variable": "x_test",
+            "creation": "Created by train_test_split function.",
+            "flow": "Used to evaluate model predictions."
+        },
+        {
+            "variable": "y_train",
+            "creation": "Created by train_test_split function.",
+            "flow": "Used to train models."
+        },
+        {
+            "variable": "y_test",
+            "creation": "Created by train_test_split function.",
+            "flow": "Used to evaluate model predictions."
+        },
+        {
+            "variable": "y_pred_lr",
+            "creation": "Predicted using model_lr.",
+            "flow": "Evaluated using the perform function."
+        },
+        {
+            "variable": "y_pred_dt",
+            "creation": "Predicted using model_dt.",
+            "flow": "Evaluated using the perform function."
+        },
+        {
+            "variable": "y_pred_rf",
+            "creation": "Predicted using model_rf.",
+            "flow": "Evaluated using the perform function."
+        },
+        {
+            "variable": "model_dt",
+            "creation": "Instantiated as a DecisionTreeClassifier.",
+            "flow": "Trained on x_train and y_train; saved as a pickle file."
+        },
+        {
+            "variable": "model_rf",
+            "creation": "Instantiated as a RandomForestClassifier.",
+            "flow": "Trained on x_train and y_train."
+        }
+    ],
+    "models": [
+        {
+            "name": "Logistic Regression",
+            "input_features": "x_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "name": "Decision Tree",
+            "input_features": "x_train",
+            "target_variable": "y_train",
+            "hyperparameters": {}
+        },
+        {
+            "name": "Random Forest",
+            "input_features": "x_train",
+            "target_variable": "y_train",
+            "hyperparameters": {
+                "n_estimators": 10,
+                "criterion": "entropy",
+                "random_state": 0
+            }
+        }
+    ]
+}

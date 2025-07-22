@@ -1,0 +1,47 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Supermart Grocery Sales - Retail Analytics Dataset.csv",
+      "description": "This CSV file contains sales data for Supermart Grocery, including information on sales, profits, discounts, categories, and regions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame that contains the sales dataset."
+    },
+    {
+      "variable_name": "sale_profit",
+      "description": "DataFrame containing the profit and sales aggregated by category and sub-category."
+    },
+    {
+      "variable_name": "year_sale",
+      "description": "DataFrame containing yearly aggregated sales and profit data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_from": "Read from CSV using pd.read_csv.",
+      "flows_to": [
+        "Data cleaning to drop any entry with 'North' region.",
+        "Used for visualizations (Sales by the Regions, Categories, Sub Categories)."
+      ]
+    },
+    {
+      "variable": "sale_profit",
+      "created_from": "Pivot table from df to aggregate sales and profit by sub-category.",
+      "flows_to": [
+        "Used for visualizations (Sales by Product Sub Categories)."
+      ]
+    },
+    {
+      "variable": "year_sale",
+      "created_from": "Pivot table from df to aggregate sales, profit, and order counts by year.",
+      "flows_to": [
+        "Used for visualizations (Sales by the Year and Sales by the Months)."
+      ]
+    }
+  ],
+  "models": []
+}

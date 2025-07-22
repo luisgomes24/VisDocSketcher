@@ -1,0 +1,66 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/spacenet-7-change-detection-chips-and-masks/annotations.csv",
+            "description": "CSV containing satellite image annotations including mask paths and indicators of whether the images are blank."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "Pandas DataFrame containing the annotations data read from the CSV file."
+        },
+        {
+            "variable_name": "blank_mask_path",
+            "description": "Path to an example of a blank mask image."
+        },
+        {
+            "variable_name": "non_blank_mask_path",
+            "description": "Path to an example of a non-blank mask image."
+        },
+        {
+            "variable_name": "n_change_pix",
+            "description": "New column in the DataFrame that stores the number of activated pixels from the mask images."
+        },
+        {
+            "variable_name": "period_1",
+            "description": "Column in the DataFrame representing the time period for the first image capture."
+        },
+        {
+            "variable_name": "period_2",
+            "description": "Column in the DataFrame representing the time period for the second image capture."
+        },
+        {
+            "variable_name": "month_diff",
+            "description": "Column in the DataFrame representing the number of months apart between two image captures."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "pd.read_csv(annotations_path)",
+            "flow": "Used for calculations to determine activated pixels and to create new columns."
+        },
+        {
+            "variable": "n_change_pix",
+            "creation": "df['n_change_pix'] = parallelize_on_rows(df['mask_path'], get_number_of_activated_pixels)",
+            "flow": "Stored in DataFrame as a new column for further analysis."
+        },
+        {
+            "variable": "period_1",
+            "creation": "df['period_1'] = df.progress_apply(lambda x: pd.Period(year=x['year1'],month=x['month1'],freq='M'),axis=1)",
+            "flow": "Used for calculating time-based statistics."
+        },
+        {
+            "variable": "period_2",
+            "creation": "df['period_2'] = df.progress_apply(lambda x: pd.Period(year=x['year2'],month=x['month2'],freq='M'),axis=1)",
+            "flow": "Used for calculating time-based statistics."
+        },
+        {
+            "variable": "month_diff",
+            "creation": "df['month_diff'] = df.progress_apply(lambda x: abs((x['period_1']-x['period_2']).n), axis=1)",
+            "flow": "Stored in DataFrame for further analysis."
+        }
+    ],
+    "models": []
+}

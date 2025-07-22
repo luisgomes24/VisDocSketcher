@@ -1,0 +1,15 @@
+%% This Mermaid diagram visualizes the data flow in the analyzed Jupyter Notebook
+flowchart TD
+    %% Represent the number to be rounded
+    num["num"] -->|Input to| round_to_two_places["round_to_two_places Function"]
+    round_to_two_places -->|Output: Rounded Value| num_output["Rounded num"]
+    
+    %% Represent the candy distribution
+    total_candies["total_candies"] -->|Input to| to_smash["to_smash Function"]
+    no_frnds["no_frnds"] -->|Default: 3, Input to| to_smash
+    to_smash -->|Output: Leftover Candies| candies_leftover["Leftover candies (smashed)"]
+    
+    %% Represent calculation of smallest absolute value
+    x["x (-10)"] -->|Used in| smallest_abs["smallest_abs Calculation"]
+    y["y (5)"] -->|Used in| smallest_abs
+    smallest_abs -->|Output: Minimum| min_output["Smallest Absolute Value"]

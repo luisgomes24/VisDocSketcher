@@ -1,0 +1,64 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and a result (Class/ASD) for predicting autism."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Testing dataset containing the same features as the training dataset, used to validate the model." 
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission format for predictions with a placeholder for the target variable (Class/ASD)."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing training data with features and a result for classification."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing testing data with features."
+    },
+    {
+      "variable_name": "predictions",
+      "description": "DataFrame containing the predictions made by the model on the test data."
+    },
+    {
+      "variable_name": "sol",
+      "description": "DataFrame to prepare the final submission including model predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv",
+      "flows_to": ["setup", "plot_model", "predictions"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv",
+      "flows_to": ["predict_model"]
+    },
+    {
+      "variable": "predictions",
+      "created_by": "predict_model",
+      "flows_to": ["sol"]
+    },
+    {
+      "variable": "sol",
+      "created_by": "pd.read_csv",
+      "flows_to": ["sol.to_csv"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Extra Trees Classifier (et)",
+      "input_features": "Features from the train DataFrame, excluding target variable Class/ASD.",
+      "target_variable": "Class/ASD",
+      "hyperparameters": "N/A" 
+    }
+  ]
+}

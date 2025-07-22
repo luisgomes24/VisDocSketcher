@@ -1,0 +1,111 @@
+{
+  "data_sources": [
+    {
+      "file": "url1-combined.txt",
+      "description": "Text data scraped from the first URL of Amazon search for Skin care : Face : Creams & Moisturizers : Night Creams."
+    },
+    {
+      "file": "url2-combined.txt",
+      "description": "Text data scraped from the second URL of Amazon search for Skin care : Face : Creams & Moisturizers : Night Creams."
+    },
+    {
+      "file": "url3-combined.txt",
+      "description": "Text data scraped from the third URL of Amazon search for Beauty & Personal Care : Skin Care : Eyes : Serums."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "stop_words",
+      "description": "List of stop words used to filter out common words that do not add value to analysis."
+    },
+    {
+      "variable": "url1_unigrams",
+      "description": "List of unigrams (individual words) processed from text of the first URL."
+    },
+    {
+      "variable": "url2_unigrams",
+      "description": "List of unigrams (individual words) processed from text of the second URL."
+    },
+    {
+      "variable": "url3_unigrams",
+      "description": "List of unigrams (individual words) processed from text of the third URL."
+    },
+    {
+      "variable": "url1_bigrams",
+      "description": "Dictionary storing bigrams (two-word combinations) and their frequency from the first URL."
+    },
+    {
+      "variable": "url2_bigrams",
+      "description": "Dictionary storing bigrams (two-word combinations) and their frequency from the second URL."
+    },
+    {
+      "variable": "url3_bigrams",
+      "description": "Dictionary storing bigrams (two-word combinations) and their frequency from the third URL."
+    },
+    {
+      "variable": "df_url1",
+      "description": "DataFrame containing the top 20 bigrams from the first URL."
+    },
+    {
+      "variable": "df_url2",
+      "description": "DataFrame containing the top 20 bigrams from the second URL."
+    },
+    {
+      "variable": "df_url3",
+      "description": "DataFrame containing the top 20 bigrams from the third URL."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "stop_words",
+      "creation": "prepare_stop_words()",
+      "flow": "Used to filter stop words from the input text."
+    },
+    {
+      "variable": "url1_unigrams",
+      "creation": "process_text('../input/text-scrapped-from-amazon-search-pages/url1-combined.txt')",
+      "flow": "Used to create bigram list and visualize results."
+    },
+    {
+      "variable": "url2_unigrams",
+      "creation": "process_text('../input/text-scrapped-from-amazon-search-pages/url2-combined.txt')",
+      "flow": "Used to create bigram list and visualize results."
+    },
+    {
+      "variable": "url3_unigrams",
+      "creation": "process_text('../input/text-scrapped-from-amazon-search-pages/url3-combined.txt')",
+      "flow": "Used to create bigram list and visualize results."
+    },
+    {
+      "variable": "url1_bigrams",
+      "creation": "create_bigram_scored_list(url1_unigrams)",
+      "flow": "Used to visualize bigrams from URL 1."
+    },
+    {
+      "variable": "url2_bigrams",
+      "creation": "create_bigram_scored_list(url2_unigrams)",
+      "flow": "Used to visualize bigrams from URL 2."
+    },
+    {
+      "variable": "url3_bigrams",
+      "creation": "create_bigram_scored_list(url3_unigrams)",
+      "flow": "Used to visualize bigrams from URL 3."
+    },
+    {
+      "variable": "df_url1",
+      "creation": "create_top_n_dataframe(url1_bigrams)",
+      "flow": "Used to generate bar plot and display top 20 words for URL 1."
+    },
+    {
+      "variable": "df_url2",
+      "creation": "create_top_n_dataframe(url2_bigrams)",
+      "flow": "Used to generate bar plot and display top 20 words for URL 2."
+    },
+    {
+      "variable": "df_url3",
+      "creation": "create_top_n_dataframe(url3_bigrams)",
+      "flow": "Used to generate bar plot and display top 20 words for URL 3."
+    }
+  ],
+  "models": []
+}

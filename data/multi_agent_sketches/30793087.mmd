@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv] --> |Read into DataFrame| B[datasetObject]
+    A --> |Generate labels| E[healthy_csv]
+    A --> |Generate labels| F[multiple_diseases_csv]
+    A --> |Generate labels| G[rust_csv]
+    A --> |Generate labels| H[scab_csv]
+    I[images] --> |Load and preprocess| J[images]
+
+    %% Data Preparation
+    B --> |Extract IDs| C[images_id_csv]
+    B --> |Prepare labels| D[labels]
+
+    %% Image and Label Preprocessing
+    J --> |Resize and normalize| K[images]
+    D --> L[labels]
+
+    %% Train Test Split
+    K --> |Split into train/test| M[x_train]
+    K --> |Split into train/test| N[x_test]
+    L --> |Split into train/test| O[y_train]
+    L --> |Split into train/test| P[y_test]
+
+    %% Model Training
+    M --> |Train DenseNet CNN| Q[DenseNet CNN]
+    O --> Q
+    Q -.-> |Outputs features| R[Scaled CNN features]
+
+    %% Classifiers
+    R --> |Train and Evaluate| S[XGBClassifier]
+    R --> |Train and Evaluate| T[RandomForestClassifier]
+    R --> |Train and Evaluate| U[SVM]

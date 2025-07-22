@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/valid/*.jpg",
+      "description": "Training images used for detecting circles"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "training_images",
+      "description": "List of image file paths found in the input directory"
+    },
+    {
+      "variable_name": "original_image",
+      "description": "The image loaded in grayscale format"
+    },
+    {
+      "variable_name": "image",
+      "description": "The image rescaled to a specific height for processing"
+    },
+    {
+      "variable_name": "edges",
+      "description": "Binary edge map obtained using Canny edge detection"
+    },
+    {
+      "variable_name": "fill",
+      "description": "Binary image obtained by filling holes in the edges"
+    },
+    {
+      "variable_name": "hough_radii",
+      "description": "Array of radii (50-150) to be used for Hough Circle Transform"
+    },
+    {
+      "variable_name": "hough_res",
+      "description": "The result of the Hough Circle Transform"
+    },
+    {
+      "variable_name": "centers",
+      "description": "List of detected circle centers"
+    },
+    {
+      "variable_name": "accums",
+      "description": "Accumulator values from Hough Transform for circle detection"
+    },
+    {
+      "variable_name": "radii",
+      "description": "List of corresponding radii for the detected circles"
+    },
+    {
+      "variable_name": "circles",
+      "description": "Final list of circles detected in the image"
+    },
+    {
+      "variable_name": "circle_img",
+      "description": "Segment of the original image showing a detected circle"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "training_images",
+      "creation_method": "glob",
+      "flows_to": "Input for looping through images"
+    },
+    {
+      "variable_name": "original_image",
+      "creation_method": "imread",
+      "flows_to": "Used for processing to find edges, circles"
+    },
+    {
+      "variable_name": "image",
+      "creation_method": "rescale",
+      "flows_to": "Input for edge detection"
+    },
+    {
+      "variable_name": "edges",
+      "creation_method": "canny and convolve",
+      "flows_to": "Used for Hough Circle Detection"
+    },
+    {
+      "variable_name": "fill",
+      "creation_method": "ndi.binary_fill_holes",
+      "flows_to": "Input for another Canny edge detection"
+    },
+    {
+      "variable_name": "hough_res",
+      "creation_method": "hough_circle",
+      "flows_to": "Used to find peaks for circle centers"
+    },
+    {
+      "variable_name": "centers",
+      "creation_method": "peak_local_max",
+      "flows_to": "Used to create final circle list"
+    },
+    {
+      "variable_name": "circles",
+      "creation_method": "appending from sorted accum values",
+      "flows_to": "Creates final detected circle images"
+    },
+    {
+      "variable_name": "circle_img",
+      "creation_method": "slicing original_image",
+      "flows_to": "Saved as image file with detected circles"
+    }
+  ],
+  "models": []
+}

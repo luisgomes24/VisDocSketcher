@@ -1,0 +1,80 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/house-prices-advanced-regression-techniques/train.csv",
+            "description": "Training dataset containing house prices and associated features."
+        },
+        {
+            "file": "../input/house-prices-advanced-regression-techniques/test.csv",
+            "description": "Test dataset containing features of houses to predict their prices."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "train_house",
+            "description": "DataFrame containing training data from the house prices dataset."
+        },
+        {
+            "variable": "test_house",
+            "description": "DataFrame containing testing data from the house prices dataset."
+        },
+        {
+            "variable": "regression_setup",
+            "description": "Setup configuration for the regression model which includes preprocessing steps and setup parameters."
+        },
+        {
+            "variable": "lgbm",
+            "description": "LightGBM regression model created from the setup."
+        },
+        {
+            "variable": "lgbm_holdout_pred",
+            "description": "Predictions made on the holdout set using the trained LightGBM model."
+        },
+        {
+            "variable": "house_prediction",
+            "description": "Predictions from the LightGBM model on the test dataset."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train_house",
+            "creation": "pd.read_csv('../input/house-prices-advanced-regression-techniques/train.csv')",
+            "flow": "Used for regression setup and training the model."
+        },
+        {
+            "variable": "test_house",
+            "creation": "pd.read_csv('../input/house-prices-advanced-regression-techniques/test.csv')",
+            "flow": "Used to make predictions after training the model."
+        },
+        {
+            "variable": "regression_setup",
+            "creation": "setup(...) method",
+            "flow": "Produces preprocessed data for modeling and configures the regression environment."
+        },
+        {
+            "variable": "lgbm",
+            "creation": "create_model(estimator='lightgbm', fold=5)",
+            "flow": "Trains the LightGBM model."
+        },
+        {
+            "variable": "lgbm_holdout_pred",
+            "creation": "predict_model(lgbm)",
+            "flow": "Stores predictions on holdout data for evaluation."
+        },
+        {
+            "variable": "house_prediction",
+            "creation": "predict_model(lgbm, data=test_house)",
+            "flow": "Generates predictions for test data and exports to CSV."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "LightGBM",
+            "input_features": "All features except for 'Id',",
+            "target_variable": "SalePrice",
+            "hyperparameters": {
+                "fold": 5
+            }
+        }
+    ]
+}

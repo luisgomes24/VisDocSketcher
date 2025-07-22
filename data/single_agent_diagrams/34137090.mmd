@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Data Loading <img src='file.svg'/> <br/> Read CSV"] --> B["📈 EDA <img src='heatmap_template.svg'/> <br/> Null Heatmap"]
+    B --> C["🔍 Basic Stats <img src='table.svg'/> <br/> Describe & Info"]
+    C --> D["🧹 Data Preprocessing Pipeline <img src='column_split.svg'/> <br/> One-Hot Encoding & Scaling"]
+    D --> E["🔀 Train-Test Split <img src='row_split.svg'/> <br/> Split Data into Train and Test Sets"]
+    E --> F["🧠 Model Training <img src='brain.svg'/> <br/> Fit Models"]
+    F --> G["🧪 Model Testing <img src='brain.svg'/> <br/> Predictions"]
+    G --> H["📊 Model Evaluation <img src='barplot_template.svg'/> <br/> Confusion Matrix"]
+    H --> I["📊 Results Visualization <img src='barplot_template.svg'/> <br/> Model Performance Scores"]

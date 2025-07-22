@@ -1,0 +1,67 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/rapido-rides/ct_rr.csv",
+            "description": "CSV file containing ride data including timestamps, pick-up and drop locations, and customer information."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "input_data",
+            "description": "Initial DataFrame containing raw ride data."
+        },
+        {
+            "name": "data",
+            "description": "Processed DataFrame after cleaning and feature engineering."
+        },
+        {
+            "name": "distance",
+            "description": "Calculated distance for each ride based on pick-up and drop-off latitude and longitude."
+        },
+        {
+            "name": "ride_minutes",
+            "description": "Estimated ride time in minutes based on distance and average speed."
+        },
+        {
+            "name": "new_month",
+            "description": "Extended month variable to account for overlapping data across years."
+        },
+        {
+            "name": "ride_price",
+            "description": "Calculated price of the ride based on distance and surge pricing."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "input_data",
+            "creation": "pd.read_csv",
+            "flow": "Cleaned and processed to create the 'data' DataFrame."
+        },
+        {
+            "variable": "data",
+            "creation": "Derived from input_data after cleaning and feature engineering.",
+            "flow": "Used for further analysis and final saved for model training."
+        },
+        {
+            "variable": "distance",
+            "creation": "Calculated using a custom function based on latitude/longitude.",
+            "flow": "Used in further analysis and contributes to ride_minutes and ride_price."
+        },
+        {
+            "variable": "ride_minutes",
+            "creation": "Calculated based on distance and average speed.",
+            "flow": "Used in cleaning data and final pricing models."
+        },
+        {
+            "variable": "new_month",
+            "creation": "Derived variable created during feature engineering.",
+            "flow": "Used to analyze ride trends across months."
+        },
+        {
+            "variable": "ride_price",
+            "creation": "Calculated based on distance and surge pricing method.",
+            "flow": "Final attribute for ride cost estimation in analytical models."
+        }
+    ],
+    "models": []
+}

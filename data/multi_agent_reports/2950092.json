@@ -1,0 +1,80 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/microsoft-malware-prediction/train.csv",
+      "description": "Training dataset containing features and target variable 'HasDetections'."
+    },
+    {
+      "file": "../input/microsoft-malware-prediction/test.csv",
+      "description": "Test dataset for making predictions."
+    },
+    {
+      "file": "../input/malware-timestamps/AvSigVersionTimestamps.npy",
+      "description": "Timestamping data for versions to use temporal features."
+    },
+    {
+      "file": "../input/microsoft-malware-prediction/sample_submission.csv",
+      "description": "Sample submission file format for competition submission."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training data with 82 categorical variables and target variable 'HasDetections'."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the test data, targeted for prediction."
+    },
+    {
+      "name": "AvSigVersion",
+      "description": "Version control feature in categorical form, important for time-based splitting."
+    },
+    {
+      "name": "CountryIdentifier",
+      "description": "Categorical feature used to demonstrate distribution comparisons between TRAIN and TEST."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in EDA plots, train-test validation comparisons, model training"]
+    },
+    {
+      "variable": "df_test",
+      "creation_method": "pd.read_csv",
+      "flow": ["used in EDA plots, predictions"]
+    },
+    {
+      "variable": "comparePlot",
+      "creation_method": "Defined function for density comparison",
+      "flow": ["used to analyze distributions of TRAIN and TEST datasets"]
+    }
+  ],
+  "models": [
+    {
+      "name": "LightGBM Classifier",
+      "features": "All categorical features from train set after processing.",
+      "target": "HasDetections",
+      "hyperparameters": {
+        "n_estimators": 3000,
+        "colsample_bytree": 0.2,
+        "objective": "binary",
+        "num_leaves": 16,
+        "max_depth": -1,
+        "learning_rate": 0.1
+      },
+      "training_type": "Random Validation, Time Split"
+    },
+    {
+      "name": "Decision Tree Classifier",
+      "features": "Combined features of TRAIN and TEST datasets.",
+      "target": "HasDetections",
+      "hyperparameters": {
+        "max_leaf_nodes": 5
+      },
+      "training_type": "Adversarial Validation"
+    }
+  ]
+}

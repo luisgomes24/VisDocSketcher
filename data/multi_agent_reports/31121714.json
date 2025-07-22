@@ -1,0 +1,134 @@
+{
+    "data_sources": [
+        {
+            "file_name": "alpha_fold_df.csv",
+            "description": "Contains AlphaFold predictions for wildtypes in train data with several predictions for each wildtype."
+        },
+        {
+            "file_name": "train_wildtype_groups.csv",
+            "description": "Contains mutation information for wildtypes."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "alpha_fold_df",
+            "description": "DataFrame that holds AlphaFold prediction results."
+        },
+        {
+            "name": "wildtypes",
+            "description": "List of unique wildtype sequences extracted from alpha_fold_df."
+        },
+        {
+            "name": "wildtype",
+            "description": "Selected wildtype sequence to explore."
+        },
+        {
+            "name": "AF_keys",
+            "description": "Series of AF ids corresponding to predictions for the selected wildtype."
+        },
+        {
+            "name": "confidense_df",
+            "description": "DataFrame containing confidence scores for the selected wildtype AF id."
+        },
+        {
+            "name": "confidense_df_list",
+            "description": "List of DataFrames containing confidence scores for all matches to the selected wildtype."
+        },
+        {
+            "name": "min_score",
+            "description": "List holding the minimum confidence score across all matches at each point."
+        },
+        {
+            "name": "max_score",
+            "description": "List holding the maximum confidence score across all matches at each point."
+        },
+        {
+            "name": "cif_path_list",
+            "description": "List of paths to cif files corresponding to the selected wildtype AF keys."
+        },
+        {
+            "name": "atom_df_list",
+            "description": "List of DataFrames holding atom information from the cif files."
+        },
+        {
+            "name": "wildtype_set",
+            "description": "Set containing unique residues from all matches to ensure consistency."
+        },
+        {
+            "name": "train_wildtype_groups",
+            "description": "DataFrame containing all train wildtype groups and their corresponding mutations."
+        },
+        {
+            "name": "mutations",
+            "description": "Filtered DataFrame holding mutations related to the currently selected wildtype."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "alpha_fold_df",
+            "creation": "pd.read_csv",
+            "usage": "Used to define wildtypes and explore predictions."
+        },
+        {
+            "variable": "wildtypes",
+            "creation": "list(alpha_fold_df[\"af2_sequence\"].drop_duplicates())",
+            "usage": "Used to get the unique wildtype sequence for exploration."
+        },
+        {
+            "variable": "wildtype",
+            "creation": "wildtypes[0]",
+            "usage": "Sets the current wildtype for further analysis."
+        },
+        {
+            "variable": "AF_keys",
+            "creation": "alpha_fold_df.loc[alpha_fold_df[\"af2_sequence\"] == wildtype][\"af2id\"]",
+            "usage": "Holds the AF keys for the current wildtype prediction to fetch confidence scores."
+        },
+        {
+            "variable": "confidense_df",
+            "creation": "pd.read_json",
+            "usage": "Holds confidence scores for the first AF key; plotted to analyze confidence trends."
+        },
+        {
+            "variable": "confidense_df_list",
+            "creation": "list of pd.read_json",
+            "usage": "Used for plotting confidence scores for all AF keys related to selected wildtype."
+        },
+        {
+            "variable": "min_score",
+            "creation": "list(confidense_df_list[0][\"confidenceScore\"])",
+            "usage": "Used to find min confidence scores across all predictions."
+        },
+        {
+            "variable": "max_score",
+            "creation": "list(confidense_df_list[0][\"confidenceScore\"])",
+            "usage": "Used to find max confidence scores across all predictions."
+        },
+        {
+            "variable": "cif_path_list",
+            "creation": "list of paths based on AF_keys",
+            "usage": "Used to read and analyze cif files corresponding to AF keys."
+        },
+        {
+            "variable": "atom_df_list",
+            "creation": "list of PandasMmcif read",
+            "usage": "Contains atom data used to ensure consistency of residues across predictions."
+        },
+        {
+            "variable": "wildtype_set",
+            "creation": "set built from atom_df_list",
+            "usage": "Verifies that all matches have consistent residues."
+        },
+        {
+            "variable": "train_wildtype_groups",
+            "creation": "pd.read_csv",
+            "usage": "Contains wildtype mutation data for analysis."
+        },
+        {
+            "variable": "mutations",
+            "creation": "train_wildtype_groups.loc[train_wildtype_groups[\"wildtype\"] == wildtype]",
+            "usage": "Holds mutations specific to the current wildtype."
+        }
+    ],
+    "models": []
+}

@@ -1,0 +1,41 @@
+flowchart TD
+
+    %% Data Source Nodes
+    subgraph Data_Sources
+        A1["<img src='path/to/file.svg' width=100 height=100/> <br/> spam.csv"] 
+    end
+
+    %% Data Processing and Transformation Nodes
+    subgraph Data_Processing [Data Processing]
+        B1["<img src='path/to/table.svg' width=100 height=100/> <br/> data\nDataFrame of SMS text and labels"] 
+        B2["<img src='path/to/brain.svg' width=100 height=100/> <br/> sentiment\nSentiment analysis using TextBlob"]
+        B3["<img src='path/to/column_split.svg' width=100 height=100/> <br/> vec\nTfidfVectorizer for text vectorization"]
+        B4["<img src='path/to/column_split.svg' width=100 height=100/> <br/> X_train\nTraining feature set"]
+        B5["<img src='path/to/column_split.svg' width=100 height=100/> <br/> X_test\nTesting feature set"]
+        B6["<img src='path/to/column_split.svg' width=100 height=100/> <br/> Y_train\nEncoded class labels for training"]
+        B7["<img src='path/to/column_split.svg' width=100 height=100/> <br/> Y_test\nEncoded class labels for testing"]
+    end
+
+    %% Model Nodes
+    subgraph Models
+        C1["<img src='path/to/brain.svg' width=100 height=100/> <br/> RandomForestClassifier\nTrained classifier model"]
+    end
+
+    %% Data Source to Data Processing
+    A1 -->|"read_csv"| B1
+
+    %% Data Processing Flow
+    B1 -->|"Cleaning & Exploration"| B2
+    B1 -->|"Vectorization with vec"| B4 & B5
+    B2 -->|"Add Sentiment"| B1
+
+    %% Splitting Data
+    B1 -->|"train_test_split"| B4 & B5
+    B1 -->|"train_test_split"| B6 & B7
+
+    %% Data Processing to Models
+    B4 -->|"Train Model"| C1
+    B6 -->|"Train Model"| C1
+
+    %% Model Evaluation
+    C1 -->|"Test with X_test & Y_test"| C1

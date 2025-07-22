@@ -1,0 +1,21 @@
+```mermaid
+flowchart TD
+    A["train.csv"] -->|Load data using pandas| B["train_data"]
+    C["test.csv"] -->|Load data using pandas| D["test_data"]
+    B -->|Generate images| E["train images"]
+    D -->|Generate images| F["test images"]
+    E -->|Create ImageDataLoaders| G["data"]
+    G -->|Train model with ResNet50| H["Model Training"]
+    F -->|List JPG files| I["test_files"]
+    I -->|Create DataLoader| J["test_dl"]
+    J -->|Get predictions from model| K["predictions"]
+    K -->|Create submission DataFrame| L["submission.csv"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:1px;
+    classDef process fill:#bbf,stroke:#999,stroke-width:1px;
+
+    class A,C dataSource;
+    class B,D,E,F,G,I,J,K,L dataVariable;
+    class H process;
+```

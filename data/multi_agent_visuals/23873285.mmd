@@ -1,0 +1,21 @@
+%% Mermaid Diagram for Telco Customer Churn Analysis Workflow
+%% This diagram shows the data flow and model processing steps
+
+flowchart TD
+    %% Node for CSV data source
+    A["CSV: Telco Customer Churn Data"] -->|Read via pd.read_csv| B["DataFrame: df"]
+    
+    %% Nodes for data transformation
+    B -->|Transform| C["Variable: new_totalcharges"]
+    B -->|Transform| D["Variable: Transection"]
+    
+    %% Data processing and transformation
+    C -->|Compare| B
+    D -->|Use for CLTV Calculation| E["DataFrame: final_df"]
+    
+    %% Node for ML model
+    E -->|Segment based on CLTV| F["Model: Customer Lifetime Value Calculation"]
+
+    
+    %% Detail specific model
+    F -->|Outputs Segments: D, C, B, A with Hyperparameters: Profit Margin 0.1, Scaler Range 0 to 1| G[end] 

@@ -1,0 +1,11 @@
+flowchart TD
+    %% Define Nodes
+    A[Excel File: Biotech Stocks] %% Represents the source Excel file containing biotech stock tickers on NASDAQ
+    B[biotech_tickers_nasdaq] %% List of biotech stock tickers extracted from the Excel file.
+    C[historical_data] %% Historical stock price data for each biotech ticker.
+    D[correlation_list] %% List of correlated stock pairs based on correlation analysis.
+    
+    %% Define Data Flow
+    A -->|pd.read_excel| B %% Extracting stock tickers from Excel to create biotech_tickers_nasdaq variable.
+    B -->|Retrieve Historical Data| C %% Using tickers to fetch historical stock prices.
+    C -->|Correlation Analysis| D %% Performing correlation analysis to determine correlated stock pairs.

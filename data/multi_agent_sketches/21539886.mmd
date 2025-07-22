@@ -1,0 +1,15 @@
+flowchart TD
+    %% Load Iris Dataset
+    A["Iris Dataset"] -- Load Data --> B["iris"]
+    
+    %% Create Logistic Regression Model
+    B -- Data & Target Variable --> C["Logistic Regression Model\n(max_iter=1000)"]
+    
+    %% Perform Leave-One-Out Cross-validation
+    C -- Model Instance --> D["Leave-One-Out Cross-validation"]
+    
+    %% Evaluate with Cross-validation
+    D -- Cross-Validated Scores --> E["Scores"]
+    
+    %% Output Scores
+    E -- Display Output --> F(("Output: Model Performance Scores"))

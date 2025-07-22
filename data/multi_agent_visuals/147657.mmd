@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes representing data sources
+    A[/"mort.csv"/]<br/><img src='icons/file.svg' width=100 height=100/>:::dataSource
+    %% Nodes representing data variables
+    B[>mortality<]<br/><img src='icons/column_split.svg' width=100 height=100/>:::dataVar
+    C[>mortality_drop<]<br/><img src='icons/row_split.svg' width=100 height=100/>:::dataVar
+    D[>mortality_state_overall<]<br/><img src='icons/column_split.svg' width=100 height=100/>:::dataVar
+    E[>mort_st_cat_yr<]<br/><img src='icons/column_split.svg' width=100 height=100/>:::dataVar
+    F[>mort_neonat<]<br/><img src='icons/column_split.svg' width=100 height=100/>:::dataVar
+    G[>mort_neonat_drop<]<br/><img src='icons/column_split.svg' width=100 height=100/>:::dataVar
+    %% Comments for understanding nodes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+    %% Links representing the transformation process
+    A --> |"Read CSV"| B
+    B --> |"Drop columns"| C
+    C --> |"Filter states"| D
+    D --> |"Drop 'fips' column"| E
+    E --> |"Transpose for neonatal"| F
+    F --> |"Reset index and prepare for plot"| G
+    G --> |"Ready for Plotting"| H[/"Plot"/]<br/><img src='dummy_plots/barplot_template.svg' width=100 height=100/>
+    %% Comments explaining the purpose of the nodes
+    %% A node represents reading the data from a source file
+    %% B-G nodes represent transformations on data
+    %% H node represents preparing the data for visualization

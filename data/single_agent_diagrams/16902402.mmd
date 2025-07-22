@@ -1,0 +1,14 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Display Data"]
+    B --> C["<img src='column_split.svg'/> <br/> Data Inspection"]
+    C --> D["<img src='column_split.svg'/> <br/> Data Cleaning"]
+    D --> E["<img src='table.svg'/> <br/> Feature Engineering"]
+    E --> F["<img src='hist_template.svg'/> <br/> Exploratory Data Analysis"]
+    F --> G["<img src='barplot_template.svg'/> <br/> Visualize Findings"]
+    G --> H["<img src='brain.svg'/> <br/> Answer Questions"]
+    H --> I["<img src='table.svg'/> <br/> Conclusions"]
+
+    C --> D
+    D --> E
+    F --> G
+    G --> H

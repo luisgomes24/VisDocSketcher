@@ -1,0 +1,111 @@
+{
+  "data_sources": [
+    {
+      "filename": "../input/ddsm-mammography/training10_0/training10_0.tfrecords",
+      "description": "TFRecord containing training data for the mammography classification task."
+    },
+    {
+      "filename": "../input/ddsm-mammography/training10_1/training10_1.tfrecords",
+      "description": "TFRecord containing additional training data for the mammography classification task."
+    },
+    {
+      "filename": "../input/ddsm-mammography/training10_2/training10_2.tfrecords",
+      "description": "Another TFRecord with more training data for the model."
+    },
+    {
+      "filename": "../input/ddsm-mammography/training10_3/training10_3.tfrecords",
+      "description": "TFRecord with further training examples for mammography classification."
+    },
+    {
+      "filename": "../input/ddsm-mammography/training10_4/training10_4.tfrecords",
+      "description": "Final TFRecord in the series containing training data for the task."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "images",
+      "description": "List of images processed and resized from the TFRecords."
+    },
+    {
+      "name": "labels",
+      "description": "List of corresponding labels for the images used for classification."
+    },
+    {
+      "name": "X",
+      "description": "Numpy array of images that will be used for training and testing."
+    },
+    {
+      "name": "y",
+      "description": "Numpy array of labels that corresponds to images in X."
+    },
+    {
+      "name": "x_train, x_val, x_test, y_train, y_val, y_test",
+      "description": "Datasets split for training, validation, and testing purposes."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "images",
+      "creation_method": "Appending from read_data function",
+      "usage": "Used to create the X variable for model training and testing."
+    },
+    {
+      "variable": "labels",
+      "creation_method": "Appending from read_data function",
+      "usage": "Used to create the y variable for model training and testing."
+    },
+    {
+      "variable": "X",
+      "creation_method": "Converted from list of images to numpy array",
+      "usage": "Used for splitting into training, validation, and testing datasets."
+    },
+    {
+      "variable": "y",
+      "creation_method": "Converted from list of labels to numpy array",
+      "usage": "Used for splitting into training, validation, and testing datasets."
+    },
+    {
+      "variable": "x_train, x_val, x_test, y_train, y_val, y_test",
+      "creation_method": "Split from X and y using train_test_split",
+      "usage": "Used in training and evaluation of models."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Artificial Neural Network (ANN)",
+      "input_features": "x_train (train_features)",
+      "target_variable": "train_y",
+      "hyperparameters": "Layers and dropout rate specified in the model definition."
+    },
+    {
+      "model_name": "KNeighborsClassifier",
+      "input_features": "train_features",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "SVC",
+      "input_features": "train_features",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "train_features",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "AdaBoostClassifier",
+      "input_features": "train_features",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": "train_features",
+      "target_variable": "y_train",
+      "hyperparameters": "Default parameters."
+    }
+  ]
+}

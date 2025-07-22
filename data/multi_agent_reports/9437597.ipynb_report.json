@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/dogs-gone-sideways/images/train",
+      "description": "Training data containing images of dogs, half of which are sideways."
+    },
+    {
+      "source": "../input/dogs-gone-sideways/images/val",
+      "description": "Validation data containing images of dogs for evaluating the model."
+    },
+    {
+      "source": "../input/resnet50/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5",
+      "description": "Pre-trained weights for the ResNet50 model, used as a base for transfer learning."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "my_new_model",
+      "description": "A Keras Sequential model built using the ResNet50 architecture to classify images as either sideways or upright."
+    },
+    {
+      "name": "train_generator",
+      "description": "Data generator for training data, configured to preprocess and load images from the training directory."
+    },
+    {
+      "name": "validation_generator",
+      "description": "Data generator for validation data, configured to preprocess and load images from the validation directory."
+    },
+    {
+      "name": "fit_stats",
+      "description": "Statistics that capture the results of fitting the model to the training data, used to evaluate model performance."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_generator",
+      "creation": "Created from ImageDataGenerator with flow_from_directory using training images data source.",
+      "flow": "Passed to fit_generator method to train the model."
+    },
+    {
+      "variable": "validation_generator",
+      "creation": "Created from ImageDataGenerator with flow_from_directory using validation images data source.",
+      "flow": "Passed to fit_generator method to validate the model."
+    },
+    {
+      "variable": "my_new_model",
+      "creation": "Constructed using Sequential and ResNet50 layers.",
+      "flow": "Compiled with a loss function, optimizer, and metrics, and then trained using fit_generator."
+    },
+    {
+      "variable": "fit_stats",
+      "creation": "Generated from the output of the fit_generator method.",
+      "flow": "Stores the results of model training, useful for analysis."
+    }
+  ],
+  "models": [
+    {
+      "model": "ResNet50",
+      "type": "Transfer Learning Model",
+      "input_features": "Images preprocessed to (224, 224) size with categorical class distribution.",
+      "target_variable": "Orientation (sideways or upright).",
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss_function": "categorical_crossentropy",
+        "metrics": ["accuracy"],
+        "trainable_layers": "first layer of ResNet50 set to not trainable."
+      }
+    }
+  ]
+}

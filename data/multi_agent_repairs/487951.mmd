@@ -1,0 +1,8 @@
+flowchart TD
+    A1["child_wishlist.csv"]:::dataSource --> B1
+    A2["gift_goodkids.csv"]:::dataSource --> B2
+    B1["child_prefs"] --> C1["GIFT Allocation Logic"]
+    B2["gift_prefs"] --> C1
+    C1 --> D1["gift_matches"]
+    C1 --> D2["gift_counter"]
+    D1 --> E1["nice_inversion_benchmark.csv"]

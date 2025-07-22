@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Source Node
+    A["WomenRepresentaionInCityProperty-SanFrancisco.csv"]
+    
+    %% Main DataFrame Node
+    B["df"]
+    A -->|import csv| B
+    
+    %% Filtered DataFrames Nodes
+    C["df_FM"]
+    D["df_MF"]
+    E["df_MM"]
+    B -->|filter 'F & M'| C
+    B -->|filter 'M & F'| D
+    B -->|filter 'M & M'| E
+    
+    %% Count Lists
+    F["male"]
+    G["female"]
+    B -->|count male entries| F
+    B -->|count female entries| G
+    
+    %% Add Counts to df
+    B -->|add male count to df['Male']| F
+    B -->|add female count to df['Female']| G
+    
+    %% Aggregate DataFrame
+    H["df_department"]
+    B -->|group by Department/Source and aggregate counts| H
+    
+    %% Data Usage
+    H -->|visualization| I["Visualize gender representation by department"]

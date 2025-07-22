@@ -1,0 +1,21 @@
+%% Data Source Nodes
+state "results-imagenet.csv" as results_imagenet <!-- Contains benchmark results for various image classification models. -->
+state "benchmark-infer-amp-nhwc-pt111-cu113-rtx3090.csv" as benchmark_infer <!-- Contains inference performance metrics for models. -->
+state "benchmark-train-amp-nhwc-pt111-cu113-rtx3090.csv" as benchmark_train <!-- Contains training performance metrics for models. -->
+
+%% Data Processing Nodes
+state "DataFrame df_results" as df_results <!-- DataFrame holding the results from the ImageNet benchmark. -->
+state "DataFrame df" as df <!-- DataFrame for inference performance data -->
+state "DataFrame tdf" as tdf <!-- DataFrame for training performance data -->
+
+%% Model Node
+state "Model (CNNs & Transformers)" as model <!-- Various CNNs and Transformers used on Image data for ImageNet benchmark. -->
+
+%% Data Flow
+results_imagenet --> df_results
+benchmark_infer --> df
+benchmark_train --> tdf
+df_results --> df
+df_results --> tdf
+df --> model
+tdf --> model

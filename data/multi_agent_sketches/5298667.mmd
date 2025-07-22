@@ -1,0 +1,23 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A1["submission-174.csv"] %% This node represents the CSV file named 'submission-174.csv'
+    A2["submission-193.csv"] %% This node represents the CSV file named 'submission-193.csv'
+    A3["submission-201.csv"] %% This node represents the CSV file named 'submission-201.csv'
+
+    %% Nodes for Data Variables
+    B1["df1"] %% This node represents the DataFrame created from 'submission-174.csv'
+    B2["df2"] %% This node represents the DataFrame created from 'submission-193.csv'
+    B3["df3"] %% This node represents the DataFrame created from 'submission-201.csv'
+
+    %% Nodes for Plotting Function
+    C1["plotPerColumnDistribution"] %% This node represents plotting function usage
+
+    %% Data Source to Variable Relationships
+    A1 -->|read_csv| B1 %% The submission-174.csv is read into a DataFrame named df1
+    A2 -->|read_csv| B2 %% The submission-193.csv is read into a DataFrame named df2
+    A3 -->|read_csv| B3 %% The submission-201.csv is read into a DataFrame named df3
+
+    %% Data Variable to Function Relationships
+    B1 --> C1 %% df1 is used in the plotPerColumnDistribution function
+    B2 --> C1 %% df2 is used in the plotPerColumnDistribution function
+    B3 --> C1 %% df3 is used in the plotPerColumnDistribution function

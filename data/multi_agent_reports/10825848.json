@@ -1,0 +1,31 @@
+{  
+  "data_sources": [  
+    {  
+      "file_name": "processed_train.csv",  
+      "description": "Contains data for training, with various features for analysis."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable_name": "df1",  
+      "description": "DataFrame containing the first 1000 rows of processed_train.csv."  
+    },  
+    {  
+      "variable_name": "nRowsRead",  
+      "description": "Number of rows read from the CSV file, set to 1000 for preview."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "df1",  
+      "creation_method": "pd.read_csv",  
+      "description": "Loaded from processed_train.csv (first 1000 rows).",  
+      "usage": [  
+        "Used for plotting distributions",  
+        "Used for plotting correlation matrix",  
+        "Used for scatter and density plots"  
+      ]  
+    }  
+  ],  
+  "models": []  
+}

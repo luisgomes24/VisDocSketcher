@@ -1,0 +1,71 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/study_list.csv",
+      "description": "Contains the study data for each patient, including Patient ID, Site of primary STS, and Grade."
+    },
+    {
+      "file": "../input/patient_images_lowres.h5",
+      "description": "HDF5 file containing low-resolution CT images for patients."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "study_df",
+      "description": "DataFrame containing the study data read from a CSV file."
+    },
+    {
+      "name": "p_data",
+      "description": "Context manager for reading the patient images from the HDF5 file."
+    },
+    {
+      "name": "p_id",
+      "description": "Patient ID used to filter the relevant data for plotting."
+    },
+    {
+      "name": "p_img",
+      "description": "CT image data for the specific patient taken from the HDF5 file."
+    },
+    {
+      "name": "c_df",
+      "description": "Filtered DataFrame containing data for the specific patient ID."
+    },
+    {
+      "name": "c_dict",
+      "description": "Dictionary representation of the first row of the filtered DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "study_df",
+      "creation": "Created from pd.read_csv",
+      "flow": "Used for filtering patient data in plotting."
+    },
+    {
+      "variable": "p_data",
+      "creation": "Opened using h5py.File to read HDF5 data.",
+      "flow": "Iterated to extract CT images for plotting."
+    },
+    {
+      "variable": "p_id",
+      "creation": "Extracted from p_data during iteration.",
+      "flow": "Used to filter study_df and plot images."
+    },
+    {
+      "variable": "p_img",
+      "creation": "Extracted from p_data during iteration.",
+      "flow": "Displayed in various plots for maximum intensity projection, radiography view, and montage."
+    },
+    {
+      "variable": "c_df",
+      "creation": "Filtered from study_df based on p_id.",
+      "flow": "Used to create titles for plots."
+    },
+    {
+      "variable": "c_dict",
+      "creation": "Extracted from c_df.",
+      "flow": "Used for displaying patient information in plot titles."
+    }
+  ],
+  "models": []
+}

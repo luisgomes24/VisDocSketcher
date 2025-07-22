@@ -1,0 +1,18 @@
+flowchart TD
+%% Data Sources
+    A[NFL Play by Play 2009-2017]:::dbdata -->|Load| B(nfl_data DataFrame):::data
+    C[Building Permits]:::dbdata -->|Load| D(sf_permits DataFrame):::data
+
+%% Data Exploration and Analysis of Missing Values
+    B -->|Missing Values Analysis| E[missing_values_count]:::process
+    B -->|Total Cells Calculation| F[total_cells]:::process
+    E -->|Calculate Total Missing| G[total_missing]:::process
+
+%% Data Transformations
+    B -->|Create Subset| H[subset_nfl_data]:::process
+    B -->|Drop NAs| I[columns_with_na_dropped]:::process
+
+%% Classes
+  classDef dbdata fill:#f96;
+  classDef data fill:#36f;
+  classDef process fill:#6f9;

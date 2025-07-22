@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/spotify.csv",
+      "description": "Contains Spotify data indexed by date."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "spotify_data",
+      "description": "DataFrame containing the loaded Spotify data with dates as index."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "spotify_data",
+      "creation": "Read from a CSV file using read_csv.",
+      "flows": "Used for plotting line charts with Seaborn."
+    }
+  ],
+  "models": []
+}

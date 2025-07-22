@@ -1,0 +1,24 @@
+%% A Mermaid flowchart depicting the workflow of the data analysis in the provided Jupyter Notebook
+flowchart TD
+    %% Data source node
+    dataset_csv["Dataset CSV"]:::ds --> |"load"| data["Data DataFrame"]:::df
+    
+    %% Data variable creation and usage nodes
+    data --> |"used for descriptive stats and vis"| nat_appear
+    data --> |"creates X (features for LR)"| x["Feature Matrix X"]
+    data --> |"creates Y (target for LR)"| y["Target Y (Wins)"]
+
+    %% Random samples for hypothesis testing
+    sample["Random Sample 1000"]:::ds --> |"used in t-test"| ttest_1samp["One-Sample t-test"]:::ml
+    a["Sample A"]:::ds & b["Sample B"]:::ds --> |"used in two-sample t-test"| ttest_ind["Two-Sample t-test"]:::ml
+    before["Before Sample"]:::ds & after["After Sample"]:::ds --> |"used in paired t-test"| ttest_rel["Paired t-test"]:::ml
+
+    %% Features for ANOVA
+    nat_appear --> anova["ANOVA Appearances ~ Nationality"]:::ml
+    
+    %% Linear Regression model
+    x & y --> lr["Linear Regression Model"]:::ml
+
+    classDef ds fill:#f9f,stroke:#333,stroke-width:2px;  %% Class definition for data sources
+    classDef df fill:#bbf,stroke:#334,stroke-width:2px;  %% Class definition for dataframes
+    classDef ml fill:#fab,stroke:#f66,stroke-width:2px;  %% Class definition for ML operations & tests

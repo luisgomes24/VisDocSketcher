@@ -1,0 +1,15 @@
+%% This diagram represents the workflow of the Jupyter Notebook for data processing and analysis
+flowchart TD
+    A["Data Source: train_ship_segmentations.csv"] -->|Load CSV| B["DataFrame: df"]
+    B -->|Extract Image IDs| C["Variable: train_ids"]
+    D["Data Source: Training Images"] --> E
+    E["Path: path_train"]
+    F["Data Source: Test Images"] --> G
+    G["Path: path_test"]
+    
+    %% Comments explaining nodes
+    %% A: Represents the input data file for ship segmentations.
+    %% B: DataFrame created from input CSV containing segmentation data.
+    %% C: List of image IDs extracted for training purposes.
+    %% E: Defined path to the training images directory for file loading.
+    %% G: Defined path to the test images directory for file loading.

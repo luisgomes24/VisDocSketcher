@@ -1,0 +1,48 @@
+flowchart TD
+    %% Data Sources
+    subgraph data_sources [Data Source]
+        DS1(["../input/autos.csv"])
+    end
+
+    %% Data Variables
+    subgraph data_variables [Data Variables]
+        DV1["cars"] -- "DataFrame with input data" --> DV2["cars_updated"]
+        DV2 -- "Dropped null values" --> DV3["cars_encoded"]
+        DV3 -- "Label Encoding applied" --> DV4["x_train"]
+        DV3 -- "Label Encoding applied" --> DV5["x_test"]
+        DV3 -- "Label Encoding applied" --> DV6["y_train"]
+        DV3 -- "Label Encoding applied" --> DV7["y_test"]
+        DV4 -- "Training Data" --> DV8["Model: Linear Regression"]
+        DV6 -- "Training Data" --> DV8
+        DV5 -- "Testing Data" --> DV9["y_pred"]
+        DV8 -- "Predict using model" --> DV9
+    end
+
+    %% Processes
+    subgraph processes [Processes]
+        P1["Read CSV file"]
+        P2["Drop null values"]
+        P3["Convert categoricals with Label Encoding"]
+        P4["Train-Test Split"]
+        P5["Train Linear Regression Model"]
+        P6["Predict using model"]
+    end
+
+    %% Connections (Data Flow)
+    DS1 -->|Read| P1
+    P1 -->|Create| DV1
+    DV1 -->|Input| P2
+    P2 -->|Create| DV2
+    DV2 -->|Input| P3
+    P3 -->|Create| DV3
+    DV3 -->|Split| P4
+    P4 -->|Create| DV4
+    P4 -->|Create| DV5
+    P4 -->|Create| DV6
+    P4 -->|Create| DV7
+    DV4 -->|Train| P5
+    DV6 -->|Train| P5
+    P5 -->|Output| DV8
+    DV5 -->|Predict| P6
+    DV8 -->|Predict| P6
+    P6 -->|Output| DV9

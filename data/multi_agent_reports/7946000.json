@@ -1,0 +1,41 @@
+{
+  "data_sources": [
+    {
+      "file_name": "None",
+      "description": "There are 0 csv files in the current version of the dataset."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "plt",
+      "description": "Matplotlib library for plotting data"
+    },
+    {
+      "variable_name": "np",
+      "description": "Numpy library for numerical operations"
+    },
+    {
+      "variable_name": "pd",
+      "description": "Pandas library for data processing"
+    },
+    {
+      "variable_name": "df",
+      "description": "Dataframe that stores the dataset for analysis"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Not explicitly defined, expected to be set by user input.",
+      "used_for": "All plot functions including plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "N/A",
+      "input_features": "N/A",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

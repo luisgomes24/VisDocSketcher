@@ -1,0 +1,29 @@
+flowchart TD
+    %% Start of the flowchart
+    A[Start] --> B[Load Data]
+    B --> C["Data Source: indian-actor-images-dataset"]
+    C --> D["Read Image: img"]
+    D --> E["MTCNN Initialization: detector"]
+    E --> F["Detect Faces: result"]
+    F --> G["Process Results: Bounding Boxes, Keypoints"]
+    G --> H{"Face Detection Check"}
+    H -->|"0 or >1 face detected"| I["Log Excluded Images: excluded_images"]
+    H -->|"1 face detected"| J["Extract Face"]
+    J --> K[Save Processed Image]
+    I --> L[End Excluded]
+    K --> M[End Processed]
+    
+    %% Explanation for the nodes
+    %% A: Represents the start of the workflow
+    %% B: Loads the dataset from a given source
+    %% C: Specifies the dataset used for analysis
+    %% D: Image is read using OpenCV for processing
+    %% E: MTCNN model initialization
+    %% F: Detected faces are stored in 'result'
+    %% G: Results used for further processing or visualization
+    %% H: Conditional check for face detection results
+    %% I: Images with 0 or >1 face are logged for exclusion
+    %% J: Single detected face is extracted
+    %% K: Processed face image is saved
+    %% L: Marks the end of processing for excluded images
+    %% M: Marks the end of processing for successful face extraction

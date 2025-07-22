@@ -1,0 +1,24 @@
+{"data_sources": [
+    {"file_name": "Dataset3.csv", "description": "Contains data related to women entrepreneurship and labor force including various socio-economic indicators."}
+],
+"data_variables": [
+    {"variable_name": "data", "description": "Main DataFrame containing cleaned and processed data from Dataset3.csv."},
+    {"variable_name": "country", "description": "Numerical mapping of country names to integers for easier analysis."},
+    {"variable_name": "European Union Membership", "description": "Binary representation of EU membership status."},
+    {"variable_name": "Currency", "description": "Binary representation of currency types used in the countries."},
+    {"variable_name": "Level of development", "description": "Categorical variable indicating whether a country is developed or developing."}
+],
+"data_flow": [
+    {
+        "variable": "data",
+        "creation_method": "pd.read_csv",
+        "flow": ["cleaned by dropping unused columns", "mapped categorical variables to numerical values", "used for various analyses and visualizations"]
+    },
+    {
+        "variable": "country",
+        "creation_method": "mapping from 'Country' column",
+        "flow": ["used in bar plots and correlation analysis"]
+    }
+],
+"models": []
+}

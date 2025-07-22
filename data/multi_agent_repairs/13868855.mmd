@@ -1,0 +1,53 @@
+```mermaid
+flowchart TD
+    %% Node for Data Sources
+    A["Data Source: SoliSet Submission CSV"]
+    B["Data Source: ResNest RFCX Submission CSV"]
+    C["Data Source: Minimal Fastai Solution CSV"]
+    D["Data Source: All-in-one RFCX Baseline CSV"]
+    E["Data Source: RFCX Train ResNet50 with TPU CSV"]
+    F["Data Source: RFCX ResNet50 TPU CSV"]
+    G["Data Source: ResNet34 Augmentations CSV"]
+    H["Data Source: TPU RFCX Audio Detection Fast CSV"]
+    I["Data Source: RFCX Bagging CSV"]
+
+    %% Node for ked DataFrame creation
+    J["ked DataFrame Creation"]
+    J --> |"Data Initialization"| A
+    J --> |"Data Initialization"| B
+    J --> |"Data Initialization"| C
+    J --> |"Data Initialization"| D
+    J --> |"Data Initialization"| E
+    J --> |"Data Initialization"| F
+    J --> |"Data Initialization"| G
+    J --> |"Data Initialization"| H
+    J --> |"Data Initialization"| I
+
+    %% Node for Kernel Class
+    K["Kernel Class Initialization"]
+    J --> |"Initialize Kernel Instances"| K
+
+    %% Nodes for 'main' and 'support'
+    L["main Kernel Extraction"]
+    K --> |"Extract main Kernel"| L
+    M["support Kernel Extraction"]
+    K --> |"Extract support Kernel"| M
+
+    %% Nodes for Generative Functions
+    N["Generative Function g1, g2, g3, g4"]
+    L --> |"Generate using main Kernel"| N
+    M --> |"Support Kernel data"| N
+
+    %% Output Node
+    O["Output Submission CSV"]
+    N --> |"Create submission.csv"| O
+
+    %% Nodes for Machine Learning Models
+    P["Machine Learning Models"]
+    P1["XGBoost: Kernel Outputs"]
+    P2["Torch-based Models: Audio Features"]
+    P3["TensorFlow Models: Audio Features"]
+    P -- "Training and Inference" --> P1
+    P -- "Training and Inference" --> P2
+    P -- "Training and Inference" --> P3
+```

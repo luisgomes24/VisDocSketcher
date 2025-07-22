@@ -1,0 +1,13 @@
+flowchart TD
+    A[gptest.csv] -->|Read CSV| B[df1]
+    %% A: Represents the data source file 'gptest.csv'
+    %% B: Represents the DataFrame 'df1' which contains data read from 'gptest.csv'
+
+    B -->|Visualize| C[plotPerColumnDistribution]
+    %% C: Distribution plots for each column in the DataFrame df1
+
+    B -->|Visualize| D[plotCorrelationMatrix]
+    %% D: A correlation matrix plot derived from DataFrame df1
+
+    B -->|Visualize| E[plotScatterMatrix]
+    %% E: A scatter matrix plot showing relationships between columns in DataFrame df1

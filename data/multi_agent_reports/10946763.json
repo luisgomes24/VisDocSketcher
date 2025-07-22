@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "shootings.csv",
+      "description": "Contains data about shootings events, including multiple columns of various attributes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing up to the first 1000 rows of the shootings.csv file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "destination": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

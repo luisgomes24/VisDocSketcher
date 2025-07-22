@@ -1,0 +1,37 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#F0F0F0"}}}%%
+flowchart TD
+    %% Node Definitions %%
+
+    subgraph input_data ["Data Sources"]
+        source1["train_clinical_data.csv"]
+    end
+
+    subgraph processing ["Data Processing & Transformation"]
+        nodeA["trn: Loaded and processed clinical data"] -- filled missing -> nodeB["trn: Grouped and analyzed by medication state"]
+        nodeC["Calculated 'control' indicator from medication state"]
+        nodeD["Calculated 'control_2' from UPDRS-4 scores"]
+    end
+
+    subgraph analysis ["Data Variables for Analysis"]
+        nodeE["targets: UPDRS score columns"]
+        nodeF["grouped: Used for plotting distributions"]
+    end
+
+    subgraph output_data ["Output and Visualization"]
+        nodeG["Visualize distributions of UPDRS scores by control"]
+    end
+
+    %% Node Connections %%
+
+    input_data --> processing
+    processing --> analysis
+    processing --> output_data
+    source1 -- load data --> nodeA
+    nodeB --> nodeF
+    nodeC --> nodeG
+    nodeD --> nodeG
+    nodeE --> nodeG
+
+    %% Comments for Clarification %%
+    classDef classNode fill:#ffd700;
+    class nodeA,nodeB,nodeC,nodeD,nodeE,nodeF,nodeG,classNode;

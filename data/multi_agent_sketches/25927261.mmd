@@ -1,0 +1,25 @@
+graph TD
+    A["train.csv"] --> |"Read CSV"| B["train"]
+    B --> |"Feature Engineering"| E["features"]
+    B --> |"Model Train"| J["XGBoost Model"]
+    J --> O["predictions"]
+    O --> Q["ss (sample_submission.csv)"]
+    S["train_labels.csv"] --> |"Read CSV"| T["t_lbls"]
+    T --> |"Extract Labels"| U["labels"]
+    U --> J
+    D["test.csv"] --> |"Read CSV"| H["test"]
+    H --> |"Generate Predictions"| O
+    B --> |"GroupKFold CV"| V["groups"]
+    J --> |"Evaluation"| V
+    
+    %% Model Specifics
+    J:::XGBoostModel
+    classDef XGBoostModel fill:#ffcc00,stroke:#000,color:#000;
+    
+    %% DNN model training
+    W["DNN Model"]
+    B --> |"Data Preparation"| W
+    W:::DNNModel
+    U --> W
+    
+    classDef DNNModel fill:#ccffcc,stroke:#000,color:#000;

@@ -1,0 +1,11 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg' />"] --> B["🔄 Preprocess Data"]
+    B --> C["🔀 Shuffle Data"]
+    C --> D["🔍 Split Data <img src='icons/row_split.svg' />"]
+    D --> E["🔵 Convert Labels to Categorical"]
+    E --> F["🧠 Build Model"]
+    F --> G["⚙️ Compile Model"]
+    G --> H["🚀 Train Model <img src='icons/brain.svg' />"]
+    H --> I["📊 Evaluate Model <img src='icons/table.svg' />"]
+    I --> J["📊 Confusion Matrix <img src='dummy_plots/confusion_matrix_template.svg' />"]
+    J --> K["🔍 Predict New Data <img src='icons/image.svg' />"]

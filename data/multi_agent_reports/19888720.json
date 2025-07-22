@@ -1,0 +1,21 @@
+{"data_sources": [
+    {"source": "../input/seti-breakthrough-listen/train_labels.csv", "description": "Contains the training labels for the SETI data, indicating target (1 for signals and 0 for background)"},
+    {"source": "../input/seti-breakthrough-listen/sample_submission.csv", "description": "Template for submission containing sample format based on predictions"}
+],
+"data_variables": [
+    {"variable": "df_train", "description": "DataFrame containing training label data"},
+    {"variable": "df_subm", "description": "DataFrame containing submission template data"},
+    {"variable": "df_train_pos", "description": "DataFrame containing only the positive samples from the training data (target = 1)"},
+    {"variable": "x0", "description": "Numpy array containing a loaded example signal data for visualization"},
+    {"variable": "xn0", "description": "Normalized version of x0, using column-wise normalization"}
+],
+"data_flow": [
+    {"variable": "df_train", "created_by": "pd.read_csv", "flows_to": "Used to filter positive samples and visualize data"},
+    {"variable": "df_subm", "created_by": "pd.read_csv", "flows_to": "Not directly used, possibly for submission preparation"},
+    {"variable": "df_train_pos", "created_by": "Filtering df_train", "flows_to": "Used to extract a specific example for testing and visualization"},
+    {"variable": "x0", "created_by": "load_example", "flows_to": "Visualization and normalization"},
+    {"variable": "xn0", "created_by": "column_norm", "flows_to": "Visualized to show normalized samples for further analysis"}
+],
+"models": [
+    {"model": "MLP (Multi-layer Perceptron)", "input_features": "Normalized samples after denormalizing and image shifting", "target_variable": "Identifying presence of signal (needle)", "hyperparameters": "2 layers"}
+]}

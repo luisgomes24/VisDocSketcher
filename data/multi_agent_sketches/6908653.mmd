@@ -1,0 +1,39 @@
+flowchart TD
+
+%% Node for CSV Data Source
+A["time_series_new-3000.csv"]
+%% Description for CSV File
+description1["A CSV file containing time series data"]
+A --> description1
+
+%% Node for df1 DataFrame
+B["DataFrame df1"]
+%% Description of df1 Creation
+A -- "Read 1000 rows into" --> B
+note1["Created by reading the CSV file using pd.read_csv"]
+B --> note1
+
+%% Nodes for row and column counts
+C["nRowsRead"]
+nRowsRead_desc["Number of rows to read"]
+C --> nRowsRead_desc
+C -- "Defines how many rows to read from CSV" --> A
+
+D["nRow"]
+B --> D
+D_desc["Number of rows in DataFrame"]
+D --> D_desc
+
+E["nCol"]
+B --> E
+E_desc["Number of columns in DataFrame"]
+E --> E_desc
+
+%% Data flow nodes for visualization
+F["plotPerColumnDistribution"]
+G["plotCorrelationMatrix"]
+H["plotScatterMatrix"]
+B -- "Used in" --> F
+B -- "Used in" --> G
+B -- "Used in" --> H
+

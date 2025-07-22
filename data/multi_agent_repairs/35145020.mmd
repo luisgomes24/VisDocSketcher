@@ -1,0 +1,33 @@
+```mermaid
+flowchart TD
+    %% Nodes for Data Sources
+    A["MNCAATourneyCompactResults.csv"] %% node for tournament results
+    B["MNCAATourneySeeds.csv"] %% node for tournament seeds
+    C["MMasseyOrdinals.csv"] %% node for ordinal rankings
+    D["MTeams.csv"] %% node for team list
+
+    %% Nodes for Data Variables
+    E["results"] %% DataFrame for tournament results
+    F["seeds"] %% DataFrame for seeds assignment
+    G["rank"] %% DataFrame for ordinal rankings
+    H["teams"] %% DataFrame for team information
+    I["W_seed"] %% List of winning seeds
+    J["L_seed"] %% List of losing seeds
+    K["chart"] %% 2D array of win probabilities
+    L["higher_seed_win_prob"] %% Array of higher seed win probabilities
+
+    %% Flow of Data
+    A -->|pd.read_csv| E
+    B -->|pd.read_csv| F
+    C -->|Read & filtered| G
+    D -->|pd.read_csv| H
+
+    E -->|Used for Brier score & scores extraction| I
+    E -->|Used for Brier score & scores extraction| J
+    F -->|Extract seeds for winning| I
+    F -->|Extract seeds for losing| J
+
+    I -->|Used in match outcomes| K
+    J -->|Used in match outcomes| K
+    K -->|Visualize probabilities| L
+```

@@ -1,0 +1,20 @@
+%% This diagram represents the data flow in the Jupyter Notebook '20306999.ipynb'.
+flowchart TD
+    %% Node for attendance data files
+    A[Attendance Data Files] -->|Read into| B[inputfolder]
+    
+    %% Node for input folder variable
+    B -->|Processed by function| C[process attendance()]
+    
+    %% Node for storing school attendance
+    C -->|Stores in| D[school attendance]
+    
+    %% Node for generating summaries
+    D -->|Processed by function| E[generate summary()]
+    
+    %% Node for summary attendance variable
+    E -->|Creates| F[summary attendance]
+    
+    %% Node showing output to working folder
+    F -->|Saved to| G[working folder]
+    F -->|Used for plotting| H[Plotting]

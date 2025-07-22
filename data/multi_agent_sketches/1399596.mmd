@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Source Node
+    A["CSV File: transportation-department-permits.csv"]
+    %% DataFrame Node
+    B["DataFrame df1"]
+    %% Plotting Nodes
+    C["Histogram Plots"]
+    D["Correlation Matrix Plots"]
+    E["Scatter and Density Plots"]
+    F12["2D PCA Plot"]
+    F13["3D PCA Plot"]
+
+    %% Connections
+    A -->|Read CSV| B
+    B -->|Generate| C
+    B -->|Generate| D
+    B -->|Generate| E
+    B -->|Perform| F12
+    B -->|Perform| F13
+```
+
+%% Node Details
+%% A: Represents the source CSV file used for data input
+%% B: The DataFrame df1 is created from the CSV file and used for multiple analyses
+%% C: Histograms are generated from the data in df1
+%% D: Correlation matrices are plotted using the data in df1
+%% E: Scatter and density plots are created from the data in df1
+%% F12: A 2D PCA plot is generated from df1 data
+%% F13: A 3D PCA plot is generated from df1 data

@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Source Node
+    A["/Boston Housing Dataset/"] -->|Load data| B[df]
+
+    %% Data Preparation Nodes
+    B[df] -->|Extract 'rooms'<br>and 'price'| C[X_train]
+    B[df] -->|Extract 'rooms'<br>and 'price'| D[X_test]
+    B[df] -->|Extract 'price'| E[y_train]
+    B[df] -->|Extract 'price'| F[y_test]
+
+    %% Model Training Node
+    C[X_train] -->|Train model on<br>'rooms' and 'price'| G[Lasso Regression Model]
+    E[y_train] -->|Train model on<br>'rooms' and 'price'| G
+
+    %% Model Evaluation Node
+    G -->|Evaluate model| H{Evaluate Predictions}
+    D[X_test] --> H
+    F[y_test] --> H
+
+    %% Explanation
+    A:::dataSource
+    B:::dataNode
+    C:::trainSet
+    D:::testSet
+    E:::trainSet
+    F:::testSet
+    G:::model
+    H:::evaluation
+
+    %% Styles and Annotations
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataNode fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef trainSet fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef testSet fill:#fbb,stroke:#333,stroke-width:2px;
+    classDef model fill:#ffb,stroke:#333,stroke-width:2px;
+    classDef evaluation fill:#fbf,stroke:#333,stroke-width:2px;

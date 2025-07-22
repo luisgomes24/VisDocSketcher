@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A["Train Dataset\n../input/titanic/train.csv"] --> B["Load Data\nVariable: data"]
+    C["Test Dataset\n../input/titanic/test.csv"] --> B
+    
+    %% Preprocessing
+    B --> D["Preprocess Data\nVariables: train_df, test_df"]
+
+    %% Split Data
+    D --> E["Train/Test Split\nVariables: X_train, X_val, y_train, y_val"]
+
+    %% Model Training
+    E --> F["Train SVC Model\nModel: svm_clf"]
+    %% Comment: Support Vector Classifier with C=4.32876
+
+    %% Model Validation
+    F --> G["Validate Model\nData: X_val, y_val"]
+
+    %% Use Model for Prediction
+    F --> H["Make Predictions\nVariable: submission"]
+    D --> H
+
+    %% Save Results
+    H --> I["Save Submission\nFile: submission.csv"]

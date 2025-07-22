@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Source
+    A["No CSV files detected"] 
+    
+    %% Function Definitions
+    B["plotPerColumnDistribution"] 
+    C["plotCorrelationMatrix"] 
+    D["plotScatterMatrix"] 
+
+    %% Data Flow
+    A --> B
+    A --> C
+    A --> D
+
+    %% Description
+    B -->|Visualize distribution| F["Column Distribution Plots"]
+    C -->|Show correlations| G["Correlation Matrix"]
+    D -->|Visualize relationships| H["Scatter Matrix Plots"]  
+    
+    %% Annotations for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    class A dataSource;

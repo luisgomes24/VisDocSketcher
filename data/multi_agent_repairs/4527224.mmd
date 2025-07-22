@@ -1,0 +1,47 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["BigQuery Public Dataset"]
+    %% BigQuery Client
+    B["BigQuery Client"]
+    %% Dataset Reference
+    C["Dataset Reference"]
+    %% Dataset
+    D["Dataset"]
+    %% Table Reference
+    E["Table Reference"]
+    %% Table
+    F["Table"]
+    %% SQL Query String for Prolific Commenters
+    G["SQL Query String"]
+    %% Query Configuration
+    H["Query Configuration"]
+    %% BigQuery Job
+    I["BigQuery Job"]
+    %% Prolific Commenters DataFrame
+    J["Prolific Commenters DataFrame"]
+
+    %% Data Source to Client
+    A --> B  %% Connects to BigQuery Client to access data
+
+    %% Client to Dataset Reference
+    B --> C  %% Uses client to reference dataset
+    
+    %% Dataset Reference to Dataset
+    C --> D  %% Fetches dataset
+
+    %% Dataset Reference to Table Reference
+    C --> E  %% Constructs reference to table
+
+    %% Table Reference to Table
+    E --> F  %% Fetches table content
+
+    %% SQL Query Preparation
+    G --> I  %% Prepares query job
+
+    %% Query Constraints
+    H --> I  %% Applies configuration to job
+
+    %% Query Execution
+    I --> J  %% Outputs results to DataFrame
+```

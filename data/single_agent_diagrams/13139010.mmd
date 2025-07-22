@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Source DICOM Files"] --> B["🗃️ Create DICOM Dataframe"]
+    B --> C["🗂️ Sort and Select Best Images"]
+    C --> D["📦 Move Selected Files"]
+    D --> E["🖼️ Mask and Save Images"]
+    E --> F["📂 Load Saved Masked Images"]
+    F --> G["🔍 Compare Original and Masked Images"]
+    
+    A["📂 Load Source DICOM Files"] --> H["<img src='dummy_plots/barplot_template.svg'/> <br/> Select 5 Best Images"]
+    B --> I["<img src='dummy_plots/boxplot_template.svg'/> <br/> Create Dataframe"]
+    E --> J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Save Masked PNGs"]
+    G --> K["<img src='dummy_plots/hist_template.svg'/> <br/> Visualize Results"]

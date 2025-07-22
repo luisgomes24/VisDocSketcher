@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains the training dataset for the toxicity classification task."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains the test dataset for the toxicity classification task."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the loaded training data with comments and associated toxicity labels."
+    },
+    {
+      "variable_name": "train_sentences",
+      "description": "Array containing the comment texts extracted from the training DataFrame."
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Array containing the toxicity labels corresponding to the training sentences."
+    },
+    {
+      "variable_name": "features",
+      "description": "Concatenated features array containing input IDs, masks, segments, and labels."
+    },
+    {
+      "variable_name": "X",
+      "description": "Split arrays for input IDs, masks, segments, and labels after resampling and preparation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create train_sentences and train_y for model training."
+    },
+    {
+      "variable_name": "train_sentences",
+      "creation_method": "df["comment_text"].fillna("CVxTz").values",
+      "flow": "Processed into input features for BERT."
+    },
+    {
+      "variable_name": "train_y",
+      "creation_method": "df[list_classes].values",
+      "flow": "Used as target variable for training the model."
+    },
+    {
+      "variable_name": "features",
+      "creation_method": "np.concatenate(inputs, axis=1)",
+      "flow": "Used to split into training and test sets (features_train, features_test)."
+    },
+    {
+      "variable_name": "features_train",
+      "creation_method": "train_test_split(features, train_y, test_size=0.2)",
+      "flow": "Used along with test data for model training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "BERT",
+      "input_features": "input_ids, input_masks, input_segments",
+      "target_variable": "train_y",
+      "hyperparameters": {
+        "dropout_rate": 0.1,
+        "dense_units": 128,
+        "epochs": 2,
+        "batch_size": 64
+      }
+    }
+  ]
+}

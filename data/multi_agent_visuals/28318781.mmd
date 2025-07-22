@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data source node
+    datasource1["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/nvtabular-with-dependencies/nvt_all"]
+    %% Data generation node
+    df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]
+    %% Dataset creation node
+    ds["<img src='icons/database.svg' width=100 height=100/> <br/> Dataset ds"]
+    %% Pipeline definition node
+    out["<img src='icons/brain.svg' width=100 height=100/> <br/> Pipeline out (aggregations on 'cats')"]
+    %% Feature transformation node
+    cats_hashed["<img src='icons/column_split.svg' width=100 height=100/> <br/> Hashing cats_hashed"]
+    %% Workflow creation node
+    wf["<img src='icons/brain.svg' width=100 height=100/> <br/> Workflow wf"]
+    %% Transformation result node
+    o["<img src='icons/brain.svg' width=100 height=100/> <br/> Output o"]
+
+    %% Define the flow
+    datasource1 -->|"Used to set NVTabular dependencies"| df
+    df -->|"Pandas DataFrame from numpy random"| ds
+    ds -->|"Input for NVTabular Workflow"| wf
+    ds -->|"Part of pipeline"| out
+    out -->|"Defines workflow"| wf
+    cats_hashed -->|"Hashes 'cats' feature"| wf
+    wf -->|"fit_transform operation"| o

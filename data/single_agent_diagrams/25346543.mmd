@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Dataset"] --> B["📊 Preprocess Data"]
+    B --> C["🔀 Merge Dataframes"]
+    C --> D["🔍 Visualize Annotations <img src='dummy_plots/scatter_plot_template.svg' /> <br/>"]
+    D --> E["📊 Tokenization"]
+    E --> F["📞 Train-Validation Split"]
+    F --> G["🧠 Build Model"]
+    G --> H["📚 Train Model"]
+    H --> I["📊 Evaluation <img src='dummy_plots/hist_template.svg' /> <br/>"]
+    I --> J["💾 Save OOF Results"]
+    J --> K["💡 Inference on Test Set"]
+    K --> L["📊 Submission Preparation <img src='dummy_plots/barplot_template.svg' /> <br/>"]

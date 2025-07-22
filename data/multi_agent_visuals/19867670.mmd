@@ -1,0 +1,35 @@
+flowchart TD
+
+A1["<img src='icons/file.svg' width=100 height=100/> <br/> train_with_features.csv"]
+%% Input Data Source
+
+A2["<img src='icons/table.svg' width=100 height=100/> <br/> train_df"]
+%% DataFrame containing the training data
+
+A3["<img src='icons/table.svg' width=100 height=100/> <br/> test_df"]
+%% DataFrame generated for predictions
+
+A4["<img src='icons/brain.svg' width=100 height=100/> <br/> nn_preds<br/><img src='dummy_plots/lineplot_template.svg' /> "]
+%% Predictions generated from Neural Network
+
+A5["<img src='icons/brain.svg' width=100 height=100/> <br/> lgb_preds<br/><img src='dummy_plots/lineplot_template.svg' /> "]
+%% Predictions generated from LightGBM
+
+A6["<img src='icons/brain.svg' width=100 height=100/> <br/> Tabular Neural Network"]
+%% Neural Network Model
+
+A7["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Model"]
+%% LightGBM Model
+
+A8["Submission CSV"]
+%% Final output submission file
+
+A1 --> A2
+A2 --> |"Used for training"| A6
+A2 --> |"Used for training"| A7
+A3 --> |"Used for predictions"| A6
+A3 --> |"Used for predictions"| A7
+A6 --> |"Generate"| A4
+A7 --> |"Generate"| A5
+A4 --> |"Weighted sum"| A8
+A5 --> |"Weighted sum"| A8

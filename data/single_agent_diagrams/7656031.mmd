@@ -1,0 +1,21 @@
+flowchart TD
+    A["📁 Load Data <img src='files/file.svg'/> <br/> train.csv"] --> B["🔍 Data Preprocessing"]
+    B --> C["🔄 Process Coordinates"]
+    C --> D["📊 Calculate Angles"]
+    D --> E["🔍 Extract Car Images"]
+    E --> F["🖼️ Display Selected Car <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    F --> G["📊 Show Cars with Similar Orientation"]
+    G --> H["💻 KMeans Clustering"]
+    H --> I["🔄 Average Rotations"]
+    I --> J["📊 Show Clusters <img src='dummy_plots/boxplot_template.svg'/>"]
+    
+    %% Optional grouping for visualization clarity
+    subgraph DataProcessing
+        A --> B --> C --> D --> E
+    end
+    subgraph Visualization
+        F --> G
+    end
+    subgraph Clustering
+        H --> I --> J
+    end

@@ -1,0 +1,17 @@
+flowchart TD
+    %% Data source node
+    A["Advertising.csv"] --> |"Read into DataFrame"| B["df"]
+    %% EDA and preprocessing nodes
+    B --> |"Extract ad types"| C["types"]
+    B --> |"Calculate total cost"| D["total_cost"]
+    B --> |"Extract sales"| E["sales"]
+    %% Linear Regression Model node
+    D --> |"Feature used"| F["Linear Regression Model"]
+    E --> |"Target variable"| F
+    %% Explanation
+    %% A: Data source for advertising costs and sales
+    %% B: DataFrame containing the main data
+    %% C: List of ad types, used in visualization
+    %% D: Numpy array of total advertisement cost, used as feature
+    %% E: Numpy array of Sales, target for predictions
+    %% F: The Linear Regression model predicting sales from total cost

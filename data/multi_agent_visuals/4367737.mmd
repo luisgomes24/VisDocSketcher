@@ -1,0 +1,8 @@
+%%{ init : { "themeVariables" : { "primaryColor": "#ffcc00" } } }%%
+graph TD
+    A["Start"] --> B["Process A"]
+    B --> C["Decision"]
+    C -->|"Yes"| D["Process B"]
+    C -->|"No"| E["Process C"]
+    D --> F["End"]
+    E --> F

@@ -1,0 +1,7 @@
+flowchart TD
+  data1["train.csv"] -->|Read by| var1["tr"]
+  var1 -->|Filter operation| var2["df_train"]
+  var2 -->|Load images and masks| var3["train_data"]
+  var3 -->|Training model| var4["model_ft"]
+  var4 -->|Update weights| var5["optimizer"]
+  var5 -->|Adjust learning rate| var6["lr_scheduler"]

@@ -1,0 +1,23 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> submission-174.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> submission-193.csv"]
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> submission-201.csv"]
+
+    %% Nodes for Data Variables
+    B1["<img src='icons/table.svg' width=100 height=100/> <br/> df1"]
+    B2["<img src='icons/table.svg' width=100 height=100/> <br/> df2"]
+    B3["<img src='icons/table.svg' width=100 height=100/> <br/> df3"]
+
+    %% Nodes for Plotting Function
+    C1["<img src='icons/brain.svg' width=100 height=100/> <br/> plotPerColumnDistribution"]
+
+    %% Data Source to Variable Relationships
+    A1 -->|read_csv| B1
+    A2 -->|read_csv| B2
+    A3 -->|read_csv| B3
+
+    %% Data Variable to Function Relationships
+    B1 --> C1
+    B2 --> C1
+    B3 --> C1

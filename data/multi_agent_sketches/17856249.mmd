@@ -1,0 +1,27 @@
+flowchart TD
+    subgraph Input
+        A[Train CSV]:::data_source
+        B[Test CSV]:::data_source
+    end
+    subgraph Processing
+        A --> C[tr_data]:::data_variable
+        B --> D[ts_data]:::data_variable
+        C & D --> E[data]:::data_variable
+        E --> F[cleaned_excerpt]:::data_variable
+        F --> G[texts]:::data_variable
+        G -->|"output"| I{{"texts.txt"}}:::output
+    end
+    subgraph Model
+        F --> H[dataset]:::data_variable
+        H -.- J[roberta-base]:::model
+        H --> K[trainer]:::data_variable
+        K -->|"train()"| L{{"Model Trained"}}:::output
+        K -.- M{{"trainer.save_model()"}}:::output
+    end
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#f9f,stroke:#333,stroke-width:2px;
+    style C,D,E,F,G,H,I,J,K,L,M fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#f96,stroke:#333,stroke-width:2px;
+    classDef output fill:#96f,stroke:#333,stroke-width:2px;

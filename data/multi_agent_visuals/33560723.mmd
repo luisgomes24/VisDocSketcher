@@ -1,0 +1,15 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Load Training Data"];
+    A --> C["<img src='icons/file.svg' width=100 height=100/> <br/> Load Validation Data"];
+    B --> D["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df_train"];
+    C --> E["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df_valid"];
+    D --> F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Extract Targets "];  
+    E --> G["<img src='icons/column_split.svg' width=100 height=100/> <br/> Extract Targets "];
+    F --> H["<img src='icons/brain.svg' width=100 height=100/> <br/> Calculate Correlations - Train"];
+    G --> I["<img src='icons/brain.svg' width=100 height=100/> <br/> Calculate Correlations - Validation"];
+    H --> J["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df_spearmanr_train"];
+    I --> K["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df_spearmanr_valid"];
+    J --> L["<img src='icons/table.svg' width=100 height=100/> <br/> Mean and Std - Train"];
+    K --> M["<img src='icons/table.svg' width=100 height=100/> <br/> Mean and Std - Validation"];
+    L --> N["<img src='dummy_plots/lineplot_template.svg'/> <br/> Visualize Correlations - Train"];
+    M --> O["<img src='dummy_plots/lineplot_template.svg'/> <br/> Visualize Correlations - Validation"];

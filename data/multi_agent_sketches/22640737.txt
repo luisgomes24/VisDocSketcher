@@ -1,0 +1,3 @@
+This notebook focuses on data analysis and reports about Bandcamp sales data using the dataprep library's functionalities for exploratory data analysis.
+
+Key visualizations and EDA report generation are included in the workflow.

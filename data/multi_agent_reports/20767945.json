@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/wine-reviews/winemag-data_first150k.csv",
+      "description": "CSV dataset containing wine reviews including country, description, points, price, and various attributes related to wine."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "fruits",
+      "description": "DataFrame containing sales data of fruits with columns for Apples and Bananas."
+    },
+    {
+      "name": "fruit_sales",
+      "description": "DataFrame with sales data of fruits for the years 2017 and 2018."
+    },
+    {
+      "name": "ingredients",
+      "description": "Series listing ingredients for a dinner including quantities."
+    },
+    {
+      "name": "reviews",
+      "description": "DataFrame loaded from a CSV file containing wine reviews."
+    },
+    {
+      "name": "animals",
+      "description": "DataFrame containing data about the number of Cows and Goats over two years."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "fruits",
+      "creation": "Created manually using pd.DataFrame",
+      "flow": "Displayed and checked for correctness."
+    },
+    {
+      "variable": "fruit_sales",
+      "creation": "Created manually using pd.DataFrame",
+      "flow": "Displayed and checked for correctness."
+    },
+    {
+      "variable": "ingredients",
+      "creation": "Not created, but expected to be a Series.",
+      "flow": "Checked for correctness."
+    },
+    {
+      "variable": "reviews",
+      "creation": "Expected to be created from CSV file.",
+      "flow": "Checked for correctness."
+    },
+    {
+      "variable": "animals",
+      "creation": "Created manually using pd.DataFrame",
+      "flow": "Displayed."
+    }
+  ],
+  "models": []
+}

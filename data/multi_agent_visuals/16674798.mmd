@@ -1,0 +1,26 @@
+flowchart TD
+    A["Start"] --> B & C & D
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> Load Data"] -->|Read CSV| E["DataFrame"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Identify Columns"] -->|Categorical| F["cat_data"]
+    C -->|Numerical| G["num_data"]
+    D["Analyze Unique Entries"] --> H["cat_entries"]
+    
+    %% Data Source
+    B --> |Source: StudentsPerformance.csv| E
+    
+    %% Data Usage
+    E --> |Descriptive Statistics & Visualizations| I["<img src='icons/brain.svg' width=100 height=100/> <br/> Hypothesis Testing"]
+    F --> |Analysis| I
+    G --> |Analysis| I
+    H --> |Unique Entry Analysis| I
+    
+    %% Comments
+    %% A: Start of the workflow
+    %% B: Load the data from CSV
+    %% E: DataFrame containing student performance data
+    %% C: Identify column types (categorical/numerical)
+    %% F: Categorical data columns in DataFrame
+    %% G: Numerical data columns in DataFrame
+    %% D: Analyze unique entries in categorical columns
+    %% H: Number of unique entries in categorical columns
+    %% I: Usage of DataFrame for stats, visuals, hypothesis testing

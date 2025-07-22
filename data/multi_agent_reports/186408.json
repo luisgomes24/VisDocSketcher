@@ -1,0 +1,29 @@
+{
+  "data_sources": [
+    {
+      "file_name": "impacts.csv",
+      "description": "Contains data related to astroid impacts"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "astroids",
+      "description": "DataFrame containing astroid impact data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "astroids",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for analysis and data processing"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "SVM",
+      "input_features": "N/A",
+      "target_variable": "N/A",
+      "hyperparameters": "N/A"
+    }
+  ]
+}

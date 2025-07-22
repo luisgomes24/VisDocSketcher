@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"]:::source -->|pd.read_csv| B["train_data"]:::variable
+    A2["test.csv"]:::source -->|pd.read_csv| B2["test_data"]:::variable
+
+    %% Variables
+    B -->|"Remove rows with missing SalePrice"| C["train_data cleaned"]:::variable
+    C -->|"Select numeric columns"| D["X"]:::variable
+    C -->|"Extract SalePrice"| E["y"]:::variable
+
+    %% Model
+    subgraph ModelTraining
+        direction TB
+        D -->|"Input Features"| F["RandomForestRegressor"]:::model
+        E -->|"Target Variable"| F
+        F -->|"Varying n_estimators"| G["results"]:::variable
+    end
+
+    %% Styles
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bcd,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;

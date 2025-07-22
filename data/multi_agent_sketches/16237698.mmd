@@ -1,0 +1,24 @@
+graph TD;
+    %% Data Sources
+    A["winequality-red.csv"] -->|Read as DataFrame| B["df"];
+    
+    %% Data Preparation
+    B -->|Extract Features| C["X"];
+    B -->|Extract Target| D["y"];
+    C -->|Train/Test Split| E["X_train"] & F["X_test"];
+    D -->|Train/Test Split| G["y_train"] & H["y_test"];
+    
+    %% Model Training
+    E -->|Training Features| I["XGBClassifier (model)"];
+    G -->|Training Target| I;
+    I -->|Optimized Hyperparameters| J["df_imp"];
+    
+    %% Comments
+    %% A: Data source containing wine characteristics and quality
+    %% B: DataFrame containing the loaded data
+    %% C: Features used for training
+    %% D: Target variable indicating wine quality
+    %% E & G: Training data split
+    %% F & H: Testing data split
+    %% I: Machine learning model used for prediction
+    %% J: DataFrame containing feature importance after model training

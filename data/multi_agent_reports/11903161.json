@@ -1,0 +1,47 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Salary_Data.csv",
+      "description": "Contains salary data including Years of Experience and Salary"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame storing the salary data loaded from CSV"
+    },
+    {
+      "variable": "X",
+      "description": "Independent variable - Years of Experience from the DataFrame"
+    },
+    {
+      "variable": "y",
+      "description": "Dependent variable - Salary from the DataFrame"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data visualization and model fitting"
+    },
+    {
+      "variable": "X",
+      "creation_method": "df.iloc[:, :-1]",
+      "flow": "Used as input features for model training"
+    },
+    {
+      "variable": "y",
+      "creation_method": "df.iloc[:, [-1]]",
+      "flow": "Used as target variable for model training"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "default"
+    }
+  ]
+}

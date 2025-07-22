@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Source
+    A["Froza_Horizon_Cars.csv"] -->|Read CSV| B["df"]
+    
+    %% Initial DataFrame
+    B -->|Filter Columns| C["df1"]
+    C -->|Replace 'info_not_found'| C
+    C -->|Convert to Float| C
+    
+    %% Correlation Analysis
+    C -->|Correlation Analysis| D["Correlation Matrix"]
+    D -->|Visualize| E["Correlation Heatmap"]
+    
+    %% Data Filtering for Easy to Handle Cars
+    C -->|Sort by Handling| F["Sort Handling"]
+    F -->|Select Top 10| G["df2"]
+    
+    %% Data Filtering for High Speed Cars
+    C -->|Sort by Speed| H["Sort Speed"]
+    H -->|Select Top 10| I["df3"]
+    
+    %% Display HTML Tables
+    G -->|Display| J["HTML Table for Easy to Handle Cars"]
+    I -->|Display| K["HTML Table for High Speed Cars"]
+    
+    %% Comments for clarity
+    A:::comment ---
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    A:::comment ---
+    classDef default fill:#bbf,stroke:#f66,stroke-width:2px;
+    
+    %% Model Information (None in this Notebook)
+    

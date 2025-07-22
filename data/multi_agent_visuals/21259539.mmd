@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    DS1["Oxford IIIT Pet Dataset"]
+    
+    %% Data Variables
+    V1["dataset"]
+    V2["train"]
+    V3["test"]
+    V4["train_dataset"]
+    V5["test_dataset"]
+    V6["model (U-Net)"]
+    V7["model_history"]
+    
+    %% Data Source to Variable
+    DS1 --> |"tfds.load"| V1
+    
+    %% Data Transformation
+    V1 --> |"dataset['train'].map(load_image_train)"| V2
+    V1 --> |"dataset['test'].map(load_image_test)"| V3
+    
+    %% Dataset Preparation
+    V2 --> |"cache().shuffle(BUFFER_SIZE).batch(BATCH_SIZE).repeat()"| V4
+    V3 --> |"batch(BATCH_SIZE)"| V5
+    
+    %% Model Training
+    V4 --> |"model.fit"| V6
+    V5 --> |"model.fit"| V6
+    V6 --> |"Training and validation"| V7
+    
+    %% Comments
+    classDef classDataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef classDataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef classMLModel fill:#5f5,stroke:#333,stroke-width:2px;
+    
+    class DS1 classDataSource;
+    class V1,V2,V3,V4,V5,V7 classDataVariable;
+    class V6 classMLModel; 

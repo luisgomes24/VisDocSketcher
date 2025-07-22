@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DS [Data Sources]
+        A["train.csv"]:::dataSource --> B["titanic_df"]:::dataFrame
+        click A "#This data source contains data about Titanic passengers including survival status, age, gender, class, fare, and embarkation port."
+    end
+
+    %% Data Processing
+    B --> C["Survived"]:::dataVariable
+    B --> D["Sex"]:::dataVariable
+    B --> E["Pclass"]:::dataVariable
+    B --> F["Embarked"]:::dataVariable
+    B --> G["Age"]:::dataVariable
+    B --> H["Fare"]:::dataVariable
+    B --> I["Cabin"]:::dataVariable
+
+    %% Data Analysis
+    subgraph Analysis [Statistical Analysis]
+        C --> J["Survival Analysis & Plots"]:::analysisFlow
+        D --> K["Gender-based Plots"]:::analysisFlow
+        E --> L["Class Distribution & Survival Plots"]:::analysisFlow
+        F --> M["Embarkation Port Survival Analysis"]:::analysisFlow
+        G --> N["Age Distribution & Joint Plots"]:::analysisFlow
+        H --> O["Fare Distribution & Joint Plots"]:::analysisFlow
+        I --> P["Cabin Survival Analysis"]:::analysisFlow
+    end
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef analysisFlow fill:#ff9,stroke:#333,stroke-width:2px;
+```

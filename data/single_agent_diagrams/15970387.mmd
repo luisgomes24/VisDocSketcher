@@ -1,0 +1,10 @@
+graph TD;
+    A["📥 Load Data <img src='icons/file.svg'/>"] --> B["📊 Train_V2 <img src='table.svg'/>"];
+    B --> C["📁 Create TFRecords"];
+    C --> D["🧠 Load Segmentation Model"];
+    D --> E["📊 Create Predict Dataset"];
+    E --> F["📊 Generate Images and Masks"];
+    F --> G["✅ Serialize Examples"];
+    G --> H["📥 Write TFRecords"];
+    H --> I["📊 Verify Generated TFRecords"];
+    I --> J["🚀 Visualize Results <img src='dummy_plots/scatter_plot_template.svg'/>"];

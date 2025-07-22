@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data source node
+    A["MNIST dataset"] --> |"loaded to"| B["training_dataset"]
+    A --> |"loaded to"| C["validation_dataset"]
+
+    %% Transformation
+    D["transform"] --> |"applied to"| B
+    D --> |"applied to"| C
+    
+    %% Loader nodes
+    B --> |"DataLoader created"| E["training_loader"]
+    C --> |"DataLoader created"| F["validation_loader"]
+
+    %% Model setup
+    G["LeNet Model"]
+    G --> |"trained using"| E
+    G --> |"validated using"| F
+
+    %% Training
+    H["Adam optimizer"] --> |"optimizes"| G
+    I["CrossEntropyLoss"] --> |"criterion for"| G
+
+    E --> |"training data"| J["Training Loop"]
+    F --> |"validation data"| J
+
+    %% Tracking training progress
+    J --> |"updates"| K["running_loss_history"]
+    J --> |"updates"| L["running_corrects_history"]
+    J --> |"updates"| M["val_running_loss_history"]
+    J --> |"updates"| N["val_running_corrects_history"]
+
+    %% Comments for clarity
+    classDef transformer fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,C,E,F,G,H,I,J,K,L,M,N transformer;
+    %% Note: In this diagram, arrows indicate the flow of data and transformations across the machine learning pipeline.

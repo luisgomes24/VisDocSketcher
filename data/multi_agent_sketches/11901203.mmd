@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+flowchart TD
+    %% Player data file to dataframe
+    A["Players.xlsx"] -->|Read| B["players_data"]
+    %% Players dataframe to attributes
+    B -->|Extract batting_hand| C["batting_hand"]
+    B -->|Extract player_country| D["player_country"]
+    %% Batting hand counts
+    C -->|Count left-handed| E["lh"]
+    C -->|Count right-handed| F["rh"]
+    %% Match data file to dataframe
+    G["matches.csv"] -->|Read| H["match_data"]
+    %% Matches dataframe to attributes
+    H -->|Extract toss decision| I["toss"]
+    %% Decision counts
+    I -->|Count decision_bat| J["decision_bat"]
+    I -->|Count decision_field| K["decision_field"]
+    %% Runs and strikerate file to dataframe
+    L["most_runs_average_strikerate.csv"] -->|Read| M["strike_rate"]
+    %% Delivery data file to dataframe
+    N["deliveries.csv"] -->|Read| O["delivery_data"]

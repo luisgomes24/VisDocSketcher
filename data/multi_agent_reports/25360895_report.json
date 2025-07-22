@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tabular-playground-series-mar-2022/train.csv",
+      "description": "Training data containing time and congestion information."
+    },
+    {
+      "file": "../input/tabular-playground-march-2022-04/lightautoml_rounded_special_ve_37_v2.csv",
+      "description": "Current top public submission for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing the training data."
+    },
+    {
+      "variable": "submission_in",
+      "description": "DataFrame containing the current top public prediction submission."
+    },
+    {
+      "variable": "lower",
+      "description": "Lower quantile threshold for clipping predictions."
+    },
+    {
+      "variable": "upper",
+      "description": "Upper quantile threshold for clipping predictions."
+    },
+    {
+      "variable": "submission_out",
+      "description": "DataFrame containing the clipped and rounded predictions."
+    },
+    {
+      "variable": "mae",
+      "description": "Mean Absolute Error of the predictions before and after clipping."
+    },
+    {
+      "variable": "difference",
+      "description": "Difference between clipped and original predictions."
+    },
+    {
+      "variable": "histogram",
+      "description": "Counts of the changes in predictions after clipping."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Read from CSV using pd.read_csv",
+      "flows": ["Used to compute quantiles for congestion predictions"]
+    },
+    {
+      "variable": "submission_in",
+      "creation": "Read from CSV using pd.read_csv",
+      "flows": ["Used as input for clipping predictions"]
+    },
+    {
+      "variable": "lower",
+      "creation": "Computed from train DataFrame using groupby and quantile",
+      "flows": ["Used to clip 'submission_out' predictions"]
+    },
+    {
+      "variable": "upper",
+      "creation": "Computed from train DataFrame using groupby and quantile",
+      "flows": ["Used to clip 'submission_out' predictions"]
+    },
+    {
+      "variable": "submission_out",
+      "creation": "Copy of 'submission_in' with congestion clipped",
+      "flows": ["Rounded and saved as 'submission_rounded.csv'"]
+    },
+    {
+      "variable": "mae",
+      "creation": "Calculated using mean_absolute_error",
+      "flows": ["Displayed as an output"]
+    },
+    {
+      "variable": "difference",
+      "creation": "Computed as the difference between 'submission_out' and 'submission_in'",
+      "flows": ["Used to generate histogram of changes"]
+    },
+    {
+      "variable": "histogram",
+      "creation": "Computed from 'difference' DataFrame",
+      "flows": ["Displayed as a bar chart"]
+    }
+  ],
+  "models": []
+}

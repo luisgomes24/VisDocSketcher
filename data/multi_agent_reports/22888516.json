@@ -1,0 +1,17 @@
+{"data_sources": [
+    {"file_name": "Unicorn_Clean.csv", "description": "Cleaned dataset of unicorn startups containing their valuations, industries, joining dates, etc."}
+],
+"data_variables": [
+    {"name": "df", "description": "DataFrame containing the entire set of unicorn startups information."},
+    {"name": "industrydf", "description": "DataFrame aggregating valuations by industry."},
+    {"name": "companydf20", "description": "DataFrame listing top 20 companies by valuation."},
+    {"name": "dates", "description": "DataFrame grouping valuations by date joined, company, country, and industry."}
+],
+"data_flow": [
+    {"variable_name": "df", "creation_method": "pd.read_csv", "pipeline": "Used for all data analysis and visualization"},
+    {"variable_name": "industrydf", "creation_method": "groupby and sum on df", "pipeline": "Used to create business valuations per industry for bar plot"},
+    {"variable_name": "companydf20", "creation_method": "groupby and sum on df", "pipeline": "Used to create the top 20 companies by valuation bar plot"},
+    {"variable_name": "dates", "creation_method": "groupby on df", "pipeline": "Used for generating bar graph depicting valuation increases over time"}
+],
+"models": []
+}

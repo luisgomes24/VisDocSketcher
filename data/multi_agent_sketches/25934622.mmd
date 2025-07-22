@@ -1,0 +1,56 @@
+flowchart TD
+  subgraph DataSources
+    A1["/train.csv/"]:::source
+    A2["/test.csv/"]:::source
+    A3["/train_labels.csv/"]:::source
+    A4["/sample_submission.csv/"]:::source
+  end
+
+  subgraph DataFrames
+    B1[train]:::dataframe
+    B2[test]:::dataframe
+    B3[train_labels]:::dataframe
+    B4[train_feat_eng]:::dataframe
+    B5[test_feat_eng]:::dataframe
+    B6[df_train]:::dataframe
+    B7[labels_train]:::dataframe
+    B8[submission]:::dataframe
+    B9[prediction]:::data
+  end
+
+  subgraph Models
+    M1[XGBClassifier]:::model
+  end
+
+  %% Data Sources
+  A1 -->|Read CSV| B1
+  A2 -->|Read CSV| B2
+  A3 -->|Read CSV| B3
+  A4 -->|Read CSV for format| B8
+
+  %% Data Flow
+  B1 -->|Feature engineering| B4
+  B2 -->|Feature engineering| B5
+  B4 -->|Drop columns| B6
+  B3 -->|Get target variable| B7
+
+  %% Model Fitting and Predictions
+  B6 -->|Train Model| M1
+  B7 -->|Train Model| M1
+  M1 -->|Predict| B9
+  B9 -->|Store predictions| B8
+  B8 -->|Export CSV| A4
+
+  classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef dataframe fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#fbf,stroke:#333,stroke-width:2px;
+  classDef data fill:#fbb,stroke:#333,stroke-width:2px;
+
+  %% Comments
+  %% A1-A4: Sources of data input
+  %% B1-B3: Initial dataframes created from input data
+  %% B4 & B5: Feature engineering applied to train and test data
+  %% B6 & B7: Prepared data used for model training
+  %% M1: XGBClassifier used for predicting labels
+  %% B9: Predictions stored
+  %% B8: Submission CSV creation with predictions

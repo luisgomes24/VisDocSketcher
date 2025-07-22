@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.json",
+      "description": "Contains training data for the MRC task."
+    },
+    {
+      "file_name": "dev.json",
+      "description": "Contains development data for the MRC task."
+    },
+    {
+      "file_name": "dev_cv0_predictions_best.json",
+      "description": "Predictions from model fold 0 on the development set."
+    },
+    {
+      "file_name": "dev_cv1_predictions_best.json",
+      "description": "Predictions from model fold 1 on the development set."
+    },
+    {
+      "file_name": "dev_cv2_predictions_best.json",
+      "description": "Predictions from model fold 2 on the development set."
+    },
+    {
+      "file_name": "dev_cv3_predictions_best.json",
+      "description": "Predictions from model fold 3 on the development set."
+    },
+    {
+      "file_name": "test1_predictions_detail.pkl",
+      "description": "Detailed test predictions for the evaluation phase."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_fileJson",
+      "description": "Merged JSON data from training and development datasets."
+    },
+    {
+      "variable_name": "dev_outcome_merged",
+      "description": "Merged predictions from different model folds for the development set."
+    },
+    {
+      "variable_name": "test_iter",
+      "description": "DataLoader containing the test dataset for evaluation."
+    },
+    {
+      "variable_name": "tokenizer",
+      "description": "BertTokenizerFast instance used for processing text."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_fileJson",
+      "creation_method": "json.load",
+      "uses": "Merged to JSON file and used for training data representation."
+    },
+    {
+      "variable_name": "dev_outcome_merged",
+      "creation_method": "json.load",
+      "uses": "Evaluated for performance metrics (F1, EM)."
+    },
+    {
+      "variable_name": "test_iter",
+      "creation_method": "DataLoader",
+      "uses": "Used for model evaluation, feeding the test dataset in batches."
+    },
+    {
+      "variable_name": "tokenizer",
+      "creation_method": "BertTokenizerFast.from_pretrained",
+      "uses": "Preprocess input texts for the model."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MRC_model",
+      "input_features": ["paragraphs", "questions"],
+      "target_variable": "answers",
+      "hyperparameters": {
+        "cls_threshold": 0.6,
+        "n_best_size": 5,
+        "max_answer_length": 150,
+        "per_gpu_eval_batch_size": 2
+      }
+    }
+  ]
+}

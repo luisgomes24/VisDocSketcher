@@ -1,0 +1,13 @@
+flowchart TD
+    %% Data Sources
+    A["dc-wikia-data.csv"] -->|Load CSV| B[my_data_dc]
+    C["marvel-wikia-data.csv"] -->|Load CSV| D[my_data_ml]
+
+    %% DC Data Workflow
+    B -->|Display| E["my_data_dc.head()"]
+    B -->|Describe| F["my_data_dc.describe(include='all')"]
+    B -->|Plotting| G["sns.scatterplot"]
+    B -->|Plotting| H["sns.barplot"]
+
+    %% Marvel Data Workflow (Unused)
+    D

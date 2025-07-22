@@ -1,0 +1,36 @@
+%% Begin of the flowchart
+flowchart TD
+    %% Data sources
+    tajMahalImage["Taj Mahal Image"]
+    templeImage["Tōdai-ji Temple Image"]
+    sanMarcoImage["Piazza San Marco Image"]
+    tajMahalImage -->|Read using OpenCV| img_bgr1["Image BGR Taj Mahal"]
+    templeImage -->|Read using OpenCV| img_bgr2["Image BGR Tōdai-ji"]
+    sanMarcoImage -->|Read using OpenCV| img_bgr3["Image BGR San Marco"]
+
+    %% Image Conversion
+    img_bgr1 -->|Convert to RGB| img_rgb1["Image RGB Taj Mahal"]
+    img_bgr2 -->|Convert to RGB| img_rgb2["Image RGB Tōdai-ji"]
+    img_bgr3 -->|Convert to RGB| img_rgb3["Image RGB San Marco"]
+
+    %% Image to Tensor Conversion
+    img_rgb1 -->|Convert to Tensor| x_rgb1["Tensor RGB Taj Mahal"]
+    img_rgb2 -->|Convert to Tensor| x_rgb2["Tensor RGB Tōdai-ji"]
+    img_rgb3 -->|Convert to Tensor| x_rgb3["Tensor RGB San Marco"]
+    img_bgr1 -->|Convert to Tensor| x_bgr1["Tensor BGR Taj Mahal"]
+    img_bgr2 -->|Convert to Tensor| x_bgr2["Tensor BGR Tōdai-ji"]
+    img_bgr3 -->|Convert to Tensor| x_bgr3["Tensor BGR San Marco"]
+
+    %% Data Augmentation
+    aug_list["Augmentation Pipeline"]
+    x_bgr1 & x_bgr2 & x_bgr3 --> aug_list
+    aug_list -->|Apply Augmentations| out_tensor1["Augmented Tensor Taj Mahal"]
+    aug_list -->|Apply Augmentations| out_tensor2["Augmented Tensor Tōdai-ji"]
+    aug_list -->|Apply Augmentations| out_tensor3["Augmented Tensor San Marco"]
+
+    %% Model Description
+    aug_list -->|Uses| augmentation_pipeline
+    augmentation_pipeline["PatchSequential Pipeline"]
+    augmentation_pipeline -->|Contains| colorJitter["ColorJitter"]
+    augmentation_pipeline -->|Contains| randomAffine["RandomAffine"]
+    augmentation_pipeline -->|Contains| randomPerspective["RandomPerspective"]

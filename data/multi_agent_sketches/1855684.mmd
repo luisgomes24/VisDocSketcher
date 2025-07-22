@@ -1,0 +1,27 @@
+flowchart TD
+    %% Node for first data source
+    A1["../input/total-business-inventories.csv"]
+    %% Node for second data source
+    A2["../input/total-business-inventories_1.csv"]
+    %% Node for third data source
+    A3["../input/total-business-inventories_2.csv"]
+
+    %% Node for df1 creation and usage
+    B1["df1"]
+    B1 -->|"Visualized"| B2["plotPerColumnDistribution"]
+    B1 -->|"Dataframe Head"| B3["Head displayed"]
+
+    %% Node for df2 creation and usage
+    C1["df2"]
+    C1 -->|"Visualized"| C2["plotPerColumnDistribution"]
+    C1 -->|"Dataframe Head"| C3["Head displayed"]
+
+    %% Node for df3 creation and usage
+    D1["df3"]
+    D1 -->|"Visualized"| D2["plotPerColumnDistribution"]
+    D1 -->|"Dataframe Head"| D3["Head displayed"]
+
+    %% Arrows showing data loading
+    A1 -->|"pd.read_csv"| B1
+    A2 -->|"pd.read_csv"| C1
+    A3 -->|"pd.read_csv"| D1

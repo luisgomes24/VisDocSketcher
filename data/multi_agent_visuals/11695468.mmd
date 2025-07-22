@@ -1,0 +1,9 @@
+%% This is a Mermaid.js diagram representing the data workflow for the given Jupyter Notebook
+
+flowchart TD
+    %% Node for the data source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> eu_sf_far_2007_2013.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df1 DataFrame"]
+    %% Node for data processing
+    B -->|Used for plotting| C["<img src='icons/image.svg' width=100 height=100/> <br/> Plot Distributions <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    B -->|Used for plotting| D["<img src='icons/image.svg' width=100 height=100/> <br/> Histogram <img src='dummy_plots/hist_template.svg'/> <br/>"]
+    B -->|Used for plotting| E["<img src='icons/image.svg' width=100 height=100/> <br/> Correlation Matrix <img src='dummy_plots/correlation_matrix_template.svg'/> <br/>"]

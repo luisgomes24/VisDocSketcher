@@ -1,0 +1,31 @@
+flowchart TD
+
+    %% Data Source
+    A["Groceries_dataset.csv"]:::dataSource
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    
+    %% Load Data
+    A --> B[df]:::variable
+    classDef variable fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef process fill:#ccf,stroke:#f99,stroke-width:2px;
+
+    %% Extract Unique Items
+    B --> C[items]:::variable
+
+    %% Group Data
+    B --> D[df_grouped]:::variable
+    
+    %% Convert Grouped Data
+    D --> E[df_grouped_df]:::variable
+
+    %% Comments
+    classDef comment fill:#ddd,stroke:#888,stroke-width:1px,font-weight:bold;
+    subgraph SG_Process [Notebook Process]
+    B --> |Read and create Dataframe| B
+    C --> |Unique item descriptions| C
+    D --> |Group by Member & Date| D
+    E --> |Convert Group Object to DataFrame| E
+    end
+    
+    style A fill:#ff9,stroke:#333,stroke-width:4px;
+    style SG_Process fill:#eee,stroke:#aaa,stroke-width:1px;

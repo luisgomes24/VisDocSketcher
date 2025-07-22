@@ -1,0 +1,126 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Kaggle_Sirio_Libanes_ICU_Prediction.xlsx",
+      "description": "Contains ICU prediction data for patients including various medical features."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the dataset loaded from the Excel file, with patient variables and target ICU information."
+    },
+    {
+      "variable_name": "x",
+      "description": "Feature set DataFrame created by dropping the target column and filling null values."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable series representing whether each patient requires ICU."
+    },
+    {
+      "variable_name": "df_results_test",
+      "description": "DataFrame containing results of different classifiers applied to the test dataset, including metrics like ROC_AUC and accuracy."
+    },
+    {
+      "variable_name": "df_results_xgb",
+      "description": "DataFrame holding results of the XGBoost classifier with hyperparameter tuning."
+    },
+    {
+      "variable_name": "df_plot",
+      "description": "DataFrame prepared for plotting the top performing classifiers based on various metrics."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_excel",
+      "flows_to": ["x", "y"]
+    },
+    {
+      "variable_name": "x",
+      "creation_method": "df.drop and fillna",
+      "flows_to": ["train_clfs", "train_xgb"]
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "df['ICU']",
+      "flows_to": ["train_clfs", "train_xgb"]
+    },
+    {
+      "variable_name": "df_results_test",
+      "creation_method": "train_clfs function call",
+      "flows_to": ["df_results"]
+    },
+    {
+      "variable_name": "df_results_xgb",
+      "creation_method": "train_xgb function call",
+      "flows_to": ["df_results"]
+    },
+    {
+      "variable_name": "df_results",
+      "creation_method": "pd.concat",
+      "flows_to": ["plot_test"]
+    },
+    {
+      "variable_name": "df_plot",
+      "creation_method": "pd.concat",
+      "flows_to": ["plot_test"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Decision Tree Classifier",
+      "input_features": "All features except 'ICU' and 'PATIENT_VISIT_IDENTIFIER'",
+      "target_variable": "ICU",
+      "hyperparameters": {
+        "max_depth": 3
+      }
+    },
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "KNeighborsClassifier",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "AdaBoost Classifier",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "Support Vector Machine (SVC)",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {}
+    },
+    {
+      "model_name": "XGBoost Classifier",
+      "input_features": "All features processed from df",
+      "target_variable": "ICU",
+      "hyperparameters": {
+        "max_depth": "range from 3 to 8",
+        "learning_rate": "values from 0.01 to 0.2",
+        "colsample_bytree": "values 0.6 to 0.8",
+        "min_child_weight": "values from 0.4 to 0.6",
+        "gamma": "values 0 to 0.1",
+        "reg_lambda": "values from 6 to 10",
+        "n_estimators": "values from 150 to 300",
+        "scale_pos_weight": "calculated from dataset"
+      }
+    }
+  ]
+}

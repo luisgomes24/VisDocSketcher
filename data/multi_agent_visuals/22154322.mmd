@@ -1,0 +1,43 @@
+flowchart TD
+
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> train_sales.csv"]:::file -->|Load Data| B1["<img src='dummy_plots/barplot_template.svg'/> <br/> train_df"]:::data
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> test_sales.csv"]:::file -->|Load Data| B2["<img src='dummy_plots/barplot_template.svg'/> <br/> test_df"]:::data
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> stores.csv"]:::file -->|Load Data| B3["<img src='dummy_plots/barplot_template.svg'/> <br/> stores_df"]:::data
+    A4["<img src='icons/file.svg' width=100 height=100/> <br/> features.csv"]:::file -->|Load Data| B4["<img src='dummy_plots/barplot_template.svg'/> <br/> features_df"]:::data
+
+    %% Data Merging
+    B1 -->|Merge Data| C1["<img src='dummy_plots/barplot_template.svg'/> <br/> train_large_df"]:::data
+    B2 -->|Merge Data| C2["<img src='dummy_plots/barplot_template.svg'/> <br/> test_large_df"]:::data
+    B3 -->|Merge with Train| C1
+    B3 -->|Merge with Test| C2
+    B4 -->|Merge with Train| C1
+    B4 -->|Merge with Test| C2
+
+    %% Processing Train Data
+    C1 -->|Concat Data| D1["<img src='dummy_plots/barplot_template.svg'/> <br/> train_test_large_df"]:::data
+    D1 -->|Split Data| E1["<img src='dummy_plots/barplot_template.svg'/> <br/> train_x_df"]:::data
+    D1 -->|Split Data| E2["<img src='dummy_plots/barplot_template.svg'/> <br/> valid_x_df"]:::data
+
+    %% Training Data Preparation
+    E1 -->|Prepare Dataset| F1["<img src='dummy_plots/barplot_template.svg'/> <br/> dtrain"]:::model_data
+    E2 -->|Prepare Dataset| F2["<img src='dummy_plots/barplot_template.svg'/> <br/> dvalid"]:::model_data
+    G1["train_y"]:::data --> F1
+    G2["valid_y"]:::data --> F2
+
+    %% Model Training
+    F1 -->|Train Model| H1["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Model"]:::model
+    F2 -->|Validate Model| H1
+
+    %% Predictions
+    C2 -->|Model Prediction| I1["<img src='dummy_plots/barplot_template.svg'/> <br/> test_pred"]:::data
+    H1 --> I1
+
+    %% Submission Preparation
+    I1 -->|Create Submission| J1["<img src='dummy_plots/barplot_template.svg'/> <br/> sub_df"]:::data
+    J1 -->|Save to CSV| K1["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]:::file
+
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef model_data fill:#F2C464,stroke:#333,stroke-width:2px;

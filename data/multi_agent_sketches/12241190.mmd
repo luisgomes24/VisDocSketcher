@@ -1,0 +1,26 @@
+flowchart TD
+
+    %% Data Source Nodes
+    A((bluemarble.png)):::dataSource -->|"Read image"| C[img]
+    B((etopo.png)):::dataSource -->|"Read image"| C[img]
+
+    %% Image Processing Nodes
+    subgraph Image Plotting
+    C[img] -->|Used in| E(ax.imshow)
+    end
+
+    %% Map and Figure Nodes
+    D[plt.figure] -->|Create figure| F(fig)
+    F(fig) -->|Create subplot| G[fig.add_subplot]
+    G -->|Used for drawing| H[ax]
+
+    %% Extent & Axis Nodes
+    I[(img_extent)]:::extent -->|Defines extent| E
+    I -->|Defines extent| H
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef extent fill:#bbf,stroke:#000,stroke-width:2px;
+
+    %% Comments
+    class E, F, G, H, I classDef generated fill:none,stroke:none,color:transparent;

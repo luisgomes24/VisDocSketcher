@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "source": "No CSV files are available in the dataset",
+      "description": "The notebook did not find any CSV data sources to analyze."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame used for plotting and correlation analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Not explicitly set but intended for user data; functions operate on it.",
+      "flows": [ "used in various plotting functions" ]
+    }
+  ],
+  "models": []
+}

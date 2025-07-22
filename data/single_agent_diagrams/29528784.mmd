@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Train Data <img src='icons/file.svg' /> <br/>"] --> B["🧪 Check for Missing Values"]
+    B --> C["🔧 Fill Missing Values with Averages"]
+    C --> D["📊 Correlation Matrix <img src='dummy_plots/heatmap_template.svg' /> <br/>"]
+    D --> E["📈 Distribution Plot <img src='dummy_plots/hist_template.svg' /> <br/>"]
+    E --> F["🔄 Split Data into Features and Target"]
+    F --> G["🤖 Train Model with AutoML"]
+    G --> H["📜 Display Best Model Results"]
+    H --> I["📁 Load Test Data <img src='icons/file.svg' /> <br/>"]
+    I --> J["🔧 Fill Missing Values in Test Data"]
+    J --> K["🔄 Predict Using Trained Model"]
+    K --> L["📤 Prepare Submission Data <img src='icons/table.svg' /> <br/>"]
+    L --> M["💾 Save Submission File"]

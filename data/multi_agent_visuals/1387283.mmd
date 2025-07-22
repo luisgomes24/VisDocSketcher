@@ -1,0 +1,38 @@
+%%{ 
+  init: { 
+    'theme': 'default' 
+  }
+}%%
+flowchart TD
+    %% Node for Data Source
+    A["../input/rodent-inspection.csv"]:::data_source
+    %% Comment: This node represents the CSV file that acts as the data source.
+
+    %% Node for df1
+    B[df1]:::data_variable
+    %% Comment: This node represents the DataFrame created by reading the CSV file, containing the first 100 rows.
+
+    %% Nodes for Data usage
+    C["<img src='dummy_plots/hist_template.svg'/> <br/> plotHistogram"]:::data_usage
+    %% Comment: This node represents plotting a histogram from df1.
+    
+    D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> plotCorrelationMatrix"]:::data_usage
+    %% Comment: This node plots a correlation matrix from df1.
+
+    E["<img src='dummy_plots/boxplot_template.svg'/> <br/> plotScatterMatrix"]:::data_usage
+    %% Comment: This node stands for plotting a scatter matrix based on df1.
+
+    F["<img src='dummy_plots/barplot_template.svg'/> <br/> plotPCA"]:::data_usage
+    %% Comment: This node is for performing PCA plotting from df1.
+
+    %% Define styles
+    classDef data_source fill:#f96,stroke:#333,stroke-width:2px;
+    classDef data_variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data_usage fill:#bfb,stroke:#333,stroke-width:2px;
+
+    %% Define flow connections
+    A -->|read_csv| B
+    B --> C
+    B --> D
+    B --> E
+    B --> F

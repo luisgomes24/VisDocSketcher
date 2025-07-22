@@ -1,0 +1,66 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data with energy consumption for buildings"
+    },
+    {
+      "file_name": "building_metadata.csv",
+      "description": "Metadata about buildings, including site ID and square footage"
+    },
+    {
+      "file_name": "asu_2016-2018.csv",
+      "description": "ASU buildings energy consumption data from 2016 to 2018"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing the training dataset with meter readings"
+    },
+    {
+      "variable_name": "df_building_metadata",
+      "description": "DataFrame holding metadata about buildings"
+    },
+    {
+      "variable_name": "df_asu",
+      "description": "DataFrame for energy consumption data of ASU buildings"
+    },
+    {
+      "variable_name": "df_buildings",
+      "description": "Merged DataFrame of ASHRAE buildings with ASU building information"
+    },
+    {
+      "variable_name": "df_mapping",
+      "description": "Mapping DataFrame to associate building IDs with ASU building numbers"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "created_by": "pd.read_csv",
+      "used_for": "Training dataset used to analyze consumption patterns"
+    },
+    {
+      "variable": "df_building_metadata",
+      "created_by": "pd.read_csv",
+      "used_for": "Used to merge building metadata with consumption data"
+    },
+    {
+      "variable": "df_asu",
+      "created_by": "pd.read_csv",
+      "used_for": "Provides ASU building energy consumption data for comparisons"
+    },
+    {
+      "variable": "df_buildings",
+      "created_by": "merge",
+      "used_for": "Contains building associations for analysis"
+    },
+    {
+      "variable": "df_mapping",
+      "created_by": "manual input",
+      "used_for": "Mapping for unmatched buildings, adjusting building IDs"
+    }
+  ],
+  "models": []
+}

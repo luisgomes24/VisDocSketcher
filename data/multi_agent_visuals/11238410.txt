@@ -1,0 +1,1 @@
+This notebook performs exploratory data analysis on two CSV files. It defines functions for visualizing the distributions and correlations of the data and reads in two datasets for analysis. Various plots are created based on the data.

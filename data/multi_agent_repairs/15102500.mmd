@@ -1,0 +1,55 @@
+```mermaid
+flowchart TD
+    %% Nodes for Data Sources
+    A1{{"sales_train.csv"}}:::source
+    A2{{"test.csv"}}:::source
+    A3{{"sample_submission.csv"}}:::source
+    A4{{"shops.csv"}}:::source
+    A5{{"items.csv"}}:::source
+    A6{{"item_categories.csv"}}:::source
+
+    %% Nodes for Data Variables
+    B1["train_df"]:::variable
+    B2["test_df"]:::variable
+    B3["sub"]:::variable
+    B4["shop_df"]:::variable
+    B5["items_df"]:::variable
+    B6["item_cat"]:::variable
+    B7["data"]:::variable
+    B8["x_train"]:::variable
+    B9["y_train"]:::variable
+    B10["x_test"]:::variable
+    B11["x_valid"]:::variable
+    B12["y_valid"]:::variable
+    B13["y_pred_lgb"]:::variable
+
+    %% Nodes for Models
+    C1["LGBMRegressor"]:::model
+
+    %% Data Source to Variable Connections
+    A1 -->|Read| B1
+    A2 -->|Read| B2
+    A3 -->|Format| B3
+    A4 -->|Read| B4
+    A5 -->|Read| B5
+    A6 -->|Read| B6
+
+    %% Data Transformation and Flow
+    B1 -->|Group By| B7
+    B2 -->|Merge With| B7
+    B2 -->|Drop Columns| B8
+    B2 -->|Extract Target| B9
+
+    %% Model Training and Prediction
+    B8 -->|Train| C1
+    B9 -->|Train| C1
+    C1 -->|Predict| B13
+
+    %% Output Predictions to Submission
+    B13 -->|Save To| B3
+
+    %% Styles
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+```

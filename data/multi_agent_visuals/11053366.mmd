@@ -1,0 +1,31 @@
+graph TD
+    %% Define nodes for data sources
+    subgraph DataSources
+        direction TB
+        A1[test_lAUu6dG.csv] %% Comment: First dataset containing sample data
+        A2[train_ctrUa4K.csv] %% Comment: Second dataset for training
+    end
+
+    %% Define nodes for data frames
+    subgraph DataFrames
+        direction TB
+        B1[df1] %% Comment: DataFrame for first dataset
+        B2[df2] %% Comment: DataFrame for second dataset
+    end
+
+    %% Define process of reading CSV data into DataFrames
+    A1 -->|pd.read_csv| B1
+    A2 -->|pd.read_csv| B2
+
+    %% Define data flow to visualization
+    B1 -->|Used in visualization functions| Visualizations
+    B2 -->|Used in visualization functions| Visualizations
+
+    %% Define final visualizations node
+    Visualizations[Visualizations and analysis] %% Comment: Represents visualizations and analysis using the data frames
+    
+    A1 -->|<img src='icons/file.svg' width=100 height=100/> <br/> test_lAUu6dG.csv| B1
+    A2 -->|<img src='icons/file.svg' width=100 height=100/> <br/> train_ctrUa4K.csv| B2
+    B1 -->|<img src='icons/table.svg' width=100 height=100/> <br/> df1| Visualizations
+    B2 -->|<img src='icons/table.svg' width=100 height=100/> <br/> df2| Visualizations
+    Visualizations -->|<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Visualizations and analysis|

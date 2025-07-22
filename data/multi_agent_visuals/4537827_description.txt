@@ -1,0 +1,1 @@
+This notebook performs exploratory data analysis by visualizing the column distributions, correlation, and scatter plots of the dataset. It uses functions to generate various types of plots and evaluates relationships within the dataset.

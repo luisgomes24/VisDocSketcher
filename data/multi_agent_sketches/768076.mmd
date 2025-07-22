@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A1["../input/nflplaybyplay2009to2016/NFL Play by Play 2009-2017 (v4).csv"]
+    A2["../input/building-permit-applications-data/Building_Permits.csv"]
+    A3["../input/openaddresses-us-west/ca.csv"]
+
+    %% Data Variables
+    B1[nfl_data]
+    B2[sf_permits]
+    B3[missing_values_count]
+    B4[total_cells]
+    B5[total_missing]
+    B6[sf_permits_temp]
+    B7[subset_nfl_data]
+    B8[sf_permits_filled]
+
+    %% Data Flow
+    A1 --> |read_csv| B1
+    A2 --> |read_csv| B2
+    B1 --> |Analyze for missing values| B3
+    B1 --> |Calculate Total Cells| B4
+    B3 --> |Calculate Total Missing| B5
+    B2 --> |Analyze and drop >50% NaNs| B6
+    B1 --> |Filter for relevant columns| B7
+    B2 --> |Fill NaNs| B8
+
+    %% Data Analysis and Imputation Steps
+    B1 --> |Imputation and drop NaNs| B3
+    B6 --> |Further Analysis| B8

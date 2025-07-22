@@ -1,0 +1,17 @@
+flowchart TD
+  %% Data Source Node
+  A["India Census 2011 Data.csv"] --> |"load csv"| B["df"]
+  
+  %% Data Variable Node
+  B["df"] --> |"data manipulation"| C["Data Manipulation"]
+  B --> |"calculating totals"| D["Calculate Totals"]
+  B --> |"filtering by districts"| E["Filter by Districts"]
+  
+  %% Final nodes representing actions
+  
+  %% Comments:
+  %% A represents the input data source CSV file.
+  %% B represents the main DataFrame loaded from the CSV file.
+  %% C represents generic data manipulation operations conducted on df.
+  %% D represents operations calculating totals based on df.
+  %% E represents filtering operations based on district data from df.

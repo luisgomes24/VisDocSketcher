@@ -1,0 +1,41 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'nodeBorder': '#000000', 'tertiaryColor': '#F0F0F0'}}}%%
+flowchart TD
+    subgraph DataSources
+        direction LR
+        DS1["Russia Equipment Losses CSV"]
+        DS2["Russia Personnel Losses CSV"]
+    end
+    subgraph Transformations
+        direction LR
+        TR1["Load Equipment Losses Data"]
+        TR2["Load Personnel Losses Data"]
+        TR3["Transform Equipment Data"]
+        TR4["Transform Personnel Data"]
+    end
+    DS1 -->|read_csv| TR1
+    DS2 -->|read_csv| TR2
+    TR1 -->|process| TR3
+    TR2 -->|process| TR4
+    subgraph DataFrames
+        direction LR
+        DF1["df_equipment"]
+        DF2["df_personnel"]
+    end
+    TR3 --> DF1
+    TR4 --> DF2
+    subgraph Plotting
+        direction LR
+        PL1["Example Plot for Equipment Losses"]
+    end
+    DF1 -->|Use DataFrame| PL1
+
+    %% Node explanations
+    %% DS1: Represents the CSV file containing Russian equipment loss data
+    %% DS2: Represents the CSV file containing Russian personnel loss data
+    %% TR1: The process of loading equipment loss data from CSV
+    %% TR2: The process of loading personnel loss data from CSV
+    %% TR3: The transformation steps applied on equipment loss data
+    %% TR4: The transformation steps applied on personnel loss data
+    %% DF1: The resulting data frame holding transformed equipment loss data
+    %% DF2: The resulting data frame holding transformed personnel loss data
+    %% PL1: The visualization step for plotting equipment losses

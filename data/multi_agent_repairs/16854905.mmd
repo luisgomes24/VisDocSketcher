@@ -1,0 +1,24 @@
+```mermaid
+flowchart TD
+    %% Nodes for Data Sources
+    A["train.csv"] -->|Load Data| B["df_train"]
+    C["test.csv"] -->|Load Data| D["df_test"]
+
+    %% Nodes for Data Preparation
+    B -->|Clean & Encode| E["DataFrame: df_train"] %% df_train data preparation
+    D -->|Clean & Encode| F["DataFrame: df_test"] %% df_test data preparation
+
+    %% Feature and Target Selection
+    E -->|Select Features| G["X"] %% X contains input features
+    E -->|Select Target| H["Y"] %% Y is the target variable
+
+    %% Train Model
+    G -->|Train| I["RandomForestClassifier"] %% RandomForest Model Training
+    H -->|Use as Target| I
+    
+    %% Prediction
+    I -->|Predict| J["Y_pred"] %% Y_pred contains predictions
+    
+    %% Create Submission
+    J -->|Use Predictions| K["Submission DataFrame"] %% Create final submission with predictions
+```

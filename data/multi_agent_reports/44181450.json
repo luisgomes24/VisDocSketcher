@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/tropical-cyclone-size-in-the-northwestern-pacific/tropical_cyclone_size.csv",
+      "description": "Dataset containing information about tropical cyclones in the northwestern Pacific, including parameters like time, pressure, wind speed, latitude, and longitude."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df0",
+      "description": "DataFrame loaded from CSV containing cyclone data. Columns include Time, Cyclone Number, Latitude, Longitude, Wind Speed, and Pressure."
+    },
+    {
+      "name": "df",
+      "description": "Filtered DataFrame for each year (2015 and 2016) containing cyclone data used for plotting."
+    },
+    {
+      "name": "gdf",
+      "description": "GeoDataFrame created using filtered cyclone data containing geometry from Latitude and Longitude for mapping."
+    },
+    {
+      "name": "dfi",
+      "description": "Filtered DataFrame for Cyclone Number 1631, used to plot specific cyclone data and create a heatmap."
+    },
+    {
+      "name": "loci",
+      "description": "DataFrame containing Latitude and Longitude for the specific Cyclone Number 1631."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df0",
+      "created_by": "pd.read_csv",
+      "flows_to": "df, dfi"
+    },
+    {
+      "variable": "df",
+      "created_by": "Filtering df0 by year",
+      "flows_to": "gdf"
+    },
+    {
+      "variable": "gdf",
+      "created_by": "GeoDataFrame construction from df",
+      "flows_to": "Plotting cyclone locations on the world map"
+    },
+    {
+      "variable": "dfi",
+      "created_by": "Filtering df0 by Cyclone Number 1631",
+      "flows_to": "loci, plotting pressure, and wind speed graphs"
+    },
+    {
+      "variable": "loci",
+      "created_by": "Selecting Latitude and Longitude from dfi",
+      "flows_to": "Folium heatmap"
+    }
+  ],
+  "models": []
+}

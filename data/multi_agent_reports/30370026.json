@@ -1,0 +1,138 @@
+{
+  "data_sources": [
+    {
+      "file_name": "murderbots/train_data.json",
+      "description": "Contains environmental information for cells."
+    },
+    {
+      "file_name": "murderbots/train_labels.json",
+      "description": "Contains labels indicating the occupants of the cells; '1' for human, '0' for murderbot."
+    },
+    {
+      "file_name": "murderbots/test_data.json",
+      "description": "Environmental information about cells on the user's block."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "X",
+      "description": "DataFrame containing environmental information from the training data."
+    },
+    {
+      "variable_name": "y",
+      "description": "DataFrame containing labels corresponding to 'X', indicating if the cell has a human or murderbot."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "DataFrame containing environmental information from the test data."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training subset of the environmental information from 'X'."
+    },
+    {
+      "variable_name": "X_val",
+      "description": "Validation subset of the environmental information from 'X'."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training subset of the labels from 'y'."
+    },
+    {
+      "variable_name": "y_val",
+      "description": "Validation subset of the labels from 'y'."
+    },
+    {
+      "variable_name": "model",
+      "description": "Logistic Regression model trained to predict if a cell has a human or a murderbot."
+    },
+    {
+      "variable_name": "test_preds",
+      "description": "Prediction probabilities for the test set corresponding to the logistic regression model."
+    },
+    {
+      "variable_name": "top_10_idx",
+      "description": "Indices of the top 10 cells predicted to have humans."
+    },
+    {
+      "variable_name": "flag",
+      "description": "Array indicating which cells to open (1 for human, 0 for murderbot)."
+    },
+    {
+      "variable_name": "flag_string",
+      "description": "String format of the flag indicating which doors to open."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "X",
+      "creation_method": "pd.read_json(train_file)",
+      "flows_to": "Used for training the model."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "pd.read_json(labels_file)",
+      "flows_to": "Used for training the model."
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "pd.read_json(test_file)",
+      "flows_to": "Used for predicting the top 10 cells."
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "train_test_split(X, y, train_size=.8)",
+      "flows_to": "Trained in the model."
+    },
+    {
+      "variable_name": "X_val",
+      "creation_method": "train_test_split(X, y, train_size=.8)",
+      "flows_to": "Used for validating the model performance."
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train_test_split(X, y, train_size=.8)",
+      "flows_to": "Used for training the model."
+    },
+    {
+      "variable_name": "y_val",
+      "creation_method": "train_test_split(X, y, train_size=.8)",
+      "flows_to": "Used for validating the model performance."
+    },
+    {
+      "variable_name": "model",
+      "creation_method": "LogisticRegression(max_iter=100).fit(X_train, y_train)",
+      "flows_to": "Provides predictions for the test set."
+    },
+    {
+      "variable_name": "test_preds",
+      "creation_method": "model.predict_proba(X_test)",
+      "flows_to": "Used to determine which cells to open based on probabilities."
+    },
+    {
+      "variable_name": "top_10_idx",
+      "creation_method": "np.flip(test_preds[:,1].argsort())[:10]",
+      "flows_to": "Used to create the opening flag."
+    },
+    {
+      "variable_name": "flag",
+      "creation_method": "np.zeros((50,)); flag[top_10_idx] = 1",
+      "flows_to": "Converted to string and submitted."
+    },
+    {
+      "variable_name": "flag_string",
+      "creation_method": "list(map(lambda x: str(int(x)), flag))",
+      "flows_to": "Used for submission to the server."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "Environmental information from cells.",
+      "target_variable": "Labels indicating human or murderbot.",
+      "hyperparameters": {
+        "max_iter": 100
+      }
+    }
+  ]
+}

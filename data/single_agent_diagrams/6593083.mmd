@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Load Data<br/><img src='file.svg' />"] --> B["🔍 Data Exploration"]
+    B --> C["🗂️ Split Features and Target"]
+    C --> D["🛠️ Train/Test Split<br/><img src='row_split.svg' />"]
+    D --> E["✨ Preprocessing<br/><img src='column_split.svg' />"]
+    E --> F["🧠 Initialize Model<br/><img src='brain.svg' />"]
+    F --> G["🔗 Create Pipeline"]
+    G --> H["🛠️ Fit Model on Training Data"]
+    H --> I["📊 Predict on Validation Data"]
+    I --> J["🔍 Evaluate Model<br/><img src='hist_template.svg' />"]
+    J --> K["📊 Display Results"]

@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    file1["CSV File: MHICA06001A052NCEN"]
+    file2["CSV File: MHICA06037A052NCEN"]
+    file3["CSV File: MHICA06059A052NCEN"]
+    
+    %% Data Variables
+    df1["DataFrame df1"]
+    df2["DataFrame df2"]
+    df3["DataFrame df3"]
+    
+    %% Data Flow
+    read_csv1["read_csv (df1)"]
+    read_csv2["read_csv (df2)"]
+    read_csv3["read_csv (df3)"]
+    visualize1["plotPerColumnDistribution (df1)"]
+    visualize2["plotPerColumnDistribution (df2)"]
+    visualize3["plotPerColumnDistribution (df3)"]
+    
+    %% Flow Connections
+    file1 --> read_csv1 --> df1
+    file2 --> read_csv2 --> df2
+    file3 --> read_csv3 --> df3
+    df1 --> visualize1
+    df2 --> visualize2
+    df3 --> visualize3

@@ -1,0 +1,121 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/co2-emissions/CO2 Emissions.csv",
+      "description": "Contains data on CO2 emissions of various vehicles including features such as Engine Size, Fuel Type, and Vehicle Class."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the CO2 emissions dataset."
+    },
+    {
+      "name": "predictors",
+      "description": "List of independent variables used to predict CO2 emissions."
+    },
+    {
+      "name": "target",
+      "description": "The dependent variable (target) representing CO2 emissions in grams per kilometer."
+    },
+    {
+      "name": "strat_train_set",
+      "description": "Stratified training set split from the original DataFrame."
+    },
+    {
+      "name": "strat_test_set",
+      "description": "Stratified testing set split from the original DataFrame."
+    },
+    {
+      "name": "X_train",
+      "description": "Training features DataFrame extracted from strat_train_set."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target variable (CO2 emissions) extracted from strat_train_set."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing features DataFrame extracted from strat_test_set."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing target variable (CO2 emissions) extracted from strat_test_set."
+    },
+    {
+      "name": "X_train_prepared",
+      "description": "Preprocessed training features ready for modeling."
+    },
+    {
+      "name": "x_test_prepared",
+      "description": "Preprocessed testing features ready for modeling."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv()",
+      "flows_to": ["strat_train_set", "strat_test_set"]
+    },
+    {
+      "variable": "strat_train_set",
+      "creation": "StratifiedShuffleSplit",
+      "flows_to": ["X_train", "y_train", "X_train_prepared"]
+    },
+    {
+      "variable": "strat_test_set",
+      "creation": "StratifiedShuffleSplit",
+      "flows_to": ["X_test", "y_test", "x_test_prepared"]
+    },
+    {
+      "variable": "X_train_prepared",
+      "creation": "Pipeline and ColumnTransformer processes",
+      "flows_to": ["rf", "lin_reg", "ridge", "model"]
+    },
+    {
+      "variable": "x_test_prepared",
+      "creation": "Pipeline and ColumnTransformer processes for testing set",
+      "flows_to": ["rf", "lin_reg", "ridge", "model"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Random Forest Regressor",
+      "input_features": "X_train_prepared",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 7,
+        "min_samples_split": 20
+      }
+    },
+    {
+      "model_name": "Linear Regression",
+      "input_features": "X_train_prepared",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "Ridge Regression",
+      "input_features": "X_train_prepared",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "alpha": 5
+      }
+    },
+    {
+      "model_name": "Neural Network (TensorFlow)",
+      "input_features": "X_train_prepared",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "layers": [
+          {"nodes": 75, "activation": "linear"},
+          {"nodes": 50, "activation": "linear"},
+          {"nodes": 25, "activation": "linear"},
+          {"nodes": 1, "activation": "linear"}
+        ],
+        "learning_rate": 0.01,
+        "epochs": 1000
+      }
+    }
+  ]
+}

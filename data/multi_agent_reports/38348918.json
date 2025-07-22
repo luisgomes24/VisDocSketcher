@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "iris",
+      "description": "Built-in Iris dataset from seaborn library, contains measurements of iris flowers."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the Iris dataset, with columns for species, sepal length, sepal width, petal length, and petal width."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "sns.load_dataset('iris')",
+      "flows_to": ["visualization plots"]
+    }
+  ],
+  "models": []
+}

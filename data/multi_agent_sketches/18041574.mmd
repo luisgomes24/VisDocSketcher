@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data Source Node
+    src[test_scores.csv]:::dataSource --> df
+
+    %% DataFrame Node
+    df["df: DataFrame with test scores"]:::data --> x & y
+    df --> |Visualizations| dv["Data Visualization"]
+
+    %% Feature and Target Variable Nodes
+    x["x: Features after preprocessing"]:::data --> X_train & X_test
+    y["y: Target variable (posttest scores)"]:::data --> y_train & y_test
+
+    %% Train-Test Split Nodes
+    X_train["X_train: Training features"]:::data --> X_train_s
+    X_test["X_test: Test features"]:::data --> X_test_s
+    y_train["y_train: Training targets"]:::data
+    y_test["y_test: Test targets"]:::data
+
+    %% Scaling Nodes
+    X_train_s["X_train_s: Scaled training features"]:::data --> rf & dt
+    X_test_s["X_test_s: Scaled test features"]:::data --> rf_pred & dt_pred
+
+    %% Random Forest Model Nodes
+    rf["RandomForestRegressor\nmax_depth=6"]:::model
+    rf_pred["rf_pred: Random Forest Predictions"]:::data --> rf_eval["Evaluation Metrics\n(Random Forest)"]:::evaluation
+
+    %% Decision Tree Model Nodes
+    dt["DecisionTreeRegressor\nmax_depth=6"]:::model
+    dt_pred["dt_pred: Decision Tree Predictions"]:::data --> dt_eval["Evaluation Metrics\n(Decision Tree)"]:::evaluation
+
+    %% Class Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#fb4,stroke:#333,stroke-width:2px;
+    classDef evaluation fill:#fea,stroke:#333,stroke-width:2px;

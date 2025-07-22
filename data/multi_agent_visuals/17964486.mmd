@@ -1,0 +1,35 @@
+flowchart TD
+    %% Data read from CSV
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> diabetes.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    
+    %% Data preprocessing steps
+    B -->|Data type adjustments| B1["<img src='icons/table.svg' width=100 height=100/> <br/> df with adjusted types"]
+    B1 -->|Decimal format correction| B2["<img src='icons/table.svg' width=100 height=100/> <br/> df with corrected decimals"]
+    B2 -->|Split data| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> train"]
+    B2 -->|Split data| D["<img src='icons/row_split.svg' width=100 height=100/> <br/> test"]
+
+    %% QLattice model creation
+    E["QLattice Connected"] -->|Find models| F["models"]
+
+    %% ML Model Nodes
+    G["<img src='icons/brain.svg' width=100 height=100/> <br/> Random Forest"]
+    H["<img src='icons/brain.svg' width=100 height=100/> <br/> Gradient Boosting"]
+    I["<img src='icons/brain.svg' width=100 height=100/> <br/> Logistic Regression"]
+
+    %% Training and Evaluation
+    C -->|Train QLattice| F
+    C -->|Train RF Model| G
+    C -->|Train GB Model| H
+    C -->|Train LR Model| I
+    
+    D -->|Test Models| G
+    D -->|Test Models| H
+    D -->|Test Models| I
+    D -->|Evaluate QLattice| F
+
+    %% Annotations
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:1px;  %% Data Source: Light blue
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:1px;      %% Models: Light green
+    classDef output fill:#F2C464,stroke:#333,stroke-width:1px;     %% Outputs: Light yellow
+    class A,B,B1,B2,C,D,E class dataSource;
+    class F,G,H,I class model;

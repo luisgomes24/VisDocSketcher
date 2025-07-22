@@ -1,0 +1,58 @@
+flowchart TD
+
+    subgraph DataSources
+        A1[train.csv]\nContains training data with features and target variables
+        A2[test.csv]\nContains test data without target variables to make predictions
+        A3[sample_submission.csv]\nTemplate for submitting predictions
+    end
+
+    subgraph DataPreparation
+        B1[train_df]\nDataFrame from train.csv
+        B2[test_df]\nDataFrame from test.csv
+        B3[features]\nList of feature columns excluding target variables
+        B4[X]\nFeatures extracted for model training
+        B5[Y]\nTarget variables for model training
+        B6[x_train]\nTraining features after splitting
+        B7[y_train]\nTraining target values after splitting
+    end
+
+    subgraph Model
+        C1[Sequential Neural Network]
+        C2[Input Layer\nShape=8]
+        C3[Dense Layer\nUnits=8\nActivation=relu]
+        C4[Dense Layer\nUnits=10\nActivation=relu]
+        C5[Dense Layer\nUnits=16\nActivation=relu]
+        C6[Dense Layer\nUnits=5\nActivation=relu]
+        C7[Dense Layer\nUnits=3\nActivation=relu]
+        C8[Output Layer]
+    end
+
+    subgraph Predictions
+        D1[prediction]\nPredicted values for test_df
+    end
+
+    %% Arrows for data source to preparation
+    A1 --> |read_csv| B1
+    A2 --> |read_csv| B2
+
+    %% Arrows in data preparation
+    B1 --> |List comprehension| B3
+    B1 --> |train_df[features]| B4
+    B1 --> |train_df[['target_...] | B5
+    B4 --> |train_test_split| B6
+    B5 --> |train_test_split| B7
+
+    %% Arrows from preparation to model
+    B6 --> |Input| C2
+    B7 --> |Input| C2
+
+    %% Model architecture dependency
+    C2 --> C3
+    C3 --> C4
+    C4 --> C5
+    C5 --> C6
+    C6 --> C7
+    C7 --> C8
+
+    %% Predictions from the model
+    C8 --> |model.predict| D1

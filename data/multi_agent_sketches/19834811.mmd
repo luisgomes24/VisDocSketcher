@@ -1,0 +1,34 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffe0'}}}%%
+flowchart TD
+    subgraph DataSources
+        A1["train.csv"]:::source -->|used to create| A2["X_full"]:::variable
+        A3["test.csv"]:::source
+    end
+
+    subgraph DataPreparation
+        A2 -->|train_test_split| B1["X_train"]:::variable
+        A2 -->|train_test_split| B2["X_valid"]:::variable
+        B1 & B2 -->|split target| B3["y_train"]:::variable
+        B1 & B2 -->|split target| B4["y_valid"]:::variable
+        A2 -->|features used| B5["Features"]:::variable
+    end
+    
+    subgraph Modeling
+        B["RandomForestRegressor Models"]:::model
+        B1 & B3 -->|fit models| B
+        B2 & B4 -->|validate models| B
+        B -->|best_model| C["Best Model"]:::model
+    end
+
+    subgraph Prediction
+        C -->|predict| D["preds_test"]:::variable
+    end
+
+    subgraph Submission
+        D -->|saved to| E["submission.csv"]:::output
+    end
+
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#6b5,stroke:#333,stroke-width:2px;
+    classDef output fill:#88e,stroke:#333,stroke-width:2px;

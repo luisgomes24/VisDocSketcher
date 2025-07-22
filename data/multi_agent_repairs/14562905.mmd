@@ -1,0 +1,19 @@
+flowchart TD
+    %% Data Sources
+    A["CSV File: Trumps Legcy.csv"] --> B["DataFrame: df"]
+    %% DataFrame Preparation
+    B --> |Load Data| C(("Exploratory Data Analysis"))
+    C --> |Process Tweets| D["texts: List of Tokenized Texts"]
+    %% LDA Model
+    D --> E["LDA Model"]
+    
+    %% Details about LDA
+    E --> |Identify Topics| F(("Topics Identified"))
+    
+    %% Descriptions
+    %% A: Source of data containing tweets
+    %% B: DataFrame to hold tweet data for analysis and model input
+    %% C: Initial analysis of tweet data
+    %% D: Preprocessed tweet texts ready for topic modeling
+    %% E: Latent Dirichlet Allocation, an unsupervised model for topic detection
+    %% F: The output resulting in various identified topics

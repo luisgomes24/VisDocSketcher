@@ -1,0 +1,64 @@
+%% This Mermaid.js diagram represents the workflow of the provided Jupyter Notebook.
+flowchart TD
+    %% Node for the data source
+    A[data.csv] -->|Load data| B[dataset]
+    
+    %% Node for processing the dataset into features and target
+    B -->|Extract features| C[X]
+    B -->|Extract target| D[y]
+    
+    %% Nodes for train-test split
+    C -->|train_test_split| E[X_train]
+    C -->|train_test_split| F[X_test]
+    D -->|train_test_split| G[y_train]
+    D -->|train_test_split| H[y_test]
+    
+    %% Node for model training
+    E & G -->|Train model| I(Sequential Model)
+    
+    %% Architecture of the Sequential Model
+    I --> |Layer 1| I1[Dense(60, relu)]
+    I1 --> |Layer 2| I2[Dense(30, relu)]
+    I2 --> |Layer 3| I3[Dense(15, relu)]
+    I3 --> |Layer 4| I4[Dense(8, relu)]
+    I4 --> |Layer 5| I5[Dense(4, relu)]
+    I5 --> |Output Layer| I6[Dense(1, sigmoid)]
+    
+    %% Training process
+    I --> |Compile & Fit| J[history]  
+    
+    style A fill:#87CEEB 
+    style B fill:#87CEEB  
+    style C fill:#87CEEB 
+    style D fill:#87CEEB 
+    style E fill:#87CEEB 
+    style F fill:#87CEEB 
+    style G fill:#87CEEB 
+    style H fill:#87CEEB 
+    
+    style I fill:#C6F4D6 
+    style I1 fill:#C6F4D6 
+    style I2 fill:#C6F4D6 
+    style I3 fill:#C6F4D6 
+    style I4 fill:#C6F4D6 
+    style I5 fill:#C6F4D6 
+    style I6 fill:#C6F4D6 
+    
+    style J fill:#F2C464 
+    
+    style A stroke:#000000,stroke-width:2px 
+    style B stroke:#000000,stroke-width:2px 
+    style C stroke:#000000,stroke-width:2px 
+    style D stroke:#000000,stroke-width:2px 
+    style E stroke:#000000,stroke-width:2px 
+    style F stroke:#000000,stroke-width:2px 
+    style G stroke:#000000,stroke-width:2px 
+    style H stroke:#000000,stroke-width:2px 
+    style I stroke:#000000,stroke-width:2px 
+    style I1 stroke:#000000,stroke-width:2px 
+    style I2 stroke:#000000,stroke-width:2px 
+    style I3 stroke:#000000,stroke-width:2px 
+    style I4 stroke:#000000,stroke-width:2px 
+    style I5 stroke:#000000,stroke-width:2px 
+    style I6 stroke:#000000,stroke-width:2px 
+    style J stroke:#000000,stroke-width:2px 

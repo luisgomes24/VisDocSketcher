@@ -1,0 +1,13 @@
+flowchart TD
+    A["📁 Load Train Data <img src='file.svg' /> <br/> train.csv"] --> B["🗂️ Explore Train Data <img src='table.svg' />"]
+    B --> C["🕒 Preprocess Data <img src='column_split.svg' /> <br/> Convert date"]
+    C --> D["📁 Load Test Data <img src='file.svg' /> <br/> test.csv"]
+    D --> E["🗂️ Explore Test Data <img src='table.svg' />"]
+    E --> F["🔧 Setup Time Series <img src='brain.svg' />"]
+    F --> G["⚙️ Compare Models <img src='brain.svg' />"]
+    G --> H["🔍 Predict with Model <img src='brain.svg' />"]
+    H --> I["🔧 Tune Model <img src='brain.svg' />"]
+    I --> J["🏁 Finalize Model <img src='brain.svg' />"]
+    J --> K["📊 Create Predictions <img src='table.svg' />"]
+    K --> L["🗂️ Update Test Data <img src='table.svg' />"]
+    L --> M["👤 Save Predictions <img src='file.svg' />"]

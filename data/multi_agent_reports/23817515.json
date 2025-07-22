@@ -1,0 +1,112 @@
+{
+    "data_sources": [
+        {
+            "file": "train.csv",
+            "description": "Contains training images and corresponding labels for digits recognition."
+        },
+        {
+            "file": "test.csv",
+            "description": "Contains test images for which predictions need to be made."
+        },
+        {
+            "file": "sample_submission.csv",
+            "description": "Sample submission format for the submission file."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "DataFrame containing the training data with 'label' as the target variable."
+        },
+        {
+            "variable_name": "X",
+            "description": "Array of image data reshaped to 28x28 pixels and normalized."
+        },
+        {
+            "variable_name": "y",
+            "description": "Array of labels corresponding to the digits in the training data."
+        },
+        {
+            "variable_name": "X_train",
+            "description": "Training set of images reshaped into a 2D array for model training."
+        },
+        {
+            "variable_name": "X_test",
+            "description": "Test set of images reshaped into a 2D array for evaluation."
+        },
+        {
+            "variable_name": "y_train",
+            "description": "Training set of labels for the model."
+        },
+        {
+            "variable_name": "y_test",
+            "description": "Test set of labels for the evaluation of the model."
+        },
+        {
+            "variable_name": "predictions",
+            "description": "Array of predicted labels for the test images."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df",
+            "creation_step": "Loaded from train.csv using pd.read_csv",
+            "flows_to": ["X", "y"]
+        },
+        {
+            "variable_name": "X",
+            "creation_step": "Extracted from df, reshaped and normalized.",
+            "flows_to": ["plot_grid", "train_test_split"]
+        },
+        {
+            "variable_name": "y",
+            "creation_step": "Extracted from df.",
+            "flows_to": ["train_test_split"]
+        },
+        {
+            "variable_name": "X_train",
+            "creation_step": "Result of train_test_split on X.",
+            "flows_to": ["logreg.fit", "svc.fit", "pca.fit"]
+        },
+        {
+            "variable_name": "X_test",
+            "creation_step": "Result of train_test_split on X.",
+            "flows_to": ["logreg.predict", "svc.predict", "pca.predict"]
+        },
+        {
+            "variable_name": "y_train",
+            "creation_step": "Result of train_test_split on y.",
+            "flows_to": ["logreg.fit", "svc.fit"]
+        },
+        {
+            "variable_name": "y_test",
+            "creation_step": "Result of train_test_split on y.",
+            "flows_to": ["logreg.predict", "svc.predict", "pca.predict"]
+        },
+        {
+            "variable_name": "predictions",
+            "creation_step": "Result from svc.predict on X_submission.",
+            "flows_to": ["submission"]
+        }
+    ],
+    "models": [
+        {
+            "model_type": "Logistic Regression",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "solver='liblinear'"
+        },
+        {
+            "model_type": "SVC",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "kernel='rbf', C=10"
+        },
+        {
+            "model_type": "DigitsPCA",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "n_components=28"
+        }
+    ]
+}

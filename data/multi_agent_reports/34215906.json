@@ -1,0 +1,91 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/playground-series-s3e3/train.csv",
+            "description": "Training dataset for model training"
+        },
+        {
+            "file": "../input/playground-series-s3e3/test.csv",
+            "description": "Test dataset for model predictions"
+        },
+        {
+            "file": "../input/playground-series-s3e3/sample_submission.csv",
+            "description": "Sample submission file format"
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "df_train",
+            "description": "DataFrame containing training data"
+        },
+        {
+            "variable": "df_test",
+            "description": "DataFrame containing testing data"
+        },
+        {
+            "variable": "df_sub",
+            "description": "DataFrame for submission containing predicted values"
+        },
+        {
+            "variable": "features_num",
+            "description": "List of numerical features used for modeling"
+        },
+        {
+            "variable": "features_cat",
+            "description": "List of categorical features used for modeling"
+        },
+        {
+            "variable": "label",
+            "description": "Target variable (Attrition)"
+        },
+        {
+            "variable": "predictors",
+            "description": "Combined list of predictor variables"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_train",
+            "creation": "pd.read_csv",
+            "flow": "Used for model fitting with predictors and label"
+        },
+        {
+            "variable": "df_test",
+            "creation": "pd.read_csv",
+            "flow": "Used for generating predictions"
+        },
+        {
+            "variable": "df_sub",
+            "creation": "pd.read_csv",
+            "flow": "Used to store submission data and export to CSV"
+        },
+        {
+            "variable": "fit_auto",
+            "creation": "TabularPredictor",
+            "flow": "Fitted with df_train for model training"
+        },
+        {
+            "variable": "pred_test",
+            "creation": "fit_auto.predict_proba",
+            "flow": "Held scores for predictions on df_test and written to df_sub"
+        },
+        {
+            "variable": "pred_test_2nd",
+            "creation": "fit_auto.predict_proba",
+            "flow": "Predictions from the 2nd best model and written to second submission"
+        },
+        {
+            "variable": "pred_test_3rd",
+            "creation": "fit_auto.predict_proba",
+            "flow": "Predictions from the 3rd best model and written to third submission"
+        }
+    ],
+    "models": [
+        {
+            "model": "AutoGluon",
+            "input_features": "features_num + features_cat",
+            "target_variable": "label",
+            "hyperparameters": "best_quality, num_bag_folds=10, time_limit=300"
+        }
+    ]
+}

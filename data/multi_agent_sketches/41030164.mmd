@@ -1,0 +1,6 @@
+flowchart TD
+    A[leaderboard.csv] -->|Read CSV| B[leaderboard DataFrame]
+    %% A: This node represents the source CSV file containing the leaderboard data.
+    B -->|Save as CSV| C[full_leaderboard.csv]
+    %% B: This node represents the DataFrame created from the leaderboard data.
+    %% C: This node represents the final CSV file where the DataFrame data is saved.

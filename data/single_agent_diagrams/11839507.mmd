@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Libraries"] --> B["🗄️ Load Sample Entry"]
+    B --> C["📝 Change Entry Encoding"]
+    C --> D["📈 Read Police Killings Data <img src='dummy_plots/barplot_template.svg' /> <br/>"]
+
+    D --> E["💾 Save Data to CSV"]
+    E --> F["✅ Check Answers"]
+
+    subgraph Optional Prac["Optional Practice"]
+        G["🔍 Explore Dataset for Encoding Issues"]
+    end
+
+    F --> G

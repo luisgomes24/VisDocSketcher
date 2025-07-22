@@ -1,0 +1,31 @@
+%% Data Flow Diagram for Jupyter Notebook 25442007
+flowchart TD
+
+%% Node definitions
+A[MNIST Dataset] %% Represents the source of digits data
+B[X_train] %% Represents the training data in 784-dimensional vector form
+C[y_train] %% Represents labels for training data
+D[X_test] %% Represents the test data in 784-dimensional vector form
+E[y_test] %% Represents labels for test data
+F[PCA Model] %% Represents the PCA model with 3 components
+G[Transformed X] %% Represents the 3D transformed data for visualization
+H2D[2D Plot] %% Represents the 2D visualization step
+H3D[3D Plot] %% Represents the 3D visualization step
+
+%% Data source to data variables
+A -->|mnist.load_data()| B
+A -->|mnist.load_data()| C
+A -->|mnist.load_data()| D
+A -->|mnist.load_data()| E
+
+%% Data variable to model
+B -->|fit and transform| F
+
+%% Model to transformed data
+F -->|transform(X_train)| G
+
+%% Transformed data to visualizations
+G --> H2D
+G --> H3D
+C --> H2D
+C --> H3D

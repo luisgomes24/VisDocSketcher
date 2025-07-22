@@ -1,0 +1,24 @@
+{
+  "data_sources": [
+    {
+      "file_name": "imdb_movie_data.csv",
+      "description": "The dataset contains movie data from IMDb, including various attributes relevant to film."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame holding the first 1000 rows of the IMDb movie dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Loaded using pd.read_csv from 'imdb_movie_data.csv'.",
+      "flow": [
+        "Used for exploratory data analysis and plotting distributions, correlations, and scatter matrices."
+      ]
+    }
+  ],
+  "models": []
+}

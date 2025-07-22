@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for Data Source
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> mff.csv"] --> |Load Data| B["<img src='icons/table.svg' width=100 height=100/> <br/> df1"]
+    
+    %% Node for DataFrame Creation
+    B --> |Preview| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> df1.head(5)"]
+    B --> |Plot Distribution| D["<img src='icons/brain.svg' width=100 height=100/> <br/> plotPerColumnDistribution"]
+    
+    %% Node Descriptions
+    %% A: This is the CSV file containing the original dataset.
+    %% B: df1 is a DataFrame created by reading mff.csv, used as the primary dataset.
+    %% C: Displays the first 5 rows of df1 for previewing the data.
+    %% D: Plots the distribution of each column in df1.

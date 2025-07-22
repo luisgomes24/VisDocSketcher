@@ -1,0 +1,43 @@
+flowchart TD
+    %% Data Sources
+    A[Flowers Dataset]:::source
+    %% Data Variables
+    B[train_ds]:::variable
+    C[val_ds]:::variable
+    D[data_augmentation]:::variable
+    E[model]:::variable
+    F[history]:::variable
+
+    %% Nodes for Source and Variables
+    subgraph "Data Preparation and Augmentation"
+        A -- Load Images --> B
+        A -- Load Images --> C
+        D[Data Augmentation] -- Augment Data --> B
+    end
+
+    subgraph "Model Creation and Training"
+        D --> E[Model]:::model
+        B -- Train Model --> E
+        C -- Validate Model --> E
+        E -- Compile and Fit --> F[History]:::variable
+    end
+
+    %% Model Details
+    subgraph "Model Details"
+        E -- Neural Network -->
+        subgraph "Architecture"
+            direction LR
+            G[Dense Layers]:::component
+            H[Dropout for Regularization]:::component
+            I[Softmax Activation]:::component
+        end
+    end
+
+    %% Styling for better visualization
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#cfc,stroke:#333,stroke-width:2px;
+    classDef component fill:#ccf,stroke:#333,stroke-width:2px;
+
+    %% Connections
+    class G,H,I component;

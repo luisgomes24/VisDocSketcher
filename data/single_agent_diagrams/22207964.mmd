@@ -1,0 +1,14 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> df_train & df_test"] --> B["🧹 Preprocess Data"]
+    B --> C["📊 Visualize Data <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    C --> D["🧠 Model Initialization"]
+    D --> E["🔍 Fit Model"]
+    E --> F["⚙️ Predict"]
+    F --> G["📋 Output Results <img src='table.svg'/> <br/> result"]
+    
+    B --> B1["🔍 Drop Unnecessary Columns"]
+    B --> B2["📊 Feature Engineering"]
+    B --> B3["🧠 Augment Data"]
+    
+    B1 --> B2
+    B2 --> B3

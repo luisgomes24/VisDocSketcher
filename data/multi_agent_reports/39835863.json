@@ -1,0 +1,108 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing house sale information."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset for predictions, without sale prices."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission file containing IDs for prediction results."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test dataset."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame for storing the submission results."
+    },
+    {
+      "name": "X",
+      "description": "Input features extracted from the train DataFrame."
+    },
+    {
+      "name": "y",
+      "description": "Target variable (SalePrice) from the training dataset."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set split from X for modeling."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set split from X for evaluating the model."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target variable split for modeling."
+    },
+    {
+      "name": "y_test",
+      "description": "Test target variable split for evaluating the model."
+    },
+    {
+      "name": "pred",
+      "description": "Array of predictions for the test set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "pd.read_csv",
+      "flows_to": "train variable holds training data."
+    },
+    {
+      "variable": "test",
+      "creation": "pd.read_csv",
+      "flows_to": "test variable holds test data."
+    },
+    {
+      "variable": "submission",
+      "creation": "pd.read_csv",
+      "flows_to": "submission variable used for output predictions."
+    },
+    {
+      "variable": "X",
+      "creation": "Subset of train DataFrame",
+      "flows_to": "Used for model training as input features."
+    },
+    {
+      "variable": "y",
+      "creation": "Subset of train DataFrame",
+      "flows_to": "Used as target variable for model training."
+    },
+    {
+      "variable": "X_train",
+      "creation": "train_test_split",
+      "flows_to": "Used for training the model."
+    },
+    {
+      "variable": "X_test",
+      "creation": "train_test_split",
+      "flows_to": "Used for evaluating the model."
+    },
+    {
+      "variable": "pred",
+      "creation": "model.predict",
+      "flows_to": "Contains predicted values for test set which are stored in submission."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": "Default parameters for Random Forest model."
+    }
+  ]
+}

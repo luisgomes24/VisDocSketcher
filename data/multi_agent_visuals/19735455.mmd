@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::source -->|pd.read_csv| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_data"]:::variable
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]:::source -->|pd.read_csv| B2["<img src='icons/table.svg' width=100 height=100/> <br/> test_data"]:::variable
+
+    %% Variables
+    B -->|"Remove rows with missing SalePrice"| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_data cleaned"]:::variable
+    C -->|"Select numeric columns"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]:::variable
+    C -->|"Extract SalePrice"| E["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]:::variable
+
+    %% Model
+    subgraph ModelTraining
+        direction TB
+        D -->|"Input Features"| F["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor"]:::model
+        E -->|"Target Variable"| F
+        F -->|"Varying n_estimators"| G["results"]:::variable
+    end
+
+    %% Styles
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bcd,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;

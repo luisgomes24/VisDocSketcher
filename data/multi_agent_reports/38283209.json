@@ -1,0 +1,112 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/cafa-5-protein-function-prediction/Train/train_terms.tsv",
+      "description": "Train labels containing terms related to protein functions."
+    },
+    {
+      "file": "/kaggle/input/t5embeds/train_ids.npy",
+      "description": "Numpy file containing protein IDs for training."
+    },
+    {
+      "file": "/kaggle/input/t5embeds/train_embeds.npy",
+      "description": "Numpy file with pre-calculated embeddings for training protein sequences."
+    },
+    {
+      "file": "/kaggle/input/t5embeds/test_embeds.npy",
+      "description": "Numpy file with pre-calculated embeddings for test protein sequences."
+    },
+    {
+      "file": "/kaggle/input/t5embeds/test_ids.npy",
+      "description": "Numpy file containing protein IDs for testing."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "n_labels_to_consider",
+      "description": "Number of top frequent labels to consider for predictions, set to 1499."
+    },
+    {
+      "name": "trainTerms",
+      "description": "DataFrame containing training terms and their frequencies."
+    },
+    {
+      "name": "labels_to_consider",
+      "description": "List of top frequent labels to use as target variables."
+    },
+    {
+      "name": "Y",
+      "description": "Numpy array representing the binary classification targets for the samples."
+    },
+    {
+      "name": "X",
+      "description": "Numpy array containing features (embeddings) for the protein sequences."
+    },
+    {
+      "name": "IX_train",
+      "description": "Index array for training data samples."
+    },
+    {
+      "name": "IX_test",
+      "description": "Index array for testing data samples."
+    },
+    {
+      "name": "df_Y",
+      "description": "DataFrame representation of target Y, containing binary classifications."
+    },
+    {
+      "name": "df_finalSubmission",
+      "description": "DataFrame containing the final submission format including protein IDs, GO Term IDs, and predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "trainTerms",
+      "creation": "Loaded from train_terms.tsv",
+      "flow": "Used to create labels_to_consider and Y."
+    },
+    {
+      "variable": "vec_train_protein_ids",
+      "creation": "Loaded from train_ids.npy",
+      "flow": "Used to map training terms to their corresponding entries in Y."
+    },
+    {
+      "variable": "Y",
+      "creation": "Generated from trainTerms and protein IDs",
+      "flow": "Used as target variable during model training and saved for future reuse."
+    },
+    {
+      "variable": "X",
+      "creation": "Loaded from train_embeds.npy",
+      "flow": "Used as features during model training."
+    },
+    {
+      "variable": "IX_train",
+      "creation": "Generated using train_test_split",
+      "flow": "Used to train the model on a subset of training data."
+    },
+    {
+      "variable": "model",
+      "creation": "Initialized as RidgeCV",
+      "flow": "Trained using X[IX_train] and Y[IX_train] and used to predict Y_submit."
+    },
+    {
+      "variable": "Y_submit",
+      "creation": "Predicted using model.predict",
+      "flow": "Used to create final submission DataFrame."
+    },
+    {
+      "variable": "df_finalSubmission",
+      "creation": "Populated with Protein Ids, GO Term Ids, and Predictions",
+      "flow": "Saved as submission.tsv after filtering predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RidgeCV",
+      "input_features": "X",
+      "target_variable": "Y",
+      "hyperparameters": "Not explicitly set, uses default parameters for RidgeCV."
+    }
+  ]
+}

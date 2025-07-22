@@ -1,0 +1,51 @@
+flowchart TD
+    %% Node for Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: SoliSet Submission CSV"]
+    B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: ResNest RFCX Submission CSV"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: Minimal Fastai Solution CSV"]
+    D["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: All-in-one RFCX Baseline CSV"]
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: RFCX Train ResNet50 with TPU CSV"]
+    F["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: RFCX ResNet50 TPU CSV"]
+    G["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: ResNet34 Augmentations CSV"]
+    H["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: TPU RFCX Audio Detection Fast CSV"]
+    I["<img src='icons/file.svg' width=100 height=100/> <br/> Data Source: RFCX Bagging CSV"]
+
+    %% Node for ked DataFrame creation
+    J["<img src='icons/table.svg' width=100 height=100/> <br/> ked DataFrame Creation"]
+    J --> |"Data Initialization"| A
+    J --> |"Data Initialization"| B
+    J --> |"Data Initialization"| C
+    J --> |"Data Initialization"| D
+    J --> |"Data Initialization"| E
+    J --> |"Data Initialization"| F
+    J --> |"Data Initialization"| G
+    J --> |"Data Initialization"| H
+    J --> |"Data Initialization"| I
+
+    %% Node for Kernel Class
+    K["<img src='icons/brain.svg' width=100 height=100/> <br/> Kernel Class Initialization"]
+    J --> |"Initialize Kernel Instances"| K
+
+    %% Nodes for 'main' and 'support'
+    L["<img src='icons/column_split.svg' width=100 height=100/> <br/> main Kernel Extraction"]
+    K --> |"Extract main Kernel"| L
+    M["<img src='icons/column_split.svg' width=100 height=100/> <br/> support Kernel Extraction"]
+    K --> |"Extract support Kernel"| M
+
+    %% Nodes for Generative Functions
+    N["<img src='icons/brain.svg' width=100 height=100/> <br/> Generative Function g1, g2, g3, g4"]
+    L --> |"Generate using main Kernel"| N
+    M --> |"Support Kernel data"| N
+
+    %% Output Node
+    O["<img src='icons/file.svg' width=100 height=100/> <br/> Output Submission CSV"]
+    N --> |"Create submission.csv"| O
+
+    %% Nodes for Machine Learning Models
+    P["<img src='icons/brain.svg' width=100 height=100/> <br/> Machine Learning Models"]
+    P1["XGBoost: Kernel Outputs"]
+    P2["Torch-based Models: Audio Features"]
+    P3["TensorFlow Models: Audio Features"]
+    P -- "Training and Inference" --> P1
+    P -- "Training and Inference" --> P2
+    P -- "Training and Inference" --> P3

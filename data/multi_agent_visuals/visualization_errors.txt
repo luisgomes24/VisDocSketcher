@@ -1,0 +1,1 @@
+Error in Mermaid diagram: `[@zenuml/core] Store is a function and is not initiated in 1 second.\n\nUnknownDiagramError: No diagram type detected matching given configuration for text`

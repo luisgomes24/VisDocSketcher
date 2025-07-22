@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Data"] --> B["<img src='table.svg'/> <br/> Inspect Data"]
+    B --> C["Calculate Submission Counts"]
+    C --> D["<img src='barplot_template.svg'/> <br/> 📊 Barplot Submission Counts"]
+    D --> E["Inspect Data Again"]
+    E --> F["Calculate Weight Class Counts"]
+    F --> G["<img src='barplot_template.svg'/> <br/> 📊 Barplot Weight Class Counts"]
+    G --> H["Calculate Win Type Counts"]
+    H --> I["<img src='file.svg'/> <br/> Load Data Again"]
+    I --> J["Process Data"]
+    J --> K["Group and Calculate Counts"]
+    K --> L["<img src='lineplot_template.svg'/> <br/> 📈 Lineplot Wins Over Time"]

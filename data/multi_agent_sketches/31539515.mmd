@@ -1,0 +1,22 @@
+flowchart TD
+    A[Input Data: nyra_tracking_table.csv] -->|Read CSV| B[DataFrame df]
+    B -->|Filter & Sort| C[Filtered Positions]
+    C --> D[Position List]
+    D -->|Create Binary Images| E[Position Image List]
+    E -->|Rotate Images| F[Angle Space Calculation]
+    F -->|Compute Features| G[List of Feature List]
+    G -->|Determine Optimal Angle| H[Mean Angle List]
+    H -->|Map to Track IDs| I[Angle Items]
+    I -->|Output Optimal Angles| J[Optimized Rotation Angles]
+
+    %% Node Descriptions
+    %% A: Represents the source CSV file containing tracking data for racehorses
+    %% B: DataFrame created from the CSV file
+    %% C: Data is filtered and sorted for specific analysis
+    %% D: Longitude and Latitude extracted to form position list
+    %% E: Position list is converted into binary images for analysis
+    %% F: Angles generated to calculate optimal rotation
+    %% G: Features are computed for each angle to assess rotation
+    %% H: Ideal angle determined for minimizing vertical stretch in images
+    %% I: Mean angles mapped to corresponding track ids
+    %% J: Final output indicating best angles for each track

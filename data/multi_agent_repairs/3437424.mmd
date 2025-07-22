@@ -1,0 +1,11 @@
+```mermaid
+flowchart TD
+    DS_trainCSV["train.csv"]:::data_source -->|pd.read_csv| df_train
+    DS_testCSV["test.csv"]:::data_source -->|pd.read_csv| df_test
+    df_train -->|model.fit| model
+    df_test -->|model.predict| predictions
+    predictions -->|pd.DataFrame| results
+    results["Results"]:::output
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef output fill:#bbf,stroke:#333,stroke-width:2px;
+```

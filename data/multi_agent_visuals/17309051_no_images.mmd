@@ -1,0 +1,12 @@
+graph TD;
+    A["Dataset"] -->|"Load data"| B["DataFrame"];
+    B -->|"Create pairs"| C["Pairs List"];
+    C -->|"Train/Test split"| D["Training Pairs"];
+    C -->|"Train/Test split"| E["Testing Pairs"];
+    D -->|"Train Model"| F["EncoderSeq Model"];
+    F -->|"Make Predictions"| G["Prediction Model"];
+    G -->|"Generate Output"| H["GenerateNode Model"];
+    H -->|"Merge Outputs"| I["Merge Model"];
+    I -->|"Final Output"| J["Estimated Answer"];
+    D -->|"Track Stats"| K["Accumulators"];
+    E -->|"Evaluate Model"| L["Testing Stats"];

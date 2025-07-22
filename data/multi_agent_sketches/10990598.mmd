@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffcc00'}}}%%
+flowchart TD
+    %% Data Sources
+    A1["Training Data"]:::data -->|"Used for loading training images"| B1["img"]
+    A2["Testing Data"]:::data -->|"Used for loading testing images"| D1["test_generator"]
+
+    %% Data Variables and Flow
+    B1 -->|"Converted to array and shape extracted"| B2["shape_of_image"]
+    B2 -->|"Sets input shape for the model"| C1["model"]
+    B1 -->|"Visualized in notebook"| B3["Visualization"]
+    B1 -->|"Classes extracted from directory structure"| B4["classes"]
+    B4 -->|"Number of classes calculated"| B5["number_of_class"]
+    B5 -->|"Sets output layer of the model"| C1
+
+    %% Data Generators
+    B1 --> |"Augmented with ImageDataGenerator"| C2["train_generator"]
+    A2 --> |"Loaded into ImageDataGenerator"| D1
+
+    %% Model and Training
+    C1["Sequential CNN Model"]:::model
+    C2 -->|"Fitting the model"| C1
+    D1 -->|"Used for validation during fitting"| C1
+
+    %% Training History
+    C1 -->|"Training history recorded"| E1["hist"]
+
+    %% Styles
+    classDef data fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;

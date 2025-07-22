@@ -1,0 +1,38 @@
+{
+  "data_sources": [
+    {
+      "file_name": "janestreet",
+      "description": "The environment used for making predictions in the Jane Street market challenge."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame representing the test dataset for predictions."
+    },
+    {
+      "variable_name": "prediction_df",
+      "description": "DataFrame where predictions are stored before sending to the environment."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "test_df",
+      "creation_method": "iter_test from janestreet environment",
+      "flow": "Used to create predictions in prediction_df."
+    },
+    {
+      "variable_name": "prediction_df",
+      "creation_method": "created during the iteration over test_df",
+      "flow": "Sent to the environment for predictions with action set to 1."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Custom Prediction Model",
+      "input_features": ["weight"],
+      "target_variable": "action",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_name": "TimeGender.csv",
+      "description": "Dataset containing statistics related to the COVID-19 cases divided by gender."
+    },
+    {
+      "file_name": "covid_19_clean_complete.csv",
+      "description": "Comprehensive dataset on COVID-19 cases worldwide, including statistics on confirmed, recovered, and death cases."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "Input_Data1",
+      "description": "DataFrame containing the gender-based statistics related to COVID-19 cases."
+    },
+    {
+      "variable": "Input_Data",
+      "description": "DataFrame containing comprehensive COVID-19 statistics worldwide."
+    },
+    {
+      "variable": "male",
+      "description": "Count of male individuals in the dataset."
+    },
+    {
+      "variable": "female",
+      "description": "Count of female individuals in the dataset."
+    },
+    {
+      "variable": "country_confirmed_cases",
+      "description": "List of confirmed COVID-19 cases per country."
+    },
+    {
+      "variable": "country_death_cases",
+      "description": "List of death cases per country."
+    },
+    {
+      "variable": "country_active_cases",
+      "description": "List of active COVID-19 cases per country."
+    },
+    {
+      "variable": "country_recovery_cases",
+      "description": "List of recovery cases per country."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "Input_Data1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for gender-based analysis and summary plots."
+    },
+    {
+      "variable": "Input_Data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for global COVID-19 statistics, as well as for visualization."
+    },
+    {
+      "variable": "male",
+      "creation_method": "Calculated through iteration over Input_Data1",
+      "flow": "Contributes to gender analysis."
+    },
+    {
+      "variable": "female",
+      "creation_method": "Calculated through iteration over Input_Data1",
+      "flow": "Contributes to gender analysis."
+    },
+    {
+      "variable": "country_confirmed_cases",
+      "creation_method": "Calculated within the analysis of Input_Data",
+      "flow": "Used to summarize and visualize COVID-19 cases."
+    },
+    {
+      "variable": "country_death_cases",
+      "creation_method": "Calculated within the analysis of Input_Data",
+      "flow": "Used to summarize and visualize COVID-19 mortality related to COVID-19."
+    },
+    {
+      "variable": "country_active_cases",
+      "creation_method": "Calculated based on confirmed and recovery cases",
+      "flow": "Used to display active COVID-19 statistics for each country."
+    },
+    {
+      "variable": "country_recovery_cases",
+      "creation_method": "Calculated within the analysis of Input_Data",
+      "flow": "Used to summarize recovery statistics from the COVID-19 cases."
+    }
+  ],
+  "models": []
+}

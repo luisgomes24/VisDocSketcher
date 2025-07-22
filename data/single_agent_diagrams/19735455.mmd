@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> train_data, test_data"] --> B["🔍 Preprocess Data <img src='table.svg' /> <br/> Drop NaN, Select Numeric"]
+    B --> C["🖼️ Visualize Data <img src='hist_template.svg' /> <br/> X.head()"]
+    C --> D["🔧 Build Model <img src='brain.svg' /> <br/> RandomForestRegressor"]
+    D --> E["📈 Cross-Validate <img src='barplot_template.svg' /> <br/> Evaluate Model"]
+    E --> F["📝 Define Function <img src='column_split.svg' /> <br/> get_score()"]
+    F --> G["⚙️ Test Parameters <img src='column_split.svg' /> <br/> results dict"]
+    G --> H["📊 Plot Results <img src='lineplot_template.svg' /> <br/> Visualize MAE"]
+    H --> I["🏆 Optimize Parameters <img src='brain.svg' /> <br/> n_estimators_best"]

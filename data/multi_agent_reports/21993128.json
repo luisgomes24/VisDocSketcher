@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/nih-chest-xrays-tfrecords/preprocessed_data.csv",
+      "description": "Contains preprocessed data related to chest X-ray images and associated labels."
+    },
+    {
+      "directory": "../input/nih-chest-xrays-tfrecords/data",
+      "description": "Directory containing the chest X-ray images used for training and validation."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the preprocessed X-ray data from the CSV file."
+    },
+    {
+      "name": "images_data",
+      "description": "Path to the directory containing actual image data."
+    },
+    {
+      "name": "training",
+      "description": "Training dataset created from the TFRecord files."
+    },
+    {
+      "name": "validation",
+      "description": "Validation dataset created from the TFRecord files."
+    },
+    {
+      "name": "valdf",
+      "description": "DataFrame used to store validation results including label predictions."
+    },
+    {
+      "name": "val_image_data",
+      "description": "List to store normalized versions of validation images for inference."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv",
+      "flows_to": "Data analysis and model training."
+    },
+    {
+      "variable": "training",
+      "creation": "tfr_decoder",
+      "flows_to": "Model training."
+    },
+    {
+      "variable": "validation",
+      "creation": "tfr_decoder",
+      "flows_to": "Model evaluation and visualization."
+    },
+    {
+      "variable": "valdf",
+      "creation": "Data collection from validation dataset",
+      "flows_to": "Used for displaying label prediction results."
+    },
+    {
+      "variable": "val_image_data",
+      "creation": "Parsed and normalized images from validation dataset.",
+      "flows_to": "Used for analysis and visualization."
+    }
+  ],
+  "models": [
+    {
+      "name": "InceptionV3",
+      "input_shape": "(150, 150, 3)",
+      "layers": [
+        {
+          "type": "Dense",
+          "units": 512,
+          "activation": "relu"
+        },
+        {
+          "type": "BatchNormalization"
+        },
+        {
+          "type": "Dense",
+          "units": 128,
+          "activation": "relu"
+        },
+        {
+          "type": "BatchNormalization"
+        },
+        {
+          "type": "Dense",
+          "units": 32,
+          "activation": "relu"
+        },
+        {
+          "type": "Dense",
+          "units": 15,
+          "activation": "sigmoid"
+        }
+      ],
+      "hyperparameters": {
+        "optimizer": "Adam",
+        "loss": "binary_crossentropy",
+        "metrics": ["AUC(multi_label=True)", "binary_accuracy"]
+      },
+      "training_epochs": 25,
+      "load_model_path": "../input/temp12/MyModel"
+    }
+  ]
+}

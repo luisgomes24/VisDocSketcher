@@ -1,0 +1,120 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Kreuz-Kreis-Plus-Minus-Gartenhag.csv",
+      "description": "Contains 28 x 28 pixel images of handwritten characters including #, +, -, o, and x. The first column contains the labels as integers."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the dataset after reading the CSV file."
+    },
+    {
+      "variable_name": "x",
+      "description": "Features DataFrame containing all columns except the label column."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable DataFrame containing the label column."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training set for features."
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Test set for features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for labels."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set for labels."
+    },
+    {
+      "variable_name": "results",
+      "description": "List to store validation results for each model."
+    },
+    {
+      "variable_name": "final",
+      "description": "DataFrame containing the concatenated results from all models."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "flows_to": ["x", "y"]
+    },
+    {
+      "variable": "x",
+      "creation_method": "DataFrame indexing",
+      "flows_to": ["x_train", "x_test"]
+    },
+    {
+      "variable": "y",
+      "creation_method": "DataFrame indexing",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "train_test_split",
+      "flows_to": ["results", "final"]
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "train_test_split",
+      "flows_to": ["results", "final"]
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flows_to": ["results", "final"]
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flows_to": ["results", "final"]
+    },
+    {
+      "variable": "final",
+      "creation_method": "pd.concat",
+      "flows_to": ["metrics collection", "plots"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LogisticRegression",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "KNeighborsClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "SVC",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "GaussianNB",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": "x_train",
+      "target_variable": "y_train"
+    }
+  ]
+}

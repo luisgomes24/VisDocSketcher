@@ -1,0 +1,37 @@
+  %% This is a workflow for the notebook 2282719.ipynb
+  flowchart TD
+      %% Input list to the select_second function
+      L["<img src='icons/list.svg' width=100 height=100/> <br/> L: Input list to select_second"]
+      
+      %% List of sports teams passed to losing_team_captain
+      teams["<img src='icons/table.svg' width=100 height=100/> <br/> teams: List of sports teams"]
+      
+      %% List of racer names for purple_shell function
+      racers["<img src='icons/list.svg' width=100 height=100/> <br/> racers: List of racer names"]
+      
+      %% Ordered list of party arrivals for fashionably_late function
+      arrivals["<img src='icons/list.svg' width=100 height=100/> <br/> arrivals: Ordered list of party arrivals"]
+      
+      %% Manually defined list of lengths
+      lengths["<img src='icons/list.svg' width=100 height=100/> <br/> lengths: Predicted lengths"]
+      
+      %% List of numbers to count negatives
+      nums["<img src='icons/list.svg' width=100 height=100/> <br/> nums: List of numbers"]
+
+      %% Data flow for select_second
+      L -->|Used to| select_second["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Select second element"]
+      
+      %% Data flow for losing_team_captain
+      teams -->|Used to return| losing_team_captain["<img src='dummy_plots/barplot_template.svg'/> <br/> Return last team captain"]
+      
+      %% Data flow for purple_shell
+      racers -->|Used to swap| purple_shell["<img src='dummy_plots/lineplot_template.svg'/> <br/> Swap first and last racer"]
+      
+      %% Data flow for fashionably_late
+      arrivals -->|Used to determine| fashionably_late["<img src='dummy_plots/boxplot_template.svg'/> <br/> Determine if fashionably late"]
+      
+      %% Flow for lengths usage
+      lengths -->|Check lengths| check_lengths["<img src='dummy_plots/hist_template.svg'/> <br/> Check question 4"]
+      
+      %% Data flow for count_negatives
+      nums -->|Count negatives in| count_negatives["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Count negatives"]

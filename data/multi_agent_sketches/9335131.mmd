@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    weatherAUS_csv(("weatherAUS.csv"))
+    %% Data Variables
+    df["df (Raw Data)"]
+    new_df["new_df (Cleaned Data)"]
+    X["X (Features)"]
+    y["y (Target Variable)"]
+    labels_1["labels_1 (KMeans Labels)"]
+    kmeans["kmeans (KMeans Model)"]
+    %% Data Flow
+    weatherAUS_csv -->|Load CSV| df
+    df -->|Preprocess| new_df
+    new_df -->|Extract Features| X
+    new_df -->|Extract Target| y
+    X -->|Cluster| kmeans
+    kmeans -->|Assign Labels| labels_1
+    %% Model Details
+    subgraph Clustering
+        direction TB
+        kmeans
+        labels_1
+    end
+    
+    %% KMeans Model Specifics
+    kmeans -- "Humidity3pm, RISK_MM" --> labels_1
+    kmeans -- "n_clusters=2, random_state=100" -->|Hyperparameters| labels_1

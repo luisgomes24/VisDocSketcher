@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    A[S08_question_answer_pairs.txt] -->|Read CSV| B[df1]
+    C[S09_question_answer_pairs.txt] -->|Read CSV| D[df2]
+    E[S10_question_answer_pairs.txt] -->|Read CSV| F[df3]
+    
+    %% Data Merging
+    B -->|Append| G[all_data]
+    D -->|Append| G
+    F -->|Append| G
+    
+    %% TF-IDF Transformation
+    G -->|Transform with TF-IDF| H[tfidf_vectorizer]
+    H -->|Fit Transform| I[tfidf_matrix]
+    
+    %% Machine Learning Model
+    I -->|Cosine Similarity| J[Find Closest Question]
+    
+    %% Comments
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef process fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    class A,C,E dataSource;
+    class B,D,F,G,H,I,J process;
+    
+    class G, H, I output;

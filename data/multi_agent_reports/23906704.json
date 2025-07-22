@@ -1,0 +1,96 @@
+{
+    "data_sources": [
+        {
+            "file_name": "[Session Data Files]",
+            "description": "Contains EEG session data for multiple participants."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "sessions",
+            "description": "List of unique session identifiers extracted from filenames."
+        },
+        {
+            "variable_name": "session_dirs",
+            "description": "List of full paths to all session data directories."
+        },
+        {
+            "variable_name": "cross_val",
+            "description": "Function that performs cross-validation using specified model for evaluating accuracy and confusion matrix."
+        },
+        {
+            "variable_name": "kf",
+            "description": "Stratified K-Fold cross-validator instance for splitting the data into training/testing."
+        },
+        {
+            "variable_name": "X",
+            "description": "numpy array containing input feature data for analysis, loaded from session files."
+        },
+        {
+            "variable_name": "Y",
+            "description": "numpy array containing corresponding target labels for the input features."
+        },
+        {
+            "variable_name": "fitted_model",
+            "description": "The model after being trained on the training set."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "X",
+            "creation": "Loaded using np.load() from session directories.",
+            "flow": "Passed to fitting and evaluation procedures in 'cross_val' and 'cross_val_participants'."
+        },
+        {
+            "variable": "Y",
+            "creation": "Loaded using np.load() from session directories.",
+            "flow": "Used as target labels for model training during cross-validation."
+        },
+        {
+            "variable": "SVM_rbf_acc",
+            "creation": "Calculated through cross-validation using SVC model.",
+            "flow": "Used for plotting average accuracy per patient."
+        },
+        {
+            "variable": "LDA_acc",
+            "creation": "Calculated through cross-validation using LDA model.",
+            "flow": "Used for plotting average accuracy per patient."
+        },
+        {
+            "variable": "LR_acc",
+            "creation": "Calculated through cross-validation using Logistic Regression model.",
+            "flow": "Used for plotting average accuracy per patient."
+        },
+        {
+            "variable": "RF_acc",
+            "creation": "Calculated through cross-validation using Random Forest model.",
+            "flow": "Used for plotting average accuracy per patient."
+        }
+    ],
+    "models": [
+        {
+            "model_name": "SVC",
+            "input_features": "X",
+            "target_variable": "Y",
+            "hyperparameters": "kernel='rbf'"
+        },
+        {
+            "model_name": "LDA",
+            "input_features": "X",
+            "target_variable": "Y",
+            "hyperparameters": "shrinkage='auto', solver='eigen'"
+        },
+        {
+            "model_name": "Logistic Regression",
+            "input_features": "X",
+            "target_variable": "Y",
+            "hyperparameters": "None"
+        },
+        {
+            "model_name": "Random Forest",
+            "input_features": "X",
+            "target_variable": "Y",
+            "hyperparameters": "None"
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file_name": "otto-recommender-system_kernels.csv",
+      "description": "Contains statistics about kernels in the Otto recommender system, including authors, performance tiers, and votes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "A DataFrame containing the kernel statistics loaded from the CSV file"
+    },
+    {
+      "variable_name": "forks",
+      "description": "A DataFrame containing details about forks, including title, author, and cumulative votes"
+    },
+    {
+      "variable_name": "votes_dict",
+      "description": "A dictionary mapping kernel IDs to their corresponding vote counts"
+    },
+    {
+      "variable_name": "nodes_subtree_size",
+      "description": "A dictionary that tracks the size of the subtree for each node in the fork graph"
+    },
+    {
+      "variable_name": "nodes_cum_votes",
+      "description": "A dictionary that tracks the cumulative votes for each node in the graph"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["DataAnalysis", "Visualizations"]
+    },
+    {
+      "variable_name": "forks",
+      "created_by": "df[['title', 'KernelAuthor', 'id', 'forkParent']]",
+      "flows_to": ["CumulativeVotesComputation", "ForksStatistics"]
+    },
+    {
+      "variable_name": "votes_dict",
+      "created_by": "{i:v for i,v in zip(forks[:, 2], forks[:, 1])}",
+      "flows_to": ["CumulativeVotesCalculation"]
+    },
+    {
+      "variable_name": "nodes_subtree_size",
+      "created_by": "dfs_tree(G, node)",
+      "flows_to": ["ForksDataFrame"]
+    },
+    {
+      "variable_name": "nodes_cum_votes",
+      "created_by": "sum([votes_dict[n] if n in votes_dict else 0 for n in subtree.nodes()])",
+      "flows_to": ["ForksDataFrame"]
+    }
+  ],
+  "models": []
+}

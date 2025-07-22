@@ -1,0 +1,27 @@
+flowchart TD
+  A["<img src='path/to/file.svg' width=100 height=100/> <br/> ../input/diabetes.csv"] --> B["<img src='path/to/table.svg' width=100 height=100/> <br/> dataset"]
+  B --> C["<img src='path/to/column_split.svg' width=100 height=100/> <br/> X"]
+  B --> D["<img src='path/to/column_split.svg' width=100 height=100/> <br/> Y"]
+  C --> E["<img src='path/to/file.svg' width=100 height=100/> <br/> X_train"]
+  C --> F["<img src='path/to/file.svg' width=100 height=100/> <br/> X_test"]
+  D --> G["<img src='path/to/file.svg' width=100 height=100/> <br/> y_train"]
+  D --> H["<img src='path/to/file.svg' width=100 height=100/> <br/> y_test"]
+  E --> I["<img src='path/to/brain.svg' width=100 height=100/> <br/> model"]
+  G --> I
+  I --> J["<img src='path/to/brain.svg' width=100 height=100/> <br/> adam"]
+  I --> K["<img src='path/to/brain.svg' width=100 height=100/> <br/> scores"]
+  F --> K
+  H --> K
+
+  %% Comments for each node
+  click A "Data Source: CSV file with diabetes dataset" "_blank"
+  click B "Loaded dataset from CSV using numpy.loadtxt" "_blank"
+  click C "Input features for model training/testing" "_blank"
+  click D "Output variable (diabetes class)" "_blank"
+  click E "Training data (input features)" "_blank"
+  click F "Testing data (input features)" "_blank"
+  click G "Training data (output variable)" "_blank"
+  click H "Testing data (output variable)" "_blank"
+  click I "Keras Sequential model with Dense layers" "_blank"
+  click J "Optimizer: Adam for compiling the model" "_blank"
+  click K "Results of model evaluation" "_blank"

@@ -1,0 +1,31 @@
+%% This Mermaid diagram represents the data workflow for a data science project
+flowchart TD
+    A["Data Source: Internal Generation <img src='icons/database.svg' width=100 height=100/> <br/> "] -->|Generates Data| B["N_x, N_epsilon, N <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    B --> |Calculate Total Points| C["N <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    C --> |Generate x Values| D["x_ <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    D -->|Used in Lambda Equation| F["lambda_eq <img src='icons/brain.svg' width=100 height=100/> <br/> "]
+    D -->|Used in Probabilistic Equation| G["lambda_eq_probabalitic <img src='icons/brain.svg' width=100 height=100/> <br/> "]
+    F --> |Calculate True y Values| H["y <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    G --> |Generate Random Errors| I["epsilon <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    I --> |Calculate Measured y Values| J["y_measure <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    H --> |Create DataFrame| K["df <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    J --> |Add to DataFrame| K["df <img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+    K -->|Used in Plots| L["Plot y and y_measure <img src='icons/file.svg' width=100 height=100/> <br/> "]
+
+    subgraph Linear_Regression_Model
+        direction TB
+        M["Model: Linear Regression <img src='icons/brain.svg' width=100 height=100/> <br/> "]
+        N1["x <img src='icons/row_split.svg' width=100 height=100/> <br/> "]
+        N2["y, y_measure <img src='icons/table.svg' width=100 height=100/> <br/> "]
+        M --> |Input| N1
+        M --> |Target| N2
+        M --> |Hyperparameters| O{Hyperparameters: α=10, β=60}
+    end
+    L --> |Analyze and Validate| Linear_Regression_Model
+
+    %% Node details
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef processNode fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef outputNode fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plotNode fill:#FFCDD2,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N1,N2,O dataNode;

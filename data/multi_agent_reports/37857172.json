@@ -1,0 +1,56 @@
+{
+  "data_sources": [
+    {
+      "source": "filename.csv",
+      "description": "Dataset containing tweets related to the Russia-Ukraine war, including columns for username, tweet text, and language."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "DataFrame containing the filtered dataset with columns: username, tweet, language, Positive, Negative, Neutral."
+    },
+    {
+      "variable": "text",
+      "description": "A string containing all tweets combined for word cloud visualization."
+    },
+    {
+      "variable": "positive",
+      "description": "A string containing tweets with a positive sentiment for visualization."
+    },
+    {
+      "variable": "negative",
+      "description": "A string containing tweets with a negative sentiment for visualization."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "creation_method": "pd.read_csv",
+      "uses": ["clean text data", "perform sentiment analysis", "visualize sentiments"]
+    },
+    {
+      "variable": "text",
+      "creation_method": "joined from data.tweet",
+      "uses": ["visualization as wordcloud"]
+    },
+    {
+      "variable": "positive",
+      "creation_method": "filtered from data based on sentiment scores",
+      "uses": ["visualization as wordcloud"]
+    },
+    {
+      "variable": "negative",
+      "creation_method": "filtered from data based on sentiment scores",
+      "uses": ["visualization as wordcloud"]
+    }
+  ],
+  "models": [
+    {
+      "model": "SentimentIntensityAnalyzer",
+      "input_features": ["tweet"],
+      "target_variable": ["Positive", "Negative", "Neutral"],
+      "hyperparameters": null
+    }
+  ]
+}

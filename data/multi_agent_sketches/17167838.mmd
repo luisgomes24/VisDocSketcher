@@ -1,0 +1,16 @@
+flowchart TD
+    %% Node for CSV file containing SMS messages
+    A["spam.csv"] -->|Read into| B["df"]
+    
+    %% df contains SMS messages and labels
+    B -->|Data Cleaning, Feature Engineering| C["df_cleaned"]
+    B -->|Split Data| D["X_train, X_test, y_train, y_test"]
+    
+    %% TF-IDF Matrix creation
+    D -->|Transform X_train using TfidfVectorizer| E["tfidf_mat"]
+    
+    %% Training Multinomial Naive Bayes model
+    E -->|Features: tfidf_mat + message lengths| F["Multinomial NB Model"]
+    
+    %% Model evaluation on separate test set
+    F -->|Evaluate using| G["X_test, y_test"]

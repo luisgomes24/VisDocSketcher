@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Source Nodes
+    A1["train.csv"] -->|Read CSV| B1["df_train"]
+    A2["building_metadata.csv"] -->|Read CSV| B2["df_building_metadata"]
+    A3["asu_2016-2018.csv"] -->|Read CSV| B3["df_asu"]
+
+    %% Data Transformation Nodes
+    B1 -->|Used for analysis| C1["df_buildings"]
+    B2 -->|Merged with df_train| C1
+    B3 -->|Provides consumption data| C1
+    
+    %% Mapping Node
+    D1["df_mapping"] -->|Adjusts building IDs| C1
+
+    %% Annotations
+    %% A1: Data source for training energy consumption data
+    %% A2: Metadata for each building, such as size and location
+    %% A3: Historic energy consumption data for validation/comparison
+    %% B1: Dataframe created from reading train.csv
+    %% B2: Dataframe with building details
+    %% B3: Energy consumption dataframe
+    %% C1: Merged dataframe containing both ASHRAE and ASU building info
+    %% D1: Manual mapping for resolving unmatched building IDs

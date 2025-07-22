@@ -1,0 +1,39 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        E1["<img src='icons/file.svg' width=100 height=100/> <br/> DataWMask.xlsx"]
+        E2["<img src='icons/image.svg' width=100 height=100/> <br/> Breast Cancer Images"]
+        E3["<img src='icons/image.svg' width=100 height=100/> <br/> Additional Masks"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables
+        A1["<img src='icons/table.svg' width=100 height=100/> <br/> data"]
+        A2["<img src='icons/column_split.svg' width=100 height=100/> <br/> CFG"]
+        A3["<img src='icons/column_split.svg' width=100 height=100/> <br/> path_result"]
+        A4["<img src='icons/row_split.svg' width=100 height=100/> <br/> mapping"]
+        A5["<img src='icons/row_split.svg' width=100 height=100/> <br/> yolo_txt"]
+    end
+
+    %% Data Flow
+    E1 -->|Read Excel| A1 %% Data creation from Excel
+    E2 -->|Load Images| A1 %% Images loaded for processing
+    E3 -->|Load Masks| A1 %% Additional data for masks
+    A1 -->|Process and Label| A4 %% Mapping of labels
+    A1 -->|Image Processing| A5 %% YOLO format creation
+    A5 -->|Save YOLO Format| A3 %% YOLO text files saved
+
+    %% Machine Learning Model
+    subgraph Model
+        M1["<img src='icons/brain.svg' width=100 height=100/> <br/> YOLOv5"]
+    end
+
+    A1 -->|Train| M1 %% Feeding images for training
+    A5 -->|Train| M1 %% Using masks as bounding boxes
+
+    %% Hyperparameters
+    subgraph Hyperparameters
+        H["<img src='icons/row_split.svg' width=100 height=100/> <br/> CFG settings\n- img: CFG.IMG_SIZE\n- batch: 8\n- epochs: 1000"]
+    end
+
+    M1 -->|Configured With| H %% Model configured with hyperparameters

@@ -1,0 +1,12 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    clients_csv["clients.csv"] ---|Load| df1["df1 DataFrame"]
+    products_csv["products.csv"] ---|Load| df2["df2 DataFrame"]
+    purchases_csv["purchases.csv"] ---|Load| df3["df3 DataFrame"]
+    
+    %% Data Usage
+    df1 -->|Usage: Visualization and Data Exploration| visualization1["Visualization and Data Exploration"]
+    df2 -->|Usage: Visualization and Data Exploration| visualization2["Visualization and Data Exploration"]
+    df3 -->|Usage: Visualization and Data Exploration| visualization3["Visualization and Data Exploration"]
+```

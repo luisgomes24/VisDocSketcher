@@ -1,0 +1,128 @@
+{
+  "data_sources": [
+    {
+      "file_path": "train/NonDemented/*.jpg",
+      "description": "Images of individuals classified as Non-Demented"
+    },
+    {
+      "file_path": "train/VeryMildDemented/*.jpg",
+      "description": "Images of individuals classified as Very Mild Demented"
+    },
+    {
+      "file_path": "train/MildDemented/*.jpg",
+      "description": "Images of individuals classified as Mild Demented"
+    },
+    {
+      "file_path": "train/ModerateDemented/*.jpg",
+      "description": "Images of individuals classified as Moderate Demented"
+    },
+    {
+      "file_path": "test/NonDemented/*.jpg",
+      "description": "Test images of individuals classified as Non-Demented"
+    },
+    {
+      "file_path": "test/VeryMildDemented/*.jpg",
+      "description": "Test images of individuals classified as Very Mild Demented"
+    },
+    {
+      "file_path": "test/MildDemented/*.jpg",
+      "description": "Test images of individuals classified as Mild Demented"
+    },
+    {
+      "file_path": "test/ModerateDemented/*.jpg",
+      "description": "Test images of individuals classified as Moderate Demented"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "Images used for training the model"
+    },
+    {
+      "name": "labels",
+      "description": "Encoded labels representing dementia classification"
+    },
+    {
+      "name": "final_data",
+      "description": "Combined DataFrame containing all training and test images with labels"
+    },
+    {
+      "name": "x_train",
+      "description": "Numpy array of the training images"
+    },
+    {
+      "name": "x_test",
+      "description": "Numpy array of the test images"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "Loaded images using loadImages() function",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable": "labels",
+      "creation_method": "Derived from final_data as target variable",
+      "flow": "Used for fitting models"
+    },
+    {
+      "variable": "final_data",
+      "creation_method": "Concatenation of all individual DataFrames",
+      "flow": "Utilized to split into training and testing datasets"
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "Converted from train_data",
+      "flow": "Input to the model for training"
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "Converted from test_data",
+      "flow": "Input to the model for testing"
+    }
+  ],
+  "models": [
+    {
+      "model": "MobileNetV2",
+      "input_shape": "(224, 224, 3)",
+      "layers": [
+        "Dropout(layer_1)",
+        "Flatten()",
+        "BatchNormalization()",
+        "Dense(1024)",
+        "Dropout(layer_2)",
+        "Dense(1024)",
+        "Dropout(layer_3)",
+        "Dense(1024)",
+        "Dropout(layer_4)"
+      ],
+      "output_layer": "Dense(4, activation='softmax')"
+    },
+    {
+      "model": "KNeighborsClassifier",
+      "input_features": "Extracted features from training images",
+      "target_variable": "y_train"
+    },
+    {
+      "model": "SVC",
+      "input_features": "Extracted features from training images",
+      "target_variable": "y_train"
+    },
+    {
+      "model": "RandomForestClassifier",
+      "input_features": "Extracted features from training images",
+      "target_variable": "y_train"
+    },
+    {
+      "model": "AdaBoostClassifier",
+      "input_features": "Extracted features from training images",
+      "target_variable": "y_train"
+    },
+    {
+      "model": "XGBClassifier",
+      "input_features": "Extracted features from training images",
+      "target_variable": "y_train"
+    }
+  ]
+}

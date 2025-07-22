@@ -1,0 +1,36 @@
+flowchart TD
+
+    %% Data Sources
+    A1["train_data.csv"]
+    A2["test_sequences.csv"]
+    
+    %% Data Variables
+    B1["train"]
+    B2["test"]
+    B3["reactivity_cols"]
+    B4["reactivity_error_cols"]
+    B5["seq_len"]
+    B6["SN_filter"]
+
+    %% Data Flow
+    A1 -->|Load Data| B1
+    A2 -->|Load Data| B2
+    B1 -->|Calculate Sequence Length| B5
+    B2 -->|Calculate Sequence Length| B5
+    B1 -->|Create SN Filter| B6
+
+    %% Comments
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    class A1,A2 source;
+    class B1,B2,B3,B4,B5,B6 variable;
+
+    %% Descriptions
+    click A1 href "#" "Train data: RNA sequences, reactivities"
+    click A2 href "#" "Test data: RNA sequences"
+    click B1 href "#" "Train: DataFrame for training set"
+    click B2 href "#" "Test: DataFrame for test set"
+    click B3 href "#" "Reactivity columns"
+    click B4 href "#" "Reactivity error columns"
+    click B5 href "#" "Sequence length calculation"
+    click B6 href "#" "Signal-to-noise filter creation"

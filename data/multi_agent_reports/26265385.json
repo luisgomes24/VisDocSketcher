@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart_2020_cleaned.csv",
+      "description": "A dataset containing personal key indicators of heart disease."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the heart disease dataset."
+    },
+    {
+      "variable_name": "float1",
+      "description": "List of numeric columns from the DataFrame."
+    },
+    {
+      "variable_name": "obj1",
+      "description": "List of categorical columns from the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow_destination": ["exploratory analysis", "visualization"]
+    },
+    {
+      "variable": "float1",
+      "creation_method": "DataFrame.select_dtypes",
+      "flow_destination": ["visualization"]
+    },
+    {
+      "variable": "obj1",
+      "creation_method": "DataFrame.select_dtypes",
+      "flow_destination": ["visualization"]
+    }
+  ],
+  "models": []
+}

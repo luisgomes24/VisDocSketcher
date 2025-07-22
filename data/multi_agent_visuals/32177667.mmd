@@ -1,0 +1,40 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+
+    subgraph DataSources
+        CSV["<img src='\/Users\/user\/Desktop\/SMU\/sketch-creator\/data\/icons\/file.svg' width=100 height=100/> <br/> Input Data"] %% Data source containing kernel statistics
+    end
+
+    subgraph Variables
+        DF["<img src='\/Users\/user\/Desktop\/SMU\/sketch-creator\/data\/icons\/table.svg' width=100 height=100/> <br/> DataFrame"]
+        F["Forks"]
+        VD["Votes Dictionary"]
+        NSTS["Nodes Subtree Size"]
+        NCV["Nodes Cumulative Votes"]
+    end
+
+    subgraph Processes
+        ReadCSV["<img src='\/Users\/user\/Desktop\/SMU\/sketch-creator\/data\/icons\/file.svg' width=100 height=100/> <br/> pd.read_csv"]
+        CreateForksDF["Creating Forks DataFrame"]
+        CreateVotesDict["Creating Votes Dictionary"]
+        ComputeSubtreeSize["Compute Subtree Sizes"]
+        ComputeCumVotes["Calculate Cumulative Votes"]
+    end
+
+    subgraph DataFlow
+        DF -->|flows to| DataAnalysis["Data Analysis Process"]
+        DF -->|flows to| Visualization["Visualization Process"]
+        F -->|flows to| VotesCalc["Cumulative Votes Calculation"]
+        F -->|flows to| ForkStats["Forks Statistics"]
+        VD -->|used in| CumulativeVotesCalculation["Calculate Cumulative Votes"]
+        NSTS -->|flows to| ForksDF["<img src='\/Users\/user\/Desktop\/SMU\/sketch-creator\/data\/dummy_plots\/scatter_plot_template.svg'/> <br/> Forks Data"]
+        NCV -->|flows to| ForksDF
+    end
+
+    CSV -->|load| ReadCSV -->|create| DF
+    DF -->|select columns| CreateForksDF -->|create| F
+    F -->|zip| CreateVotesDict -->|create| VD
+    F -->|DFS tree| ComputeSubtreeSize -->|use for| NSTS
+    F &VD -->|subtree nodes| ComputeCumVotes -->|create| NCV
+
+    VoteAnalysis["Analyze Voting Patterns"] -->|depends on| DF

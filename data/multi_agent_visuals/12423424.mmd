@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Source
+    A[input_file.csv]:::source -->|Load Data| B[data]:::var
+
+    %% Data Variables
+    B[data]:::var -->|Create Dummy Variable| C[malign]:::var
+    C[malign] -->|Replace diagnosis| D[df]:::var
+    D[df] -->|Remove Unnecessary Columns| E[final_df]:::var
+    E[final_df] -->|Separate Features| F[X]:::var
+    E[final_df] -->|Separate Target| G[y]:::var
+
+    %% Data Splitting and Scaling
+    F[X] -->|Split and Scale| H[X_train]:::var
+    F[X] -->|Split and Scale| I[X_test]:::var
+
+    %% Model Training
+    H[X_train] -->|Train Model| J[Logistic Regression]:::model
+    G[y] -->|Train Model| J[Logistic Regression]
+
+    %% Model Prediction
+    J[Logistic Regression] -->|Predict on Train Set| K[train_pred]:::var
+    J[Logistic Regression] -->|Predict on Test Set| L[test_pred]:::var
+
+    %% Classes
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef var fill:#87CEEB,stroke:#555,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#988,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#999,stroke-width:2px;
+
+    %% Additional Visuals
+    B -->|Load| <img src='icons/file.svg' width=100 height=100/> <br/> Load Data
+    C -->|Transform| <img src='icons/column_split.svg' width=100 height=100/> <br/> Create Dummy Variable
+    H -->|Prepare| <img src='icons/row_split.svg' width=100 height=100/> <br/> Split and Scale
+    I -->|Prepare| <img src='icons/row_split.svg' width=100 height=100/> <br/> Split and Scale
+    J -->|Train| <img src='icons/brain.svg' width=100 height=100/> <br/> Logistic Regression
+    K -->|Output| <img src='icons/brain.svg' width=100 height=100/> <br/> Predictions
+    L -->|Output| <img src='icons/brain.svg' width=100 height=100/> <br/> Predictions

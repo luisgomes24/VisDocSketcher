@@ -1,0 +1,50 @@
+```mermaid
+flowchart TD
+    %% Node definitions
+    A["Sample Data Generation"] -->|generate 1000 random samples| B(("sample"))
+    B -->|calculate mean| C(("sample_mean"))
+    B -->|calculate std deviation| D(("sample_std"))
+    C & D -->|use SciPy norm()| E(("dist"))
+    E -->|calculate probabilities| F(("probabilities"))
+    F -->|plot histogram and PDF| G["Plot"]
+
+    %% Additional Node Definitions for KDE
+    B -->|generate two separate samples| H["Sample1 & Sample2"]
+    H -->|concatenate samples| I(("sample_combined"))
+    I -->|fit KDE model| J[
+    "Kernel Density Estimation"
+    "Bandwidth=3, Kernel='gaussian'"
+    ]
+    J -->|generate probabilities| K(("probabilities_kde"))
+    K -->|plot KDE probabilities| L["Plot KDE"]
+
+    %% Comment Nodes
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    class A comment;
+    class B comment;
+    class C comment;
+    class D comment;
+    class E comment;
+    class F comment;
+    class G comment;
+    class H comment;
+    class I comment;
+    class J comment;
+    class K comment;
+    class L comment;
+
+    %% Definitions
+    %% A - Sample data generation
+    %% B - Random sample for density estimation
+    %% C - Mean of sample
+    %% D - Standard deviation of sample
+    %% E - SciPy normal distribution object
+    %% F - Probability calculation
+    %% G - Histogram and PDF plot
+    %% H - Separate Sample Generation for KDE
+    %% I - Combine samples for KDE
+    %% J - KDE model application with sklearn
+    %% K - Probability calculation from KDE
+    %% L - Plot results from KDE
+
+```

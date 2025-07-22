@@ -1,0 +1,34 @@
+graph TD;
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Train CSV"] -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_df"];
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> Test CSV"] -->|Load data| C["<img src='icons/table.svg' width=100 height=100/> <br/> test_df"];
+
+    %% Data Preparation
+    B -->|Extract features| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> train_features"];
+    B -->|Extract target| E[train_target];
+    C -->|Extract features| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> test_features"];
+
+    %% Data Integration
+    D & F -->|Combine data| G[train_all];
+
+    %% Fake and Real Data Identification
+    F -->|Identify fake data| H["<img src='icons/row_split.svg' width=100 height=100/> <br/> fake_data"];
+    F -->|Identify real data| I["<img src='icons/row_split.svg' width=100 height=100/> <br/> real_data"];
+
+    %% Outputs
+    H -->|Save indices| J[Index of Fake Data];
+    I -->|Save indices| K[Index of Real Data];
+
+    %% Comments for clarification
+    %% A: Represents the training data CSV file
+    %% A1: Represents the test data CSV file
+    %% B: DataFrame for the training data
+    %% C: DataFrame for the test data
+    %% D: Training features extracted from train_df
+    %% E: Target variable extracted from train_df
+    %% F: Test features extracted from test_df
+    %% G: Combined DataFrame of training and test features
+    %% H: Subset of test_features identified as fake data
+    %% I: Subset of test_features identified as real data
+    %% J: Output file for indices of fake data
+    %% K: Output file for indices of real data

@@ -1,0 +1,9 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+        style A fill:#87CEEB;
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> data\n    <img src='dummy_plots/boxplot_template.svg'/> <br/> "]
+        style B fill:#C6F4D6;
+    F["<img src='icons/image.svg' width=100 height=100/> <br/> images"]
+        style F fill:#87CEEB;
+    A -->|Read into| B
+    A -->|Read into| F

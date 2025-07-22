@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Source Nodes
+    
+    %% Variable Nodes
+    num["num"]
+    total_candies["total_candies"]
+    have_umbrella["have_umbrella"]
+    rain_level["rain_level"]
+    have_hood["have_hood"]
+    is_workday["is_workday"]
+    
+    %% Process Nodes
+    sign_func["Function: sign"]
+    to_smash_func["Function: to_smash"]
+    prepared_for_weather_func["Function: prepared_for_weather"]
+    concise_is_negative_func["Function: concise_is_negative"]
+    onionless_func["Function: onionless"]
+    wants_plain_hotdog_func["Function: wants_plain_hotdog"]
+
+    %% Data Flow
+    num --> |"used in"| sign_func --> |"output to"| sign["sign"]
+    total_candies --> |"used in"| to_smash_func --> |"output to"| to_smash["to_smash"]
+    have_umbrella & rain_level & have_hood & is_workday --> |"used in"| prepared_for_weather_func --> |"output to"| prepared_for_weather["prepared_for_weather"]
+    concise_is_negative_func --> |"output to"| concise_is_negative["concise_is_negative"]
+    onionless_func --> |"output to"| onionless["onionless"]
+    wants_plain_hotdog_func --> |"output to"| wants_plain_hotdog["wants_plain_hotdog"]
+
+    %% Comments for clarity
+    %% This section represents initialization and input variables
+    
+    %% sign_func calculates the sign of a number
+    %% to_smash_func calculates the leftover candies after distribution
+    %% prepared_for_weather_func checks if you're prepared for weather conditions
+    %% concise_is_negative_func checks if a number is negative
+    %% onionless_func checks if onions are not included
+    %% wants_plain_hotdog_func checks if the customer wants a plain hotdog

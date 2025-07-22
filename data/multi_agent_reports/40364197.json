@@ -1,0 +1,62 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "num",
+      "description": "Input number for the sign function"
+    },
+    {
+      "name": "total_candies",
+      "description": "Total number of candies to distribute"
+    },
+    {
+      "name": "have_umbrella",
+      "description": "Boolean indicating if the customer has an umbrella"
+    },
+    {
+      "name": "rain_level",
+      "description": "Numerical value representing rain intensity"
+    },
+    {
+      "name": "have_hood",
+      "description": "Boolean indicating if the customer has a hood"
+    },
+    {
+      "name": "is_workday",
+      "description": "Boolean indicating if today is a workday"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sign",
+      "created_by": "def sign(num)",
+      "flows_to": ["print"]
+    },
+    {
+      "variable": "to_smash",
+      "created_by": "def to_smash(total_candies)",
+      "flows_to": ["print"]
+    },
+    {
+      "variable": "prepared_for_weather",
+      "created_by": "def prepared_for_weather(...)",
+      "flows_to": ["print"]
+    },
+    {
+      "variable": "concise_is_negative",
+      "created_by": "def concise_is_negative(number)",
+      "flows_to": ["check"]
+    },
+    {
+      "variable": "onionless",
+      "created_by": "def onionless(...)",
+      "flows_to": ["check"]
+    },
+    {
+      "variable": "wants_plain_hotdog",
+      "created_by": "def wants_plain_hotdog(...)",
+      "flows_to": ["check"]
+    }
+  ],
+  "models": []
+}

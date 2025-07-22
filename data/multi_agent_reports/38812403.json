@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "file": "Wally image from Mahotas demo",
+      "description": "The image used to demonstrate the image processing techniques."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "wally",
+      "description": "Loaded image data of 'Wally' from Mahotas demo."
+    },
+    {
+      "name": "wfloat",
+      "description": "Floating point representation of the 'Wally' image."
+    },
+    {
+      "name": "r",
+      "description": "Red channel of the 'Wally' image."
+    },
+    {
+      "name": "g",
+      "description": "Green channel of the 'Wally' image."
+    },
+    {
+      "name": "b",
+      "description": "Blue channel of the 'Wally' image."
+    },
+    {
+      "name": "w",
+      "description": "Mean channel of the 'Wally' image."
+    },
+    {
+      "name": "pattern",
+      "description": "A +1, -1 pattern used for convolution over the y-axis."
+    },
+    {
+      "name": "v",
+      "description": "Result of convolving the red channel minus the white channel using the pattern."
+    },
+    {
+      "name": "mask",
+      "description": "Boolean mask identifying the maximum response in the convolved image."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "wally",
+      "creation": "Loaded from Mahotas demos.",
+      "flow": "Displayed using imshow."
+    },
+    {
+      "variable": "wfloat",
+      "creation": "Converted from 'wally' to float.",
+      "flow": "Used to extract R, G, B channels and mean channel."
+    },
+    {
+      "variable": "r",
+      "creation": "Extracted from 'wfloat'.",
+      "flow": "Used in convolve function."
+    },
+    {
+      "variable": "g",
+      "creation": "Extracted from 'wfloat'.",
+      "flow": "Not used after extraction."
+    },
+    {
+      "variable": "b",
+      "creation": "Extracted from 'wfloat'.",
+      "flow": "Not used after extraction."
+    },
+    {
+      "variable": "w",
+      "creation": "Extracted from 'wfloat'.",
+      "flow": "Used in convolution."
+    },
+    {
+      "variable": "pattern",
+      "creation": "Created as a numpy array.",
+      "flow": "Used in convolution to generate 'v'."
+    },
+    {
+      "variable": "v",
+      "creation": "Result of convolution operation with the pattern.",
+      "flow": "Used to create mask."
+    },
+    {
+      "variable": "mask",
+      "creation": "Generated using a condition on 'v'.",
+      "flow": "Used to modify the 'wally' image."
+    }
+  ],
+  "models": []
+}

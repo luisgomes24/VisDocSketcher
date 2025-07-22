@@ -1,0 +1,34 @@
+flowchart TD
+    %% Load Data
+    subgraph Load_Data
+        A1[/train.csv/] --> B1[train]
+        A2[/test.csv/] --> B2[test]
+    end
+
+    %% Null Value Replacement
+    subgraph Null_Replacement
+        B1 --> C1[train2] --> D1[train3]
+        B2 --> C2[test2] --> D2[test3]
+    end
+
+    %% Feature and Target Extraction
+    subgraph Feature_Target_Extraction
+        D1 --> E1[x_train]
+        D1 --> E2[y_train]
+    end
+
+    %% Model Training
+    subgraph Model_Training
+        E1 --> F[Logistic Regression Model]
+        E2 --> F
+    end
+
+    %% Predictions
+    subgraph Predictions
+        F --> G[y_pred]
+    end
+
+    %% Output DataFrame
+    subgraph Output_DataFrame
+        G --> H[df_LG] --> I[/Final CSV Output/]
+    end

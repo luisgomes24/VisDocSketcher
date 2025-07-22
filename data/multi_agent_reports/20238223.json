@@ -1,0 +1,70 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/tabular-playground-series-sep-2021/train.csv",
+            "description": "Contains training data including features and target variable 'claim'."
+        },
+        {
+            "file": "../input/tabular-playground-series-sep-2021/test.csv",
+            "description": "Contains test data with features for which predictions are to be made."
+        },
+        {
+            "file": "../input/tabular-playground-series-sep-2021/sample_solution.csv",
+            "description": "Contains the format for submission sample."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "train",
+            "description": "DataFrame containing the training dataset."
+        },
+        {
+            "name": "test",
+            "description": "DataFrame containing the test dataset."
+        },
+        {
+            "name": "sample_submission",
+            "description": "DataFrame showing an example of the expected submission format."
+        },
+        {
+            "name": "x",
+            "description": "Copy of the training dataset to be used as features (same as 'train')."
+        },
+        {
+            "name": "y",
+            "description": "Array containing target variable 'claim' from the training dataset."
+        },
+        {
+            "name": "kf",
+            "description": "Stratified KFold object used for creating training and validation splits."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "train",
+            "creation": "read_csv",
+            "flow": "Used to generate KFold splits and saved to csv."
+        },
+        {
+            "variable": "test",
+            "creation": "read_csv",
+            "flow": "Saved to test.csv for predictions."
+        },
+        {
+            "variable": "x",
+            "creation": "Copy from train",
+            "flow": "Used as input features for model training."
+        },
+        {
+            "variable": "y",
+            "creation": "Extracted from train",
+            "flow": "Used as the target variable for model training."
+        },
+        {
+            "variable": "kf",
+            "creation": "StratifiedKFold",
+            "flow": "Used to create folds for model validation."
+        }
+    ],
+    "models": []
+}

@@ -1,0 +1,36 @@
+%%{ init: { 'theme': 'default' } }%%
+flowchart TD
+
+    subgraph DataSources
+        A1["../input/vehicle-detection-image-set/data/vehicles/*"]
+        A2["../input/vehicle-detection-image-set/data/non-vehicles/*"]
+    end
+    
+    subgraph DataVariables
+        B1["df"]
+        B2["train_img"]
+        B3["train_label"]
+        B4["test_img"]
+        B5["test_label"]
+        B6["model"]
+    end
+
+    subgraph DataFlow
+        A1 & A2 -->|Create DataFrame| B1
+        B1 -->|Convert to numpy| B2 & B3 & B4 & B5
+        B2 -->|Input to model.fit| B6
+        B4 -->|Input to model.predict_classes| B6
+    end
+
+    subgraph Model
+        C1["Convolutional Neural Network"]
+    end
+
+    B6 -->|Construct and Compile| C1
+
+    %% Comments for clarity
+    %% A1 and A2: Image data sources for vehicle detection
+    %% B1: DataFrame storing images and labels
+    %% B2, B3, B4, B5: Processed image arrays and labels
+    %% B6: CNN Model variable construct
+    %% C1: CNN with specified hyperparameters

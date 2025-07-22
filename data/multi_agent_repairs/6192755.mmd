@@ -1,0 +1,79 @@
+```mermaid
+flowchart TD
+    subgraph DataSources[Data Sources]
+        A[[circuits.csv]]
+        B[[constructorResults.csv]]
+        C[[constructors.csv]]
+        D[[constructorStandings.csv]]
+        E[[drivers.csv]]
+        F[[driverStandings.csv]]
+        G[[lapTimes.csv]]
+        H[[pitStops.csv]]
+        I[[qualifying.csv]]
+        J[[races.csv]]
+        K[[results.csv]]
+        L[[seasons.csv]]
+        M[[status.csv]]
+    end
+    subgraph DataVariables[Data Variables]
+        N["YEAR = 2011"]
+        O["DRIVER_LS"]
+        P["DRIVER_C"]
+        Q["TEAM_C"]
+        R["LINESTYLES"]
+        S["LapTimes"]
+        T["Results"]
+        U["Drivers"]
+        V["Races"]
+    end
+    subgraph DataFlow[Data Flow]
+        subgraph ReadingCSV[Reading CSV Files]
+            direction TB
+            A -->|read_csv| circuits
+            B -->|read_csv| constructorResults
+            C -->|read_csv| constructors
+            D -->|read_csv| constructorStandings
+            E -->|read_csv| drivers
+            F -->|read_csv| driverStandings
+            G -->|read_csv| lapTimes
+            H -->|read_csv| pitStops
+            I -->|read_csv| qualifying
+            J -->|read_csv| races
+            K -->|read_csv| results
+            L -->|read_csv| seasons
+            M -->|read_csv| status
+        end
+        subgraph Transformations[Data Transformations]
+            direction TB
+            circuits -->|merge and fix| V
+            drivers -->|merge and fix| U
+            "U & Results" -->|merge and fix| S
+            F -->|filter and subset| F
+            J -->|filter and subset| J
+        end
+    end
+    style A fill:#f96
+    style B fill:#f96
+    style C fill:#f96
+    style D fill:#f96
+    style E fill:#f96
+    style F fill:#f96
+    style G fill:#f96
+    style H fill:#f96
+    style I fill:#f96
+    style J fill:#f96
+    style K fill:#f96
+    style L fill:#f96
+    style M fill:#f96
+    style N fill:#ccf
+    style O fill:#ccf
+    style P fill:#ccf
+    style Q fill:#ccf
+    style R fill:#ccf
+    style S fill:#ccf
+    style T fill:#ccf
+    style U fill:#ccf
+    style V fill:#ccf
+    style ReadingCSV fill:#efef54,stroke:#333,stroke-width:2px
+    style Transformations fill:#54efde,stroke:#333,stroke-width:2px
+```

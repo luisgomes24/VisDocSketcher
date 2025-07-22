@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    A[acc.csv] -->|Load Data| B[acc DataFrame]
+    
+    %% Data Transformation
+    B -->|Remove Nulls, Convert Month| C[df DataFrame]
+    C -->|Identify Categorical Columns| D[obj_cols_index_no]
+    
+    %% Dictionary for Mapping
+    F[MonthDict] -->|Map Numbers to Names| C
+    
+    %% Clustering
+    C -->|KPrototypes Clustering| E[KPrototypes Model]
+    E -->|Generate Clusters| G[clusters Variable]
+    G -->|Append Cluster ID| B
+    
+    %% Visualization
+    B -->|Visualize Data| H[Visual Analysis]
+    
+    %% Model Details
+    E ---|Model: KPrototypes\nClusters: 4, Init: 5\nRandom State: 50, Jobs: -1|G

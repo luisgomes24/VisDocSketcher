@@ -1,0 +1,64 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/california-house-prices/train.csv",
+      "description": "Training dataset containing house prices and features."
+    },
+    {
+      "file_path": "/kaggle/input/california-house-prices/test.csv",
+      "description": "Testing dataset for house prices prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_data",
+      "description": "DataFrame containing training data after applying logarithmic transformation on specific columns."
+    },
+    {
+      "name": "test_data",
+      "description": "DataFrame containing testing data after applying logarithmic transformation on specific columns."
+    },
+    {
+      "name": "y_pred",
+      "description": "Predicted house prices from the model for the test dataset."
+    },
+    {
+      "name": "submit_result",
+      "description": "DataFrame containing IDs and predicted house prices to be submitted."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_data",
+      "creation_method": "TabularDataset(train_data_path)",
+      "used_for": ["Model training"]
+    },
+    {
+      "variable": "test_data",
+      "creation_method": "TabularDataset(test_data_path)",
+      "used_for": ["Model prediction"]
+    },
+    {
+      "variable": "y_pred",
+      "creation_method": "predictor.predict(test_data.drop(columns=[id]))",
+      "used_for": ["Output predictions"]
+    },
+    {
+      "variable": "submit_result",
+      "creation_method": "pd.DataFrame({'id': test_data[id],'Sold Price':y_pred})",
+      "used_for": ["CSV submission file creation"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "TabularPredictor",
+      "input_features": "All features except 'Id'",
+      "target_variable": "Sold Price",
+      "hyperparameters": {
+        "num_stack_levels": 1,
+        "num_bag_folds": 5,
+        "hyperparameters": "multimodal"
+      }
+    }
+  ]
+}

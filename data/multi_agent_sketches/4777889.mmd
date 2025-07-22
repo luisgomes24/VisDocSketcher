@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"] --> B1["train DataFrame"]
+    A2["test.csv"] --> B2["test DataFrame"]
+    
+    %% Data Preparation
+    B1 --> C1["x_train, y_train"]
+    B1 --> C2["x_test, y_test"]
+    
+    %% Model Training
+    C1 --> D1["ResNet50 Model"]
+    
+    %% Predictions
+    D1 --> E1["Predictions"]
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+    class A1,A2 dataSource;
+    class B1,B2,C1,C2 dataVariable;
+    class D1 model;
+    class E1 dataVariable;

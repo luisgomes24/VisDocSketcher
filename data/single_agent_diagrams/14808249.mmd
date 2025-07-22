@@ -1,0 +1,15 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🔍 Preview Data <img src='table.svg' /> <br/> df.head()"];
+    B --> C["🚮 Data Preprocessing <img src='column_split.svg' /> <br/> Drop useless columns"];
+    C --> D["🛠️ Add Columns <img src='column_split.svg' /> <br/> Add year, month, hour, minute"];
+    D --> E["🔤 Normalize Text <img src='column_split.svg' /> <br/> df['title'] = df['title'].str.lower()"];
+    E --> F["📊 Descriptive Analysis - Title"];
+    F --> G["📊 Title Length Analysis <img src='hist_template.svg' />"];
+    G --> H["📊 Correlation Heatmap <img src='heatmap_template.svg' /> <br/> sns.heatmap(...)"];
+    H --> I["🔡 Popular Words in Title"];
+    I --> J["📊 Popular Words Barplot <img src='barplot_template.svg' />"];
+    J --> K["📚 Descriptive Analysis - Body"];
+    K --> L["📊 Body Length Analysis <img src='hist_template.svg' />"];
+    L --> M["🏷️ Popular Tickers Analysis"];
+    M --> N["📊 NYSE Tickers Barplot <img src='barplot_template.svg' />"];
+    M --> O["📊 Other Tickers Barplot <img src='barplot_template.svg' />"];

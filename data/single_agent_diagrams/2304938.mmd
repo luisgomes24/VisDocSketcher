@@ -1,0 +1,6 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> train.csv, test.csv"] --> B["🔧 Preprocessing <img src='column_split.svg' /> <br/> Set response variable as factor"]
+    B --> C["🧠 Model Training <img src='brain.svg' /> <br/> H2O AutoML"]
+    C --> D["📊 AutoML Leaderboard <img src='table.svg' />"]
+    D --> E["🔮 Predictions <img src='brain.svg' /> <br/> Generate predictions for test set"]
+    E --> F["📥 Save Submissions <img src='file.svg' /> <br/> Save to obscene_submission.csv"]

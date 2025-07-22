@@ -1,0 +1,1 @@
+This analysis summarizes the Jupyter notebook focusing on the Reddit WallStreetBets data analysis process. It outlines data sources, key variables, data flow, and the models implemented.

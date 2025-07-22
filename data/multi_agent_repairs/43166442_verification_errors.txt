@@ -1,0 +1,18 @@
+UnknownDiagramError: No diagram type detected matching given configuration for text: ```mermaid
+flowchart TD
+    A["Development Images"]:::dataSource -->|used by| E["vlsp_dataset"]
+    B["Development JSON"]:::dataSource -->|used by| E["vlsp_dataset"]
+    C["Training Images"]:::dataSource
+    D["Training JSON"]:::dataSource
+
+    %% Data Variables
+    subgraph Variables
+        E["vlsp_dataset"]:::dataVar
+    end
+
+    %% Data Flow
+    E -->|sampled for display| F["Random Image Sample"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+```

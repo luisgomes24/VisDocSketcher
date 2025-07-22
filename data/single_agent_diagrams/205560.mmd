@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> starbucks = pd.read_csv('../input/directory.csv')"] --> B["🔍 Explore Data <img src='table.svg'/> <br/> starbucks.head(5)"]
+    B --> C["📊 Dataset Dimensions <img src='table.svg'/> <br/> starbucks.shape"]
+    C --> D["✅ Data Completeness <img src='table.svg'/> <br/> starbucks.notnull().sum()"]
+    D --> E["🏪 Number of Stores <img src='table.svg'/> <br/> starbucks.shape[0]"]
+    E --> F["🌍 Countries with Stores <img src='table.svg'/> <br/> len(starbucks.Country.unique())"]
+    F --> G["🇺🇸 States in USA <img src='table.svg'/> <br/> usa_states['State/Province'].value_counts().head(10)"]
+    G --> H["📈 Visualize Top Countries <img src='barplot_template.svg'/> <br/> starbucks.Country.value_counts().head(10).plot(kind='bar')"]
+    H --> I["📈 Visualize Top Cities <img src='barplot_template.svg'/> <br/> starbucks.City.value_counts().head(10).plot(kind='bar')"]
+    I --> J["🌎 Mapping of Stores Worldwide <img src='image.svg'/> <br/> Basemap Visualization"]
+    J --> K["📍 Mapping of Stores in USA <img src='image.svg'/> <br/> Basemap Visualization"]

@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Source
+    A["../input/creditcard.csv"] --> |"Load data"| B["data"]
+    
+    %% Data Preparation
+    B --> |"Calculate fraudulent transaction percentage"| C["percentage"]
+    B --> |"Extract important columns for modeling"| D["important_cols"]
+    
+    %% Model Setup
+    subgraph First_Layer_Models
+        direction TB
+        XGB["XGBClassifier"] --> |"Features: important_cols\nTarget: Fraud"| J
+        EE["EllipticEnvelope"] --> |"Features: important_cols\nTarget: Fraud"| J
+        IF["IsolationForest"] --> |"Features: important_cols\nTarget: Fraud"| J
+        LOF["LocalOutlierFactor"] --> |"Features: important_cols\nTarget: Fraud"| J
+    end
+    
+    D --> |"Train models"| First_Layer_Models
+    D --> |"Use in models"| models_list
+    models_list["models_names | models"] --> |"Analyze feature importance\nBuild meta features"| J["Feature Analysis"]
+    
+    J --> |"Use for stacked model"| Stacked_Model
+
+    %% Comments
+    classDef comment fill:#f9f,stroke:#333,stroke-width:2px;
+    class B, D, models_list, J comment;

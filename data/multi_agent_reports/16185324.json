@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "telecom_users.csv",
+      "description": "A dataset containing user information from a telecom service provider, including attributes like DeviceProtection, TechSupport, MultipleLines, Dependents, StreamingTV, StreamingMovies, InternetService, PaperlessBilling, and SeniorCitizen."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the telecom user data loaded from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "flow": ["Data exploration", "Data analysis results"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,33 @@
+%% Auto-generated Mermaid Diagram for Jupyter Notebook Workflow
+
+```mermaid
+graph TD;
+    %% Data Sources
+    A["train.csv"] --> B["Load and preprocess into df"]
+    C["test.csv"] --> D["Load and preprocess into test_df"]
+    E["sample_submission.csv"] --> F["Load sample_submission into submit"]
+    
+    %% Data Preparation
+    B --> G["Split df into X and y"]
+    G --> H["train_test_split"]
+    
+    %% Training Model
+    H --> I["X_train and y_train"]
+    I --> J["CatBoostClassifier model_cat training"]
+    
+    %% Model Building
+    J --> K["model_cat"]
+    
+    %% Prediction
+    K --> L["Predict on test_df"]
+    L --> M["Save prediction to submit"]
+
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+    A,C,E; 
+    class A,C,E dataSource;
+    class B,D,F,G,H,I process;
+    class J,K,L model;

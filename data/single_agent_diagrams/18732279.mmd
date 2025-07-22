@@ -1,0 +1,15 @@
+flowchart TD
+    A["📁 Load Dataset"] --> B["📊 Display Summary Statistics"]
+    B --> C["🔍 Investigate Missing Values"]
+    C --> D["🧹 Handle Missing Values"]
+    D --> E["📊 EDA and Data Visualization"]
+    E --> F["📈 Pairplot Analysis"]
+    F --> G["📊 Education - Promotions"]
+    G --> H["📝 Conclusion"]
+
+    A -->|<img src='dummy_plots/barplot_template.svg' /> <br/> Display Rows| B
+    B -->|<img src='dummy_plots/boxplot_template.svg' /> <br/> Describe Data| C
+    C -->|<img src='dummy_plots/hist_template.svg' /> <br/> Missing Values Matrix| D
+    D -->|<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Visualize Missing Values| E
+    E -->|<img src='dummy_plots/lineplot_template.svg' /> <br/> Promotions vs Ratings| F
+    F -->|<img src='dummy_plots/barplot_template.svg' /> <br/> Education vs Promotions| G

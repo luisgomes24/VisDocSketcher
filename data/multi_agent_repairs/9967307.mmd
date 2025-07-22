@@ -1,0 +1,17 @@
+```mermaid
+flowchart TD
+    %% Load data from CSV
+    A["segmentation-data.csv"] --> |Load Data| B[df_segmentation]
+    %% Perform descriptive analysis and visualization
+    B --> |Descriptive Analysis & Visualization| C["Segmentation Analysis"]
+    %% Standardize the data
+    B --> |Standardize| D["segmentation_std"]
+    %% PCA transformation
+    D --> |Apply PCA| E["scores_pca"]
+    %% KMeans clustering without PCA
+    D --> |KMeans Clustering| F["KMeans Model"]
+    F --> |Assign Segments| G[df_segm_kmeans]
+    %% KMeans clustering with PCA
+    E --> |KMeans Clustering with PCA| H["KMeans Model PCA"]
+    H --> |Assign Segments| I[df_segm_kmeans_PCA]
+```

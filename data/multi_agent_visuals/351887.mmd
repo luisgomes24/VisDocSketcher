@@ -1,0 +1,16 @@
+flowchart TD
+    %% Node for CSV Data Source
+    A[train_masks.csv] -->|read by pd.read_csv| B[df_train]
+
+    %% Node for Initial DataFrame
+    B --> C{get_image_and_mask}
+    
+    %% Node for Image and Mask Retrieval
+    C -->|Retrieves image and mask| D[img, mask]
+    
+    %% Node for Image Augmentation Function
+    D --> E{random_augmentation}
+    
+    %% Nodes for Augmented Images and Masks
+    E -->|Augments to| F[img_aug1, mask_aug1]
+    E -->|Augments to| G[img_aug2, mask_aug2]

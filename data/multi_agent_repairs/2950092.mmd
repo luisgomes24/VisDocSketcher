@@ -1,0 +1,50 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A1["train.csv"]
+        %% Training dataset containing features and target variable 'HasDetections'.
+        A2["test.csv"]
+        %% Test dataset for making predictions.
+        A3["AvSigVersionTimestamps.npy"]
+        %% Timestamping data for versions to use temporal features.
+        A4["sample_submission.csv"]
+        %% Sample submission file format for competition submission.
+    end
+    
+    subgraph DataVariables
+        B1["df_train"]
+        %% DataFrame containing the training data with 82 categorical variables and target variable 'HasDetections'.
+        B2["df_test"]
+        %% DataFrame containing the test data, targeted for prediction.
+        B3["AvSigVersion"]
+        %% Version control feature in categorical form, important for time-based splitting.
+        B4["CountryIdentifier"]
+        %% Categorical feature used to demonstrate distribution comparisons between TRAIN and TEST.
+    end
+
+    subgraph DataFlow
+        C1["df_train (read_csv)"] -->|"EDA, Train-Test Validation, Model Training"| B1
+        C2["df_test (read_csv)"] -->|"EDA, Predictions"| B2
+        C3["comparePlot (Defined Function)"] -->|"Analyze distributions of TRAIN and TEST datasets"| B4
+    end
+    
+    subgraph Models
+        D1["LightGBM Classifier"]
+        %% All categorical features from train set after processing. 
+        %% Target: HasDetections 
+        %% Hyperparameters: n_estimators=3000, colsample_bytree=0.2, objective='binary', num_leaves=16, max_depth=-1, learning_rate=0.1
+        D2["Decision Tree Classifier"]
+        %% Combined features of TRAIN and TEST datasets. 
+        %% Target: HasDetections 
+        %% Hyperparameters: max_leaf_nodes=5
+    end
+    
+    A1 --> C1
+    A2 --> C2
+    A3 --> B3
+    A4 -->|"submission format"| B2
+    B1 --> D1
+    B2 --> D1
+    B1 --> D2
+    B2 --> D2
+```

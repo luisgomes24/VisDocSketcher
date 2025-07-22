@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes
+    A[Train Data CSV] -->|Import| B(Train Data)    
+    A -->|Import| D(Test Data)
+    B -->|Transform| C{Logarithmic Transformation}
+    D -->|Transform| E{Logarithmic Transformation}
+    C -->|Prepare| F(Training Dataset)
+    E -->|Prepare| G(Testing Dataset)
+    F -->|Train| H[TabularPredictor Model]
+    G -->|Predict| J[Prediction]
+    H -->|Use Model to Predict| J
+    J -->|Create Submission| K{Submission Dataframe}
+
+    %% Node Descriptions
+    B:::data -- "Contains training data after preprocessing" --> C
+    D:::data -- "Contains testing data after preprocessing" --> E
+    F:::intermediate -- "Data prepared for model training" --> H
+    G:::intermediate -- "Data prepared for prediction with trained model" --> J
+    J:::data -- "Predictions from trained machine learning model" --> K
+    K:::output -- "Output CSV file for submission"
+    
+    %% Styles
+    classDef data fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef intermediate fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef output fill:#bfb,stroke:#333,stroke-width:2px;

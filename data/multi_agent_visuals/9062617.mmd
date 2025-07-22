@@ -1,0 +1,9 @@
+%%{init: {'theme': 'default'}}%%
+
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Load Data"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Preprocessing"];
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Feature Selection"];
+    C --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Train-Test Split"];
+    D --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Model Training"];
+    E --> ML_Model["Neural Network Model"];
+    ML_Model --> Output["<img src='icons/image.svg' width=100 height=100/> <br/> Model Output"];

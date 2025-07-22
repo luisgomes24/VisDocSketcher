@@ -1,0 +1,65 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Iris.csv",
+      "description": "Contains data of Iris flower features including Sepal and Petal dimensions, and species classification."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "iris",
+      "description": "DataFrame containing the Iris dataset with features and species."
+    },
+    {
+      "variable_name": "x_train",
+      "description": "Training set features (Sepal and Petal dimensions) used for model training."
+    },
+    {
+      "variable_name": "x_test",
+      "description": "Test set features used to evaluate model performance."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set target variable (species) for model training."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Test set target variable (species) used for model evaluation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "iris",
+      "creation_method": "read_csv",
+      "flows_to": "x_train, x_test, y_train, y_test"
+    },
+    {
+      "variable": "x_train",
+      "creation_method": "train_test_split",
+      "flows_to": "lr.fit"
+    },
+    {
+      "variable": "x_test",
+      "creation_method": "train_test_split",
+      "flows_to": "lr.predict, lr.score"
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "flows_to": "lr.fit"
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "flows_to": "lr.score"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": ["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"],
+      "target_variable": "Species",
+      "hyperparameters": {}
+    }
+  ]
+}

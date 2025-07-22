@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "./kaggle/input/dfl-yolov5l6-ball-detection/yolov5l6_trained_600images.pt",
+      "description": "Trained YOLOv5 model optimized for ball detection in game movies."
+    },
+    {
+      "file": "./kaggle/input/dfl-bundesliga-data-shootout/test/019d5b34_1.mp4",
+      "description": "Video file used as a source for ball detection testing."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "BOX",
+      "description": "DataFrame containing detected ball information with columns: label, x, y, w, h, confidence, file."
+    },
+    {
+      "name": "data0",
+      "description": "Filtered DataFrame from BOX containing only detections with confidence greater than 0.65."
+    },
+    {
+      "name": "image_dir",
+      "description": "Directory path for storing extracted frames from the video."
+    },
+    {
+      "name": "txt_dir",
+      "description": "Directory path for accessing label text files generated from video frame detections."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "BOX",
+      "creation": "Created by reading detection results and appending them as DataFrame.",
+      "flow": "Used to extract relevant information about detected balls, visualized in plots."
+    },
+    {
+      "variable": "data0",
+      "creation": "Filtered from BOX to keep only high-confidence detections.",
+      "flow": "Used in visualization and further analysis."
+    },
+    {
+      "variable": "image_dir",
+      "creation": "Defined as a directory for storing frames extracted from the video.",
+      "flow": "Used to read images for visualizations."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "YOLOv5",
+      "input_features": "Video frames from the input video.",
+      "target_variable": "Ball detection with coordinates.",
+      "hyperparameters": {
+        "weights": "yolov5l6_trained_600images.pt",
+        "image_size": 1280
+      }
+    }
+  ]
+}

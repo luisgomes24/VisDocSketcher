@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/mobile-vendor-market-share-india4-2010-to-2-2023/Mobile Vendor Market Share India.csv",
+      "description": "Mobile Vendor Market Share data in India from 2010 to February 2023"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the mobile vendor market share data"
+    },
+    {
+      "variable": "df_yearly",
+      "description": "DataFrame containing yearly aggregated sales for each mobile brand"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.read_csv",
+      "flow": "Used for generating df_yearly and visualizations"
+    },
+    {
+      "variable": "df_yearly",
+      "created_by": "df.groupby + sum",
+      "flow": "Used in various time series plots to analyze market share over years"
+    }
+  ],
+  "models": []
+}

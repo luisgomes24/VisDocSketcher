@@ -1,0 +1,63 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "x",
+      "description": "A tensor created with initial value 1.0 that tracks its gradients."
+    },
+    {
+      "name": "y",
+      "description": "A tensor created with initial value 2.0 that does not track gradients."
+    },
+    {
+      "name": "z",
+      "description": "A tensor that is the product of x and y and tracks gradients after x is set to require gradients."
+    },
+    {
+      "name": "net",
+      "description": "An instance of MyNet class, representing a simple neural network with one hidden layer and one output layer."
+    },
+    {
+      "name": "loss_fn",
+      "description": "Mean Squared Error loss function used for computing loss during network training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "x",
+      "creation_method": "torch.tensor(1.0, requires_grad=True)",
+      "flow": "Used in the computation of z; its gradients are tracked after .backward() is called on z."
+    },
+    {
+      "variable": "y",
+      "creation_method": "torch.tensor(2.0)",
+      "flow": "Used in the computation of z, but does not track gradients."
+    },
+    {
+      "variable": "z",
+      "creation_method": "z = x * y",
+      "flow": "Gradient computation will be done when calling .backward() after setting x requires_grad=True."
+    },
+    {
+      "variable": "net",
+      "creation_method": "MyNet()",
+      "flow": "Used for forward pass, backward pass, and training steps during optimization."
+    },
+    {
+      "variable": "loss_fn",
+      "creation_method": "nn.MSELoss()",
+      "flow": "Used to calculate the loss between the network's output and the target labels during training."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MyNet",
+      "input_features": "3 inputs",
+      "output_variables": "3 outputs",
+      "hyperparameters": {
+        "hidden_layer_neurons": 20,
+        "activation_function": "Tanh"
+      }
+    }
+  ]
+}

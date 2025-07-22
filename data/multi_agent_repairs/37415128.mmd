@@ -1,0 +1,20 @@
+flowchart TD
+    A["Drug.csv"]
+    A --> B["df"]
+    B --> C["Effective_Cat"]
+    B --> D["EaseOfUse_Cat"]
+    B --> E["Satisfaction_Cat"]
+    B --> F["popular_drugs"]
+
+    C --> G["Analysis and Visualization 1"]
+    D --> H["Analysis and Visualization 2"]
+    E --> I["Analysis and Visualization 3"]
+    F --> J["Top 10 Drugs Visualization"]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef analysisStep fill:#ffb,stroke:#333,stroke-width:2px;
+
+    class A dataSource;
+    class B, C, D, E, F dataVariable;
+    class G, H, I, J analysisStep;

@@ -1,0 +1,17 @@
+%% This diagram shows the workflow of a data science project involving BigQuery to analyze Hacker News comments.
+
+flowchart TD
+    %% Node for BigQuery Client creation
+    A[Client Setup] -->|Create BigQuery Client| B[client]
+    B -->|Reference Dataset| C[dataset_ref]
+    C -->|Reference Table| D[table_ref]
+    
+    %% Nodes for Prolific Commenters Analysis
+    D -->|Run SQL Query| E[prolific_commenters_query]
+    E -->|Execute Query & Convert to DataFrame| F[prolific_commenters]<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Prolific Commenters DataFrame
+    F -.->|Output Prolific Commenters| G[Prolific Commenters Output]<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Prolific Commenters Output
+    
+    %% Nodes for Deleted Posts Analysis
+    D -->|Run SQL Query| H[deleted_posts_query]
+    H -->|Execute Query & Convert to DataFrame| I[deleted_posts]<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Deleted Posts DataFrame
+    I -.->|Output Deleted Posts Count| J[Deleted Posts Output]<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Deleted Posts Output

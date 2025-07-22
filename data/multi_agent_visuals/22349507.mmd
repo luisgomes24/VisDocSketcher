@@ -1,0 +1,40 @@
+flowchart TD
+
+%% Nodes for Data Variables
+n["n: <img src='path/to/icon.svg' width=100 height=100/> <br/> NormalDistribution Instance"]
+r["r: <img src='path/to/icon.svg' width=100 height=100/> <br/> RectangularDistribution Instance"]
+t["t: <img src='path/to/icon.svg' width=100 height=100/> <br/> TriangularDistribution Instance"]
+st["st: <img src='path/to/icon.svg' width=100 height=100/> <br/> SymmetricTriangularDistribution Instance"]
+e["e: <img src='path/to/icon.svg' width=100 height=100/> <br/> ExponentialDistribution Instance"]
+
+%% Nodes for Distributions
+ND["Normal Distribution"]
+RD["Rectangular Distribution"]
+TD["Triangular Distribution"]
+STD["Symmetric Triangular Distribution"]
+ED["Exponential Distribution"]
+
+%% Data Flow
+n --> ND
+r --> RD
+t --> TD
+st --> STD
+e --> ED
+
+%% Descriptions
+classDef default fill: #C6F4D6, stroke: #333, stroke-width: 2px;
+ND:::default
+RD:::default
+TD:::default
+STD:::default
+ED:::default
+
+%% Sample Generation
+ND --> |"Generate Samples"| r
+ND --> |"Generate Samples"| t
+
+%% Plotting
+r --> |"Plot"| RD
+t --> |"Plot"| TD
+st --> |"Plot"| STD
+e --> |"Statistical Summary & CDF"| ED

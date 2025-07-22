@@ -1,0 +1,7 @@
+%% The diagram represents the data processing and visualization workflow
+flowchart TD
+  %% Node for the data source.
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> tistene-knihy_2020_export.csv"] --> |Reads CSV file| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]
+  %% Node representing initial DataFrame
+  B --> |Visualizes data using| C["<img src='icons/row_split.svg' width=100 height=100/> <br/> Plots <img src='dummy_plots/barplot_template.svg'/> <br/> "]
+  B --> |Generates word clouds for| D["<img src='icons/brain.svg' width=100 height=100/> <br/> Word Clouds for 'N\'azev' and 'Autor' <img src='dummy_plots/word_cloud_template.svg'/> <br/> "]

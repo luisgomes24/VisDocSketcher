@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["🔍 View Data Head"]
+    B --> C["🔍 View Data Tail"]
+    C --> D["ℹ️ Data Info"]
+    D --> E["⚠️ Check for Missing Values"]
+    E --> F["🛠️ Fill Missing Values"]
+    F --> G["🔄 Clean Data <img src='table.svg' />"]
+    G --> H["📊 Time Series Plot <img src='lineplot_template.svg' />"]
+    H --> I["📈 Data Description"]
+    I --> J["🌍 Unique Countries Extraction"]
+    J --> K["📈 Time Series Plots for Each Country <img src='lineplot_template.svg' />"]
+    K --> L["💹 Inflation Plots for Each Country <img src='lineplot_template.svg' />"]

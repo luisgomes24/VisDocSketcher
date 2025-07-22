@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <br/> <img src='../input/face-mask-lite-dataset/without_mask' />"] --> B["🖼️ Visualize Images <br/> <img src='path/to/plot.svg'/>"]
+    B --> C["🧠 Define Generator Model"]
+    C --> D["🧠 Define Discriminator Model"]
+    D --> E["⚙️ Define Loss Function & Optimizer"]
+    E --> F["🔄 Train Model"]
+    F --> G["🖼️ Plot Generated Images <br/> <img src='path/to/plot.svg'/>"]
+    G --> H["💾 Save Models"]

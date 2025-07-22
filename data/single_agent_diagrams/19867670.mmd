@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data"] --> B["<img src='file.svg'/> <br/> Generate Test Data"]
+    A --> C["<img src='file.svg'/> <br/> Load Train Data"]
+    
+    B --> D["🧹 Preprocess Data"]
+    C --> D
+
+    D --> E["🧠 Train Neural Network Model"]
+    D --> F["📈 Train LightGBM Model"]
+
+    E --> G["🎯 Make Predictions"]
+    F --> G
+
+    G --> H["📊 Combine Predictions"]
+    H --> I["📥 Save to CSV"]

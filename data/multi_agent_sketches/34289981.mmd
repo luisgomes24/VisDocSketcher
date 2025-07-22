@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A1["train_BRCpofr.csv"] --> |"load"| B1["train"]
+    A2["test_koRSKBP.csv"] --> |"load"| B2["test"]
+    A3["sample_submission.csv"] --> |"load"| B3["sol"]
+
+    %% Train Data
+    B1 --> |"extract CLTV"| C1["y"]
+    B1 --> |"remaining"| C2["X"]
+
+    %% Train-test Split
+    C2 --> |"split"| D1["X_train\nX_test"]
+    C1 --> |"split"| D2["y_train\ny_test"]
+
+    %% Modeling
+    D1 --> |"train model on"| E1["AutoML"]
+    D2 --> |"train model on"| E1
+
+    %% Prediction
+    E1 --> |"predict with"| F1["y_pred"]
+    B2 --> |"predict with"| F1
+
+    %% Submission
+    F1 --> |"to CSV"| B3

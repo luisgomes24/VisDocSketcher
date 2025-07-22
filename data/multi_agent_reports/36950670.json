@@ -1,0 +1,92 @@
+{
+  "data_sources": [
+    {
+      "source": "train.csv",
+      "description": "Contains news articles with their titles, authors, content, and labels indicating if they are real or fake."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the loaded news articles data."
+    },
+    {
+      "variable": "targets",
+      "description": "Array containing the labels (real/fake) of the news articles."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set features after TF-IDF transformation."
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing set features after TF-IDF transformation."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set labels."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing set labels."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "pd.read_csv",
+      "usage": "Used for data processing and feature extraction."
+    },
+    {
+      "variable": "targets",
+      "creation_method": "df['label'].values",
+      "usage": "Used for model training and evaluation."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "usage": "Used for training the models."
+    },
+    {
+      "variable": "X_test",
+      "creation_method": "train_test_split",
+      "usage": "Used for testing the models."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "usage": "Used for training the models."
+    },
+    {
+      "variable": "y_test",
+      "creation_method": "train_test_split",
+      "usage": "Used for testing the models."
+    }
+  ],
+  "models": [
+    {
+      "model": "Logistic Regression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "None"
+    },
+    {
+      "model": "Support Vector Machine",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "None"
+    },
+    {
+      "model": "Decision Tree Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "max_depth=58"
+    },
+    {
+      "model": "Random Forest Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "n_estimators and max_depth determined by GridSearchCV"
+    }
+  ]
+}

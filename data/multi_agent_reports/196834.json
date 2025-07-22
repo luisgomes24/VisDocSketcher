@@ -1,0 +1,29 @@
+{"data_sources": [
+    {"file_name": "train.csv", "description": "Contains training data with features and labels (species)."},
+    {"file_name": "test.csv", "description": "Contains test data with sample IDs."},
+    {"file_name": "../input/images/{1 to 1584}.jpg", "description": "Contains image files used in analysis."}
+],
+"data_variables": [
+    {"name": "train", "description": "DataFrame containing features for model training, with species and id columns removed."},
+    {"name": "test", "description": "DataFrame containing test samples with id column removed."},
+    {"name": "labels", "description": "Series containing species labels from the training data."},
+    {"name": "labelid", "description": "Series containing IDs for each training sample."},
+    {"name": "testid", "description": "Series containing IDs for each test sample."},
+    {"name": "A", "description": "Transposed training DataFrame, used for singular value decomposition."},
+    {"name": "simila", "description": "A variable to store similarity scores calculated between test and training samples."},
+    {"name": "fullImageMatrix3D", "description": "3D array containing all images for visualization purposes."}
+],
+"data_flow": [
+    {"variable": "train", "creation_method": "pd.read_csv", "flow": ["used for SVD", "used in model training"]},
+    {"variable": "test", "creation_method": "pd.read_csv", "flow": ["used for testing and image visualization"]},
+    {"variable": "labels", "creation_method": "train.species", "flow": ["used for output during similarity checks"]},
+    {"variable": "labelid", "creation_method": "train.id", "flow": ["used for matching and output during similarity checks"]},
+    {"variable": "testid", "creation_method": "test.id", "flow": ["used for visualization and output during similarity checks"]},
+    {"variable": "A", "creation_method": "train.transpose()", "flow": ["used in SVD calculations"]},
+    {"variable": "simila", "creation_method": "calculated in loop", "flow": ["used for comparing test samples to training samples"]},
+    {"variable": "fullImageMatrix3D", "creation_method": "constructed from images", "flow": ["used for visualization in plots"]}
+],
+"models": [
+    {"model_name": "SVD", "input_features": "Transformed training data", "target_variable": "Not applicable", "hyperparameters": "None specified"}
+]
+}

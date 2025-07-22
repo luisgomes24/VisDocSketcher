@@ -1,0 +1,9 @@
+graph LR
+    A(File Input) --> B[<img src='icons/database.svg' width=100 height=100/> <br/> Database]
+    B --> C[<img src='icons/table.svg' width=100 height=100/> <br/> Process Data]
+    C --> D[<img src='icons/column_split.svg' width=100 height=100/> <br/> Select Features]
+    C --> E[<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split]
+    D --> F[<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model]
+    E --> F
+    F --> G[<img src='icons/image.svg' width=100 height=100/> <br/> Predictions]
+    G --> H[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Results Plot]

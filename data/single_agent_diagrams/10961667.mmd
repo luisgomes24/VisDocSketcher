@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> df_total = pd.read_csv(...)"] --> B["🔍 Preprocess Text <img src='column_split.svg'/> <br/> df_total['preprocessedTweet'] = df_total.tweet.apply(...)"]
+    B --> C["🧹 Check Missing Values <img src='table.svg'/> <br/> df_total.isna().sum()"]
+    C --> D["📊 Tokenization <img src='boxplot_template.svg'/>  <br/> y_train, y_test = train_test_split(...)"]
+    D --> E["🧠 Build Model <img src='brain.svg'/> <br/> model_glove = Sequential()"]
+    E --> F["🚀 Train Model <img src='lineplot_template.svg'/> <br/> model_glove.fit(...)"]
+    F --> G["🔍 Make Predictions <img src='scatter_plot_template.svg'/> <br/> y_pred = model_glove.predict(...)"]
+    G --> H["📈 Evaluate Model <img src='hist_template.svg'/> <br/> plt.plot(...)"]

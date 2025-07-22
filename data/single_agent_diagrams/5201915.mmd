@@ -1,0 +1,23 @@
+flowchart TD
+    A["📂 Load Data"] --> B["📊 Data Exploration"]
+    B --> C["👨‍🔧 Data Preprocessing"]
+    C --> D["📊 Visualize Data"]
+    D --> E["🧠 Model Training"]
+    E --> F["📈 Model Evaluation"]
+    F --> G["📤 Save Submission"]
+
+    A --> |"csv files"| A1["<img src='icons/file.svg'/> <br/> df_train, df_test"]
+    A --> |"csv files"| A2["<img src='icons/file.svg'/> <br/> df_country_info"]
+    
+    C --> |"Merge Data"| C1["📊 Merged Data"]
+    C --> |"Drop unnecessary columns"| C2["📊 Cleaned Data"]
+    C --> |"Fill missing values"| C3["📊 Processed Data"]
+    
+    D --> | "Plot Data"| D1["<img src='dummy_plots/barplot_template.svg'/> <br/> Visualization"]
+    
+    E --> |"Train-Test Split"| E1["📊 Split Data"]
+    E --> |"Train Model"| E2["🧠 Train using LightGBM"]
+    
+    F --> |"Predict and Evaluate"| F1["📈 ROC AUC Score"]
+    
+    G --> |"Save to CSV"| G1["📤 submission.csv"]

@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        DS1["/train.csv.zip/"]:::DataSourceStyle
+        DS2["/test.csv.zip/"]:::DataSourceStyle
+    end
+
+    subgraph DataPreparation
+        D1["train_df"]:::VariableStyle
+        D2["test_df"]:::VariableStyle
+        D3["X"]:::VariableStyle
+        D4["y"]:::VariableStyle
+        D5["x_train, x_test, y_train, y_test"]:::VariableStyle
+        D6["train_word_features"]:::VariableStyle
+        D7["X_train_transformed, X_test_transformed"]:::VariableStyle
+    end
+
+    subgraph Modeling
+        M1["Logistic Regression"]:::ModelStyle
+    end
+
+    subgraph Predictions
+        P1["y_pred"]:::VariableStyle
+    end
+
+    %% Links
+    DS1 -->|read_csv| D1
+    DS2 -->|read_csv| D2
+    D1 -->|comment_text| D3
+    D1 -->|drop| D4
+    D3 -->|train_test_split| D5
+    D5 -->|TfidfVectorizer| D6
+    D6 -->|train model| M1
+    M1 -->|predict| P1
+
+    %% Styles
+    classDef DataSourceStyle fill:#f9c,stroke:#333,stroke-width:2px;
+    classDef VariableStyle fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef ModelStyle fill:#cfc,stroke:#333,stroke-width:2px;
+```

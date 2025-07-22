@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A["chicago_crime dataset"]
+    
+    %% Data Variables
+    B[client] --> C
+    C[dataset_ref] --> D
+    D[dataset] --> E
+    E[tables] --> F
+    F[num_tables]
+    C --> G
+    G[table_ref] --> H
+    H[table] --> I
+    I[fields_for_plotting]
+    
+    %% Data Flow
+    B -->|"bigquery.Client()"| C
+    C -->|"client.dataset('chicago_crime', project='bigquery-public-data')"| D
+    D -->|"client.get_dataset(dataset_ref)"| E
+    E -->|"list(client.list_tables(dataset))"| F
+    F -->|"[table.table_id for table in tables]"| G
+    G -->|"dataset_ref.table('crime')"| H
+    H -->|"client.get_table(table_ref)"| I
+    I -->|"['latitude', 'longitude']"| F  

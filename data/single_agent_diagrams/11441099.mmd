@@ -1,0 +1,16 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Data Preview: df1.head() <img src='table.svg' />"]
+    B --> C["📉 Distribution Graphs <img src='hist_template.svg' />"]
+    C --> D["📊 Correlation Matrix <img src='boxplot_template.svg' />"]
+    D --> E["📈 Scatter Matrix <img src='scatter_plot_template.svg' />"]
+    
+    A2["📂 Load Data (Second File) <img src='file.svg' />"] --> B2["📊 Data Preview: df2.head() <img src='table.svg' />"]
+    B2 --> C2["📉 Distribution Graphs <img src='hist_template.svg' />"]
+    C2 --> D2["📊 Correlation Matrix <img src='boxplot_template.svg' />"]
+    D2 --> E2["📈 Scatter Matrix <img src='scatter_plot_template.svg' />"]
+
+    A --> A2
+    B --> B2
+    C --> C2
+    D --> D2
+    E --> E2

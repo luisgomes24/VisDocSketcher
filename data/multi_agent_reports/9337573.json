@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "N/A",
+      "description": "The notebook does not specify any input data file or source."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "quality",
+      "description": "Antecedent for the quality of service with values ranging from 0 to 10."
+    },
+    {
+      "variable_name": "service",
+      "description": "Antecedent for quality of service with values ranging from 0 to 10."
+    },
+    {
+      "variable_name": "tip",
+      "description": "Consequent variable representing the amount of tip, ranging from 0 to 25."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "quality",
+      "created_by": "ctrl.Antecedent(np.arange(0, 11, 1), 'quality')",
+      "flow": "Used in rule formations and calculations for tip based on fuzzy logic."
+    },
+    {
+      "variable_name": "service",
+      "created_by": "ctrl.Antecedent(np.arange(0, 11, 1), 'service')",
+      "flow": "Used in rule formations and calculations for tip based on fuzzy logic."
+    },
+    {
+      "variable_name": "tip",
+      "created_by": "ctrl.Consequent(np.arange(0, 26, 1), 'tip')",
+      "flow": "Generated outputs based on inputs from quality and service. It is viewed as the output of fuzzy computation."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Fuzzy Logic Control System",
+      "input_features": ["quality", "service"],
+      "target_variable": "tip",
+      "rules": [
+        "If quality is poor or service is poor, tip is low.",
+        "If service is average, tip is medium.",
+        "If service is good or quality is good, tip is high."
+      ]
+    }
+  ]
+}

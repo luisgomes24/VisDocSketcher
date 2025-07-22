@@ -1,0 +1,17 @@
+%% This diagram represents the workflow of the Jupyter notebook with ID 7325965
+
+flowchart TD
+    A[Start] --> B[Load Insurance Data]
+    B -->|Read CSV File| C[Data: dat]
+    C -->|Plot Charts| D[Visualize Relationship: BMI vs Charges]
+    C -->|Add Color| E[Colored by Sex and Smoker Status]
+    D --> F[End]
+    E --> F[End]
+
+%% Nodes descriptions
+%% A: Represents the starting point of the workflow
+%% B: Data source load, reading the insurance.csv file
+%% C: The loaded data is stored in the variable 'dat'
+%% D: Shows the step of plotting charts to visualize data relationships
+%% E: The plots are enhanced with color based on specific attributes
+%% F: Marks the end of the data workflow

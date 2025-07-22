@@ -1,0 +1,23 @@
+flowchart TD
+    %% Node Definitions
+    A0[/<img src='path/to/icon.svg' width=100 height=100/> <br/> "lol_version_Date.csv"/]:::dataSource -- read_csv --> D1[<img src='icons/table.svg' width=100 height=100/> <br/> df1]
+    B0[/<img src='path/to/icon.svg' width=100 height=100/> <br/> "lose_team_stats.csv"/]:::dataSource -- read_csv --> D2[<img src='icons/table.svg' width=100 height=100/> <br/> df2]
+    C0[/<img src='path/to/icon.svg' width=100 height=100/> <br/> "stats.csv"/]:::dataSource -- read_csv --> D3[<img src='icons/table.svg' width=100 height=100/> <br/> df3]
+    
+    %% Data Variable Nodes
+    D1 --> E1[<img src='path/to/plot.svg'/> <br/> Distribution Graphs]:::plot
+    D1 --> E2[<img src='path/to/plot.svg'/> <br/> Correlation Matrix]:::plot
+    D1 --> E3[<img src='path/to/plot.svg'/> <br/> Scatter Matrix]:::plot
+    
+    D2 --> F1[<img src='path/to/plot.svg'/> <br/> Distribution Graphs]:::plot
+    D2 --> F2[<img src='path/to/plot.svg'/> <br/> Correlation Matrix]:::plot
+    D2 --> F3[<img src='path/to/plot.svg'/> <br/> Scatter Matrix]:::plot
+    
+    D3 --> G1[<img src='path/to/plot.svg'/> <br/> Distribution Graphs]:::plot
+    D3 --> G2[<img src='path/to/plot.svg'/> <br/> Correlation Matrix]:::plot
+    D3 --> G3[<img src='path/to/plot.svg'/> <br/> Scatter Matrix]:::plot
+    
+    %% Edge Annotations
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVar fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef plot fill:#cfc,stroke:#333,stroke-width:2px;

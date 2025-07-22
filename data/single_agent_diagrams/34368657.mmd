@@ -1,0 +1,12 @@
+```
+graph TD;
+    A["📂 Load Dataset <img src='icons/file.svg' />"] --> B["📊 Browse Metadata"];
+    B --> C["📊 Azimuth & Zenith Visualization <img src='dummy_plots/hist_template.svg' />"];
+    C --> D["📂 Load Geometry Data <img src='icons/table.svg' />"];
+    D --> E["📊 3D Scatter Plot of Sensor Positions <img src='dummy_plots/scatter_plot_template.svg' />"];
+    E --> F["📂 Load Training Data <img src='icons/file.svg' />"];
+    F --> G["🔍 Fit Line to Points"];
+    G --> H["📊 Sample Event Visualization"];
+    H --> I["🧪 Interactive Event Browsing"];
+    I --> J["📋 Prepare Submission"];
+    J --> K["📥 Finalize Submission"];

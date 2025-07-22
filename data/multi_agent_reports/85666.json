@@ -1,0 +1,165 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains 42000 images of handwritten digits along with their labels. Each image is represented by 784 pixel values and a corresponding label (0-9)."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Contains test images of handwritten digits without labels. Structure is similar to train.csv."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "DataFrame containing the training dataset read from train.csv."
+    },
+    {
+      "variable_name": "images",
+      "description": "NumPy array containing image data normalized from [0:255] to [0.0:1.0]."
+    },
+    {
+      "variable_name": "labels_flat",
+      "description": "1D array of digit labels (0-9) corresponding to each image."
+    },
+    {
+      "variable_name": "labels",
+      "description": "2D array containing one-hot encoded representations of digit labels."
+    },
+    {
+      "variable_name": "train_images",
+      "description": "NumPy array containing the training images used for model training."
+    },
+    {
+      "variable_name": "validation_images",
+      "description": "NumPy array containing images set aside for validation during training."
+    },
+    {
+      "variable_name": "W_conv1",
+      "description": "Weight variable for the first convolutional layer."
+    },
+    {
+      "variable_name": "b_conv1",
+      "description": "Bias variable for the first convolutional layer."
+    },
+    {
+      "variable_name": "h_conv1",
+      "description": "Activation of the first convolutional layer after applying ReLU."
+    },
+    {
+      "variable_name": "h_pool1",
+      "description": "Output of the first max pooling layer."
+    },
+    {
+      "variable_name": "W_conv2",
+      "description": "Weight variable for the second convolutional layer."
+    },
+    {
+      "variable_name": "h_conv2",
+      "description": "Activation of the second convolutional layer after applying ReLU."
+    },
+    {
+      "variable_name": "h_pool2",
+      "description": "Output of the second max pooling layer."
+    },
+    {
+      "variable_name": "h_fc1",
+      "description": "Activation of the fully connected layer after applying ReLU."
+    },
+    {
+      "variable_name": "h_fc1_drop",
+      "description": "Dropout applied to h_fc1 to prevent overfitting."
+    },
+    {
+      "variable_name": "y",
+      "description": "Output of the softmax layer of the neural network, representing predictions."
+    },
+    {
+      "variable_name": "predicted_lables",
+      "description": "Array containing predicted labels for test images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "flow": "Created by reading train.csv. Used to extract images and labels for training."
+    },
+    {
+      "variable": "images",
+      "flow": "Created from data. Used for model training and validation."
+    },
+    {
+      "variable": "labels_flat",
+      "flow": "Created from data. Used to create one-hot encoded labels."
+    },
+    {
+      "variable": "labels",
+      "flow": "Created from labels_flat. Used for training the model."
+    },
+    {
+      "variable": "train_images",
+      "flow": "Created by splitting images. Used for training the neural network."
+    },
+    {
+      "variable": "validation_images",
+      "flow": "Created by splitting images. Used to validate the model's accuracy."
+    },
+    {
+      "variable": "W_conv1",
+      "flow": "Created for neural network. Used in the first convolution operation."
+    },
+    {
+      "variable": "b_conv1",
+      "flow": "Created for neural network. Used in the first convolution operation."
+    },
+    {
+      "variable": "h_conv1",
+      "flow": "Created using W_conv1 and b_conv1. Output passed to max pooling layer and for visualization."
+    },
+    {
+      "variable": "h_pool1",
+      "flow": "Created from h_conv1. Output passed to second convolutional layer."
+    },
+    {
+      "variable": "W_conv2",
+      "flow": "Created for neural network. Used in the second convolution operation."
+    },
+    {
+      "variable": "h_conv2",
+      "flow": "Created using W_conv2 and b_conv2. Output passed to max pooling layer."
+    },
+    {
+      "variable": "h_pool2",
+      "flow": "Created from h_conv2. Output passed to the fully connected layer."
+    },
+    {
+      "variable": "h_fc1",
+      "flow": "Created from h_pool2. Activation passed to dropout layer."
+    },
+    {
+      "variable": "h_fc1_drop",
+      "flow": "Created from h_fc1. Passed to the readout layer to get predictions."
+    },
+    {
+      "variable": "y",
+      "flow": "Created in the readout layer. Represents the model's predictions."
+    },
+    {
+      "variable": "predicted_lables",
+      "flow": "Created by evaluating y on the test set. Output saved to a CSV file for submission."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Convolutional Neural Network",
+      "input_features": "images",
+      "target": "labels",
+      "hyperparameters": {
+        "learning_rate": 1e-4,
+        "dropout": 0.5,
+        "batch_size": 50,
+        "training_iterations": 2500
+      }
+    }
+  ]
+}

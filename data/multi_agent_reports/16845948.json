@@ -1,0 +1,25 @@
+{"data_sources": [
+    { "file_name": "diabetes.csv", "description": "Pima Indians Diabetes Database containing various health metrics and the outcome (diabetes status)." }
+],
+"data_variables": [
+    { "name": "df", "description": "DataFrame containing the dataset loaded from the CSV file." },
+    { "name": "features", "description": "List of feature columns used for model training." },
+    { "name": "labels", "description": "Series containing the outcome (diabetes status) used as the target variable for model training." },
+    { "name": "X_train", "description": "Training set features for model training." },
+    { "name": "y_train", "description": "Training set labels for model training." },
+    { "name": "X_test", "description": "Testing set features for evaluating model performance." },
+    { "name": "y_test", "description": "Testing set labels for evaluating model performance." }
+],
+"data_flow": [
+    { "variable": "df", "created_by": "pd.read_csv", "flows_to": ["features", "labels"] },
+    { "variable": "features", "created_by": "df.drop", "flows_to": ["X_train", "X_test"] },
+    { "variable": "labels", "created_by": "df['Outcome']", "flows_to": ["y_train", "y_test"] },
+    { "variable": "X_train", "created_by": "train_test_split", "flows_to": ["model training"] },
+    { "variable": "y_train", "created_by": "train_test_split", "flows_to": ["model training"] },
+    { "variable": "X_test", "created_by": "train_test_split", "flows_to": ["model evaluation"] },
+    { "variable": "y_test", "created_by": "train_test_split", "flows_to": ["model evaluation"] }
+],
+"models": [
+    { "model_name": "Artificial Neural Network", "input_features": "Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, Age", "target_variable": "Outcome", "hyperparameters": { "layers": [16, 32, 64, 16], "activation": "sigmoid", "epochs": 3001 } },
+    { "model_name": "Boosted Trees Classifier", "input_features": "Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, Age", "target_variable": "Outcome", "hyperparameters": { "n_batches": 4, "max_steps": 300 } }
+]}

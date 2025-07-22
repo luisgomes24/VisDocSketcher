@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv] -->|Load Data| B[train<br>DataFrame containing training dataset]
+    C[test.csv] -->|Load Data| D[test<br>DataFrame containing test dataset]
+    E[sample_submission.csv] -->|Load Data| F[submission<br>DataFrame for submission results]
+
+    %% Data Preparation
+    B -->|Extract Features| G[X<br>Input features from train DataFrame]
+    B -->|Extract Target| H[y<br>Target variable (SalePrice)]
+
+    %% Train/Test Split
+    G -->|train_test_split| I[X_train<br>Training input set]
+    G -->|train_test_split| J[X_test<br>Testing input set]
+    H -->|train_test_split| K[y_train<br>Training target set]
+    H -->|train_test_split| L[y_test<br>Testing target set]
+
+    %% Model Training
+    I & K -->|Train Model| M[RandomForestRegressor<br>Using default hyperparameters]
+
+    %% Prediction
+    M -->|Predict| N[pred<br>Predicted values for test set]
+    N -->|Store Predictions| F
+
+    %% Descriptions
+    subgraph DataSources
+        A
+        C
+        E
+    end
+
+    subgraph DataPreparation
+        G
+        H
+    end
+
+    subgraph ModelTrainingAndEvaluation
+        M
+    end

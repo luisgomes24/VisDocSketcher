@@ -1,0 +1,7 @@
+flowchart TD;
+    A["📁 Load Data"] --> B["🛠️ Create DataFrame: fruits"];
+    B --> C["🛠️ Create DataFrame: fruit_sales"];
+    C --> D["🛠️ Create Series: ingredients"];
+    D --> E["📁 Load CSV: reviews"];
+    E --> F["🛠️ Create DataFrame: animals"];
+    F --> G["💾 Save DataFrame: cows_and_goats.csv"];

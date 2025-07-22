@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/Video_Store.csv",
+      "description": "Contains data regarding video rentals including attributes like Income, Age, Rentals, and Genre."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "video_pandas",
+      "description": "DataFrame loaded from the video store CSV containing all relevant data."
+    },
+    {
+      "variable": "video_sub",
+      "description": "Filtered DataFrame containing customers with incomes greater than $30K."
+    },
+    {
+      "variable": "vp",
+      "description": "Alias for video_pandas, used for transformations."
+    },
+    {
+      "variable": "Age_Z",
+      "description": "DataFrame containing Z-scores for Age."
+    },
+    {
+      "variable": "Income_Z",
+      "description": "DataFrame containing Z-scores for Income."
+    },
+    {
+      "variable": "Rentals_Z",
+      "description": "DataFrame containing Z-scores for Rentals."
+    },
+    {
+      "variable": "Avg_Per_Visit_Z",
+      "description": "DataFrame containing Z-scores for Avg Per Visit."
+    },
+    {
+      "variable": "Genre_dummy",
+      "description": "DataFrame containing dummy variables created from Genre categorical variable."
+    },
+    {
+      "variable": "video_cross",
+      "description": "Crosstab DataFrame summarizing Genre by Gender."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "video_pandas",
+      "creation": "pd.read_csv(..)",
+      "flow": "Analyzed for descriptive statistics, filtered to create video_sub, used for plotting"
+    },
+    {
+      "variable": "video_sub",
+      "creation": "video_pandas.query('Income > 30000')",
+      "flow": "Used for further descriptive statistics and plotting"
+    },
+    {
+      "variable": "Age_Z",
+      "creation": "(vp.Age - vp.Age.mean()) / vp.Age.std()",
+      "flow": "Z-score transformation, no further use highlighted"
+    },
+    {
+      "variable": "Income_Z",
+      "creation": "(vp.Income - vp.Income.mean()) / vp.Income.std()",
+      "flow": "Z-score transformation, no further use highlighted"
+    },
+    {
+      "variable": "Rentals_Z",
+      "creation": "(vp.Rentals - vp.Rentals.mean()) / vp.Rentals.std()",
+      "flow": "Z-score transformation, no further use highlighted"
+    },
+    {
+      "variable": "Avg_Per_Visit_Z",
+      "creation": "(vp['Avg Per Visit'] - vp['Avg Per Visit'].mean()) / vp['Avg Per Visit'].std()",
+      "flow": "Z-score transformation, no further use highlighted"
+    },
+    {
+      "variable": "Genre_dummy",
+      "creation": "pd.get_dummies(vp['Genre'])",
+      "flow": "Created for potential modeling purposes, no further direct use highlighted"
+    },
+    {
+      "variable": "video_cross",
+      "creation": "pd.crosstab(vp.Gender, vp.Genre)",
+      "flow": "Used for plotting a bar chart"
+    }
+  ],
+  "models": []
+}

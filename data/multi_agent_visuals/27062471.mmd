@@ -1,0 +1,38 @@
+%% The main data source for the workflow
+graph TD;
+  subgraph DataPreparation
+    DS["<img src='icons/database.svg' width=100 height=100/> <br/> Acoustic Extinguisher Fire Dataset"] -->|pd.read_excel| df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame with Fire Data"] %% Data is loaded from an excel file
+    df -->|Drop STATUS column| X["<img src='icons/column_split.svg' width=100 height=100/> <br/> Features for Model"] %% Features are extracted for modeling
+    df -->|Extract STATUS column| y["<img src='icons/column_split.svg' width=100 height=100/> <br/> Target Variable for Model"] %% Target labels are extracted for modeling
+  end
+
+  subgraph DataSplit
+    X -->|evalml.preprocessing.split_data| X_train["<img src='icons/row_split.svg' width=100 height=100/> <br/> Training Features"] %% Training features prepared
+    X -->|evalml.preprocessing.split_data| X_test["<img src='icons/row_split.svg' width=100 height=100/> <br/> Testing Features"] %% Testing features prepared
+    y -->|evalml.preprocessing.split_data| y_train["<img src='icons/row_split.svg' width=100 height=100/> <br/> Training Target"] %% Training labels prepared
+    y -->|evalml.preprocessing.split_data| y_test["<img src='icons/row_split.svg' width=100 height=100/> <br/> Testing Target"] %% Testing labels prepared
+  end
+
+  subgraph ModelTraining
+    X_train -->|Train Model| AutoML["<img src='icons/brain.svg' width=100 height=100/> <br/> AutoML Search"] %% AutoML search for best pipeline
+    y_train -->|Train Model| AutoML %% Using AutoML for model training
+    AutoML -->|Extract Best Pipeline| BestPipeline["<img src='icons/brain.svg' width=100 height=100/> <br/> Best Model Pipeline"] %% Extract the best model pipeline from AutoML
+  end
+
+  subgraph ModelTesting
+    BestPipeline -->|Predict on X_test| pred["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"] %% Use the best model pipeline to predict
+    y_test -->|Evaluation Metrics| Evaluation["<img src='icons/image.svg' width=100 height=100/> <br/> Model Evaluation"] %% Evaluate model using test labels
+  end
+
+  style DS fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style df fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style X fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style y fill:#87CEEB,stroke:#333,stroke-width:2px;
+  style X_train fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style X_test fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style y_train fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style y_test fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style AutoML fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style BestPipeline fill:#C6F4D6,stroke:#333,stroke-width:2px;
+  style pred fill:#F2C464,stroke:#333,stroke-width:2px;
+  style Evaluation fill:#F2C464,stroke:#333,stroke-width:2px;

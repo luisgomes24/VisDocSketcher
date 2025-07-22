@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/advertisingcsv/Advertising.csv",
+      "description": "Contains advertising data with features like TV, Radio, Newspaper budgets and the corresponding Sales."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing the entire dataset imported from the CSV file."
+    },
+    {
+      "variable": "X",
+      "description": "Feature set used for prediction, excluding the target variable (Sales)."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable, which is the Sales column from the dataset."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set features after splitting the original feature set."
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing set features after splitting the original feature set."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set target variable after splitting."
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing set target variable after splitting."
+    },
+    {
+      "variable": "lin_model",
+      "description": "Linear regression model fitted to the training data."
+    },
+    {
+      "variable": "predicted_sales_1",
+      "description": "Predicted sales for the first new data input based on the trained model."
+    },
+    {
+      "variable": "predicted_sales_2",
+      "description": "Predicted sales for the second new data input based on the trained model."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Loaded using pd.read_csv() from the CSV file.",
+      "flows": "Used for EDA, data visualization, and modeling."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping the 'Sales' column from df.",
+      "flows": "Used as input features for model training."
+    },
+    {
+      "variable": "y",
+      "creation": "Created by selecting the 'Sales' column from df.",
+      "flows": "Used as the target variable for model training."
+    },
+    {
+      "variable": "X_train, X_test, y_train, y_test",
+      "creation": "Created by splitting X and y using train_test_split().",
+      "flows": "X_train and y_train are used to fit the model; X_test and y_test are used to evaluate model performance."
+    },
+    {
+      "variable": "lin_model",
+      "creation": "Fitted by calling sm.ols().fit() on the training data.",
+      "flows": "Used to generate predictions and evaluate the model."
+    },
+    {
+      "variable": "predicted_sales_1",
+      "creation": "Computed by calling lin_model.predict() with new data.",
+      "flows": "Output result displayed in the notebook."
+    },
+    {
+      "variable": "predicted_sales_2",
+      "creation": "Computed by calling lin_model.predict() with second new data.",
+      "flows": "Output result displayed in the notebook."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Linear Regression",
+      "input_features": ["TV", "Radio", "Newspaper"],
+      "target_variable": "Sales",
+      "hyperparameters": null
+    }
+  ]
+}

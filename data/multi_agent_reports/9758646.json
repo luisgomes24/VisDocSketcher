@@ -1,0 +1,51 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training data containing passenger details and survival status."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test data for which survival status is predicted."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train_df",
+      "description": "DataFrame containing the training data."
+    },
+    {
+      "variable_name": "test_df",
+      "description": "DataFrame containing the test data."
+    },
+    {
+      "variable_name": "combine",
+      "description": "List containing both train_df and test_df for processing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train_df",
+      "creation_method": "read_csv",
+      "flow": "Used for training the model and for feature engineering."
+    },
+    {
+      "variable_name": "test_df",
+      "creation_method": "read_csv",
+      "flow": "Used for generating predictions and for feature engineering."
+    },
+    {
+      "variable_name": "combine",
+      "creation_method": "[train_df, test_df]",
+      "flow": "Used to apply transformations to both train and test datasets simultaneously."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "input_features": "All processed features excluding 'Survived'.",
+      "target_variable": "Survived",
+      "hyperparameters": "None specified."
+    }
+  ]
+}

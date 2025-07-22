@@ -1,0 +1,23 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train_features.csv"] -->|Load Data| B["df_Train"]
+    C["train_targets_scored.csv"] -->|Load Data| D["df_Train_scored"]
+    E["train_targets_nonscored.csv"] -->|Load Data| F["df_Train_unscored"]
+    G["test_features.csv"] -->|Load Data| H["df_Test"]
+    
+    %% DataFrames
+    %% DataFrame containing training feature data
+    B --> I["EDA & Correlation Analysis"]
+    B --> J["Model Training"]
+    
+    %% DataFrame containing scored binary MoA targets for training
+    D --> K["Model Evaluation"]
+    
+    %% DataFrame containing non-scored binary MoA responses
+    F --> L["Additional Insights"]
+    
+    %% DataFrame containing test feature data
+    H --> M["Predict Test Set Probabilities"]
+
+```

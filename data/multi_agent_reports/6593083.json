@@ -1,0 +1,130 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains house prices and other features related to the properties."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Main DataFrame containing features from the CSV."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable: SalePrice of the houses."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature set excluding SalePrice and Id."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training set for features."
+    },
+    {
+      "variable_name": "X_valid",
+      "description": "Validation set for features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for target variable."
+    },
+    {
+      "variable_name": "y_valid",
+      "description": "Validation set for target variable."
+    },
+    {
+      "variable_name": "categorical_cols",
+      "description": "List of categorical feature columns in X_train."
+    },
+    {
+      "variable_name": "numerical_cols",
+      "description": "List of numerical feature columns in X_train."
+    },
+    {
+      "variable_name": "model",
+      "description": "LightGBM regression model instance."
+    },
+    {
+      "variable_name": "my_pipeline",
+      "description": "Pipeline that combines preprocessing and model fitting."
+    },
+    {
+      "variable_name": "preds",
+      "description": "Predictions made by the model on the validation set."
+    },
+    {
+      "variable_name": "score",
+      "description": "Root Mean Squared Error (RMSE) of the model predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "description": "Loaded from train.csv file.",
+      "usage": "Used to extract y and X, also to identify categorical and numerical columns."
+    },
+    {
+      "variable": "y",
+      "creation_method": "df.SalePrice",
+      "usage": "Target variable for model training."
+    },
+    {
+      "variable": "X",
+      "creation_method": "df.drop",
+      "usage": "Used in train/test splitting."
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "train_test_split",
+      "usage": "Used to fit the model."
+    },
+    {
+      "variable": "X_valid",
+      "creation_method": "train_test_split",
+      "usage": "Used to generate predictions and evaluate the model."
+    },
+    {
+      "variable": "y_train",
+      "creation_method": "train_test_split",
+      "usage": "Used to train the model."
+    },
+    {
+      "variable": "y_valid",
+      "creation_method": "train_test_split",
+      "usage": "Used to evaluate model predictions."
+    },
+    {
+      "variable": "model",
+      "creation_method": "LGBMRegressor",
+      "usage": "Fitted in the pipeline with training data."
+    },
+    {
+      "variable": "my_pipeline",
+      "creation_method": "Pipeline",
+      "usage": "Fitted with X_train and y_train and used for predictions."
+    },
+    {
+      "variable": "preds",
+      "creation_method": "my_pipeline.predict",
+      "usage": "Used to evaluate model performance."
+    },
+    {
+      "variable": "score",
+      "creation_method": "mean_absolute_error",
+      "usage": "Final evaluation metric of the model performance."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "LGBMRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "random_state": 0
+      }
+    }
+  ]
+}

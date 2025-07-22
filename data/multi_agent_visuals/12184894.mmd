@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> SMS Spam Collection Dataset"]
+    %% Data Variables
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df"]
+    C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Features X"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Target Y"]
+    E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Training Features X_train"]
+    F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Test Features X_test"]
+    G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Training Target Y_train"]
+    H["<img src='icons/row_split.svg' width=100 height=100/> <br/> Test Target Y_test"]
+    I["<img src='icons/brain.svg' width=100 height=100/> <br/> CountVectorizer cv1"]
+    J["<img src='icons/brain.svg' width=100 height=100/> <br/> TF-IDF Vectorizer tfidf"]
+    K["<img src='dummy_plots/barplot_template.svg'/> <br/> X_traincv"]
+    L["<img src='dummy_plots/barplot_template.svg'/> <br/> X_testcv"]
+    M["<img src='dummy_plots/barplot_template.svg'/> <br/> Predictions pred"]
+    N["<img src='dummy_plots/barplot_template.svg'/> <br/> X_train_tf"]
+    O["<img src='dummy_plots/barplot_template.svg'/> <br/> X_test_tf"]
+    %% Models
+    P["<img src='icons/brain.svg' width=100 height=100/> <br/> Multinomial Naive Bayes"]
+
+    %% Data Flow
+    A -->|read_csv| B
+    B -->|Extract| C
+    B -->|Extract| D
+    C -->|train_test_split| E
+    C -->|train_test_split| F
+    D -->|train_test_split| G
+    D -->|train_test_split| H
+    E -->|CountVectorizer.fit_transform| K
+    F -->|CountVectorizer.transform| L
+    E -->|TfidfVectorizer.fit_transform| N
+    F -->|TfidfVectorizer.transform| O
+    K -->|Train| P
+    L -->|Predict| P
+    N -->|Train| P
+    O -->|Predict| P
+    P -->|Output| M

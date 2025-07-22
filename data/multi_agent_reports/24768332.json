@@ -1,0 +1,134 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/heart-failure-prediction/heart.csv",
+            "description": "Dataset containing various features related to heart disease and their corresponding target variable."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "data",
+            "description": "DataFrame containing the imported heart disease dataset."
+        },
+        {
+            "variable": "X",
+            "description": "Feature matrix containing all predictors except the target variable."
+        },
+        {
+            "variable": "y",
+            "description": "Target variable which indicates the presence of heart disease."
+        },
+        {
+            "variable": "X_train",
+            "description": "Training set of features after splitting the dataset."
+        },
+        {
+            "variable": "X_test",
+            "description": "Test set of features after splitting the dataset."
+        },
+        {
+            "variable": "y_train",
+            "description": "Training set of target variable after splitting the dataset."
+        },
+        {
+            "variable": "y_test",
+            "description": "Test set of target variable after splitting the dataset."
+        },
+        {
+            "variable": "scaler",
+            "description": "StandardScaler instance used to scale the features."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "data",
+            "creation": "pd.read_csv",
+            "flow": "Used for exploratory analysis and preprocessing." 
+        },
+        {
+            "variable": "X",
+            "creation": "data.drop('HeartDisease', axis=1)",
+            "flow": "Used as input features for model training."
+        },
+        {
+            "variable": "y",
+            "creation": "data['HeartDisease']",
+            "flow": "Used as the target variable for model training."
+        },
+        {
+            "variable": "X_train",
+            "creation": "train_test_split(X, y, train_size=0.8)",
+            "flow": "Used in model training." 
+        },
+        {
+            "variable": "X_test",
+            "creation": "train_test_split(X, y, train_size=0.8)",
+            "flow": "Used for model evaluation." 
+        },
+        {
+            "variable": "y_train",
+            "creation": "train_test_split(X, y, train_size=0.8)",
+            "flow": "Used in model training." 
+        },
+        {
+            "variable": "y_test",
+            "creation": "train_test_split(X, y, train_size=0.8)",
+            "flow": "Used for model evaluation." 
+        },
+        {
+            "variable": "scaler",
+            "creation": "StandardScaler()",
+            "flow": "Used to scale X_train and X_test before model training and evaluation."
+        }
+    ],
+    "models": [
+        {
+            "model_type": "Logistic Regression",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "penalty='l2', C=1, max_iter=100"
+        },
+        {
+            "model_type": "Random Forest Classifier",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "n_estimators=50"
+        },
+        {
+            "model_type": "Gaussian Naive Bayes",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "None"
+        },
+        {
+            "model_type": "Voting Classifier",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)], voting='hard'"
+        },
+        {
+            "model_type": "Decision Tree Classifier",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "max_depth=4"
+        },
+        {
+            "model_type": "KNeighbors Classifier",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "n_neighbors=7"
+        },
+        {
+            "model_type": "Support Vector Classifier",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "kernel='rbf', probability=True"
+        },
+        {
+            "model_type": "Voting Classifier (Soft Voting)",
+            "input_features": "X_train",
+            "target": "y_train",
+            "hyperparameters": "weights=[2, 1, 2]"
+        }
+    ]
+}

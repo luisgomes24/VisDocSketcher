@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Read CSV| B["X_full"]
+    A1["test.csv"] -->|Read CSV| C["X_test_full"]
+    
+    %% Data Preparation
+    B -->|Extract SALE_PRICE| D["y"]
+    B -->|Select Features| E["features"]
+    
+    %% Data Splitting
+    B -->|Train-Test Split| F["X_train"] & G["X_valid"]
+    D -->|Train-Test Split| H["y_train"] & I["y_valid"]
+    
+    %% Model Training and Evaluation
+    subgraph Model_Training_and_Evaluation
+        direction TB
+        J1["RandomForestRegressor: model_1"]
+        J2["RandomForestRegressor: model_2"]
+        J3["RandomForestRegressor: model_3"]
+        J4["RandomForestRegressor: model_4"]
+        J5["RandomForestRegressor: model_5"]
+        F & H --> J1
+        F & H --> J2
+        F & H --> J3
+        F & H --> J4
+        F & H --> J5
+        J1 & J2 & J3 & J4 & J5 --> K["Evaluation: mean_absolute_error"]
+    end
+    
+    %% Prediction and Output
+    C -->|Prepare Features| L["preds_test"]
+    L -->|Predict| M["output: submission.csv"]
+```

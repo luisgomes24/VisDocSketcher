@@ -1,0 +1,33 @@
+flowchart TD
+    %% L variable node
+    L["Variable: L"]
+    click L "Variable 'L' is created locally in function select_second and used to return the second element of the list.\n    
+    %% teams variable node
+    teams["Variable: teams"]
+    click teams "Variable 'teams' contains lists of team members, used to find losing team's captain."
+    
+    %% racers variable node 
+    racers["Variable: racers"]
+    click racers "Variable 'racers' is used in purple_shell to swap first and last racer names."
+
+    %% lengths variable node 
+    lengths["Variable: lengths"]
+    click lengths "Variable 'lengths' stores predictions for lengths of multiple lists."
+    
+    %% arrivals variable node
+    arrivals["Variable: arrivals"]
+    click arrivals "Variable 'arrivals' used in fashionably_late function to check if a guest is late."
+
+    %% Data flow connections
+    L --> select_second["Function: select_second"]
+    teams --> losing_team_captain["Function: losing_team_captain"]
+    racers --> purple_shell["Function: purple_shell"]
+    lengths --> Length_Check["Function: Length Check"]
+    arrivals --> fashionably_late["Function: fashionably_late"]
+
+    %% Function Implementations
+    select_second --> L
+    losing_team_captain --> teams
+    purple_shell --> racers
+    Length_Check --> lengths
+    fashionably_late --> arrivals

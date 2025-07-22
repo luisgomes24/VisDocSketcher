@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🔍 Preprocess Data"]
+    B --> C["🗄️ Reduce Memory Usage"]
+    C --> D["🧹 Remove Zero Rows"]
+    D --> E["📊 Export to SQLite"]
+    E --> F["📊 Visualization <img src='dummy_plots/barplot_template.svg'/> <br/> Barplot Results"]
+    F --> G["🔍 Model Training"]
+    G --> H["⚙️ Model Evaluation"]

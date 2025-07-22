@@ -1,0 +1,13 @@
+```
+flowchart TD
+    A["📂 Data Loading"] --> B["📄 Read /kaggle/input/test_lAUu6dG.csv"]
+    B --> C["🖼️ Data Preview: df1.head(5)"]
+    C --> D["📊 Distribution Graphs <img src='dummy_plots/barplot_template.svg'/> <br/> df1"]
+    D --> E["📈 Correlation Matrix <img src='dummy_plots/boxplot_template.svg'/> <br/> df1"]
+    E --> F["🔍 Scatter and Density Plots <img src='dummy_plots/scatter_plot_template.svg'/> <br/> df1"]
+    F --> G["📂 Data Loading"]
+    G --> H["📄 Read /kaggle/input/train_ctrUa4K.csv"]
+    H --> I["🖼️ Data Preview: df2.head(5)"]
+    I --> J["📊 Distribution Graphs <img src='dummy_plots/barplot_template.svg'/> <br/> df2"]
+    J --> K["📈 Correlation Matrix <img src='dummy_plots/boxplot_template.svg'/> <br/> df2"]
+    K --> L["🔍 Scatter and Density Plots <img src='dummy_plots/scatter_plot_template.svg'/> <br/> df2"]

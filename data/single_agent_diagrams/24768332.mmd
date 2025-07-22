@@ -1,0 +1,17 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📝 Data Overview <img src='table.svg' />"]
+    B --> C["📊 Visualize Data <img src='hist_template.svg' />"]
+    C --> D["📊 Correlation Heatmap <img src='heatmap_template.svg' />"]
+    D --> E["🔄 Preprocess Data"]
+    E --> F["🧰 Feature Engineering <img src='column_split.svg' />"]
+    F --> G["📦 Train-test Split <img src='row_split.svg' />"]
+    G --> H["🧮 Scale Data"]
+    H --> I["📊 Model Evaluation <img src='brain.svg' />"]
+    I --> J["📊 Logistic Regression Results"]
+    I --> K["📊 Voting Classifier Results"]
+    subgraph Model Evaluation
+        J --> L["📈 Accuracy Score"]
+        J --> M["📉 Classification Report"]
+        K --> N["📈 Accuracy Score"]
+        K --> O["📉 Classification Report"]
+    end

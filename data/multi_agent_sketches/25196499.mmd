@@ -1,0 +1,17 @@
+flowchart TD
+  %% Data Sources
+  A1["../input/samsung-electronics-stock-historical-price/005930.KS.csv"]:::dataSource --> B1["df"]:::dataVariable
+  %% Data processing
+  B1 --> |"Passed to bollinger function"| C1["Bollinger Bands Model"]:::model
+  C1 --> |"Generates"| B1
+  B2["df_balance"]:::dataVariable
+  C2["Backtesting Trading Strategy"]:::model
+  B1 --> |"Used in backtesting function"| C2
+  C2 --> |"Generates"| B2
+  %% Visualization
+  B1 --> |"Used for plotting stock prices"| D1["Stock Prices Plot"]
+  B2 --> |"Used for plotting balance over time"| D2["Balance Over Time Plot"]
+
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#ffcc00,stroke:#333,stroke-width:2px;

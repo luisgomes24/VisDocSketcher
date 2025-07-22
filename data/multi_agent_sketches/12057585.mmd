@@ -1,0 +1,35 @@
+flowchart TD
+    %% Nodes
+    A[Data Source: train.zarr]
+    B[Data Source: validate.zarr]
+    C[Data Source: sample.zarr]
+    D[train_dataloader]
+    E[valid_dataloader]
+    F[eval_dataloader]
+    G[cfg]
+    H[model: ResNet-18]
+    I[optimizer: Adam]
+    J[criterion: Mean Squared Error]
+    K[losses]
+    L[val_losses]
+
+    %% Comments
+    %% A, B, C are the initial data sources for training, validation, and evaluation respectively
+    %% D, E, F are DataLoader objects created to batch and shuffle the datasets
+    %% G is the configuration dictionary with model parameters
+    %% H is the ResNet-18 model used for predictions
+    %% I and J are optimizer and loss function respectively
+    %% K and L store training and validation losses for analysis
+
+    %% Links
+    A --> D
+    B --> E
+    C --> F
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+    H --> I
+    H --> J
+    H --> K
+    H --> L

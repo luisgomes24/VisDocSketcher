@@ -1,0 +1,70 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/super-image-resolution/Data/HR/*",
+      "description": "High Resolution Images for training"
+    },
+    {
+      "file_path": "/kaggle/input/super-image-resolution/Data/LR/*",
+      "description": "Low Resolution Images for training"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "hr_image_raw_dict",
+      "description": "Dictionary containing raw high resolution images"
+    },
+    {
+      "name": "lr_image_raw_dict",
+      "description": "Dictionary containing raw low resolution images"
+    },
+    {
+      "name": "x_train",
+      "description": "Input training data, low resolution images"
+    },
+    {
+      "name": "y_train",
+      "description": "Target training data, high resolution images"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "hr_image_raw_dict",
+      "created_by": "load_images function",
+      "flows_to": "Used for training target variable y_train"
+    },
+    {
+      "variable": "lr_image_raw_dict",
+      "created_by": "load_images function",
+      "flows_to": "Used for training input variable x_train"
+    },
+    {
+      "variable": "x_train",
+      "created_by": "np.array(list(lr_image_raw_dict.values()))",
+      "flows_to": "Used in model training"
+    },
+    {
+      "variable": "y_train",
+      "created_by": "np.array(list(hr_image_raw_dict.values()))",
+      "flows_to": "Used in model training"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Custom CNN",
+      "input_shape": "(96, 96, 3)",
+      "layers": [
+        "Conv2D(32, kernel_size=3)",
+        "Conv2D(64, kernel_size=3)",
+        "Conv2D(128, kernel_size=9)",
+        "UpSampling2D(size=(2,2))",
+        "Dense(3)"
+      ],
+      "hyperparameters": {
+        "optimizer": "Adam(learning_rate=0.0001)",
+        "loss": "MSE",
+        "metrics": ["PSNR", "accuracy", "SSIM"]
+      }
+    }
+  ]
+}

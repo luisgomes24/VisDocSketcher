@@ -1,0 +1,17 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame intended to hold the dataset for exploratory analysis"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "Not explicitly stated, but likely intended to be read from input source",
+      "uses": "Expected to be processed in plotting functions"
+    }
+  ],
+  "models": []
+}

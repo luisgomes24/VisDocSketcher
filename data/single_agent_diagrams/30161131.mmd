@@ -1,0 +1,19 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Dataset"] --> B["Preprocessing Data"]
+    B --> C["<img src='table.svg'/> <br/> Setup for Frequency"]
+    C --> D["Train Frequency Model"]
+    D --> E["<img src='scatter_plot_template.svg'/> <br/> 📊 Elbow Plot for Frequency"]
+    
+    B --> F["<img src='table.svg'/> <br/> Setup for Recency"]
+    F --> G["Train Recency Model"]
+    G --> H["<img src='scatter_plot_template.svg'/> <br/> 📊 Elbow Plot for Recency"]
+    
+    B --> I["<img src='table.svg'/> <br/> Setup for Monetary"]
+    I --> J["Train Monetary Model"]
+    J --> K["<img src='scatter_plot_template.svg'/> <br/> 📊 Elbow Plot for Monetary"]
+    
+    E --> L["Create RFM Table"]
+    H --> L
+    K --> L
+
+    L --> M["<img src='barplot_template.svg'/> <br/> 📊 Visualization of RFM Scores"]

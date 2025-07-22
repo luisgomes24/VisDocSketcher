@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/> <br/>"] --> B["⚙️ Preprocess Data <img src='icons/column_split.svg'/> <br/>"]
+    B --> C["🔍 Train-Test Split <img src='icons/row_split.svg'/> <br/>"]
+    C --> D["🚚 Load Data into DataLoader <img src='icons/table.svg'/> <br/>"]
+    D --> E["🖼️ Visualize Sample Data <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    E --> F["🧠 Init Model <img src='icons/brain.svg'/> <br/>"]
+    F --> G["🔧 Train Model <img src='icons/brain.svg'/> <br/>"]
+    G --> H["📈 Plot Training Results <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    H --> I["📊 Evaluate Model <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    I --> J["📤 Save Model <img src='icons/database.svg'/> <br/>"]
+    J --> K["📷 Make Predictions <img src='icons/image.svg'/> <br/>"]
+    K --> L["📊 Visualize Predictions <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]

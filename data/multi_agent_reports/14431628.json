@@ -1,0 +1,88 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/cassava-leaf-disease-classification/train.csv",
+      "description": "Contains training data with labels for cassava leaf disease classification."
+    },
+    {
+      "file_path": "/kaggle/input/cassava-leaf-disease-classification/label_num_to_disease_map.json",
+      "description": "Maps numeric labels to their respective disease names."
+    },
+    {
+      "file_path": "../input/cassava-leaf-disease-classification/sample_submission.csv",
+      "description": "Sample submission file format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data and labels."
+    },
+    {
+      "variable_name": "diseases",
+      "description": "Series mapping disease labels to their names."
+    },
+    {
+      "variable_name": "train_generator",
+      "description": "Data generator for the training set providing augmented images and labels."
+    },
+    {
+      "variable_name": "val_generator",
+      "description": "Data generator for the validation set providing images and labels."
+    },
+    {
+      "variable_name": "history",
+      "description": "Variable that stores the training history including loss and accuracy over epochs."
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame for holding prediction results for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "created_by": "pd.read_csv()",
+      "flows_to": ["train_generator", "val_generator"]
+    },
+    {
+      "variable_name": "diseases",
+      "created_by": "pd.read_json()",
+      "flows_to": []
+    },
+    {
+      "variable_name": "train_generator",
+      "created_by": "image.ImageDataGenerator.flow_from_dataframe()",
+      "flows_to": ["history"]
+    },
+    {
+      "variable_name": "val_generator",
+      "created_by": "image.ImageDataGenerator.flow_from_dataframe()",
+      "flows_to": ["history"]
+    },
+    {
+      "variable_name": "model",
+      "created_by": "Sequential()",
+      "flows_to": ["history"]
+    },
+    {
+      "variable_name": "preds",
+      "created_by": "model.predict()",
+      "flows_to": ["submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "InceptionResNetV2",
+      "input_features": "Images resized to 320x320 with 3 color channels.",
+      "target_variable": "Labels corresponding to cassava leaf diseases.",
+      "hyperparameters": {
+        "loss_function": "CategoricalCrossentropy",
+        "optimizer": "Adamax",
+        "learning_rate": 0.01,
+        "epochs": 25,
+        "batch_size": 32
+      }
+    }
+  ]
+}

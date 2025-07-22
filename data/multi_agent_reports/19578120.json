@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "online_retail_final.csv",
+      "description": "Contains individual sale records for customers and products."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the input sales data."
+    },
+    {
+      "variable_name": "customer_price",
+      "description": "DataFrame containing cumulative revenue and percentages calculated for customers."
+    },
+    {
+      "variable_name": "item_price",
+      "description": "DataFrame containing cumulative revenue and percentages calculated for products."
+    },
+    {
+      "variable_name": "top_customers",
+      "description": "List of customer IDs contributing to 80% of revenue."
+    },
+    {
+      "variable_name": "products_for_top_customers",
+      "description": "List of products bought by the top customers."
+    },
+    {
+      "variable_name": "products_for_other_customers",
+      "description": "List of products bought by customers outside the top contributors."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for calculations to generate Pareto charts."
+    },
+    {
+      "variable_name": "customer_price",
+      "creation_method": "prepare_pareto_data(df, 'CustomerID', 'TotalPrice')",
+      "flow": "Creates Pareto chart for customers."
+    },
+    {
+      "variable_name": "item_price",
+      "creation_method": "prepare_pareto_data(df, 'StockCode', 'TotalPrice')",
+      "flow": "Creates Pareto chart for products."
+    },
+    {
+      "variable_name": "top_customers",
+      "creation_method": "customer_price[customer_price.CumulativePercentage <= 80].index.tolist()",
+      "flow": "Used to identify top customers and their purchases."
+    },
+    {
+      "variable_name": "products_for_top_customers",
+      "creation_method": "df[df.CustomerID.isin(top_customers)].Description.drop_duplicates().values.tolist()",
+      "flow": "Lists products bought by top revenue-generating customers."
+    },
+    {
+      "variable_name": "products_for_other_customers",
+      "creation_method": "df[~df.CustomerID.isin(top_customers)].Description.drop_duplicates().values.tolist()",
+      "flow": "Lists products bought by other customers."
+    }
+  ],
+  "models": []
+}

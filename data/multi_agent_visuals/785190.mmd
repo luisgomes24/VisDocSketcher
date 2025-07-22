@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> /Earthquake Database CSV/"] -->|Load| B1["<img src='icons/table.svg' width=100 height=100/> <br/> Earthquake Data"] 
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> /Landslide Events CSV/"] -->|Load| B2["<img src='icons/table.svg' width=100 height=100/> <br/> Landslide Data"] 
+    A3["<img src='icons/file.svg' width=100 height=100/> <br/> /Volcanic Eruptions CSV/"] -->|Load| B3["<img src='icons/table.svg' width=100 height=100/> <br/> Volcano Data"] 
+
+    %% Earthquake Data Processing
+    B1 -->|Parse and Filter| C1["<img src='icons/column_split.svg' width=100 height=100/> <br/> Earthquakes with Normal Dates"] 
+    C1 -->|Extract| D1["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Day of Month Earthquakes Chart"] 
+
+    %% Landslide Data Processing
+    B2 -->|Extract| D2["<img src='dummy_plots/barplot_template.svg' width=100 height=100/> <br/> Day of Month Landslides Chart"] 
+    
+    %% Comments
+    %% Node A1 represents the earthquake database file.
+    %% Node A2 represents the landslide events file.
+    %% Node A3 represents the volcanic eruptions file.
+    %% Node B1 represents the DataFrame containing raw earthquake data.
+    %% Node B2 represents the DataFrame containing raw landslide data.
+    %% Node B3 represents the DataFrame containing raw volcano data.
+    %% Node C1 represents the DataFrame of earthquakes filtered by valid date.
+    %% Node D1 represents the extracted day of the month for earthquake incidents used for plotting.
+    %% Node D2 represents the extracted day of the month for landslide incidents used for plotting.

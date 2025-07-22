@@ -1,0 +1,30 @@
+flowchart TD
+
+    %% Data Sources
+    A[chennai_reservoir_levels.csv]:::dataSource --> |read_csv| B[df_water]
+    C[chennai_reservoir_rainfall.csv]:::dataSource --> |read_csv| D[df_rainfall]
+    E[chennai_population.csv]:::dataSource --> |read_csv| F[df_population]
+
+    %% DataFrames Creation
+    B --> |merge with df_rainfall| G[df]
+    D --> |merge with df_water| G
+
+    %% Aggregations and Merges
+    G --> |groupby and aggregate| H[df_agg]
+    H --> |merge with df_population| I[df_year]
+    F --> |merge with df_agg| I
+
+    %% Visualizations
+    G --> |Used for plotting| J[Reservoir and Rainfall Data Visualization]
+    I --> |Used for visualizing| K[Population and Liters per Person Visualization]
+
+    %% Styles
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+
+    class A,C,E dataSource;
+    class B,D,F,G,H,I dataFrame;
+    class J plot;
+    class K plot;

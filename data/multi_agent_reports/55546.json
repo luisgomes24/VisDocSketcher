@@ -1,0 +1,26 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "actual",
+      "description": "A list representing the actual correct answer, in this case containing a single element."
+    },
+    {
+      "name": "predicted",
+      "description": "A list representing predicted values, varying in different instances to demonstrate the output of the MAP@K calculation."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "actual",
+      "created": "Defined as a list with one correct answer.",
+      "flows": "Used as the ground truth in AP@K and MAP@K calculations."
+    },
+    {
+      "variable": "predicted",
+      "created": "Defined and modified multiple times to show different prediction scenarios.",
+      "flows": "Used in conjunction with 'actual' for calculating AP@5 and MAP@K metrics."
+    }
+  ],
+  "models": []
+}

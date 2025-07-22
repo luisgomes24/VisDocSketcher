@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Read train.csv"] --> B["📊 Data Shape Check"]
+    B --> C["🖼️ Load Images <img src='image.svg'/> <br/> Read DICOM Files"]
+    
+    C --> D["🔬 Visualization <img src='barplot_template.svg'/> <br/> Plot Organ Injury Distribution"]
+    D --> E["📈 Animated Image Display <img src='lineplot_template.svg'/> <br/> Visualize CT Scans"]
+    
+    E --> F["🔨 Preprocessing <img src='scatter_plot_template.svg'/> <br/> Convert DICOM to NPY"]
+    
+    F --> G["☑️ Finish <img src='image.svg'/> <br/> Wrap Up and Future Work"]

@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file_name": "indian population new.csv",
+      "description": "Population data of India from 1950 to 2022 including various demographic metrics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the population data, including Year, Population, Life Expectancy, Birth Rate, and more."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "usage": "Analyzed and visualized in various plots for demographic trends over years."
+    }
+  ],
+  "models": []
+}

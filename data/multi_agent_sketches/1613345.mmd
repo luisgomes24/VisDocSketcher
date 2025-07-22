@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Source
+    A[Data Source] -->|read| df
+    
+    %% Transformation and Analysis Nodes
+    df[DataFrame df] -->|used in| B[plotHistogram]
+    df -->|used in| C[plotCorrelationMatrix]
+    df -->|used in| D[plotScatterMatrix]
+    
+    %% Parameters for Visualization
+    B -.->|depends on| E[nHistogramShown]
+    B -.->|depends on| F[nHistogramPerRow]
+    C -.->|depends on| G[graphWidth]
+    D -.->|depends on| H[plotSize]
+    D -.->|depends on| I[textSize]
+    
+    %% Comments for Contextual Understanding
+    %% A: Data Source node representing the origin of data being loaded into the DataFrame df.
+    %% df: The main DataFrame that stores the data for analysis and visualization.
+    %% B: Function that generates histograms for data exploration purposes.
+    %% C: Function that creates a correlation matrix for exploring relationships.
+    %% D: Function that plots scatter matrix for multivariate data analysis.
+    %% E, F, G, H, I: Parameters influencing the visualization aspects of the histograms, correlation matrix, and scatter plots.

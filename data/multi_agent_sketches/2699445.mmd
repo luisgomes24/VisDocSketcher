@@ -1,0 +1,33 @@
+flowchart TD
+    A[CSV Data Source: ks-projects-201801.csv] -->|Read CSV| B[DataFrame: kickstarters_2017]
+    
+    %% Data Scaling
+    B -->|Extract Column: usd_goal_real| C[Variable: usd_goal]
+    C -->|Min-Max Scaling| D[Variable: scaled_data]
+    D -->|Plotting| E[Plots: Scaled Data Plots]
+    
+    %% Data Normalization
+    B -->|Filter Positive Pledges| F[Variable: positive_pledges]
+    F -->|Box-Cox Transformation| G[Variable: normalized_pledges]
+    G -->|Plotting| H[Plots: Normalized Data Plots]
+
+    %% Visualization Steps
+    subgraph Scaling and Normalization
+    C
+    D
+    F
+    G
+    end
+    
+    %% No ML Model Used
+    %% There are no machine learning models applied in this notebook
+    
+    %% Transition Descriptions
+    %% A - the data source
+    %% B - Pandas DataFrame created after reading the CSV
+    %% C - Specific column extracted for scaling
+    %% D - Result of the min-max scaling process
+    %% E - Visualization of the scaled data
+    %% F - Positive pledge values filtered from the data
+    %% G - Result of the Box-Cox normalization process
+    %% H - Visualization of the normalized data

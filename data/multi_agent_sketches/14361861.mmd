@@ -1,0 +1,30 @@
+flowchart TD
+    %% Train Dataset Node
+    A[train.csv.zip] -->|Load with pandas| B[train_df]
+    
+    %% Test Dataset Node
+    C[test.csv.zip] -->|Load with pandas| D[test_df]
+    
+    %% Test Labels Node
+    E[test_labels.csv.zip]
+    
+    %% Validation Data
+    B -->|Split for Validation| F[val_df]
+    
+    %% Toxic and Clean Data
+    B -->|Filter Toxic Comments| G[toxic_df]
+    B -->|Filter Clean Comments| H[clean_df]
+    
+    %% Rebalance Data for Model Training
+    G -->|Used for Balancing| I[Rebalanced Training Data]
+    H -->|Used for Balancing| I
+    
+    %% Model Training
+    I -->|Train Model| J[ToxicCommentClassifier]
+    
+    %% Model Hyperparameters
+    J -.-> |Optimizer: AdamW\nLoss Function: Binary Cross Entropy\nBatch Size: 32\nEpochs: 5| J
+    
+    %% Validation
+    F -->|Validate Model| J
+    D -->|Provide Comments| J

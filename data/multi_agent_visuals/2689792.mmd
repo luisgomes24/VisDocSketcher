@@ -1,0 +1,34 @@
+flowchart TD
+
+%% Data Sources
+subgraph DataSources["Data Sources"]
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::data_source -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df DataFrame"]:::data_var
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]:::data_source -->|Read CSV| D["<img src='icons/table.svg' width=100 height=100/> <br/> test DataFrame"]:::data_var
+end
+
+%% Data Transformations and Variables
+subgraph Transformations["Data Transformations"]
+    B -->|MinMaxScaler| E["Scaled df"]:::data_var
+    D -->|MinMaxScaler| F["Scaled test"]:::data_var
+    
+    E -->|train_test_split| G["train DataFrame"]:::data_var
+    E -->|train_test_split| H["dev DataFrame"]:::data_var
+    
+    G -->|Feature Set| I["train_x"]:::data_var
+    G -->|Target Variable| J["train_y"]:::data_var
+    F -->|Feature Set| K["test_x"]:::data_var
+end
+
+%% Model Section
+subgraph Model["Model"]
+    I & J -->|Training| L["<img src='icons/brain.svg' width=100 height=100/> <br/> Sequential Neural Network"]:::model
+    L -. Output .-> M["predictions"]:::data_var
+end
+
+%% Submissions
+M -->|Create submission| N["sample_submission.csv"]:::data_source
+
+%% Styles
+classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#bfb,stroke:#333,stroke-width:2px;

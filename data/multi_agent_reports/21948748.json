@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_name": "data.csv",
+      "description": "Breast cancer dataset containing various attributes related to tumors."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dataset",
+      "description": "DataFrame containing the breast cancer dataset with 569 instances and 32 attributes."
+    },
+    {
+      "variable_name": "X",
+      "description": "Array of feature values representing the tumor attributes, excluding 'id' and 'diagnosis' columns."
+    },
+    {
+      "variable_name": "y",
+      "description": "Array of target values (diagnosis) encoded as binary values (0 for benign, 1 for malignant)."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training dataset features after splitting and scaling."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing dataset features after splitting and scaling."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training dataset target values after splitting."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing dataset target values after splitting."
+    },
+    {
+      "variable_name": "history",
+      "description": "Contains training history including accuracy and loss metrics during model training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "created_by": "pd.read_csv",
+      "flows_to": "Cleaned data is processed for visualization and model training."
+    },
+    {
+      "variable": "X",
+      "created_by": "data.iloc[:,2:].values",
+      "flows_to": "Used for model training (input features)."
+    },
+    {
+      "variable": "y",
+      "created_by": "data.iloc[:, 1].values",
+      "flows_to": "Used for model training (target variable)."
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": "Used in model training."
+    },
+    {
+      "variable": "X_test",
+      "created_by": "train_test_split",
+      "flows_to": "Used in model evaluation."
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split",
+      "flows_to": "Used in model training."
+    },
+    {
+      "variable": "y_test",
+      "created_by": "train_test_split",
+      "flows_to": "Used in model evaluation."
+    },
+    {
+      "variable": "history",
+      "created_by": "classifier.fit",
+      "flows_to": "Used to visualize model accuracy and loss over epochs."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential Neural Network",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "architecture": [
+        {"layer_type": "Dense", "neurons": 60, "activation": "relu"},
+        {"layer_type": "Dense", "neurons": 30, "activation": "relu"},
+        {"layer_type": "Dense", "neurons": 15, "activation": "relu"},
+        {"layer_type": "Dense", "neurons": 8, "activation": "relu"},
+        {"layer_type": "Dense", "neurons": 4, "activation": "relu"},
+        {"layer_type": "Dense", "neurons": 1, "activation": "sigmoid"}
+      ],
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss_function": "binary_crossentropy",
+        "metrics": ["accuracy"],
+        "batch_size": 100,
+        "epochs": 50
+      }
+    }
+  ]
+}

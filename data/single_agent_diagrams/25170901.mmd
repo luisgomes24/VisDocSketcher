@@ -1,0 +1,8 @@
+```
+flowchart TD
+    A["📂 Load Train Data <img src='file.svg'/> <br/> train_data = pd.read_csv(\"train.csv\")"] --> B["📂 Load Test Data <img src='file.svg'/> <br/> test_data = pd.read_csv(\"test.csv\")"]
+    B --> C["👩‍⚕️ Calculate Survival Rate of Women <br/> rate_women = sum(women)/len(women)"]
+    C --> D["👨‍⚕️ Calculate Survival Rate of Men <br/> rate_men = sum(men)/len(men)"]
+    D --> E["🤖 Train Random Forest Model <br/> model.fit(X, y)"]
+    E --> F["📥 Make Predictions <br/> predictions = model.predict(X_test)"]
+    F --> G["📄 Save Submission <img src='file.svg'/> <br/> output.to_csv('submission.csv', index=False)"]

@@ -1,0 +1,30 @@
+flowchart TD;
+    %% Data Collection Nodes
+    A1["Commonwealth Games Webpage"] -->|Scrape Data| B1["Medal Standings List"]
+    A2["Wikipedia 2022 Commonwealth Games"] -->|Read HTML| B2["Athlete Count DataFrame"]
+
+    %% Medal Standings Data Structure
+    B1 --> C1{{"Create Medal Standings DataFrame"}}
+    C1 -->|Countries, Medals Info| D1["df (Medal Standings)"]
+
+    %% Saving Data
+    D1 -->|Save as CSV| E1["Medal_Standings.csv"]
+    B2 -->|Save as CSV| E2["athlete_count.csv"]
+
+    %% Selenium WebDriver Node
+    subgraph S1["Selenium Setup"]
+        A3["Selenium WebDriver"]
+    end
+    A1 --- S1
+
+    %% Data Usage and Exhibition
+    E1 --> F1["Read CSV into DataFrame"]
+    E2 --> F2["Read Athlete Count CSV"]
+
+    %% Terminal Node
+    F1 --> G1["Data Analysis & Visualization"]
+    F2 --> G1
+
+    %% Remarks on Data Flow and Handling
+    %% Selenium WebDriver is used for automated browsing
+    %% Web scraping is synchronized with sleep to handle dynamic content

@@ -1,0 +1,36 @@
+%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#ffffe0" }}}%%
+%% IPL Data Analysis Workflow for Jupyter Notebook %%
+
+flowchart TD
+    subgraph Data_Sources
+        A["../input/ipl-complete-dataset-20082020/IPL Matches 2008-2020.csv"]
+        %% This node represents the raw IPL dataset source %%
+    end
+
+    subgraph Data_Processing
+        B["df: IPL DataFrame (2018-2020)"]
+        %% DataFrame containing IPL data filtered for the years 2018-2020 %%
+        C["dx: CSK Matches DataFrame"]
+        %% DataFrame containing matches played by Chennai Super Kings (CSK) %%
+        D["dy: CSK Results Pivot"]
+        %% Pivot table summarizing CSK match results based on batting/fielding decision %%
+    end
+
+    subgraph Statistical_Test
+        E["Chi-square Test"]
+        %% Chi-square test to evaluate the independence of match outcomes and toss decisions for CSK %%
+    end
+
+    subgraph Chi-Square_Results
+        F["stat: Test Statistic"]
+        %% Test statistic from the Chi-square test %%
+        G["p: P-value"]
+        %% P-value indicating the test significance %%
+    end
+
+    A -->|Read CSV| B
+    B -->|Filter for CSK| C
+    C -->|Create Pivot| D
+    D -->|Perform Test| E
+    E -->|Output Results| F
+    E --> G

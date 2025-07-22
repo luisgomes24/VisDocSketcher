@@ -1,0 +1,33 @@
+UnknownDiagramError: No diagram type detected matching given configuration for text: ```mermaid
+flowchart TD
+    subgraph Input
+        A["chinese_mnist.csv"]
+        %% This node represents the CSV file source used to load dataset information
+    end
+    
+    subgraph DataPreparation
+        B["data_df"]
+        %% DataFrame that holds image paths and labels loaded from CSV
+        A --> |"pd.read_csv()"| B
+    end
+
+    subgraph ImageProcessing
+        C["x_train"]
+        D["y_train"]
+        E["image_original"]
+        %% x_train: Processed training images
+        %% y_train: Labels for training images
+        %% image_original: Unprocessed, loaded original images for baseline
+        
+        B --> |"Extract 'value' column"| D
+        B --> |"Process paths to images"| E
+        E --> |"Enhancement and resizing"| C
+    end
+
+    subgraph Model
+        F["(Preparation for model training)"]
+        %% Currently there is no defined model, preparing data for model training
+        C --> F
+        D --> F
+    end
+```

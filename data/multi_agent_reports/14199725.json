@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "source": "train.csv",
+      "description": "Contains training data for the market prediction model, including features and response variables."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the loaded dataset." 
+    },
+    {
+      "name": "features",
+      "description": "List of features used for training, derived from the columns of df that contain 'feature' in their names."
+    },
+    {
+      "name": "env",
+      "description": "Environment object used to simulate the market conditions and interaction with the agent."
+    },
+    {
+      "name": "config",
+      "description": "Configuration object containing hyperparameters for training the Dueling DDQN agent."
+    },
+    {
+      "name": "memory",
+      "description": "Experience replay memory to store past transitions for training the agent."
+    },
+    {
+      "name": "agent",
+      "description": "Instance of the DuelingDDQN model used to learn and determine actions."
+    },
+    {
+      "name": "rewards",
+      "description": "List that accumulates the rewards earned in each episode during training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "load_df function",
+      "flows_to": [ "add_actions function", "Env constructor" ]
+    },
+    {
+      "variable": "features",
+      "created_by": "load_df function",
+      "flows_to": [ "add_actions function", "Env constructor" ]
+    },
+    {
+      "variable": "env",
+      "created_by": "Env constructor",
+      "flows_to": [ "training loop" ]
+    },
+    {
+      "variable": "config",
+      "created_by": "Config constructor",
+      "flows_to": [ "DuelingDDQN constructor" ]
+    },
+    {
+      "variable": "memory",
+      "created_by": "ExperienceReplay constructor",
+      "flows_to": [ "training loop" ]
+    },
+    {
+      "variable": "agent",
+      "created_by": "DuelingDDQN constructor",
+      "flows_to": [ "training loop" ]
+    },
+    {
+      "variable": "rewards",
+      "created_by": "Initialize empty list",
+      "flows_to": [ "plotting" ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DuelingDDQN",
+      "input_features": "features",
+      "target_variable": "action",
+      "hyperparameters": {
+        "epsilon_start": 1.0,
+        "epsilon_final": 0.01,
+        "epsilon_decay": 8000,
+        "gamma": 0.99,
+        "lr": 1e-4,
+        "target_net_update_freq": 1000,
+        "memory_size": "size of the experience replay",
+        "batch_size": 128,
+        "learning_starts": 5000,
+        "max_frames": "total samples in the dataset"
+      }
+    }
+  ]
+}

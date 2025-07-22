@@ -1,0 +1,25 @@
+flowchart TD
+    % Data Sources
+    episodes_file["<img src='icons/file.svg' width=100 height=100/> <br/> Family Guy Dataset.csv"]:::dataSource
+    
+    % Data Variables
+    episodes_df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: episodes_df"]:::dataVariable
+    true_detective_df["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame: true_detective_df"]:::dataVariable
+    
+    % Data Flow
+    episodes_file -->|"pd.read_csv"| episodes_df
+    episodes_df -->|"Merged into"| true_detective_df
+    
+    % Data Usage
+    episodes_df -->|"Used for analyses and visualizations"| A["Analysis & Vis"]:::dataFlow
+    true_detective_df -- No direct use --> B["Unused"]:::dataFlow
+    
+    %% Styles
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;  /* Light Blue */
+    classDef dataVariable fill:#C6F4D6,stroke:#333,stroke-width:2px;  /* Light Green */
+    classDef dataFlow fill:#FFCDD2,stroke:#333,stroke-width:2px;  /* Light Red */
+    classDef model fill:#F2C464,stroke:#333,stroke-width:2px;  /* Light Yellow */
+
+    class episodes_file dataSource;
+    class episodes_df,true_detective_df dataVariable;
+    class A,B dataFlow;

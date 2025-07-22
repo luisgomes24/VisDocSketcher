@@ -1,0 +1,29 @@
+flowchart TD
+  %% Data Sources Nodes %%
+  DS1[List Attr<|...|>] --> |Data Loading| DF
+
+  %% Variable Initialization %%
+  device[Device] --> |Setup| COMPUTE
+  hidden_dim[Hidden Dim] --> |Initialization| MODEL_PARAMS
+  batch_size[Batch Size] --> |Initialization| MODEL_PARAMS
+  max_epochs[Max Epochs] --> |Initialization| MODEL_PARAMS
+
+  %% DataFrame Creation %%
+  subgraph Data preparation
+    DF[DataFrame: CelebA CSV] --> |Sample & Split| TRAIN[Train DataFrame]
+    DF --> |Sample & Split| VALIDATION[Validation DataFrame]
+    DF --> |Sample & Split| TEST[Test DataFrame]
+  end
+
+  %% Training Flow %%
+  subgraph Training
+    TRAIN --> |Create Batches & Train| MODEL[Classif Model]
+    VALIDATION --> |Validation Checks| MODEL
+    TEST --> |Test Model| EVALUATION[Test Results]
+  end
+
+  %% Model Description %%
+  subgraph Model Architecture
+    classif[Classifier Network: Classif] --> |Training| MODEL
+    classif_loss[Loss Function] --> |Compute Loss| MODEL
+  end

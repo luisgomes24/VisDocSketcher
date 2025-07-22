@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] --> |pd.read_csv| B["TrainData"] %% Training data
+    C["test.csv"] --> |pd.read_csv| D["TestData"] %% Test data
+    
+    %% Data Preparation
+    B --> |TrainData.pop| E["Label"] %% Extracting labels
+    
+    %% Data Splitting and Reshaping
+    B --> |train_test_split| F["DS1"] %% Training dataset
+    B --> |train_test_split| G["DS2"] %% Validation dataset
+    E --> H["L1"] %% One-hot encoding labels for training
+    E --> I["L2"] %% One-hot encoding labels for validation
+    
+    %% Model Training and Prediction
+    subgraph CNN_Model["Convolutional Neural Network"]
+        F & H --> |Fit Model| CNN["Convolutional Neural Network"] 
+        G & I --> |Model.evaluate| J["Validation Evaluation"]
+    end
+    
+    %% Prediction on Validation
+    CNN --> |Model.predict| K["L2Predict"]
+    K --> |Error Calculation| L["Error"]
+    
+    %% Confusion Matrix for Validation
+    I & K --> M["Confusion Matrix"]
+
+    %% Prediction on Test Data
+    D --> |Model.predict| N["result"] 
+    N --> |Submission Creation| O["Submission"]
+
+    %% Comments
+    A:::commentstyle
+    C:::commentstyle
+    DOT:::commentstyle
+
+    classDef commentstyle fill:#f9f,stroke:#333,stroke-width:2px,
+                font-weight:bold,font-size:12px,color:#333;

@@ -1,0 +1,103 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/animal-imbalance-classification/train_images/image_0.png",
+            "description": "An image file used as an example for augmentation."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "image_before",
+            "description": "Original image loaded as a NumPy array."
+        },
+        {
+            "name": "image_after1",
+            "description": "First augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after2",
+            "description": "Second augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after3",
+            "description": "Third augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after4",
+            "description": "Fourth augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after5",
+            "description": "Fifth augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after6",
+            "description": "Sixth augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after7",
+            "description": "Seventh augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after8",
+            "description": "Eighth augmented image after applying HorizontalFlip."
+        },
+        {
+            "name": "image_after9",
+            "description": "Ninth augmented image after applying HorizontalFlip."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "image_before",
+            "creation": "Loaded from the image file using Image.open and converted to NumPy array.",
+            "usage": "Used as input for various augmentations."
+        },
+        {
+            "variable": "image_after1",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after2",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after3",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after4",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after5",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after6",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after7",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after8",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        },
+        {
+            "variable": "image_after9",
+            "creation": "Augmented from image_before using HorizontalFlip.",
+            "usage": "Displayed in the plot."
+        }
+    ],
+    "models": []
+}

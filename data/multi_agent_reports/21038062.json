@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "Contains the 'Id' and 'Pawpularity' columns, where 'Id' provides the filepath of images and 'Pawpularity' is the target variable to predict."
+    },
+    {
+      "file": "test.csv",
+      "description": "Contains the 'Id' column for test images."
+    },
+    {
+      "file": "sample_submission.csv",
+      "description": "Contains the required format for submission with 'Pawpularity' to be predicted."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame from 'train.csv' that contains training data."
+    },
+    {
+      "variable": "dls",
+      "description": "DataLoaders created from the DataBlock definition, used for training and validation data batches."
+    },
+    {
+      "variable": "learn",
+      "description": "Learner object that contains the model and manages training and inference."
+    },
+    {
+      "variable": "pred",
+      "description": "Predicted values for the 'Pawpularity' based on test images."
+    },
+    {
+      "variable": "sub",
+      "description": "DataFrame for submission containing predicted 'Pawpularity' scores."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "pd.read_csv(path/'train.csv')",
+      "flow": "Used as input to DataBlock to obtain DataLoaders (dls)."
+    },
+    {
+      "variable": "dls",
+      "creation": "db.dataloaders(df)",
+      "flow": "Used for training the model and fetching batches of data."
+    },
+    {
+      "variable": "learn",
+      "creation": "cnn_learner(dls, resnet18, y_range=(0, 100))",
+      "flow": "Utilized for training the model with the created DataLoaders. Model is fine-tuned and predictions are made."
+    },
+    {
+      "variable": "pred",
+      "creation": "learn.get_preds(dl=learn.dls.test_dl(fnames, bs=128))",
+      "flow": "Predictions generated for the test dataset."
+    },
+    {
+      "variable": "sub",
+      "creation": "pd.read_csv(path/'sample_submission.csv')",
+      "flow": "Contains final predictions for submission after processing predictions (pred)."
+    }
+  ],
+  "models": [
+    {
+      "model": "ResNet18",
+      "input_features": "Images loaded from 'train.csv' using ImageBlock.",
+      "target_variable": "Pawpularity",
+      "hyperparameters": {
+        "learning_rate": "Detected learning rates based on finding using learn.lr_find()",
+        "epochs": 10
+      }
+    }
+  ]
+}

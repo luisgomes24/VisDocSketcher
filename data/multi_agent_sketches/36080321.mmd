@@ -1,0 +1,29 @@
+flowchart TD
+    %%% Data Sources %%%
+    A["cookie_cats.csv"]:::Data for A/B testing of a mobile game, including player retention and game rounds.
+
+    %%% Data Loading and Initial Variables %%%
+    A --> |"Read CSV"| B[df]:::DataFrame containing player data, including their version group and game metrics.
+    
+    %%% Data Variables %%%
+    B --> C[userid]:::Unique identifier for each player.
+    B --> D[version]:::Indicates whether the player is in the control group or the test group.
+    B --> E[sum_gamerounds]:::Total number of game rounds played by the player in the first 14 days.
+    B --> F[retention_1]:::Indicates if the player returned to play 1 day after installation.
+    B --> G[retention_7]:::Indicates if the player returned to play 7 days after installation.
+    
+    %%% Data Analysis and Tests %%%
+    B --> |"Data Summary Check"| H["Data Summary Review"]
+    B --> |"Plots"| I["Various Plots"]
+    
+    E --> |"Normality Checks"| J["Normality Analysis"]
+    E --> |"A/B Tests"| M["A/B Test Analysis"]
+    F --> |"Retention Analysis"| K["Retention Analysis 1 Day"]
+    G --> |"Retention Analysis"| L["Retention Analysis 7 Days"]
+
+    %%% Model %%%
+    M --> |"Mann Whitney U test"| N["Hypothesis Testing with Mann Whitney U test"]
+    N --> |"Hypotheses: H0: M1 = M2, H1: M1 != M2"| O["Evaluate Hypotheses"]
+
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,E,F,G,N fill:#bbf,stroke:#f66,stroke-width:2px;

@@ -1,0 +1,37 @@
+%%{init: {"theme": "default", "themeVariables": { "primaryColor": "#f9f9f9", "edgeLabelBackground":"#f9f9f9", "tertiaryColor": "#ECECFF"}}}%%
+flowchart TD
+    subgraph DataPreprocessing
+        raw_img["../input/animals10/raw-img"] 
+        %% Dataset: Raw input image files %%
+        dataset["dataset: Image directories"] 
+        %% Contains list of paths to all directories %%
+        dataset -->|Read images| image_array["image_array: Resized Images"] 
+        %% Resized and RGB converted images for modeling %%
+        dataset -->|Label images| image_label["image_label: One-hot encoded labels"] 
+        %% Label encoded as one-hot vectors %%
+    end
+
+    subgraph DataSplit
+        image_array -->|Split| X_train["X_train: Training Images"] 
+        %% Training set of images for model training %%
+        image_array -->|Split| X_test["X_test: Testing Images"] 
+        %% Test set of images for testing %%
+        image_label -->|Split| y_train["y_train: Training Labels"] 
+        %% Training set of labels %%
+        image_label -->|Split| y_test["y_test: Testing Labels"] 
+        %% Test set of labels %%
+    end
+
+    subgraph ModelTraining
+        X_train --> modelen7["modelen7: EfficientNetB7"] 
+        %% Keras model created using EfficientNetB7 %%
+        y_train --> modelen7
+    end
+
+    subgraph ModelEvaluation
+        modelen7 -->|Evaluation| X_test
+        modelen7 -->|Evaluation| y_test
+    end
+
+    %% ML Model Details %%
+    modelen7 -.->|Inputs| EfficientNetB7["EfficientNetB7 Model\nOptimizer: Adam\nLoss: Categorical Crossentropy\nMetrics: Accuracy\nEpochs: 15\nBatch Size: 2\nCallbacks: EarlyStopping, ModelCheckpoint, ReduceLROnPlateau"]

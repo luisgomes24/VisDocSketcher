@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/PovStatsCountry.csv",
+      "description": "Contains country-specific poverty statistics."
+    },
+    {
+      "file": "../input/PovStatsCountry-Series.csv",
+      "description": "Contains time series data related to poverty statistics by country."
+    },
+    {
+      "file": "../input/PovStatsData.csv",
+      "description": "Contains detailed poverty data for countries."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame holding the first CSV data - PovStatsCountry."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame holding the second CSV data - PovStatsCountry-Series."
+    },
+    {
+      "name": "df3",
+      "description": "DataFrame holding the third CSV data - PovStatsData."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in histogram plotting.",
+        "Used in correlation matrix plotting.",
+        "Used in scatter and density plotting."
+      ]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in histogram plotting.",
+        "Used in correlation matrix plotting.",
+        "Used in scatter and density plotting."
+      ]
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in histogram plotting.",
+        "Used in correlation matrix plotting.",
+        "Used in scatter and density plotting."
+      ]
+    }
+  ],
+  "models": []
+}

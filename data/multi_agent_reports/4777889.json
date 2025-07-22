@@ -1,0 +1,82 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/aptos2019-blindness-detection/train.csv",
+      "description": "Contains training data with 'id_code' and 'diagnosis' columns."
+    },
+    {
+      "file": "../input/aptos2019-blindness-detection/test.csv",
+      "description": "Contains testing data with 'id_code' column."
+    },
+    {
+      "file": "../input/aptos2019-blindness-detection/sample_submission.csv",
+      "description": "Contains sample submission format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data loaded from 'train.csv'."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing testing data loaded from 'test.csv'."
+    },
+    {
+      "variable": "x_train",
+      "description": "Array of training image IDs obtained from splitting the 'id_code' column of train DataFrame."
+    },
+    {
+      "variable": "x_test",
+      "description": "Array of test image IDs obtained from splitting the 'id_code' column of train DataFrame."
+    },
+    {
+      "variable": "y_train",
+      "description": "Array of training labels obtained from the 'diagnosis' column of train DataFrame."
+    },
+    {
+      "variable": "y_test",
+      "description": "Array of test labels obtained from the 'diagnosis' column of train DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv('../input/aptos2019-blindness-detection/train.csv')",
+      "flows_to": ["x_train", "y_train"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv('../input/aptos2019-blindness-detection/test.csv')",
+      "flows_to": []
+    },
+    {
+      "variable": "x_train",
+      "created_by": "train_test_split(train['id_code'].values, train['diagnosis'].values)"
+    },
+    {
+      "variable": "x_test",
+      "created_by": "train_test_split(train['id_code'].values, train['diagnosis'].values)"
+    },
+    {
+      "variable": "y_train",
+      "created_by": "train_test_split(train['id_code'].values, train['diagnosis'].values)"
+    },
+    {
+      "variable": "y_test",
+      "created_by": "train_test_split(train['id_code'].values, train['diagnosis'].values)"
+    }
+  ],
+  "models": [
+    {
+      "model_type": "ResNet50",
+      "input_shape": "(IMG_SIZE, IMG_SIZE, NB_CHANNELS)",
+      "n_out": "5",
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss": "categorical_crossentropy",
+        "metrics": ["accuracy"]
+      }
+    }
+  ]
+}

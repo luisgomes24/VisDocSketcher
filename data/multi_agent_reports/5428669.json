@@ -1,0 +1,92 @@
+{
+  "data_sources": [
+    {
+      "file_name": "winemag-data-130k-v2.csv",
+      "description": "Contains wine reviews including attributes like region and wine name."
+    },
+    {
+      "file_name": "gaming.csv",
+      "description": "Includes product links mentioned in the r/gaming subreddit."
+    },
+    {
+      "file_name": "movies.csv",
+      "description": "Includes product links mentioned in the r/movies subreddit."
+    },
+    {
+      "file_name": "meets.csv",
+      "description": "Contains information about powerlifting meets."
+    },
+    {
+      "file_name": "openpowerlifting.csv",
+      "description": "Contains data regarding powerlifting competitors."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "reviews",
+      "description": "DataFrame containing wine reviews."
+    },
+    {
+      "variable_name": "gaming_products",
+      "description": "DataFrame containing products from the r/gaming subreddit."
+    },
+    {
+      "variable_name": "movie_products",
+      "description": "DataFrame containing products from the r/movies subreddit."
+    },
+    {
+      "variable_name": "combined_products",
+      "description": "DataFrame combining products from both gaming and movies subreddits."
+    },
+    {
+      "variable_name": "powerlifting_meets",
+      "description": "DataFrame containing data on powerlifting meets."
+    },
+    {
+      "variable_name": "powerlifting_competitors",
+      "description": "DataFrame containing data on powerlifting competitors."
+    },
+    {
+      "variable_name": "powerlifting_combined",
+      "description": "DataFrame containing combined information of meets and competitors."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "reviews",
+      "creation_method": "read_csv",
+      "flow": "Used to create renamed DataFrame and reindexed DataFrame."
+    },
+    {
+      "variable_name": "gaming_products",
+      "creation_method": "read_csv",
+      "flow": "Used to create combined_products DataFrame."
+    },
+    {
+      "variable_name": "movie_products",
+      "creation_method": "read_csv",
+      "flow": "Used to create combined_products DataFrame."
+    },
+    {
+      "variable_name": "combined_products",
+      "creation_method": "pd.concat",
+      "flow": "Used for further analysis, but not saved or plotted."
+    },
+    {
+      "variable_name": "powerlifting_meets",
+      "creation_method": "read_csv",
+      "flow": "Used as a base for creating powerlifting_combined DataFrame."
+    },
+    {
+      "variable_name": "powerlifting_competitors",
+      "creation_method": "read_csv",
+      "flow": "Used as a base for creating powerlifting_combined DataFrame."
+    },
+    {
+      "variable_name": "powerlifting_combined",
+      "creation_method": "join",
+      "flow": "Used for further analysis, but not saved or plotted."
+    }
+  ],
+  "models": []
+}

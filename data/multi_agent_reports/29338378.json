@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/even-more-fruitssssss/results/train",
+      "description": "Training dataset consisting of images of various fruits organized in folders representing class labels."
+    },
+    {
+      "file_path": "../input/even-more-fruitssssss/results/val",
+      "description": "Validation dataset consisting of images of various fruits organized in folders representing class labels."
+    },
+    {
+      "file_path": "../input/even-more-fruitssssss/results/test",
+      "description": "Test dataset consisting of images of various fruits organized in folders representing class labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "x",
+      "description": "Numpy array of training images after preprocessing."
+    },
+    {
+      "variable_name": "y",
+      "description": "Categorical labels corresponding to training images after one-hot encoding."
+    },
+    {
+      "variable_name": "val_images",
+      "description": "Numpy array of validation images after preprocessing."
+    },
+    {
+      "variable_name": "val_image_label",
+      "description": "Categorical labels for validation images after one-hot encoding."
+    },
+    {
+      "variable_name": "test_images",
+      "description": "Numpy array of test images after preprocessing."
+    },
+    {
+      "variable_name": "test_image_label",
+      "description": "Categorical labels for test images after one-hot encoding."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "x",
+      "flow": "Created from image data in train_dir, used for model training."
+    },
+    {
+      "variable_name": "y",
+      "flow": "Created from class indices of training images, used for model training."
+    },
+    {
+      "variable_name": "val_images",
+      "flow": "Created from image data in val_dir, used for model validation."
+    },
+    {
+      "variable_name": "val_image_label",
+      "flow": "Created from class indices of validation images, used for model validation."
+    },
+    {
+      "variable_name": "test_images",
+      "flow": "Created from image data in test_dir, used for model testing and evaluation."
+    },
+    {
+      "variable_name": "test_image_label",
+      "flow": "Created from class indices of test images, used for model evaluation."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "MobileNetV2",
+      "input_features": "224x224 RGB images.",
+      "target_variable": "Categorical labels with 8 classes.",
+      "hyperparameters": {
+        "layers": [
+          "GlobalAveragePooling2D",
+          "Dense(512, activation='relu')",
+          "BatchNormalization",
+          "Dropout(0.3)",
+          "Dense(128, activation='relu')",
+          "Dropout(0.1)",
+          "Dense(8, activation='softmax')"
+        ],
+        "epochs": 20,
+        "optimizer": "adam",
+        "loss_function": "categorical_crossentropy"
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "data_sources": [
+    {
+      "file_name": "CD36importances.csv",
+      "description": "Contains importance scores related to the CD36 gene."
+    },
+    {
+      "file_name": "train_cite_inputs.h5",
+      "description": "HDF5 file containing input features for training models."
+    },
+    {
+      "file_name": "train_cite_targets.h5",
+      "description": "HDF5 file containing target variables for training models."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "cd36_importances",
+      "description": "DataFrame containing importance scores for the CD36 gene."
+    },
+    {
+      "variable_name": "cd36_importances_new",
+      "description": "Processed DataFrame of CD36 importance scores."
+    },
+    {
+      "variable_name": "train_cite_input_df",
+      "description": "DataFrame of features to be used in model training."
+    },
+    {
+      "variable_name": "train_cite_target_df",
+      "description": "DataFrame of target variables for model training."
+    },
+    {
+      "variable_name": "dfc",
+      "description": "Modified DataFrame where columns have been renamed."
+    },
+    {
+      "variable_name": "dfc_sim",
+      "description": "Filtered DataFrame containing only relevant columns based on semantic list."
+    },
+    {
+      "variable_name": "df_cd36",
+      "description": "DataFrame containing target variable related to the CD36 gene."
+    },
+    {
+      "variable_name": "df_sim_corr",
+      "description": "DataFrame of correlations between CD36 and relevant features."
+    },
+    {
+      "variable_name": "sim_df_merge",
+      "description": "Merged DataFrame containing similarity information."
+    },
+    {
+      "variable_name": "ppi_df_merge",
+      "description": "Merged DataFrame containing PPI information."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "cd36_importances",
+      "creation": "Read from 'CD36importances.csv',"
+      "flows_to": [
+        "cd36_importances_new",
+        "sim_cd_list"
+      ]
+    },
+    {
+      "variable_name": "cd36_importances_new",
+      "creation": "Processed existing DataFrame",
+      "flows_to": [
+        "sim_cd_list"
+      ]
+    },
+    {
+      "variable_name": "train_cite_input_df",
+      "creation": "Read from 'train_cite_inputs.h5',"
+      "flows_to": [
+        "dfc",
+        "dfc_sim",
+        "df_ppi"
+      ]
+    },
+    {
+      "variable_name": "train_cite_target_df",
+      "creation": "Read from 'train_cite_targets.h5',"
+      "flows_to": [
+        "df_cd36",
+        "df_sim_corr"
+      ]
+    },
+    {
+      "variable_name": "dfc",
+      "creation": "Renamed columns from train_cite_input_df",
+      "flows_to": [
+        "dfc_sim",
+        "df_ppi"
+      ]
+    },
+    {
+      "variable_name": "dfc_sim",
+      "creation": "Filtered DataFrame",
+      "flows_to": [
+        "df_sim_corr"
+      ]
+    },
+    {
+      "variable_name": "df_cd36",
+      "creation": "Extracted target variable from train_cite_target_df",
+      "flows_to": [
+        "df_sim_corr",
+        "ppi_cd_list"
+      ]
+    },
+    {
+      "variable_name": "df_sim_corr",
+      "creation": "Calculated correlations with dfc_sim",
+      "flows_to": [
+        "sim_cd_list",
+        "sim_df_merge"
+      ]
+    },
+    {
+      "variable_name": "sim_df_merge",
+      "creation": "Merged df_sim_corr and df_sim_cd_list_out",
+      "flows_to": [
+        "sim_df_merge_filter"
+      ]
+    },
+    {
+      "variable_name": "ppi_df_merge",
+      "creation": "Merged df_ppi_corr and df_ppi_cd_list_out",
+      "flows_to": [
+        "ppi_df_merge_filter"
+      ]
+    }
+  ],
+  "models": []
+}

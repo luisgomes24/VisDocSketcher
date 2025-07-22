@@ -1,0 +1,24 @@
+%% This is a Mermaid.js diagram representing the workflow of the Jupyter Notebook 14286335
+flowchart TD
+    A["WomenRepresentaionInCityProperty-SanFrancisco.csv"]
+    B["df"]
+    C["df_FM"]
+    D["df_MF"]
+    E["df_MM"]
+    F["male"]
+    G["female"]
+    H["df_department"]
+
+    A -->|load csv| B
+    B -->|filter: Gender is 'F & M'| C
+    B -->|filter: Gender is 'M & F'| D
+    B -->|filter: Gender is 'M & M'| E
+    B -->|count males| F
+    B -->|count females| G
+    B -->|aggregate by department| H
+
+    classDef csv fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataframe fill:#bbf,stroke:#f66,stroke-width:2px;
+
+    class A csv;
+    class B,C,D,E,H dataframe;

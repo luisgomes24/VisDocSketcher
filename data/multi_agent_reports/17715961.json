@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains house prices data from Iowa including features such as lot size, year built, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "home_data",
+      "description": "A Pandas DataFrame containing the house prices and related features from the 'train.csv' dataset."
+    },
+    {
+      "variable_name": "avg_lot_size",
+      "description": "The average lot size rounded to the nearest integer calculated from the dataset."
+    },
+    {
+      "variable_name": "newest_home_age",
+      "description": "Age of the newest home based on the year built data from the dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "home_data",
+      "created_by": "pd.read_csv(file_path)",
+      "flows_to": "Data analysis, summarized statistics, and variables like avg_lot_size and newest_home_age."
+    },
+    {
+      "variable": "avg_lot_size",
+      "created_by": "Calculated from home_data",
+      "flows_to": "Used to answer questions about the dataset."
+    },
+    {
+      "variable": "newest_home_age",
+      "created_by": "Calculated from home_data",
+      "flows_to": "Used to answer questions about the dataset."
+    }
+  ],
+  "models": []
+}

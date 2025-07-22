@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/train.csv",
+      "description": "Training dataset containing features and target variable"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "trainDataFrame",
+      "description": "DataFrame containing training data after cleaning"
+    },
+    {
+      "variable_name": "trainLabels",
+      "description": "Target variable extracted from trainDataFrame"
+    },
+    {
+      "variable_name": "trainFeatures",
+      "description": "DataFrame containing feature variables excluding ID and TARGET"
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features split from trainFeatures"
+    },
+    {
+      "variable_name": "X_valid",
+      "description": "Validation features split from trainFeatures"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training labels split from trainLabels"
+    },
+    {
+      "variable_name": "y_valid",
+      "description": "Validation labels split from trainLabels"
+    },
+    {
+      "variable_name": "singleFeatureTable",
+      "description": "Table containing AUC scores for individual features"
+    },
+    {
+      "variable_name": "featureCombinationsTable",
+      "description": "Table containing AUC scores for feature combinations"
+    },
+    {
+      "variable_name": "combinationOverlapMatrix",
+      "description": "Matrix showing overlap of features in combinations"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "trainDataFrame",
+      "created_by": "pd.read_csv",
+      "flows_to": ["trainLabels", "trainFeatures"]
+    },
+    {
+      "variable": "trainLabels",
+      "created_by": "trainDataFrame['TARGET']",
+      "flows_to": ["X_train", "X_valid"]
+    },
+    {
+      "variable": "trainFeatures",
+      "created_by": "trainDataFrame.drop",
+      "flows_to": ["X_train", "X_valid"]
+    },
+    {
+      "variable": "X_train",
+      "created_by": "cross_validation.train_test_split",
+      "flows_to": ["y_train", "singleFeatureTable", "featureCombinationsTable"]
+    },
+    {
+      "variable": "X_valid",
+      "created_by": "cross_validation.train_test_split",
+      "flows_to": ["y_valid"]
+    },
+    {
+      "variable": "singleFeatureTable",
+      "created_by": "GradientBoostingClassifier.fit & predict_proba",
+      "flows_to": []
+    },
+    {
+      "variable": "featureCombinationsTable",
+      "created_by": "random feature combinations generation and model fitting",
+      "flows_to": ["combinationOverlapMatrix"]
+    },
+    {
+      "variable": "combinationOverlapMatrix",
+      "created_by": "overlap calculations",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Gradient Boosting Classifier",
+      "input_features": "Various single and combinations of features",
+      "target_variable": "trainLabels",
+      "hyperparameters": {
+        "n_estimators": 20,
+        "max_features": 1,
+        "max_depth": 3,
+        "min_samples_leaf": 100,
+        "learning_rate": 0.1,
+        "subsample": 0.65,
+        "loss": "deviance"
+      }
+    },
+    {
+      "model_name": "Gradient Boosting Classifier",
+      "input_features": "Five random features",
+      "target_variable": "trainLabels",
+      "hyperparameters": {
+        "n_estimators": 30,
+        "max_features": 2,
+        "max_depth": 3,
+        "min_samples_leaf": 100,
+        "learning_rate": 0.1,
+        "subsample": 0.65,
+        "loss": "deviance"
+      }
+    }
+  ]
+}

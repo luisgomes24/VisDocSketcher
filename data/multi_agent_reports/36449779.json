@@ -1,0 +1,104 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Russell's Viper and Indian Rock Python Dataset",
+      "description": "Image dataset categorized into folders representing different classes."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data_dir",
+      "description": "Directory path where the dataset is stored."
+    },
+    {
+      "name": "filepaths",
+      "description": "List of file paths for images in the dataset."
+    },
+    {
+      "name": "labels",
+      "description": "List containing the labels corresponding to each image file."
+    },
+    {
+      "name": "df",
+      "description": "DataFrame combining file paths and labels, used for training and validation."
+    },
+    {
+      "name": "train_df",
+      "description": "Training set dataframe derived from the main dataframe."
+    },
+    {
+      "name": "valid_df",
+      "description": "Validation set dataframe derived from the remaining samples after splitting."
+    },
+    {
+      "name": "test_df",
+      "description": "Test set dataframe for evaluating model performance after training."
+    },
+    {
+      "name": "dls",
+      "description": "ImageDataLoaders object created for batch loading images with specified transformations."
+    },
+    {
+      "name": "learn",
+      "description": "Learner object for building and training a convolutional neural network model."
+    },
+    {
+      "name": "preds",
+      "description": "Predictions made by the model on the validation dataset."
+    },
+    {
+      "name": "y",
+      "description": "True labels for the validation dataset to compare against predictions."
+    },
+    {
+      "name": "loss",
+      "description": "Calculated loss when obtaining predictions on the validation set."
+    },
+    {
+      "name": "interp",
+      "description": "ClassificationInterpretation object to analyze model predictions and errors."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_by": "pd.concat",
+      "flows_to": ["train_df", "valid_df", "test_df"]
+    },
+    {
+      "variable": "train_df",
+      "created_by": "train_test_split",
+      "flows_to": ["dls"]
+    },
+    {
+      "variable": "dls",
+      "created_by": "ImageDataLoaders.from_df",
+      "flows_to": ["learn"]
+    },
+    {
+      "variable": "learn",
+      "created_by": "vision_learner",
+      "flows_to": ["preds", "y", "loss", "interp"]
+    },
+    {
+      "variable": "preds",
+      "flows_to": ["acc"]
+    },
+    {
+      "variable": "interp",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "efficientnet_b3",
+      "input_features": "Image data from dls",
+      "target_variable": "Labels in train_df",
+      "hyperparameters": {
+        "metrics": ["accuracy", "error_rate"],
+        "training_cycles": 30,
+        "data_type": "fp16"
+      }
+    }
+  ]
+}

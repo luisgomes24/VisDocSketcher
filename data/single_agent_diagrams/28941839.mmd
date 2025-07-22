@@ -1,0 +1,18 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["📊 Display Data <img src='icons/table.svg' />"]
+    B --> C["🧹 Data Preprocessing"]
+    C --> D["📉 Data Visualization"]
+    D --> E["🧠 Modeling"]
+    E --> F["📊 Model Evaluation"]
+
+    A -->|Train Data| G["<img src='dummy_plots/barplot_template.svg'/> <br/> Train Data Info"]
+    A -->|Test Data| H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Test Data Info"]
+    
+    C --> I["🔍 Feature Engineering"]
+    C --> J["🧭 Train-Test Split"]
+    
+    I --> K["💡 Feature Selection"]
+    J --> L["🔄 Cross Validation"]
+    
+    L --> M["💾 Save Model"]
+    F --> N["📈 Performance Metrics"]

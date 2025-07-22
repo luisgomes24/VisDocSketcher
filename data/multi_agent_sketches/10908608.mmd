@@ -1,0 +1,37 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv] -->|load data| B[train_data]
+    C[test.csv] -->|load data| D[test_data]
+
+    %% Data Transformations and Calculations
+    B -->|calculate survival rates| E[rate_women & rate_men]
+    B -->|extract target variable| F[y]
+    B -->|extract features| G[features for X]
+    D -->|extract features| H[features for X_test]
+    
+    %% Model Training
+    G -->|convert to dummies| I[X]
+    H -->|convert to dummies| J[X_test]
+    subgraph RandomForestClassifier
+        I --> K[model]
+        F --> K
+    end
+
+    %% Predictions
+    K -->|predict| L[predictions]
+    L -->|create submission| M[output]
+    M -->|save as| N["my_submission.csv"]
+
+    %% Comments
+    %% A: Source of training data
+    %% B: DataFrame of the training data
+    %% C: Source of test data
+    %% D: DataFrame of the test data
+    %% E: Survival rates calculation
+    %% F: Target variable for model training
+    %% G, H: Features extracted for modeling
+    %% I, J: Feature sets after converting to dummy variables
+    %% K: Random Forest model used for training and prediction
+    %% L: Prediction outcomes by the model
+    %% M: DataFrame prepared for submission
+    %% N: Output file containing predictions

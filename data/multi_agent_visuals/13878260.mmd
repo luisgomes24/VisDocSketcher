@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Variables
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> nums"] -->|Check for lucky number| B["<img src='dummy_plots/hist_template.svg'/> <br/> has_lucky_number()"]
+    %% Description for nums: A list of numbers to check for lucky numbers.
+
+    L["<img src='icons/column_split.svg' width=100 height=100/> <br/> L"] -->|Compare elements| C["<img src='dummy_plots/boxplot_template.svg'/> <br/> elementwise_greater_than()"]
+    C -->|With threshold| thresh["<img src='icons/column_split.svg' width=100 height=100/> <br/> thresh"]
+    %% Description for L: A list of numbers for element-wise comparison.
+    %% Description for thresh: The threshold number for comparison.
+
+    meals["<img src='icons/row_split.svg' width=100 height=100/> <br/> meals"] -->|Check consecutive meals| D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> menu_is_boring()"]
+    %% Description for meals: A list of meals served over time for consecutive check.
+
+    n_runs["<img src='icons/database.svg' width=100 height=100/> <br/> n_runs"] -->|Simulate runs| E["<img src='dummy_plots/lineplot_template.svg'/> <br/> estimate_average_slot_payout()"]
+    %% Description for n_runs: Number of runs to simulate for slot machine payout estimation.
+
+    %% Outputs
+    B --> F{"Result: Lucky Number Check"}
+    C --> G{"Result: Greater Than Comparison"}
+    D --> H{"Result: Boring Menu Check"}
+    E --> I{"Result: Slot Machine Payout Estimate"}

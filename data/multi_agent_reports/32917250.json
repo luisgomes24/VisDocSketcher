@@ -1,0 +1,44 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/rsna-breast-cancer-detection/train.csv",
+      "description": "Training dataset containing breast cancer screening data including features and target labels."
+    },
+    {
+      "file": "/kaggle/input/rsna-breast-cancer-detection/test.csv",
+      "description": "Test dataset for predictions, includes similar features but without target labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "Train_data",
+      "description": "DataFrame containing the training dataset of breast cancer screening."
+    },
+    {
+      "name": "Test_data",
+      "description": "DataFrame containing the testing dataset for breast cancer predictions."
+    },
+    {
+      "name": "dups",
+      "description": "Boolean series indicating duplicate rows in the Train_data DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "Train_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for data inspection, visualization, and analysis."
+    },
+    {
+      "variable": "Test_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for predictions; details not processed as target labels are missing."
+    },
+    {
+      "variable": "dups",
+      "creation_method": "Train_data.duplicated()",
+      "flow": "Used to identify any duplicate entries in the training dataset."
+    }
+  ],
+  "models": []
+}

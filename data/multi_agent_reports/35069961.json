@@ -1,0 +1,89 @@
+{
+  "data_sources": [
+    {
+      "file_name": "car_price_prediction.csv",
+      "description": "Contains car price data including features like mileage, engine volume, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "Main DataFrame that contains car price and features."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Feature set for training after scaling."
+    },
+    {
+      "variable_name": "Y_train",
+      "description": "Target variable (Price) for training."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Feature set for testing after scaling."
+    },
+    {
+      "variable_name": "Y_test",
+      "description": "Target variable (Price) for testing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data",
+      "creation_method": "read_csv",
+      "flow": ["data preprocessing", "train/test split"]
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "StandardScaler",
+      "flow": ["model training"]
+    },
+    {
+      "variable_name": "Y_train",
+      "creation_method": "extracted from data",
+      "flow": ["model training"]
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "StandardScaler",
+      "flow": ["model testing"]
+    },
+    {
+      "variable_name": "Y_test",
+      "creation_method": "extracted from data",
+      "flow": ["model testing"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KNeighborsRegressor",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "LinearRegression",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "SVC",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "DecisionTreeRegressor",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+  %% Data Source
+  A1["CSV File: news.csv"] -->|load| B1["DataFrame: news_df"]
+  %% Data Preparation
+  B1 -->|filter non-null and from 2023| C1["Filtered DataFrame"]
+  C1 -->|extract text| D1["List: docs"]
+  %% Model Preparation
+  subgraph Models
+    E1["UMAP Model"]
+    E2["CountVectorizer: stop words in RU, EN"]
+    E3["HDBSCAN Model"]
+  end
+  %% Training Model
+  D1 -->|train| F1["BERTopic Model"]
+  E1 --> F1
+  E2 --> F1
+  E3 --> F1
+  %% Hyperparameters and Outputs
+  F1 -->|topics and clusters| G1["Visualizations"]
+  %% Comments for clarity
+  %% A1: Data source containing the live news dataset
+  %% B1: Initial loading of the dataset into a DataFrame
+  %% C1: DataFrame filtered to contain relevant data only
+  %% D1: List of text from filtered news for analysis
+  %% E1, E2, E3: Machine Learning models and parameters used for topic modeling
+  %% F1: BERTopic Model trained to discover topics in news
+  %% G1: Visual representation of the topics discovered
+```

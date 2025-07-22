@@ -1,0 +1,9 @@
+graph TD;
+    A["📁 Load Dataset <img src='icons/file.svg'/> <br/> 'beauty-detection-data-set'"] --> B["🧹 Preprocess Data <img src='icons/table.svg'/>"];
+    B --> C["📊 Show Sample Data <img src='dummy_plots/scatter_plot_template.svg'/>"];
+    C --> D["🔍 Create DataLoaders <img src='icons/column_split.svg'/>"];
+    D --> E["🤖 Build Model <img src='icons/brain.svg'/>"];
+    E --> F["📈 Find Learning Rate <img src='dummy_plots/lineplot_template.svg'/>"];
+    F --> G["🏋️ Fine-Tune Model"];
+    G --> H["🔍 Predict on Test Data <img src='icons/image.svg'/>"];
+    H --> I["📊 Evaluate Model <img src='dummy_plots/barplot_template.svg'/>"];

@@ -1,0 +1,34 @@
+flowchart TD
+
+%% Data Sources
+A[Data Source: 2016 FCC New Coders Survey] 
+%% Represents the data source used for the analysis
+click A "file: ../input/2016-FCC-New-Coders-Survey-Data.csv" "Click here for the data source file"
+
+%% Data Loading
+B[Load Data: new_c]
+%% Reads data from CSV using pandas read_csv
+A --> B
+
+%% Data Variable: Age Distribution
+C[Histogram Plot: aplot]
+%% Age distribution histogram derived from new_c
+B --> C
+
+%% Data Variable: Degree Analysis
+D[School Degree Count: SchoolDegree_count]
+%% Count of each unique school degree from new_c
+B --> D
+D --> E[School Degree Plot]
+
+%% Data Variable: Major Analysis
+F[School Major Count: SchoolMajor_counts]
+%% Count of each unique school major from new_c
+B --> F
+F --> G[School Major Plot]
+
+%% Data Variable: Post Bootcamp Salary Analysis
+H[Post Bootcamp Salary Count: BootcampPostSalary_count]
+%% Count of different post-bootcamp salaries from new_c
+B --> H
+H --> I[Post Bootcamp Salary Plot]

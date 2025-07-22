@@ -1,0 +1,104 @@
+{  
+  "data_sources": [  
+    {  
+      "file": "../input/chest-xray-pneumonia/chest_xray/chest_xray/train",  
+      "description": "Training data containing images of Chest X-rays labeled as Pneumonia or Normal."  
+    },  
+    {  
+      "file": "../input/chest-xray-pneumonia/chest_xray/chest_xray/test",  
+      "description": "Testing data with Chest X-ray images for final model evaluation."  
+    },  
+    {  
+      "file": "../input/chest-xray-pneumonia/chest_xray/chest_xray/val",  
+      "description": "Validation data to supplement training due to insufficient examples."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "variable": "X_train",  
+      "description": "Training features reshaped for CNN input (images)."  
+    },  
+    {  
+      "variable": "X_test",  
+      "description": "Testing features reshaped for CNN input (images)."  
+    },  
+    {  
+      "variable": "y_train",  
+      "description": "Training labels (0 for Pneumonia and 1 for Normal)."  
+    },  
+    {  
+      "variable": "y_test",  
+      "description": "Testing labels (0 for Pneumonia and 1 for Normal)."  
+    },  
+    {  
+      "variable": "model",  
+      "description": "The CNN model compiled for training and evaluation."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "X_train",  
+      "creation": "Data processed through OpenCV and resized, normalized between 0-1.",  
+      "flow_to": ["model.fit()", "model.evaluate()", "train-test split"]  
+    },  
+    {  
+      "variable": "X_test",  
+      "creation": "Data processed similarly to training data.",  
+      "flow_to": ["model.evaluate()", "predictions"]  
+    },  
+    {  
+      "variable": "y_train",  
+      "creation": "Labels extracted from training data processing.",  
+      "flow_to": ["model.fit()"]  
+    },  
+    {  
+      "variable": "y_test",  
+      "creation": "Labels extracted from testing data processing.",  
+      "flow_to": ["model.evaluate()", "binary_predictions", "metrics"]  
+    },  
+    {  
+      "variable": "model",  
+      "creation": "Defined as a Sequential CNN and compiled with Adam optimizer.",  
+      "flow_to": ["model.fit()", "model.evaluate()", "predictions"]  
+    }  
+  ],  
+  "models": [  
+    {  
+      "model_name": "CNN",  
+      "input_features": "X_train",  
+      "target_variable": "y_train",  
+      "hyperparameters": {  
+        "layer_config": [  
+            {  
+              "type": "Conv2D",  
+              "filters": 256,  
+              "kernel_size": [3, 3],  
+              "activation": "relu"  
+            },  
+            {  
+              "type": "MaxPooling2D",  
+              "pool_size": [2, 2]  
+            },  
+            {  
+              "type": "Dropout",  
+              "rate": 0.5  
+            },  
+            {  
+              "type": "Dense",  
+              "units": 64,  
+              "activation": "relu"  
+            },  
+            {  
+              "type": "Dense",  
+              "units": 1,  
+              "activation": "sigmoid"  
+            }  
+          ],  
+        "optimizer": "Adam",  
+        "learning_rate": 0.0001,  
+        "loss_function": "binary_crossentropy",  
+        "epochs": 15  
+      }  
+    }  
+  ]  
+}

@@ -1,0 +1,30 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Input Data Files",
+      "description": "Files from the Kaggle input directory."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "dirname",
+      "description": "Current directory name in the file listing loop."
+    },
+    {
+      "variable_name": "filenames",
+      "description": "List of file names in the current directory."
+    },
+    {
+      "variable_name": "filename",
+      "description": "Full path to each file in the listing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "filenames",
+      "created_by": "os.walk",
+      "flows_to": "print statement for logging file paths."
+    }
+  ],
+  "models": []
+}

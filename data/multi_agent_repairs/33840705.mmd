@@ -1,0 +1,15 @@
+graph TD;
+    A["Data Sources"] --> B["Anime Data"];
+    A --> C["Ratings Data"];
+    B -->|"Load"| D["DataFrame df1"];
+    C -->|"Load"| E["DataFrame df2"];
+    D -->|"Merge"| F["Merged DataFrame df"];
+    F -->|"Filter"| G["Sample DataFrame sample_df"];
+    G -->|"Pivot"| H["User-Anime Ratings user_anime_df"];
+    user_anime_df -->|"Surprise Dataset"| I["Data for Modeling data"];
+    I -->|"Split"| J["Train Set trainset"];
+    I -->|"Split"| K["Test Set testset"];
+    J -->|"Fit"| L["SVD Model svd_model"];
+    K -->|"Predict"| M["Predictions"];
+    L -->|"Evaluate"| N["Model Performance"];
+    L -->|"Hyperparameter Search"| O["GridSearchCV gs"].

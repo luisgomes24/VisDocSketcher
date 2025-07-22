@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data source node
+    A["../input/hands-on-machine-learning-housing-dataset/housing.csv"] --> B["housing_data"]
+    %% Loading and initial data overview
+    B["housing_data"] --> C["data overview, preprocessing"]
+    %% One-hot encoding categorical variables
+    C --> D["data (One-hot encoded)"]
+    %% Handling missing values with imputation
+    D --> E["imputed_data"]
+    %% Scaling data for model training
+    E --> F["scaled_data"]
+    %% Splitting data into features and target
+    F --> G["X (Features)"]
+    F --> H["y (Target)"]
+    %% Splitting data into train and test sets
+    G --> I["X_train"]
+    G --> J["X_test"]
+    H --> K["y_train"]
+    H --> L["y_test"]
+    %% Linear Regression Model
+    I --> M["Linear Regression"]
+    K --> M
+    M --> N["predictions"]
+    %% MLP Regressor Model
+    I --> O["MLPRegressor"]
+    K --> O
+    O --> P["nn_predictions"]
+    %% Decision Tree Regressor Model
+    I --> Q["Decision Tree Regressor"]
+    K --> Q
+    Q --> R["dec_predict"]

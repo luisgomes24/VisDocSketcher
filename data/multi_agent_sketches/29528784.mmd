@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|Read CSV| B["train DataFrame"]
+    C["test.csv"] -->|Read CSV| D["test DataFrame"]
+
+    %% Data Preparation
+    B -->|Drop 'id' and 'loss'| E["Features DataFrame X"]
+    B -->|Extract 'loss'| F["Target Variable y"]
+    E -->|Fill NaN with average_values| G["Cleaned Features DataFrame X"]
+
+    %% Model Training
+    G -->|Input Features| H["AutoML Model"]
+    F -->|Target Variable| H
+    H:::model -->|Train Model| I["Trained AutoML Model"]
+
+    %% Predictions
+    D -->|Clean and Transform| J["Processed Test DataFrame"]
+    I -->|Predict on Test Data| J
+
+    %% Submission
+    J -->|Create Submission DataFrame| K["submission DataFrame"]
+    K -->|Save to CSV| L["submission.csv"]
+
+    %% Model Style
+    classDef model stroke:#ff6347,stroke-width:2px;

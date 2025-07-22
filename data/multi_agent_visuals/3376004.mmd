@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> /input/wine-reviews/winemag-data_first150k.csv"]
+
+    %% Data variables
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> fruits DataFrame"]
+    C["<img src='icons/table.svg' width=100 height=100/> <br/> fruit_sales DataFrame"]
+    D["<img src='icons/column_split.svg' width=100 height=100/> <br/> ingredients Series"]
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> reviews DataFrame"]
+    F["<img src='icons/table.svg' width=100 height=100/> <br/> animals DataFrame"]
+
+    %% Data connections and transformations
+    A -->|Load CSV| E
+    E -->|Data Analysis| G["<img src='icons/brain.svg' width=100 height=100/> <br/> Assess wine attributes"]
+    
+    B -->|Used in| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> Exercises: Check & Calculate"]
+    C -->|Used in| H
+    D -->|Used in| H
+    
+    F -->|Save as CSV| I["<img src='icons/file.svg' width=100 height=100/> <br/> Save to cows_and_goats.csv"]
+
+    subgraph create_data
+        B
+        C
+        D
+        F
+    end

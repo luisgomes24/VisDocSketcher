@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph DataSources
+        A1["../input/PovStatsCountry.csv"]
+        A2["../input/PovStatsCountry-Series.csv"]
+        A3["../input/PovStatsData.csv"]
+    end
+    subgraph DataVariables
+        B1["df1"]
+        B2["df2"]
+        B3["df3"]
+    end
+    subgraph DataFlow
+        B1 -- "Created from A1 using pd.read_csv" --> C1["Histogram Plotting"]
+        B1 --> C2["Correlation Matrix Plotting"]
+        B1 --> C3["Scatter and Density Plotting"]
+
+        B2 -- "Created from A2 using pd.read_csv" --> C1
+        B2 --> C2
+        B2 --> C3
+
+        B3 -- "Created from A3 using pd.read_csv" --> C1
+        B3 --> C2
+        B3 --> C3
+    end
+
+    %% Comments for each node
+    %% A1, A2, A3 represent input CSV files
+    %% B1, B2, B3 represent DataFrames created from CSVs
+    %% C1, C2, C3 represent the visualization tasks performed with DataFrames

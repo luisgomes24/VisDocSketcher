@@ -1,0 +1,8 @@
+flowchart TD
+    A["<img src='icons/file.svg'/> <br/> Load Data"] --> B["<img src='icons/table.svg'/> <br/> Preprocess Data"]
+    B --> C["<img src='icons/brain.svg'/> <br/> Establish Baseline Model"]
+    C --> D["<img src='icons/brain.svg'/> <br/> Evaluate Model"]
+    D --> E["<img src='icons/column_split.svg'/> <br/> Class Balance Visualization<br/><img src='dummy_plots/barplot_template.svg'/>"]
+    D --> F["<img src='icons/brain.svg'/> <br/> Classification Report"]
+    D --> G["<img src='icons/brain.svg'/> <br/> Prediction Error"]
+    D --> H["<img src='icons/brain.svg'/> <br/> AUC ROC Score"]

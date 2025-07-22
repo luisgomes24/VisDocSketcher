@@ -1,0 +1,10 @@
+flowchart TD
+    A["📥 Download Data"] --> B["💾 Load Test Data"]
+    B --> C["🧽 Preprocess Data"]
+    C --> D["🧪 Setup Models"]
+    D --> E["🔮 Generate Predictions"]
+    E --> F["📊 Visualize Predictions"]
+    F --> G["📈 Evaluate Model"]
+    G --> H["📊 <img src='dummy_plots/hist_template.svg' /> <br/> Class-wise Probability Distributions"]
+    H --> I["💾 Generate Submission"]
+    I --> J["📦 Clean Up"]

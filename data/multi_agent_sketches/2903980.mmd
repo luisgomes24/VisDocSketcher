@@ -1,0 +1,20 @@
+%% This Mermaid.js diagram illustrates the workflow of the Jupyter Notebook, focusing on the data flow and operations.
+
+flowchart TD
+
+    %% Data source nodes
+    A["playoff_win_loss.csv"]:::dataSource -->|Read CSV| B(df1)
+    C["playoffs_frac_score.csv"]:::dataSource -->|Read CSV| D(df2)
+    E["Playoffs.csv"]:::dataSource -->|Read CSV| F(df3)
+    
+    %% Data Variable descriptions
+    B[/(DataFrame df1)\]:::dataVariable -->|Used by| G["plotPerColumnDistribution"]:::operation
+    D[/(DataFrame df2)\]:::dataVariable -->|Used by| G
+    F[/(DataFrame df3)\]:::dataVariable -->|Used by| G
+
+    %% No ML models used
+    G -->|Note: No ML Models Involved|
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef operation fill:#bfb,stroke:#333,stroke-width:2px;

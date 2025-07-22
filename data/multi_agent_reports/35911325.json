@@ -1,0 +1,84 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/birdclef-2023/sample_submission.csv",
+      "description": "Submission file that predicts the probability of birds being present in 5-second intervals."
+    },
+    {
+      "file": "/kaggle/input/birdclef-2023/train_metadata.csv",
+      "description": "Metadata for the training data containing bird types, common names, and other related information."
+    },
+    {
+      "file": "/kaggle/input/birdclef-2023/eBird_Taxonomy_v2021.csv",
+      "description": "Taxonomy file that contains the scientific classifications of the birds."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "submission",
+      "description": "DataFrame containing sample submission format."
+    },
+    {
+      "name": "train",
+      "description": "DataFrame containing training metadata with details on the birds including primary labels and secondary labels."
+    },
+    {
+      "name": "taxonomy",
+      "description": "DataFrame mapping scientific names to primary labels of birds."
+    },
+    {
+      "name": "counts_labels",
+      "description": "DataFrame containing counts of primary labels."
+    },
+    {
+      "name": "counts_family",
+      "description": "DataFrame containing counts of families of birds from the taxonomy."
+    },
+    {
+      "name": "sec_labels",
+      "description": "Column containing lists of secondary labels for birds in the training data."
+    },
+    {
+      "name": "song_types",
+      "description": "Column containing types of songs represented in the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "submission",
+      "creation": "Loaded from CSV file.",
+      "flow": "Used to validate submission structure."
+    },
+    {
+      "variable": "train",
+      "creation": "Loaded from CSV file.",
+      "flow": "Analyzed for primary labels, counts, and duplicates; used for further modeling."
+    },
+    {
+      "variable": "taxonomy",
+      "creation": "Loaded from CSV file, mapped from scientific names to labels.",
+      "flow": "Used to understand taxonomy relationships between birds."
+    },
+    {
+      "variable": "counts_labels",
+      "creation": "Aggregated from 'train' DataFrame.",
+      "flow": "Visualized to show distribution of bird counts."
+    },
+    {
+      "variable": "counts_family",
+      "creation": "Aggregated from 'taxonomy' DataFrame.",
+      "flow": "Visualized to show distribution of bird families."
+    },
+    {
+      "variable": "sec_labels",
+      "creation": "Processed from 'train' DataFrame.",
+      "flow": "Analyzed for subsets and duplicates."
+    },
+    {
+      "variable": "song_types",
+      "creation": "Processed from 'train' DataFrame.",
+      "flow": "Analyzed for frequency of song types."
+    }
+  ],
+  "models": []
+}

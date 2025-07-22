@@ -1,0 +1,27 @@
+graph TD;
+    %% Dataset loading
+    A["aclImdb_v1.tar.gz"] -->|Load Files| B["text_train, y_train, text_test, y_test"]
+    
+    %% Training data processing
+    B -->|CountVectorizer| C["X_train"]
+    B -->|CountVectorizer| D["X_test"]
+    
+    %% Model Training
+    C -->|Train Logistic Regression| E["Trained Logistic Regression Model"]
+    
+    %% Cross-validation
+    C -->|Cross-val Score| F["scores"]
+    
+    %% Hyperparameter Tuning
+    E -->|GridSearchCV| G["grid"]
+    
+    %% Testing
+    E -->|Evaluate on X_test| H["Model Evaluation"]
+    
+    %% Comments
+    classDef dataset fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#f66,stroke-width:2px;
+    classDef model fill:#f66,stroke:#333,stroke-width:2px;
+    class A dataset;
+    class B,C,D,E,F,G,H process;
+    class E,G,H model;

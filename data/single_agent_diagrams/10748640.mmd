@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> Read CSV"] --> B["🔍 Preprocess Data <img src='table.svg'/> <br/> Clean & Format"]
+    B --> C["💡 Feature Selection <img src='column_split.svg'/> <br/> Create 'market_value'"]
+    C --> D["📊 Create Returns <img src='lineplot_template.svg'/> <br/> Calculate Percentage Change"]
+    D --> E["🧠 Model Selection <img src='brain.svg'/> <br/> Fit ARMA(1,1)"]
+    E --> F["🖼️ Evaluate LLR Test <img src='scatter_plot_template.svg'/> <br/> Compare Models"]
+    F --> G["📈 Higher-Lag ARMA Models <img src='lineplot_template.svg'/> <br/> Fit & Evaluate"]
+    G --> H["📊 Residual Analysis <img src='hist_template.svg'/> <br/> Plot ACF of Residuals"]
+    H --> I["🏷️ Model Reevaluation <img src='brain.svg'/> <br/> Fit New Models"]
+    I --> J["📊 Analyze Residuals <img src='hist_template.svg'/> <br/> Plot ACF"]
+    J --> K["📊 ARMA for Prices <img src='hist_template.svg'/> <br/> Fit ARMA Models"]
+    K --> L["💬 Comparison <img src='brain.svg'/> <br/> Compare ARMA for Returns vs Prices"]

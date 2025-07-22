@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/foodproductemissions/Food_Product_Emissions.csv",
+      "description": "Contains data on food product emissions, including GHG emissions per kg and related metrics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the food product emissions data."
+    },
+    {
+      "variable_name": "df1",
+      "description": "Processed DataFrame with unnecessary columns removed and sorted by 'Total from Land to Retail'."
+    },
+    {
+      "variable_name": "df_viz",
+      "description": "DataFrame used for visualizations, loaded from the same CSV file."
+    },
+    {
+      "variable_name": "df_meat",
+      "description": "DataFrame containing subsets of data specifically for meat products."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "flow": "Created by reading the CSV file; used to create df1, df_viz, and df_meat."
+    },
+    {
+      "variable_name": "df1",
+      "flow": "Created by dropping certain columns from df; used for visualization."
+    },
+    {
+      "variable_name": "df_viz",
+      "flow": "Loaded for AutoViz visualizations; derived from the original CSV."
+    },
+    {
+      "variable_name": "df_meat",
+      "flow": "Subset of df containing only meat product data; used for emissions impact analysis."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "description": "Clustering model used to cluster food products into 4 clusters.",
+      "input_features": "Data in df for clustering.",
+      "target_variable": "Not defined for clustering; classified into clusters.",
+      "hyperparameters": "num_clusters=4"
+    }
+  ]
+}

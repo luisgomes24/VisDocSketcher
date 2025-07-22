@@ -1,0 +1,33 @@
+flowchart TD
+    subgraph DataSources
+        DS1([PoliceKillingsUS.csv])
+    end
+
+    subgraph Variables
+        V1[sample_entry]
+        V2[new_entry]
+        V3[encoding]
+        V4[police_killings]
+    end
+
+    DS1 --> V4
+
+    subgraph DataFlow
+        DF1[Hardcoded byte string] --> V1
+        V1 --> |Type & sample check| V2
+        V1 --> |Encoding operation| V2
+        V2 --> |Check correctness| DF3>End of Flow]
+        
+        DS1 --> |Read as binary| V3
+        V3 --> |Detect encoding| V4
+        V4 --> |Save as UTF-8 CSV| DF4>End of Flow]
+    end
+
+    style DS1 fill:#f9f,stroke:#333,stroke-width:2px;
+    style V1 fill:#bbf,stroke:#333,stroke-width:2px;
+    style V2 fill:#bbf,stroke:#333,stroke-width:2px;
+    style V3 fill:#bbf,stroke:#333,stroke-width:2px;
+    style V4 fill:#bbf,stroke:#333,stroke-width:2px;
+    style DF1 fill:#bfb,stroke:#333,stroke-width:2px;
+    style DF3 fill:#bfb,stroke:#333,stroke-width:2px;
+    style DF4 fill:#bfb,stroke:#333,stroke-width:2px;

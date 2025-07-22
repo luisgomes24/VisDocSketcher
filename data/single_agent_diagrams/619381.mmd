@@ -1,0 +1,34 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg'/>"] --> B["🗃️ Separate Features & Labels"]
+    B --> C["🔄 Scale Features <img src='dummy_plots/scatter_plot_template.svg'/>"]
+    C --> D["📊 Split Data <img src='icons/row_split.svg'/>"]
+    D --> E["🧠 Build CNN Model"]
+    E --> F["🔄 Train Model"]
+    F --> G["✅ Evaluate on Cross Validation Set"]
+    G --> H["✅ Evaluate on Test Set"]
+    H --> I["🔍 Visualize Predictions <img src='dummy_plots/scatter_plot_template.svg'/>"]
+
+    subgraph Load_Data
+        direction TB
+        A
+    end
+
+    subgraph Preprocessing
+        direction TB
+        B
+        C
+        D
+    end
+
+    subgraph Modeling
+        direction TB
+        E
+        F
+    end
+
+    subgraph Evaluation
+        direction TB
+        G
+        H
+        I
+    end

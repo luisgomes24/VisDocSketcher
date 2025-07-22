@@ -1,0 +1,11 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg' />"] --> B["🛠️ Data Transformations"]
+    B --> C["🖼️ Display Images <img src='dummy_plots/barplot_template.svg'/> <br/> Sample Images"]
+    C --> D["🧠 Build CNN Model"]
+    D --> E["⚙️ Set Loss & Optimizer"]
+    E --> F["📈 Train Model"]
+    F --> G["📊 Plot Training Loss <img src='dummy_plots/hist_template.svg'/> <br/> Loss History"]
+    F --> H["📊 Plot Training Accuracy <img src='dummy_plots/hist_template.svg'/> <br/> Accuracy History"]
+    F --> I["🔍 Test Model"]
+    I --> J["✅ Evaluate Predictions"]
+    G --> K["🌟 Achieved Accuracy"]

@@ -1,0 +1,10 @@
+```mermaid
+flowchart TD
+    DS1["School Explorer CSV"] --> |"Load Data"| school_explorer
+    DS2["SHSAT Registrations CSV"] --> |"Load Data"| registration_testers
+    brooklyn["Brooklyn Schools"]
+    brooklyn_census["Brooklyn Census Data"]
+    school_explorer --> brooklyn
+    school_explorer --> brooklyn_census
+    registration_testers --> brooklyn_census
+```

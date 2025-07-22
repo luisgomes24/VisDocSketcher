@@ -1,0 +1,12 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🔄 Preprocess Data"]
+    B --> C["🏷️ Create Train Data <img src='icons/table.svg' />"]
+    C --> D["📊 Visualize Sample Data <img src='dummy_plots/scatter_plot_template.svg' />"]
+    D --> E["📉 Train-Test Split"]
+    E --> F["🧠 Build CNN Model <img src='icons/brain.svg' />"]
+    F --> G["🏋️ Train Model"]
+    G --> H["💾 Save Model"]
+    H --> I["🔄 Convert Model to TFlite"]
+    I --> J["📊 Evaluate Model"]
+    J --> K["📈 Plot Accuracy <img src='dummy_plots/lineplot_template.svg' />"]
+    K --> L["🖼️ Display Misclassified Images"]

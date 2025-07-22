@@ -1,0 +1,3 @@
+flowchart TD
+    A["CSV Data Source: ks-projects-201801.csv"] -->|Read CSV| B["DataFrame: kickstarters_2017"]
+    B -->|Extract Column: usd_goal_real| C["Variable: usd_goal"]

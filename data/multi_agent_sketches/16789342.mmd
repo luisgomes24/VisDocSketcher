@@ -1,0 +1,39 @@
+flowchart TD
+    subgraph DataSources
+        A[Violent Videos]:::dataSource
+        B[Non-Violent Videos]:::dataSource
+    end
+    
+    subgraph DataPreparation
+        A --> C[Load and Preprocess Images]:::process
+        B --> C
+        C --> D[data\nList of preprocessed images from videos]:::data
+        D --> E[Split data]:::process
+        E --> F[trainX\nTraining dataset of images]:::data
+        E --> G[testX\nTesting dataset of images]:::data
+        
+        H[One-hot encode labels]:::process
+        H --> I[labels\nEncoded labels for violence/non-violence]:::data
+        I --> J[Split labels]:::process
+        J --> K[trainY\nTraining labels]:::data
+        J --> L[testY\nTesting labels]:::data
+    end
+
+    subgraph ModelTraining
+        M[(InceptionV3 Model)]:::model
+        F --> M
+        K --> M
+        N[train\nTraining process with images and labels]:::process
+        M -.-> N
+    end
+
+    subgraph ModelEvaluation
+        G --> O[evaluate\nModel Evaluation with Test Data]:::process
+        L --> O
+        M --> O
+    end
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data fill:#ffb,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;

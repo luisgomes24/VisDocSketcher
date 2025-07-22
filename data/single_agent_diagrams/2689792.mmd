@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train.csv, test.csv"] --> B["📊 Visualize Important Features <img src='hist_template.svg'/>"]
+    B --> C["🔧 Scale Features <img src='column_split.svg'/>"]
+    C --> D["📊 Visualize Scaled Features <img src='hist_template.svg'/>"]
+    D --> E["🔄 Split Data <img src='row_split.svg'/>"]
+    E --> F["⚙️ Set Hyperparameters"]
+    F --> G["🧠 Build Model Architecture <img src='brain.svg'/>"]
+    G --> H["🔧 Compile Model <img src='brain.svg'/>"]
+    H --> I["📈 Train Model"]
+    I --> J["📉 Validate Model <img src='brain.svg'/>"]
+    J --> K["🔮 Make Predictions"]
+    K --> L["📤 Create Submission File <img src='file.svg'/>"]

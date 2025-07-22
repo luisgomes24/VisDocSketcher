@@ -1,0 +1,83 @@
+{
+    "data_sources": [
+        {
+            "path": "ENTER_PATH_OF_VIOLENT_VIDEOS",
+            "description": "Path to video files containing violent content."
+        },
+        {
+            "path": "ENTER_PATH_OF_NON_VIOLENT_VIDEOS",
+            "description": "Path to video files containing non-violent content."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "data",
+            "description": "List of images constructed from video frames for training the model."
+        },
+        {
+            "name": "labels",
+            "description": "One-hot encoded labels corresponding to the images denoting 'Violence' or 'NonViolence'."
+        },
+        {
+            "name": "trainX",
+            "description": "Training dataset of images."
+        },
+        {
+            "name": "testX",
+            "description": "Testing dataset of images."
+        },
+        {
+            "name": "trainY",
+            "description": "One-hot encoded training labels."
+        },
+        {
+            "name": "testY",
+            "description": "One-hot encoded testing labels."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "data",
+            "created_by": "Image loading and preprocessing from dataset",
+            "flows_to": "Model training process"
+        },
+        {
+            "variable": "labels",
+            "created_by": "One-hot encoding of labels",
+            "flows_to": "Model training process"
+        },
+        {
+            "variable": "trainX",
+            "created_by": "Split from data",
+            "flows_to": "Model training"
+        },
+        {
+            "variable": "testX",
+            "created_by": "Split from data",
+            "flows_to": "Model evaluation"
+        },
+        {
+            "variable": "trainY",
+            "created_by": "Split from labels",
+            "flows_to": "Model training"
+        },
+        {
+            "variable": "testY",
+            "created_by": "Split from labels",
+            "flows_to": "Model evaluation"
+        }
+    ],
+    "models": [
+        {
+            "model": "InceptionV3",
+            "input_features": "224x224 RGB images",
+            "target_variable": "labels",
+            "hyperparameters": {
+                "epochs": 10,
+                "optimizer": "SGD",
+                "learning_rate": "1e-4",
+                "batch_size": 32
+            }
+        }
+    ]
+}

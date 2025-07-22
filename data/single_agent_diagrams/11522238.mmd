@@ -1,0 +1,11 @@
+graph TD;
+    A["📂 Load Data <img src='file.svg' /> <br/> df_train_scored"] --> B["🔍 Inspect Data Shape"];
+    B --> C["🗃️ View Data Head <img src='table.svg' />"];
+    C --> D["📊 Calculate Targets"];
+    D --> E["🔗 Calculate Correlation Matrix"];
+    E --> F["📉 Plot Correlation Matrix <img src='hist_template.svg' />"];
+    F --> G["📊 Print High Correlations"];
+    G --> H["📈 Cross Tables for Selected Pairs"];
+    H --> I["🧮 Analyze Multiplicity"];
+    I --> J["📊 Plot Multiplicity Distribution <img src='barplot_template.svg' />"];
+    J --> K["📊 Analyze Means <img src='barplot_template.svg' />"];

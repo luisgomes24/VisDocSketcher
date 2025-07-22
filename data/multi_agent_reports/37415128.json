@@ -1,0 +1,68 @@
+{
+  "data_sources": [
+    {
+      "file": "Drug.csv",
+      "description": "Contains data related to various drugs including their effectiveness, ease of use, and satisfaction ratings."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing drug performance evaluation data."
+    },
+    {
+      "name": "Effective_Cat",
+      "description": "Categorical variable indicating the effectiveness of the drug based on a rating scale."
+    },
+    {
+      "name": "EaseOfUse_Cat",
+      "description": "Categorical variable indicating the ease of use of the drug based on a rating scale."
+    },
+    {
+      "name": "Satisfaction_Cat",
+      "description": "Categorical variable indicating the satisfaction level with the drug based on a rating scale."
+    },
+    {
+      "name": "popular_drugs",
+      "description": "DataFrame containing the top 10 most reviewed drugs."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Imported from Drug.csv using pd.read_csv()",
+      "flows": [
+        "Used for data exploration, cleaning, categorization, and visualization."
+      ]
+    },
+    {
+      "variable": "Effective_Cat",
+      "creation": "Derived from df['Effective'] using categorize_effectiveness() function",
+      "flows": [
+        "Used for analysis and visualization (grouped by Type and Indication)."
+      ]
+    },
+    {
+      "variable": "EaseOfUse_Cat",
+      "creation": "Derived from df['EaseOfUse'] using categorize_ease_of_use() function",
+      "flows": [
+        "Used for analysis and visualization (grouped by Type)."
+      ]
+    },
+    {
+      "variable": "Satisfaction_Cat",
+      "creation": "Derived from df['Satisfaction'] using categorize_satisfaction() function",
+      "flows": [
+        "Used for analysis and visualization (grouped by Type)."
+      ]
+    },
+    {
+      "variable": "popular_drugs",
+      "creation": "Derived from df by sorting based on 'Reviews'",
+      "flows": [
+        "Used for visualization of the top 10 drugs in terms of reviews and effectiveness."
+      ]
+    }
+  ],
+  "models": []
+}

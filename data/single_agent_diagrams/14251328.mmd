@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🛠 Preprocess Data"]
+    B --> C["📊 Time Resampling"]
+    C --> D["📈 Decompose Time Series"]
+    D --> E["🔍 Fill Missing Values"]
+    E --> F["📅 Train-Test Split"]
+    F --> G["🧠 Train AutoML Model"]
+    G --> H["📋 Evaluate Results"]
+    H --> I["📊 Get Leaderboard"]
+    I --> J["📉 Plot CV Scores"]
+    J --> K["🔮 Forecast Results"]
+    K --> L["📈 Plot Predictions <img src='lineplot_template.svg'/>"]

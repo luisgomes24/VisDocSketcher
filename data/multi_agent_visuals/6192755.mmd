@@ -1,0 +1,77 @@
+flowchart TD
+    subgraph DataSources[Data Sources]
+        A[[<img src='icons/file.svg' width=100 height=100/> <br/> circuits.csv]]
+        B[[<img src='icons/file.svg' width=100 height=100/> <br/> constructorResults.csv]]
+        C[[<img src='icons/file.svg' width=100 height=100/> <br/> constructors.csv]]
+        D[[<img src='icons/file.svg' width=100 height=100/> <br/> constructorStandings.csv]]
+        E[[<img src='icons/file.svg' width=100 height=100/> <br/> drivers.csv]]
+        F[[<img src='icons/file.svg' width=100 height=100/> <br/> driverStandings.csv]]
+        G[[<img src='icons/file.svg' width=100 height=100/> <br/> lapTimes.csv]]
+        H[[<img src='icons/file.svg' width=100 height=100/> <br/> pitStops.csv]]
+        I[[<img src='icons/file.svg' width=100 height=100/> <br/> qualifying.csv]]
+        J[[<img src='icons/file.svg' width=100 height=100/> <br/> races.csv]]
+        K[[<img src='icons/file.svg' width=100 height=100/> <br/> results.csv]]
+        L[[<img src='icons/file.svg' width=100 height=100/> <br/> seasons.csv]]
+        M[[<img src='icons/file.svg' width=100 height=100/> <br/> status.csv]]
+    end
+    subgraph DataVariables[Data Variables]
+        N["YEAR = 2011 <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        O["DRIVER_LS <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        P["DRIVER_C <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        Q["TEAM_C <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        R["LINESTYLES <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        S["LapTimes <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        T["Results <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        U["Drivers <br/><img src='dummy_plots/barplot_template.svg'/> "]
+        V["Races <br/><img src='dummy_plots/barplot_template.svg'/> "]
+    end
+    subgraph DataFlow[Data Flow]
+        subgraph ReadingCSV[Reading CSV Files]
+            direction TB
+            A -->|read_csv| circuits
+            B -->|read_csv| constructorResults
+            C -->|read_csv| constructors
+            D -->|read_csv| constructorStandings
+            E -->|read_csv| drivers
+            F -->|read_csv| driverStandings
+            G -->|read_csv| lapTimes
+            H -->|read_csv| pitStops
+            I -->|read_csv| qualifying
+            J -->|read_csv| races
+            K -->|read_csv| results
+            L -->|read_csv| seasons
+            M -->|read_csv| status
+        end
+        subgraph Transformations[Data Transformations]
+            direction TB
+            circuits -->|merge and fix| V
+            drivers -->|merge and fix| U
+            "U & Results" -->|merge and fix| S
+            F -->|filter and subset| F
+            J -->|filter and subset| J
+        end
+    end
+    style A fill:#87CEEB
+    style B fill:#87CEEB
+    style C fill:#87CEEB
+    style D fill:#87CEEB
+    style E fill:#87CEEB
+    style F fill:#87CEEB
+    style G fill:#87CEEB
+    style H fill:#87CEEB
+    style I fill:#87CEEB
+    style J fill:#87CEEB
+    style K fill:#87CEEB
+    style L fill:#87CEEB
+    style M fill:#87CEEB
+    style N fill:#C6F4D6
+    style O fill:#C6F4D6
+    style P fill:#C6F4D6
+    style Q fill:#C6F4D6
+    style R fill:#C6F4D6
+    style S fill:#C6F4D6
+    style T fill:#C6F4D6
+    style U fill:#C6F4D6
+    style V fill:#C6F4D6
+    style ReadingCSV fill:#F2C464,stroke:#333,stroke-width:2px
+    style Transformations fill:#C6F4D6,stroke:#333,stroke-width:2px

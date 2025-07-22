@@ -1,0 +1,77 @@
+{
+    "data_sources": [
+        {
+            "file_name": "LokSabha2004.csv",
+            "description": "Contains data regarding candidates in the 2004 Lok Sabha elections."
+        },
+        {
+            "file_name": "LokSabha2009.csv",
+            "description": "Contains data regarding candidates in the 2009 Lok Sabha elections."
+        },
+        {
+            "file_name": "LokSabha2014.csv",
+            "description": "Contains data regarding candidates in the 2014 Lok Sabha elections."
+        },
+        {
+            "file_name": "LokSabha2019.csv",
+            "description": "Contains data regarding candidates in the 2019 Lok Sabha elections."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df_2004",
+            "description": "DataFrame containing candidates' criminal cases information for the 2004 elections"
+        },
+        {
+            "variable_name": "df_2009",
+            "description": "DataFrame containing candidates' criminal cases information for the 2009 elections"
+        },
+        {
+            "variable_name": "df_2014",
+            "description": "DataFrame containing candidates' criminal cases information for the 2014 elections"
+        },
+        {
+            "variable_name": "df_2019",
+            "description": "DataFrame containing candidates' criminal cases information for the 2019 elections"
+        },
+        {
+            "variable_name": "city_list_2004",
+            "description": "List of unique cities for the 2004 elections"
+        },
+        {
+            "variable_name": "city_list_2009",
+            "description": "List of unique cities for the 2009 elections"
+        },
+        {
+            "variable_name": "city_list_2014",
+            "description": "List of unique cities for the 2014 elections"
+        },
+        {
+            "variable_name": "city_list_2019",
+            "description": "List of unique cities for the 2019 elections"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_2004",
+            "creation_method": "pd.read_csv",
+            "used_in": ["sorted by criminal cases", "finding highest crime city", "top five crime candidates", "distribution plotting"]
+        },
+        {
+            "variable": "df_2009",
+            "creation_method": "pd.read_csv",
+            "used_in": ["sorted by criminal cases", "finding highest crime city", "top five crime candidates", "distribution plotting"]
+        },
+        {
+            "variable": "df_2014",
+            "creation_method": "pd.read_csv",
+            "used_in": ["sorted by criminal cases", "finding highest crime city", "top five crime candidates", "distribution plotting"]
+        },
+        {
+            "variable": "df_2019",
+            "creation_method": "pd.read_csv",
+            "used_in": ["sorted by criminal cases", "finding highest crime city", "top five crime candidates", "distribution plotting"]
+        }
+    ],
+    "models": []
+}

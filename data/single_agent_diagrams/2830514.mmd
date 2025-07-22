@@ -1,0 +1,6 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Read CSV"] --> B["🔍 Data Preview <img src='table.svg'/> <br/> df1.head()"]
+    B --> C["📊 Distribution Graphs <img src='hist_template.svg'/> <br/> plotPerColumnDistribution"]
+    C --> D["📈 Correlation Matrix <img src='boxplot_template.svg'/> <br/> plotCorrelationMatrix"]
+    D --> E["🔗 Scatter & Density Plots <img src='scatter_plot_template.svg'/> <br/> plotScatterMatrix"]
+    E --> F["✅ Conclusion"]

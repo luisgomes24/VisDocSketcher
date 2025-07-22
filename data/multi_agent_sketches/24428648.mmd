@@ -1,0 +1,17 @@
+    %% Mermaid Diagram for Data Science Workflow in Notebook 24428648
+    flowchart TD
+        A["train.csv"] -->|"Read CSV"| B["train_df"]
+        B -->|"Filter Asset_ID 1"| C["btc"]
+        B -->|"Filter Asset_ID 6"| D["eth"]
+        B -->|"Filter Asset_ID 9"| E["lth"]
+
+        subgraph Visualizations
+            C -->|"Candle Plot"| F["BTC Visualization"]
+            D -->|"Candle Plot"| G["ETH Visualization"]
+            E -->|"Candle Plot"| H["LTC Visualization"]
+        end
+
+        A1["asset_details.csv"] -->|"Read CSV"| A2["asset_details"]
+        A2 -->|"Bar Plot"| A3["Asset Count Visualization"]
+
+    

@@ -1,0 +1,22 @@
+flowchart TD
+
+%% Node for the training CSV file
+data1["train.csv"] -->|Read by| var1["tr"]
+
+%% Node for filtering operation
+var1 -->|Filter operation| var2["df_train"]
+
+%% Node for ImageData initialization
+var2 -->|Processed into| var3["train_data"]
+
+%% Node for folder containing images
+data2["train_images/"] -->|Used by| var3
+
+%% Node for the DeepLabV3 model
+var3 -->|Feeds into| model1["DeepLabV3 ResNet-101"]
+
+%% SGDS Optimizer Node
+optimizer["SGD Optimizer"] -->|Updates| model1
+
+%% Learning Rate Scheduler Node
+scheduler["LR Scheduler"] -->|Adjusts LR of| optimizer

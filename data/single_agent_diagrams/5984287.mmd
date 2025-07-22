@@ -1,0 +1,12 @@
+graph TD;
+    A["📂 Load Data"] --> B["📝 Read CSV Data"]
+    B --> C["🗂 Preprocess Data"]
+    C --> D["🚧 Clean Invalid Images"]
+    D --> E["📈 Data Loaders"]
+    E --> F["📊 Plot Train Example <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    E --> G["📊 Plot Test Example <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    F --> H["🧠 Build Model"]
+    H --> I["🚂 Train Model"]
+    I --> J["🔍 Inference"]
+    J --> K["📤 Create Submission"]
+    K --> L["🗑 Clean Up"]

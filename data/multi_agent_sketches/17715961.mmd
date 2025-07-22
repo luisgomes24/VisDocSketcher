@@ -1,0 +1,16 @@
+flowchart TD
+    %% Node for Data Source
+    A["/train.csv/"] -->|Read CSV| B["/home_data/"]
+    %% Node for home_data
+    B["home_data"] -->|Calculate| C["/avg_lot_size/"]
+    B -->|Calculate| D["/newest_home_age/"]
+    %% Nodes for Calculated Variables
+    C -->|Used for analysis| E[Questions about dataset]
+    D -->|Used for analysis| E
+    
+    %% Comments for clarification
+    %% A: Data source containing house prices from Iowa
+    %% B: DataFrame derived from CSV, containing features like lot size, year built, etc.
+    %% C: Calculated average lot size from home_data
+    %% D: Age of the newest home calculated from home_data
+    %% E: Analysis and queries based on calculated data

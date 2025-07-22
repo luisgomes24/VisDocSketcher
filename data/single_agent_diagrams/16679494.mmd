@@ -1,0 +1,18 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["📊 View Training Data <img src='dummy_plots/table.svg' />"]
+    A --> C["📊 View Test Data <img src='dummy_plots/table.svg' />"]
+    A --> D["📊 View Sensor Data <img src='dummy_plots/table.svg' />"]
+    
+    B --> E["🔄 Transform Sensor Data <br/> <img src='dummy_plots/scatter_plot_template.svg' />"]
+    C --> E
+    D --> E
+
+    E --> F["🔍 Encode Targets <img src='icons/brain.svg' />"]
+    
+    F --> G["🎥 Data Augmentation <img src='icons/image.svg' />"]
+   
+    G --> H["📦 Create Data Generator <img src='icons/column_split.svg' />"]
+    
+    H --> I["📈 Visualize Augmentation Results <img src='dummy_plots/lineplot_template.svg' />"]
+   
+    I --> J["🎉 Enjoy your Data Science Journey!"]

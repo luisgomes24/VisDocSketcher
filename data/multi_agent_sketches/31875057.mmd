@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A1["uk_pm.parquet"] -->|Load Data| B1["train DataFrame"]
+    A2["uk_pm.csv"] -->|Load Data| B2["df DataFrame"]
+    
+    %% Data Variables
+    B1 -->|Data Cleaning| C["train['clean_text']"]
+    B2 -->|Data Exploration| D["Data Exploration"]
+    
+    %% Modeling
+    C -->|Preprocessing| E["TF-IDF Model"]
+    E -->|Transform Data| F["TF-IDF Values"]
+    F -->|LDA Input| G["LDA Model (10 topics)"]
+    
+    %% Outputs
+    G -->|Identify Topics| H["Topics Identified"]
+    C -->|Generate Word Cloud| I["Word Cloud Visualization"]
+
+    %% Comments
+    %% A1: Parquet file containing raw tweet data
+    %% A2: CSV file containing tweet data
+    %% B1: DataFrame holding the tweet data
+    %% B2: DataFrame for data exploration
+    %% C: Cleaned text data
+    %% D: Initial Data Exploration
+    %% E: TF-IDF Model for feature transformation
+    %% F: Transformed features for LDA
+    %% G: LDA Model identifying topics
+    %% H: Output topics from LDA model
+    %% I: Visualization of most common words

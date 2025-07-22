@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Source Node
+    DS1["<img src='icons/database.svg' width=100 height=100/> <br/> chicago_crime dataset from BigQuery"]
+    
+    %% Data Variable Nodes
+    V1["<img src='icons/table.svg' width=100 height=100/> <br/> tables"]
+    V2["num_tables"]
+    V3["table"]
+    V4["num_timestamp_fields"]
+    V5["latitude"]
+    V6["longitude"]
+
+    %% Process Nodes
+    P1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> client.list_tables(dataset)"]
+    P2["<img src='dummy_plots/boxplot_template.svg'/> <br/> Set as constant value of 1"]
+    P3["client.get_table(table_ref)"]
+    P4["Constant value set based on schema analysis"]
+    P5["Extracted using client.list_rows(table, max_results=5).to_dataframe()"]
+
+    %% Data Flow
+    DS1 --> P1 --> V1  
+    V1 --> |"determine the number of tables"| V2
+    P2 --> V2
+    DS1 --> P3 --> V3 --> |"analyze schema"| V4
+    P4 --> V4
+    V3 --> |"critical feature for plotting"| V5
+    V3 --> |"critical feature for plotting"| V6
+    P5 --> V5
+    P5 --> V6

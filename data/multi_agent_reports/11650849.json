@@ -1,0 +1,56 @@
+{
+"data_sources": [
+  {
+    "file_name": "train_features.csv",
+    "description": "Contains the features for the training dataset."
+  },
+  {
+    "file_name": "train_targets_scored.csv",
+    "description": "Contains the target labels for the training dataset."
+  }
+],
+"data_variables": [
+  {
+    "variable_name": "df",
+    "description": "DataFrame containing the training features"
+  },
+  {
+    "variable_name": "labels",
+    "description": "DataFrame containing the target labels"
+  },
+  {
+    "variable_name": "melt_labels",
+    "description": "Melted DataFrame of labels used for plotting"
+  },
+  {
+    "variable_name": "anon_cols",
+    "description": "List of anonymous columns in the DataFrame"
+  },
+  {
+    "variable_name": "categorical_cols",
+    "description": "List of categorical column names"
+  },
+  {
+    "variable_name": "continuous_cols",
+    "description": "List of continuous column names"
+  }
+],
+"data_flow": [
+  {
+    "variable": "df",
+    "creation": "pd.read_csv",
+    "flow": "Used for data exploration, plotting, and statistics"
+  },
+  {
+    "variable": "labels",
+    "creation": "pd.read_csv",
+    "flow": "Used for plotting targets and statistics"
+  },
+  {
+    "variable": "melt_labels",
+    "creation": "pd.melt",
+    "flow": "Used for count plotting of labels"
+  }
+],
+"models": []
+}

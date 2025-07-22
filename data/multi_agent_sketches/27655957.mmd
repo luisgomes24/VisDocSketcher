@@ -1,0 +1,31 @@
+%% This diagram visualizes the workflow of loading and processing air quality data.
+
+```mermaid
+flowchart TD
+
+%% Data Source Node
+A["/air-quality-india.csv/"]:::dataSource
+%% Comment: This node represents the input CSV file containing air quality data.
+
+%% Data Variable Node
+B[aqi_data]:::dataVariable
+%% Comment: This node represents the DataFrame holding the air quality data.
+
+%% Process Node
+C[pd.read_csv --> aqi_data]:::process
+%% Comment: This node represents the process of reading data from the CSV file into a DataFrame.
+
+%% Usage Node
+D[Plot Time Series]:::usage
+%% Comment: This node represents the action of plotting the PM2.5 levels from the DataFrame.
+
+%% Defining Styles
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#ccf,stroke:#333,stroke-width:2px;
+classDef process fill:#fc9,stroke:#333,stroke-width:2px;
+classDef usage fill:#9f9,stroke:#333,stroke-width:2px;
+
+%% Connecting Nodes
+A --> C
+C --> B
+B --> D

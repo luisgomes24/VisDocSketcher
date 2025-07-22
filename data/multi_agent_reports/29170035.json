@@ -1,0 +1,107 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_LZV4RXX.csv",
+      "description": "Training data containing loan features and defaults."
+    },
+    {
+      "file_name": "test_4zJg83n.csv",
+      "description": "Test data containing features for prediction without 'loan_default'."
+    },
+    {
+      "file_name": "sample_submission_tbPU9qQ.csv",
+      "description": "Sample submission file format for the predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training dataset after preprocessing."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test dataset after preprocessing."
+    },
+    {
+      "variable_name": "X",
+      "description": "Features DataFrame for training."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable (loan_default) extracted from training data."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training split of feature data."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing split of feature data."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training split of target variable."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing split of target variable."
+    },
+    {
+      "variable_name": "y_pred",
+      "description": "Predicted values for the test set."
+    },
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing predictions for the test set."
+    },
+    {
+      "variable_name": "sol",
+      "description": "DataFrame for submission containing final predictions formatted for submission."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv('../input/loan-default-prediction/train_LZV4RXX.csv')",
+      "flows_to": ["train_", "X", "y"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv('../input/loan-default-prediction/test_4zJg83n.csv')",
+      "flows_to": ["X_test", "y_test", "df"]
+    },
+    {
+      "variable": "X",
+      "created_by": "train.drop('loan_default')",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created_by": "train.pop('loan_default')",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "train_",
+      "created_by": "lgbm_imtr.fit_transform(train[col])",
+      "flows_to": ["train"]
+    },
+    {
+      "variable": "y_pred",
+      "created_by": "automl.predict(test)",
+      "flows_to": ["df", "sol"]
+    },
+    {
+      "variable": "sol",
+      "created_by": "pd.read_csv('../input/loan-default-prediction/sample_submission_tbPU9qQ.csv')",
+      "flows_to": []
+    }
+  ],
+  "models": [
+    {
+      "model_name": "FLAML AutoML",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "best_hyperparameters": "config stored in automl.best_config"
+    }
+  ]
+}

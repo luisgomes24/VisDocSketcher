@@ -1,0 +1,125 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Suicides in India 2001-2012.csv",
+      "description": "Contains data on suicides in India across various parameters like year, age group, gender, and causes."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the raw data on suicides in India."
+    },
+    {
+      "variable_name": "causesDf",
+      "description": "Filtered DataFrame for causes of suicides based on Type_code."
+    },
+    {
+      "variable_name": "diff_causes",
+      "description": "DataFrame that aggregates the total number of suicides by cause."
+    },
+    {
+      "variable_name": "causesDf_age_wise",
+      "description": "DataFrame that aggregates the total number of suicides by age group."
+    },
+    {
+      "variable_name": "children_causes_Df",
+      "description": "Filtered DataFrame that includes data on suicides of children aged 0-14."
+    },
+    {
+      "variable_name": "elder_causes_Df",
+      "description": "Filtered DataFrame that includes data on suicides of elderly aged 60 and above."
+    },
+    {
+      "variable_name": "gender_Df",
+      "description": "DataFrame that aggregates the total number of suicides by gender."
+    },
+    {
+      "variable_name": "causes_gender_Df",
+      "description": "DataFrame to analyze suicides by cause and gender."
+    },
+    {
+      "variable_name": "population_state",
+      "description": "List of dictionaries containing state populations for 2001 and 2011."
+    },
+    {
+      "variable_name": "population_state_Df",
+      "description": "DataFrame constructed from population_state list."
+    },
+    {
+      "variable_name": "suicides_state",
+      "description": "DataFrame that aggregates the number of suicides by state for 2001."
+    },
+    {
+      "variable_name": "final",
+      "description": "DataFrame that combines state population data and suicide data for per capita analysis."
+    },
+    {
+      "variable_name": "suicides_percapita",
+      "description": "Final DataFrame containing suicide per capita data for 2001 and 2011 by state."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Reading CSV file",
+      "flows": ["causesDf"]
+    },
+    {
+      "variable": "causesDf",
+      "creation": "Filtering df based on Type_code",
+      "flows": ["diff_causes", "causesDf_age_wise", "children_causes_Df", "elder_causes_Df", "causes_gender_Df"]
+    },
+    {
+      "variable": "diff_causes",
+      "creation": "Aggregating Total by cause from causesDf",
+      "flows": ["plots"]
+    },
+    {
+      "variable": "causesDf_age_wise",
+      "creation": "Aggregating Total by Age_group from causesDf",
+      "flows": ["plots"]
+    },
+    {
+      "variable": "children_causes_Df",
+      "creation": "Filtering causesDf for Age_group '0-14'",
+      "flows": ["children_reason"]
+    },
+    {
+      "variable": "elder_causes_Df",
+      "creation": "Filtering causesDf for Age_group '60+'",
+      "flows": ["elder_reason"]
+    },
+    {
+      "variable": "gender_Df",
+      "creation": "Aggregating Total by Gender from df",
+      "flows": ["plots"]
+    },
+    {
+      "variable": "causes_gender_Df",
+      "creation": "Grouping causesDf by Type and Gender",
+      "flows": ["plots"]
+    },
+    {
+      "variable": "population_state_Df",
+      "creation": "Creating DataFrame from population_state list",
+      "flows": ["final"]
+    },
+    {
+      "variable": "suicides_state",
+      "creation": "Aggregating Total by State from df for 2001",
+      "flows": ["final"]
+    },
+    {
+      "variable": "final",
+      "creation": "Merging population_state_Df and suicides_state",
+      "flows": ["suicides_percapita"]
+    },
+    {
+      "variable": "suicides_percapita",
+      "creation": "Creating DataFrame for suicide per capita",
+      "flows": ["plots"]
+    }
+  ],
+  "models": []
+}

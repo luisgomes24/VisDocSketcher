@@ -1,0 +1,12 @@
+flowchart TD
+    %% Dataset nodes
+    A[TAT_Prediction_Test_Version_61.csv] --> |Read as df1| B[df1]
+    A[TAT_Prediction_Train_Version_61.csv] --> |Read as df2| C[df2]
+
+    %% Processing nodes
+    B --> |Used in| D[plotPerColumnDistribution]
+    C --> |Used in| D
+    B --> |Used in| E[plotCorrelationMatrix]
+    C --> |Used in| E
+    B --> |Used in| F[plotScatterMatrix]
+    C --> |Used in| F

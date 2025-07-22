@@ -1,0 +1,27 @@
+graph TD
+    %% Node for initial data source (image of peregrine falcon)
+    A["peregrine falcon.jpeg"] -->|Load image| B["img"]
+    
+    %% Node for image processing
+    B -->|Resize to 224x224| C["Image array (x)"]
+    
+    %% Node for loading pretrained model
+    D["Load ResNet50 model"]
+    
+    %% Model usage for prediction
+    C -->|Predict with ResNet50| E["predictions"]
+    D --> E
+    
+    %% Decoding predictions
+    E -->|Decode top 5 classes| F["decoded_predictions"]
+    
+    %% Output the results
+    F -->|Display results| G["Human-readable class labels and scores"]
+
+    %% Comments explaining each step
+    B:::comment -- This node represents the image loading and initial processing. 
+    C:::comment -- This node represents the preprocessed image array ready for input into the model.
+    D:::comment -- This node signifies the use of a pretrained ResNet50 model for predictions.
+    E:::comment -- This node represents the predictions made by the model on the input image.
+    F:::comment -- This node shows the process of decoding predicted classes into human-readable form.
+    G:::comment -- This node displays the final output, which consists of class labels and their prediction scores.

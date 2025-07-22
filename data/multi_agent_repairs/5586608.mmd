@@ -1,0 +1,37 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["BigQuery Dataset - github_repos"] 
+    subgraph Tables
+        A1["Table: sample_commits"]
+        A2["Table: languages"]
+    end
+    
+    %% Data Variables
+    B["BigQuery Client"] 
+    C["sample_commits_table"]
+    D["languages_table"]
+    
+    %% SQL Queries
+    E["max_commits_query"] 
+    F["pop_lang_query"]
+    G["all_langs_query"]
+    
+    %% Data Flow
+    A -- Fetch from sample_commits --> C
+    A -- Fetch from languages --> D
+    
+    %% Data Variable Creation
+    B --> C %% Comment: BigQuery client fetches sample_commits_table
+    B --> D %% Comment: BigQuery client fetches languages_table
+    
+    %% Query Definition
+    C --> E %% Comment: max_commits_query uses sample_commits_table
+    D --> F %% Comment: pop_lang_query uses languages_table
+    D --> G %% Comment: all_langs_query uses languages_table
+    
+    %% Query Execution
+    E -->|Execute| H["Most Commits in 2016"]
+    F -->|Execute| I["Most Popular Languages"]
+    G -->|Execute| J["Languages in polyrabbit/polyglot"]
+```

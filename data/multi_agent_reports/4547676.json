@@ -1,0 +1,85 @@
+{
+  "data_sources": [
+    {
+      "source": "chicago_crime dataset",
+      "description": "Contains crime data for the city of Chicago"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "client",
+      "description": "BigQuery client object used to access datasets"
+    },
+    {
+      "variable": "dataset_ref",
+      "description": "Reference to the chicago_crime dataset in BigQuery"
+    },
+    {
+      "variable": "dataset",
+      "description": "The dataset fetched from BigQuery"
+    },
+    {
+      "variable": "tables",
+      "description": "List of tables in the dataset"
+    },
+    {
+      "variable": "num_tables",
+      "description": "Number of tables in the chicago_crime dataset"
+    },
+    {
+      "variable": "table_ref",
+      "description": "Reference to the crime table in the dataset"
+    },
+    {
+      "variable": "table",
+      "description": "The crime table fetched from BigQuery"
+    },
+    {
+      "variable": "fields_for_plotting",
+      "description": "List of field names for plotting coordinates"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "client",
+      "creation": "bigquery.Client()",
+      "flow": "Used to create dataset_ref and fetch datasets"
+    },
+    {
+      "variable": "dataset_ref",
+      "creation": "client.dataset("chicago_crime", project="bigquery-public-data")",
+      "flow": "Used to fetch dataset and initialize tables list"
+    },
+    {
+      "variable": "dataset",
+      "creation": "client.get_dataset(dataset_ref)",
+      "flow": "Contains the dataset's tables and information"
+    },
+    {
+      "variable": "tables",
+      "creation": "list(client.list_tables(dataset))",
+      "flow": "Holds the number of tables in dataset derived from dataset"
+    },
+    {
+      "variable": "num_tables",
+      "creation": "[table.table_id for table in tables]",
+      "flow": "Stores the number of tables, used for analysis checks"
+    },
+    {
+      "variable": "table_ref",
+      "creation": "dataset_ref.table("crime")",
+      "flow": "Used to fetch the actual crime table data"
+    },
+    {
+      "variable": "table",
+      "creation": "client.get_table(table_ref)",
+      "flow": "Fetched table used to preview rows and check schema"
+    },
+    {
+      "variable": "fields_for_plotting",
+      "creation": "['latitude', 'longitude']",
+      "flow": "Defines fields to be used for plotting on a map"
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,9 @@
+%% The data source node represents the CSV file used in the analysis
+flowchart TD
+    A["kc_house_data.csv"] -->|Load Data| B["data_df"]
+
+    %% The data_df node represents the DataFrame that holds the dataset
+    B -->|Profile Data| C["Pandas-Profiling"]
+    
+    %% The Pandas-Profiling node represents the generation of a profiling report
+    C

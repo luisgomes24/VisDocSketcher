@@ -1,0 +1,43 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A1["labels.csv"]:::dataSource -- Contains breed labels --> B1["labels"]:::dataVariable
+        A2["sample_submission.csv"]:::dataSource -- Sample format --> B2["Sample Submission"]:::dataVariable
+        A3["keras-pretrained-models/"]:::dataSource -- Pretrained models --> B3["Keras Models"]:::dataVariable
+    end
+    
+    subgraph DataVariables
+        B1 --> C1["labels_pivot"]:::dataVariable
+        C1 -.-> |"Pivot operation"| D1["y_train"]:::dataVariable
+        C1 -.-> |"Pivot operation"| D2["y_valid"]:::dataVariable
+
+        E1["x_train"]:::dataVariable --> F1["train_vgg_bf"]:::dataVariable
+        E1 --> F2["valid_vgg_bf"]:::dataVariable
+        E1 --> F3["train_x_bf"]:::dataVariable
+        E1 --> F4["valid_x_bf"]:::dataVariable
+        E1 --> F5["train_i_bf"]:::dataVariable
+        E1 --> F6["valid_i_bf"]:::dataVariable
+    end
+    
+    subgraph Models
+        F1 -- "VGG16 features" --> G1["Logistic Regression"]
+        F2 -- "VGG16 features" --> H1["Validation Metrics"]
+        F3 -- "Xception features" --> G1
+        F4 -- "Xception features" --> H1
+        F5 -- "InceptionV3 features" --> G1
+        F6 -- "InceptionV3 features" --> H1
+    end
+    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#ff9,stroke:#333,stroke-width:2px;
+    
+    G1:::model -- "Train" --> D1
+    H1:::model -- "Validate" --> D2
+
+    %% Comment for each major transformation
+    %% A1, A2, A3 are the initial data sources.
+    %% B1, C1, D1, D2 show transformations involving data pivots and train/validation splits.
+    %% E1, F1-F6 are for feature extraction using various models.
+    %% G1 is the Logistic Regression model, trained and validated using bottleneck features.
+```

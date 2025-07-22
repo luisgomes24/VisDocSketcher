@@ -1,0 +1,20 @@
+graph TD;
+    A["📥 Read train_csv <img src='icons/file.svg' />"] --> B["🔍 Exploratory Data Analysis"];
+    B --> C["📊 Unique Values \n <img src='dummy_plots/hist_template.svg' />"];
+    B --> D["🔍 Missing Values \n <img src='dummy_plots/hist_template.svg' />"];
+    B --> E["📂 Columns Inspection"];
+    F["🗺️ Map Numeric to Ancestry"] --> G["❓ Create Ancestry Label"];
+    G --> H["🔬 Create X & y"];
+    H --> I["⚖️ Train-Test Split"];
+    I --> J["🤖 Model: Logistic Regression"];
+    J --> K["📈 Model Evaluation"];
+    K --> L["📊 Visualize Classification Report \n <img src='dummy_plots/boxplot_template.svg' />"];
+    K --> M["📊 Visualize Confusion Matrix \n <img src='dummy_plots/scatter_plot_template.svg' />"];
+    N["📥 Read test_csv <img src='icons/file.svg' />"] --> O["🔍 Create X_Test"];
+    O --> P["🕵️ Prediction Time"];
+    P --> Q["🗂️ Concatenate X_Test & Predictions"];
+    Q --> R["🔄 Map Real Data to Numeric Prediction"];
+    R --> S["✔️ Final Output"];
+    
+    A --> F;
+    N --> O;

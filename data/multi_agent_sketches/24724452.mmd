@@ -1,0 +1,26 @@
+flowchart TD
+    %% Define data sources
+    ds1["Population Simulation Parameters"]
+    %% Define variables
+    v1["people DataFrame"]
+    v2["stats DataFrame"]
+    v3["outcome Collection"]
+    %% Define models
+    mm1["Population Simulation Model"]
+    
+    %% Data source to Model
+    ds1 --> mm1
+    
+    %% Model to Data Variables
+    mm1 --> v1
+    mm1 --> v2
+    
+    %% Model Process
+    subgraph Model_Process["Simulation and Experiment Process"]
+        direction TB
+        v1 -- "Calculate descendant columns and statistical measures" --> v2
+        v2 -- "Display statistics" --> v3
+    end
+
+    %% Final Output
+    v3 --> |"Summarize Results"| v2

@@ -1,0 +1,18 @@
+flowchart TD
+    %% DataFrame Node
+    DF["df"]:::dataVar
+    classDef dataVar fill:#f9f,stroke:#333,stroke-width:2px;
+    %% Functions Nodes
+    DISTFUNC["plotPerColumnDistribution"]:::function
+    CORRFUNC["plotCorrelationMatrix"]:::function
+    SCATTTERFUNC["plotScatterMatrix"]:::function
+    classDef function fill:#bbf,stroke:#333,stroke-width:2px;
+    %% Data Flow
+    DF --> DISTFUNC
+    DF --> CORRFUNC
+    DF --> SCATTTERFUNC
+    %% Comments
+    %% df is used for creating plots and analysis
+    %% plotPerColumnDistribution visualizes data distribution for each column
+    %% plotCorrelationMatrix creates correlation matrix for numerical data
+    %% plotScatterMatrix generates scatter and density plots for numerical data

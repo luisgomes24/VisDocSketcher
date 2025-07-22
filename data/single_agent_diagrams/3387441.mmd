@@ -1,0 +1,44 @@
+```
+flowchart TD
+    A["📁 Read Data <br/> <img src='file.svg' />"] --> B["🧪 Data Exploration"]
+    B --> C["📊 Data Summary <br/> df.describe()"]
+    B --> D["🔍 Data Shape <br/> df.shape"]
+    B --> E["🗂️ Columns Info <br/> df.columns"]
+    
+    subgraph Gender_Step
+        F["👫 Analyze Gender <br/> df['Sex']"] --> G["🔄 Clean Gender Data"]
+        G --> H["📊 Gender Count <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    end
+    B --> F
+    
+    subgraph Visualization
+        I["📈 Basic Plots"]
+        J["📊 Gender Distribution <br/> sns.countplot()"]
+        I --> J
+        J --> K["📊 Other Graphs"]
+        K --> L["📈 Age Histogram <br/> <img src='dummy_plots/hist_template.svg' />"]
+        K --> M["📊 Race Pie Chart <br/> <img src='dummy_plots/pie_template.svg' />"]
+    end
+    H --> I
+    
+    subgraph Performance_Analysis
+        N["🏆 Manager Performance <br/> sns.countplot()"]
+        O["💰 Department Pay Rate <br/> df.groupby('Department')['Pay Rate']"]
+        P["💸 Position Pay Rate <br/> df.groupby('Position')['Pay Rate']"]
+    end
+    J --> N
+    J --> O
+    J --> P
+    
+    subgraph Insights
+        Q["💡 Conclusions"]
+    end
+    N --> Q
+    O --> Q
+    P --> Q
+    
+    A --> R["📊 Visualize New Dataset"]
+    R --> S["📈 Scatter Plot <br/> df2.plot()"]
+    R --> T["📊 Violin Plot <br/> sns.violinplot()"]
+    
+    classDef flow style="stroke-width: 2px; stroke: #333; fill: #fff;"

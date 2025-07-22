@@ -1,0 +1,8 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Train Data\n(train.csv)"] -->|load data| B["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame\ndata_train"]
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> Test Data\n(test.csv)"] -->|load data| B1["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame\ndata_test"]
+    B --> C["<img src='icons/row_split.svg' width=100 height=100/> <br/> Split to X and y"]
+    C --> D["<img src='icons/brain.svg' width=100 height=100/> <br/> Train Model\n(RandomForestClassifier)"]
+    D --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Predictions"]
+    B1 --> F["<img src='icons/table.svg' width=100 height=100/> <br/> Predicted DataFrame"]
+    E --> G["<img src='icons/file.svg' width=100 height=100/> <br/> submission.csv"]

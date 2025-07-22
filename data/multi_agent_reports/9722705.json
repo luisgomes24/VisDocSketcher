@@ -1,0 +1,44 @@
+{
+  "data_sources": [],
+  "data_variables": [
+    {
+      "name": "num",
+      "description": "The input number being rounded to two decimal places."
+    },
+    {
+      "name": "total_candies",
+      "description": "The total number of candies being split among friends."
+    },
+    {
+      "name": "num_friends",
+      "description": "The number of friends among whom the candies are split (defaults to 3)."
+    },
+    {
+      "name": "smallest_abs",
+      "description": "The smallest absolute value between x and y."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "num",
+      "creation": "Passed as an argument to round_to_two_places",
+      "flow": "Used to return a rounded value."
+    },
+    {
+      "variable": "total_candies",
+      "creation": "Passed as first parameter to to_smash",
+      "flow": "Used to calculate the number of leftover candies."
+    },
+    {
+      "variable": "num_friends",
+      "creation": "Passed as a second parameter to to_smash (defaults to 3)",
+      "flow": "Determines the number of candies to smash."
+    },
+    {
+      "variable": "smallest_abs",
+      "creation": "Calculated using min() on abs(x) and abs(y)",
+      "flow": "Final value printed out."
+    }
+  ],
+  "models": []
+}

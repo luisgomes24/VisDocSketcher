@@ -1,0 +1,17 @@
+flowchart TD
+    A["📥 Load Data <img src='icons/file.svg' />"] --> B["🔍 Preprocess Data"]
+    B --> C["📊 Data Visualization"]
+    C --> D["🧠 Model Training"]
+    D --> E["📈 Evaluate Models"]
+    E --> F["📤 Make Predictions"]
+    F --> G["📊 Plot Predictions <img src='dummy_plots/barplot_template.svg' />"]
+    G --> H["📦 Create Submission"]
+    
+    A -->|Load CSV| B
+    B -->|Split Data| D
+    C -->|Plot Digits| C
+    D -->|Train Logistic Regression| E
+    D -->|Train SVC| E
+    D -->|PCA Analysis| E
+    E -->|Accuracy, F1, Precision| E
+    F -->|Visualize Results| G

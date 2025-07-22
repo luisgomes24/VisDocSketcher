@@ -1,0 +1,43 @@
+{"data_sources": [
+  {
+    "file_name": "FinalProductList.csv",
+    "description": "Contains scraped product details including description, price, rating, review count, and URL."
+  },
+  {
+    "file_name": "Productlists.csv",
+    "description": "Another format for the scraped product details, saved in CSV format."
+  }
+],
+"data_variables": [
+  {
+    "variable_name": "search_term",
+    "description": "The keyword used to search products on Amazon."
+  },
+  {
+    "variable_name": "record",
+    "description": "A list that stores product records scraped from Amazon."
+  },
+  {
+    "variable_name": "df",
+    "description": "DataFrame that stores the final product list with columns for description, price, rating, review count, and URL."
+  }
+],
+"data_flow": [
+  {
+    "variable_name": "search_term",
+    "creation": "User input",
+    "flow": "Used to generate a search URL and passed to the main scraping function."
+  },
+  {
+    "variable_name": "record",
+    "creation": "List initialized in main(), records populated in the loop scraping the pages.",
+    "flow": "Converted to a DataFrame 'df' and saved to CSV files."
+  },
+  {
+    "variable_name": "df",
+    "creation": "Created from the list 'record' with defined columns.",
+    "flow": "Saved as 'FinalProductList.csv' and written using a different method as 'Productlists.csv'."
+  }
+],
+"models": []
+}

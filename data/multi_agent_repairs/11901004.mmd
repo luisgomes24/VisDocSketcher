@@ -1,0 +1,34 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        DS1["task-dummy.csv\n~ Dummy submission file with fighter betting data"]
+        DS2["mdabbert-9-19-20-submission.csv\n~ Submission by mdabbert with GaussianNB classifier predictions"]
+        DS3["most-recent-event.csv\n~ Most recent UFC events dataset"]
+    end
+
+    %% Data Variables and Flow
+    subgraph DataFlow
+        A["sub_list\n~ Betting predictions from submissions"] 
+        B["results_df\n~ Recent fight results and data"]
+        C["score_list\n~ Calculated profits from submissions"]
+    end
+    
+    %% Data Reading
+    DS1 --> A
+    DS2 --> A
+    DS3 --> B
+
+    %% Data Processing
+    A --> B
+    B --> C
+    
+    %% Model
+    subgraph Model
+        M1["GaussianNB Model\n~ Uses features like B_Weight_lbs, B_avg_TD_landed"]
+        M2["Winning fighter prediction"]
+    end
+
+    %% Model Processing
+    M1 -->|Predicts| M2
+```

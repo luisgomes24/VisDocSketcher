@@ -1,0 +1,47 @@
+```mermaid
+flowchart TD
+    A["stage_1_train.csv"]
+    B["stage_1_sample_submission.csv"]
+    C["stage_1_train_png_224x"]
+    D["stage_1_test_png_224x"]
+    E["train DataFrame"]
+    F["test DataFrame"]
+    G["train_dataset"]
+    H["test_dataset"]
+    I["data_loader_train"]
+    J["data_loader_test"]
+    K["ResNeXt-101 Model"]
+    L["Binary Cross-Entropy Loss"]
+    M["Adam Optimizer"]
+    N["submission DataFrame"]
+
+    %% Data Source Nodes
+    A --> |"Read CSV"| E
+    B --> |"Read CSV"| F
+    C --> |"Image Files"| G
+    D --> |"Image Files"| H
+
+    %% Data Processing and Flow Nodes
+    E --> |"Create Dataset"| G
+    G --> |"Prepare DataLoader"| I
+    I --> |"Train Model"| K
+    F --> |"Prepare DataLoader"| J
+    J --> |"Inference"| K
+    K --> |"Generate Predictions"| N
+    N --> |"Write CSV"| "submission.csv"
+
+    %% Model Training Components
+    K --> L
+    K --> M
+
+    %% Comments for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,B,C,D dataSource;
+    class E,F,G,H,I,J,K,L,M,N dataProcess;
+    
+    %%%% Specific ML model node
+    class K fill:#ff9,stroke:#333,stroke-width:2px;
+    %% Models
+    class L,M fill:#fff,stroke:#333,stroke-width:2px;
+```

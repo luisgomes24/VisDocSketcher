@@ -1,0 +1,26 @@
+flowchart TD
+  %% Nodes for data sources
+  A["MNIST Train CSV"] -->|"load_csv"| B["train"]
+  C["MNIST Test CSV"] -->|"load_csv"| D["test"]
+
+  %% Nodes for processing training data
+  B -->|"split features"| E["train_x"]
+  B -->|"split targets"| F["train_y"]
+
+  %% Nodes for processing test data
+  D -->|"split features"| G["test_x"]
+  D -->|"split targets"| H["test_y"]
+
+  %% Nodes for CNN model
+  E -->|"reshape and shuffle"| I["train_X"]
+  F -->|"shuffle"| J["train_y"]
+
+  I -->|"train CNN"| K["Convolutional Neural Network"]
+  J -->|"train CNN"| K
+
+  K -->|"predict"| L["pred"]
+  L -->|"evaluate"| M["accuracy"]
+
+  %% Model specifics
+  K -.->|"structure: conv1(32, 3x3), conv2(64, 3x3), conv3(128, 3x3), dense(100), output(10)"| K
+  K -.->|"hyperparameters: learning_rate=0.001, batch_size=100, training_iters=10"| K

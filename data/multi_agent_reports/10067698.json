@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/apps.csv",
+      "description": "Contains application data such as names, categories, and ratings."
+    },
+    {
+      "file": "/kaggle/input/user_reviews.csv",
+      "description": "Contains user reviews for applications, potentially with ratings and feedback."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df1",
+      "description": "DataFrame containing the first 1000 rows of apps.csv."
+    },
+    {
+      "variable": "df2",
+      "description": "DataFrame containing the first 1000 rows of user_reviews.csv."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "pd.read_csv('/kaggle/input/apps.csv', nrows=1000)",
+      "flow": "Used in plotting functions like plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+    },
+    {
+      "variable": "df2",
+      "creation": "pd.read_csv('/kaggle/input/user_reviews.csv', nrows=1000)",
+      "flow": "Used in plotting functions like plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+    }
+  ],
+  "models": []
+}

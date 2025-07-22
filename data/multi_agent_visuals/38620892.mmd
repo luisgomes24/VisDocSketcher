@@ -1,0 +1,21 @@
+%% Mermaid.js Diagram of Jupyter Notebook Workflow
+%% This diagram represents the data flow and relationships between variables
+
+flowchart TD
+    %% Time Variable
+    t["<img src='icons/column_split.svg' width=100 height=100/> <br/> t: Time values"] -->|"Calculate y"| y
+    t -->|"Plot variable"| PI["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Plot t vs. y"]
+    
+    %% Gravitational Constant
+    g["<img src='icons/database.svg' width=100 height=100/> <br/> g: Gravitational constant (9.81)"] -->|"Calculate y"| y
+    
+    %% Vertical Position
+    y["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> y: Vertical position as a function of t"] -->|"Dependent on t, g"| PI
+
+    %% Random Data
+    data["<img src='icons/file.svg' width=100 height=100/> <br/> data: Random data arrays for plot"] -->|"Scatter plotting"| SP["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Scatter plot"]
+
+    %% Group Names and Values for Categorical Plotting
+    names["<img src='icons/table.svg' width=100 height=100/> <br/> names: Group names"] -->|"Categorical plotting"| CP["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Categorical plot"]
+    values["<img src='icons/table.svg' width=100 height=100/> <br/> values: Corresponding group values"] -->|"Categorical plotting"| CP
+        

@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        DS1["Dados_bancarios.csv"]:::source
+    end
+
+    subgraph Variables
+        V1["leitura_df"]:::var
+        V2["total"]:::var
+        V3["adimplente"]:::var
+        V4["inadimplente"]:::var
+        V5["novo_total"]:::var
+        V6["novo_adimplente"]:::var
+        V7["novo_inadimplente"]:::var
+        V8["adimplente_df"]:::var
+        V9["inadimplente_df"]:::var
+    end
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef var fill:#ccf,stroke:#333,stroke-width:2px;
+
+    DS1 -->|pd.read_csv| V1
+    V1 -->|len(leitura_df)| V2
+    V1 -->|filter: non-defaulting| V3
+    V1 -->|filter: defaulting| V4
+    V1 -->|clean missing values| V5
+    V5 -->|filter: non-defaulting| V6
+    V5 -->|filter: defaulting| V7
+    V6 --> V8
+    V7 --> V9
+```

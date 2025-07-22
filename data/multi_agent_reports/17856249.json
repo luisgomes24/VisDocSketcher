@@ -1,0 +1,117 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/commonlitreadabilityprize/train.csv",
+      "description": "Training dataset containing textual excerpts for training."
+    },
+    {
+      "source": "../input/commonlitreadabilityprize/test.csv",
+      "description": "Testing dataset containing textual excerpts for evaluation."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "tr_data",
+      "description": "Training DataFrame containing data from train.csv."
+    },
+    {
+      "variable": "ts_data",
+      "description": "Testing DataFrame containing data from test.csv."
+    },
+    {
+      "variable": "data",
+      "description": "Combined DataFrame created by concatenating tr_data and ts_data."
+    },
+    {
+      "variable": "cleaned_excerpt",
+      "description": "New column in data DataFrame that holds cleaned text excerpts."
+    },
+    {
+      "variable": "model",
+      "description": "Pre-trained masked language model loaded for fine-tuning."
+    },
+    {
+      "variable": "tokenizer",
+      "description": "Tokenizer corresponding to the pre-trained model used for text processing."
+    },
+    {
+      "variable": "texts",
+      "description": "String of all cleaned excerpts joined by newline for training."
+    },
+    {
+      "variable": "dataset",
+      "description": "Dataset created from the cleaned excerpts for training."
+    },
+    {
+      "variable": "val_dataset",
+      "description": "Dataset created from the cleaned excerpts for validation."
+    },
+    {
+      "variable": "data_collator",
+      "description": "Object that pads input sequences for the language model."
+    },
+    {
+      "variable": "training_args",
+      "description": "Configuration settings for model training such as epochs and batch size."
+    },
+    {
+      "variable": "trainer",
+      "description": "Trainer object initialized for training the model with dataloaders and arguments."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "tr_data",
+      "created_by": "read_csv",
+      "flows_to": "data"
+    },
+    {
+      "variable": "ts_data",
+      "created_by": "read_csv",
+      "flows_to": "data"
+    },
+    {
+      "variable": "data",
+      "created_by": "concat",
+      "flows_to": "cleaned_excerpt"
+    },
+    {
+      "variable": "cleaned_excerpt",
+      "created_by": "map(clean_text)",
+      "flows_to": "texts"
+    },
+    {
+      "variable": "texts",
+      "created_by": "join",
+      "flows_to": "texts.txt (output)"
+    },
+    {
+      "variable": "dataset",
+      "created_by": "LineByLineTextDataset",
+      "flows_to": "trainer"
+    },
+    {
+      "variable": "val_dataset",
+      "created_by": "LineByLineTextDataset",
+      "flows_to": "trainer"
+    },
+    {
+      "variable": "trainer",
+      "created_by": "Trainer",
+      "flows_to": ["trainer.train()", "trainer.save_model()"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "roberta-base",
+      "input_features": "cleaned excerpts",
+      "target_variable": "N/A",
+      "hyperparameters": {
+        "num_train_epochs": 3,
+        "per_device_train_batch_size": 16,
+        "evaluation_strategy": "steps",
+        "eval_steps": 150
+      }
+    }
+  ]
+}

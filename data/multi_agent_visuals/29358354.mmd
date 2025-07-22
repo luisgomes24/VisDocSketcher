@@ -1,0 +1,18 @@
+%% This Mermaid diagram describes the data workflow and transformations within the Jupyter Notebook
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Emissions Data EU27 CSV"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> data1"]
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> data1"] -->|Direct Load| C["<img src='icons/file.svg' width=100 height=100/> <br/> No Further Use"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> Emissions Data EU28 CSV"] -->|Read CSV| D["<img src='icons/table.svg' width=100 height=100/> <br/> data2"]
+
+    D["<img src='icons/table.svg' width=100 height=100/> <br/> data2"] -->|Filter by Unit T| E["<img src='icons/table.svg' width=100 height=100/> <br/> data_world_t_unit"]
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> data_world_t_unit"] -->|Group by Air Pollutant| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> airpol_groupby"]
+    F["<img src='icons/column_split.svg' width=100 height=100/> <br/> airpol_groupby"] -->|Visualization| G["<img src='dummy_plots/barplot_template.svg'/> <br/> Air Pollutant Emissions Plot"]
+
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> data_world_t_unit"] -->|Group by Industry Usage| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> induse_groupby"]
+    H["<img src='icons/column_split.svg' width=100 height=100/> <br/> induse_groupby"] -->|Visualization| I["<img src='dummy_plots/barplot_template.svg'/> <br/> Industry Usage Emissions Plot"]
+
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> data_world_t_unit"] -->|Group by CPA Activities| J["<img src='icons/column_split.svg' width=100 height=100/> <br/> cpa_groupby"]
+    J["<img src='icons/column_split.svg' width=100 height=100/> <br/> cpa_groupby"] -->|Visualization| K["<img src='dummy_plots/barplot_template.svg'/> <br/> CPA Activity Emissions Plot"]
+
+    E["<img src='icons/table.svg' width=100 height=100/> <br/> data_world_t_unit"] -->|Group by Origin| L["<img src='icons/column_split.svg' width=100 height=100/> <br/> origin_groupby"]
+    L["<img src='icons/column_split.svg' width=100 height=100/> <br/> origin_groupby"] -->|Visualization| M["<img src='dummy_plots/barplot_template.svg'/> <br/> Origin Emissions Plot"]

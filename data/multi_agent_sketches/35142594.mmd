@@ -1,0 +1,58 @@
+%% Workflow for Frame Interpolation using FILM Model
+flowchart TD
+  %% Data Sources
+  DS1["First Input Image"]
+  DS2["Second Input Image"]
+  
+  %% Loading and Normalization
+  DS1 -->|Load and Normalize| V1["image1"]
+  DS2 -->|Load and Normalize| V2["image2"]
+  
+  %% Time Variable
+  V3["time"] -->|Set Interpolation Time| IN1
+  
+  %% Input Preparation
+  subgraph Input Preparation
+    direction TB
+    IN1["input"]
+    V1 --> IN1
+    V2 --> IN1
+    V3 --> IN1
+  end
+  
+  %% Machine Learning Model
+  subgraph Model
+    direction TB
+    M["FILM Model"]
+    IN1 -->|Infer| M
+    M -->|Generate| V4["mid_frame"]
+  end
+  
+  %% Frames Assembly
+  V4 -->|Store| V5["frames"]
+  V1 --> V5
+  V2 --> V5
+  
+  %% Visualization
+  V5 -->|Display| V6["show_images"]
+  V5 -->|Create Video| V7["show_video"]
+
+  %% Extended Interpolation System
+  subgraph Extended Interpolation
+    direction TB
+    E1["Interpolator Instance"]
+    M --> E1
+    V5 -->|Iterate| E1
+  end
+  
+  E1 -->|Generate Multiple| V8["Extended Frames"]
+  V8 -->|Create Smoother Video| V9["show_video"]
+
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+  classDef process fill:#bbf,stroke:#333,stroke-width:1px;
+  classDef variable fill:#9f9,stroke:#333,stroke-width:1px;
+  classDef model fill:#f96,stroke:#333,stroke-width:1px;
+  class DS1,DS2 dataSource;
+  class V1,V2,V3,V4,V5,V6,V7,V8,V9 variable;
+  class M,E1 model;
+  class IN1 process;

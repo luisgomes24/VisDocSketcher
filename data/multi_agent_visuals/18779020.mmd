@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A1["<img src='icons/image.svg' width=100 height=100/> <br/> Images of Ripe Bananas"]
+    A2["<img src='icons/image.svg' width=100 height=100/> <br/> Images of Unripe Bananas"]
+    
+    %% Data Preprocessing
+    B1["<img src='icons/column_split.svg' width=100 height=100/> <br/> Make Train Data Function"]
+    B2["<img src='icons/column_split.svg' width=100 height=100/> <br/> Create Labels"]
+    B3["<img src='icons/column_split.svg' width=100 height=100/> <br/> One-hot Encoding"]
+    
+    %% Train-Test Split
+    C1["Train-Test Split"]
+    
+    %% Model Development
+    D1["<img src='icons/brain.svg' width=100 height=100/> <br/> Create CNN Model"]
+    D2["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Train CNN Model"]
+    
+    %% Model Output
+    E1["<img src='dummy_plots/barplot_template.svg'/> <br/> Save Trained Model"]
+
+    %% Data Flow and Dependencies
+    A1 --> B1
+    A2 --> B1
+    B1 -->|Creates X| C1
+    B2 -->|Creates Z| B3
+    B3 -->|Creates Y| C1
+    C1 -->|Creates x_train, y_train| D1
+    C1 -->|Creates x_test, y_test| D2
+    D1 -->|Trains with x_train, y_train| D2
+    D2 --> E1

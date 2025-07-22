@@ -1,0 +1,28 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg'/> <br/> '911.csv'"] --> B["🧹 Preprocess Data"];
+    B --> C["📊 Analyze Data"];
+    C --> D["📈 Visualization"];
+    D --> E["🔍 Modeling"];
+    E --> F["📏 Evaluation"];
+
+    B1["🗂️ Check Data Info"] --> B2["📋 View Data"];
+    B2 --> B3["📊 Top 5 ZIP Codes"];
+    B3 --> B4["🏙️ Top 5 Townships"];
+    B4 --> B5["🔍 Unique Title Codes"];
+    B5 --> B6["📝 Extract Reason"];
+    B6 --> B7["📊 Most Common Reasons"];
+
+    D1["📊 Count Calls by Reason <img src='dummy_plots/countplot_template.svg'/>"] --> D2["📊 Calls by Day of Week"];
+    D2 --> D3["📊 Calls by Month"];
+    D3 --> D4["📉 Month vs Township Regression <img src='dummy_plots/lineplot_template.svg'/>"];
+    
+    E1["📆 Add Date Column"] --> E2["📊 Calls by Date"];
+    E2 --> E3["📊 EMS Calls by Month"];
+    E3 --> E4["📊 Fire Calls by Month"];
+    E4 --> E5["📊 Traffic Calls by Month"];
+    
+    A --> B;
+    B -->|Preprocessing| B1;
+    B -->|Preprocessing| D;
+    D -->|Visualization| E;
+    E -->|Evaluation| F;

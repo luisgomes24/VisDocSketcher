@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> df_train, df_test, df_sample"] --> B["🧹 Preprocess Data"]
+    B --> C["🔠 OneHotEncode <img src='column_split.svg' /> <br/> train_ohe, test_ohe"]
+    C --> D["📊 Combine Features <img src='table.svg' /> <br/> train_x, test_x"]
+    D --> E["💡 Model Training <img src='brain.svg' />"]
+    E --> F["🛠 Optimize Parameters <img src='brain.svg' /> <br/> TunerCV"]
+    F --> G["📈 Feature Importance <img src='barplot_template.svg' />"]
+    G --> H["✅ Evaluate Model <img src='hist_template.svg' /> <br/> RMSE Calculation"]
+    H --> I["📤 Prepare Submission <img src='file.svg' /> <br/> submission_optuna_lgbm_ohe_v1.csv"]

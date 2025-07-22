@@ -1,0 +1,42 @@
+```mermaid
+flowchart TD
+  %% Data Sources
+  A1["/kaggle/input/playground-series-s3e5/train.csv"]
+  A2["/kaggle/input/playground-series-s3e5/test.csv"]
+  A3["/kaggle/input/playground-series-s3e5/sample_submission.csv"]
+  A4["/kaggle/input/wine-quality-dataset/WineQT.csv"]
+  
+  %% Data Variables
+  B1["train_data"]
+  B2["test_data"]
+  B3["submission"]
+  B4["extra_data"]
+  B5["roles"]
+  B6["automl"]
+  B7["task"]
+  
+  %% Machine Learning Model
+  C1["TabularAutoML Model"]
+  
+  %% Data Source to Variable Flow
+  A1 --> |"read_csv"| B1
+  A2 --> |"read_csv"| B2
+  A3 --> |"read_csv"| B3
+  A4 --> |"read_csv"| B4
+  
+  %% Data Flow and Processing
+  B4 --> |"additional features"| B1
+  B1 --> |"feature_engineering"| B5
+  B1 --> |"fit"| B6
+  B1 --> |"train_data"| C1
+  B2 --> |"feature_engineering"| B7
+  B6 ==> |"used for predictions"| B2
+  B6 --> |"task definition"| C1
+  
+  %% Model Training and Prediction
+  C1 --> |"fit_predict"| B1
+  C1 --> |"predict"| B2
+  
+  %% Submission Flow
+  B3 --> |"prepare submission"| A3
+  ```

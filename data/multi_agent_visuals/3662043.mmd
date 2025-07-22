@@ -1,0 +1,13 @@
+flowchart TD
+    A[<img src='icons/file.svg' width=100 height=100/> <br/> ../input/Mall_Customers.csv]:::source --> B[<img src='icons/table.svg' width=100 height=100/> <br/> file]
+    B --> C[<img src='icons/column_split.svg' width=100 height=100/> <br/> {Data Preparation}]
+    C --> D[<img src='icons/row_split.svg' width=100 height=100/> <br/> file_ages]
+    B --> E[<img src='icons/file.svg' width=100 height=100/> <br/> Plotting and Analysis]
+    D --> F[<img src='icons/file.svg' width=100 height=100/> <br/> Age Density Analysis]
+
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef output fill:#F2C464,stroke:#333,stroke-width:2px;
+    classDef plot fill:#FFCDD2,stroke:#333,stroke-width:2px;

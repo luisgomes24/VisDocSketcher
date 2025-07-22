@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Train Data <img src='icons/file.svg'/> <br/> train.csv"] --> B["📊 Add Additional Train Examples <img src='icons/file.svg'/> <br/> extra_train_set.csv"]
+    B --> C["📊 Preprocess Data"]
+    C --> D["📝 Create HuggingFace Dataset"]
+    D --> E["🔄 Tokenize Dataset"]
+    E --> F["📈 Training Setup"]
+    F --> G["🧠 Train Model"]
+    G --> H["🔍 Predict on Test Set <img src='icons/file.svg'/> <br/> test.csv"]
+    H --> I["✨ Process Predictions"]
+    I --> J["📄 Output Submission"]

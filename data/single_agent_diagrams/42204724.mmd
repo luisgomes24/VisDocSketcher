@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["🔍 Preprocess Data"]
+    B --> C["🔄 Shuffle & Split Data"]
+    C --> D["📊 Show Some Data <img src='dummy_plots/scatter_plot_template.svg' />"]
+    D --> E["🧠 Build Model"]
+    E --> F["📈 Train Model"]
+    F --> G["📉 Evaluate Model"]
+    G --> H["📊 Plot Loss <img src='dummy_plots/lineplot_template.svg' />"]
+    H --> I["📊 Plot Accuracy <img src='dummy_plots/lineplot_template.svg' />"]

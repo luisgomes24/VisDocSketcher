@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "basic1.csv",
+      "description": "Contains data with columns 'f1' and 'f2' used for cumulative sum calculations."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame loaded from 'basic1.csv' containing original data."
+    },
+    {
+      "variable_name": "df2",
+      "description": "Series storing the cumulative sum of 'f1' where 'f2' equals 1, with NaNs filled using the next valid value."
+    },
+    {
+      "variable_name": "s",
+      "description": "Series demonstrating NaN filling methods using backfill."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "created_via": "pd.read_csv",
+      "flow": "Used to create df2, source of cumulative sums."
+    },
+    {
+      "variable_name": "df2",
+      "created_via": "df[df['f2']==1]['f1'].cumsum()",
+      "flow": "Used to calculate the mean, printed at the end."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,35 @@
+flowchart TD
+    %% Start of the flowchart
+    
+    subgraph data_sources [Data Sources]
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]:::data_source_df[Contains training data for cryptocurrency prediction, including asset prices and target values]
+        B["<img src='icons/file.svg' width=100 height=100/> <br/> asset_details.csv"]:::data_source_df[Contains details of each cryptocurrency asset including Asset_ID and Asset_Name]
+    end
+    
+    subgraph data_variables [Data Variables]
+        D["<img src='icons/table.svg' width=100 height=100/> <br/> df_train"]:::data_variable_df[Contains training data loaded from train.csv]
+        C["<img src='icons/table.svg' width=100 height=100/> <br/> df_asset_details"]:::data_variable_df[Contains asset details loaded from asset_details.csv]
+        E["<img src='icons/table.svg' width=100 height=100/> <br/> Xs"]:::data_variable_df[Stores feature DataFrames for each asset during model training]
+        F["<img src='icons/table.svg' width=100 height=100/> <br/> ys"]:::data_variable_df[Stores target values for each asset during model training]
+        G["<img src='icons/table.svg' width=100 height=100/> <br/> models"]:::data_variable_df[Stores trained models for each asset]
+    end
+
+    subgraph ml_model [ML Model]
+        H["<img src='icons/brain.svg' width=100 height=100/> <br/> LGBMRegressor"]:::model_df[Trained model for asset prediction]
+    end
+
+    % Flow connections
+    A --> D
+    B --> C
+    D --> E
+    D --> F
+    E --> H
+    F --> H
+    H --> G
+    
+    %% Styles
+    classDef data_source_df fill:#f96,stroke:#333,stroke-width:2px;
+    classDef data_variable_df fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model_df fill:#bfb,stroke:#333,stroke-width:2px;
+    
+    %% End of flowchart

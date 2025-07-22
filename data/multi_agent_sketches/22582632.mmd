@@ -1,0 +1,32 @@
+%% Mermaid Flowchart Diagram %%
+flowchart TD
+    %% Nodes %%
+    A[input_audio] -->|Load from File| B[vad-go-stereo-44100.wav]
+    B -->|Source| C[Audio Augmentations] 
+    
+    %% Augmentation Process %%
+    C -->|Apply Pitch Shift| D[aug_audio]
+    C -->|Apply Time Stretch| D
+    C -->|Apply Peaking Equalizer| D
+
+    %% Sample Rate and Metadata %%
+    D --> E[sr]
+    D --> F[meta]
+    E -->|Used for Display| G[Display Augmented Audio]
+    F -->|Metadata Collection| G
+
+    %% Node Descriptions %%
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    class A fill:#bbf,stroke:#333,stroke-width:2px;
+    class B fill:#cdf,stroke:#333,stroke-width:2px;
+    class C fill:#f96,stroke:#333,stroke-width:2px;
+    class D fill:#ccf,stroke:#333,stroke-width:2px;
+    class E,F,G fill:#cfc,stroke:#333,stroke-width:2px;
+
+%% Comment for each Node %%
+    %% A represents the variable input_audio, holding the path to the input audio file.
+    %% B is the data source 'vad-go-stereo-44100.wav', loaded as input.
+    %% C represents the various audio augmentations applied to input_audio.
+    %% D is the augmented audio output, resulting from transformations.
+    %% E and F represent the sample rate and metadata, respectively, used/display after augmentation.
+    %% G is the final output step where augmented audio is displayed.

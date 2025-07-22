@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/total-business-inventories.csv",
+      "description": "Contains total business inventories data."
+    },
+    {
+      "file_name": "../input/total-business-inventories_1.csv",
+      "description": "Contains another set of total business inventories data."
+    },
+    {
+      "file_name": "../input/total-business-inventories_2.csv",
+      "description": "Contains an additional set of total business inventories data."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding data from the first CSV file."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame holding data from the second CSV file."
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame holding data from the third CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "usage": [
+        "Visualized using plotPerColumnDistribution",
+        "Head of the DataFrame displayed."
+      ]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "usage": [
+        "Visualized using plotPerColumnDistribution",
+        "Head of the DataFrame displayed."
+      ]
+    },
+    {
+      "variable_name": "df3",
+      "creation_method": "pd.read_csv",
+      "usage": [
+        "Visualized using plotPerColumnDistribution",
+        "Head of the DataFrame displayed."
+      ]
+    }
+  ],
+  "models": []
+}

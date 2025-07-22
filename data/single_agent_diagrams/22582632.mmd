@@ -1,0 +1,7 @@
+flowchart TD
+    A["<img src='file.svg'/> <br/> Load Audio Data"] --> B["<img src='audio.svg'/> <br/> Audio Playback"]
+    B --> C["<img src='audio.svg'/> <br/> Apply Pitch Shift"]
+    C --> D["<img src='audio.svg'/> <br/> Augment Audio"]
+    D --> E["<img src='audio.svg'/> <br/> Apply Time Stretch"]
+    E --> F["<img src='audio.svg'/> <br/> Class-based Augmentations"]
+    F --> G["<img src='audio.svg'/> <br/> Compose Transformations"]

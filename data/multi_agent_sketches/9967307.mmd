@@ -1,0 +1,27 @@
+flowchart TD
+    %% Load data from CSV
+    A[segmentation-data.csv] --> |Load Data| B[df_segmentation]
+    %% Perform descriptive analysis and visualization
+    B --> |Descriptive Analysis & Visualization| C(Segmentation Analysis)
+    %% Standardize the data
+    B --> |Standardize| D[segmentation_std]
+    %% PCA transformation
+    D --> |Apply PCA| E[scores_pca]
+    %% KMeans clustering without PCA
+    D --> |KMeans Clustering| F[KMeans Model]
+    F --> |Assign Segments| G[df_segm_kmeans]
+    %% KMeans clustering with PCA
+    E --> |KMeans Clustering with PCA| H[KMeans Model PCA]
+    H --> |Assign Segments| I[df_segm_kmeans_PCA]
+```
+
+**Diagram Node Comments:**
+- **A**: Represents the source CSV file containing customer segmentation data.
+- **B**: Represents the DataFrame after loading data from the CSV.
+- **C**: Represents the descriptive analysis and visualization activities.
+- **D**: Represents the standardized segmentation DataFrame.
+- **E**: Represents the PCA transformed scores.
+- **F**: Represents the KMeans model being applied to standardized data.
+- **G**: Represents the assignment of segments to the KMeans model output.
+- **H**: Represents the KMeans model applied to PCA transformed data.
+- **I**: Represents the assignment of segments from the KMeans model on PCA data.

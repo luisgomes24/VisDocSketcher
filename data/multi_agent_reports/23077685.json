@@ -1,0 +1,139 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/bmidataset/bmi.csv",
+      "description": "Contains data related to BMI including features such as height, weight, and gender."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the input data after being read from the CSV file."
+    },
+    {
+      "name": "X",
+      "description": "Features used for model training, excluding the 'Index' column."
+    },
+    {
+      "name": "y",
+      "description": "Target variable indicating the BMI category represented by the 'Index' column."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set of features."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing set of features."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set of target variable."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing set of target variable."
+    },
+    {
+      "name": "qda",
+      "description": "Quadratic Discriminant Analysis model for classification."
+    },
+    {
+      "name": "matrix",
+      "description": "Confusion matrix DataFrame containing the classification results."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file using pd.read_csv",
+      "flow": "Used to create variables for input features (X) and target variable (y), and also for exploratory data analysis and model fitting."
+    },
+    {
+      "variable": "X",
+      "creation": "Created by dropping 'Index' from df",
+      "flow": "Split into training (X_train) and testing (X_test) datasets."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from 'Index' column in df",
+      "flow": "Split into training (y_train) and testing (y_test) datasets."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Split from X dataset",
+      "flow": "Used for fitting the classification models."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Split from y dataset",
+      "flow": "Used for fitting the classification models."
+    },
+    {
+      "variable": "qda",
+      "creation": "Initialized Quadratic Discriminant Analysis",
+      "flow": "Fitted using X_train and y_train, then used to predict y_test."
+    },
+    {
+      "variable": "matrix",
+      "creation": "Created from confusion_matrix function on predictions",
+      "flow": "Used for evaluating model performance."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Quadratic Discriminant Analysis",
+      "input_features": "Features from X (height and weight)",
+      "target_variable": "Index (BMI category)",
+      "hyperparameters": "None specified in the notebook"
+    },
+    {
+      "model_name": "KNeighborsClassifier",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "n_neighbors = 5"
+    },
+    {
+      "model_name": "LinearSVC",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "DecisionTreeClassifier",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "max_depth = 3, criterion = 'gini'"
+    },
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "random_state = 1, max_features = 'sqrt'"
+    },
+    {
+      "model_name": "XGBClassifier",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "AdaBoostClassifier",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "GaussianNB",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model_name": "QuadraticDiscriminantAnalysis",
+      "input_features": "Same as above",
+      "target_variable": "Index",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

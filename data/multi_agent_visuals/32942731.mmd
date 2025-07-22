@@ -1,0 +1,26 @@
+flowchart TD
+    %% Data Sources
+    A1[Iris.csv] -->|load with pandas| B1(df)
+    A2[Seaborn Iris Dataset] -->|load with seaborn| B2(iris)
+    
+    %% Data Variables
+    B1 -->|data analysis| C1[data visualization plots]
+    B1 -->|data analysis| C2[KDE plot]
+    B1 -->|data analysis| C3[box plots]
+    B1 -->|data analysis| C4[pie chart]
+    B1 -->|data analysis| C5[pair plot]
+    B1 -->|data analysis| C6[bubble plot]
+
+    B2 -->|data analysis| D1[line histograms]
+    B2 -->|data analysis| D2[KDE plot with seaborn]
+    
+    %% No ML models used in this notebook
+    
+    %% Annotations    
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef dataAnalysis fill:#6f9,stroke:#333,stroke-width:2px;
+    
+    class A1,A2 dataSource;
+    class B1,B2 dataVariable;
+    class C1,C2,C3,C4,C5,C6,D1,D2 dataAnalysis;

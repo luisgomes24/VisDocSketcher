@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data Source Node
+    A["Pre_restaurants.csv"] -->|Load Data| B
+
+    %% DataFrame Creation Node
+    B["df: DataFrame"] 
+    B -->|Used in| C["g: Seaborn lmplot"]
+    B -->|Used in| D["fig_px: Plotly express scatter_mapbox"]
+    B -->|Used in| E["fig: Plotly express bar"]
+
+    %% Visualization Nodes
+    C -->|Visualized with| F["plt.show()"]
+    D -->|Visualized with| G["fig_px.show()"]
+    E -->|Visualized with| H["fig.show()"]
+    
+    %% Comments explaining each node.
+    %% A: Represents the CSV file containing pre-COVID restaurant data.
+    %% B: DataFrame in pandas containing restaurant data.
+    %% C: Seaborn linear model plot to visualize latitude and longitude by borough.
+    %% D: Plotly scatter mapbox figure to represent the geographical distribution of restaurants.
+    %% E: Plotly bar graph to show the number of restaurants distributed by grade date.
+    %% F, G, H: Visualization of the respective plots.

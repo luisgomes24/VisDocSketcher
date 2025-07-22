@@ -1,0 +1,18 @@
+graph TD;
+
+    A["📂 Load Dataset <img src='file.svg'/> <br/> df = pd.read_csv(path)"] --> B["🔧 Preprocess Data <img src='column_split.svg'/> <br/> df.fillna(df.mean(), inplace=True)"]
+    B --> C["📊 Visualize Correlation <img src='heatmap_template.svg'/> <br/> sns.heatmap(df.corr())"]
+    C --> D["📊 Select Features and Labels <img src='table.svg'/> <br/> features, labels = df.drop('Outcome', axis=1), df['Outcome']"]
+    D --> E["📈 Split Data <img src='row_split.svg'/> <br/> train_test_split(features, labels, test_size=0.20)"]
+    
+    E --> F["🧠 Build Model <img src='brain.svg'/> <br/> model = tf.keras.Sequential([...])"]
+    F --> G["⚙️ Define Loss Function <img src='brain.svg'/> <br/> loss_object = tf.keras.losses.BinaryCrossentropy()"]
+    G --> H["🏋️‍♂️ Train Model <img src='brain.svg'/> <br/> model.fit(...)"]
+    H --> I["📊 Analyze Training Metrics <img src='lineplot_template.svg'/> <br/> plt.plot(train_loss_results)"]
+    I --> J["📊 Analyze Testing Metrics <img src='lineplot_template.svg'/> <br/> plt.plot(test_loss_results)"]
+
+    J --> K["🌲 Initialize Boosted Trees <img src='brain.svg'/> <br/> est = tf.estimator.BoostedTreesClassifier(...)"]
+    K --> L["🗂️ Create Input Function <img src='column_split.svg'/> <br/> make_input_fn(...)"]
+    L --> M["🚀 Train Boosted Trees <img src='brain.svg'/> <br/> est.train(...)"]
+    M --> N["📊 Evaluate Model <img src='hist_template.svg'/> <br/> result = est.evaluate(...)"]
+    N --> O["📈 Visualize Predictions <img src='hist_template.svg'/> <br/> probs.plot(...)"]

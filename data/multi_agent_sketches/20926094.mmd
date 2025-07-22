@@ -1,0 +1,34 @@
+%% Mermaid diagram for the data flow and processing in the Jupyter Notebook
+flowchart TD;
+    %%%% Data Sources
+    A["datasets_228_482_diabetes.csv"]
+    %% Represents the source CSV file containing the PIMA Indian Diabetes dataset
+
+    %%%% Data Import
+    A -->|pd.read_csv| B["pima"]
+    %% pima: DataFrame containing the entire dataset
+
+    %%%% Data Inspection
+    B --> C1["tail()"]
+    B --> C2["head()"]
+    B --> C3["shape()"]
+    B --> C4["size()"]
+    B --> C5["info()"]
+    B --> C6["isnull()"]
+    %% Methods used for inspecting the DataFrame
+
+    %%%% Descriptive Statistics
+    B -->|pima['BMI'].mean()| D1["m1"]
+    %% m1: Mean value of BMI
+    B -->|pima['BMI'].median()| D2["m2"]
+    %% m2: Median value of BMI
+    B -->|pima['BMI'].mode()| D3["m3"]
+    %% m3: Mode value of BMI
+
+    %%%% Correlation Analysis
+    B -->|pima.iloc[:,0:8].corr()| E["corr_matrix"]
+    %% corr_matrix: Correlation matrix for the first eight numeric features
+
+    %%%% Visualizations
+    E --> F["heatmap"]
+    %% Heatmap visualization based on the correlation matrix

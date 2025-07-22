@@ -1,0 +1,18 @@
+flowchart TD
+    %% Node for Data Source
+    A["exchange-rate.csv"] --> |"read data"| B
+
+    %% Node for Data Loading
+    B["Load Data with pd.read_csv"] --> |"Creates variable"| C
+
+    %% Node for DataFrame
+    C["df1"] --> |"Data used for plotting"| D
+
+    %% Node for Data Usage
+    D["Plotting (distribution, correlation, scatter plots)"]
+    
+    %% Comments for each node:
+    %% A: CSV file containing exchange rates data
+    %% B: Execution of the read_csv function from pandas library to load data
+    %% C: DataFrame variable containing the imported CSV data
+    %% D: Utilization of the DataFrame for generating plots

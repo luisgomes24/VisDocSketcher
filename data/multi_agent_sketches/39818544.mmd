@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"] -->|Read CSV| B1["data"]
+    A2["test.csv"] -->|Read CSV| E["test"]
+    
+    %% Data Preprocessing
+    B1 -->|Data Cleaning & Preprocessing| C1["Feature Preparation"]
+    C1 -->|Extract Features| D["X"]
+    C1 -->|Extract Labels| F["Y"]
+    
+    %% Model Training
+    D -->|Input Features| G["ANN Model Training"]
+    F -->|Target Variable| G
+    
+    %% Model Details
+    subgraph model_details["Artificial Neural Network"]
+        direction TB
+        layer1["Dense Layer: units=10, activation='relu'"]
+        layer2["Dense Layer: units=10, activation='relu'"]
+        layer3["Dense Layer: units=10, activation='relu'"]
+        output_layer["Output Layer: units=1, activation='sigmoid'"]
+        optimizer["Optimizer: adam"]
+        loss["Loss: binary_crossentropy"]
+        metrics["Metrics: accuracy"]
+    end
+    
+    G -->|Train with |- model_details
+    G -->|Predict on Test Data| H["predictions"]
+    
+    %% Save Predictions
+    H -->|Save CSV| I["output.csv"]

@@ -1,0 +1,39 @@
+{
+  "data_sources": [
+    {
+      "file_name": "attendance data files",
+      "description": "Multiple Excel files for each class containing attendance by subject"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "inputfolder",
+      "description": "Directory to read input files"
+    },
+    {
+      "variable": "workingfolder",
+      "description": "Directory to save processed files"
+    },
+    {
+      "variable": "schoolattendance",
+      "description": "Dictionary containing attendance data of all classes and subjects"
+    },
+    {
+      "variable": "summaryattendance",
+      "description": "Processed summary DataFrame of attendance for each class"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "schoolattendance",
+      "created_by": "processattendance()",
+      "flows_to": "summaryattendance, saved to Excel files"
+    },
+    {
+      "variable": "summaryattendance",
+      "created_by": "generatesummary()",
+      "flows_to": "used for plotting, checked for data types"
+    }
+  ],
+  "models": []
+}

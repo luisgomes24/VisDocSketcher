@@ -1,0 +1,12 @@
+graph TD
+    A[Data Sources]
+    B[Variables] -->|Uses| C(L)
+    C -->|Returns| D[<img src='dummy_plots/lineplot_template.svg'/> <br/> List of Elements in L]
+    B -->|Defines| E(teams)
+    E -->|Fetches Captain| F[<img src='dummy_plots/barplot_template.svg'/> <br/>  Teams List]
+    B -->|Defines| G(racers)
+    G -->|Swaps Positions| H[<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Racers List]
+    B -->|Defines| I(lengths)
+    I -->|Holds List Lengths| J[<img src='dummy_plots/boxplot_template.svg'/> <br/> List Lengths]
+    B -->|Defines| K(arrivals)
+    K -->|Checks Arrival Time| L[<img src='dummy_plots/hist_template.svg'/> <br/> Party Arrivals] 

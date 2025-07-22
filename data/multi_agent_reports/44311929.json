@@ -1,0 +1,49 @@
+{  
+  "data_sources": [  
+    {  
+      "file": "https://ipyvizzu-story.vizzuhq.com/0.8/examples/usbudget/usbudget.csv",  
+      "description": "Contains U.S. budget data categorized by function over the years. The dataset includes columns such as Year, Function, and Amount."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "name": "df",  
+      "description": "DataFrame containing the data read from the CSV file."  
+    },  
+    {  
+      "name": "data",  
+      "description": "Data object created to store DataFrame for visualization."  
+    },  
+    {  
+      "name": "style",  
+      "description": "Style configuration for the visualizations."  
+    },  
+    {  
+      "name": "story",  
+      "description": "Story object that encapsulates the data and style for animated presentations."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "df",  
+      "creation": "pd.read_csv() to read data from the specified CSV URL.",  
+      "flow": "Added to data object using `data.add_df(df)`."  
+    },  
+    {  
+      "variable": "data",  
+      "creation": "Created using Data() and populated with the DataFrame.",  
+      "flow": "Used for creating the story and providing data for visual charts."  
+    },  
+    {  
+      "variable": "style",  
+      "creation": "Defined with various style configurations.",  
+      "flow": "Applied to the story object to style the charts."  
+    },  
+    {  
+      "variable": "story",  
+      "creation": "Initialized with data and style.",  
+      "flow": "Slides are added to the story; the final `story.play()` plays through the visual presentation."  
+    }  
+  ],  
+  "models": []  
+}

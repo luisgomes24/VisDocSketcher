@@ -1,0 +1,31 @@
+%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#ffcc00", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#ffffe0" }}}%%
+
+flowchart TD
+    subgraph DataSources
+        A["sitemap_2023_01_11_apple_com.csv"]
+        %% CSV file containing the sitemap data for apple.com.
+    end
+    
+    subgraph DataVariables
+        B["sitemap_raw"]
+        %% Raw DataFrame containing the sitemap data read from the CSV.
+        C["sitemap"]
+        %% De-duplicated DataFrame derived from sitemap_raw containing unique URLs.
+        D["duplicated_urls"]
+        %% A boolean Series that indicates which URLs are duplicated in sitemap_raw.
+        E["urldf"]
+        %% DataFrame containing the structured URL components extracted from sitemap.
+        F["china_index"]
+        %% Index of the URLs that belong to the China domain.
+        G["country_counts"]
+        %% Series containing counts of URLs classified by country.
+    end
+
+    subgraph DataFlow
+        A -->|"Read from CSV"| B
+        B -->|"Drop duplicates"| C
+        B -->|"Identify Duplicates"| D
+        C -->|"Extract URL components"| E
+        E -->|"Identify China domain"| F
+        E -->|"Count URLs by country"| G
+    end

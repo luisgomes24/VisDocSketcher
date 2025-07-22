@@ -1,0 +1,41 @@
+```mermaid
+flowchart TD
+  %% Data Source Node
+  A["/filename.csv/"] -->|Read CSV| B[data]
+  %% Data Node
+  B[data] -->|Select Columns| C["Filtered Data"]
+  C["Filtered Data"] -->|Clean Data| D["Cleaned Tweets"]
+  D["Cleaned Tweets"] -->|Sentiment Analysis| E["Sentiment Scored Data"]
+  
+  %% Sentiment Analysis Model
+  E -->|Use SentimentIntensityAnalyzer| F{"Sentiment Scores"}
+  
+  %% Sentiment Scores to Data Variables
+  F -->|Positive| G["Positive"]
+  F -->|Negative| H["Negative"]
+  F -->|Neutral| I["Neutral"]
+  
+  %% Visualization Nodes
+  D --> |Join for WordCloud| J["text"]
+  J --> |Generate WordCloud Visualization| K(("WordCloud Image"))
+  G --> |Filter for Positive WordCloud| L["Positive Text"]
+  L --> |Generate Positive WordCloud| M(("Positive WordCloud Image"))
+  H --> |Filter for Negative WordCloud| N["Negative Text"]
+  N --> |Generate Negative WordCloud| O(("Negative WordCloud Image"))
+  
+  %% Comments Section
+  %% Comment for Data Nodes
+  B:::comment -- Extract| C:::comment
+  C:::comment -- Data Cleaning| D:::comment
+  D:::comment -- Analysis| E:::comment
+
+  %% Comment for Sentiment Analysis Model
+  E:::comment -- Model Applied for Sentiment| F:::comment
+
+  %% Comment for Visualization Nodes
+  J:::comment -- Combine Tweets| K:::comment
+  L:::comment -- Filtered Positive| M:::comment
+  N:::comment -- Filtered Negative| O:::comment
+
+  classDef comment fill:#f9f,stroke:#333,stroke-width:2px; 
+```

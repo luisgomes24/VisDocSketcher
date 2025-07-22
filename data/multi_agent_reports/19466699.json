@@ -1,0 +1,58 @@
+{
+    "data_sources": [
+        {
+            "file": "/kaggle/input/jojos-bizarre-adventure-stand-stats/jojostandstatsv2.csv",
+            "description": "This CSV file contains statistical data about different stands from JoJo's Bizarre Adventure. Key attributes include destructive power, speed, range, durability, precision, and development potential."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "df",
+            "description": "A DataFrame containing the data loaded from the CSV file. It includes various characteristics of stands."
+        },
+        {
+            "name": "dictionary",
+            "description": "A mapping dictionary to convert letter grades A-E into numeric values from 5 to 1."
+        },
+        {
+            "name": "hist_data",
+            "description": "A list that collects values for histogram plotting from various columns of the DataFrame."
+        },
+        {
+            "name": "hist_df",
+            "description": "A DataFrame created by dropping rows with missing values from the original DataFrame."
+        },
+        {
+            "name": "x",
+            "description": "A filtered DataFrame that selects rows for specific stands such as 'Stone Free' and 'Gold Experience' to analyze their stats."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "Created by reading the CSV file.",
+            "flow": "Used for plotting various graphs and analyses."
+        },
+        {
+            "variable": "dictionary",
+            "creation": "Defined as a static mapping for numeric conversion.",
+            "flow": "Used to create new columns in the DataFrame for numeric representation of stand stats."
+        },
+        {
+            "variable": "hist_data",
+            "creation": "Populated by iterating over selected columns of 'hist_df'.",
+            "flow": "Used to create a distribution plot."
+        },
+        {
+            "variable": "hist_df",
+            "creation": "Filtered from 'df' to drop NA values.",
+            "flow": "Used to prepare data for histogram plotting."
+        },
+        {
+            "variable": "x",
+            "creation": "Filtered from 'df' based on stand name.",
+            "flow": "Used for creating polar plots for specific stands."
+        }
+    ],
+    "models": []
+}

@@ -1,0 +1,35 @@
+graph TD
+    %% Data Sources
+    A1[<img src='icons/image.svg' width=100 height=100/> <br/> Images without Brain Tumor] -->|Load Image Paths| B1[filepaths]
+    A2[<img src='icons/image.svg' width=100 height=100/> <br/> Images with Brain Tumor] -->|Load Image Paths| B1[filepaths]
+    
+    %% Data Preparation
+    B1 -->|Merge with Labels| C1[<img src='icons/table.svg' width=100 height=100/> <br/> df]
+    C1 -->|Split Data| D1{x_train, x_val, x_test}
+    D1 -->|Create Data Generator| E1[<img src='icons/brain.svg' width=100 height=100/> <br/> train_generator]
+    D1 -->|Create Data Generator| E2[<img src='icons/brain.svg' width=100 height=100/> <br/> validation_generator]
+    D1 -->|Create Data Generator| E3[<img src='icons/brain.svg' width=100 height=100/> <br/> test_generator]
+    
+    %% Model Configuration
+    F1[<img src='icons/brain.svg' width=100 height=100/> <br/> InceptionResNetV2 Model]
+    E1 -->|Train| F1
+    E2 -->|Validate| F1
+    E3 -->|Evaluate| F1
+    
+    %% Training and Evaluation
+    F1 -->|Fit Model| G1[<img src='icons/file.svg' width=100 height=100/> <br/> history]
+    F1 -->|Predict| H1[<img src='icons/file.svg' width=100 height=100/> <br/> y_pred]
+    
+    %% Annotations
+    classDef class1 fill:#f9f,stroke:#333,stroke-width:2px;
+    class A1,A2 class1; %% Image data sources
+
+    %% Comments
+    %% A1, A2 represent image data sources for brain tumor detection testing
+    %% B1 represents file paths of images
+    %% C1 represents a combined DataFrame of file paths and labels
+    %% D1 represents dataset splits for training, validation, and testing
+    %% E1, E2, E3 are data generators for training, validation, and test sets respectively
+    %% F1 is the machine learning model InceptionResNetV2
+    %% G1 contains training history (loss, accuracy) over epochs
+    %% H1 holds the predicted outcomes for the test set

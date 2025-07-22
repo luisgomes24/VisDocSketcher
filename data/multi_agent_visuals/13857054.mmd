@@ -1,0 +1,12 @@
+flowchart TD
+    subgraph DataLoading
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv"] -->|Load CSV| B["<img src='icons/dataframe.svg' width=100 height=100/> <br/> df"]
+    end
+    subgraph DataCleaning
+        C["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame Cleaning"] -->|Clean Data| D["<img src='icons/dataframe.svg' width=100 height=100/> <br/> df_clean"]
+    end
+    subgraph DataAnalysis
+        E["<img src='icons/brain.svg' width=100 height=100/> <br/> Data Analysis"] -->|Perform Analysis| F["<img src='dummy_plots/barplot_template.svg'/> <br/> results"]
+    end
+    A --> C
+    D --> E

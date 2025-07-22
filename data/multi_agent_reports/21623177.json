@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file_name": "SolarPrediction.csv",
+      "description": "Contains solar radiation data used for prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing solar radiation data with multiple time features."
+    },
+    {
+      "name": "X",
+      "description": "Feature set for the model excluding the target variable 'Radiation'."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing solar radiation."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set of features.",
+    },
+    {
+      "name": "X_test",
+      "description": "Testing set of features."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set of target variable (Radiation)."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing set of target variable (Radiation)."
+    },
+    {
+      "name": "regr",
+      "description": "RandomForestRegressor model object used for predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data",
+      "creation_method": "pd.read_csv",
+      "flow": ["data is profiled using ProfileReport", "engineered features are created", "used for fitting RandomForest model"]
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "Extracted from data by dropping 'Radiation'",
+      "flow": ["Used for model training and testing."]
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "Extracted from data as the target",
+      "flow": ["Used for model training and testing."]
+    },
+    {
+      "variable_name": "X_train",
+      "creation_method": "train_test_split",
+      "flow": ["Used for fitting the model"]
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "train_test_split",
+      "flow": ["Used for fitting the model"]
+    },
+    {
+      "variable_name": "X_test",
+      "creation_method": "train_test_split",
+      "flow": ["Used for scoring the model"]
+    },
+    {
+      "variable_name": "y_test",
+      "creation_method": "train_test_split",
+      "flow": ["Used for scoring the model"]
+    },
+    {
+      "variable_name": "regr",
+      "creation_method": "RandomForestRegressor",
+      "flow": ["Model is fit with X_train and y_train ", "Scores are calculated based on training and test datasets."]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestRegressor",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "max_depth": 25,
+        "random_state": 3
+      }
+    }
+  ]
+}

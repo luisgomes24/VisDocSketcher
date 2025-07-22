@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> transactions_train.csv"] --> B["📈 Preprocess Data"]
+    B --> C["📝 Group by Date <img src='table.svg'/>"]
+    C --> D["🗓️ Prepare Data for Prophet <img src='column_split.svg'/>"]
+    D --> E["🔍 Create and Fit Model <img src='brain.svg'/>"]
+    E --> F["🔮 Make Future Predictions"]
+    F --> G["📊 Forecast Data <img src='table.svg'/>"]
+    G --> H["📊 Plot Forecasts <img src='lineplot_template.svg'/>"]
+    H --> I["📊 Plot Forecast Components <img src='lineplot_template.svg'/>"]
+    I --> J["📊 Cross Validation <img src='table.svg'/>"]
+    J --> K["📊 Performance Metrics <img src='barplot_template.svg'/>"]

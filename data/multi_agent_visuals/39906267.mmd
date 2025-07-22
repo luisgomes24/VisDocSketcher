@@ -1,0 +1,6 @@
+flowchart TD
+    A["genetic_data_train.csv"] -->|Read CSV| B["df_train"]
+    C["genetic_data_test.csv"] -->|Read CSV| D["df_test"]
+    B -->|Train Model| E["trained_model"]
+    D -->|Predict| F["predictions"]
+    F -->|Evaluate| G["evaluation"]

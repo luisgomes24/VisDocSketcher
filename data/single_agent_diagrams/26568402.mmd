@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg'/>"] --> B["🔧 Preprocess Data"]
+    B --> C["🖼️ Visualize Data <img src='dummy_plots/barplot_template.svg'/>"]
+    C --> D["🧠 Build Model"]
+    D --> E["🛠️ Compile Model"]
+    E --> F["🚀 Train Model"]
+    F --> G["📈 Evaluate Model <img src='dummy_plots/hist_template.svg'/>"]
+    G --> H["💾 Save Model"]
+    H --> I["🔍 Make Predictions"]
+    I --> J["📈 Evaluate Predictions"]
+    
+    classDef process fill:#f9f,stroke:#333,stroke-width:4px;
+    class A,B,C,D,E,F,G,H,I,J process;

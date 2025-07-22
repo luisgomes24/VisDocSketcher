@@ -1,0 +1,52 @@
+{"data_sources": [
+    {"file": "/kaggle/input/kmarket-mlp/feature_cols.dill", "description": "Contains feature columns used for model input"},
+    {"file": "/kaggle/input/kmarket-mlp/val_model.hdf5", "description": "Pre-trained Keras model for predictions"}
+],
+"data_variables": [
+    {"variable": "feature_cols", "description": "List of feature columns loaded from a .dill file"},
+    {"variable": "model", "description": "Keras model loaded from a .hdf5 file for generating predictions"},
+    {"variable": "test_df", "description": "DataFrame containing test set data for making predictions"},
+    {"variable": "sample_prediction_df", "description": "DataFrame for holding the predictions to be submitted"},
+    {"variable": "X", "description": "Numpy array containing input features derived from test_df"},
+    {"variable": "action", "description": "Binary decision output of the model indicating action to take"}
+],
+"data_flow": [
+    {
+        "variable": "feature_cols",
+        "created_by": "dill.load",
+        "flows_to": "X, model"
+    },
+    {
+        "variable": "model",
+        "created_by": "tf.keras.models.load_model",
+        "flows_to": "action"
+    },
+    {
+        "variable": "test_df",
+        "created_by": "env.iter_test",
+        "flows_to": "X, sample_prediction_df"
+    },
+    {
+        "variable": "X",
+        "created_by": "test_df[feature_cols].values",
+        "flows_to": "action"
+    },
+    {
+        "variable": "action",
+        "created_by": "model(X, training=False).numpy()[0,0] > 0.5",
+        "flows_to": "sample_prediction_df"
+    },
+    {
+        "variable": "sample_prediction_df",
+        "created_by": "env.predict",
+        "flows_to": "submission"
+    }
+],
+"models": [
+    {
+        "model_type": "Keras model",
+        "input_features": "feature_cols",
+        "target_variable": "action",
+        "hyperparameters": []
+    }
+]}

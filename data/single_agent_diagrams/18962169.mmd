@@ -1,0 +1,14 @@
+```
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg'/> <br/> From CSV"] --> B["🔍 Data Preprocessing"];
+    B --> C["🧮 Train-Test Split"];
+    C --> D["🔤 One-Hot Encoding"];
+    D --> E["🧠 Build Model 1: XGBRegressor"];
+    E --> F["🔮 Predictions on Validation Data"];
+    F --> G["📈 Calculate MAE for Model 1"];
+    G --> H["🧠 Improve Model: XGBRegressor"];
+    H --> I["🔮 Predictions on Validation Data for Improved Model"];
+    I --> J["📈 Calculate MAE for Improved Model"];
+    J --> K["🧠 Build Model 3: Poor Performance"];
+    K --> L["🔮 Predictions on Validation Data for Poor Model"];
+    L --> M["📈 Calculate MAE for Poor Model"];

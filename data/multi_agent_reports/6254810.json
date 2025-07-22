@@ -1,0 +1,32 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/diamonds.csv",
+      "description": "A dataset containing information about diamonds, including their characteristics and prices. It has columns like carat, depth, price, etc."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dpath",
+      "description": "The path to the diamonds dataset CSV file."
+    },
+    {
+      "name": "diamonddf",
+      "description": "A DataFrame containing the diamonds dataset after being read from the CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "diamonddf",
+      "creation": "Created by reading the CSV file using pd.read_csv(dpath).",
+      "usage": [
+        "Displayed with head() method for initial inspection.",
+        "Used in info() method to check the data types and structure.",
+        "The 'clarity' column is dropped from the DataFrame.",
+        "Checked for missing values with isna().sum() method.",
+        "Visualizations created for the 'carat', 'depth', 'table', and 'price' columns using seaborn."
+      ]
+    }
+  ],
+  "models": []
+}

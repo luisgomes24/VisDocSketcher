@@ -1,0 +1,13 @@
+```mermaid
+flowchart TD
+    A["Calendar Data"] -->|load| B["calender DataFrame"]
+    B -->|select features| C["date_features DataFrame"]
+    C -->|transformation| D["dates DataFrame"]
+    D -->|save| E["data/date_features.csv"]
+    %% Nodes Explanation
+    %% A: Source CSV file containing calendar-related data.
+    %% B: DataFrame containing the loaded calendar data.
+    %% C: Subset of calendar data with specific selected columns.
+    %% D: DataFrame created through concatenation, one-hot encoding, and normalization.
+    %% E: Final structure saved as CSV for further use.
+```

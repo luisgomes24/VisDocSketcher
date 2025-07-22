@@ -1,0 +1,36 @@
+flowchart TD
+
+  %% Define data sources
+  A1["Zomato CSV<br><small>zomato_restaurants_in_India.csv</small>"] 
+  %% Define main data variable
+  A2["zomato<br><small>DataFrame of restaurant data</small>"]
+
+  %% Define data cleaning processes
+  B1["Data Cleaning"]
+  B2["Duplicates Removal"]
+  B3["Missing Values Treatment"]
+
+  %% Define filtered data variables
+  C1["zch<br><small>Chennai restaurants</small>"]
+  C2["rd_type<br><small>Restaurant types count</small>"]
+  C3["rd_loc<br><small>Restaurant locality count</small>"]
+  C4["rd_pr<br><small>Restaurant price range count</small>"]
+  C5["zch_rat<br><small>Non-zero ratings</small>"]
+  C6["cuisine_count<br><small>Count of cuisines</small>"]
+
+  %% Diagram connections
+  A1 -->|Read CSV| A2
+  A2 --> B1
+  B1 --->|Clean Data| A2
+  A2 --> B2
+  B2 --->|Remove Duplicates| A2
+  A2 --> B3
+  B3 --->|Treat Missing Values| A2
+  A2 -->|Filter (Chennai)| C1 
+
+  %% Further processing and analysis
+  C1 -->|Group and Count| C2
+  C1 -->|Group and Count| C3
+  C1 -->|Group and Count| C4
+  C1 -->|Filter Non-zero Ratings| C5
+  C1 -->|Count Cuisines| C6

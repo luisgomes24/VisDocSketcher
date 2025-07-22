@@ -1,0 +1,30 @@
+flowchart TD
+    %% Data Sources
+    A1["train.csv"]
+    A2["test.csv"]
+    A3["store.csv"]
+
+    %% Data Variables
+    B1[train_df]
+    B2[test_df]
+    B3[store_df]
+    B4[y_train]
+    B5[ID]
+    B6[Predictions]
+
+    %% Models
+    C1[LGBMRegressor]
+
+    %% Data Flow
+    A1 --> B1
+    A2 --> B2
+    A3 --> B3
+
+    B1 --> B4
+    B1 --> C1
+    B2 --> C1
+    B4 --> C1
+
+    C1 --> B6
+
+    B6 --> D1["Final predictions CSV"]

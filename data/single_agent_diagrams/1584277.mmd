@@ -1,0 +1,20 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' />"] --> B["📊 Explore Data"]
+    B --> C["<img src='boxplot_template.svg'/> <br/> Histogram of Column Data"]
+    B --> D["<img src='barplot_template.svg'/> <br/> Correlation Matrix"]
+    B --> E["<img src='scatter_plot_template.svg'/> <br/> Scatter and Density Plots"]
+    C --> F["📈 Review Next File <img src='file.svg' />"]
+
+    subgraph DataFiles
+        F1["📁 File: IDACountry.csv"] --> C
+        F1 --> D
+        F1 --> E
+        F2["📁 File: IDACountry-Series.csv"] --> C
+        F2 --> D
+        F2 --> E
+        F3["📁 File: IDAData.csv"] --> C
+        F3 --> D
+        F3 --> E
+    end
+
+    A -->|Repeated for each file| F

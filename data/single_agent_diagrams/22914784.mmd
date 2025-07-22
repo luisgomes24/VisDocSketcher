@@ -1,0 +1,7 @@
+flowchart TD
+    A["👩‍💻 Load Data <img src='icons/file.svg'/> <br/> train_data, test_data"] --> B["🔍 Explore Data <img src='icons/table.svg'/> <br/> Check Columns and NaNs"]
+    B --> C["🔧 Preprocess Data <img src='icons/row_split.svg'/> <br/> Train-Test Split"]
+    C --> D["💡 Feature Engineering <img src='icons/column_split.svg'/> <br/> One-Hot Encoding"]
+    D --> E["🧠 Model Training <img src='icons/brain.svg'/> <br/> Train XGBRegressor"]
+    E --> F["📊 Evaluate Model <img src='icons/table.svg'/> <br/> Make Predictions"]
+    F --> G["📥 Export Results <img src='icons/file.svg'/> <br/> Save submission.csv"]

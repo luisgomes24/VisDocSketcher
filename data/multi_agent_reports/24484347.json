@@ -1,0 +1,99 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/tsdata-1/us_energy.csv",
+      "description": "Time series data of US energy consumption"
+    },
+    {
+      "file": "../input/greenhouse-dataset/GreenhouseClimate1.csv",
+      "description": "Climate data from greenhouse for time series prediction"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing US energy consumption time series data"
+    },
+    {
+      "name": "xtrain",
+      "description": "Training subset of energy data filtered by cutoff date"
+    },
+    {
+      "name": "xvalid",
+      "description": "Validation subset of energy data filtered by cutoff date"
+    },
+    {
+      "name": "forecast",
+      "description": "Forecasted values for the validation set using Exponential Smoothing"
+    },
+    {
+      "name": "xdat",
+      "description": "DataFrame containing greenhouse climate data"
+    },
+    {
+      "name": "df_cv",
+      "description": "Cross-validation results for model performance"
+    },
+    {
+      "name": "comparison",
+      "description": "Comparison DataFrame for performance metrics of models"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "created_from": "read_csv",
+      "flows_to": ["df.set_index", "df.plot", "seasonal_decompose"]
+    },
+    {
+      "variable": "xtrain",
+      "created_from": "df.loc",
+      "flows_to": ["ExponentialSmoothing"]
+    },
+    {
+      "variable": "xvalid",
+      "created_from": "df.loc",
+      "flows_to": ["ExponentialSmoothing"]
+    },
+    {
+      "variable": "forecast",
+      "created_from": "fit1.forecast",
+      "flows_to": ["plot_acf"]
+    },
+    {
+      "variable": "xdat",
+      "created_from": "read_csv",
+      "flows_to": ["data cleaning", "Prophet"]
+    },
+    {
+      "variable": "df_cv",
+      "created_from": "cross_validation",
+      "flows_to": ["performance_metrics"]
+    },
+    {
+      "variable": "comparison",
+      "created_from": "pd.DataFrame",
+      "flows_to": ["output"]
+    }
+  ],
+  "models": [
+    {
+      "name": "ExponentialSmoothing",
+      "features": ["xtrain['value']"],
+      "target": "xvalid['value']",
+      "hyperparameters": {"seasonal_periods": 12, "trend": "mul", "seasonal": "mul"}
+    },
+    {
+      "name": "Prophet",
+      "features": ["ds", "Tair"],
+      "target": "y",
+      "hyperparameters": {"weekly_seasonality": false, "interval_width": 0.95}
+    },
+    {
+      "name": "NeuralProphet",
+      "features": ["Tair"],
+      "target": "y",
+      "hyperparameters": {"weekly_seasonality": false}
+    }
+  ]
+}

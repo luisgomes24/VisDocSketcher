@@ -1,0 +1,13 @@
+```
+graph TD;
+    A["📂 Load Data"] --> B["🔄 Pre-process Text"];
+    B --> C["✂️ Process Text into Word Lists"];
+    C --> D["📊 Create Bigrams"];
+    D --> E["📈 Visualization"];
+    E --> F["🌈 Word Clouds"];
+    F --> G["📊 Barplot Top 20 Bigrams"];
+    G --> H["📋 Tables of Top 20 Words"];
+    
+    A["📂 Load Data"] -->|File 1| B;
+    A["📂 Load Data"] -->|File 2| B;
+    A["📂 Load Data"] -->|File 3| B;

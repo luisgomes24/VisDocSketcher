@@ -1,0 +1,59 @@
+{
+"data_sources": [
+  {
+    "file_name": "train.csv",
+    "description": "Contains training data for autonomous driving, including prediction strings and image IDs."
+  }
+],
+"data_variables": [
+  {
+    "variable_name": "train",
+    "description": "DataFrame containing the training data loaded from train.csv."
+  },
+  {
+    "variable_name": "cars",
+    "description": "List containing car target data extracted from the training DataFrame."
+  },
+  {
+    "variable_name": "angles",
+    "description": "List of angles (r1, r2, r3) representing orientations of cars."
+  },
+  {
+    "variable_name": "centroid_id_to_cars",
+    "description": "Dictionary mapping centroid IDs to lists of cars for each cluster."
+  }
+],
+"data_flow": [
+  {
+    "variable_name": "train",
+    "created_by": "pd.read_csv",
+    "flows_to": "Extracted to lists for 'cars' and 'angles'."
+  },
+  {
+    "variable_name": "cars",
+    "created_by": "Appending from target data in 'train'.",
+    "flows_to": "Used for visualizations, and clustering."
+  },
+  {
+    "variable_name": "angles",
+    "created_by": "Extracted from 'cars'.",
+    "flows_to": "Used for clustering.
+  },
+  {
+    "variable_name": "centroids",
+    "created_by": "kmeans function returning cluster centers.",
+    "flows_to": "Used to group cars into clusters using their orientations."
+  }
+],
+"models": [
+  {
+    "model_name": "kmeans",
+    "input_features": "Rotational angles of cars.",
+    "target_variable": "Cluster assignments.",
+    "hyperparameters": {
+      "k": 32,
+      "max_iter": 10
+    }
+  }
+]
+}

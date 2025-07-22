@@ -1,0 +1,105 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/zomato-restaurant-info-bengaluru/zomato_locations.csv",
+      "description": "Contains information about restaurants in Bengaluru including their location, average rating, and count."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "locations",
+      "description": "DataFrame containing restaurant information including name, location coordinates, average rating, and count."
+    },
+    {
+      "name": "y",
+      "description": "Target variable representing the average rating of restaurants."
+    },
+    {
+      "name": "x",
+      "description": "Features used for modeling, including various characteristics of the restaurants (like count and coordinates)."
+    },
+    {
+      "name": "data_sort",
+      "description": "Sorted DataFrame based on average ratings."
+    },
+    {
+      "name": "dd",
+      "description": "DataFrame used to visualize clustering results."
+    },
+    {
+      "name": "y_kmeans",
+      "description": "Predicted cluster labels from K-Means clustering."
+    },
+    {
+      "name": "y_hc",
+      "description": "Predicted cluster labels from Agglomerative Clustering."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "locations",
+      "creation": "pd.read_csv('/kaggle/input/zomato-restaurant-info-bengaluru/zomato_locations.csv')",
+      "flow": "Used for data exploration, visualization, and modeling."
+    },
+    {
+      "variable": "y",
+      "creation": "Extracted from locations DataFrame (specifically column for average ratings)",
+      "flow": "Used as target variable in Linear Regression."
+    },
+    {
+      "variable": "x",
+      "creation": "Extracted from locations DataFrame (features used for modeling)",
+      "flow": "Used as input features in Linear Regression and clustering models."
+    },
+    {
+      "variable": "data_sort",
+      "creation": "locations.sort_values(by='avg_rating', ascending=False)",
+      "flow": "Used for exploratory data analysis and visualizations."
+    },
+    {
+      "variable": "dd",
+      "creation": "pd.DataFrame(x, columns=['count','lat','lon','avg_rating'])",
+      "flow": "Used for visualization of clustering results."
+    },
+    {
+      "variable": "y_kmeans",
+      "creation": "kmeans.fit_predict(x)",
+      "flow": "Used for analyzing the results of K-Means clustering."
+    },
+    {
+      "variable": "y_hc",
+      "creation": "hc.fit_predict(x)",
+      "flow": "Used for analyzing the results of Agglomerative Clustering."
+    }
+  ],
+  "models": [
+    {
+      "model": "Linear Regression",
+      "input_features": "Count, latitude, longitude",
+      "target_variable": "Avg_rating",
+      "hyperparameters": "None specified"
+    },
+    {
+      "model": "K-Means Clustering",
+      "input_features": "Count, latitude, longitude, avg_rating",
+      "target_variable": "Cluster assignments",
+      "hyperparameters": {
+        "n_clusters": 4,
+        "init": "k-means++",
+        "max_iter": 300,
+        "n_init": 10,
+        "random_state": 0
+      }
+    },
+    {
+      "model": "Agglomerative Clustering",
+      "input_features": "Count, latitude, longitude, avg_rating",
+      "target_variable": "Cluster assignments",
+      "hyperparameters": {
+        "n_clusters": 4,
+        "affinity": "euclidean",
+        "linkage": "ward"
+      }
+    }
+  ]
+}

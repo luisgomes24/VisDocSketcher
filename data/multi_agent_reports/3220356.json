@@ -1,0 +1,27 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/f.csv",
+      "description": "Contains data used for exploratory analysis, loaded with pandas."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "A DataFrame containing the data loaded from 'f.csv' with 1000 rows for analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in various plotting functions to visualize the data",
+        "Passed to plotPerColumnDistribution function",
+        "Passed to plotCorrelationMatrix function",
+        "Passed to plotScatterMatrix function"
+      ]
+    }
+  ],
+  "models": []
+}

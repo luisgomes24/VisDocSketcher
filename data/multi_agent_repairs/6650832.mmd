@@ -1,0 +1,23 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A1["/kaggle/input/operators.csv"]:::dataSource
+    A2["/kaggle/input/weapons.csv"]:::dataSource
+
+    %% Data Variables
+    B1["DataFrame df1"]:::dataVariable
+    B2["DataFrame df2"]:::dataVariable
+
+    %% Data Flow
+    A1 --> B1
+    A2 --> B2
+
+    %% Data Processing
+    subgraph Exploratory_Data_Analysis
+        B1 --> |"Distribution, Correlation, Scatter Plots"| C1["Visualizations for df1"]
+        B2 --> |"Distribution, Correlation, Scatter Plots"| C2["Visualizations for df2"]
+    end
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+```

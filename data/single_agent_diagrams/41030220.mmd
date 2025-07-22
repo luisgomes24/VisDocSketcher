@@ -1,0 +1,11 @@
+flowchart TD
+    A["📥 Load Dataset <img src='file.svg' /> <br/> data = pd.read_csv('diabetes.csv')"] --> B["🔍 Inspect Data <img src='table.svg' /> <br/> data.head(), data.tail()"]
+    B --> C["📊 Understand Data <img src='table.svg' /> <br/> data.info(), data.describe()"]
+    C --> D["⚠️ Check NULL Values <img src='table.svg' /> <br/> data.isnull().sum()"]
+    D --> E["🔢 Distribution of Target <img src='table.svg' /> <br/> sns.countplot()"]
+    E --> F["📈 Exploratory Data Analysis <img src='scatter_plot_template.svg' /> <br/> Visualize various distributions and relationships"]
+    F --> G["🔄 Split Dataset <img src='row_split.svg' /> <br/> X_train, X_test, Y_train, Y_test"]
+    G --> H["🔄 Standardization <img src='brain.svg' /> <br/> scaler = StandardScaler(), X = scaler.transform(X)"]
+    H --> I["🤖 Train SVM Model <img src='brain.svg' /> <br/> SVM.fit(X_train, Y_train)"]
+    I --> J["✅ Evaluate Model <img src='brain.svg' /> <br/> accuracy, confusion matrix"]
+    J --> K["🔍 Predictive System <img src='brain.svg' /> <br/> Make predictions on new input"]

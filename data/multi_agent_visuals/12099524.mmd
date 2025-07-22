@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    S1[<img src='icons/file.svg' width=100 height=100/> <br/> Train Features CSV] -->|Load data| V1[<img src='icons/table.svg' width=100 height=100/> <br/> train_feat_df]
+    S2[<img src='icons/file.svg' width=100 height=100/> <br/> Train Metadata Parquet Parts] -->|Concatenate metadata| V2[<img src='icons/table.svg' width=100 height=100/> <br/> train_metadf]
+
+    %% Variables and Data Transformation
+    V1 -->|Prepare input features| M1[<img src='icons/brain.svg' width=100 height=100/> <br/> MultiHeadedSequenceClassifier Model]
+    V2 -->|Add metadata features| M1
+
+    M1 -->|Uses input features| V5[<img src='icons/table.svg' width=100 height=100/> <br/> files_dict]
+    V1 -->|Extract unique IDs| V3[unique_pids]
+    V3 -->|Calculate 5% of IDs| V4[<img src='dummy_plots/barplot_template.svg'/> <br/> nvalid]
+
+    %% Model Preparation and Management
+    subgraph ModelInputPreparation
+        V5 -->|Organize training data| V6[<img src='icons/column_split.svg' width=100 height=100/> <br/> DataBlock]
+        V6 -->|Manage training and validation| M1
+    end
+
+    %% Model and Target
+    M1 -->|Predicts based on medical images| D1[<img src='icons/column_split.svg' width=100 height=100/> <br/> Multiple Target Variables]
+
+    %% Comments for Clarity
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:1px;
+    classDef variable fill:#C6F4D6,stroke:#333,stroke-width:1px;
+    classDef model fill:#F2C464,stroke:#333,stroke-width:1px;
+
+    class S1,S2 dataSource;
+    class V1,V2,V3,V4,V5 variable;
+    class M1 model;
+    class V6,D1 variable;

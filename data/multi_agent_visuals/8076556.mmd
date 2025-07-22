@@ -1,0 +1,36 @@
+%% This flowchart describes the workflow for a digit recognition task using a Keras Sequential model
+
+flowchart TD
+    %% Data sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/>train.csv"]:::data -->|Load data| B["<img src='icons/table.svg' width=100 height=100/> <br/>Train Data"]:::data
+    C["<img src='icons/file.svg' width=100 height=100/> <br/>test.csv"]:::data -->|Load data| D["<img src='icons/table.svg' width=100 height=100/> <br/>Test Data"]:::data
+
+    %% Data Preparation
+    B -->|Extract Features| E["<img src='icons/column_split.svg' width=100 height=100/> <br/>X_train"]:::data
+    B -->|Extract Labels| F["<img src='icons/column_split.svg' width=100 height=100/> <br/>y_train"]:::data
+    E -->|Normalize| G[Xs_train]:::data
+    D -->|Extract Features| H[X_test]:::data
+
+    %% Data Splitting
+    E -->|Train/Validation Split| I[X_valid]:::data
+    F -->|Train/Validation Split| J[y_valid]:::data
+    I -->|Normalize| K[Xs_valid]:::data
+
+    %% Model Definition
+    G -->|Input| L[Sequential Model]:::model
+    F -->|Labels| L
+    L -->|Compile & Train| M[Fitted Model]:::model
+
+    %% Model Prediction
+    M -->|Predict| N[Predictions on X_test]:::output
+
+    %% Model Specification
+    subgraph L[Sequential Model]
+        direction TB
+        a[Input Layer: Dense (64, relu, input_shape=(784,))]
+        b[Output Layer: Dense (10, softmax)]
+    end
+
+    classDef data fill:#87CEEB,stroke:#333,stroke-width:1px;
+    classDef model fill:#C6F4D6,stroke:#2F7F7F,stroke-width:1px;
+    classDef output fill:#F2C464,stroke:#996633,stroke-width:1px;

@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/odb-paris/ParisHousing.csv",
+      "description": "Housing data for Paris, containing features like square meters, price, category, number of rooms, and various amenities."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data",
+      "description": "DataFrame containing the housing dataset read from the CSV file."
+    },
+    {
+      "name": "scaled_data",
+      "description": "Standardized version of the original dataset, transformed to have a mean of 0 and a standard deviation of 1."
+    },
+    {
+      "name": "wcss",
+      "description": "List containing the Within-Cluster Sum of Squares for various numbers of clusters to determine optimal clusters in K-Means."
+    },
+    {
+      "name": "lst_vars",
+      "description": "List of combinations of pairs of features from the scaled dataset for potential analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "created_by": "pd.read_csv",
+      "flow_destination": "Undergoes exploratory data analysis, transformations, and scaling."
+    },
+    {
+      "variable": "scaled_data",
+      "created_by": "StandardScaler().transform",
+      "flow_destination": "Used for K-Means clustering analysis."
+    },
+    {
+      "variable": "wcss",
+      "created_by": "KMeans.fit",
+      "flow_destination": "Used to visualize the optimal number of clusters with an elbow method plot."
+    },
+    {
+      "variable": "lst_vars",
+      "created_by": "list(combinations(scaled_data.columns,2))",
+      "flow_destination": "Potentially used for further analysis, such as visualizing relationships."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "KMeans",
+      "input_features": "All features from scaled_data, particularly utilized for clustering.",
+      "target_variable": "Not applicable for clustering.",
+      "hyperparameters": {
+        "init": "k-means++",
+        "random_state": 0,
+        "number_of_clusters": "Varies (e.g., tested from 1 to 100 with steps of 20)"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+flowchart TD
+
+  %% Nodes
+  A[kc_house_data.csv]:::dataSource --> B[hs DataFrame]:::dataVariable
+  B --> C(bedrooms):::dataVariable
+  B --> D(bathrooms):::dataVariable
+  
+  %% Data Usage
+  C --> E[Line Plot]:::dataUsage
+  C --> F[Histograms]:::dataUsage
+  C --> G[KDE Plots]:::dataUsage
+  
+  D --> E
+  D --> F
+  D --> G
+
+  %% Classes and Styles
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef dataUsage fill:#bfb,stroke:#333,stroke-width:2px;
+
+  %% Comments
+  class A,B,C,D,E,F,G;
+  click A "Contains housing sale data including features like bedrooms, bathrooms, etc." "Data Source"
+  click B "DataFrame containing housing sale data loaded from kc_house_data.csv" "Variable"
+  click C "Column representing the number of bedrooms" "Variable"
+  click D "Column representing the number of bathrooms" "Variable"
+  click E "Line plot using both bedrooms and bathrooms data" "Visualization"
+  click F "Histograms using both bedrooms and bathrooms data" "Visualization"
+  click G "KDE plots using both bedrooms and bathrooms data" "Visualization"

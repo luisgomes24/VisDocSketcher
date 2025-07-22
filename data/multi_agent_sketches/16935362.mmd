@@ -1,0 +1,22 @@
+flowchart TD
+    %% Data source node
+    A["train.csv"]
+    %% Data loading node
+    B["Load training data"]
+    %% DataFrame variable node
+    C["DataFrame: train"]
+    %% Columns exploration node
+    D["Explore columns: target, standard_error"]
+    %% Excerpt length calculation node
+    E["Calculate excerpt_length"]
+    %% Word count calculation node
+    F["Calculate word_count"]
+    %% Correlation analysis node
+    G["Correlation analysis: target vs excerpt_length"]
+    H["Correlation analysis: target vs word_count"]
+
+    %% Define relationships
+    A --> B --> C
+    C --> D
+    C --> E --> G
+    C --> F --> H

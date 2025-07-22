@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+
+%% Data Sources
+A1["../input/civilian-employment-level.csv"] %% Civilian employment levels over time
+A2["../input/civilian-employment-level_1.csv"] %% Another dataset of civilian employment levels over time
+A3["../input/civilian-employment-population-ratio.csv"] %% Ratio of civilian employment to the total population
+
+%% DataFrames
+B1["df1"] %% DataFrame containing civilian employment levels from the first CSV file
+B2["df2"] %% DataFrame containing civilian employment levels from the second CSV file
+B3["df3"] %% DataFrame containing civilian employment-population ratio from the third CSV file
+
+%% Loading Data
+A1 -- pd.read_csv --> B1
+A2 -- pd.read_csv --> B2
+A3 -- pd.read_csv --> B3
+
+%% Data Usage
+B1 --> C1["Distributions Plotting"]
+B1 --> C2["Exploratory Analysis"]
+B2 --> C1
+B2 --> C2
+B3 --> C1
+B3 --> C2
+
+%% Comments explaining nodes
+%% A1, A2, A3 are data sources loaded into dataframes B1, B2, B3 respectively
+%% B1, B2, B3 are then used for plotting and exploration tasks
+```

@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A[train.csv]:::dataSource --> B[train DataFrame]
+    C[weather_power_nasa.csv]:::dataSource --> D[weather DataFrame]
+
+    %% Data Merging
+    D -->|Merge on Metropolitan Area Code and Date| B
+
+    %% Data Processing
+    B -->|Feature Engineering| E[X, y]
+    E -->|train_test_split| F[X_train, y_train]
+    E -->|train_test_split| G[X_test, y_test]
+
+    %% ML Model
+    F -->|Train| H(LazyRegressor)
+    G -->|Test| H
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#ff9,stroke:#333,stroke-width:2px;
+    class H model;

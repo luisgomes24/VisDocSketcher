@@ -1,0 +1,23 @@
+%% Mermaid.js Diagram for Jupyter Notebook 21948748
+```mermaid
+flowchart TD
+    A["Data Source: ../input/breast-cancer-wisconsin-data/data.csv"] -->|"Load Data"| B["Dataset"]
+    B -->|"Feature Selection"| C["X: Features"]
+    B -->|"Label Encoding"| D["y: Target"]
+    C -->|"train_test_split"| E["X_train"]
+    C -->|"train_test_split"| F["X_test"]
+    D -->|"train_test_split"| G["y_train"]
+    D -->|"train_test_split"| H["y_test"]
+    I["Neural Network Model: Sequential"]
+    E -->|"Model Training"| I
+    G -->|"Model Training"| I
+    I -->|"Output: Training History"| J["History"]
+    F -->|"Model Evaluation"| I
+    H -->|"Model Evaluation"| I
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#f66,stroke-width:2px;
+
+    class A dataSource;
+    class I model;
+```

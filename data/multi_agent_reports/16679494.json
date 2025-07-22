@@ -1,0 +1,95 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/data-science-spring-osaka-2021/train.csv",
+      "description": "Training data containing inputs and corresponding labels for the model."
+    },
+    {
+      "file": "/kaggle/input/data-science-spring-osaka-2021/test.csv",
+      "description": "Testing data for evaluating model performance."
+    },
+    {
+      "file": "/kaggle/input/data-science-spring-osaka-2021/train/train_0000.csv",
+      "description": "Sensor data used for creating image representations for training."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing the training dataset."
+    },
+    {
+      "name": "df_test",
+      "description": "DataFrame containing the testing dataset."
+    },
+    {
+      "name": "df_sensor",
+      "description": "DataFrame holding sensor data, containing variable-length sequences."
+    },
+    {
+      "name": "X_train",
+      "description": "Numpy array of image data created from the training sensor data."
+    },
+    {
+      "name": "X_test",
+      "description": "Numpy array of image data created from the test sensor data."
+    },
+    {
+      "name": "y_train",
+      "description": "One-hot encoded array of target labels corresponding to training data."
+    },
+    {
+      "name": "training_generator",
+      "description": "Instance of EskinGenerator for generating augmented training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "pd.read_csv('/kaggle/input/data-science-spring-osaka-2021/train.csv')",
+      "flows": "Used to create X_train and y_train."
+    },
+    {
+      "variable": "df_test",
+      "creation": "pd.read_csv('/kaggle/input/data-science-spring-osaka-2021/test.csv')",
+      "flows": "Used to create X_test."
+    },
+    {
+      "variable": "df_sensor",
+      "creation": "pd.read_csv('/kaggle/input/data-science-spring-osaka-2021/train/train_0000.csv')",
+      "flows": "Used in the create_image function to transform sensor data."
+    },
+    {
+      "variable": "X_train",
+      "creation": "create_image(df_train, 512)",
+      "flows": "Input to training_generator for data augmentation."
+    },
+    {
+      "variable": "X_test",
+      "creation": "create_image(df_test, 512)",
+      "flows": "Used for model evaluation."
+    },
+    {
+      "variable": "y_train",
+      "creation": "le.fit_transform(df_train.action_seq.values)",
+      "flows": "Targets for model training."
+    },
+    {
+      "variable": "training_generator",
+      "creation": "EskinGenerator(X_train, y_train, ...) ",
+      "flows": "Used in model training to provide batches of augmented data."
+    }
+  ],
+  "models": [
+    {
+      "name": "EskinGenerator",
+      "description": "A data generator for Keras that performs data augmentation.",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "batch_size": 32,
+        "alpha": 0.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "data_sources": [
+    {
+      "file_name": "ca_train.csv",
+      "description": "Training dataset containing confirmed cases and fatalities over time."
+    },
+    {
+      "file_name": "ca_test.csv",
+      "description": "Test dataset for predicting confirmed cases and fatalities."
+    },
+    {
+      "file_name": "ca_submission.csv",
+      "description": "Submission format for the predicted results."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training data including dates, confirmed cases, and fatalities."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data for predictions."
+    },
+    {
+      "name": "submission",
+      "description": "DataFrame for storing the submission output with predicted values."
+    },
+    {
+      "name": "confirmed_cases",
+      "description": "Time series data of confirmed COVID-19 cases over time."
+    },
+    {
+      "name": "Fatalities",
+      "description": "Time series data of confirmed fatalities over time."
+    },
+    {
+      "name": "train_new",
+      "description": "Filtered DataFrame with only confirmed cases greater than zero."
+    },
+    {
+      "name": "df",
+      "description": "Final DataFrame for model training featuring relevant columns."
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame for training, excluding target variables."
+    },
+    {
+      "name": "y",
+      "description": "Target DataFrame containing confirmed cases and fatalities."
+    },
+    {
+      "name": "X_train",
+      "description": "Training features split from X for model training."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing features split from X for model evaluation."
+    },
+    {
+      "name": "y_train",
+      "description": "Training target split from y for model training."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing target split from y for model evaluation."
+    },
+    {
+      "name": "models",
+      "description": "DataFrame containing model names and their corresponding R² scores for confirmed cases and fatalities."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_via": "pd.read_csv",
+      "flow": "Passed for exploratory data analysis (EDA) and feature engineering."
+    },
+    {
+      "variable": "test",
+      "created_via": "pd.read_csv",
+      "flow": "Used for predicting confirmed cases and fatalities."
+    },
+    {
+      "variable": "train_new",
+      "created_via": "Filtering on 'ConfirmedCases',"
+      "flow": "Used for visualization and feature engineering."
+    },
+    {
+      "variable": "df",
+      "created_via": "Dropping unnecessary columns from 'train_new',"
+      "flow": "Used for model training."
+    },
+    {
+      "variable": "X",
+      "created_via": "Dropping target variables from 'df',"
+      "flow": "Split into training and testing sets."
+    },
+    {
+      "variable": "y",
+      "created_via": "Selecting target variables from 'df',"
+      "flow": "Split into training and testing sets."
+    },
+    {
+      "variable": "X_train",
+      "created_via": "train_test_split",
+      "flow": "Used to fit models."
+    },
+    {
+      "variable": "X_test",
+      "created_via": "train_test_split",
+      "flow": "Used to evaluate models."
+    },
+    {
+      "variable": "y_train",
+      "created_via": "train_test_split",
+      "flow": "Used to fit models."
+    },
+    {
+      "variable": "y_test",
+      "created_via": "train_test_split",
+      "flow": "Used to evaluate models."
+    },
+    {
+      "variable": "models",
+      "created_via": "Creating a DataFrame with model performance metrics",
+      "flow": "Used for result visualization."
+    },
+    {
+      "variable": "test_data",
+      "created_via": "Processing 'test' DataFrame for predictions.",
+      "flow": "Used to store and output predictions."
+    },
+    {
+      "variable": "submission",
+      "created_via": "to_csv",
+      "flow": "Saved to 'submission.csv' for submission."
+    }
+  ],
+  "models": [
+    {
+      "name": "KNeighborsRegressor",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "ConfirmedCases",
+      "hyperparameters": null
+    },
+    {
+      "name": "LinearRegression",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "ConfirmedCases",
+      "hyperparameters": null
+    },
+    {
+      "name": "RandomForestRegressor",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "ConfirmedCases",
+      "hyperparameters": null
+    },
+    {
+      "name": "DecisionTreeRegressor",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "ConfirmedCases",
+      "hyperparameters": null
+    },
+    {
+      "name": "BayesianRidge",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "Fatalities",
+      "hyperparameters": null
+    },
+    {
+      "name": "GradientBoostingRegressor",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "Fatalities",
+      "hyperparameters": null
+    },
+    {
+      "name": "Lasso",
+      "input_features": "['Week', 'Day', 'DayOfWeek', 'DayOfYear']",
+      "target_variable": "Fatalities",
+      "hyperparameters": null
+    }
+  ]
+}

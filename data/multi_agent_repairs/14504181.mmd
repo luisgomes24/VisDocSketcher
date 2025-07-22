@@ -1,0 +1,19 @@
+```mermaid
+%% This Mermaid diagram shows the workflow of the Vaccination Data Analysis Project
+flowchart TD
+    A["Start"] --> B["Load Data"]
+    B --> C["Filter India Data"]
+    B --> D["Filter Canada Data"]
+    B --> E["Filter Selected Countries"]
+    C --> F["Analysis on India Data"]
+    E --> G["Compare Selected Countries Data"]
+
+    %% Node explanations
+    %% A: Start of the process.
+    %% B: Loading data from country_vaccinations.csv into DataFrame.
+    %% C: Filtering India-specific data for detailed analysis.
+    %% D: Filtering Canada-specific data; not explicitly used in analysis.
+    %% E: Filtering data for selected countries (Canada, India, China, England, United States).
+    %% F: Performing analysis specific to India using filtered data.
+    %% G: Performing comparative analysis among selected countries.
+```

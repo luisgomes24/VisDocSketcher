@@ -1,0 +1,27 @@
+graph TD
+    A[Data Source] -->|CSV| B[Data Pipeline]
+    B -->|Transformation| C[ML Model]
+    C -->|Prediction| D[Output]
+    D -->|Evaluation| E[Results]
+
+    A --> D1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Data Visualisation"]
+    B --> D2["<img src='dummy_plots/barplot_template.svg'/> <br/> Data Clean"]
+    C --> D3["<img src='dummy_plots/lineplot_template.svg'/> <br/> Model Training"]
+    D --> D4["<img src='dummy_plots/hist_template.svg'/> <br/> Model Performance"]
+    E --> D5["<img src='dummy_plots/boxplot_template.svg'/> <br/> Final Report"]
+
+    classDef dataNode fill:#87CEEB;
+    classDef modelNode fill:#C6F4D6;
+    classDef outputNode fill:#F2C464;
+    classDef plotNode fill:#FFCDD2;
+
+    class A dataNode;
+    class B dataNode;
+    class C modelNode;
+    class D outputNode;
+    class E outputNode;
+    class D1 plotNode;
+    class D2 plotNode;
+    class D3 plotNode;
+    class D4 plotNode;
+    class D5 plotNode;

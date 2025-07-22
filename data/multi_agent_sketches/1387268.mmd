@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node representing the data source
+    A[trade-waste-hauler-licensees.csv] -->|Load data| B[df1]
+    
+    %% Node representing the DataFrame creation
+    B[df1] -->|Preview data| C[Data Head]
+    B[df1] -->|Create Visualizations| D[Histogram, PCA plots]
+
+    %% Comments for each node
+    %% A: Represents the CSV file data source containing trade waste hauler licensees.
+    %% B: Represents the DataFrame created from the CSV file, limited to first 100 rows.
+    %% C: Represents the action to preview the data by displaying its head.
+    %% D: Represents the visualizations created using the DataFrame, such as histograms and PCA plots.

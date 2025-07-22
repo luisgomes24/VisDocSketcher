@@ -1,0 +1,30 @@
+%%{init : {'theme' : 'base', 'themeVariables': {'fontSize': '16px'}}}%%
+flowchart TD
+
+%% Data source nodes
+A1["<img src='path/to/icon.svg' width=100 height=100/> <br/> train.csv"]:::source --> B1["<img src='path/to/icon.svg' width=100 height=100/> <br/> df_train"]:::variable
+A2["<img src='path/to/icon.svg' width=100 height=100/> <br/> test.csv"]:::source --> B2["<img src='path/to/icon.svg' width=100 height=100/> <br/> df_test"]:::variable
+A3["<img src='path/to/icon.svg' width=100 height=100/> <br/> sample_submission.csv"]:::source --> B3["<img src='path/to/icon.svg' width=100 height=100/> <br/> df_sample_submission"]:::variable
+A4["<img src='path/to/icon.svg' width=100 height=100/> <br/> revealed_test.csv"]:::source --> B4["<img src='path/to/icon.svg' width=100 height=100/> <br/> df_revealed_test"]:::variable
+A5["<img src='path/to/icon.svg' width=100 height=100/> <br/> census_starter.csv"]:::source --> B5["<img src='path/to/icon.svg' width=100 height=100/> <br/> df_census_starter"]:::variable
+
+%% Variable nodes and transitions
+B1 --> C1["<img src='path/to/icon.svg' width=100 height=100/> <br/> X_train"]:::variable
+B1 --> C2["<img src='path/to/icon.svg' width=100 height=100/> <br/> y_train"]:::variable
+B2 --> C3["<img src='path/to/icon.svg' width=100 height=100/> <br/> X_test"]:::variable
+
+%% Model training nodes
+C1 & C2 --> D1["<img src='dummy_plots/linear_regression_template.svg'/> <br/> Linear Regression"]:::model
+C1 & C2 --> D2["<img src='dummy_plots/linear_regression_template.svg'/> <br/> Ridge (alpha: 0.001, 0.01, 0.1, 1, 10)"]:::model
+C1 & C2 --> D3["<img src='dummy_plots/linear_regression_template.svg'/> <br/> Lasso (alpha: 0.001, 0.01, 0.1, 1, 10)"]:::model
+C1 & C2 --> D4["<img src='dummy_plots/linear_regression_template.svg'/> <br/> Random Forest (n_estimators: 5, 10, 50, 100, 200)"]:::model
+C1 & C2 --> D5["<img src='dummy_plots/linear_regression_template.svg'/> <br/> K-Nearest Neighbors (n_neighbors: 3, 5, 7)"]:::model
+C1 & C2 --> D6["<img src='dummy_plots/linear_regression_template.svg'/> <br/> XGBoost (max_depth: 3, 6, 9; learning_rate: 0.1, 0.01, 0.001)"]:::model
+
+%% Prediction node
+D1 & D2 & D3 & D4 & D5 & D6 --> E["y_pred"]:::variable
+
+%% Style Definitions
+classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+classDef variable fill:#87CEEB,stroke:#333,stroke-width:2px;
+classDef model fill:#C6F4D6,stroke:#333,stroke-width:2px;

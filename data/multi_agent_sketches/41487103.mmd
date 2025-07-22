@@ -1,0 +1,22 @@
+%% Data Processing and Visualization Flowchart %%
+flowchart TD
+    A[train.csv] -->|Read CSV file| B[train_csv]
+    %% train.csv serves as a source for injury data
+    B -->|Explore data and count injuries| C[organ_counts]
+    %% organ_counts is derived from train_csv for visualization purposes
+    subgraph DICOMProcessing
+        D[DICOM Images] -->|Select file| E[image_file]
+        %% image_file is a single DICOM file selected from the DICOM Images directory
+        E -->|Read DICOM image| F[ds]
+        %% ds represents the DICOM image data read into the workflow
+        F -->|Extract pixel data| sample_vid
+        %% sample_vid holds pixel data for selected DICOM images
+    end
+    sample_vid -->|Visualize| G[Animation of samples]
+    %% sample_vid is visualized to show appearance of DICOM images
+    B -->|Visualize injury counts| C
+    %% organ_counts is visualized to show the distribution of injuries
+    B --> H[train_list]
+    %% train_list is used to loop through DICOM images for preprocessing
+    H -->|Preprocess images| I[Batch Processing]
+    %% train_list processes batches of DICOM images

@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='../input/ctdsmedium-blogs/sb_blog.csv'/> <br/>" ] --> B["🔍 Preprocess Data"]
+    B --> C["🧹 Clean Text"]
+    C --> D["🔄 Tokenize Text"]
+    D --> E["🔢 Calculate Metrics"]
+    E --> F["📊 Visualize Claps by Heroes <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    F --> G["📊 Boxplot of Script Lengths <img src='dummy_plots/boxplot_template.svg'/> <br/>"]
+    G --> H["📚 Frequency Distribution of Words <img src='dummy_plots/hist_template.svg'/> <br/>"]

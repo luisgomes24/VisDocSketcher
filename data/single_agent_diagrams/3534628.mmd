@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/>"] --> B["🔍 Check Data <img src='table.svg'/>"]
+    B --> C["📊 Visualize Missing Values <img src='boxplot_template.svg'/>"]
+    B --> D["🧹 Preprocess Data"]
+    D --> E["📊 Visualize Features <img src='hist_template.svg'/>"]
+    E --> F["🤖 Model Training"]
+    F --> G["📈 Model Evaluation"]
+    G --> H["📝 Submission Preparation"]
+    H --> I["📤 Save Submission <img src='file.svg'/>"]

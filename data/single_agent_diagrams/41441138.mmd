@@ -1,0 +1,14 @@
+graph TD;
+    A["📂 Load Data <img src='icons/file.svg' /> <br/>"]
+    B["🔍 Examine Data <img src='icons/table.svg' /> <br/>"]
+    C["📊 Data Visualization <img src='icons/image.svg' /> <br/>"]
+    
+    A -->|Read CSV| B
+    B -->|Display Head| B
+    B -->|Info & Describe| B
+    B --> C
+    C -->|Pie Chart| C["<img src='dummy_plots/piechart_template.svg'/> <br/> Crimes in Different Areas"]
+    C -->|Heatmap| C["<img src='dummy_plots/heatmap_template.svg'/> <br/> Correlation Heatmap"]
+    C -->|Count Plot by Crime Category| C["<img src='dummy_plots/barplot_template.svg'/> <br/> Number of Crimes per Category"]
+    C -->|Count Plot by Victim's Sex| C["<img src='dummy_plots/barplot_template.svg'/> <br/> Number of Crimes per Victim's Sex"]
+    C -->|Count Plot by Victim's Age| C["<img src='dummy_plots/barplot_template.svg'/> <br/> Number of Crimes per Victim's Age"]

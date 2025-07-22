@@ -1,0 +1,23 @@
+flowchart TD
+    %% Node for the AlphaFold prediction file
+    A["alpha_fold_df.csv"] -->|"Create DataFrame with AlphaFold results"| B["alpha_fold_df"]
+    %% Node for extracting wildtypes
+    B -->|"Extract unique wildtype sequences"| C["wildtypes"]
+    %% Node for selecting a wildtype
+    C -->|"Select first wildtype sequence"| D["wildtype"]
+    %% Node for AF keys specific to the selected wildtype
+    D -->|"Get AF ids for predictions"| E["AF_keys"]
+    %% Node for reading confidence scores
+    E -->|"Read JSON for confidence scores"| F["confidense_df"]
+    %% Node for handling confidence scores for all AF matches
+    E -->|"Create list of confidence scores DataFrames"| G["confidense_df_list"]
+    G -->|"Min of all confidence scores"| H["min_score"]
+    G -->|"Max of all confidence scores"| I["max_score"]
+    %% Node for handling cif file paths
+    E -->|"Generate cif file paths"| J["cif_path_list"]
+    %% Node for atom data extraction
+    J -->|"Read atom data from cif files"| K["atom_df_list"]
+    K -->|"Unique residues for consistency"| L["wildtype_set"]
+    %% Node for reading train wildtype groups
+    M["train_wildtype_groups.csv"] -->|"Read mutations data"| N["train_wildtype_groups"]
+    N -->|"Filter mutations for selected wildtype"| O["mutations"]

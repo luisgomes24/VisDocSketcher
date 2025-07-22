@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "TAT_Prediction_Test_Version_61_Min_400_03_12_2019_25_11_to_03_12_With_Cyclic_and_rounding_revised.csv",
+      "description": "Test dataset used for predictions, containing various features for analysis."
+    },
+    {
+      "file_name": "TAT_Prediction_Train_Version_61_Min_400_03_12_2019_03_05_to_24_11_With_Cyclic_and_rounding_revised.csv",
+      "description": "Training dataset containing features for model training and evaluation."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding data from the first CSV file (test dataset)."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame holding data from the second CSV file (training dataset)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "creation_method": "pd.read_csv",
+      "usage": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    },
+    {
+      "variable_name": "df2",
+      "creation_method": "pd.read_csv",
+      "usage": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,30 @@
+%% This diagram represents the data workflow of a Jupyter Notebook analyzing Pokemon data.
+
+flowchart TD
+    %% Define the initial data source node
+    A[pokemon.csv] -->|Initial Dataset| B(URL)
+    %% Define API Call
+    B -->|API Call| C[content]
+    
+    %% API Response to DataFrame of names
+    C -->|JSON to DataFrame| D[names]
+    
+    %% Detailed API Calls for stats
+    D -->|Fetch Stats| E[poke_content]
+    
+    %% Merge data to create final dataframe
+    E -->|Additions to Names| F[pokemon]
+    
+    %% Final Dataset
+    F -->|Export| A
+    F -->|Present| G[Final DataFrame Presentation]
+    F -->|Visualize| H[Data Visualization]
+
+    %% Comments
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#bbf,stroke:#888,stroke-width:2px;
+    classDef output fill:#bfb,stroke:#888,stroke-width:2px;
+
+    class A dataSource;
+    class B,C,D,E dataProcess;
+    class F,G,H output;

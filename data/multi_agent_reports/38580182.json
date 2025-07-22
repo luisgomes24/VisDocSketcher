@@ -1,0 +1,62 @@
+{
+"data_sources": [
+    {
+        "file_path": "/kaggle/input/playground-series-s3e15/data.csv",
+        "description": "Main feature dataset for heat flux prediction."
+    },
+    {
+        "file_path": "/kaggle/input/playground-series-s3e15/sample_submission.csv",
+        "description": "Sample submission file format for Kaggle competition."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "data",
+        "description": "Dataframe containing the main dataset loaded from CSV."
+    },
+    {
+        "variable_name": "sample_submission",
+        "description": "Dataframe containing the submission format for the Kaggle competition."
+    },
+    {
+        "variable_name": "df",
+        "description": "Copy of the main dataset excluding the target variable."
+    },
+    {
+        "variable_name": "num_cols",
+        "description": "List of numeric feature column names in the dataset."
+    },
+    {
+        "variable_name": "cat_cols",
+        "description": "List of categorical feature column names in the dataset."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "data",
+        "created_by": "pd.read_csv",
+        "flow": "Used for exploratory data analysis and imputation."
+    },
+    {
+        "variable_name": "sample_submission",
+        "created_by": "pd.read_csv",
+        "flow": "Standby for submission format but no other processing."
+    },
+    {
+        "variable_name": "df",
+        "created_by": "data.copy()",
+        "flow": "Used for data imputation where numeric and categorical variables are processed."
+    },
+    {
+        "variable_name": "num_cols",
+        "created_by": "df.select_dtypes",
+        "flow": "Used to determine the numeric variables for imputation."
+    },
+    {
+        "variable_name": "cat_cols",
+        "created_by": "df.select_dtypes",
+        "flow": "Used to determine categorical variables for imputation."
+    }
+],
+"models": []
+}

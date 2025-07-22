@@ -1,0 +1,25 @@
+flowchart TD
+    %% Nodes for data sources
+    A1[/pyTestTab.csv/]:::source  --> B1
+    A2[/pyTrainTab.csv/]:::source  --> B2
+
+    %% Nodes for DataFrames
+    %% df1 creation and usage
+    B1[df1]:::dataframe --> C1["Visualize: plotPerColumnDistribution"]
+    B1 --> C2["Visualize: plotCorrelationMatrix"]
+    B1 --> C3["Visualize: plotScatterMatrix"]
+
+    %% df2 creation and usage
+    B2[df2]:::dataframe --> D1["Visualize: plotPerColumnDistribution"]
+    B2 --> D2["Visualize: plotCorrelationMatrix"]
+    B2 --> D3["Visualize: plotScatterMatrix"]
+
+    %% Styling
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataframe fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    A1:::source -- pyTestTab.csv as the initial data source
+    A2:::source -- pyTrainTab.csv as the training data source
+    B1:::dataframe -- DataFrame from pyTestTab.csv
+    B2:::dataframe -- DataFrame from pyTrainTab.csv

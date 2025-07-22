@@ -1,0 +1,14 @@
+flowchart TD
+    %% Start of the flowchart
+    A["train.csv.gz"] --> |"pd.read_csv"| B["train"]
+    B --> |"Combine with test dataset"| C["alldata"]
+    
+    D["Sample_submission.csv.gz"] --> |"pd.read_csv"| E["sub"]
+    
+    %% Feature processing and transformations
+    F["TF-IDF on breeds"] --> |"TfidfVectorizer"| G["breed_text"]
+    G --> |"SVD Transformation"| H["breed_svd"]
+    
+    %% Data flow continuation
+    H --> |"Add to alldata"| C
+    G --> |"Add to alldata"| C

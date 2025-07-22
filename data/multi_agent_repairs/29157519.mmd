@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["stopwords-master"] -->|"Load stopwords"| B["stopwords"]
+    
+    %% Text Input
+    C["Multiline string in Chinese"] -->|"Define text"| D["text"]
+    
+    %% Word Count Process
+    D -->|"Input text for word count"| E["getWordCount Function"]
+    B -->|"Use stopwords to filter"| E
+    E -->|"Generate word count dictionary"| F["word_count"]
+    
+    %% Data Transformation
+    F -->|"Create DataFrame from word count"| G["word_ds (DataFrame)"]
+    
+    %% Display and Visualization
+    G -->|"Display top 20 words"| H["Display DataFrame"]
+    F -->|"Generate Word Cloud"| I["WordCloud Model"]
+    
+    %% Word Cloud Model Details
+    subgraph WordCloudModel
+    I["WordCloud Model"]
+    I -- "font_path: 方正正中黑简体.TTF"
+    I -- "width: 1000"
+    I -- "height: 1000"
+    I -- "background_color: red"
+    I -- "max_words: 50"
+    I -- "color_func: Custom coloring"
+    end
+```

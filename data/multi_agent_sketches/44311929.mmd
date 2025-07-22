@@ -1,0 +1,25 @@
+flowchart TD
+    %% Node for CSV Data Source
+    A["U.S. Budget CSV Data"]
+    click A href "https://ipyvizzu-story.vizzuhq.com/0.8/examples/usbudget/usbudget.csv"
+    
+    %% Node for Loading data into DataFrame
+    B["Load data into DataFrame (df)"]
+    
+    %% Node for Creating Data Object
+    C["Create Data Object (data)"]
+    
+    %% Node for Styling Configuration
+    D["Styling Configuration (style)"]
+    
+    %% Node for Story Creation
+    E["Create Story Object (story)"]
+    
+    %% Data flow
+    A -->|Read CSV| B
+    B -->|Add to data object| C
+    D -->|Apply style| E
+    C -->|Use in story| E
+    
+    %% Final Visualization Flow
+    E -->|Play animation| F["Animated Visual Presentation"]

@@ -1,0 +1,33 @@
+%% This is a Mermaid diagram of the data workflow in the given notebook
+flowchart TD
+    %% Data Sources
+    A1["C:\Users\gemma\Documents\osos\"]
+    A2["C:\Users\gemma\Documents\osos\grizzly\"]
+    A3["C:\Users\gemma\Documents\osos\teddys\"]
+    A4["C:\Users\gemma\Documents\osostest\"]
+    
+    %% Data Variables and Initial Steps
+    B["train"] --> C{train_p function}
+    C -->|creates| D[genera_train]
+    A1 --> B
+    A2 --> B
+    A3 --> B
+    A4 --> E["test"]
+    
+    %% Model Initialization and Data Flow
+    F["modelo function"] -->|initializes| G[model]
+    G -->|used for training| H{proceso_train}
+    D -->|feeds data to| H
+    H -->|returns| I[data_model]
+    
+    %% Model Testing and Evaluation
+    J(imagen_test function) -->|evaluates| G
+    E --> J
+    
+    %% Performance Analysis
+    I --> K["Analyze performance metrics"]
+    
+    %% Machine Learning Models
+    G -.->|VGG16: Adam, ReLU, softmax, epochs: 5| L1[VGG16]
+    G -.->|VGG19: Adam, ReLU, softmax, epochs: 5| L2[VGG19]
+    G -.->|MobileNetV2: Adam, Tanh, softmax, epochs: 5| L3[MobileNetV2]

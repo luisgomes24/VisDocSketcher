@@ -1,0 +1,28 @@
+flowchart TD
+    %% Node for reading train data
+    A[train.csv] -->|Load data using pandas| B[train_data]
+    %% Node for reading test data
+    C[test.csv] -->|Load data using pandas| D[test_data]
+    %% Nodes for generating image files
+    B -->|Generate images| E[train images]
+    D -->|Generate images| F[test images]
+    %% Node for creating ImageDataLoaders
+    E -->|Create ImageDataLoaders| G[data]
+    %% Node for training the model
+    G -->|Train model with ResNet50| H[Model Training]
+    %% Node for listing test files
+    F -->|List JPG files| I[test_files]
+    %% Node for test DataLoader
+    I -->|Create DataLoader| J[test_dl]
+    %% Node for model predictions
+    J -->|Get predictions from model| K[predictions]
+    %% Node for submission DataFrame
+    K -->|Create submission DataFrame| L[submission.csv]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:1px;
+    classDef process fill:#bbf,stroke:#999,stroke-width:1px;
+
+    class A,C dataSource;
+    class B,D,E,F,G,I,J,K,L dataVariable;
+    class H process;

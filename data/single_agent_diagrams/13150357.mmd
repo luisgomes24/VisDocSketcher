@@ -1,0 +1,10 @@
+graph TD;
+    A["📁 Load Dataset"] --> B["📸 Preview Images <img src='dummy_plots/scatter_plot_template.svg'/> <br/> Show Sample Bears"];
+    B --> C["🛠 Preprocess Images"];
+    C --> D["🧠 Build Model"];
+    D --> E["⚙️ Train Model"];
+    E --> F["📊 Evaluate Model <img src='dummy_plots/barplot_template.svg'/> <br/> Accuracy and Score"];
+    F --> G["📈 Visualize Results <img src='dummy_plots/lineplot_template.svg'/> <br/> Training and Validation Metrics"];
+    G --> H["📊 Compare Optimizers <img src='dummy_plots/boxplot_template.svg'/> <br/> Adam vs. RMS"];
+    H --> I["📉 Hyperparameter Tuning <img src='dummy_plots/hist_template.svg'/> <br/> Learning Rate and Activation Functions"];
+    I --> J["✅ Final Model Selection: MobileNet V2"];

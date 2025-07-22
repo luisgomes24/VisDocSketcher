@@ -1,0 +1,21 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] --> |"load as train_df"| B["<img src='icons/table.svg' width=100 height=100/> <br/> train_df"]
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] --> |"load as test_df"| C["<img src='icons/table.svg' width=100 height=100/> <br/> test_df"]
+    %% Combined Data
+    B --> |"combine as list"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> combine"]
+    C --> |"combine as list"| D
+    %% Data Processing
+    D --> |"feature engineering"| E["<img src='icons/row_split.svg' width=100 height=100/> <br/> Processed train_df and test_df"]
+    %% Machine Learning Model
+    E --> |"train logistic regression"| F["<img src='icons/brain.svg' width=100 height=100/> <br/> Logistic Regression Model"]
+    F --> |"predict survival status"| G["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions on test_df"]
+    
+    %% Comments explaining nodes
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef model fill:#F2C464,stroke:#333,stroke-width:2px;
+    
+    class A,A1 dataSource;
+    class B,C,D,E,G dataVariable;
+    class F model;

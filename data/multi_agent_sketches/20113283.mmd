@@ -1,0 +1,39 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        E1["DataWMask.xlsx"]
+        E2["Breast Cancer Images"]
+        E3["Additional Masks"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables
+        A1["data"]
+        A2["CFG"]
+        A3["path_result"]
+        A4["mapping"]
+        A5["yolo_txt"]
+    end
+
+    %% Data Flow
+    E1 -->|Read Excel| A1 %% Data creation from Excel
+    E2 -->|Load Images| A1 %% Images loaded for processing
+    E3 -->|Load Masks| A1 %% Additional data for masks
+    A1 -->|Process and Label| A4 %% Mapping of labels
+    A1 -->|Image Processing| A5 %% YOLO format creation
+    A5 -->|Save YOLO Format| A3 %% YOLO text files saved
+
+    %% Machine Learning Model
+    subgraph Model
+        M1["YOLOv5"]
+    end
+
+    A1 -->|Train| M1 %% Feeding images for training
+    A5 -->|Train| M1 %% Using masks as bounding boxes
+
+    %% Hyperparameters
+    subgraph Hyperparameters
+        H["CFG settings\n- img: CFG.IMG_SIZE\n- batch: 8\n- epochs: 1000"]
+    end
+
+    M1 -->|Configured With| H %% Model configured with hyperparameters

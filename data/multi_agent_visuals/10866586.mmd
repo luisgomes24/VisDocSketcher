@@ -1,0 +1,64 @@
+flowchart TD
+    subgraph DataSources
+        direction TB
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/train.csv"]
+        B["<img src='icons/file.svg' width=100 height=100/> <br/> ../input/test.csv"]
+    end
+    
+    subgraph Variables
+        direction TB
+        C["<img src='icons/table.svg' width=100 height=100/> <br/> home_data"]
+        D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+        E["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]
+        F["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_X"]
+        G["<img src='icons/row_split.svg' width=100 height=100/> <br/> val_X"]
+        H["<img src='icons/row_split.svg' width=100 height=100/> <br/> train_y"]
+        I["<img src='icons/row_split.svg' width=100 height=100/> <br/> val_y"]
+        J["<img src='icons/file.svg' width=100 height=100/> <br/> test_data"]
+        K["<img src='icons/column_split.svg' width=100 height=100/> <br/> test_X"]
+        L["<img src='icons/brain.svg' width=100 height=100/> <br/> test_preds"]
+        M["<img src='icons/file.svg' width=100 height=100/> <br/> output"]
+    end
+
+    subgraph Models
+        direction TB
+        N["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor"]
+        O["<img src='icons/brain.svg' width=100 height=100/> <br/> DecisionTreeRegressor"]
+    end
+
+    A --> C
+    C -->|"Extract SalePrice"| D
+    C -->|"Select features"| E
+    E -->|"Split to train_X, val_X"| F
+    E -->|"Split to train_X, val_X"| G
+    D -->|"Split to train_y, val_y"| H
+    D -->|"Split to train_y, val_y"| I
+    F & H --> |"Train"| N
+    G & I --> |"Validate"| N
+    B --> J
+    J --> |"Select features"| K
+    K --> |"Predict"| L
+    L --> |"Prepare output DataFrame with IDs"| M
+
+    %% Descriptions
+    %% DataSources
+    A:::comment -->|"Training data source"| C
+    B:::comment -->|"Test data source"| J
+
+    %% Variables
+    C:::comment -- "Loaded training data" --> D
+    D:::comment -- "Target variable" --> E
+    E:::comment -- "Feature selection" --> F
+    F:::comment -- "Training data" --> G
+    G:::comment -- "Validation data" --> N
+    H:::comment -- "Target train data" --> N
+    I:::comment -- "Target validation data" --> N
+    J:::comment -- "Loaded test data" --> K
+    K:::comment -- "Test features" --> L
+    L:::comment -- "Predictions" --> M
+
+    %% Models
+    N:::comment -- "Random Forest Model" --> L
+    O:::comment -- "Decision Tree Model (not used in flow)" -->
+
+    classDef comment fill:none,stroke:none,color:#333;

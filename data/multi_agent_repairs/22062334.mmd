@@ -1,0 +1,47 @@
+%% Mermaid diagram for data science workflow
+flowchart TD
+    subgraph DataSources
+        A["/sample_submit.csv/"] 
+        %% Sample submission file
+    end
+    subgraph DataVariables
+        B["pd_submit"] 
+        %% DataFrame for submission with predictions
+        C["train_dataset"] 
+        %% Custom train dataset
+        D["test_dataset"] 
+        %% Custom test dataset
+        E["train_data_loader"] 
+        %% DataLoader for train dataset
+        F["test_data_loader"] 
+        %% DataLoader for test dataset
+        G["model"] 
+        %% EfficientNet model
+        H["pred_list"] 
+        %% List of predictions
+        I["loss_fn"] 
+        %% Loss function: CrossEntropyLoss
+        J["optimizer"] 
+        %% Optimizer: Adam
+    end
+    subgraph DataFlow
+        B --> |"Updated with predictions"| A
+        C --> |"Used in"| E
+        D --> |"Used in"| F
+        E --> |"Batches for training"| G
+        F --> |"Batches for predictions"| G
+        G --> |"Generates"| H
+        H --> |"Updates"| B
+    end
+    subgraph ModelHyperparameters
+        K["EfficientNet"] 
+        %% Model
+        L["num_classes: 5"] 
+        %% Number of classes
+        M["learning_rate: 5e-5"] 
+        %% Learning rate
+        N["epochs: 21"] 
+        %% Number of epochs
+    end
+    M((Train)) --> I
+    M((Evaluate)) --> J

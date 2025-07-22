@@ -1,0 +1,9 @@
+graph TD
+A["<img src='icons/database.svg' width=100 height=100/> <br/> SQL Database"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Source File"] --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"];
+
+D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Training"] --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Evaluation"];
+
+F["<img src='dummy_plots/lineplot_template.svg' width=100 height=100/> <br/> Output Plot"];
+
+G -->|model predictions| F;
+F -->|analyze results| E;

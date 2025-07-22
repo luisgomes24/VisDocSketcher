@@ -1,0 +1,12 @@
+%% This is a Mermaid.js diagram representing the data flow in the notebook 6008552
+flowchart TD
+    %% Data Source
+    A["submission.csv"] -->|Read 1000 rows| B["df1 DataFrame"]
+    
+    %% Data Variable
+    B --> C["Plotting Functions"]
+
+    %% Functions using the data
+    C -->|Input Data| D["plotPerColumnDistribution"]
+    C -->|Input Data| E["plotCorrelationMatrix"]
+    C -->|Input Data| F["plotScatterMatrix"]

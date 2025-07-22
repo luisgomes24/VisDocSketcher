@@ -1,0 +1,41 @@
+flowchart TD
+    %% Data Sources
+    subgraph data_sources[Data Sources]
+        DS1["train.csv"]
+        DS2["test.csv"]
+    end
+    
+    %% Data Variables
+    subgraph data_variables[Data Variables]
+        V1["titanic_df"]
+        V2["test_df"]
+        V3["X_train"]
+        V4["Y_train"]
+        V5["X_test"]
+        V6["Y_pred"]
+    end
+
+    %% Models
+    subgraph models[ML Models]
+        M1["Logistic Regression"]
+        M2["Random Forest Classifier"]
+    end
+    
+    %% Data Flow
+    DS1 -->|"Read CSV"| V1
+    DS2 -->|"Read CSV"| V2
+    V1 -->|"Drop 'Survived', to get features"| V3
+    V1 -->|"Extract 'Survived' as target"| V4
+    V2 -->|"Prepare test features"| V5
+    V3 --> M1
+    V4 --> M1
+    V3 --> M2
+    V4 --> M2
+    M1 -->|"Predict"| V6
+    M2 -->|"Predict"| V6
+    
+    %% Model Annotations
+    M1:::modelDesc -- Logistic Regression is trained with X_train as features and Y_train as target --
+    M2:::modelDesc -- Random Forest with 100 estimators is trained similarly --
+    
+    classDef modelDesc fill:#f9f,stroke:#333,stroke-width:2px;

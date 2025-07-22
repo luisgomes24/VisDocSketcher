@@ -1,0 +1,25 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffcc00', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#ffffe0'}}}%%
+flowchart TD
+    %% Node for Data Source
+    A["kc_house_data.csv"] 
+    %% Comment: Represents the source file for house sales data
+
+    %% Node for DataFrame
+    B[df]
+    %% Comment: DataFrame holding the housing sales data
+
+    %% Nodes for Visualization Figures
+    C[fig1] 
+    %% Comment: Plotly figure for distribution of bedrooms
+
+    D[fig2]
+    %% Comment: Plotly figure for distribution of bathrooms
+
+    E[fig3]
+    %% Comment: Plotly figure for distribution of square footage
+
+    %% Data Flow Arrows
+    A -->|read_csv| B
+    B -->|distribution of<br/>bedrooms| C
+    B -->|distribution of<br/>bathrooms| D
+    B -->|distribution of<br/>square footage| E

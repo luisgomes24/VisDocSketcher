@@ -1,0 +1,12 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> train.csv"] --> B["🗃️ Dataframe Creation <img src='table.svg' />"]
+    B --> C["📊 Explore Data <img src='hist_template.svg' />"]
+    C --> D["🖼️ View Training Images <img src='image.svg' />"]
+    D --> E["🎨 Image Segmentation Preparation"]
+    E --> F["🔍 Get Metadata"]
+    F --> G["🔗 Merge Paths with Data"]
+    G --> H["🖼️ Display Images with Masks <img src='scatter_plot_template.svg' />"]
+    H --> I["🤖 Model Training"]
+    I --> J["🔍 Evaluation"]
+    J --> K["📊 Generate Submission File"]
+    K --> L["✅ Complete!"]

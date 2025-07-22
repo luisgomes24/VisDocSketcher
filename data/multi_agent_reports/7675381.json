@@ -1,0 +1,74 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/flowers-recognition/flowers/flowers",
+      "description": "Directory containing flower images organized in subdirectories by class."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "STORAGE_CLIENT",
+      "description": "GCS storage client to interact with Google Cloud Storage."
+    },
+    {
+      "name": "WORKING_DIRECTORY",
+      "description": "Directory where TFRecord files are saved."
+    },
+    {
+      "name": "BASE_DIR",
+      "description": "Base directory for the flower images dataset."
+    },
+    {
+      "name": "FILE_PATTERN",
+      "description": "Pattern to match all jpg files in the base directory."
+    },
+    {
+      "name": "TARGET_SIZE",
+      "description": "Target size for resizing images."
+    },
+    {
+      "name": "CLASSES",
+      "description": "List of class names derived from the subdirectory names."
+    },
+    {
+      "name": "AUTO",
+      "description": "Auto tuning for parallel calls in TF data sequences."
+    },
+    {
+      "name": "SHARDS",
+      "description": "Number of shards to split the TFRecords into."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset1",
+      "creation_method": "filenames.map(decode_jpeg_and_label)",
+      "flows_to": "dataset2"
+    },
+    {
+      "variable": "dataset2",
+      "creation_method": "dataset1.map(resize_and_crop_image)",
+      "flows_to": "dataset3"
+    },
+    {
+      "variable": "dataset3",
+      "creation_method": "dataset2.map(recompress_image)",
+      "flows_to": "TFRecord writing"
+    },
+    {
+      "variable": "dataset4",
+      "creation_method": "tf.data.Dataset.list_files(WORKING_DIRECTORY + '*.tfrec')",
+      "flows_to": "model training or validation"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "TPU-based model",
+      "input_features": "Images in TFRecord format",
+      "target_variable": "Class labels",
+      "hyperparameters": {
+        "description": "TPU configuration and model architecture are not specified in this notebook."
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A[Training Data - Malware Images] -->|Load using ImageDataGenerator| B[batches]
+    A2[Validation Data - Malware Images] -->|Load using ImageDataGenerator| B
+
+    %% Data Variables
+    B -->|Retrieve Image and Label Batches| C[imgs]
+    B -->|Retrieve Image and Label Batches| D[labels]
+    
+    C -->|Normalize and Split| E[x_train]
+    D -->|Normalize and Split| F[y_train]
+    C -->|Split for Testing| G[x_test]
+    D -->|Split for Testing| H[y_test]
+
+    %% ML Model
+    E -->|Train CoAtNet Model| I[CoAtNet Model]
+    F -->|Train CoAtNet Model| I
+    
+    I -->|Predict on Test Data| J[pred_x]
+    J -->|Derive Predicted Labels| K[y_pred]
+
+    %% Confusion Matrix
+    H -->|Compare with Predictions| L[c_matrix]
+    K -->|Compare with Test Labels| L

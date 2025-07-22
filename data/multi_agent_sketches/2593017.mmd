@@ -1,0 +1,5 @@
+flowchart TD
+    %% This node represents the source data file
+    A[test.csv] -->|read_csv| B[data]
+    %% This node represents the DataFrame used in analysis
+    B[data] -->|used in| C[Analysis]

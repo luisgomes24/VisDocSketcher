@@ -1,0 +1,104 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/titanic/train.csv",
+      "description": "Training dataset for the Titanic survival prediction."
+    },
+    {
+      "source": "../input/titanic/test.csv",
+      "description": "Test dataset for making predictions on Titanic survival."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "DataFrame containing the Titanic dataset after initial loading."
+    },
+    {
+      "variable": "dummy_data",
+      "description": "DataFrame containing preprocessed and one-hot encoded features."
+    },
+    {
+      "variable": "train_df",
+      "description": "DataFrame containing preprocessed training data with selected features."
+    },
+    {
+      "variable": "test_df",
+      "description": "DataFrame containing preprocessed test data with selected features."
+    },
+    {
+      "variable": "X",
+      "description": "Input features for training the model (excluding the target variable)."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable (Survived) from training data."
+    },
+    {
+      "variable": "X_train",
+      "description": "Training input features split from X."
+    },
+    {
+      "variable": "X_val",
+      "description": "Validation input features split from X."
+    },
+    {
+      "variable": "y_train",
+      "description": "Training target variable split from y."
+    },
+    {
+      "variable": "y_val",
+      "description": "Validation target variable split from y."
+    },
+    {
+      "variable": "svm_clf",
+      "description": "Support Vector Classifier model used for prediction."
+    },
+    {
+      "variable": "submission",
+      "description": "DataFrame prepared for submission containing predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_df",
+      "created_by": "preprocess_data",
+      "flows_to": "Train and validation split for model training."
+    },
+    {
+      "variable": "test_df",
+      "created_by": "preprocess_data",
+      "flows_to": "Used for making predictions after training the model."
+    },
+    {
+      "variable": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": "Used to train the SVC model."
+    },
+    {
+      "variable": "X_val",
+      "created_by": "train_test_split",
+      "flows_to": "Used for validating the SVC model performance."
+    },
+    {
+      "variable": "svm_clf",
+      "created_by": "SVC.fit",
+      "flows_to": "Used to generate predictions on test data and create submission file."
+    },
+    {
+      "variable": "submission",
+      "created_by": "pd.DataFrame",
+      "flows_to": "Saved as submission.csv."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Support Vector Classifier (SVC)",
+      "input_features": ["Fare_band", "Embarked", "Is_alone", "Pclass", "Sex"],
+      "target_variable": "Survived",
+      "hyperparameters": {
+        "C": "4.32876"
+      }
+    }
+  ]
+}

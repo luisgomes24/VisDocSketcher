@@ -1,0 +1,99 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/house-prices-advanced-regression-techniques/train.csv",
+      "description": "Contains training data for house prices, including features and target variable (SalePrice)"
+    },
+    {
+      "file": "../input/house-prices-advanced-regression-techniques/test.csv",
+      "description": "Contains test data for house prices"
+    },
+    {
+      "file": "../input/house-prices-advanced-regression-techniques/sample_submission.csv",
+      "description": "Template for submission containing predicted SalePrice"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "TRAIN_PATH",
+      "description": "Path to the training dataset"
+    },
+    {
+      "variable": "TEST_PATH",
+      "description": "Path to the testing dataset"
+    },
+    {
+      "variable": "SAMPLE_SUBMISSION_PATH",
+      "description": "Path to the sample submission file"
+    },
+    {
+      "variable": "SUBMISSION_PATH",
+      "description": "Path where the final submission will be saved"
+    },
+    {
+      "variable": "ID",
+      "description": "Identifier variable for the dataset"
+    },
+    {
+      "variable": "TARGET",
+      "description": "Target variable (SalePrice) to be predicted"
+    },
+    {
+      "variable": "SEED",
+      "description": "Random seed for reproducibility"
+    },
+    {
+      "variable": "MODEL_TIME_BUDGET",
+      "description": "Time budget for the AutoML training process"
+    },
+    {
+      "variable": "MODEL_METRIC",
+      "description": "Metric used to evaluate model performance (rmse)"
+    },
+    {
+      "variable": "MODEL_TASK",
+      "description": "Type of machine learning task (regression)"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "autoLabelEncodingByPath(TRAIN_PATH, TEST_PATH, TARGET)",
+      "flow": "Used to create feature set X and target y for model training"
+    },
+    {
+      "variable": "X",
+      "creation_method": "train.drop([ID,TARGET], axis=1)",
+      "flow": "Used as input features for training the AutoML model"
+    },
+    {
+      "variable": "y",
+      "creation_method": "train[TARGET]",
+      "flow": "Used as target variable for training the AutoML model"
+    },
+    {
+      "variable": "model",
+      "creation_method": "AutoML().fit(X, y, **params)",
+      "flow": "Trained model used for predictions and evaluation"
+    },
+    {
+      "variable": "sub",
+      "creation_method": "pd.read_csv(SAMPLE_SUBMISSION_PATH)",
+      "flow": "Used to store prediction results and save to SUBMISSION_PATH"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "AutoML",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "time_budget": "60",
+        "metric": "rmse",
+        "estimator_list": ["lgbm", "catboost", "xgboost"],
+        "task": "regression",
+        "seed": "2022"
+      }
+    }
+  ]
+}

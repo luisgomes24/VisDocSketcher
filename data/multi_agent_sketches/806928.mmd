@@ -1,0 +1,38 @@
+flowchart TD
+    %% Data Source Nodes
+    DS1["NFL Play by Play CSV"]
+    DS2["Building Permits CSV"]
+    
+    %% Data Variables Nodes
+    V1["nfl_data"]
+    V2["sf_permits"]
+    V3["missing_values_count"]
+    V4["total_cells"]
+    V5["total_missing"]
+    V6["sf_missing_values_count"]
+    V7["sf_total_cells"]
+    V8["sf_total_missing"]
+    V9["columns_with_na_dropped"]
+    V10["sf_columns_with_na_dropped"]
+    V11["subset_nfl_data"]
+    
+    %% Data Source to Variable Links
+    DS1 -->|"pd.read_csv"| V1
+    DS2 -->|"pd.read_csv"| V2
+    
+    %% Data Variables Processing
+    V1 -->|"isnull().sum()"| V3
+    V3 -->|".sum()"| V5
+    V1 -->|"dropna(axis=1)"| V9
+    V1 -->|"loc[:, 'EPA':'Season'].head()"| V11
+    
+    V2 -->|"isnull().sum()"| V6
+    V6 -->|".sum()"| V8
+    V2 -->|"dropna(axis=1)"| V10
+
+    %% Comments for clarity
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+
+    class DS1,DS2 dataSource;
+    class V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11 dataVariable;

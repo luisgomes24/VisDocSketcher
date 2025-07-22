@@ -1,0 +1,121 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training dataset containing features and target variable."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Test dataset containing features without the target variable."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submission containing sample submission format."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data loaded from train.csv."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the test data loaded from test.csv."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature DataFrame created by dropping 'row_id' and 'target' from the training or full dataset."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable Series extracted from the 'target' column of the training or full dataset."
+    },
+    {
+      "variable_name": "Xtr",
+      "description": "Training subset of features for the training split."
+    },
+    {
+      "variable_name": "Xval",
+      "description": "Validation subset of features for model validation."
+    },
+    {
+      "variable_name": "ytr",
+      "description": "Training subset of target for the training split."
+    },
+    {
+      "variable_name": "yval",
+      "description": "Validation subset of target for model validation."
+    },
+    {
+      "variable_name": "pred",
+      "description": "Predictions generated from the model on the test data."
+    },
+    {
+      "variable_name": "full_data",
+      "description": "Concatenated DataFrame of training and test data including generated labels."
+    },
+    {
+      "variable_name": "submission",
+      "description": "DataFrame prepared for submission containing test predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X", "y", "full_data"]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv",
+      "flows_to": ["pred", "submission"]
+    },
+    {
+      "variable": "X",
+      "created_by": "train.drop",
+      "flows_to": ["Xtr", "Xval"]
+    },
+    {
+      "variable": "y",
+      "created_by": "train['target']",
+      "flows_to": ["ytr", "yval"]
+    },
+    {
+      "variable": "Xtr",
+      "created_by": "train_test_split",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "ytr",
+      "created_by": "train_test_split",
+      "flows_to": ["model"]
+    },
+    {
+      "variable": "pred",
+      "created_by": "model.predict",
+      "flows_to": ["submission"]
+    },
+    {
+      "variable": "full_data",
+      "created_by": "pd.concat",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "submission",
+      "created_by": "pd.read_csv",
+      "flows_to": ["submission.to_csv"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ExtraTreesClassifier",
+      "input_features": "Xtr, ytr",
+      "target_variable": "yval",
+      "hyperparameters": {
+        "n_estimators": 800,
+        "random_state": 0,
+        "n_jobs": -1
+      }
+    }
+  ]
+}

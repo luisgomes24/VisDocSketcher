@@ -1,0 +1,42 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffcc00", "edgeLabelBackground":"#ffcc00", "tertiaryColor": "#ffffff"}}}%%
+flowchart TD
+    subgraph Data_Sources
+        A["train.csv"]
+        B["test.csv"]
+        C["sample_submission.csv"]
+    end
+
+    subgraph Variables
+        D["train DataFrame"]
+        E["test DataFrame"]
+        F["y (Target)"]
+        G["X (Features)"]
+        H["X_train"]
+        I["X_test"]
+        J["y_train"]
+        K["y_test"]
+        L["y_pred"]
+        M["sol DataFrame"]
+    end
+
+    subgraph Data_Flow
+        A -->|pd.read_csv| D
+        B -->|pd.read_csv| E
+        D -->|Drop 'id', 'Product ID'| G
+        G -->|train_test_split| H & I & J & K
+        D -->|train.pop('Machinefailure')| F
+        E --> L
+        F -->|train_test_split| J & K
+    end
+
+    subgraph Model
+        N["AutoML"]
+        H -->|Training| N
+        J -->|Training| N
+        N -->|Predict| L
+    end
+
+    subgraph Predictions
+        L --> M
+        M -->|to_csv| C
+    end

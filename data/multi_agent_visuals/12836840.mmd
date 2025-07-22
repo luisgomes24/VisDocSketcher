@@ -1,0 +1,9 @@
+
+    graph TD;
+    A["<img src='path/to/database.svg' width=100 height=100/> <br/> Data Sources"]  --> B["<img src='path/to/file.svg' width=100 height=100/> <br/> Video Paths"];
+    B --> C["<img src='path/to/table.svg' width=100 height=100/> <br/> Body Pose Data"];
+    C --> D["<img src='path/to/brain.svg' width=100 height=100/> <br/> TfPoseEstimator"];
+    D --> |"Generate Estimates"| E["<img src='path/to/scatter_plot_template.svg'/> <br/> Frame Analysis"];
+    E --> |"Analysis Results"| F["<img src='path/to/lineplot_template.svg'/> <br/> Results Overview"];
+    F --> |"Statistical Results"| G["<img src='path/to/barplot_template.svg'/> <br/> Body Pose Distribution"];
+    G --> |"Conclusion"| H["<img src='path/to/boxplot_template.svg'/> <br/> Statistical Summary"];

@@ -1,0 +1,13 @@
+graph TD;
+    A["📂 Load Events Data <img src='file.svg'/>"] --> B["📍 Filter Events in Beijing"];
+    B --> C["📊 Histogram of Events by Day <img src='dummy_plots/hist_template.svg'/>"];
+    C --> D["📊 Histogram of Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    D --> E["📂 Load Gender & Age Data <img src='file.svg'/>"];
+    E --> F["🔗 Merge Gender Age with Beijing Events"];
+    F --> G["📊 Histogram of Female Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    F --> H["📊 Histogram of Male Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    H --> I["📊 Histogram of Under-30s Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    I --> J["📊 Histogram of 30-something Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    J --> K["📊 Histogram of Over-40s Events by Hour <img src='dummy_plots/hist_template.svg'/>"];
+    K --> L["🔍 Analyze Friday Night Events"];
+    L --> M["📊 User Group Counts <img src='table.svg'/>"];

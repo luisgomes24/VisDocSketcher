@@ -1,0 +1,18 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/>"] --> B["🔍 Data Overview"]
+    B --> C["📊 Distribution Graphs <img src='barplot_template.svg'/>"]
+    C --> D["💼 Load 2nd File <img src='file.svg'/>"]
+    D --> E["📊 Distribution Graphs <img src='barplot_template.svg'/>"]
+    E --> F["💼 Load 3rd File <img src='file.svg'/>"]
+    F --> G["📊 Distribution Graphs <img src='barplot_template.svg'/>"]
+    G --> H["✅ Conclusion"]
+
+    click A "Load data from CSV files"
+    click B "Preview the first few rows"
+    click C "Visualize distributions of sample columns"
+    click D "Read in second file"
+    click E "Visualize distributions of sample columns"
+    click F "Read in third file"
+    click G "Visualize distributions of sample columns"
+    click H "Final thoughts and encouragement"
+

@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data<br/><img src='file.svg' />"] --> B["📊 Explore Data<br/>train.head()"]
+    B --> C["📊 Data Description<br/>train.describe()"]
+    C --> D["🔄 Preprocess Text<br/><img src='column_split.svg' />"]
+    D --> E["🧹 Clean Text<br/><img src='column_split.svg' />"]
+    E --> F["🗑️ Remove Stopwords<br/><img src='column_split.svg' />"]
+    F --> G["🌿 Stemming<br/><img src='column_split.svg' />"]
+    G --> H["📊 TF-IDF Transformation<br/><img src='table.svg' />"]
+    H --> I["🔍 Train-Test Split<br/><img src='row_split.svg' />"]
+    I --> J["🧠 Train Model<br/>MultinomialNB"]
+    J --> K["✅ Evaluate Model<br/>mnb.score"]
+    K --> L["📝 Predictions on Test Set<br/><img src='table.svg' />"]
+    L --> M["📤 Save Submission<br/>pred_df.to_csv"]

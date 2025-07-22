@@ -1,0 +1,80 @@
+{
+  "data_sources": [
+    {
+      "source": "train.csv",
+      "description": "Training dataset containing 700 data pairs (x, y) where y values are generated based on x."
+    },
+    {
+      "source": "test.csv",
+      "description": "Test dataset containing 300 data pairs (x, y)."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "train",
+      "description": "DataFrame containing training data loaded from train.csv."
+    },
+    {
+      "variable": "test",
+      "description": "DataFrame containing test data loaded from test.csv."
+    },
+    {
+      "variable": "X_train",
+      "description": "Feature array for training, containing x values from the training dataset."
+    },
+    {
+      "variable": "y_train",
+      "description": "Target array for training, containing y values from the training dataset."
+    },
+    {
+      "variable": "X_test",
+      "description": "Feature array for testing, containing x values from the test dataset."
+    },
+    {
+      "variable": "y_test",
+      "description": "Target array for testing, containing y values from the test dataset."
+    },
+    {
+      "variable": "regressor",
+      "description": "LinearRegression model used to fit the training data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "flow": "Created from reading train.csv, checked for NaN values, and cleaned."
+    },
+    {
+      "variable": "test",
+      "flow": "Created from reading test.csv."
+    },
+    {
+      "variable": "X_train",
+      "flow": "Created from train DataFrame for model training. Used as input for regressor.
+    },
+    {
+      "variable": "y_train",
+      "flow": "Created from train DataFrame as target for model training."
+    },
+    {
+      "variable": "X_test",
+      "flow": "Created from test DataFrame for model testing."
+    },
+    {
+      "variable": "y_test",
+      "flow": "Created from test DataFrame as target for model testing."
+    },
+    {
+      "variable": "regressor",
+      "flow": "Fitted with X_train and y_train. Used to make predictions and plotted against training and test data."
+    }
+  ],
+  "models": [
+    {
+      "model": "LinearRegression",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": "None specified"
+    }
+  ]
+}

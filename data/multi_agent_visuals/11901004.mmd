@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        DS1["<img src='icons/file.svg' width=100 height=100/> <br/> task-dummy.csv\n~ Dummy submission file with fighter betting data"]
+        DS2["<img src='icons/file.svg' width=100 height=100/> <br/> mdabbert-9-19-20-submission.csv\n~ Submission by mdabbert with GaussianNB classifier predictions"]
+        DS3["<img src='icons/file.svg' width=100 height=100/> <br/> most-recent-event.csv\n~ Most recent UFC events dataset"]
+    end
+
+    %% Data Variables and Flow
+    subgraph DataFlow
+        A["<img src='icons/column_split.svg' width=100 height=100/> <br/> sub_list\n~ Betting predictions from submissions\n<img src='dummy_plots/scatter_plot_template.svg'/> <br/> "]
+        B["<img src='icons/table.svg' width=100 height=100/> <br/> results_df\n~ Recent fight results and data\n<img src='dummy_plots/lineplot_template.svg'/> <br/> "]
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> score_list\n~ Calculated profits from submissions\n<img src='dummy_plots/barplot_template.svg'/> <br/> "]
+    end
+    
+    %% Data Reading
+    DS1 --> A
+    DS2 --> A
+    DS3 --> B
+
+    %% Data Processing
+    A --> B
+    B --> C
+    
+    %% Model
+    subgraph Model
+        M1["<img src='icons/brain.svg' width=100 height=100/> <br/> GaussianNB Model\n~ Uses features like B_Weight_lbs, B_avg_TD_landed"]
+        M2["<img src='dummy_plots/hist_template.svg'/> <br/> Winning fighter prediction"]
+    end
+
+    %% Model Processing
+    M1 -->|Predicts| M2

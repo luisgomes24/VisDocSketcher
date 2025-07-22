@@ -1,0 +1,28 @@
+```mermaid
+flowchart TD
+    %% Data Source
+    A["train.csv"] -->|"Read CSV"| B["train DataFrame"]
+
+    %% Data Preprocessing
+    B -->|"Drop 'Id' column"| C["train DataFrame (no Id)"]
+    C -->|"Extract features"| D["X_train DataFrame"]
+    C -->|"Extract target"| E["y_train Series"]
+    
+    %% PCA Transformation
+    D -->|"fit_transform"| F["PCA Transformation"]
+    F -->|"Reduced Features"| G["PCA Components"]
+
+    %% Styling the nodes for better visualization
+    classDef dataset fill:#f96,stroke:#333,stroke-width:2px;
+    classDef model fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef feature fill:#6f9,stroke:#333,stroke-width:2px;
+
+    %% Apply Styles
+    A:::dataset
+    B:::feature
+    C:::feature
+    D:::feature
+    E:::feature
+    F:::model
+    G:::feature
+```

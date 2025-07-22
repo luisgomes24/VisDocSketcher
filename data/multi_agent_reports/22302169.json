@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/petfinder-pawpularity-score/train.csv",
+      "description": "Training data containing Pawpularity scores for pet images"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing the training data loaded from the CSV file"
+    },
+    {
+      "name": "N",
+      "description": "Number of samples for Monte Carlo simulation"
+    },
+    {
+      "name": "mean_target",
+      "description": "Mean Pawpularity score from the training data"
+    },
+    {
+      "name": "rmse_values",
+      "description": "List to store computed RMSE values from simulations"
+    },
+    {
+      "name": "mc_mean",
+      "description": "Mean of the computed RMSE values from Monte Carlo simulations"
+    },
+    {
+      "name": "mc_std",
+      "description": "Standard deviation of the computed RMSE values from simulations"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to calculate RMSE and for Monte Carlo simulations"
+    },
+    {
+      "variable": "mean_target",
+      "creation_method": "np.mean(train[\"Pawpularity\"])",
+      "flow": "Used as reference in RMSE calculations"
+    },
+    {
+      "variable": "rmse_values",
+      "creation_method": "list to store RMSE values",
+      "flow": "Used for computing mc_mean and mc_std"
+    },
+    {
+      "variable": "mc_mean",
+      "creation_method": "np.mean(rmse_values)",
+      "flow": "Displayed as mean of RMSE distributions"
+    },
+    {
+      "variable": "mc_std",
+      "creation_method": "np.std(rmse_values)",
+      "flow": "Displayed as standard deviation of RMSE distributions"
+    }
+  ],
+  "models": []
+}

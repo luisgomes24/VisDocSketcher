@@ -1,0 +1,49 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Groceries_dataset.csv",
+      "description": "Contains transactional data related to grocery purchases including Member number, Date, and Item Description."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing the full dataset read from the CSV file."
+    },
+    {
+      "variable_name": "items",
+      "description": "Array of unique item descriptions available in the dataset."
+    },
+    {
+      "variable_name": "df_grouped",
+      "description": "Grouped DataFrame aggregating item descriptions by member number and date."
+    },
+    {
+      "variable_name": "df_grouped_df",
+      "description": "DataFrame conversion of the grouped DataFrame for easier manipulation and viewing."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file using pd.read_csv.",
+      "flows_to": ["items", "df_grouped"]
+    },
+    {
+      "variable": "items",
+      "creation": "Obtained from unique item descriptions in df.",
+      "flows_to": []
+    },
+    {
+      "variable": "df_grouped",
+      "creation": "Created by grouping the df DataFrame by Member number and Date.",
+      "flows_to": ["df_grouped_df"]
+    },
+    {
+      "variable": "df_grouped_df",
+      "creation": "Created by converting the grouped object into a DataFrame.",
+      "flows_to": []
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "file_name": "stopwords-master",
+      "description": "Contains a collection of stopwords used in language processing."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "stopwords",
+      "description": "A list of unique stopwords loaded from the stopwords text files."
+    },
+    {
+      "variable_name": "text",
+      "description": "A multiline string containing text in Chinese for word count analysis."
+    },
+    {
+      "variable_name": "word_count",
+      "description": "A dictionary with words as keys and their respective counts as values from the input text."
+    },
+    {
+      "variable_name": "word_ds",
+      "description": "A pandas DataFrame containing the word counts sorted in descending order."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "stopwords",
+      "creation": "Loaded from text files in the stopwords-master directory.",
+      "flows": "Used in the getWordCount function to remove stopwords from the word count results."
+    },
+    {
+      "variable_name": "text",
+      "creation": "Defined as a multiline string within the notebook.",
+      "flows": "Passed to the getWordCount function for analysis."
+    },
+    {
+      "variable_name": "word_count",
+      "creation": "Generated as a result of the getWordCount function using the input text.",
+      "flows": "Used to create the word_ds DataFrame and generate the word cloud visualization."
+    },
+    {
+      "variable_name": "word_ds",
+      "creation": "Created from word_count using pandas to form a DataFrame.",
+      "flows": "Displayed as a sorted DataFrame showing the top 20 words by count."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "WordCloud",
+      "input_features": "word_count (frequency of words)",
+      "target_variables": "N/A",
+      "hyperparameters": {
+        "font_path": "../input/fonts-on-mac/Fonts/方正正中黑简体.TTF",
+        "width": 1000,
+        "height": 1000,
+        "background_color": "red",
+        "max_words": 50,
+        "color_func": "lambda function for coloring"
+      }
+    }
+  ]
+}

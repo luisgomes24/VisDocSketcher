@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    ds1["train.csv"] -->|Read CSV| train_df
+    ds2["test.csv"] -->|Read CSV| test_df
+
+    %% Data Preparation
+    train_df -->|Drop SalePrice| input
+    train_df -->|Extract SalePrice| target
+    input -->|train_test_split| x_train
+    target -->|train_test_split| y_train
+    input -->|train_test_split| x_test
+    target -->|train_test_split| y_test
+
+    %% Model Training
+    x_train & y_train --> xg[XGBRegressor: "x_train, y_train"]
+    xg -->|Subsample: 0.1, N_Estimators: 700, Min_Child_Weight: 2, Max_Depth: 4, Learning_Rate: 0.2, Col_Sample_Bytree: 1, Booster: gblinear, Alpha: 22| plott
+
+    x_train & y_train --> rmf[RandomForestRegressor: "x_train, y_train"]
+    rmf -->|N_Estimators: 500, Min_Samples_Split: 3, Max_Depth: 5| plott
+
+    x_train & y_train --> gb_m[GradientBoostingRegressor: "x_train, y_train"]
+    gb_m -->|Learning_Rate: 0.5, N_Estimators: 900, Max_Depth: 11, Min_Samples_Split: 8| plott
+
+    %% Result Compilation
+    plott["Result DataFrame storing models' names, absolute errors, and accuracy scores"]
+
+    %% Test Data Flows
+    x_test -->|Unused directly in modeling process| plott
+    y_test -->|Unused directly in modeling process| plott
+```

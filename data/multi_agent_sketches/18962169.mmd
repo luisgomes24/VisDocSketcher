@@ -1,0 +1,21 @@
+%%{"flowchart TD"}
+
+%% data sources
+A[../input/train.csv]:::dataSource -->|Preprocess| B[X_train / y_train]:::dataVar
+A -->|Preprocess| C[X_valid / y_valid]:::dataVar
+D[../input/test.csv]:::dataSource
+
+%% training phase
+B -->|Train| E[my_model_1]:::model
+B -->|Train| F[my_model_2]:::model
+B -->|Train| G[my_model_3]:::model
+
+%% validation and prediction phase
+E -->|Predict| H[predictions_1]:::dataVar
+F -->|Predict| I[predictions_2]:::dataVar
+G -->|Predict| J[predictions_3]:::dataVar
+
+%% style sections
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+classDef model fill:#fea,stroke:#333,stroke-width:2px;

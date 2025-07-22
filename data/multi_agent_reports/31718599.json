@@ -1,0 +1,63 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/alzheimer-diseases-3-class/3_cls/",
+      "description": "Images of patients with Alzheimer's in different severity levels - CONTROL, AD (Alzheimer's Disease), PD (Parkinson's Disease)"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "X_train",
+      "description": "Array containing training images resized to (150, 150)"
+    },
+    {
+      "name": "Y_train",
+      "description": "Array of categorical labels corresponding to training images"
+    },
+    {
+      "name": "Y_test",
+      "description": "Array of categorical labels for testing images"
+    },
+    {
+      "name": "labels",
+      "description": "List categorizing the disease severity: CONTROL, AD, PD"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X_train",
+      "creation": "Images read from the file system and resized",
+      "flow": "Used as input data for the model training"
+    },
+    {
+      "variable": "Y_train",
+      "creation": "Labels appended during image loading",
+      "flow": "Used as target data for the model training"
+    },
+    {
+      "variable": "Y_test",
+      "creation": "Generated from Y_train after train_test_split",
+      "flow": "Used to evaluate the model performance"
+    },
+    {
+      "variable": "y_train_new",
+      "creation": "Converted from string labels to integer indices",
+      "flow": "Used to convert into categorical matrix for model training"
+    }
+  ],
+  "models": [
+    {
+      "name": "EfficientNetB0",
+      "input_features": "X_train",
+      "target_variable": "Y_train",
+      "hyperparameters": {
+        "optimizer": "adam",
+        "loss": "categorical_crossentropy",
+        "metrics": ["acc"],
+        "epochs": 20,
+        "batch_size": 32,
+        "callbacks": ["TensorBoard", "ModelCheckpoint", "ReduceLROnPlateau", "EarlyStopping"]
+      }
+    }
+  ]
+}

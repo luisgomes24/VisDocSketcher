@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Read cities.csv"] --> B["🔍 Prepare Inputs"]
+    B --> C["🗺️ Initialize Tour"]
+    C --> D["🔄 Implement Two-opt Algorithm (Python)"]
+    D --> E["⌚ Time Execution of Python Implementation"]
+    E --> F{"💡 Is Improvement Found?"}
+    F -- Yes --> D
+    F -- No --> G["🔄 Implement Two-opt Algorithm (Cython)"]
+    G --> H["⌚ Time Execution of Cython Implementation"]
+    H --> I["🎉 Performance Comparison"]

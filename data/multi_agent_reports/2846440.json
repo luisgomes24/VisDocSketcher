@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/train_labels.csv",
+      "description": "Contains training labels for image classification"
+    },
+    {
+      "source": "../input/sample_submission.csv",
+      "description": "Sample submission format for the results"
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing training labels"
+    },
+    {
+      "name": "df_unique",
+      "description": "Unique labels extracted from the training labels"
+    },
+    {
+      "name": "path",
+      "description": "Path object for the dataset directory"
+    },
+    {
+      "name": "data",
+      "description": "Data object containing image data and labels processed for training"
+    },
+    {
+      "name": "learn",
+      "description": "Learner object wrapping the model, data, and training metrics"
+    },
+    {
+      "name": "preds",
+      "description": "Predictions from the model for the test dataset"
+    },
+    {
+      "name": "df_sub",
+      "description": "DataFrame for submission with predictions"
+    },
+    {
+      "name": "fname_cleaned",
+      "description": "Cleaned file names extracted from test dataset paths"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation_method": "read_csv",
+      "usage": ["Used to extract unique labels and to create the data object"]
+    },
+    {
+      "variable": "df_unique",
+      "creation_method": "pd.unique",
+      "usage": ["Utilized to understand distinct labels for classification"]
+    },
+    {
+      "variable": "data",
+      "creation_method": "ImageItemList.from_csv",
+      "usage": ["Used for training the model through the Learner object"]
+    },
+    {
+      "variable": "learn",
+      "creation_method": "create_cnn",
+      "usage": ["Model training and evaluation"]
+    },
+    {
+      "variable": "preds",
+      "creation_method": "learn.get_preds",
+      "usage": ["Retrieves model predictions on test dataset"]
+    },
+    {
+      "variable": "df_sub",
+      "creation_method": "read_csv",
+      "usage": ["Used to structure submission results"]
+    },
+    {
+      "variable": "fname_cleaned",
+      "creation_method": "np.vectorize",
+      "usage": ["Used to prepare filenames for final submission"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "CNN",
+      "architecture": "DenseNet161",
+      "input_features": "Image data processed with augmentation",
+      "target_variable": "Label associated with images",
+      "hyperparameters": {
+        "dropout_rate": 0.5,
+        "batch_size": 64,
+        "learning_rate": ["1e-3", "1e-6 to 1e-4"]
+      }
+    }
+  ]
+}

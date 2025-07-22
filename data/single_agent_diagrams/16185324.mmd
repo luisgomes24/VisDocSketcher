@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg'/> <br/> df = pd.read_csv()"] --> B["📊 Display Data <img src='table.svg'/> <br/> df.head()"]
+    B --> C["🔍 Data Exploration"]
+    C --> D["📊 Analyze Device Protection <img src='barplot_template.svg'/> <br/> df['DeviceProtection'].value_counts()"]
+    D --> E["🔍 Tech Support Analysis <img src='column_split.svg'/> <br/> df.groupby(['DeviceProtection'])['TechSupport'].value_counts()"]
+    C --> F["📊 Dependent Analysis <img src='barplot_template.svg'/> <br/> df.groupby(['MultipleLines'])['Dependents'].value_counts()"]
+    C --> G["📊 Streaming Analysis <img src='barplot_template.svg'/> <br/> df.groupby(['StreamingTV', 'StreamingMovies'])['DeviceProtection'].value_counts()"]
+    G --> H["📊 Internet Service Preferences <img src='barplot_template.svg'/> <br/> df.groupby(['StreamingTV', 'StreamingMovies'])['InternetService'].value_counts()"]
+    C --> I["📊 Paperless Billing Analysis <img src='barplot_template.svg'/> <br/> df['PaperlessBilling'].value_counts()"]
+    I --> J["🔍 Senior Citizen Analysis <img src='column_split.svg'/> <br/> df.groupby(['PaperlessBilling'])['SeniorCitizen'].value_counts()"]

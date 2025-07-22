@@ -1,0 +1,7 @@
+flowchart TD
+    DataSource["geonames-postal-code.csv"] %% This is the source CSV file containing global postal codes and related information.
+    ReadCSV["read_csv()"] %% This function reads the CSV file into a DataFrame.
+    DataFrame["df"] %% This DataFrame contains the global postal codes fetched from the CSV file.
+    
+    DataSource -->|Read Data| ReadCSV
+    ReadCSV -->|Output DataFrame| DataFrame

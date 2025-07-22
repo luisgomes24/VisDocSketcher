@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph Data_Sources
+        CompetitionsCSV<img src='icons/file.svg' width=100 height=100/> <br/> /"Competitions.csv"/
+        CompetitionTagsCSV<img src='icons/file.svg' width=100 height=100/> <br/> /"CompetitionTags.csv"/
+        DatasetsCSV<img src='icons/file.svg' width=100 height=100/> <br/> /"Datasets.csv"/
+    end
+
+    subgraph Data_Variables
+        DF1<img src='icons/table.svg' width=100 height=100/> <br/> /"df1"/:::dataFrame
+        DF2<img src='icons/table.svg' width=100 height=100/> <br/> /"df2"/:::dataFrame
+        DF3<img src='icons/table.svg' width=100 height=100/> <br/> /"df3"/:::dataFrame
+    end
+
+    subgraph Data_Visualizations
+        PlotDist<img src='dummy_plots/hist_template.svg' width=100 height=100/> <br/> /"plotPerColumnDistribution"/
+        PlotCorr<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> /"plotCorrelationMatrix"/
+        PlotScatter<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> /"plotScatterMatrix"/
+    end
+
+    %% Data source to DataFrame
+    CompetitionsCSV -- Read CSV --> DF1
+    DF1 -- Used In --> PlotDist
+    DF1 -- Used In --> PlotCorr
+    DF1 -- Used In --> PlotScatter
+
+    CompetitionTagsCSV -- Read CSV --> DF2
+    DF2 -- Used In --> PlotDist
+    DF2 -- Used In --> PlotCorr
+    DF2 -- Used In --> PlotScatter
+
+    DatasetsCSV -- Read CSV --> DF3
+    DF3 -- Used In --> PlotDist
+    DF3 -- Used In --> PlotCorr
+    DF3 -- Used In --> PlotScatter
+
+    classDef dataFrame fill:#87CEEB,stroke:#333,stroke-width:2px;

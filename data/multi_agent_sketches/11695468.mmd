@@ -1,0 +1,11 @@
+%% This is a Mermaid.js diagram representing the data workflow for the given Jupyter Notebook
+
+flowchart TD
+    %% Node for the data source
+    A["eu_sf_far_2007_2013.csv"] -->|Read CSV| B["df1 DataFrame"]
+    %% Node for data processing
+    B -->|Used for plotting| C["Plot Distributions"]
+    B -->|Used for plotting| D["Correlation Matrix"]
+    B -->|Used for plotting| E["Scatter/Density Plots"]
+    %% An explanation that no ML models are used in the notebook
+    %% This notebook does not involve any Machine Learning models

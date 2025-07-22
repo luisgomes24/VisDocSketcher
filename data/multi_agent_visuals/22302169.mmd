@@ -1,0 +1,27 @@
+flowchart TD
+    subgraph Input
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+        %% Training data containing Pawpularity scores for pet images
+    end
+    subgraph DataPreparation
+        A --> B["<img src='icons/table.svg' width=100 height=100/> <br/> train DataFrame"]
+        %% DataFrame containing the training data loaded from the CSV file
+    end
+    subgraph Analysis
+        B --> C["<img src='dummy_plots/barplot_template.svg'/> <br/> mean_target"]
+        %% Mean Pawpularity score from the training data
+        C --> E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> RMSE calculations"]
+        B --> E
+        E --> F["<img src='dummy_plots/hist_template.svg'/> <br/> rmse_values"]
+        %% List to store computed RMSE values from simulations
+        F --> G["<img src='dummy_plots/lineplot_template.svg'/> <br/> mc_mean"]
+        %% Mean of the computed RMSE values from Monte Carlo simulations
+        F --> H["<img src='dummy_plots/boxplot_template.svg'/> <br/> mc_std"]
+        %% Standard deviation of the computed RMSE values from simulations
+    end
+    subgraph Simulation
+        G --> I["<img src='dummy_plots/barplot_template.svg'/> <br/> Monte Carlo Mean RMSE"]
+        %% Display mean of RMSE distributions
+        H --> J["<img src='dummy_plots/hist_template.svg'/> <br/> Monte Carlo Std Dev RMSE"]
+        %% Display standard deviation of RMSE distributions
+    end

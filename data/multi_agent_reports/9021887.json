@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Training_Apr_jul_2019_Master_Lanes.csv",
+      "description": "Contains training data for traffic lanes from April to July 2019."
+    },
+    {
+      "file_name": "Testing_Aug_dec_2019_Master.csv",
+      "description": "Contains testing data for traffic lanes from August to December 2019."
+    },
+    {
+      "file_name": "Training_Jan_mar_2019_Master_Lanes.csv",
+      "description": "Contains training data for traffic lanes from January to March 2019."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first 1000 rows of the Training_Apr_jul_2019_Master_Lanes.csv file."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing the first 1000 rows of the Testing_Aug_dec_2019_Master.csv file."
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame containing the first 1000 rows of the Training_Jan_mar_2019_Master_Lanes.csv file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "primary_use": "visualization using plotPerColumnDistribution"
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "primary_use": "visualization using plotPerColumnDistribution"
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv",
+      "primary_use": "visualization using plotPerColumnDistribution"
+    }
+  ],
+  "models": []
+}

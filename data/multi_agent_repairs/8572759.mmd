@@ -1,0 +1,41 @@
+%% Mermaid.js Workflow Diagram for Data Science Project
+flowchart TD
+    %% Data Sources
+    subgraph data_sources [Data Sources]
+        A1["winemag-data-130k-v2.csv"]:::data_source
+        A2["gaming.csv"]:::data_source
+        A3["movies.csv"]:::data_source
+        A4["meets.csv"]:::data_source
+        A5["openpowerlifting.csv"]:::data_source
+    end
+
+    %% Data Variables
+    subgraph data_variables [Data Variables]
+        B1["reviews"]:::data_var
+        B2["renamed"]:::data_var
+        B3["reindexed"]:::data_var
+        B4["gaming_products"]:::data_var
+        B5["movie_products"]:::data_var
+        B6["combined_products"]:::data_var
+        B7["powerlifting_meets"]:::data_var
+        B8["powerlifting_competitors"]:::data_var
+        B9["powerlifting_combined"]:::data_var
+    end
+
+    %% Data Flow
+    A1 --> |"Read CSV"| B1
+    B1 --> |"Rename columns 'region_1' & 'region_2'"| B2
+    B1 --> |"Set index name"| B3
+
+    A2 --> |"Read CSV"| B4
+    A3 --> |"Read CSV"| B5
+    B4 --> |"Concatenate"| B6
+    B5 --> |"Concatenate"| B6
+
+    A4 --> |"Read CSV"| B7
+    A5 --> |"Read CSV"| B8
+    B7 --> |"Join on 'MeetID'"| B9
+    B8 --> |"Join on 'MeetID'"| B9
+
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#ccf,stroke:#333,stroke-width:2px;

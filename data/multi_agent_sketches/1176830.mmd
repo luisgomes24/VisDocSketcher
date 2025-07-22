@@ -1,0 +1,42 @@
+flowchart TD
+    subgraph DataFlow ["Data Flow"]
+        train["/train.csv/"] 
+        train_md["train"]
+        test["/test.csv/"] 
+        test_md["test"]
+        all_data_md["all_data"]
+        data_agg_md["data_agg"]
+        X_train_md["X_train"]
+        Y_train_md["Y_train"]
+        X_test_md["X_test"]
+        submission_md["submission"]
+        
+        %% Data Sources and Initial Loading
+        train -- read_csv --> train_md
+        test -- read_csv --> test_md
+        
+        %% Data Preparation and Aggregation
+        train_md -->|append and preprocess| all_data_md
+        test_md -->|append and preprocess| all_data_md
+        all_data_md --> data_agg_md
+        all_data_md --> X_train_md
+        all_data_md --> X_test_md
+        
+        %% Feature and Target Extraction
+        data_agg_md --> X_train_md
+        train_md -->|Extract target| Y_train_md
+        train_md -->|Select features| X_train_md
+        test_md -->|Select features| X_test_md
+        
+        %% Model Training
+        X_train_md -->|Features| reg["/ElasticNet Regression/"]
+        Y_train_md -->|Target| reg
+        
+        %% Model Predictions and Submission
+        X_test_md --> submission_md
+        submission_md -- to_csv -->|Generate submission| test["/test.csv/"]
+        
+        %% Clustering - KMeans Model
+        X_train_md -.->|Fit KMeans| kmeans_md["/KMeans Clustering/"]
+        
+    end

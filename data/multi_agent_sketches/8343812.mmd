@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Source
+    A[Excel File: Cars.xlsx] -->|Read| B[DataFrame: df]
+    A[Excel File: Cars.xlsx]:::data_src
+
+    %% Cars Dictionary
+    C[Dictionary: cars] -->|Create DataFrame| B[DataFrame: df]
+    C[Dictionary: cars]:::data_var
+
+    %% Usage of df
+    B -->|Calculate Maximum Price| D[Max Price Calculation]
+    D:::process
+
+    B -->|Print DataFrame| E[Print Output]
+    E:::process
+
+    %% Numbers Dictionary 
+    F[Dictionary: numbers] -->|Create DataFrame| G[DataFrame]
+    F[Dictionary: numbers]:::data_var
+
+    %% Handling NaN
+    G -->|Replace NaN with 0| H[Data Cleaning]
+    H:::process
+
+    classDef data_var fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_src fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#7f7,stroke:#333,stroke-width:2px;

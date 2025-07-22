@@ -1,0 +1,31 @@
+%% Mermaid diagram for the Jupyter Notebook Workflow
+
+flowchart TD
+
+    %% Data Sources
+    A["Train Data \n train.csv"] -->|Load Data| B["DataFrame \n train"]
+    C["Test Data \n test.csv"] -->|Load Data| D["DataFrame \n test"]
+
+    %% Model Initialization
+    E["Initialize Model \n TabularAutoML"] 
+    B -->|Train Model| E
+
+    %% Model Training
+    E -->|Fit Model| F["Out-of-Fold Predictions \n oof_pred"]
+    E -->|Predict| G["Model Predictions \n test_pred"]
+
+    %% Prepare Submission
+    G -->|Prepare Results| H["Results DataFrame \n result"]
+    H -->|Save to CSV| I["Submission File \n lightautoml_titanic.csv"]
+
+    %% Additional Nodes
+    J["Gender Submission \n gender_submission.csv"]
+
+    style A fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style C fill:#ffcccc,stroke:#ff0000,stroke-width:2px
+    style E fill:#ccffcc,stroke:#008000,stroke-width:2px
+    style F fill:#ccccff,stroke:#0000ff,stroke-width:2px
+    style G fill:#ccccff,stroke:#0000ff,stroke-width:2px
+    style H fill:#ffffcc,stroke:#ffd700,stroke-width:2px
+    style I fill:#ffcc99,stroke:#ff8000,stroke-width:2px
+    style J fill:#ffcc99,stroke:#ff8000,stroke-width:2px

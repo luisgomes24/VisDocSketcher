@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file": "countries.csv",
+      "description": "Contains country names and abbreviations."
+    },
+    {
+      "file": "US_States.csv",
+      "description": "Contains US State names and abbreviations."
+    },
+    {
+      "file": "PDF reports from Google Mobility",
+      "description": "Reports containing mobility data across categories for countries and US states."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df_countries",
+      "description": "DataFrame containing countries with their abbreviations."
+    },
+    {
+      "variable": "df_states",
+      "description": "DataFrame containing US States with their abbreviations."
+    },
+    {
+      "variable": "df_us_state_percent",
+      "description": "DataFrame storing mobility percentages for US states."
+    },
+    {
+      "variable": "df_us_country_percent",
+      "description": "DataFrame storing mobility percentages for countries."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_countries",
+      "creation_method": "read_csv",
+      "data_used_for": "Download and process country mobility reports"
+    },
+    {
+      "variable": "df_states",
+      "creation_method": "read_csv",
+      "data_used_for": "Download and process state mobility reports"
+    },
+    {
+      "variable": "df_us_state_percent",
+      "creation_method": "extract_pdf_data",
+      "data_used_for": "Storing mobility data for states, exported to CSV"
+    },
+    {
+      "variable": "df_us_country_percent",
+      "creation_method": "extract_pdf_data",
+      "data_used_for": "Storing mobility data for countries, exported to CSV"
+    }
+  ],
+  "models": []
+}

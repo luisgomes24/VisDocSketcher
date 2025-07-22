@@ -1,0 +1,18 @@
+flowchart TD
+    %% Node for Image Source
+    A["22612.jpeg"] -->|Read by cv2.imread| B["img (NumPy Array)"]
+    
+    %% Histogram Nodes
+    B -->|Convert to Grayscale| C["Grayscale Image"]
+    C -->|Plot Histogram| D["counts, bins"]
+    
+    %% Multivariate Normal Distribution Nodes
+    E["Multivariate Normal Distribution"] -->|Generate Data| F["x, y Coordinates"]
+    
+    %% Comments for each node
+    %% A: Represents the image file used for analysis
+    %% B: The image data read into a NumPy array
+    %% C: The conversion of the image to a grayscale version
+    %% D: The histogram output consisting of intensity counts and bin edges
+    %% E: Represents the process of data generation for visualization
+    %% F: The coordinates generated used for 2D histogram visualization

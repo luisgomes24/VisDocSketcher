@@ -1,0 +1,43 @@
+%% Diagram of the Data Workflow in 16908284.ipynb
+
+flowchart TD
+    %% Data source nodes
+    subgraph DataSources
+        A1["train_metadata.csv"]
+        A2["train_soundscapes/*.ogg"]
+        A3["test_soundscapes/*.ogg"]
+        A4["train_soundscape_labels.csv"]
+        A5["sample_submission.csv"]
+    end
+
+    %% Data variable nodes and transformations
+    subgraph DataProcessing
+        B1["DataFrame df_train"]
+        B2["DataFrame data"]
+        B3["LABEL_IDS"]
+        B4["INV_LABEL_IDS"]
+        B5["BirdCLEFDataset test_data"]
+        B6["Predicted probabilites pred_probas"]
+        B7["Final predictions preds"]
+        B8["Submission DataFrame sub"]
+    end
+
+    %% ML Model nodes
+    subgraph Models
+        M1["resnest50 Model"]
+    end
+
+    %% Data flow and transformation links
+    A1 --> B1 %% Creation of df_train from train_metadata.csv
+    B1 --> B3 %% Creation of LABEL_IDS from df_train
+    B3 --> B4 %% Creation of INV_LABEL_IDS from LABEL_IDS
+    A3 --> B2 %% Creation of data from test soundscapes
+    B2 --> B5 %% Creation of test_data using data
+    B5 --> M1
+    M1 -- Predictions --> B6
+    B6 --> B7 %% Conversion of probabilities to final predictions
+    B7 --> B8 %% Building submission DataFrame
+    A5 --> B8 %% Incorporating sample submission format
+
+    %% Output node
+    B8 --> |"submission.csv"| B9[["Save Submission"]]

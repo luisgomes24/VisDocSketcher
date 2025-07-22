@@ -1,0 +1,50 @@
+flowchart TD
+    %% Input Data Nodes
+    A1["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"]
+    A2["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"]
+
+    %% DataFrame Nodes
+    B1["<img src='icons/table.svg' width=100 height=100/> <br/> train DataFrame"]
+    B2["<img src='icons/table.svg' width=100 height=100/> <br/> test DataFrame"]
+    B3["<img src='icons/table.svg' width=100 height=100/> <br/> all_data DataFrame"]
+    B4["<img src='icons/column_split.svg' width=100 height=100/> <br/> y_train array"]
+    B5["<img src='icons/column_split.svg' width=100 height=100/> <br/> stacked_pred array"]
+
+    %% Model Nodes
+    C1["<img src='icons/brain.svg' width=100 height=100/> <br/> Kernel Ridge Regression"]
+    C2["<img src='icons/brain.svg' width=100 height=100/> <br/> Lasso Regression"]
+    C3["<img src='icons/brain.svg' width=100 height=100/> <br/> ElasticNet Regression"]
+    C4["<img src='icons/brain.svg' width=100 height=100/> <br/> Gradient Boosting Regression"]
+    C5["<img src='icons/brain.svg' width=100 height=100/> <br/> XGBoost"]
+    C6["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM"]
+    C7["<img src='icons/brain.svg' width=100 height=100/> <br/> Stacking Averaged Models"]
+
+    %% Data Load
+    A1 --> B1 %% Loading training data
+    A2 --> B2 %% Loading test data
+
+    %% Data Preparation
+    B1 --> B3 %% Combining train and test for feature engineering
+    B2 --> B3
+    B1 --> B4 %% Extracting target variable
+
+    %% Model Training and Predictions
+    B4 --> C1 %% Models use the target variable
+    B3 --> C1
+    B4 --> C2
+    B3 --> C2
+    B4 --> C3
+    B3 --> C3
+    B4 --> C4
+    B3 --> C4
+    B4 --> C5
+    B3 --> C5
+    B4 --> C6
+    B3 --> C6
+    C1 --> C7 %% Stacking different models
+    C2 --> C7
+    C3 --> C7
+    C4 --> C7
+    C5 --> C7
+    C6 --> C7
+    C7 --> B5 %% Final predictions

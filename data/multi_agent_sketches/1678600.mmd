@@ -1,0 +1,9 @@
+flowchart TD
+    %% Represents the initial DataFrame 'df'
+    A[df]:::dataVar
+
+    %% Represents the various uses of 'df' in plotting functions
+    A --> |Used in plotting functions| B[Plotting Functions]:::process
+
+    classDef dataVar fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;

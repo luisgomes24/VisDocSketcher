@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "file": "shipsnet.json",
+      "description": "Dataset of ship images and their labels (1 = ship, 0 = no ship)."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "Numpy array of shape (4000, 19200) representing the ship images."
+    },
+    {
+      "variable": "labels",
+      "description": "Numpy array of shape (4000,) representing the labels corresponding to each image (1 = ship, 0 = no ship)."
+    },
+    {
+      "variable": "X",
+      "description": "Reshaped Numpy array of shape (4000, 3, 80, 80) representing the images with 3 color channels (RGB) and 80x80 pixels."
+    },
+    {
+      "variable": "Xmeans",
+      "description": "Mean values for each channel (R, G, B) across all images."
+    },
+    {
+      "variable": "Xstds",
+      "description": "Standard deviation values for each channel (R, G, B) across all images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "created_by": "Loaded from shipsnet.json",
+      "flows_to": "Used for reshaping into X, and for displaying images."
+    },
+    {
+      "variable": "labels",
+      "created_by": "Loaded from shipsnet.json",
+      "flows_to": "Used for identifying ship vs. no ship images."
+    },
+    {
+      "variable": "X",
+      "created_by": "data reshaped using np.reshape",
+      "flows_to": "Used for displaying images, calculating means and stds, and normalizing."
+    },
+    {
+      "variable": "Xmeans",
+      "created_by": "Calculated using X.mean(axis=0)",
+      "flows_to": "Used for plotting histogram of means for RGB channels."
+    },
+    {
+      "variable": "Xstds",
+      "created_by": "Calculated using X.std(axis=0)",
+      "flows_to": "Used for plotting histogram of standard deviations for RGB channels."
+    }
+  ],
+  "models": []
+}

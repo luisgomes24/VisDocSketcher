@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/titanic/train.csv",
+      "description": "Training dataset containing information about Titanic passengers, including their survival status, class, and personal details."
+    },
+    {
+      "file_name": "../input/titanic/test.csv",
+      "description": "Testing dataset, typically used to validate the trained model, containing similar features as the train dataset but without the survival status."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data with columns for survival status, class, age, sex, and embarkation information."
+    },
+    {
+      "variable_name": "test",
+      "description": "DataFrame containing the testing data, structured similarly to the training data but used for evaluation purposes."
+    },
+    {
+      "variable_name": "count_towns",
+      "description": "DataFrame summarizing the count of passengers from different embarkation towns."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "created_by": "pd.read_csv('../input/titanic/train.csv')",
+      "flows_to": [
+        "Data analysis and visualization (count plots, heatmaps, sunburst)",
+        "Used to create visualizations for gender distribution, survival rates, and other analyses."
+      ]
+    },
+    {
+      "variable": "test",
+      "created_by": "pd.read_csv('../input/titanic/test.csv')",
+      "flows_to": [
+        "Model evaluation (not explicitly shown in notebook)",
+        "Used for predicting survival outcomes based on the trained model."
+      ]
+    },
+    {
+      "variable": "count_towns",
+      "created_by": "train.groupby(pd.Grouper(key='Embarked')).size().reset_index(name='count')",
+      "flows_to": ["Used for heatmap visualization of embarkation towns."]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Artificial Neural Network (ANN)",
+      "input_features": ["Pclass", "Sex", "Age", "Fare"],
+      "target_variable": "Survived",
+      "hyperparameters": "Not specifically defined in the notebook but suggested to analyze feature importance for model training."
+    }
+  ]
+}

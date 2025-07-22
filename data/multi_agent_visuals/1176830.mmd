@@ -1,0 +1,12 @@
+flowchart TD
+    subgraph DataFlow ["Data Flow"]
+        train["/train.csv/"]
+        preprocess["Preprocessing"]
+        model["Model Training"]
+        evaluate["Evaluation"]
+        deploy["Deployment"]
+    end
+    train --> preprocess
+    preprocess --> model
+    model --> evaluate
+    evaluate --> deploy

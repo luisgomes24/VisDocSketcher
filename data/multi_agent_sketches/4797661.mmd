@@ -1,0 +1,6 @@
+flowchart TD
+    A["../input/spotify.csv"] -->|"Read CSV"| B["spotify_data"]
+    %% A: Represents the source CSV file containing Spotify data indexed by date
+    %% B: DataFrame containing the loaded data, ready for analysis
+    B --> C["Seaborn Line Plot"]
+    %% C: Line chart plotting using the Spotify data

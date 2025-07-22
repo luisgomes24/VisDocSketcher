@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data: /kaggle/input/operators.csv"] --> B["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Distribution Graphs"]
+    B --> C["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 📈 Correlation Matrix"]
+    C --> D["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 🌐 Scatter and Density Plots"]
+
+    E["📁 Load Data: /kaggle/input/weapons.csv"] --> F["<img src='dummy_plots/hist_template.svg'/> <br/> 📊 Distribution Graphs"]
+    F --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 📈 Correlation Matrix"]
+    G --> H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> 🌐 Scatter and Density Plots"]
+
+    A --> E

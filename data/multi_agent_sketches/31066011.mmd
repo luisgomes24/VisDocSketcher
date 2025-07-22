@@ -1,0 +1,30 @@
+flowchart TD
+    subgraph DataLoading
+        A[Delaney dataset] -- Load Data --> B[dc.molnet.load_delaney]
+    end
+    
+    subgraph DataProcessing
+        B --> C[tasks]
+        B --> D[(datasets)]
+        D --> |Split| E[train]
+        D --> |Split| F[valid]
+        D --> |Split| G[test]
+        B --> H[transformers]
+    end
+    
+    subgraph ModelTraining
+        E --> |Training Data| I[Train Model]
+        F --> |Validation Data| I
+        I --> |Trained Model| J[Model Evaluation]
+        G --> |Testing Data| J
+    end
+
+    %% Comments for each node
+    %% A represents the initial Delaney dataset
+    %% B is the function that loads and preprocesses the dataset
+    %% C is the list of task names constructed from the dataset
+    %% D is the tuple of datasets split into training, validation, and test datasets
+    %% E, F, G are the respective portions of the datasets meant for training, validation, and testing
+    %% H is a list of transformers applied to the dataset
+    %% I is the process of training the model using the provided datasets
+    %% J is the final evaluation of the trained model using the test data

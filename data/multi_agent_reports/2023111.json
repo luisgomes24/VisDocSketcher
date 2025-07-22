@@ -1,0 +1,41 @@
+{
+  "data_sources": [
+    {
+      "file_name": "PakistanSuicideAttacks Ver 11 (30-November-2017).csv",
+      "description": "Dataset containing information about suicide attacks in Pakistan."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "suicide_attacks",
+      "description": "DataFrame containing the information from the loaded CSV file."
+    },
+    {
+      "variable_name": "cities",
+      "description": "Array of unique city names extracted from the 'City' column of the DataFrame."
+    },
+    {
+      "variable_name": "prov",
+      "description": "Array of unique province names extracted from the 'Province' column of the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "suicide_attacks",
+      "creation_method": "pd.read_csv",
+      "source": "PakistanSuicideAttacks Ver 11 (30-November-2017).csv",
+      "flow": "Used for data cleaning and fuzzy matching."
+    },
+    {
+      "variable_name": "cities",
+      "creation_method": "suicide_attacks['City'].unique()",
+      "flow": "Utilized for identifying inconsistencies in city names." 
+    },
+    {
+      "variable_name": "prov",
+      "creation_method": "suicide_attacks['Province'].unique()",
+      "flow": "Utilized for identifying inconsistencies in province names."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,25 @@
+flowchart TD
+    %% Data Source Nodes
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] --> |"Load Training Data"|  B["<img src='icons/table.svg' width=100 height=100/> <br/> df_train"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] --> |"Load Test Data"| D["<img src='icons/table.svg' width=100 height=100/> <br/> df_test"]
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> sampleSubmission.csv"] --> F["Submission Template"]
+
+    %% Data Variable Nodes
+    B --> |"Select Features"| G["<img src='icons/column_split.svg' width=100 height=100/> <br/> X_train"]
+    B --> |"Select Class"| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> y_train"]
+    G --> |"PCA Transformation"| I["<img src='icons/database.svg' width=100 height=100/> <br/> df_train_pca"]
+    D --> |"PCA Transformation"| J["<img src='icons/database.svg' width=100 height=100/> <br/> df_test_pca"]
+
+    %% Model Training
+    G --- H --> |"Train SVC Model"| K["<img src='icons/brain.svg' width=100 height=100/> <br/> SVC Model"]
+
+    %% Predictions
+    K --> |"Predict on Train Data"| L["Train Predictions"]
+    K --> |"Predict on Test Data"| M["Test Predictions"]
+
+    %% Submission
+    M --> |"Format Submission"| N["Submit Predictions"]
+
+    %% Visualization
+    I --> |"Visualize Data"| O["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Train Data Visualization"]
+    J --> |"Visualize Data"| P["<img src='dummy_plots/scatter_plot_template.svg' /> <br/> Test Data Visualization"]

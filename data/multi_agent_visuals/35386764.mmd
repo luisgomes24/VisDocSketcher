@@ -1,0 +1,8 @@
+flowchart TD;
+    data_dir["<img src='icons/database.svg' width=100 height=100/> <br/> Data Directory"] --> train_ds["<img src='icons/table.svg' width=100 height=100/> <br/> Training Dataset"];
+    data_dir --> val_ds["<img src='icons/table.svg' width=100 height=100/> <br/> Validation Dataset"];
+    train_ds --> model["<img src='icons/brain.svg' width=100 height=100/> <br/> Model"];
+    model --> hist["<img src='dummy_plots/lineplot_template.svg'/> <br/> Training History"];
+    model --> lite_model_content["<img src='icons/file.svg' width=100 height=100/> <br/> Model Content"];
+    train_ds -->|Trains| model;
+    val_ds -->|Validates| model;

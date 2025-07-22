@@ -1,0 +1,32 @@
+flowchart TD
+    A["📁 Load Data <br/> <img src='file.svg' />"] --> B["🔍 EDA"]
+    B --> C["✅ Check NaN Values"]
+    B --> D["✅ Check Shape"]
+    B --> E["✅ Check & Drop Duplicates"]
+    B --> F["📈 Check Outliers <br/> <img src='boxplot_template.svg' />"]
+    B --> G["🔍 Remove Outliers"]
+    B --> H["🔖 Create Label Quality"]
+    B --> I["📊 Visualization <br/> <img src='barplot_template.svg' />"]
+    I --> J["📈 Bar Plot of Quality"]
+    I --> K["📊 Scatter Plot of Sulphates vs Alcohol <br/> <img src='scatter_plot_template.svg' />"]
+    
+    L["📊 Data Splitting"] --> M["🔍 Without SMOTE"]
+    L --> N["🔄 With SMOTE"]
+    
+    %% Without SMOTE
+    M --> O["📊 Prepare Data for Modeling"]
+    O --> P["🤖 Model Training"]
+    P --> Q["📊 Model Evaluation"]
+    Q --> R["📈 Confusion Matrix <br/> <img src='barplot_template.svg' />"]
+    Q --> S["📈 Classification Report <br/> <img src='barplot_template.svg' />"]
+    Q --> T["💡 Feature Importance"]
+    
+    %% With SMOTE
+    N --> U["📊 Prepare Data with SMOTE"]
+    U --> V["🤖 Model Training"]
+    V --> W["📊 Model Evaluation"]
+    W --> X["📈 Confusion Matrix <br/> <img src='barplot_template.svg' />"]
+    W --> Y["📈 Classification Report <br/> <img src='barplot_template.svg' />"]
+    W --> Z["💡 Feature Importance"]
+
+    A --> L

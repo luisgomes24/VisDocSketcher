@@ -1,0 +1,13 @@
+flowchart TD
+    %% Data Source
+    A[Building_Permits.csv] -->|Load CSV| B[data]
+    %% Initial Data
+    B[data] -->|Drop columns and fill missing values| C[newdata]
+    %% Latitude and Longitude Extraction
+    C[newdata] -->|Extract lat/long from 'Location'| D[latlong]
+    %% Merge LatLong back to newdata
+    D[latlong] -->|Add lat/long to dataframe| C
+    %% Categorical Encoding
+    C -->|Convert categorical to numerical| E[encdata]
+    %% Visualization
+    E -->|Used in analysis and visualizations| F[Visualizations]

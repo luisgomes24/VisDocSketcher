@@ -1,0 +1,57 @@
+{
+  "data_sources": [
+    {
+      "file_name": "HAM10000_metadata.csv",
+      "description": "Contains metadata for skin cancer images, including image IDs and diagnosis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "skin_df",
+      "description": "DataFrame containing the metadata for skin cancer images."
+    },
+    {
+      "variable_name": "img_to_class_dict",
+      "description": "Dictionary mapping image IDs to their corresponding skin cancer classification."
+    },
+    {
+      "variable_name": "dls",
+      "description": "Data loaders for training and validation datasets created from images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "skin_df",
+      "creation": "Read from CSV using pd.read_csv",
+      "flow": "Used to create img_to_class_dict and dblock."
+    },
+    {
+      "variable_name": "img_to_class_dict",
+      "creation": "Dictionary mapping image IDs to disease names",
+      "flow": "Used in the DataBlock to create labels for images."
+    },
+    {
+      "variable_name": "dls",
+      "creation": "Created using dblock.dataloaders",
+      "flow": "Used for model training with vision_learner."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ResNet18",
+      "input_features": "Image data",
+      "target_variable": "Skin cancer class",
+      "hyperparameters": "None defined",
+      "training_cycles": "4 fine-tune cycles"
+    },
+    {
+      "model_name": "ResNet34",
+      "input_features": "Image data",
+      "target_variable": "Skin cancer class",
+      "hyperparameters": {
+        "learning_rate": "1e-2",
+        "training_cycles": "3"
+      }
+    }
+  ]
+}

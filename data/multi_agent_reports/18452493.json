@@ -1,0 +1,66 @@
+{
+    "data_sources": [
+        {
+            "file": "../input/chinese-mnist-digit-recognizer/chineseMNIST.csv",
+            "description": "Dataset containing Chinese handwritten digits for recognition."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "dataset",
+            "description": "DataFrame holding the entire dataset read from the CSV file."
+        },
+        {
+            "name": "data",
+            "description": "Sample of the dataset (80%) used for training models."
+        },
+        {
+            "name": "data_unseen",
+            "description": "Data (20%) reserved for testing predictions after the model is trained."
+        },
+        {
+            "name": "numeric_features",
+            "description": "List of numeric feature columns from the dataset, excluding the 'label'."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "dataset",
+            "creation": "Read from CSV using pd.read_csv()",
+            "flow": "Processed into 'data' and 'data_unseen' DataFrames."
+        },
+        {
+            "variable": "data",
+            "creation": "Sampled from 'dataset' to create training data",
+            "flow": "Input to PyCaret's setup function for modeling."
+        },
+        {
+            "variable": "data_unseen",
+            "creation": "Extracted from 'dataset' by dropping indices in 'data'",
+            "flow": "Used for predictions post model training."
+        },
+        {
+            "variable": "numeric_features",
+            "creation": "Generated from the columns of 'data'",
+            "flow": "Passed as an argument to the setup function in PyCaret."
+        }
+    ],
+    "models": [
+        {
+            "model": "Various models in PyCaret",
+            "input_features": "All numeric features from the 'data' DataFrame.",
+            "target_variable": "label",
+            "hyperparameters": {
+                "normalize": true,
+                "transformation": true,
+                "log_experiment": true,
+                "handle_unknown_categorical": true,
+                "unknown_categorical_method": "most_frequent",
+                "remove_multicollinearity": true,
+                "ignore_low_variance": true,
+                "numeric_imputation": "median",
+                "categorical_imputation": "mode"
+            }
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "source": "chicago_crime dataset",
+      "description": "Contains multiple tables related to crime incidents in Chicago."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "tables",
+      "description": "A list of tables in the chicago_crime dataset fetched using BigQuery."
+    },
+    {
+      "variable": "num_tables",
+      "description": "The number of tables in the chicago_crime dataset, stored as a single integer."
+    },
+    {
+      "variable": "table",
+      "description": "Represents the schema of the crime table fetched from BigQuery."
+    },
+    {
+      "variable": "num_timestamp_fields",
+      "description": "The number of 'TIMESTAMP' columns in the crime table, stored as a single integer."
+    },
+    {
+      "variable": "fields_for_plotting",
+      "description": "A list containing the names of fields (latitude and longitude) required for mapping crime incidents."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "tables",
+      "creation_method": "Fetched using client.list_tables(dataset)",
+      "uses": "Counted and printed to show available tables in the dataset."
+    },
+    {
+      "variable": "num_tables",
+      "creation_method": "len(tables)",
+      "uses": "Stored and used to check the count of tables."
+    },
+    {
+      "variable": "table",
+      "creation_method": "client.get_table(table_ref)",
+      "uses": "Used to explore the schema of the crime table and check TIMESTAMP fields."
+    },
+    {
+      "variable": "num_timestamp_fields",
+      "creation_method": "Calculated by examining table.schema",
+      "uses": "Stored and used to check the number of TIMESTAMP fields in the crime table."
+    },
+    {
+      "variable": "fields_for_plotting",
+      "creation_method": "Hardcoded as ['latitude', 'longitude']",
+      "uses": "Identified needed fields for mapping crime data on a map."
+    }
+  ],
+  "models": []
+}

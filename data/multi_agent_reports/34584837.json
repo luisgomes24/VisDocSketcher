@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "source": "/kaggle/input/most-watched-stocks-of-past-decade20132023/AAPL(Apple).csv",
+      "description": "Contains stock price data for Apple from 2013 to 2023"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "df",
+      "description": "DataFrame containing stock price data"
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set for features: adjusted stock prices"
+    },
+    {
+      "variable": "X_test",
+      "description": "Testing set for features: adjusted stock prices"
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set for target: 3 day moving average"
+    },
+    {
+      "variable": "y_test",
+      "description": "Testing set for target: 3 day moving average"
+    },
+    {
+      "variable": "MA3",
+      "description": "3 day moving average of adjusted close prices"
+    },
+    {
+      "variable": "MA9",
+      "description": "9 day moving average of adjusted close prices"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV file",
+      "flow": ["Visualized in plots", "Used to create moving averages", "Split into training and test sets"]
+    },
+    {
+      "variable": "MA3",
+      "creation": "Calculated using rolling mean",
+      "flow": ["Used as target in model training"]
+    },
+    {
+      "variable": "MA9",
+      "creation": "Calculated using rolling mean",
+      "flow": ["Used as target in model training"]
+    }
+  ],
+  "models": [
+    {
+      "model": "LinearRegression",
+      "features": ["Adj Close"],
+      "target": "MA3",
+      "hyperparameters": {} 
+    },
+    {
+      "model": "LinearRegression",
+      "features": ["Adj Close"],
+      "target": "MA9",
+      "hyperparameters": {} 
+    }
+  ]
+}

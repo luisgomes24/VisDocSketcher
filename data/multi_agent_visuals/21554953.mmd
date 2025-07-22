@@ -1,0 +1,16 @@
+flowchart TD
+  subgraph Load_Data
+    A1["train.csv"] --> A2["Load train DataFrame"]
+  end
+  subgraph Load_Test_Data
+    B1["test.csv"] --> B2["Load test DataFrame"]
+  end
+  subgraph Preprocess_Data
+    A2 --> C["<img src='path/to/icon.svg' width=100 height=100/> <br/> Add Features"]
+    B2 --> C
+  end
+  C --> D["<img src='path/to/icon.svg' width=100 height=100/> <br/> Train Test Split"]
+  D --> E["<img src='path/to/icon.svg' width=100 height=100/> <br/> Train Model"]
+  E --> F["<img src='path/to/icon.svg' width=100 height=100/> <br/> Validate Model"]
+  F --> G["<img src='path/to/icon.svg' width=100 height=100/> <br/> Generate Predictions"]
+  G --> H["<img src='path/to/icon.svg' width=100 height=100/> <br/> Submit Predictions"]

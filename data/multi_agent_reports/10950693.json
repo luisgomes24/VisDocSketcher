@@ -1,0 +1,26 @@
+{
+    "data_sources": [
+        {
+            "file_path": "../input/data-analyst-jobs/DataAnalyst.csv",
+            "description": "Dataset containing data analyst job postings."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df",
+            "description": "DataFrame containing job data with attributes like Salary, Company information, and Location."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df",
+            "creation": "pd.read_csv()",
+            "flow": [
+                "Data cleaning (null value handling)",
+                "Feature engineering (e.g., replacing categories, mean salary calculation)",
+                "Data visualization (histograms, bar charts, pie charts)"
+            ]
+        }
+    ],
+    "models": []
+}

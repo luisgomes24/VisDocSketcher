@@ -1,0 +1,140 @@
+{
+"data_sources": [],
+"data_variables": [
+    {
+        "name": "R",
+        "description": "Reward matrix representing rewards for state-action pairs."
+    },
+    {
+        "name": "t",
+        "description": "Transition matrix indicating possible transitions from one state to another."
+    },
+    {
+        "name": "nStates",
+        "description": "Number of states in the environment."
+    },
+    {
+        "name": "nActions",
+        "description": "Number of actions available in the environment."
+    },
+    {
+        "name": "Q",
+        "description": "Q-value matrix initialized with random values representing expected rewards for state-action pairs."
+    },
+    {
+        "name": "mu",
+        "description": "Learning rate for adjusting Q-values."
+    },
+    {
+        "name": "gamma",
+        "description": "Discount factor for future rewards."
+    },
+    {
+        "name": "epsilon",
+        "description": "Epsilon value for epsilon-greedy action selection."
+    },
+    {
+        "name": "nits",
+        "description": "Counter for the number of iterations in the learning process."
+    },
+    {
+        "name": "s",
+        "description": "Current state in the environment."
+    },
+    {
+        "name": "a",
+        "description": "Current action taken by the agent."
+    },
+    {
+        "name": "r",
+        "description": "Reward received after taking action a in state s."
+    },
+    {
+        "name": "sprime",
+        "description": "New state after taking action a."
+    },
+    {
+        "name": "aprime",
+        "description": "Next action taken after transitioning to state sprime."
+    }
+],
+"data_flow": [
+    {
+        "variable": "R",
+        "creation_method": "Initialized as a numpy array",
+        "flow": "Used to calculate rewards during Q-value updates"
+    },
+    {
+        "variable": "t",
+        "creation_method": "Initialized as a numpy array",
+        "flow": "Used to determine possible actions from the current state"
+    },
+    {
+        "variable": "nStates",
+        "creation_method": "Shape of reward matrix R",
+        "flow": "Defines the dimensions of the Q matrix"
+    },
+    {
+        "variable": "nActions",
+        "creation_method": "Shape of reward matrix R",
+        "flow": "Defines the dimensions of the Q matrix"
+    },
+    {
+        "variable": "Q",
+        "creation_method": "Initialized as a random numpy array",
+        "flow": "Updated based on the SARSA algorithm during training"
+    },
+    {
+        "variable": "mu",
+        "creation_method": "Set as a constant",
+        "flow": "Used in Q-value updates"
+    },
+    {
+        "variable": "gamma",
+        "creation_method": "Set as a constant",
+        "flow": "Used in Q-value updates"
+    },
+    {
+        "variable": "epsilon",
+        "creation_method": "Set as a constant",
+        "flow": "Used for epsilon-greedy action selection"
+    },
+    {
+        "variable": "s",
+        "creation_method": "Randomly assigned state",
+        "flow": "Determines the current context of the agent"
+    },
+    {
+        "variable": "a",
+        "creation_method": "Chosen based on current state s",
+        "flow": "Action taken based on Q-values and exploration strategy"
+    },
+    {
+        "variable": "r",
+        "creation_method": "Calculated as the reward from R based on s and a",
+        "flow": "Used in the update rule for Q-values"
+    },
+    {
+        "variable": "sprime",
+        "creation_method": "Set to the action taken",
+        "flow": "Defines the next state based on the action taken"
+    },
+    {
+        "variable": "aprime",
+        "creation_method": "Chosen based on state sprime",
+        "flow": "Action taken for the next transition in the environment"
+    }
+],
+"models": [
+    {
+        "model_name": "SARSA",
+        "input_features": ["State (s)", "Action (a)", "Reward (r)", "Next state (sprime)", "Next action (aprime)"],
+        "target_variable": "Q-value updates",
+        "hyperparameters": {
+            "mu": 0.7,
+            "gamma": 0.4,
+            "epsilon": 0.1
+        }
+    }
+]
+}

@@ -1,0 +1,13 @@
+graph TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["📊 Data Overview\n<img src='table.svg' />"]
+    B --> C["📦 Data Preparation"]
+    C --> D["🔄 Transform Data"]
+    D --> E["🔍 Check for Duplicates"]
+    E --> F["📊 Visualize Gold Price History\n<img src='lineplot_template.svg' />"]
+    F --> G["✂️ Split Data into Train & Test Sets"]
+    G --> H["⚖️ Scale Data"]
+    H --> I["📐 Restructure Data & Create Sliding Window"]
+    I --> J["🏗️ Create LSTM Model"]
+    J --> K["🔍 Train Model"]
+    K --> L["✅ Evaluate Model"]
+    L --> M["📈 Visualize Results\n<img src='lineplot_template.svg' />"]

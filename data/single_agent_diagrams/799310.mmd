@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Libraries"] --> B["📄 Read Data<br/><img src='dummy_plots/barplot_template.svg' />"]
+    B --> C["🔍 Check Encoding"]
+    C --> D["📊 Data Loaded"]
+    D --> E["🔤 Preprocessing City Data"]
+    E --> F["✂️ Clean City Column<br/><img src='dummy_plots/scatter_plot_template.svg' />"]
+    F --> G["🔍 Unique City Values"]
+    G --> H["🤖 Fuzzy Matching for Corrections"]
+    H --> I["🔄 Replace Matches in City Column"]
+    I --> J["📊 Verify Cleaned Data<br/><img src='dummy_plots/boxplot_template.svg' />"]
+    J --> K["🔄 Your Turn: Correct Others"]

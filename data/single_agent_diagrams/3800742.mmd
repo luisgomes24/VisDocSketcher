@@ -1,0 +1,11 @@
+graph TD;
+    A["📁 Load Data <img src='icons/file.svg'/>"] --> B["🧪 Preprocess Data"];
+    B --> C["🗂️ Create Train & Validation Loaders"];
+    C --> D["🖼️ Visualize Data <img src='dummy_plots/barplot_template.svg'/> <br/> Show Images"];
+    D --> E["🧠 Build Model"];
+    E --> F["⚙️ Define Optimizer"];
+    F --> G["🚀 Train Model"];
+    G --> H["🧪 Evaluate on Training Data"];
+    H --> I["📈 Evaluate on Test Data"];
+    I --> J["🔍 Test on Different Samples"];
+    J --> K["💾 Save Model"];

@@ -1,0 +1,12 @@
+graph TD;
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"]:::dataNode --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Files"]:::dataNode
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Selection"]:::dataNode
+    C --> D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train/Test Split"]:::dataNode
+    D --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]:::modelNode
+    E --> F["<img src='icons/table.svg' width=100 height=100/> <br/> Predictions"]:::outputNode
+    F --> G["<img src='dummy_plots/scatter_plot_template.svg' width=100 height=100/> <br/> Visualization"]:::plotNode
+
+    classDef dataNode fill:#87CEEB;
+    classDef modelNode fill:#C6F4D6;
+    classDef outputNode fill:#F2C464;
+    classDef plotNode fill:#FFCDD2;

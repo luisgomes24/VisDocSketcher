@@ -1,0 +1,11 @@
+graph TD
+    A["🔄 Load Data <img src='icons/file.svg' /> <br/> NFL & SF Permits"] --> B["👀 First Look at Data <img src='icons/table.svg' />"]
+    B --> C["📊 Check Missing Values <img src='icons/database.svg' />"]
+    C --> D["🤔 Analyze Missing Values Reason"]
+    D --> E["❌ Drop Missing Values"]
+    E --> F["🔍 Check Remaining Data"]
+    F --> G["🛠️ Impute Missing Values"]
+    G --> H["✅ Fill NA with 0"]
+    G --> I["🔄 Backfill NA"]
+    H --> J["📝 Your Turn!  <img src='icons/file.svg' />"]
+    I --> J

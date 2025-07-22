@@ -1,0 +1,12 @@
+flowchart TD
+    A["<img src='icons/file.svg' /> <br/> Load Training Data"] --> B["Create Target Variable (y)"]
+    B --> C["Select Features (X)"]
+    C --> D["<img src='column_split.svg' /> <br/> Split Data"]
+    D --> E["<img src='brain.svg' /> <br/> Train Model (Decision Tree)"]
+    E --> F["Evaluate Model (Validation MAE)"]
+    F --> G["<img src='brain.svg' /> <br/> Train Random Forest Model"]
+    G --> H["Make Predictions on Validation Set"]
+    H --> I["<img src='icons/file.svg' /> <br/> Load Test Data"]
+    I --> J["Prepare Test Features"]
+    J --> K["<img src='brain.svg' /> <br/> Predict with Random Forest"]
+    K --> L["<img src='icons/file.svg' /> <br/> Save Submission"]

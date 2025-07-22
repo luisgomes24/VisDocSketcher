@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Metadata <img src='file.svg' /><br/> df_meta = pd.read_csv(...)"]
+    A --> B["📂 Load Training Data <img src='file.svg' /><br/> df_train = pd.read_csv(...)"]
+    B --> C["📂 Load Parquet Data <img src='file.svg' /><br/> df = pd.read_parquet(...)"]
+    C --> D["🚦 Check for Missing Values <img src='table.svg' /><br/> df.isnull().sum()"]
+    D --> E["📊 Scatter Plot of Coordinates <img src='scatter_plot_template.svg' /><br/> plt.scatter(...)"]
+    E --> F["📊 Boxplot of Features <img src='boxplot_template.svg' /><br/> sns.boxplot(...)"]
+    F --> G["📊 Pairplot of Features <img src='pairplot_template.svg' /><br/> sns.pairplot(...)"]
+    G --> H["📊 Correlation Heatmap <img src='heatmap_template.svg' /><br/> sns.heatmap(...)"]
+    H --> I["📊 Histograms of Features <img src='hist_template.svg' /><br/> sns.histplot(...)"]

@@ -1,0 +1,15 @@
+# Workflow Analysis for 5694230 Notebook
+
+1. **Data Sources**:
+   - specialized_bikes_2019.csv: Contains data about specialized bikes sold in 2019 with various features.
+
+2. **Data Variables**:
+   - df1: DataFrame holding the data loaded from specialized_bikes_2019.csv.
+
+3. **Data Flow**:
+   - df1:
+     - Created using `pd.read_csv`.
+     - Used in statistical distributions and visualizations after reading the data.
+
+4. **Models**:
+   - No machine learning models were defined in this notebook, focusing only on data analysis and visualization.

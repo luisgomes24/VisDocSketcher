@@ -1,0 +1,46 @@
+%% This Mermaid diagram shows the main data processing workflow and model utilization in the notebook
+flowchart TD
+    subgraph Input[Input Data]
+        A["oyuncu.csv"]
+        %% This is the data source file for player statistics
+    end
+
+    subgraph LoadData[Loading Data]
+        B["df"]
+        %% DataFrame containing data from oyuncu.csv
+    end
+
+    subgraph ProcessData[Process Data]
+        C["aybars"]
+        %% Group by player name and calculate mean statistics
+
+        D["cat_deg, num_deg, car_deg"]
+        %% Identify categorical and numerical variables
+    end
+
+    subgraph PCA[Perform PCA]
+        E["PCA"]
+        %% PCA model with 2 components for dimensionality reduction
+    end
+
+    subgraph ClusterData[Clustering]
+        F["KMeans"]
+        %% KMeans clustering with 10 clusters
+
+        G["kumeler"]
+        %% Clustering labels for each player
+    end
+
+    subgraph Output[Output Data]
+        H["df_pca"]
+        %% Data after PCA transformation
+    end
+
+    A --> B
+    B --> C
+    B --> D
+    C --> E
+    E --> H
+    C --> F
+    F --> G
+    G --> H

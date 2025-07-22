@@ -1,0 +1,98 @@
+{  
+  "data_sources": [  
+    {  
+      "file": "../input/train.zip",  
+      "description": "Contains training images of cats and dogs."  
+    },  
+    {  
+      "file": "../input/test1.zip",  
+      "description": "Contains testing images."  
+    }  
+  ],  
+  "data_variables": [  
+    {  
+      "name": "dataset",  
+      "description": "DataFrame containing image paths and their corresponding labels (target) for cats and dogs."  
+    },  
+    {  
+      "name": "train_datagen",  
+      "description": "ImageDataGenerator used for augmenting the training dataset."  
+    },  
+    {  
+      "name": "test_datagen",  
+      "description": "ImageDataGenerator used for processing the test dataset without augmentation."  
+    },  
+    {  
+      "name": "features",  
+      "description": "Numpy array containing extracted features from images using a pretrained CNN model (VGG16)."  
+    },  
+    {  
+      "name": "targets",  
+      "description": "Encoded labels for the target classes (cats and dogs)."  
+    },  
+    {  
+      "name": "model",  
+      "description": "Convolutional Neural Network (CNN) model created to classify images."  
+    }  
+  ],  
+  "data_flow": [  
+    {  
+      "variable": "dataset",  
+      "creation": "created using pd.DataFrame with image paths and targets extracted from the file system.",  
+      "flow": "Used for splitting into training and testing datasets, which are then fed into the model."  
+    },  
+    {  
+      "variable": "train_datagen",  
+      "creation": "Initialized using ImageDataGenerator with specified augmentations.",  
+      "flow": "Used to provide augmented training data for model training."  
+    },  
+    {  
+      "variable": "test_datagen",  
+      "creation": "Initialized using ImageDataGenerator with rescaling only.",  
+      "flow": "Used to provide validation data for evaluation during model training."  
+    },  
+    {  
+      "variable": "features",  
+      "creation": "Extracted from images using the pretrained VGG16 model.",  
+      "flow": "Used as input to the LogisticRegression model for final classification."  
+    },  
+    {  
+      "variable": "targets",  
+      "creation": "Encoded using LabelEncoder to convert string labels to numeric.",  
+      "flow": "Used as target variable for training the LogisticRegression model."  
+    },  
+    {  
+      "variable": "model",  
+      "creation": "Sequential CNN model defined using Keras layers.",  
+      "flow": "Trained on the augmented training datasets to classify images."  
+    }  
+  ],  
+  "models": [  
+    {  
+      "name": "Convolutional Neural Network (CNN)",  
+      "input_features": "Image data resized to (150, 150, 3).",  
+      "target_variable": "Binary class for cats and dogs.",  
+      "hyperparameters": {  
+        "layers": [  
+          "Conv2D with 32 filters, (3,3), ReLU activation",  
+          "Conv2D with 32 filters, (3,3), ReLU activation",  
+          "MaxPooling2D with (2,2)",  
+          "Dropout rate of 0.25",  
+          "Flatten",  
+          "Dense layer with 512 neurons, ReLU activation",  
+          "Dense output layer with 1 neuron, sigmoid activation"  
+        ],  
+        "optimizer": "RMSprop with learning rate 1e-4",  
+        "loss_function": "binary_crossentropy"  
+      }  
+    },  
+    {  
+      "name": "Logistic Regression",  
+      "input_features": "8192 features extracted from images.",  
+      "target_variable": "Encoded labels for cats and dogs.",  
+      "hyperparameters": {  
+        "solver": "lbfgs"  
+      }  
+    }  
+  ]
+}

@@ -1,0 +1,21 @@
+flowchart TD
+    subgraph Load Data
+        A(911 Dataset) -- Load --> B[df]
+        %% A represents the 911 emergency call dataset loaded into a DataFrame.
+    end
+
+    subgraph Process Data
+        B --> C[cardiac_arrest]
+        B --> D[fire]
+        B --> E[ems]
+        B --> F[traffic]
+        %% B, the main data, undergoes filtering into subsets for different incident types.
+    end
+
+    subgraph Analyze Data
+        C --> G[Analyze cardiac arrest]
+        D --> H[Analyze fire incidents]
+        E --> I[Analyze EMS incidents]
+        F --> J[Analyze traffic incidents]
+        %% Each subset of data is independently analyzed.
+    end

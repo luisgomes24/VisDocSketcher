@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/johar-pic/79669868_10158168171086929_2402259235392978944_n.jpg",
+      "description": "Content image used for style transfer"
+    },
+    {
+      "file_name": "../input/images/style2.png",
+      "description": "Style image used to apply style to the content"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "content",
+      "description": "Tensor representation of the content image"
+    },
+    {
+      "variable_name": "style",
+      "description": "Tensor representation of the style image"
+    },
+    {
+      "variable_name": "target",
+      "description": "Tensor representation of the stylized target image, initialized with the content image"
+    },
+    {
+      "variable_name": "content_features",
+      "description": "Features extracted from the content image using VGG19"
+    },
+    {
+      "variable_name": "style_features",
+      "description": "Features extracted from the style image using VGG19"
+    },
+    {
+      "variable_name": "style_grams",
+      "description": "Gram matrices for the style features extracted from the style image"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "content",
+      "created_by": "load_image()",
+      "used_for": "Model training (style transfer)"
+    },
+    {
+      "variable_name": "style",
+      "created_by": "load_image()",
+      "used_for": "Model training (style transfer)"
+    },
+    {
+      "variable_name": "target",
+      "created_by": "content.clone().requires_grad_(True)",
+      "used_for": "Model training, displayed as output"
+    },
+    {
+      "variable_name": "content_features",
+      "created_by": "get_features(content, vgg)",
+      "used_for": "Loss computation during training"
+    },
+    {
+      "variable_name": "style_features",
+      "created_by": "get_features(style, vgg)",
+      "used_for": "Loss computation during training"
+    },
+    {
+      "variable_name": "style_grams",
+      "created_by": "gram_matrix(style_features[layer])",
+      "used_for": "Loss computation during training"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "VGG19",
+      "type": "Feature extraction for style transfer",
+      "input_features": ["content", "style"],
+      "target_variables": ["target"],
+      "hyperparameters": { "style_weights": {"conv1_1": 1.0, "conv2_1": 0.75, "conv3_1": 0.2, "conv4_1": 0.2, "conv5_1": 0.2}, "content_weight": 1, "style_weight": 1e9, "steps": 2000 }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data Source
+    A["flavors_of_cacao.csv"] -->|Load data| B["DataFrame df"]
+    
+    %% Data Exploration and Preparation
+    B -->|Feature and Target Split| C["Features X"]
+    B -->|Feature and Target Split| D["Target y"]
+    
+    %% Train-Test Split
+    C -->|train_test_split| E["X_train"]
+    C -->|train_test_split| F["X_test"]
+    D -->|train_test_split| G["y_train"]
+    D -->|train_test_split| H["y_test"]
+    
+    %% Model Training
+    E -->|Training| I["RandomForestClassifier rfc"]
+    G -->|Training| I
+    
+    %% Prediction
+    I -->|Predict| J["Predictions rfc_pred"]
+    F -->|Test Features| J
+    
+    %% Model Evaluation
+    J -->|Evaluate| H
+
+    %% Comments for Clarity
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+    class A source;
+    class B,C,D,E,F,G,H,variable;
+    class I,J model;

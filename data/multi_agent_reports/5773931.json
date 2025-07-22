@@ -1,0 +1,93 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/hymenoptera-data/hymenoptera_data",
+      "description": "Contains training and validation folders for image data of hymenoptera species."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "path",
+      "description": "Path to the dataset directory."
+    },
+    {
+      "name": "il",
+      "description": "ImageList instance created from the folder of images."
+    },
+    {
+      "name": "sd",
+      "description": "SplitData object containing train and validation splits."
+    },
+    {
+      "name": "ll",
+      "description": "LabelList containing labels based on the folder structure."
+    },
+    {
+      "name": "data",
+      "description": "DataBunch instance containing normalized image data."
+    },
+    {
+      "name": "learn",
+      "description": "Learner object for training the CNN model."
+    },
+    {
+      "name": "pred",
+      "description": "Predictions from the model."
+    },
+    {
+      "name": "truth",
+      "description": "True labels for the validation set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "path",
+      "creation_method": "Path object initialization",
+      "flow": "Used to list files and directories in the dataset."
+    },
+    {
+      "variable": "il",
+      "creation_method": "ImageList.from_folder(path)",
+      "flow": "Used to create item lists for training and validation images.",
+      "visualization": "Show an image with its label."
+    },
+    {
+      "variable": "sd",
+      "creation_method": "il.split_by_folder()",
+      "flow": "Used to obtain training and validation datasets."
+    },
+    {
+      "variable": "ll",
+      "creation_method": "sd.label_from_folder()",
+      "flow": "Labels are generated, applying transformations and creating a DataBunch instance.",
+      "visualization": "Show random transformations of images."
+    },
+    {
+      "variable": "data",
+      "creation_method": "ll.databunch()",
+      "flow": "Normalizes the dataset and prepares for training.",
+      "visualization": "Show a batch of images with labels."
+    },
+    {
+      "variable": "learn",
+      "creation_method": "cnn_learner(data, models.resnet18)",
+      "flow": "Created a learner object, then used for model training with fit_one_cycle."
+    },
+    {
+      "variable": "pred",
+      "creation_method": "learn.get_preds()",
+      "flow": "Utilizes the model to obtain predictions on the validation set."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "resnet18",
+      "input_features": "Images of hymenoptera species",
+      "target_variable": "Species/class labels",
+      "hyperparameters": {
+        "max_lr": "0.007",
+        "cycles": "10"
+      }
+    }
+  ]
+}

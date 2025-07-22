@@ -1,0 +1,20 @@
+This is a diagram representation of the workflow to be created based on the analysis of the notebook. It will include the data sources, the important variables, their flow, and models if any used in the notebook.
+
+1. **Data Sources**:
+   - train_tp.csv: true positive labels
+   - train_fp.csv: false positive labels
+
+2. **Data Variables**:
+   - tp_data: DataFrame for true positives
+   - fp_data: DataFrame for false positives
+   - audio_path: Path to audio file
+   - x: Audio data
+   - sr: Sampling rate
+
+3. **Data Flow**:
+   - tp_data and fp_data loaded with read_csv
+   - x loaded with librosa
+   - Variables used for visualization
+
+4. **Models**:
+   - No specific models noted in the code for machine learning purposes.

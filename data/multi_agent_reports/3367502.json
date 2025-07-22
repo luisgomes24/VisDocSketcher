@@ -1,0 +1,22 @@
+{"data_sources": [
+    { "file": "../input/train.csv", "description": "Training data containing features and target variable." },
+    { "file": "../input/test.csv", "description": "Test data containing features without target variable." }
+],
+"data_variables": [
+    { "name": "train_df", "description": "DataFrame containing training data with features and target variable." },
+    { "name": "test_df", "description": "DataFrame containing test data." },
+    { "name": "train_features", "description": "DataFrame containing features from the training dataset, without target and ID columns." },
+    { "name": "test_features", "description": "DataFrame containing features from the test dataset, without ID column." },
+    { "name": "train_target", "description": "Series containing the target variable from the training dataset." },
+    { "name": "train_all", "description": "Concatenated DataFrame of train_features and test_features for preprocessing." }
+],
+"data_flow": [
+    { "variable": "train_df", "creation": "pd.read_csv('../input/train.csv')", "usage": ["Splitting into features and target variable", "Creating train_all DataFrame"] },
+    { "variable": "test_df", "creation": "pd.read_csv('../input/test.csv')", "usage": ["Creating test_features DataFrame"] },
+    { "variable": "train_features", "creation": "train_df.drop(['target', 'ID_code'], axis=1)", "usage": ["Used to separate target variable", "Used in creating train_all"] },
+    { "variable": "test_features", "creation": "test_df.drop(['ID_code'], axis=1)", "usage": ["Used in creating train_all"] },
+    { "variable": "train_target", "creation": "train_df['target']", "usage": ["Used in model training"] },
+    { "variable": "train_all", "creation": "pd.concat([train_features, test_features], axis=0)", "usage": ["Generating duplicate feature information", "Splitting back into train and test features"] }
+],
+"models": []
+}

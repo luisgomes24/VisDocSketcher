@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    DS1["bigquery-public-data.openaq.global_air_quality"]
+    
+    %% Data Variables
+    V1["open_aq: BigQueryHelper"]
+    V2["us_cities: DataFrame"]
+    V3["unit_countries: DataFrame"]
+    V4["zero_pollutant: DataFrame"]
+    Q1["query: US Cities"]
+    Q2["query_1: Non-ppm Countries"]
+    Q3["query_2: Zero Pollutants"]
+
+    %% Data Flow
+    DS1 --> V1
+    V1 -->|"query_to_pandas_safe(query)"| V2
+    V1 -->|"query_to_pandas_safe(query_1)"| V3
+    V1 -->|"query_to_pandas_safe(query_2)"| V4
+    
+    %% Queries
+    V2 --> Q1
+    V3 --> Q2
+    V4 --> Q3

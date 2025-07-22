@@ -1,0 +1,62 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_tp.csv",
+      "description": "Training data of true positive species labels with corresponding time localization."
+    },
+    {
+      "file_name": "train_fp.csv",
+      "description": "Training data of false positives species labels with corresponding time localization."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "tp_data",
+      "description": "DataFrame containing data from train_tp.csv."
+    },
+    {
+      "variable_name": "fp_data",
+      "description": "DataFrame containing data from train_fp.csv."
+    },
+    {
+      "variable_name": "audio_path",
+      "description": "Path to the .flac audio file."
+    },
+    {
+      "variable_name": "x",
+      "description": "Audio time series data loaded from the .flac file."
+    },
+    {
+      "variable_name": "sr",
+      "description": "Sampling rate of the audio file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "tp_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for visualization and analysis of true positives."
+    },
+    {
+      "variable": "fp_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for visualization and analysis of false positives."
+    },
+    {
+      "variable": "audio_path",
+      "creation_method": "f-string formatting",
+      "flow": "Defines the path for loading audio data using librosa."
+    },
+    {
+      "variable": "x",
+      "creation_method": "librosa.load",
+      "flow": "Audio data used for further processing."
+    },
+    {
+      "variable": "sr",
+      "creation_method": "librosa.load",
+      "flow": "Sampling rate used during analysis and transformations."
+    }
+  ],
+  "models": []
+}

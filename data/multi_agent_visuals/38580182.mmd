@@ -1,0 +1,24 @@
+flowchart TD
+    %% Data Sources
+    A[/data.csv/]:::dataSource -->|Load data| B[data]:::dataVariable
+    C[/sample_submission.csv/]:::dataSource -->|Load submission format| D[sample_submission]:::dataVariable
+    
+    %% Data Preparation
+    B -->|Copy| E[df]:::dataVariable
+    
+    %% Determine Numeric & Categorical Columns
+    E -->|Identify Numeric Columns| F[num_cols]:::dataVariable
+    E -->|Identify Categorical Columns| G[cat_cols]:::dataVariable
+    
+    %% Data Node Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#87CEEB,stroke:#f66,stroke-width:2px;
+    
+    %% Comments
+    %% A: Main feature dataset for heat flux prediction.
+    %% C: Sample submission format for the competition.
+    %% B: Dataframe containing the main dataset.
+    %% D: Dataframe containing the submission format.
+    %% E: Copy of the main dataset excluding the target variable.
+    %% F: List of numeric feature column names.
+    %% G: List of categorical feature column names.

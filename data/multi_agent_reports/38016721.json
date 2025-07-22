@@ -1,0 +1,96 @@
+{
+  "data_sources": [
+    {
+      "file_path": "D:\projects ML\titanic\train.csv",
+      "description": "Contains the training data for the Titanic survival prediction, including features like Age, Sex, Pclass, and Survived."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data_train",
+      "description": "DataFrame containing the Titanic training data."
+    },
+    {
+      "name": "X",
+      "description": "Features DataFrame used for model training, excluding PassengerId, Name, Ticket, Survived, and Fare."
+    },
+    {
+      "name": "y",
+      "description": "Target variable Series containing the Survived values."
+    },
+    {
+      "name": "X_train",
+      "description": "Training set features after splitting."
+    },
+    {
+      "name": "X_test",
+      "description": "Test set features after splitting."
+    },
+    {
+      "name": "y_train",
+      "description": "Training set target after splitting."
+    },
+    {
+      "name": "y_test",
+      "description": "Test set target after splitting."
+    },
+    {
+      "name": "LRmodel",
+      "description": "Logistic Regression model for predicting survival."
+    },
+    {
+      "name": "randommodel",
+      "description": "Random Forest model for predicting survival."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data_train",
+      "created_by": "pd.read_csv",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "X",
+      "created_by": "data_train.drop",
+      "flows_to": ["X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created_by": "data_train['Survived']",
+      "flows_to": ["y_train", "y_test"]
+    },
+    {
+      "variable": "X_train, X_test, y_train, y_test",
+      "created_by": "train_test_split",
+      "flows_to": ["LRmodel", "randommodel"]
+    },
+    {
+      "variable": "LRmodel",
+      "created_by": "LogisticRegression",
+      "flows_to": ["Logistic Regression model predictions"]
+    },
+    {
+      "variable": "randommodel",
+      "created_by": "RandomForestClassifier",
+      "flows_to": ["Random Forest model predictions"]
+    }
+  ],
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "max_iter": 5000
+      }
+    },
+    {
+      "name": "Random Forest",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {
+        "n_estimators": 1000
+      }
+    }
+  ]
+}

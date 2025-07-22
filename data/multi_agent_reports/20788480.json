@@ -1,0 +1,136 @@
+{
+"data_sources": [
+    {
+        "file_name": "train.csv",
+        "description": "Contains training data including features and pressure target."
+    },
+    {
+        "file_name": "test.csv",
+        "description": "Contains test data including features for predictions."
+    },
+    {
+        "file_name": "sample_submission.csv",
+        "description": "Template for submission containing a sample of expected output format."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "train",
+        "description": "DataFrame containing training data after being read from CSV."
+    },
+    {
+        "variable_name": "test",
+        "description": "DataFrame containing test data after being read from CSV."
+    },
+    {
+        "variable_name": "sample_submission",
+        "description": "DataFrame to hold the final predictions for submission."
+    },
+    {
+        "variable_name": "feature_cols",
+        "description": "List of features used for training: ['R', 'C', 'u_in', 'u_out']."
+    },
+    {
+        "variable_name": "RS",
+        "description": "RobustScaler object used to scale the features."
+    },
+    {
+        "variable_name": "n_steps",
+        "description": "The number of time steps in the time series data. Set to 80."
+    },
+    {
+        "variable_name": "n_features",
+        "description": "The number of feature columns used for model input."
+    },
+    {
+        "variable_name": "X",
+        "description": "Numpy array containing reshaped feature data for model training."
+    },
+    {
+        "variable_name": "y",
+        "description": "Numpy array containing the pressure target values reshaped for model training."
+    },
+    {
+        "variable_name": "model",
+        "description": "Keras Sequential model instance built for predicting pressure."
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "train",
+        "creation_method": "pd.read_csv",
+        "flow": "Used to extract features and target for model training."
+    },
+    {
+        "variable_name": "test",
+        "creation_method": "pd.read_csv",
+        "flow": "Used to predict pressure values and create submission file."
+    },
+    {
+        "variable_name": "sample_submission",
+        "creation_method": "pd.read_csv",
+        "flow": "Holds the predictions for submission."
+    },
+    {
+        "variable_name": "X",
+        "creation_method": "train[feature_cols].values.reshape",
+        "flow": "Used as input for model training."
+    },
+    {
+        "variable_name": "y",
+        "creation_method": "train.pop",
+        "flow": "Used as target for model training."
+    },
+    {
+        "variable_name": "model",
+        "creation_method": "get_model()",
+        "flow": "Compiled and trained with the input data (X, y) and used for predictions."
+    }
+],
+"models": [
+    {
+        "model_name": "LSTM",
+        "input_features": "['R', 'C', 'u_in', 'u_out']",
+        "target_variable": "pressure",
+        "hyperparameters": {
+            "layers": [
+                {
+                    "type": "Bidirectional LSTM",
+                    "neurons": 150,
+                    "return_sequences": true
+                },
+                {
+                    "type": "Bidirectional LSTM",
+                    "neurons": 150,
+                    "return_sequences": true
+                },
+                {
+                    "type": "Bidirectional LSTM",
+                    "neurons": 150,
+                    "return_sequences": true
+                },
+                {
+                    "type": "Bidirectional LSTM",
+                    "neurons": 150,
+                    "return_sequences": true
+                }
+            ],
+            "dropout": 0.2,
+            "dense_layers": [
+                {
+                    "units": 128,
+                    "activation": "swish"
+                },
+                {
+                    "units": 256,
+                    "activation": "swish"
+                },
+                {
+                    "units": 512,
+                    "activation": "swish"
+                }
+            ],
+            "output_units": 80
+        }
+    }
+]}

@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' />"] --> B["🔄 Check & Fix Train/Test Set Order"]
+    B --> C["🗑️ Drop Unnecessary Columns"]
+    C --> D["🔍 Feature Engineering"]
+    D --> E["🔤 Get Categorical Columns"]
+    E --> F["➡️ Split Features and Labels"]
+    F --> G["📏 Scale Numeric Features"]
+    G --> H["🔢 One-Hot Encode Categorical Variables"]
+    H --> I["💾 Save Processed Data <img src='file.svg' />"]

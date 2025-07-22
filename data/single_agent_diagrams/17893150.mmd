@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='dummy_plots/hist_template.svg'/> <br/> locations=pd.read_csv(...)"] --> B["🧪 Check Missing Values <img src='icons/database.svg'/> <br/> sns.heatmap(...)"]
+    B --> C["📊 Exploratory Analysis <img src='dummy_plots/heatmap_template.svg'/> <br/> sns.heatmap(...)"]
+    C --> D["📊 Histogram of Ratings <img src='dummy_plots/hist_template.svg'/> <br/> plt.hist(...)"]
+    D --> E["📊 Boxplot of Ratings <img src='dummy_plots/boxplot_template.svg'/> <br/> sns.catplot(...)"]
+    E --> F["📍 Scatterplot of Ratings <img src='dummy_plots/scatter_plot_template.svg'/> <br/> sns.relplot(...)"]
+    F --> G["🧠 Linear Regression <img src='icons/brain.svg'/> <br/> OLS(...)"]
+    G --> H["📊 Residual Analysis <img src='dummy_plots/hist_template.svg'/> <br/> plt.hist(residual)"]
+    H --> I["📉 K-Means Clustering <img src='icons/brain.svg'/> <br/> KMeans(...)"]
+    I --> J["🧬 Agglomerative Clustering <img src='icons/brain.svg'/> <br/> AgglomerativeClustering(...)"]

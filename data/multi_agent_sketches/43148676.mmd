@@ -1,0 +1,43 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#f9f9f9", "edgeLabelBackground":"#ffffff", "tertiaryColor": "#f2f2f2"}}}%%
+flowchart TD
+    %% Data Sources
+    A[CIFAR-10 Dataset] 
+    %% Data Variables
+    B[X_train]
+    C[y_train]
+    D[X_test]
+    E[y_test]
+    F[classes]
+    %% Models
+    G[Multilayer Perceptron (MLP)]
+    H[Convolutional Neural Network (CNN)]
+    
+    %% Data Flow
+    A --> |Load| B
+    A --> |Load| C
+    A --> |Load| D
+    A --> |Load| E
+    A --> |Load Class Names| F
+    
+    %% Model Training
+    B --> |Training Data| G
+    C --> |Target Data| G
+    B --> |Training Data| H
+    C --> |Target Data| H
+
+    %% Model Evaluation
+    G --> |Evaluate with| D
+    G --> |Evaluate using| E
+    H --> |Evaluate with| D
+    H --> |Evaluate using| E
+
+    %% Comments on Nodes for Clarity
+    classDef comment fill:#e0e0e0,stroke:#000000,color:#0a0a0a,font-style:italic;
+    A:::comment
+    B:::comment
+    C:::comment
+    D:::comment
+    E:::comment
+    F:::comment
+    G:::comment
+    H:::comment

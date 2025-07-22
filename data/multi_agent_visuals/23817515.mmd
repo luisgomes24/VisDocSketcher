@@ -1,0 +1,49 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A1[\"train.csv\"] 
+    A2[\"test.csv\"] 
+    A3[\"sample_submission.csv\"]
+
+    %% Nodes for Data Variables
+    B1[\"df\"] 
+    B2[\"X\"] 
+    B3[\"y\"] 
+    B4[\"X_train\"] 
+    B5[\"X_test\"] 
+    B6[\"y_train\"] 
+    B7[\"y_test\"] 
+    B8[\"predictions\"]
+
+    %% Data Flow 
+    A1 -->|Load using pd.read_csv| B1
+    
+    B1 -->|Extract and normalize| B2
+    B1 -->|Extract labels| B3
+    
+    B2 -->|Split| B4
+    B3 -->|Split| B6
+    
+    B4 -->|train_test_split| B5
+    B6 -->|train_test_split| B7
+
+    %% Models
+    M1[\"Logistic Regression\"]
+    M2[\"SVC\"]
+    M3[\"DigitsPCA\"]
+    
+    %% Model Training
+    B4 --> |fit| M1
+    B6 --> |fit| M1
+    
+    B4 --> |fit| M2
+    B6 --> |fit| M2
+    
+    B4 --> |fit| M3
+
+    %% Predictions
+    M1 -->|predict| B5
+    M2 -->|predict| B5
+    M3 -->|predict| B5
+
+    %% Predictions Flow
+    B5 -->|to X_submission| B8

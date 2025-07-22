@@ -1,0 +1,22 @@
+{
+"data_sources": [
+    {
+        "file_name": "housing_raw.csv",
+        "description": "Contains housing data."
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "df1",
+        "description": "DataFrame storing the housing dataset." 
+    }
+],
+"data_flow": [
+    {
+        "variable_name": "df1",
+        "creation_method": "pd.read_csv",
+        "flow": "Used for exploratory data analysis and various plots."
+    }
+],
+"models": []
+}

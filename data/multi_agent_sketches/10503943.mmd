@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph DataSources
+        A["/kaggle/input/kpmi_data.csv"]:::classA
+    end
+
+    subgraph DataVariables
+        B["df1"]:::classB
+    end
+
+    subgraph DataFlow
+        C["pd.read_csv('/kaggle/input/kpmi_data.csv', nrows=1000)"]:::classC
+        D["Exploratory Data Analysis"]:::classD
+    end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#bbf,stroke:#333,stroke-width:2px;
+    style C fill:#bfb,stroke:#333,stroke-width:2px;
+    style D fill:#ffb,stroke:#333,stroke-width:2px;
+
+    %% Data Source Node
+    A -- Load data --> C
+    %% DataFrame creation
+    C -- Creates --> B
+    %% DataFrame usage
+    B -- Used in --> D

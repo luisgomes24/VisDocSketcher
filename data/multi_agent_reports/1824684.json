@@ -1,0 +1,119 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/home-data-for-ml-course/train.csv",
+      "description": "Home data for machine learning course, contains features and target variable SalePrice"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "home_data",
+      "description": "DataFrame containing all home data from the CSV"
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable which is the SalePrice of the homes"
+    },
+    {
+      "variable_name": "X",
+      "description": "Features DataFrame used for training the model"
+    },
+    {
+      "variable_name": "train_X",
+      "description": "Training features DataFrame"
+    },
+    {
+      "variable_name": "val_X",
+      "description": "Validation features DataFrame"
+    },
+    {
+      "variable_name": "train_y",
+      "description": "Training target variable DataFrame"
+    },
+    {
+      "variable_name": "val_y",
+      "description": "Validation target variable DataFrame"
+    },
+    {
+      "variable_name": "iowa_model",
+      "description": "DecisionTreeRegressor model initialized"
+    },
+    {
+      "variable_name": "val_predictions",
+      "description": "Predicted values on validation set"
+    },
+    {
+      "variable_name": "val_mae",
+      "description": "Mean Absolute Error for validation predictions"
+    },
+    {
+      "variable_name": "final_model",
+      "description": "Final DecisionTreeRegressor model fitted with all data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "home_data",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to create X and y"
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "home_data.SalePrice",
+      "flow": "Target variable for model training"
+    },
+    {
+      "variable_name": "X",
+      "creation_method": "home_data[features]",
+      "flow": "Features for the model, split into train_X and val_X"
+    },
+    {
+      "variable_name": "train_X",
+      "creation_method": "train_test_split",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable_name": "val_X",
+      "creation_method": "train_test_split",
+      "flow": "Used for validation after training"
+    },
+    {
+      "variable_name": "train_y",
+      "creation_method": "train_test_split",
+      "flow": "Used for training the model"
+    },
+    {
+      "variable_name": "val_y",
+      "creation_method": "train_test_split",
+      "flow": "Used as validation target"
+    },
+    {
+      "variable_name": "iowa_model",
+      "creation_method": "DecisionTreeRegressor",
+      "flow": "Fitted using train_X and train_y"
+    },
+    {
+      "variable_name": "val_predictions",
+      "creation_method": "iowa_model.predict",
+      "flow": "Used to compute mean absolute error"
+    },
+    {
+      "variable_name": "val_mae",
+      "creation_method": "mean_absolute_error",
+      "flow": "Final assessment of model performance"
+    },
+    {
+      "variable_name": "final_model",
+      "creation_method": "DecisionTreeRegressor",
+      "flow": "Used to fit final model on X and y"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DecisionTreeRegressor",
+      "input_features": "X",
+      "target_variable": "y",
+      "hyperparameters": {"max_leaf_nodes": 100, "random_state": 0}
+    }
+  ]
+}

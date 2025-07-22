@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph DataSources
+        A1["Wine Reviews CSV"]
+        A2["Pregnant Women Excel"]
+        A3["Artists SQLite"]
+    end
+    subgraph DataFrames
+        B1["Wine Reviews DataFrame"]
+        B2["Excel DataFrame"]
+        B3["Artists DataFrame"]
+    end
+    subgraph Outputs
+        C1["cows_and_goats.csv"]
+    end
+    subgraph Process
+        D1["Create q6_df"]
+    end
+    A1 -->|read_csv| B1
+    A2 -->|read_excel| B2
+    A3 -->|read_sql_query| B3
+    D1 -->|to_csv| C1
+    %% Comments for clarity
+    %% A1, A2, A3: These are data sources
+    %% B1, B2, B3: DataFrames created from respective sources
+    %% D1: Process to create q6_df and subsequently output to CSV

@@ -1,0 +1,28 @@
+{
+  "data_sources": [
+    "../input/porto-seguro-data-challenge/train.csv",
+    "../input/porto-seguro-data-challenge/test.csv",
+    "../input/porto-seguro-data-challenge/submission_sample.csv",
+    "../input/porto-seguro-data-challenge/metadata.csv"
+  ],
+  "data_variables": [
+    "train",
+    "test",
+    "sample_submission",
+    "meta",
+    "X",
+    "y"
+  ],
+  "data_flow": [
+    "train -> X, y",
+    "test -> X_test",
+    "meta -> cat_nom, cat_ord, num_dis, num_con",
+    "X -> var_imp, mutual_info, pzeros, pnull, feature selection",
+    "y -> model training"
+  ],
+  "models": [
+    "RandomForestClassifier",
+    "LogisticRegression",
+    "LogisticRegression"
+  ]
+}

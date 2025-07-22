@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A["train.csv"] --> |"read_csv"| B["train_df"]
+    B --> |"Extract 'target'"| C["train_target"]
+    A --> |"feature split"| D["X_train"]
+    B --> |"feature split"| E["X_test"]
+    
+    F["test.csv"] --> |"read_csv"| G["test_df"]
+    G --> |"for prediction"| H["submission_df"]
+    
+    I["sample_submission.csv"] --> |"read_csv and merge with predictions"| H
+    H --> |"to CSV"| J["submission.csv"]
+    
+    %% Model
+    K["CatBoostClassifier"]
+    D --> |"Train Model"| K
+    C --> |"Target Variable"| K
+    K --> |"Predict"| H
+    
+    %% Commentary 
+    classDef nodeStyle fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,B,F,I nodeStyle;
+    class C,D,E,G,H,J,K nodeStyle;

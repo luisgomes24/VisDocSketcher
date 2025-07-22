@@ -1,0 +1,12 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/database.svg'/> <br/> CIFAR-10"] --> B["👀 Data Exploration"]
+    B --> C["📊 Visualize Image <img src='dummy_plots/image.svg'/> <br/> Sample Image"]
+    C --> D["⚙️ Normalize Data"]
+    D --> E["🧠 Build ANN Model"]
+    E --> F["🔗 Compile & Train ANN"]
+    F --> G["🔍 Predict with ANN"]
+    G --> H["📈 Evaluate ANN Accuracy"]
+    H --> I["🧠 Build CNN Model"]
+    I --> J["🔗 Compile & Train CNN"]
+    J --> K["🔍 Predict with CNN"]
+    K --> L["📈 Evaluate CNN Accuracy"]

@@ -1,0 +1,15 @@
+```mermaid
+flowchart TD
+    A["train.csv"] --> |Load DataFrame| B["train_df"]
+    B --> |Split Features & Target| C["X_train & y_train"]
+    C["X_train & y_train"] --> |Train Model| D["RandomForestRegressor"]
+    B --> |Split Test Data| E["X_test & y_test"]
+    D --> |Predict| F["preds"]
+    E --> |Evaluate Model| F["preds"]
+    F --> |Calculate MSE| G["MSE"]
+    G --> |Plot Predictions| H["Plot"]
+    I["test.csv"] --> |Load DataFrame| J["test_df"]
+    J --> |Predict Emissions| K["sub"]
+    L["sample_submission.csv"] --> |Load Submission Template| M["samsub"]
+    K --> |Update & Save Submission| M["samsub"]
+```

@@ -1,0 +1,24 @@
+{
+    "data_sources": [
+        {
+            "file_name": "eu_sf_far_2007_2013.csv",
+            "description": "Contains data related to EU structural funds from 2007 to 2013."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df1",
+            "description": "DataFrame storing the read data from 'eu_sf_far_2007_2013.csv'."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df1",
+            "creation": "Created by reading the CSV file using pd.read_csv.",
+            "flow": [
+                "Used for plotting distributions, correlation matrix, and scatter/density plots."
+            ]
+        }
+    ],
+    "models": []
+}

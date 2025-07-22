@@ -1,0 +1,22 @@
+{
+  "data_sources": [
+    {
+      "file": "insurance.csv",
+      "description": "Contains insurance data including bmi, charges, sex, smoker status, and region."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "dat",
+      "description": "DataFrame containing the insurance dataset loaded from a CSV file."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dat",
+      "creation": "read_csv('../input/insurance/insurance.csv')",
+      "usage": "Used for plotting various charts to visualize the relationship between bmi and charges, colored by sex and smoker status."
+    }
+  ],
+  "models": []
+}

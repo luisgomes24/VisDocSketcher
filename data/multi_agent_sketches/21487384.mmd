@@ -1,0 +1,20 @@
+flowchart TD
+    %% Data Sources
+    A[Pokemon CSV File]:::dataSource -->|read_csv| B[Pokeman DataFrame]:::dataVariable
+
+    %% Data Processing and Variable Creation
+    B --> C{pokeman['Generation']}
+    C -->|value_counts().index| D[Pokemon Sort]:::dataVariable
+    B --> E[Visualizations of Generations and Types]:::process
+    E <-- F[bar_color]:::dataVariable
+    G[Seaborn Color Palette]:::dataSource -->|sns.color_palette()[0]| F
+
+    %% Comment styles
+    classDef dataSource fill:#C6E2FF,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#CFFDD4,stroke:#333,stroke-width:2px;
+    classDef process fill:#FFDAB9,stroke:#333,stroke-width:2px;
+
+    %% Explanatory comments for each node
+    class A,D,G dataSource;
+    class B,F dataVariable;
+    class E process;

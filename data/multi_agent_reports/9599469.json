@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Customer_DF (1).csv",
+      "description": "Contains customer data with relevant attributes for analysis."
+    },
+    {
+      "file_name": "cust_transaction_details (1).csv",
+      "description": "Contains transaction details related to customers."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing the first dataset (Customer information)."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing the second dataset (Customer transaction details)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "created_by": "pd.read_csv",
+      "flow": "Used for plotting distributions, correlation matrix, and scatter plots."
+    },
+    {
+      "variable": "df2",
+      "created_by": "pd.read_csv",
+      "flow": "Used for plotting distributions, correlation matrix, and scatter plots."
+    }
+  ],
+  "models": []
+}

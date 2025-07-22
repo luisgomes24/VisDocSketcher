@@ -1,0 +1,22 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["Not_so_Markov_action_board_S100E1000.csv"]
+    B["Not_so_Markov_leaderboard_S100E1000.csv"]
+
+    %% Data Variables
+    C["DataFrame df1"]
+    D["DataFrame df2"]
+
+    %% Data Flow
+    A --> |"pd.read_csv"| C
+    B --> |"pd.read_csv"| D
+
+    %% Data Usage
+    C --> E["plotPerColumnDistribution"]
+    D --> E
+    C --> F["plotCorrelationMatrix"]
+    D --> F
+    C --> G["plotScatterMatrix"]
+    D --> G
+```

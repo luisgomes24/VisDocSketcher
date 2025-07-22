@@ -1,0 +1,20 @@
+%%{init: {"theme": "default"}}%%
+%% The main workflow for video-based pose estimation using TfPoseEstimator %%
+flowchart TD
+    %% Data source node for video files %%
+    A["Video Files"] --> |"List video paths"| B["video_paths"]
+    
+    %% Processing node for each video path to create a video generator object %%
+    B --> |"Create video generator with video_gen()"| C["c_video"]
+    
+    %% Frame processing node for generating pose estimation %%
+    C --> |"Run pose estimation frame by frame"| D["Pose Estimation"]
+    
+    %% Output from the pose estimation - pose data for frames %%
+    D --> |"Estimate body poses with TfPoseEstimator"| E["humans"]
+    
+    %% Creation of body pose list from estimated data %%
+    E --> |"Accumulate pose data"| F["body_pose_list"]
+    
+    %% Conversion of pose data list to DataFrame for further analysis %%
+    F --> |"Convert to DataFrame"| G["body_pose_df"]

@@ -1,0 +1,30 @@
+flowchart TD
+    %% Node for data source meta_data_0016.csv
+    A["meta_data_0016.csv"]
+    %% Node for DataFrame df1
+    DF1["DataFrame df1"]
+    %% DataFrame creation from meta_data_0016.csv
+    A -->|"pd.read_csv"| DF1
+    
+    %% Node for data source meta_data_0027.csv
+    B["meta_data_0027.csv"]
+    %% Node for DataFrame df2
+    DF2["DataFrame df2"]
+    %% DataFrame creation from meta_data_0027.csv
+    B -->|"pd.read_csv"| DF2
+    
+    %% Node for data source meta_data_0013.csv
+    C["meta_data_0013.csv"]
+    %% Node for DataFrame df3
+    DF3["DataFrame df3"]
+    %% DataFrame creation from meta_data_0013.csv
+    C -->|"pd.read_csv"| DF3
+
+    %% Visualization of df1
+    DF1 -->|"Visualized: plotPerColumnDistribution & head()"| E["Visualization of df1"]
+    
+    %% Visualization of df2
+    DF2 -->|"Visualized: plotPerColumnDistribution & head()"| F["Visualization of df2"]
+
+    %% Visualization of df3
+    DF3 -->|"Visualized: plotPerColumnDistribution & head()"| G["Visualization of df3"]

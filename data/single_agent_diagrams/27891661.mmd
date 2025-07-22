@@ -1,0 +1,18 @@
+```
+flowchart TD
+    A["📥 Load Training Data<br/><img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+    B --> C["🔍 Check Missing Values"]
+    C --> D["✅ Fill Missing Values"]
+    D --> E["📊 Exploratory Data Analysis"]
+    E --> F["📈 Visualize Age Distribution<br/><img src='hist_template.svg'/>"]
+    E --> G["📊 Visualize Feature Distributions<br/><img src='barplot_template.svg'/>"]
+    G --> H["🔤 Label Encoding"]
+    H --> I["📚 Split Data into Train and Validation Sets"]
+    I --> J["🧠 Train Logistic Regression Model"]
+    J --> K["📊 Evaluate Model Performance"]
+    K --> L["📥 Load Test Data<br/><img src='file.svg'/>"]
+    L --> M["🧹 Preprocess Test Data"]
+    M --> N["🔤 Encode Test Data"]
+    N --> O["✅ Fill Missing Values in Test Data"]
+    O --> P["🔮 Predict on Test Data"]
+    P --> Q["📜 Store Submission Results<br/><img src='table.svg'/>"]

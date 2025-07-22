@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Load Dataset <img src='file.svg'/> <br/> df=pd.read_csv('../input/hotel-booking-demand/hotel_bookings.csv')"] --> B["🔍 Assess Data <img src='table.svg'/> <br/> df.shape"]
+    B --> C["📉 Data Cleaning <img src='column_split.svg'/> <br/> df=df.dropna()"]
+    C --> D["📊 Visualizing Missing Data <img src='barplot_template.svg'/>"]
+    D --> E["🔍 Data Summary <img src='table.svg'/> <br/> df.describe()"]
+    E --> F["🔀 Analyze Data <img src='boxplot_template.svg'/>"]
+    F --> G["📊 Month Booking Analysis <img src='barplot_template.svg'/> <br/> sns.barplot()"]
+    G --> H["📊 Year Booking Analysis <img src='piechart_template.svg'/> <br/> ax.pie()"]
+    H --> I["📈 Hotel Booking Insights <img src='heatmap_template.svg'/>"]
+    I --> J["🤖 Modeling <img src='brain.svg'/> <br/> result=rm.fit()"]
+    J --> K["📊 Prediction Results <img src='scatter_plot_template.svg'/> <br/> df.corr()"]

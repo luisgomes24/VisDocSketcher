@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A[hotel_id_code_mapping.csv] -- Load Mapping --> B[hotel_id_code_df]
+    C[test_images/] -- Construct DataFrame --> D[test_df]
+
+    %% Data Variables and Transformations
+    D -- Create Dataset --> E[test_dataset]
+    B -- Create Mapping --> F[hotel_id_code_map]
+    E -- Initialize DataLoader --> G[test_loader]
+
+    %% Model Loading
+    P[SEED] -.-> Q[Initialize SEED]
+    R[IMG_SIZE] -- Resize Images --> S
+    T[Load Model Checkpoint] --> M[model]
+
+    %% Predictions
+    G -- Perform Predictions --> H[preds]
+    M -- Generate Predictions --> H
+    F -- Map Predictions --> I[Final Submission]
+
+    %% Model Details
+    M -. Consists of .-> J[HotelIdModel]
+    J -- Uses Backbone --> K[EfficientNet-B0]

@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "filename": "wine dataset",
+      "description": "Chemical analysis results of wines from an Italian region, containing measurements of 13 features across 178 instances."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "wine_dataset",
+      "description": "Dictionary containing the wine dataset, including features and target variables."
+    },
+    {
+      "variable_name": "X",
+      "description": "Pandas DataFrame containing the features (13 measurements) of the wine dataset."
+    },
+    {
+      "variable_name": "y",
+      "description": "Pandas DataFrame containing the target variables (wine classes)."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "wine_dataset",
+      "creation": "load_wine()",
+      "flow": "X and y are created from this dictionary."
+    },
+    {
+      "variable_name": "X",
+      "creation": "pd.DataFrame(wine_dataset['data'])",
+      "flow": "Used in plotting visualizations."
+    },
+    {
+      "variable_name": "y",
+      "creation": "pd.DataFrame(wine_dataset['target'])",
+      "flow": "Used in plotting visualizations."
+    }
+  ],
+  "models": []
+}

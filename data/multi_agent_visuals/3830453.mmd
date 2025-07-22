@@ -1,0 +1,8 @@
+%%{init: {'theme': 'default'}}%%
+flowchart TD
+    A["dc-wikia-data.csv"] -->|Load CSV| B["my_data_dc"]
+    C["marvel-wikia-data.csv"] -->|Load CSV| D["my_data_ml"]
+
+B -->|Display| E["my_data_dc.head()"]
+B -->|Describe| F["my_data_dc.describe(include='all')"]
+\n

@@ -1,0 +1,20 @@
+flowchart TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|"Load data with pandas"| B["<img src='icons/table.svg' width=100 height=100/> <br/> home_data"]
+    %% home_data loaded from train.csv
+
+    B -->|"Extract target"| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"]
+    B -->|"Define features"| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> X"]
+    %% y and X are derived from home_data
+
+    C --> E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> train_y, val_y"]
+    D --> F["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> train_X, val_X"]
+    %% train_test_split generates train and validation sets
+
+    E -->|"Model Training"| G["<img src='icons/brain.svg' width=100 height=100/> <br/> DecisionTreeRegressor iowa_model"]
+    F -->|"Model Training"| G
+    F -->|"Model Training"| H["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestRegressor rf_model"]
+    %% Models are trained on training data
+
+    G -->|"Predictions"| I["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> val_predictions"]
+    H -->|"Evaluate"| J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> rf_val_mae"]
+    %% Predictions and evaluation on validation data

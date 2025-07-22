@@ -1,0 +1,9 @@
+```
+graph TD;
+    A["📦 Load Image <img src='file.svg'/> <br/>"] --> B["🖼️ Read Image <img src='image.svg'/> <br/>"];
+    B --> C["🔄 Augment Images Using Horizontal Flip <img src='column_split.svg'/> <br/>"];
+    C --> D["📊 Display Augmented Images <img src='barplot_template.svg'/> <br/>"];
+    D --> C1["🔄 Augment Again with Full Flip <img src='column_split.svg'/> <br/>"];
+    C1 --> D1["📊 Display Augmented Images <img src='barplot_template.svg'/> <br/>"];
+    D1 --> C2["🔄 Augment with 25% Flip <img src='column_split.svg'/> <br/>"];
+    C2 --> D2["📊 Display Augmented Images <img src='barplot_template.svg'/> <br/>"];

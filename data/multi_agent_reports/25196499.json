@@ -1,0 +1,46 @@
+{
+  "data_sources": [
+    {
+      "file_path": "../input/samsung-electronics-stock-historical-price/005930.KS.csv",
+      "description": "This CSV file contains historical stock prices for Samsung Electronics."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "A DataFrame containing the historical stock prices, including columns for Date, Close, and Adjusted Close."
+    },
+    {
+      "variable_name": "df_balance",
+      "description": "A DataFrame tracking the balance during backtesting trading strategy over time."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "description": "Read from the CSV file and contains the historical stock data.",
+      "flow_destination": ["used for plotting stock prices", "passed to bolinger function", "used in backtesting function"]
+    },
+    {
+      "variable_name": "df_balance",
+      "creation_method": "backtesting function",
+      "description": "Generated from the backtesting function that simulates trading using the Bollinger Bands strategy.",
+      "flow_destination": ["used for plotting balance over time"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Bollinger Bands",
+      "input_features": ["Close price"],
+      "target_variable": "upper_20 and lower_20 bands",
+      "hyperparameters": {"window_size": 20}
+    },
+    {
+      "model_name": "Backtesting Trading Strategy",
+      "input_features": ["df.Close", "df.upper_20", "df.lower_20"],
+      "target_variable": "total_balance",
+      "hyperparameters": {"initial_balance": 1000000}
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+        A1["results.csv"]
+    end
+
+    %% Data Variables
+    subgraph Variables
+        B1["data_dir"]
+        B2["image_dir"]
+        B3["csv_file"]
+        B4["df"]
+        B5["train_cap, val_cap, test_cap"]
+        B6["train_img, val_img, test_img"]
+        B7["train_ds, val_ds, test_ds"]
+    end
+
+    %% Methods
+    subgraph Methods
+        C1["pd.read_csv"]
+        C2["tokenizer.texts_to_sequences + pad_sequences"]
+        C3["tf.data.Dataset.zip"]
+    end
+
+    %% Models
+    subgraph Models
+        D1["CNN_Encoder"]
+        D2["RNN_Decoder"]
+    end
+
+    %% Data Flow
+    A1 --> C1 
+    C1 --> B4
+    B4 --> C2
+    C2 --> B5
+    B4 -->|Derive| B6
+    B5 -->|Input| C3
+    B6 -->|Input| C3
+    C3 --> B7
+    B7 -->|Input| D1
+    B7 -->|Used in model training| D2
+
+    D1 -->|Features to| D2
+    D2 -->|Outputs| B5

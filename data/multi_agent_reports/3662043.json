@@ -1,0 +1,31 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/Mall_Customers.csv",
+      "description": "Dataset containing customer information including ID, Gender, Age, Annual Income, and Spending Score."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "file",
+      "description": "DataFrame that holds the dataset loaded from the CSV file."
+    },
+    {
+      "name": "file_ages",
+      "description": "Subset DataFrame containing only ID and Age for analysis."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "file",
+      "creation_method": "pd.read_csv",
+      "flow": ["Used for plotting and analysis"]
+    },
+    {
+      "variable": "file_ages",
+      "creation_method": "file[['ID','Age']]",
+      "flow": ["Used for age density analysis"]
+    }
+  ],
+  "models": []
+}

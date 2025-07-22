@@ -1,0 +1,18 @@
+{"data_sources": [
+  {"file_name": "cars.csv", "description": "Contains data on various car attributes such as mpg, cylinders, horsepower, weight, and more."}
+],
+"data_variables": [
+  {"name": "dados", "description": "DataFrame containing car data loaded from cars.csv, including attributes and target variables for clustering"},
+  {"name": "x", "description": "DataFrame used for processing, consists of selected feature columns for clustering"},
+  {"name": "x_array", "description": "Numpy array derived from DataFrame x, used as input for the KMeans algorithm"},
+  {"name": "kmeans", "description": "KMeans model object initialized with parameters to perform clustering"}
+],
+"data_flow": [
+  {"variable": "dados", "created_by": "pd.read_csv", "flows_to": ["x", "kmeans"]},
+  {"variable": "x", "created_by": "dados.iloc[:,:7]", "flows_to": ["x_array", "kmeans"]},
+  {"variable": "x_array", "created_by": "x.values", "flows_to": ["kmeans"]},
+  {"variable": "kmeans", "created_by": "KMeans()", "flows_to": ["dados['clusters']"]}
+],
+"models": [
+  {"model_name": "KMeans", "input_features": ["mpg", "cylinders", "cubicinches", "hp", "weightlbs", "time-to-60", "year"], "target_variable": "clusters", "hyperparameters": {"n_clusters": 3, "init": "k-means++", "max_iter": 300, "n_init": 10, "random_state": 0}}
+]}

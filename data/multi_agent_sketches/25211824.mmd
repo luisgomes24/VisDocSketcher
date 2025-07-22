@@ -1,0 +1,25 @@
+flowchart TD
+
+%% Data Sources
+A[Height of Male and Female by Country 2022.csv]
+B[clean_data.csv]
+
+%% Data Variables
+C[df] -->|Read from| A
+D[df2] -->|Read from| B
+E[df3] -->|Subset of df2\nFirst 100 rows| D
+
+%% Data Flow and Usage
+C -->|Used for scatter plots of\nmale and female heights| F[Scatter Plot of Heights]
+D -->|Used for scatter plots of\nhouse prices against locations| G[Scatter Plot of House Prices]
+E -->|Used for specific scatter plot visualization\nof house prices and locations| H[Scatter Plot Visualization]
+
+%% Comments
+%% A: Represents the CSV file containing average height data for 2022.
+%% B: Represents the CSV file containing Chennai's house prices data.
+%% C: A DataFrame holding height data of males and females by country.
+%% D: A DataFrame holding Chennai's house prices data.
+%% E: A subset of df2 limited to the first 100 rows.
+%% F: A scatter plot illustrating male and female heights.
+%% G: A scatter plot of house prices based on location data.
+%% H: A focused visualization plotting the first 100 house price locations.

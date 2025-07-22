@@ -1,0 +1,15 @@
+{
+  "data_sources": [
+    { "file_path": "/kaggle/input/2023-kaggle-ai-report/kaggle_writeups_20230510.csv", "description": "Contains Kaggle write-ups from the AI report" },
+    { "file_path": "/kaggle/input/2023-kaggle-ai-report/sample_submission.csv", "description": "Sample submission file for the Kaggle competition" }
+  ],
+  "data_variables": [
+    { "variable": "df", "description": "DataFrame containing the Kaggle write-ups" },
+    { "variable": "submission", "description": "DataFrame containing the sample submission data" }
+  ],
+  "data_flow": [
+    { "variable": "df", "creation_method": "pd.read_csv", "flows_to": "numerical and categorical analysis, cleaning" },
+    { "variable": "submission", "creation_method": "pd.read_csv", "flows_to": "displaying sample submissions" }
+  ],
+  "models": []
+}

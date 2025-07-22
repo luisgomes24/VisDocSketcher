@@ -1,0 +1,21 @@
+{
+  "data_sources": [
+    {"file_name": "train.csv.gz", "description": "Contains training data for shelter animal outcomes."},
+    {"file_name": "sample_submission.csv.gz", "description": "Contains sample submission format for predictions."}
+  ],
+  "data_variables": [
+    {"variable_name": "train", "description": "DataFrame containing training data."},
+    {"variable_name": "alldata", "description": "Combined DataFrame of train and test datasets, including processed features."},
+    {"variable_name": "breed_text", "description": "TF-IDF representation of breeds."},
+    {"variable_name": "breed_svd", "description": "Reduced dimensional representation of breed features using SVD."},
+    {"variable_name": "sub", "description": "DataFrame containing the sample submission."}
+  ],
+  "data_flow": [
+    {"variable_name": "train", "created_by": "pd.read_csv", "flows_to": ["alldata"]},
+    {"variable_name": "alldata", "created_by": "pd.concat", "flows_to": []},
+    {"variable_name": "breed_text", "created_by": "TfidfVectorizer", "flows_to": ["breed_svd", "alldata"]},
+    {"variable_name": "breed_svd", "created_by": "TruncatedSVD", "flows_to": ["alldata"]},
+    {"variable_name": "sub", "created_by": "pd.read_csv", "flows_to": []}
+  ],
+  "models": []
+}

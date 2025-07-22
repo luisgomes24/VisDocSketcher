@@ -1,0 +1,125 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/train.csv",
+      "description": "Training dataset containing various housing features and the target price (SalePrice)"
+    },
+    {
+      "file": "../input/test.csv",
+      "description": "Test dataset containing various housing features without the target price (SalePrice)"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "X",
+      "description": "DataFrame containing features from the training dataset"
+    },
+    {
+      "variable": "y",
+      "description": "Series containing target values (SalePrice)"
+    },
+    {
+      "variable": "X_train",
+      "description": "DataFrame containing training features after preprocessing"
+    },
+    {
+      "variable": "X_valid",
+      "description": "DataFrame containing validation features after preprocessing"
+    },
+    {
+      "variable": "X_test",
+      "description": "DataFrame containing features from the test dataset after preprocessing"
+    },
+    {
+      "variable": "predictions_1",
+      "description": "Predictions made by the first model on validation data"
+    },
+    {
+      "variable": "predictions_2",
+      "description": "Predictions made by the second model on validation data"
+    },
+    {
+      "variable": "predictions_3",
+      "description": "Predictions made by the third model on validation data"
+    },
+    {
+      "variable": "mae_1",
+      "description": "Mean Absolute Error for predictions of the first model"
+    },
+    {
+      "variable": "mae_2",
+      "description": "Mean Absolute Error for predictions of the second model"
+    },
+    {
+      "variable": "mae_3",
+      "description": "Mean Absolute Error for predictions of the third model"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X",
+      "creation_method": "pd.read_csv",
+      "flows_to": ["y", "X_train_full", "X_valid_full"]
+    },
+    {
+      "variable": "y",
+      "creation_method": "X.SalePrice",
+      "flows_to": ["my_model_1", "predictions_1", "my_model_2", "predictions_2", "my_model_3", "predictions_3"]
+    },
+    {
+      "variable": "X_train_full",
+      "creation_method": "train_test_split",
+      "flows_to": ["X_train", "X_valid"]
+    },
+    {
+      "variable": "X_train",
+      "creation_method": "pd.get_dummies",
+      "flows_to": ["my_model_1", "my_model_2", "my_model_3"]
+    },
+    {
+      "variable": "predictions_1",
+      "creation_method": "my_model_1.predict",
+      "flows_to": ["mae_1"]
+    },
+    {
+      "variable": "predictions_2",
+      "creation_method": "my_model_2.predict",
+      "flows_to": ["mae_2"]
+    },
+    {
+      "variable": "predictions_3",
+      "creation_method": "my_model_3.predict",
+      "flows_to": ["mae_3"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "my_model_1",
+      "model_type": "XGBRegressor",
+      "hyperparameters": {
+        "random_state": 0
+      },
+      "input_features": "X_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "my_model_2",
+      "model_type": "XGBRegressor",
+      "hyperparameters": {
+        "n_estimators": 1000,
+        "learning_rate": 0.05
+      },
+      "input_features": "X_train",
+      "target_variable": "y_train"
+    },
+    {
+      "model_name": "my_model_3",
+      "model_type": "XGBRegressor",
+      "hyperparameters": {
+        "n_estimators": 1
+      },
+      "input_features": "X_train",
+      "target_variable": "y_train"
+    }
+  ]
+}

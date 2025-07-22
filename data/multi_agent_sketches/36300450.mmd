@@ -1,0 +1,40 @@
+flowchart TD
+
+    %% Data source nodes
+    A1["ConcreteStrengthData.csv"] %% Represents the original dataset containing concrete strength features
+    A2["train.csv"] %% Represents the training dataset for the model
+    A3["test.csv"] %% Represents the test dataset for model evaluation
+    A4["sample_submission.csv"] %% Represents the sample submission format file
+
+    %% Data variable nodes
+    B1["original_df"] %% DataFrame for original dataset
+    B2["train_df"] %% DataFrame for training data
+    B3["test_df"] %% DataFrame for test data
+    B4["sample_sub"] %% DataFrame for submission format
+    B5["aux_target"] %% Auxiliary target column for UMAP
+
+    %% Process nodes
+    C1["Correlation Heatmap & Feature Distribution"] %% Analyzing data through correlation heatmap and feature distribution
+    C2["Feature Drift Analysis"] %% Used to analyze feature drift between datasets
+    C3["UMAP Data Representation"] %% UMAP representation for visualizing datasets
+    C4["Model Training"] %% Process of training various ML models
+
+    %% Model nodes
+    D1["XGBoost Model"] %% Using XGBoost for prediction
+    D2["LightGBM Model"] %% Using LightGBM for prediction
+    D3["RandomForestClassifier"] %% Using RandomForestClassifier for prediction
+    D4["CatBoostClassifier"] %% Using CatBoost for prediction
+
+    %% Data flow connections
+    A1 --> B1
+    A2 --> B2
+    A3 --> B3
+    A4 --> B4
+
+    B1 & B2 --> C2
+    B2 --> C1
+    B2 --> C4
+    B3 --> C2
+    B1 & B2 --> B5
+
+    C4 --> D1 & D2 & D3 & D4

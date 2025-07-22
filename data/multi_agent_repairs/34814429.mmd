@@ -1,0 +1,44 @@
+```mermaid
+%% Data Loading Section
+flowchart TD
+    A["/kaggle/input/gc10detv0-single/GC10-DETv0 -single/train/crease"] -->|"Loaded into"| B["dataset"]
+    B -->|"Transformed & Used in"| C["dataloader"]
+
+%% Model Configuration & Hyperparameters
+    I["dataroot"]
+    J["num_workers"]
+    K["batch_size"]
+    L["image_size"]
+    M["nc"]
+    N["nz"]
+    O["ngf"]
+    P["ndf"]
+    Q["num_epochs"]
+    R["lr"]
+    S["beta1"]
+    T["device"]
+
+%% Training Variables
+    C -->|"Batches to"| D["Generator & Discriminator Training"]
+    D -->|"Updates"| E["G_losses"]
+    D -->|"Updates"| F["D_losses"]
+
+    %% Noise & Generated images
+    G["initialized fixed_noise"] --> D
+    H["img_list for visualization"] --> D
+
+%% Models
+    subgraph dcgan [DCGAN Models]
+        direction TB
+        G_model["Generator"]
+        G_input["z_latent_vector (size nz)"]
+        G_model -->|"Generates"| G_output["64x64 Image (size nc)"]
+        D_model["Discriminator"]
+        D_input["Image (size nc x 64 x 64)"]
+        D_model -->|"Produces"| D_output["Probability of Real"]
+    end
+
+    %% Optimizers
+    Optim["Adam Optimizer"]
+    S -->|"Used for"| Optim
+```

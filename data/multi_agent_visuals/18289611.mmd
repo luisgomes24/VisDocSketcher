@@ -1,0 +1,8 @@
+graph TD
+A["<img src='icons/database.svg' width=100 height=100/> <br/> Input Images"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> Ground Truth Masks"]
+B --> C["Data Preparation <br/><img src='dummy_plots/barplot_template.svg'/>"]
+C --> D["<img src='icons/brain.svg' width=100 height=100/> <br/> UNet Model"]
+D --> E["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Training"]
+E --> F["<img src='icons/database.svg' width=100 height=100/> <br/> Predictions"]
+F --> G["<img src='dummy_plots/lineplot_template.svg'/> <br/> Model Evaluation"]
+G --> H["Output Segmented Masks"].

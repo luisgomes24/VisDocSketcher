@@ -1,0 +1,55 @@
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#ffcc00',
+      'edgeLabelBackground':'#ffffff',
+      'tertiaryColor': '#ffffe0'
+    }
+  }
+}%%
+flowchart TD
+    A["/kaggle/input/pets-facial-expression-dataset/happy"]
+    %% Represents the happy data source.
+    B["/kaggle/input/pets-facial-expression-dataset/Sad"]
+    %% Represents the sad data source.
+    C["/kaggle/input/pets-facial-expression-dataset/Angry"]
+    %% Represents the angry data source.
+    D["happy_images"]
+    %% Images loaded and preprocessed from happy dataset.
+    E["sad_images"]
+    %% Images loaded and preprocessed from sad dataset.
+    F["angry_images"]
+    %% Images loaded and preprocessed from angry dataset.
+    G["X"]
+    %% Combined dataset from all categories.
+    H["y"]
+    %% One-hot encoded labels.
+    I["train_test_split"]
+    %% Process splitting data into training and testing.
+    J["X_train, X_test, y_train, y_test"]
+    %% Training and testing data separation.
+    K["CNN Model"]
+    %% Convolutional Neural Network Model setup.
+    L["Training"]
+    %% Model training process.
+    M["Evaluation"]
+    %% Evaluate the model's performance.
+    N["loaded_model"]
+    %% Loaded model for predictions.
+    O["custom_test_image"]
+    %% Image loaded for testing predictions.
+
+    A --> D
+    B --> E
+    C --> F
+    D --> G
+    E --> G
+    F --> G
+    G --> I
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    N --> O

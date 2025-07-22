@@ -1,0 +1,7 @@
+flowchart TD
+    
+    %% Node for data source 'dump.csv'
+    A["dump.csv"] -->|"pd.read_csv, 1000 rows"| B["df1 DataFrame"]
+    
+    %% Node for data visualization
+    B --> C["EDA Visualizations"]

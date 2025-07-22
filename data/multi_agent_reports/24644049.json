@@ -1,0 +1,30 @@
+{"data_sources": [
+    {"file":"../input/context-toxicitymaster/CCC.csv", "description":"Contains comments for toxicity analysis."},
+    {"file":"../input/context-toxicitymaster/gc.csv", "description":"Contains comments from GC dataset."},
+    {"file":"../input/context-toxicitymaster/gn.csv", "description":"Contains comments from GN dataset."},
+    {"file":"../input/jigsaw-toxic-severity-rating/validation_data.csv", "description":"Contains validation data with less and more toxic comments."}
+],
+"data_variables": [
+    {"variable":"df_CCC", "description":"DataFrame for the CCC dataset which contains comment texts."},
+    {"variable":"df_gc", "description":"DataFrame for the GC dataset which contains comment texts."},
+    {"variable":"df_gn", "description":"DataFrame for the GN dataset which contains comment texts."},
+    {"variable":"text_list", "description":"List containing all unique comment texts combined from the three datasets."},
+    {"variable":"target_dataset", "description":"DataFrame containing a single column 'comment_text' which is the cleaned text input for the model."},
+    {"variable":"CONFIG", "description":"Configuration dictionary containing model parameters and device settings."},
+    {"variable":"validation_df", "description":"Validation DataFrame for evaluating model performance."},
+    {"variable":"comments", "description":"DataFrame excluding validation comments, used for final predictions and saving results."}
+],
+"data_flow": [
+    {"variable":"df_CCC", "creation":"read_csv", "flows_to":"text_list, target_dataset"},
+    {"variable":"df_gc", "creation":"read_csv", "flows_to":"text_list, target_dataset"},
+    {"variable":"df_gn", "creation":"read_csv", "flows_to":"text_list, target_dataset"},
+    {"variable":"text_list", "creation":"combination of unique texts", "flows_to":"target_dataset"},
+    {"variable":"target_dataset", "creation":"DataFrame of unique comments", "flows_to":"CCDataset, comments"},
+    {"variable":"comments", "creation":"filtered from target_dataset", "flows_to":"test_dataset, preds"},
+    {"variable":"test_dataset", "creation":"CCDataset instance", "flows_to":"test_loader"},
+    {"variable":"test_loader", "creation":"DataLoader instance", "flows_to":"inference function"},
+    {"variable":"preds", "creation":"model inference", "flows_to":"pseudo_label in comments, saved to CSV"}
+],
+"models": [
+    {"model":"JigsawModel", "input_features":["ids", "mask"], "target_variable":"toxicity labels", "hyperparameters":{"output_layer":"linear(768, num_classes=1)"}}
+]}

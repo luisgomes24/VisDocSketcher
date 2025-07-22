@@ -1,0 +1,11 @@
+flowchart TD
+  %% Data sources
+  A[train_with_ClusterNo.csv] -->|Read CSV| B[Train Data] 
+  C[test_with_ClusterNo.csv] -->|Read CSV| D[Test Data] 
+  E[sample_submission.csv] -->|Read CSV| F[Submission Data] 
+  F -->|Save As| G[Results: submission.csv] 
+
+  %% Data flow and variables
+  B -->|Training and Analysis| H[DataFrame: df_plot] 
+  D -->|Used in Predictions and Plotting| H 
+  H -->|Plotting Emissions| I[Visualize Emission Trends]

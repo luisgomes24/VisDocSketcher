@@ -1,0 +1,125 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/train.csv",
+      "description": "Training dataset containing various features related to health metrics."
+    },
+    {
+      "file_name": "../input/test.csv",
+      "description": "Test dataset used to make predictions. Contains the same feature structure as training data."
+    },
+    {
+      "file_name": "../input/sample_submission.csv",
+      "description": "Sample submission file format for the competition."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the training data after being read from CSV."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame containing the test data after being read from CSV."
+    },
+    {
+      "name": "train",
+      "description": "DataFrame containing the training subset created from df (80% of df)."
+    },
+    {
+      "name": "dev",
+      "description": "DataFrame containing the development subset created from df (20% of df)."
+    },
+    {
+      "name": "train_x",
+      "description": "Feature set created from the 'train' DataFrame, excluding the target variable."
+    },
+    {
+      "name": "train_y",
+      "description": "Target variable extracted from the 'train' DataFrame."
+    },
+    {
+      "name": "test_x",
+      "description": "Feature set created from the 'test' DataFrame for making predictions."
+    },
+    {
+      "name": "predictions",
+      "description": "Predictions generated from the model for the test feature set."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Read from CSV: pd.read_csv('../input/train.csv')",
+      "flow": [
+        "Scaled using MinMaxScaler.",
+        "Split into train and dev datasets."
+      ]
+    },
+    {
+      "variable": "test",
+      "creation": "Read from CSV: pd.read_csv('../input/test.csv')",
+      "flow": [
+        "Scaled using MinMaxScaler.",
+        "Used for making predictions."
+      ]
+    },
+    {
+      "variable": "train",
+      "creation": "Split from df using train_test_split.",
+      "flow": [
+        "Used for training the model."
+      ]
+    },
+    {
+      "variable": "dev",
+      "creation": "Split from df using train_test_split.",
+      "flow": [
+        "Used for model evaluation."
+      ]
+    },
+    {
+      "variable": "train_x",
+      "creation": "Extracted from train DataFrame.",
+      "flow": [
+        "Input features to the model during training."
+      ]
+    },
+    {
+      "variable": "train_y",
+      "creation": "Extracted from train DataFrame.",
+      "flow": [
+        "Target variable used during model training."
+      ]
+    },
+    {
+      "variable": "test_x",
+      "creation": "Extracted from test DataFrame.",
+      "flow": [
+        "Input features for making predictions."
+      ]
+    },
+    {
+      "variable": "predictions",
+      "creation": "Generated from model predictions.",
+      "flow": [
+        "Used to create submission file."
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential Neural Network",
+      "input_features": "8 features from the input data.",
+      "target_variable": "1 binary output.",
+      "hyperparameters": {
+        "hidden_units": 300,
+        "learning_rate": 0.005,
+        "hidden_layer_activation": "tanh",
+        "output_layer_activation": "sigmoid",
+        "no_epochs": 100,
+        "batch_size": 128
+      }
+    }
+  ]
+}

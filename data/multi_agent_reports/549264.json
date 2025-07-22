@@ -1,0 +1,147 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/nba_2017_att_val_elo.csv",
+      "description": "Contains NBA player attendance valuations and Elo ratings."
+    },
+    {
+      "file": "../input/nba_2017_salary.csv",
+      "description": "Includes the salaries of NBA players for the year 2017."
+    },
+    {
+      "file": "../input/nba_2017_pie.csv",
+      "description": "Contains NBA player performance metrics, including Player Efficiency Rating (PIE)."
+    },
+    {
+      "file": "../input/nba_2017_real_plus_minus.csv",
+      "description": "Features advanced metrics for player performance, such as Wins Real Plus Minus."
+    },
+    {
+      "file": "../input/nba_2017_br.csv",
+      "description": "Basic player statistics for the NBA season 2017."
+    },
+    {
+      "file": "../input/nba_2017_player_wikipedia.csv",
+      "description": "Player Wikipedia pageviews data."
+    },
+    {
+      "file": "../input/nba_2017_twitter_players.csv",
+      "description": "Twitter engagement metrics for NBA players."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "attendance_valuation_elo_df",
+      "description": "DataFrame containing attendance valuations and Elo ratings."
+    },
+    {
+      "name": "salary_df",
+      "description": "DataFrame containing NBA players' salaries."
+    },
+    {
+      "name": "pie_df",
+      "description": "DataFrame containing Player Efficiency Rating (PIE) and other metrics."
+    },
+    {
+      "name": "plus_minus_df",
+      "description": "DataFrame containing Wins Real Plus Minus metrics."
+    },
+    {
+      "name": "br_stats_df",
+      "description": "DataFrame containing basic player statistics."
+    },
+    {
+      "name": "nba_players_df",
+      "description": "Merged DataFrame combining player stats, plus minus, and PIE."
+    },
+    {
+      "name": "nba_players_with_salary_df",
+      "description": "Merged DataFrame that includes salary information for NBA players."
+    },
+    {
+      "name": "nba_players_with_salary_wiki_df",
+      "description": "Merged DataFrame that includes Wikipedia pageviews for NBA players."
+    },
+    {
+      "name": "nba_players_with_salary_wiki_twitter_df",
+      "description": "Final DataFrame that includes Twitter metrics along with previous data."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "attendance_valuation_elo_df",
+      "creation": "Loaded from CSV.",
+      "flow": "Not directly used but acts as a data source."
+    },
+    {
+      "variable": "salary_df",
+      "creation": "Loaded from CSV.",
+      "flow": "Merged with player DataFrame."
+    },
+    {
+      "variable": "pie_df",
+      "creation": "Loaded from CSV.",
+      "flow": "Merged with player DataFrame."
+    },
+    {
+      "variable": "plus_minus_df",
+      "creation": "Loaded from CSV and processed.",
+      "flow": "Merged with player DataFrame."
+    },
+    {
+      "variable": "br_stats_df",
+      "creation": "Loaded from CSV and processed.",
+      "flow": "Merged with plus minus DataFrame."
+    },
+    {
+      "variable": "nba_players_df",
+      "creation": "Merging br_stats_df with plus_minus_df.",
+      "flow": "Used for additional merges, correlation analysis, and visualizations."
+    },
+    {
+      "variable": "nba_players_with_salary_df",
+      "creation": "Merged nba_players_df with salary_df.",
+      "flow": "Used for correlation analysis and modeling."
+    },
+    {
+      "variable": "nba_players_with_salary_wiki_df",
+      "creation": "Merged nba_players_with_salary_df with median_wiki_df.",
+      "flow": "Further merged with Twitter data."
+    },
+    {
+      "variable": "nba_players_with_salary_wiki_twitter_df",
+      "creation": "Merged with twitter_df.",
+      "flow": "Used for final correlation analysis and visualizations."
+    }
+  ],
+  "models": [
+    {
+      "name": "Ordinary Least Squares (OLS)",
+      "equation": "W ~ POINTS",
+      "input_features": ["POINTS"],
+      "target_variable": "Wins",
+      "summary_output": true
+    },
+    {
+      "name": "Ordinary Least Squares (OLS)",
+      "equation": "W ~ WINS_RPM",
+      "input_features": ["WINS_RPM"],
+      "target_variable": "Wins",
+      "summary_output": true
+    },
+    {
+      "name": "Ordinary Least Squares (OLS)",
+      "equation": "SALARY_MILLIONS ~ POINTS",
+      "input_features": ["POINTS"],
+      "target_variable": "SALARY_MILLIONS",
+      "summary_output": true
+    },
+    {
+      "name": "Ordinary Least Squares (OLS)",
+      "equation": "SALARY_MILLIONS ~ WINS_RPM",
+      "input_features": ["WINS_RPM"],
+      "target_variable": "SALARY_MILLIONS",
+      "summary_output": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{ 
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for the CommonLit Reading Ease challenge, including text excerpts and their corresponding reading ease scores."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "train",
+      "description": "DataFrame containing the training data loaded from the CSV file."
+    },
+    {
+      "variable_name": "col",
+      "description": "Variable used to reference different columns of the DataFrame for analysis (e.g., 'target', 'standard_error', 'excerpt_length', 'word_count')."
+    },
+    {
+      "variable_name": "excerpt_length",
+      "description": "The length of each excerpt (in characters) calculated from the 'excerpt' column."
+    },
+    {
+      "variable_name": "word_count",
+      "description": "The word count of each excerpt calculated from the 'excerpt' column."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "train",
+      "creation_method": "pd.read_csv",
+      "flow": ["Explored for null value percentage", "Analyzed target variable (reading ease)", "Analyzed 'standard_error' with correlation", "Calculated 'excerpt_length' and 'word_count'" ]
+    },
+    {
+      "variable_name": "excerpt_length",
+      "creation_method": "train['excerpt'].apply(lambda x: len(x))",
+      "flow": ["Used in correlation analysis with target variable"]
+    },
+    {
+      "variable_name": "word_count",
+      "creation_method": "train['excerpt'].apply(lambda x: len(x.split()))",
+      "flow": ["Used in correlation analysis with target variable"]
+    }
+  ],
+  "models": []
+}

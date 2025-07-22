@@ -1,0 +1,11 @@
+flowchart TD
+    A["📥 Load Datasets"] --> B["📦 Common Parameters"]
+    B --> C["📁 Import Style and Content Images"]
+    C --> D["🔍 Exploratory Data Analysis"]
+    D --> E["🧠 Load Pretrained Model"]
+    E --> F["🔄 Generating Outputs"]
+    F --> G["📦 Visualize Outputs"]
+    G --> H["📊 <img src='dummy_plots/barplot_template.svg'/> <br/> Sample Output Images"]
+
+    C -->|from style_path| D1["<img src='icons/database.svg'/> <br/> Style Images"]
+    C -->|from content_path| D2["<img src='icons/database.svg'/> <br/> Content Images"]

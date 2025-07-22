@@ -1,0 +1,26 @@
+flowchart TD
+    %% Nodes
+    A[Data Source: train.zarr] -->|\n  <img src='icons/database.svg' width=100 height=100/> <br/> 
+    B[Data Source: validate.zarr] -->|\n  <img src='icons/database.svg' width=100 height=100/> <br/> 
+    C[Data Source: sample.zarr] -->|\n  <img src='icons/database.svg' width=100 height=100/> <br/> 
+    D[train_dataloader] -->|\n  <img src='icons/table.svg' width=100 height=100/> <br/> 
+    E[valid_dataloader] -->|\n  <img src='icons/table.svg' width=100 height=100/> <br/> 
+    F[eval_dataloader] -->|\n  <img src='icons/table.svg' width=100 height=100/> <br/> 
+    G[cfg] -->|\n  <img src='icons/file.svg' width=100 height=100/> <br/> 
+    H[model: ResNet-18] -->|\n  <img src='icons/brain.svg' width=100 height=100/> <br/> 
+    I[optimizer: Adam] -->|\n  <img src='icons/brain.svg' width=100 height=100/> <br/> 
+    J[criterion: Mean Squared Error] -->|\n  <img src='icons/brain.svg' width=100 height=100/> <br/> 
+    K[losses] -->|\n  <img src='dummy_plots/scatter_plot_template.svg'/> <br/> 
+    L[val_losses] -->|\n  <img src='dummy_plots/scatter_plot_template.svg'/> <br/> 
+    %% Links
+    A --> D
+    B --> E
+    C --> F
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+    H --> I
+    H --> J
+    H --> K
+    H --> L

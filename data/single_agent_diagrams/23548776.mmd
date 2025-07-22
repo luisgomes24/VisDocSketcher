@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Training Data <img src='file.svg'/> <br/> data=pd.read_csv('train.csv')"] --> B["🔍 Data Exploration <img src='table.svg'/> <br/> data.info(), data.nunique()"]
+    B --> C["📅 Convert Date <img src='column_split.svg'/> <br/> data.date=pd.to_datetime(data.date)"]
+    C --> D["⚙️ Setup PyCaret <img src='brain.svg'/>"]
+    D --> E["🔧 Tune Model <img src='brain.svg'/> <br/> model_dt_MAE = tune_model(create_model('dt'), optimize='MAE')"]
+    E --> F["📈 Learning Curve <img src='barplot_template.svg'/> <br/> plot_model(model_dt_MAE, plot='learning')"]
+    F --> G["🔮 Make Predictions <img src='scatter_plot_template.svg'/> <br/> predictions=predict_model(final_dt, data=test)"]
+    G --> H["📤 Prepare Submission <img src='file.svg'/> <br/> sol.to_csv('./submission.csv', index=False)"]
+    H --> I["💾 Save Model <img src='brain.svg'/> <br/> save_model(model_dt_MAE, './model_dt_MAE')"]

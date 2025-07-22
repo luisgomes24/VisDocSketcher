@@ -1,0 +1,7 @@
+flowchart TD
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> train.csv"]:::datasource --> B["<img src='icons/file.svg' width=100 height=100/> <br/> train"]:::variable
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> cars"]:::variable
+    C --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> selected features"]:::variable
+    D --> E["<img src='icons/row_split.svg' width=100 height=100/> <br/> train-test split"]:::variable
+    E --> F["<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestClassifier"]:::model
+    F --> G["<img src='icons/image.svg' width=100 height=100/> <br/> predictions"]:::output

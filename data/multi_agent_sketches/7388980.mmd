@@ -1,0 +1,33 @@
+flowchart TD
+    %% Data Source Nodes
+    A["train.csv"] --> |"Load Training Data"|  B["df_train"]
+    C["test.csv"] --> |"Load Test Data"| D["df_test"]
+    E["sampleSubmission.csv"] --> F["Submission Template"]
+
+    %% Data Variable Nodes
+    B --> |"Select Features"| G["X_train"]
+    B --> |"Select Class"| H["y_train"]
+    G --> |"PCA Transformation"| I["df_train_pca"]
+    D --> |"PCA Transformation"| J["df_test_pca"]
+
+    %% Model Training
+    G --- H --> |"Train SVC Model"| K["SVC Model"]
+
+    %% Predictions
+    K --> |"Predict on Train Data"| L["Train Predictions"]
+    K --> |"Predict on Test Data"| M["Test Predictions"]
+
+    %% Submission
+    M --> |"Format Submission"| N["Submit Predictions"]
+
+    %% Visualization
+    I --> |"Visualize Data"| O["Train Data Visualization"]
+    J --> |"Visualize Data"| P["Test Data Visualization"]
+
+    %% Comments describing each section
+    %% Data Source Nodes explain the loading of data files
+    %% Data Variable Nodes explain feature selection and transformation
+    %% Model Training node indicates the training of the SVC model
+    %% Predictions nodes denote the prediction steps for train and test data
+    %% Submission node explains the formatting of predictions for submission
+    %% Visualization nodes are for visualizing PCA transformed data

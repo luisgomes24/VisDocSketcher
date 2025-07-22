@@ -1,0 +1,10 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> train, test"] --> B["🔗 Combine Data <img src='table.svg'/>"]
+    B --> C["🔍 Preprocess Data"]
+    C --> D["🔄 Label Encode <img src='column_split.svg'/>"]
+    D --> E["📉 Feature Engineering"]
+    E --> F["📊 Train-Test Split <img src='row_split.svg'/>"]
+    F --> G["⚖️ Resampling"]
+    G --> H["🧠 Train Model <img src='brain.svg'/>"]
+    H --> I["📈 Model Evaluation"]
+    I --> J["📜 Save Predictions <img src='file.svg'/>"]

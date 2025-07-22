@@ -1,0 +1,36 @@
+flowchart TD
+
+%% Data Sources
+A1[train.csv] %% This node represents the training data source
+A2[test.csv] %% This node represents the test data source
+A3[sample_submission.csv] %% This node represents the sample submission data template
+
+%% Data Loading
+B1[train] --> |pd.read_csv| A1
+B2[test] --> |pd.read_csv| A2
+B3[sample_submission] --> |pd.read_csv| A3
+
+%% Data Preprocessing
+B1 --> |Extract Features X| C1[X]
+B1 --> |Extract Target y| C2[y]
+
+%% Train-Test Split
+C1 --> |train_test_split| D1[X_train & X_test]
+C2 --> |train_test_split| D2[y_train & y_test]
+
+%% Modeling
+E1[LightGBM Classifier] --> |Fit model| D1
+E1 --> |With target| D2
+
+%% Model Training and Prediction
+D1 --> |model.fit| F1[Trained Model]
+B2 --> |model.predict_proba| F2[Test Predicted Probabilities]
+
+%% Submission Preparation
+F2 --> |Predictions| B3
+B3 --> |Prepare CSV Output| G1[sample_submission.to_csv]
+
+%% Modeling Details
+E1:::lightgbm(LightGBM Classifier)\nHyperparams: n_estimators=97, num_leaves=33, etc.
+
+classDef lightgbm fill:#f9f,stroke:#333,stroke-width:2px;

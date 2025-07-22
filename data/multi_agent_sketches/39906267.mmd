@@ -1,0 +1,32 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A["genetic_data_train.csv"] -->|Read CSV| B["df_train"]
+    C["genetic_data_test.csv"] -->|Read CSV| D["df_test"]
+
+    %% Nodes for Data Preparation
+    B -->|Drop 'Ancestry', 'Ancestry Label'| E["X"]
+    B -->|Select 'Ancestry Label'| F["y"]
+
+    %% Splitting Data
+    E -->|Train Test Split| G["X_train"]
+    E -->|Train Test Split| H["X_test"]
+    F -->|Train Test Split| I["y_train"]
+    F -->|Train Test Split| J["y_test"]
+
+    %% Model Training
+    G -->|Fit| K["Logistic Regression Model"]
+    I -->|Fit| K
+
+    %% Model Evaluation
+    H -->|Predict| L["y_predi"]
+    J -->|Evaluate| K
+
+    %% Preparing Testing Features
+    D -->|Drop 'Ancestry'| M["X_Test"]
+
+    %% Generating Output
+    M -->|Model Predict| L
+    L -->|Concatenate| N["Output"]
+
+    %% Mapping Prediction
+    N -->|Decode to Original Labels

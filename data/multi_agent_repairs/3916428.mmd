@@ -1,0 +1,14 @@
+%% The diagram illustrates the workflow of the Jupyter Notebook
+flowchart TD
+
+    %% Node for data source 
+    A["../input/Datos finales.csv"] --> |"Load data"| B["df1"] 
+    %% Node for reading the CSV data
+    B --> |"Used for"| C["plotPerColumnDistribution"]
+    B --> |"Used for"| D["plotCorrelationMatrix"]
+    B --> |"Used for"| E["plotScatterMatrix"]
+
+    %% Add comments:
+    %% Node A represents the CSV file being read into the notebook
+    %% Node B represents the DataFrame 'df1' that holds the loaded data
+    %% Nodes C, D, and E represent the different analysis/plotting functions that use 'df1'

@@ -1,0 +1,81 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Fish_Dataset",
+      "description": "A dataset containing images of various fish types, organized in subdirectories corresponding to their labels."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "data_path",
+      "description": "Path to the directory containing the fish dataset images."
+    },
+    {
+      "name": "all_images",
+      "description": "A list of file paths for all images in the dataset to be processed."
+    },
+    {
+      "name": "images",
+      "description": "A list containing the image file paths."
+    },
+    {
+      "name": "labels",
+      "description": "A list containing the label for each image (the fish type)."
+    },
+    {
+      "name": "dataframe",
+      "description": "A DataFrame containing two columns: image paths and corresponding labels."
+    },
+    {
+      "name": "shuffled_dataframe",
+      "description": "A shuffled DataFrame for randomness in train/validation/test splits."
+    },
+    {
+      "name": "train, val, test",
+      "description": "DataFrames for training, validation, and test datasets."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataframe",
+      "creation_method": "pd.concat",
+      "flow": "Used to create training, validation and test datasets via train_test_split."
+    },
+    {
+      "variable": "training_generator",
+      "creation_method": "tf.keras.preprocessing.image.ImageDataGenerator",
+      "flow": "Used to generate batches of images for model training."
+    },
+    {
+      "variable": "mlp_model",
+      "creation_method": "tf.keras.models.Sequential",
+      "flow": "Trained using the training generator and evaluated on the validation set."
+    },
+    {
+      "variable": "cnn_model",
+      "creation_method": "tf.keras.models.Sequential",
+      "flow": "Trained using the training generator and evaluated on the validation and test sets."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Multi Layer Perceptron (MLP)",
+      "input_features": "Flattened image vectors.",
+      "target_variable": "Fish class labels.",
+      "hyperparameters": {
+        "hidden_layers": [256, 256, 128],
+        "activation_functions": ["relu", "softmax"]
+      }
+    },
+    {
+      "model_type": "Convolutional Neural Network (CNN)",
+      "input_features": "Image tensors in original shape (224, 224, 3).",
+      "target_variable": "Fish class labels.",
+      "hyperparameters": {
+        "conv_layers": [32, 64, 128, 256],
+        "activation_functions": ["relu", "softmax"],
+        "dropout_rate": 0.4
+      }
+    }
+  ]
+}

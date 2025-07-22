@@ -1,0 +1,16 @@
+flowchart TD
+    A["Start"]
+    %% Define product purchase process
+    B["product_type"] -- Defines type of product --> C["purchase_product function"]
+    C --> D["price"]
+    C --> E["discount"]
+    D -- Uses in total price calculation --> F["total_price"]
+    E -- Uses in total price calculation --> F
+    F -- Outputs --> G["Final Output"]
+
+    %% Mobile instances creation
+    H["mob1"] -- Instance of Mobile class --> I["Brand and Price Information"]
+    J["mob2"] -- Instance of Mobile class --> K["Brand and Price Information"]
+
+    %% Encapsulation Example
+    L["obj"] -- Instance of Example class --> M["Set and Get Private Variable"]

@@ -1,0 +1,28 @@
+graph TD;
+
+    %% Nodes for data sources
+    S1[("train.csv")]:::dataSource -- "Read CSV" --> V1[("train")]
+    S2[("video_0")]:::dataSource --> V6[("images0")]
+
+    %% Data Variable Nodes
+    V1[("train")]:::dataVariable -- "Filter by video_id 0" --> V2[("train0")]
+    V2 --> V3[("DICT0")]
+    V2 --> V4[("impaths")]
+
+    %% Image Processing
+    V4 --> V6
+    V6 -- "Draw Annotations" --> V7[("images1")]
+
+    %% Styles
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:1px;
+
+    %% Explanations
+    click S1 "Data source: Annotations and metadata."
+    click S2 "Data source: Image frames."
+    click V1 "DataFrame from CSV."
+    click V2 "Filtered DataFrame for video_id 0."
+    click V3 "Bounding box annotations."
+    click V4 "File paths for images."
+    click V6 "Images with no annotations."
+    click V7 "Annotated images for visualization."

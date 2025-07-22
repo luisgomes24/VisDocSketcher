@@ -1,0 +1,153 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/complex1/complex1.jfif",
+      "description": "An image related to 'complex1'."
+    },
+    {
+      "file": "../input/complex2/complex2.jfif",
+      "description": "An image related to 'complex2'."
+    },
+    {
+      "file": "../input/computer/computer.PNG",
+      "description": "An image of a computer."
+    },
+    {
+      "file": "../input/picture/picture_comp.PNG",
+      "description": "An additional image related to 'picture_comp'."
+    },
+    {
+      "file": "../input/cat-and-dog/training_set/training_set",
+      "description": "Directory containing training images of cats and dogs."
+    },
+    {
+      "file": "../input/cat-and-dog/test_set/test_set",
+      "description": "Directory containing test images of cats and dogs."
+    },
+    {
+      "file": "../input/single-cat/cat_or_dog_2.jpg",
+      "description": "Sample image of a single cat for prediction."
+    },
+    {
+      "file": "../input/singledog/cat_or_dog_1.jpg",
+      "description": "Sample image of a single dog for prediction."
+    },
+    {
+      "file": "../input/single-cat2/cat.jpg",
+      "description": "Another sample image of a cat."
+    },
+    {
+      "file": "../input/single-dog2/dog.jpg",
+      "description": "Another sample image of a dog."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train_datagen",
+      "description": "An instance of ImageDataGenerator for augmenting training images."
+    },
+    {
+      "name": "test_datagen",
+      "description": "An instance of ImageDataGenerator for processing test images."
+    },
+    {
+      "name": "training_set",
+      "description": "A data generator for the training set containing batches of images."
+    },
+    {
+      "name": "test_set",
+      "description": "A data generator for the test set containing batches of images."
+    },
+    {
+      "name": "cnn",
+      "description": "A Sequential model representing the Convolutional Neural Network."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train_datagen",
+      "creation": "ImageDataGenerator with rescaling and augmentation parameters.",
+      "flows_to": "training_set"
+    },
+    {
+      "variable": "test_datagen",
+      "creation": "ImageDataGenerator with rescaling parameters.",
+      "flows_to": "test_set"
+    },
+    {
+      "variable": "training_set",
+      "creation": "Created from train_datagen.flow_from_directory()",
+      "flows_to": "Used in model training (cnn.fit())"
+    },
+    {
+      "variable": "test_set",
+      "creation": "Created from test_datagen.flow_from_directory()",
+      "flows_to": "Used for validation in model training (cnn.fit())"
+    },
+    {
+      "variable": "cnn",
+      "creation": "Sequential model to include Conv2D, MaxPool2D, Flatten, and Dense layers.",
+      "flows_to": "Used for model training (cnn.fit()) and making predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Convolutional Neural Network (CNN)",
+      "layers": [
+        {
+          "type": "Conv2D",
+          "parameters": {
+            "filters": 32,
+            "kernel_size": 3,
+            "activation": "relu"
+          }
+        },
+        {
+          "type": "MaxPool2D",
+          "parameters": {
+            "pool_size": 2,
+            "strides": 2
+          }
+        },
+        {
+          "type": "Conv2D",
+          "parameters": {
+            "filters": 32,
+            "kernel_size": 3,
+            "activation": "relu"
+          }
+        },
+        {
+          "type": "Flatten"
+        },
+        {
+          "type": "Dense",
+          "parameters": {
+            "units": 128,
+            "activation": "relu"
+          }
+        },
+        {
+          "type": "Dense",
+          "parameters": {
+            "units": 64,
+            "activation": "relu"
+          }
+        },
+        {
+          "type": "Dense",
+          "parameters": {
+            "units": 1,
+            "activation": "sigmoid"
+          }
+        }
+      ],
+      "compile_parameters": {
+        "optimizer": "adam",
+        "loss": "binary_crossentropy",
+        "metrics": ["accuracy"]
+      },
+      "training_epochs": 15
+    }
+  ]
+}

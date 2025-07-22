@@ -1,0 +1,14 @@
+%% This Mermaid.js diagram represents the data workflow of the Jupyter Notebook.
+
+flowchart TD
+    CSVFile["<img src='icons/file.svg' width=100 height=100/> <br/> gldv2_extra.csv"]
+    LoadData["<img src='icons/row_split.svg' width=100 height=100/> <br/> Load data from CSV"]
+    df1["<img src='icons/table.svg' width=100 height=100/> <br/> DataFrame df1 <img src='dummy_plots/boxplot_template.svg'/> <br/> "]
+    nRowsRead["<img src='icons/column_split.svg' width=100 height=100/> <br/> Number of Rows Read"]
+    nRow["<img src='icons/column_split.svg' width=100 height=100/> <br/> Number of Rows <img src='dummy_plots/barplot_template.svg'/> <br/> "]
+    nCol["<img src='icons/column_split.svg' width=100 height=100/> <br/> Number of Columns <img src='dummy_plots/barplot_template.svg'/> <br/> "]
+
+    CSVFile --> |read nRowsRead| LoadData
+    LoadData --> df1
+    df1 --> |"Visualizations & Display"| nRow
+    df1 --> |"Visualizations & Display"| nCol

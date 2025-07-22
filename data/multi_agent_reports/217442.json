@@ -1,0 +1,77 @@
+{
+  "data_sources": [
+    {
+      "file_name": "lab_petct_vox_5.00mm.h5",
+      "description": "This HDF5 file contains PET and CT image data, as well as label data for segmentation."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "ct_image",
+      "description": "CT image data extracted from the HDF5 file."
+    },
+    {
+      "name": "pet_image",
+      "description": "PET image data extracted from the HDF5 file."
+    },
+    {
+      "name": "label_image",
+      "description": "Label data for segmented regions extracted from the HDF5 file."
+    },
+    {
+      "name": "petct_vol",
+      "description": "Stacked array combining CT and PET data for processing."
+    },
+    {
+      "name": "petct_segs",
+      "description": "Superpixel segmentation results from the SLIC algorithm on the combined volume."
+    },
+    {
+      "name": "bright_segs",
+      "description": "Binary mask indicating which superpixels have a high average PET signal."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "ct_image",
+      "creation": "Read from HDF5 file",
+      "flow": "Used for projection and segmentation analysis."
+    },
+    {
+      "variable": "pet_image",
+      "creation": "Read from HDF5 file",
+      "flow": "Used for temporary variables in combination with CT image."
+    },
+    {
+      "variable": "label_image",
+      "creation": "Read from HDF5 file",
+      "flow": "Used for evaluating segmentation accuracy."
+    },
+    {
+      "variable": "petct_vol",
+      "creation": "Created by stacking CT and PET images.",
+      "flow": "Passed to SLIC for superpixel segmentation."
+    },
+    {
+      "variable": "petct_segs",
+      "creation": "Generated using SLIC on petct_vol.",
+      "flow": "Used to analyze superpixel regions and compare with label_image."
+    },
+    {
+      "variable": "bright_segs",
+      "creation": "Created by filtering petct_segs based on PET signal average.",
+      "flow": "Visualized in 3D plots."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "SLIC (Simple Linear Iterative Clustering)",
+      "input_features": ["PET and CT data"],
+      "target_variable": "superpixels",
+      "hyperparameters": {
+        "n_segments": "Number of segments to create",
+        "compactness": "Weight of spatial dimensions vs image intensity"
+      }
+    }
+  ]
+}

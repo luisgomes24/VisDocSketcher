@@ -1,0 +1,3 @@
+The Mermaid diagram sketch for the workflow has been successfully created and saved as a .mmd file. The diagram comprises three main sections: Data Sources, Data Variables, and Data Flow. It outlines how data from shapefile and CSV sources are read and stored into respective DataFrames, which are then utilized for plotting Covid19 case data over time or mapping cases on specific dates. No machine learning models are utilized in this notebook based on the analysis provided.
+
+If there are any specific changes or visual representations required, please indicate the details for further refinement.

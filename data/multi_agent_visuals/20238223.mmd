@@ -1,0 +1,19 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|"Read CSV"| B["<img src='icons/table.svg' width=100 height=100/> <br/> train DataFrame"]
+    C["<img src='icons/file.svg' width=100 height=100/> <br/> test.csv"] -->|"Read CSV"| D["<img src='icons/table.svg' width=100 height=100/> <br/> test DataFrame"]
+    E["<img src='icons/file.svg' width=100 height=100/> <br/> sample_solution.csv"] -->|"Read CSV"| F["<img src='icons/table.svg' width=100 height=100/> <br/> sample_submission DataFrame"]
+
+    %% Data Preparation
+    B -->|"Extract 'claim'"| G["<img src='icons/column_split.svg' width=100 height=100/> <br/> y (target variable)"]
+    B -->|"Copy"| H["<img src='icons/column_split.svg' width=100 height=100/> <br/> x (features)"]
+    H -->|"Used for model training"| I["<img src='icons/brain.svg' width=100 height=100/> <br/> LightGBM Model Training"]
+
+    %% KFold Preparation
+    B --> J["<img src='icons/row_split.svg' width=100 height=100/> <br/> StratifiedKFold"]
+    J -->|"Create Folds"| K["<img src='icons/row_split.svg' width=100 height=100/> <br/> K-Fold Validation"]
+    K -->|"Annotated in train DataFrame"| B
+
+    %% Saving Data
+    B -->|"Save CSV"| L["<img src='icons/file.svg' width=100 height=100/> <br/> septps_train_folds.csv"]
+    D -->|"Save CSV"| M["<img src='icons/file.svg' width=100 height=100/> <br/> septps_test.csv"]

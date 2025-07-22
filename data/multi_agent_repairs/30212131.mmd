@@ -1,0 +1,20 @@
+```mermaid
+flowchart TD
+    subgraph DataSources
+        A["../input/netflix-shows/netflix_titles.csv"]
+        %% A: CSV file containing Netflix titles including movies and TV shows
+    end
+
+    subgraph DataPreparation
+        B["df"]
+        %% B: DataFrame containing all data from Netflix dataset
+        C["df_movie"]
+        %% C: DataFrame filtered to include only movies
+        D["df_TVshow"]
+        %% D: DataFrame filtered to include only TV shows
+    end
+
+    A --> |"Read CSV"| B
+    B --> |"Filter: type == Movie"| C
+    B --> |"Filter: type == TV Show"| D
+```

@@ -1,0 +1,122 @@
+{
+  "data_sources": [
+    {
+      "source": "../input/home-data-for-ml-course/train.csv",
+      "description": "CSV file containing training data for housing prices including features and target SalePrice."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "home_data",
+      "description": "DataFrame containing housing data loaded from CSV file."
+    },
+    {
+      "variable": "y",
+      "description": "Target variable representing SalePrice of the houses."
+    },
+    {
+      "variable": "X",
+      "description": "DataFrame containing the input features used for prediction."
+    },
+    {
+      "variable": "train_X",
+      "description": "Training set of features after splitting the original dataset."
+    },
+    {
+      "variable": "val_X",
+      "description": "Validation set of features after splitting the original dataset."
+    },
+    {
+      "variable": "train_y",
+      "description": "Training set of target values after splitting the original dataset."
+    },
+    {
+      "variable": "val_y",
+      "description": "Validation set of target values after splitting the original dataset."
+    },
+    {
+      "variable": "iowa_model",
+      "description": "Decision Tree Regressor model instance used for training and predictions."
+    },
+    {
+      "variable": "val_predictions",
+      "description": "Array containing predictions made by the model on validation data."
+    },
+    {
+      "variable": "val_mae",
+      "description": "Mean Absolute Error of predictions on validation data, represents model accuracy."
+    },
+    {
+      "variable": "candidate_max_leaf_nodes",
+      "description": "List of candidate values for max_leaf_nodes to tune the Decision Tree model."
+    },
+    {
+      "variable": "best_tree_size",
+      "description": "Stored best value of max_leaf_nodes that gives the best model performance."
+    },
+    {
+      "variable": "final_model",
+      "description": "Final Decision Tree Regressor fitted with the entire dataset and optimal tree size."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "home_data",
+      "creation_method": "pd.read_csv",
+      "usage": "Used to create target y and feature set X, and for dataset splitting."
+    },
+    {
+      "variable": "y",
+      "creation_method": "home_data.SalePrice",
+      "usage": "Used as the target variable for model training and validation."
+    },
+    {
+      "variable": "X",
+      "creation_method": "home_data[features]",
+      "usage": "Input features used to train and validate the model."
+    },
+    {
+      "variable": "train_X, val_X, train_y, val_y",
+      "creation_method": "train_test_split",
+      "usage": "Used to split the dataset into training and validation sets."
+    },
+    {
+      "variable": "iowa_model",
+      "creation_method": "DecisionTreeRegressor",
+      "usage": "Fitted using training data (train_X, train_y) and predict validation data."
+    },
+    {
+      "variable": "val_predictions",
+      "creation_method": "iowa_model.predict",
+      "usage": "Used to calculate validation MAE."
+    },
+    {
+      "variable": "val_mae",
+      "creation_method": "mean_absolute_error",
+      "usage": "Represents the accuracy of the validation predictions."
+    },
+    {
+      "variable": "candidate_max_leaf_nodes",
+      "creation_method": "List assignment",
+      "usage": "Used to determine the best max_leaf_node for the model."
+    },
+    {
+      "variable": "best_tree_size",
+      "creation_method": "Loop algorithm",
+      "usage": "Stores the optimal max_leaf_nodes for the final model."
+    },
+    {
+      "variable": "final_model",
+      "creation_method": "DecisionTreeRegressor with optimal parameters",
+      "usage": "Fitted with all data, ready for deployment."
+    }
+  ],
+  "models": [
+    {
+      "model_type": "DecisionTreeRegressor",
+      "input_features": "[LotArea, YearBuilt, 1stFlrSF, 2ndFlrSF, FullBath, BedroomAbvGr, TotRmsAbvGrd]",
+      "target_variable": "SalePrice",
+      "hyperparameters": ["max_leaf_nodes"]
+    }
+  ]
+}

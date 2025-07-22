@@ -1,0 +1,99 @@
+{
+  "data_sources": [
+    {
+      "file_name": "DatosIbex2020.csv",
+      "description": "Dataset containing Ibex 35 values for the year 2020"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "Initial DataFrame loaded from CSV file containing full dataset"
+    },
+    {
+      "variable_name": "ibex",
+      "description": "DataFrame filtered to contain only 'Fecha' and 'Ibex' columns"
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable containing the original Ibex series"
+    },
+    {
+      "variable_name": "y_log",
+      "description": "Log-transformed Ibex series"
+    },
+    {
+      "variable_name": "y_log_diff",
+      "description": "Log-differenced Ibex series"
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for modeling, 90% of the series"
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing set for modeling, 10% of the series"
+    },
+    {
+      "variable_name": "best_params",
+      "description": "Best ARIMA model parameters found during grid search"
+    },
+    {
+      "variable_name": "pred_uc",
+      "description": "Forecasted values for the test set"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "creation_method": "pd.read_csv",
+      "flows_to": "ibex"
+    },
+    {
+      "variable_name": "ibex",
+      "creation_method": "df[['Fecha', 'Último']]",
+      "flows_to": "y, y_log, y_log_diff"
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "ibex[Ibex]",
+      "flows_to": "y_log, y_log_diff"
+    },
+    {
+      "variable_name": "y_log",
+      "creation_method": "np.log(ibex['Ibex'])",
+      "flows_to": "y_log_diff"
+    },
+    {
+      "variable_name": "y_log_diff",
+      "creation_method": "ibex['Ibex_log'].diff()",
+      "flows_to": "y_train, y_test"
+    },
+    {
+      "variable_name": "y_train",
+      "creation_method": "serie_a_predecir[y_index[:date_train]]",
+      "flows_to": "mod"
+    },
+    {
+      "variable_name": "y_test",
+      "creation_method": "serie_a_predecir[y_index[date_train:]]",
+      "flows_to": "pred_uc"
+    },
+    {
+      "variable_name": "pred_uc",
+      "creation_method": "results.get_forecast(steps=len(y_test))",
+      "flows_to": "final prediction plot"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "ARIMA",
+      "input_features": ["y_train"],
+      "target_variable": "y",
+      "hyperparameters": {
+        "order": "best_params",
+        "seasonal_order": "parameter_seasonal"
+      }
+    }
+  ]
+}

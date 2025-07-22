@@ -1,0 +1,51 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#f9f9f9', 'edgeLabelBackground':'#f9f9f9','tertiaryColor': '#f9f9f9'}}}%%
+flowchart TD
+    %% Nodes and their descriptions
+    TrainCSV["train.csv"]
+    %% Train CSV Data Source
+    TestCSV["test.csv"]
+    %% Test CSV Data Source
+    TrainDF["train DataFrame"]
+    %% Train DataFrame loaded from train.csv
+    TestDF["test DataFrame"]
+    %% Test DataFrame loaded from test.csv
+    X["X (Features)"]
+    %% Features from the Train DataFrame
+    y["y (Labels)"]
+    %% Labels from the Train DataFrame
+    XTrain["X_train"]
+    %% Training features after split
+    XVal["X_val"]
+    %% Validation features after split
+    yTrain["y_train"]
+    %% Training labels after split
+    yVal["y_val"]
+    %% Validation labels after split
+    XTest["X_test"]
+    %% Normalized test features
+    CNNModel["CNN Model"]
+    %% Convolutional Neural Network model for digit recognition
+    CNNHistory["cnn_history"]
+    %% Training history of the CNN model
+    ValPred["val_pred"]
+    %% Validation predictions
+    ConfMat["conf_mat"]
+    %% Confusion matrix
+    TestPred["test_pred"]
+    %% Predictions for test set
+    Results["results DataFrame"]
+    %% Results DataFrame for submission
+
+    %% Data flow connections
+    TrainCSV -->|load csv| TrainDF
+    TestCSV -->|load csv| TestDF
+    TrainDF -->|split| X & y
+    X -->|train_test_split| XTrain & XVal
+    y -->|train_test_split| yTrain & yVal
+    TestDF -->|normalize| XTest
+    XTrain & yTrain -->|fit| CNNModel
+    CNNModel -->|fit| CNNHistory
+    XVal -->|predict| ValPred
+    yVal & ValPred -->|create| ConfMat
+    XTest -->|predict| TestPred
+    TestPred -->|create| Results

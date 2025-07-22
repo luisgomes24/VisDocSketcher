@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A[train_features.csv]\n    %% Contains the features for the training dataset
+    B[train_targets_scored.csv]\n    %% Contains the target labels for the training dataset
+
+    %% Data Variables
+    C[df]\n    %% DataFrame containing training features
+    D[labels]\n    %% DataFrame containing target labels
+    E[melt_labels]\n    %% Melted DataFrame of labels for plotting
+    F[anon_cols]\n    %% List of anonymous columns in the DataFrame
+    G[categorical_cols]\n    %% List of categorical column names
+    H[continuous_cols]\n    %% List of continuous column names
+
+    %% Data Flow
+    A --> C
+    B --> D
+    D --> E
+
+    %% Plotting and Exploration
+    C -->|"Used for exploration and stats"| I(Big Count Plotter)
+    C -->|"Rank Correlations"| J(Rank Correlations)
+    E -->|"Used for plotting"| K(Count Plot)
+
+    %% Visualizations
+    I --> L[Plots]
+    J --> M[Correlation Plots]
+    K --> N[Label Count Plot]
+```
+

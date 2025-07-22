@@ -1,0 +1,36 @@
+flowchart TD
+    subgraph DataSources
+        direction TB
+        src1["/kaggle/input/aapl10y/AAPL10Y.csv"]
+        %% This node represents the source of AAPL stock data for ten years.
+    end
+
+    subgraph DataProcessing
+        direction TB
+        df["df"]
+        %% DataFrame containing the AAPL stock data with 'date' set as index.
+        df_week["df_week"]
+        %% Weekly average closing prices from the stock data.
+        udiff["udiff"]
+        %% DataFrame of weekly returns after calculating logs of closing prices.
+    end
+    
+    subgraph Model
+        direction TB
+        modelARMA["ARMA Model"]
+        %% ARMA model with hyperparameters p=3, q=1, using 'udiff' as features.
+        forecast["forecast"]
+        %% Forecasted values produced using the ARIMA model.
+    end
+
+    src1 -->|Read as DataFrame| df
+    df -->|Resample| df_week
+    df_week -->|Log difference| udiff
+    udiff -->|Used for modeling| modelARMA
+    modelARMA -->|Generate Forecast| forecast
+    forecast -->|Used in visualization| plot
+
+    classDef raw fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef derived fill:#bbf,stroke:#333,stroke-width:2px;
+    class src1 raw;
+    class df, df_week, udiff, forecast derived;

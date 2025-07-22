@@ -1,0 +1,35 @@
+{
+  "data_sources": [
+    {
+      "file_name": "test.csv",
+      "description": "Contains test data for analysis."
+    },
+    {
+      "file_name": "train.csv",
+      "description": "Contains training data for analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding the first 1000 rows of test data from test.csv."
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame holding the first 1000 rows of training data from train.csv."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting various distributions and correlations, displayed via plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix functions."
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for plotting various distributions and correlations, displayed via plotPerColumnDistribution, plotCorrelationMatrix, and plotScatterMatrix functions."
+    }
+  ],
+  "models": []
+}

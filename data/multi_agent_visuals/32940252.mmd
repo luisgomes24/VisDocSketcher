@@ -1,0 +1,16 @@
+flowchart TD
+    DICOM_File["<img src='icons/file.svg' width=100 height=100/> <br/> DICOM File (train_images/10006/462822612.dcm)"]
+    Pydicom_Processing["<img src='icons/database.svg' width=100 height=100/> <br/> Process with Pydicom"]
+    tfio_image["<img src='icons/column_split.svg' width=100 height=100/> <br/> TFIO Image"]
+    tfio_lossy["<img src='icons/row_split.svg' width=100 height=100/> <br/> Lossy TFIO Image"]
+    Max_Value["<img src='dummy_plots/barplot_template.svg'/> <br/> Max Value"]
+    Display1["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Display Image"]
+
+    DICOM_File --> Pydicom_Processing
+    Pydicom_Processing --> tfio_image
+    tfio_image --> Max_Value
+    Max_Value --> Display1
+
+    Pydicom_Processing --> tfio_lossy
+    tfio_lossy --> Max_Value
+    Max_Value --> Display1

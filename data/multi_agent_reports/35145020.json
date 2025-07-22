@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file_name": "MNCAATourneyCompactResults.csv",
+      "description": "Contains the compact results of the NCAA tournament games."
+    },
+    {
+      "file_name": "MNCAATourneySeeds.csv",
+      "description": "Holds the seeds for each team in the NCAA tournament."
+    },
+    {
+      "file_name": "MMasseyOrdinals.csv",
+      "description": "Includes ordinal rankings of teams from various ranking systems."
+    },
+    {
+      "file_name": "MTeams.csv",
+      "description": "List of teams participating in the NCAA tournament."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "results",
+      "description": "DataFrame containing the tournament results."
+    },
+    {
+      "variable_name": "seeds",
+      "description": "DataFrame showing the seed assignment for teams in the tournament."
+    },
+    {
+      "variable_name": "rank",
+      "description": "DataFrame with teams' ordinal rankings on a specific day."
+    },
+    {
+      "variable_name": "teams",
+      "description": "DataFrame with information about each team."
+    },
+    {
+      "variable_name": "W_seed",
+      "description": "List holding the seeds of winning teams."
+    },
+    {
+      "variable_name": "L_seed",
+      "description": "List holding the seeds of losing teams."
+    },
+    {
+      "variable_name": "chart",
+      "description": "2D array containing the win probabilities of higher seeded teams."
+    },
+    {
+      "variable_name": "higher_seed_win_prob",
+      "description": "Array summarizing the higher seed's win probabilities."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "results",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Used in calculating the Brier score and to extract WScore and LScore."
+    },
+    {
+      "variable": "seeds",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Used to extract team seeds for winning and losing teams."
+    },
+    {
+      "variable": "rank",
+      "creation_method": "pd.read_csv + filtering",
+      "flow_destination": "Used to set the rankings for predicting outcomes."
+    },
+    {
+      "variable": "teams",
+      "creation_method": "pd.read_csv",
+      "flow_destination": "Used to get the team names based on TeamID."
+    },
+    {
+      "variable": "W_seed",
+      "creation_method": "List construction based on results and seeds data.",
+      "flow_destination": "Used for calculating match outcomes."
+    },
+    {
+      "variable": "L_seed",
+      "creation_method": "List construction based on results and seeds data.",
+      "flow_destination": "Used for calculating match outcomes."
+    },
+    {
+      "variable": "chart",
+      "creation_method": "Array manipulation and filling based on win counts.",
+      "flow_destination": "Used to visualize winning probabilities."
+    },
+    {
+      "variable": "higher_seed_win_prob",
+      "creation_method": "Copy of chart.",
+      "flow_destination": "Visualized through the heatmap."
+    }
+  ],
+  "models": []
+}

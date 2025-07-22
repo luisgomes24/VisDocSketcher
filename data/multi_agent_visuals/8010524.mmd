@@ -1,0 +1,33 @@
+flowchart TD
+    DS1["<img src='icons/database.svg' width=100 height=100/> <br/> /farm-ads CSV"  ] -->|Read CSV| D1["/farm_ads"]
+    DS2["<img src='icons/database.svg' width=100 height=100/> <br/> /farm-ads-vect CSV" ] -->|Read CSV| D2["/farm_vect"]
+
+    D1 -->|Merge| D3["/data"]
+    D2 -->|Merge| D3
+    
+    D3 -->|Split features and target| X["/X"]
+    D3 -->|Split features and target| y["/y"]
+
+    X -->|train_test_split| X_train["/X_train"]
+    X -->|train_test_split| X_test["/X_test"]
+    y -->|train_test_split| y_train["/y_train"]
+    y -->|train_test_split| y_test["/y_test"]
+
+    subgraph Model_Training_and_Prediction
+        direction TB
+        M1["<img src='icons/brain.svg' width=100 height=100/> <br/> /RandomForestClassifier\n n_estimators=400, min_samples_split=2\n min_samples_leaf=1, max_features='sqrt'\n bootstrap=False"] -->|fit| X_train
+        M1 -->|fit| y_train
+        M1 -->|predict| X_test
+        X_test -->|predict| P["/predictions"]
+    end
+
+    X_train -->|Used for training| Model_Training_and_Prediction
+    y_train -->|Used for training| Model_Training_and_Prediction
+    X_test -->|Used for prediction| Model_Training_and_Prediction
+
+    %% Node Descriptions
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    class DS1,DS2,dataNode;
+    
+    %% Transition Descriptions
+    %% Data is read, merged, split into train/test sets, and used in RandomForest model training and prediction

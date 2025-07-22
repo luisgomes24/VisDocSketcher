@@ -1,0 +1,16 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> df_train"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> df_test"];
+    A --> C["<img src='icons/table.svg' width=100 height=100/> <br/> X"];
+    A --> D["<img src='icons/column_split.svg' width=100 height=100/> <br/> y"];
+    C -->|"train_test_split"| E["<img src='dummy_plots/train_test_split_template.svg' /> <br/> X_train"];
+    C -->|"train_test_split"| F["<img src='dummy_plots/train_test_split_template.svg' /> <br/> X_test"];
+    D -->|"train_test_split"| G[y_train];
+    D -->|"train_test_split"| H[y_test];
+    G --> I["<img src='icons/brain.svg' width=100 height=100/> <br/> lr"];
+    F --> J["<img src='icons/brain.svg' width=100 height=100/> <br/> lr_pred"];
+    G --> K["<img src='icons/brain.svg' width=100 height=100/> <br/> rfr"];
+    F --> L["<img src='icons/brain.svg' width=100 height=100/> <br/> rfr_pred"];
+    G --> M["<img src='icons/brain.svg' width=100 height=100/> <br/> xgb"];
+    F --> N["<img src='icons/brain.svg' width=100 height=100/> <br/> xgb_pred"];
+    N --> O["<img src='icons/file.svg' width=100 height=100/> <br/> df_final"];
+    O --> P["<img src='icons/file.svg' width=100 height=100/> <br/> df_final.to_csv"];

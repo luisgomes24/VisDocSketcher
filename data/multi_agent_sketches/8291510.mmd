@@ -1,0 +1,26 @@
+%% Begin Mermaid Diagram
+
+flowchart TD
+
+%% Node for Data Source
+A[("HandFootandMouthDisease_Korea_2011_2019.csv")] 
+%% A --> B: Represents loading data into DataFrame
+
+%% Node for DataFrame
+B[("df1 DataFrame\nFirst 1000 rows loaded")] 
+%% B --> C: Represents data flowing to plotPerColumnDistribution function
+%% B --> D: Represents data flowing to plotCorrelationMatrix function
+%% B --> E: Represents data flowing to plotScatterMatrix function
+
+%% Visualization Function Nodes
+C[plotPerColumnDistribution]
+D[plotCorrelationMatrix]
+E[plotScatterMatrix]
+
+%% Define Data Flow 
+A --> B
+B --> C
+B --> D
+B --> E
+
+%% End of Mermaid Diagram

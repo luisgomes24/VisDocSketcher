@@ -1,0 +1,94 @@
+{
+  "data_sources": [
+    {
+      "source": "mnist dataset",
+      "description": "Contains images of handwritten digits (0-9) for training and testing."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "trainX",
+      "description": "Training images of handwritten digits, preprocessed to scale pixel values to [0, 1]."
+    },
+    {
+      "variable": "trainY",
+      "description": "Training labels corresponding to trainX, representing the digit each image depicts."
+    },
+    {
+      "variable": "testX",
+      "description": "Testing images for evaluating the model, also scaled."
+    },
+    {
+      "variable": "testY",
+      "description": "Testing labels corresponding to testX."
+    },
+    {
+      "variable": "y_train",
+      "description": "One-hot encoded training labels."
+    },
+    {
+      "variable": "y_test",
+      "description": "One-hot encoded testing labels."
+    },
+    {
+      "variable": "model",
+      "description": "Neural network model that classifies the digit images."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "trainX",
+      "creation": "mnist.load_data()",
+      "flow": "Used to fit the model"
+    },
+    {
+      "variable": "trainY",
+      "creation": "mnist.load_data()",
+      "flow": "Used to fit the model"
+    },
+    {
+      "variable": "testX",
+      "creation": "mnist.load_data()",
+      "flow": "Used for evaluation"
+    },
+    {
+      "variable": "testY",
+      "creation": "mnist.load_data()",
+      "flow": "Used for evaluation"
+    },
+    {
+      "variable": "y_train",
+      "creation": "np_utils.to_categorical(trainY, num_classes)",
+      "flow": "Used to fit the model"
+    },
+    {
+      "variable": "y_test",
+      "creation": "np_utils.to_categorical(testY, num_classes)",
+      "flow": "Used for evaluation"
+    },
+    {
+      "variable": "model",
+      "creation": "Sequential() and adding layers",
+      "flow": "Compiled and fitted with trainX and y_train"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "model",
+      "architecture": "Convolutional Neural Network",
+      "input_features": "28x28 grayscale images",
+      "target_variable": "Digits from 0 to 9",
+      "hyperparameters": {
+        "layers": [
+          "Conv2D",
+          "MaxPool2D",
+          "Flatten",
+          "Dense"
+        ],
+        "loss_function": "binary_crossentropy",
+        "optimizer": "RMSprop",
+        "metrics": ["accuracy"]
+      }
+    }
+  ]
+}

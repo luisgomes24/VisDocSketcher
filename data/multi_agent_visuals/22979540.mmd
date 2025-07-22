@@ -1,0 +1,11 @@
+flowchart TD;
+    A["CSV File: Premier League Matches 2014-2020 <img src='icons/file.svg' width=100 height=100/> <br/> Read Data"] --> |"Read data from CSV"| B["DataFrame: data0 <img src='icons/table.svg' width=100 height=100/> <br/> Data Loaded"];
+    B --> |"Preprocess: Label Encoding, Score-Diff Calculation"| C["DataFrame: data1 <img src='icons/column_split.svg' width=100 height=100/> <br/> Preprocessed Data"];
+    C --> |"Split data into features and target"| D["Features: trainX <img src='icons/column_split.svg' width=100 height=100/> <br/> Feature Set"];
+    C --> E["Target: trainY0 <img src='icons/column_split.svg' width=100 height=100/> <br/> Target Set"];
+    C --> F["Features: testX <img src='icons/column_split.svg' width=100 height=100/> <br/> Test Features"];
+    C --> G["Target: testY0 <img src='icons/column_split.svg' width=100 height=100/> <br/> Test Targets"];
+    D & E --> |"Train LGBMClassifier"| H["LGBMClassifier Model <img src='icons/brain.svg' width=100 height=100/> <br/> Trained Model"];
+    F & G --> |"Evaluate model"| H;
+    H --> |"Model Hyperparameters and Configurations"| I["num_leaves, objective, max_depth, learning_rate, lambda_l1, lambda_l2, bagging_freq, bagging_fraction <img src='dummy_plots/lineplot_template.svg'/> <br/> Model Configurations"];
+    I --> |"Optimized using Optuna"| I;

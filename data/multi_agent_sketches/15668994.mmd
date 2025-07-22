@@ -1,0 +1,45 @@
+flowchart TD
+    % Train and Test data nodes
+    train_csv["train.csv" ]
+    %% Represents the CSV file containing training data
+    test_csv["test.csv" ]
+    %% Represents the CSV file containing test data
+
+    train["Train DataFrame" ]
+    %% DataFrame containing the training data with labels
+    test["Test DataFrame" ]
+    %% DataFrame containing the test data without labels
+
+    X_train["Features of Training Data, X_train"]
+    %% Input features for model training
+    y_train["Labels of Training Data, y_train"]
+    %% Target variable for model training
+    X_test["Features of Test Data, X_test"]
+    %% Input features for prediction
+
+
+    train_csv -->|Read CSV| train
+    test_csv -->|Read CSV| test
+    train -->|Select Features| X_train
+    train -->|Select Label| y_train
+    test -->|Copy Data| X_test
+
+    % Model Training and Prediction
+    RandomForestClassifier["Random Forest Classifier"]
+    %% A Random Forest Classifier model used for training
+    y_test_pred_rfc["Predictions by Random Forest"]
+    %% Predictions made by the Random Forest Classifier on the test set
+
+    X_train -->|Train Model| RandomForestClassifier
+    y_train -->|Train Model| RandomForestClassifier
+    RandomForestClassifier -->|Predict| y_test_pred_rfc
+    X_test -->|Predict| RandomForestClassifier
+
+    % Final Submission
+    submission["Submission DataFrame"]
+    %% DataFrame preparing the final submission containing ImageId and predicted labels
+    submission_csv["'submission.csv'"]
+    %% Final CSV file for the submission
+
+    y_test_pred_rfc -->|Prepare Submission| submission
+    submission -->|Write CSV| submission_csv

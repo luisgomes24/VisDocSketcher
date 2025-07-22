@@ -1,0 +1,34 @@
+flowchart TD
+    %% Titanic Data Source Node
+    A[Titanic CSV] -->|Load| B(Titanic DataFrame)
+    
+    %% Initial Titanic DataFrame Node
+    B -->|Filter Columns| C[Filtered DataFrame 'df']
+    
+    %% Filtered DataFrame Node
+    C -->|Encode & Impute| D[Processed DataFrame 'df1']
+    
+    %% Processed DataFrame Node
+    D --> E[Features 'X']
+    D --> F[Target 'y']
+    
+    %% Features and Target Nodes
+    E -->|Train/Test Split| G[Training Set]
+    F -->|Train/Test Split| G
+    
+    %% Decision Tree Model Node
+    G -->|Train Model| H[DecisionTreeClassifier\nmax_leaf_nodes=90,\nrandom_state=10]
+    
+    %% Model Training Node
+    H --> |Predict| I[Model Predictions]
+    
+    %% Comments explaining each node
+    %% A: Represents the source CSV containing Titanic data.
+    %% B: Initial DataFrame containing all loaded data.
+    %% C: DataFrame after filtering to relevant columns.
+    %% D: DataFrame after encoding categorical variables and handling missing values.
+    %% E: Feature set extracted from processed DataFrame for model input.
+    %% F: Target variable extracted for model training.
+    %% G: The dataset split into training and testing sets for the model.
+    %% H: Decision Tree model being trained on the features and target.
+    %% I: Model predictions or output after training.

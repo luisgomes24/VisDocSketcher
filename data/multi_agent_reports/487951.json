@@ -1,0 +1,69 @@
+{
+  "data_sources": [
+    {
+      "file_name": "child_wishlist.csv",
+      "description": "Preferences of children for gifts."
+    },
+    {
+      "file_name": "gift_goodkids.csv",
+      "description": "Gift types and quantities available."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "child_prefs",
+      "description": "A matrix containing the preferences of each child for different gifts."
+    },
+    {
+      "variable_name": "gift_prefs",
+      "description": "A matrix containing the types and maximum quantity of gifts available."
+    },
+    {
+      "variable_name": "twins",
+      "description": "The number of twin children participating in the gift allocation."
+    },
+    {
+      "variable_name": "n_children",
+      "description": "Total number of children based on the length of the child_prefs data."
+    },
+    {
+      "variable_name": "n_gift_type",
+      "description": "Total different types of gifts based on the length of gift_prefs."
+    },
+    {
+      "variable_name": "n_gift_quantity",
+      "description": "The maximum quantity available for each type of gift."
+    },
+    {
+      "variable_name": "gift_matches",
+      "description": "List to store the matches between children and gifts they receive."
+    },
+    {
+      "variable_name": "gift_counter",
+      "description": "An array keeping track of how many of each type of gift has been assigned."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "child_prefs",
+      "creation": "Read from child_wishlist.csv using pd.read_csv.",
+      "flow": "Used in gift allocation logic."
+    },
+    {
+      "variable_name": "gift_prefs",
+      "creation": "Read from gift_goodkids.csv using pd.read_csv.",
+      "flow": "Used to determine available gifts."
+    },
+    {
+      "variable_name": "gift_matches",
+      "creation": "Initialized as an empty list.",
+      "flow": "Populated with (ChildId, GiftId) tuples and saved to 'nice_inversion_benchmark.csv'."
+    },
+    {
+      "variable_name": "gift_counter",
+      "creation": "Initialized to track number of gifts assigned.",
+      "flow": "Updated during the gift assignment process."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,132 @@
+{
+  "data_sources": [
+    {
+      "file_name": "Fraud.csv",
+      "description": "Dataset containing information related to fraudulent transactions in a company"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable": "data",
+      "description": "DataFrame containing the original dataset loaded from the CSV file"
+    },
+    {
+      "variable": "new_data",
+      "description": "DataFrame containing the cleaned dataset without rows where the recipient name starts with 'M'"
+    },
+    {
+      "variable": "X",
+      "description": "DataFrame containing the feature set used for modeling"
+    },
+    {
+      "variable": "y",
+      "description": "Series containing the target variable (isFraud) for modeling"
+    },
+    {
+      "variable": "X_resampled",
+      "description": "Balanced feature dataset after applying undersampling to handle class imbalance"
+    },
+    {
+      "variable": "y_resampled",
+      "description": "Balanced target variable after applying undersampling"
+    },
+    {
+      "variable": "X_train",
+      "description": "Training set of features used for model training"
+    },
+    {
+      "variable": "X_test",
+      "description": "Test set of features used for evaluating model performance"
+    },
+    {
+      "variable": "y_train",
+      "description": "Training set of target variable"
+    },
+    {
+      "variable": "y_test",
+      "description": "Test set of target variable"
+    },
+    {
+      "variable": "model",
+      "description": "The RandomForest model trained on the training dataset"
+    },
+    {
+      "variable": "y_val_pred",
+      "description": "Predicted values on the validation set"
+    },
+    {
+      "variable": "y_pred",
+      "description": "Predicted values on the test set"
+    },
+    {
+      "variable": "accuracy_val",
+      "description": "Accuracy of the model on the validation set"
+    },
+    {
+      "variable": "accuracy",
+      "description": "Accuracy Metric on the test set"
+    },
+    {
+      "variable": "precision",
+      "description": "Precision Metric on the test set"
+    },
+    {
+      "variable": "recall",
+      "description": "Recall Metric on the test set"
+    },
+    {
+      "variable": "f1",
+      "description": "F1 Score Metric on the test set"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "data",
+      "created_by": "pd.read_csv",
+      "flows_to": ["new_data"]
+    },
+    {
+      "variable": "new_data",
+      "created_by": "Data Cleaning",
+      "flows_to": ["X", "y"]
+    },
+    {
+      "variable": "X",
+      "created_by": "Feature Selection",
+      "flows_to": ["X_resampled", "X_train", "X_test"]
+    },
+    {
+      "variable": "y",
+      "created_by": "Target Variable Selection",
+      "flows_to": ["y_resampled", "y_train", "y_test"]
+    },
+    {
+      "variable": "X_resampled",
+      "created_by": "RandomUnderSampler",
+      "flows_to": ["X_train"]
+    },
+    {
+      "variable": "model",
+      "created_by": "RandomForestClassifier",
+      "flows_to": ["y_val_pred", "y_pred"]
+    },
+    {
+      "variable": "y_val_pred",
+      "created_by": "model.predict",
+      "flows_to": ["accuracy_val"]
+    },
+    {
+      "variable": "y_pred",
+      "created_by": "model.predict",
+      "flows_to": ["accuracy", "precision", "recall", "f1"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "RandomForestClassifier",
+      "input_features": ["isFlaggedFraud", "amount", "oldbalanceOrg", "newbalanceOrig", "step", "type", "nameOrig"],
+      "target_variable": "isFraud",
+      "hyperparameters": "None"
+    }
+  ]
+}

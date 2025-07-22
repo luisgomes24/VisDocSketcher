@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file": "cifar10 dataset",
+      "description": "Contains 60,000 32x32 color images in 10 classes, with 6,000 images per class."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "X_train",
+      "description": "Training images from the CIFAR-10 dataset."
+    },
+    {
+      "name": "y_train",
+      "description": "Training labels from the CIFAR-10 dataset, reshaped to a 1D array."
+    },
+    {
+      "name": "X_test",
+      "description": "Testing images from the CIFAR-10 dataset."
+    },
+    {
+      "name": "y_test",
+      "description": "Testing labels from the CIFAR-10 dataset, reshaped to a 1D array."
+    },
+    {
+      "name": "classes",
+      "description": "List of class names corresponding to the CIFAR-10 dataset."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "X_train",
+      "creation": "Loaded from the CIFAR-10 dataset.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Loaded from the CIFAR-10 dataset and reshaped.",
+      "flow": "Used in model training."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Loaded from the CIFAR-10 dataset.",
+      "flow": "Used in model evaluation."
+    },
+    {
+      "variable": "y_test",
+      "creation": "Loaded from the CIFAR-10 dataset and reshaped.",
+      "flow": "Used in model evaluation."
+    }
+  ],
+  "models": [
+    {
+      "name": "Multilayer Perceptron (MLP)",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "layers": [3000, 1000, 10],
+        "optimizer": "SGD",
+        "loss": "sparse_categorical_crossentropy",
+        "epochs": 5
+      }
+    },
+    {
+      "name": "Convolutional Neural Network (CNN)",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {
+        "layers": ["Conv2D(32)", "MaxPooling2D(2)", "Conv2D(32)", "MaxPooling2D(2)", "Flatten()", "Dense(64)", "Dense(10)"],
+        "optimizer": "Adam",
+        "loss": "sparse_categorical_crossentropy",
+        "epochs": 10
+      }
+    }
+  ]
+}

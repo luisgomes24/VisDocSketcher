@@ -1,0 +1,42 @@
+{
+  "data_sources": [
+    {
+      "source_name": "crypto_bitcoin.transactions",
+      "description": "Contains transaction data for Bitcoin, including block timestamps."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "client",
+      "description": "BigQuery client object used to interact with Google Cloud BigQuery."
+    },
+    {
+      "variable_name": "dataset_ref",
+      "description": "Reference to the crypto_bitcoin dataset in BigQuery."
+    },
+    {
+      "variable_name": "dataset",
+      "description": "Dataset object fetched from BigQuery that contains cryptocurrency data."
+    },
+    {
+      "variable_name": "table_ref",
+      "description": "Reference to the transactions table in the crypto_bitcoin dataset."
+    },
+    {
+      "variable_name": "table",
+      "description": "Table object fetched from BigQuery that contains transaction records."
+    },
+    {
+      "variable_name": "transactions_by_date",
+      "description": "DataFrame containing count of transactions grouped by date."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "transactions_by_date",
+      "creation_method": "Executed SQL Query",
+      "flow": "Used for plotting transactions over time."
+    }
+  ],
+  "models": []
+}

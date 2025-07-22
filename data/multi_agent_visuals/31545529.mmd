@@ -1,0 +1,38 @@
+flowchart TD
+    subgraph DataSources[Data Sources]
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> /kaggle/input/coursera-free-courses-dataset/courserafree.csv"]
+    end
+    
+    subgraph DataPreparation[Data Preparation]
+        B["<img src='icons/column_split.svg' width=100 height=100/> <br/> Load and preprocess data"]
+        C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Define main label 'ratings'"]
+    end
+    
+    subgraph FeatureEngineering[Feature Engineering]
+        D["<img src='icons/column_split.svg' width=100 height=100/> <br/> Create feature set X"]
+        E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Create target array y"]
+    end
+
+    subgraph ModelTraining[Model Training & Evaluation]
+        F["<img src='icons/brain.svg' width=100 height=100/> <br/> Create CatBoost Pools for train and test
+<img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+        G["<img src='icons/brain.svg' width=100 height=100/> <br/> Train CatBoost Regressor
+<img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    D --> F
+    E --> F
+    F --> G
+
+    %% Comments
+    %% A: Source data containing course details
+    %% B: Loading and initial preprocessing of data
+    %% C: Identification of label for predictions
+    %% D: Feature set used for training models
+    %% E: Target variable (ratings) for predictions
+    %% F: Data split into pools for training and testing
+    %% G: Training process of CatBoost Regressor model with specified hyperparameters

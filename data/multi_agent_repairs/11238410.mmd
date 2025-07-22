@@ -1,0 +1,7 @@
+graph TD;
+    A["Start"] --> B["Process"];
+    B --> C["Decision (Y/N)"];
+    C -- Yes --> D["Outcome A"];
+    C -- No --> E["Outcome B"];
+    D --> F["End"];
+    E --> F;

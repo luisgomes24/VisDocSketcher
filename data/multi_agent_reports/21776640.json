@@ -1,0 +1,106 @@
+{
+  "data_sources": [
+    {
+      "file_name": "../input/plant-village/PlantVillage",
+      "description": "Directory containing images of various plant diseases for classification."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataset",
+      "description": "A TensorFlow dataset object created from the image directory, containing images and labels."
+    },
+    {
+      "name": "train_ds",
+      "description": "Training dataset consisting of 80% of the images."
+    },
+    {
+      "name": "val_ds",
+      "description": "Validation dataset consisting of 10% of the images."
+    },
+    {
+      "name": "test_ds",
+      "description": "Test dataset consisting of the remaining 10% of the images."
+    },
+    {
+      "name": "classifier",
+      "description": "A Convolutional Neural Network (CNN) model built with several layers for image classification."
+    },
+    {
+      "name": "callbacks",
+      "description": "List of callbacks for model training including EarlyStopping and learning rate schedulers."
+    },
+    {
+      "name": "history",
+      "description": "History object storing training metrics such as accuracy and loss for plots."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "creation_method": "tf.keras.utils.image_dataset_from_directory",
+      "usage": "Split into train_ds, val_ds, and test_ds; visualized in graphs."
+    },
+    {
+      "variable": "train_ds",
+      "creation_method": "get_train_val_test_split",
+      "usage": "Used for training the model."
+    },
+    {
+      "variable": "val_ds",
+      "creation_method": "get_train_val_test_split",
+      "usage": "Used for validation during training."
+    },
+    {
+      "variable": "test_ds",
+      "creation_method": "get_train_val_test_split",
+      "usage": "Used for final model testing and predictions."
+    },
+    {
+      "variable": "classifier",
+      "creation_method": "Sequential model construction",
+      "usage": "Trained with fit method using train_ds and validated with val_ds."
+    },
+    {
+      "variable": "history",
+      "creation_method": "classifier.fit",
+      "usage": "Used for plotting training and validation metrics."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CNN",
+      "features": "Input shape of images (256, 256, 3), several convolutional, pooling, and dropout layers.",
+      "target_variable": "n_class (number of classes derived from dataset)",
+      "hyperparameters": {
+        "learning_rate": 0.00001,
+        "epochs": 50,
+        "batch_size": 32,
+        "layers": [
+          {
+            "type": "Conv2D",
+            "filters": 96,
+            "kernel_size": 11,
+            "activation": "relu"
+          },
+          {
+            "type": "Conv2D",
+            "filters": 256,
+            "kernel_size": 11,
+            "activation": "relu"
+          },
+          {
+            "type": "Dense",
+            "units": 4096,
+            "activation": "relu"
+          },
+          {
+            "type": "Dense",
+            "units": 2048,
+            "activation": "relu"
+          }
+        ]
+      }
+    }
+  ]
+}

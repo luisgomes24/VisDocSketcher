@@ -1,0 +1,29 @@
+%% A flowchart representing the workflow of Jupyter Notebook 2830514
+```mermaid
+title Notebook 2830514 Data Workflow
+flowchart TD
+
+    subgraph DATA_SOURCE
+        direction TB
+        DS1["../input/training_ratings_for_kaggle_comp.csv"]
+        %% DS1: Represents the training ratings data source.
+    end
+
+    subgraph LOADING
+        direction TB
+        DF1["df1: Load data from CSV"]
+        %% DF1: Use pandas to read CSV, limited to 1000 rows for analysis.
+    end
+
+    subgraph PLOTS
+        direction TB
+        PL1["Data Distribution Plots"]
+        PL2["Correlation Matrix"]
+        PL3["Scatter Density Plots"]
+        %% PLOTS: Various analyses and visualizations on df1.
+    end
+
+    DS1 -->|Read 1000 rows| DF1
+    DF1 --> PL1
+    DF1 --> PL2
+    DF1 --> PL3

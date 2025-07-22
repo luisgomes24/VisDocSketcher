@@ -1,0 +1,137 @@
+{
+    "data_sources": [
+        {
+            "source": "../input/hands-on-machine-learning-housing-dataset/housing.csv",
+            "description": "Contains housing data with various features for house value prediction"
+        }
+    ],
+    "data_variables": [
+        {
+            "variable": "housing_data",
+            "description": "Pandas DataFrame containing the original housing data after loading from CSV"
+        },
+        {
+            "variable": "data",
+            "description": "DataFrame after applying one-hot encoding to transform categorical features into numerical"
+        },
+        {
+            "variable": "imputed_data",
+            "description": "DataFrame containing the housing data after handling missing values using imputation"
+        },
+        {
+            "variable": "scaled_data",
+            "description": "DataFrame containing data scaled to a min-max range for training"
+        },
+        {
+            "variable": "X",
+            "description": "Input features for model training, excluding target variable 'median_house_value'"
+        },
+        {
+            "variable": "y",
+            "description": "Target variable representing house values"
+        },
+        {
+            "variable": "X_train",
+            "description": "Training set input features"
+        },
+        {
+            "variable": "X_test",
+            "description": "Testing set input features"
+        },
+        {
+            "variable": "y_train",
+            "description": "Training set target values"
+        },
+        {
+            "variable": "y_test",
+            "description": "Testing set target values"
+        },
+        {
+            "variable": "predictions",
+            "description": "Predicted values using Linear Regression model"
+        },
+        {
+            "variable": "nn_predictions",
+            "description": "Predicted values using Neural Network model"
+        },
+        {
+            "variable": "dec_predict",
+            "description": "Predicted values using Decision Tree Regressor"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "housing_data",
+            "origin": "read_csv",
+            "used_in": "data overview, further preprocessing"
+        },
+        {
+            "variable": "data",
+            "origin": "pd.get_dummies",
+            "used_in": "handling categorical variables"
+        },
+        {
+            "variable": "imputed_data",
+            "origin": "SimpleImputer",
+            "used_in": "scaling and splitting data"
+        },
+        {
+            "variable": "scaled_data",
+            "origin": "MinMaxScaler",
+            "used_in": "model training"
+        },
+        {
+            "variable": "X",
+            "origin": "scaled_data.drop",
+            "used_in": "model training"
+        },
+        {
+            "variable": "y",
+            "origin": "scaled_data['median_house_value']",
+            "used_in": "model training"
+        },
+        {
+            "variable": "X_train",
+            "origin": "train_test_split",
+            "used_in": "training models"
+        },
+        {
+            "variable": "y_train",
+            "origin": "train_test_split",
+            "used_in": "training models"
+        },
+        {
+            "variable": "predictions",
+            "origin": "linear_reg.fit",
+            "used_in": "model evaluation"
+        },
+        {
+            "variable": "nn_predictions",
+            "origin": "nn.fit",
+            "used_in": "model evaluation"
+        },
+        {
+            "variable": "dec_predict",
+            "origin": "dec_tree_reg.fit",
+            "used_in": "model evaluation"
+        }
+    ],
+    "models": [
+        {
+            "model_type": "Linear Regression",
+            "input_features": "X_train",
+            "target_variable": "y_train"
+        },
+        {
+            "model_type": "MLPRegressor",
+            "input_features": "X_train",
+            "target_variable": "y_train",
+            "hyperparameters": "random_state=1, max_iter=300, n_iter_no_change=10"
+        },
+        {
+            "model_type": "Decision Tree Regressor",
+            "input_features": "X_train",
+            "target_variable": "y_train"
+        }
+    ]
+}

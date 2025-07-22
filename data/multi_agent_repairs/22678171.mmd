@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    %% Data Source Nodes
+    ds["../input/bikeshare-analysis/NYC-CitiBike-2016.csv"]
+    
+    %% Data Transformation Nodes
+    ds_loaded["Dataset loaded from CSV"]
+    start["Grouped departures by station and time"]
+    end["Grouped arrivals by station and time"]
+    U["Final availability DataFrame"]
+    trip["Bike trips from CSV"]
+    air["Discontinuities in station transitions"]    
+    output["CSV output of final DataFrame"]
+
+    %% Data Flow Links
+    ds -->|"Load data"| ds_loaded
+    ds_loaded -->|"Group and count"| start
+    ds_loaded -->|"Group and count"| end
+    start -->|"Append arrivals"| U
+    end -->|"Append departures"| U
+    U -->|"Save to CSV"| output
+
+    trip -->|"Filter discontinuities"| air
+    air -->|"Contribute to"| U
+```

@@ -1,0 +1,84 @@
+{
+  "data_sources": [
+    {
+      "file_name": "card_transdata.csv",
+      "description": "Credit card transaction data containing fraud information."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing credit card transaction data."
+    },
+    {
+      "variable_name": "df0",
+      "description": "Resampled DataFrame ensuring equal representation of fraudulent and non-fraudulent classes."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature set derived from df0 without the target variable 'fraud'."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable (fraud) derived from df0."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training subset of features."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing subset of features."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training set for the target variable."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing set for the target variable."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df",
+      "created_by": "pd.read_csv",
+      "flows_to": ["df0", "X", "y"]
+    },
+    {
+      "variable_name": "df0",
+      "created_by": "pd.concat",
+      "flows_to": ["X", "y", "X_train", "X_test", "y_train", "y_test"]
+    },
+    {
+      "variable_name": "X_train",
+      "created_by": "train_test_split",
+      "flows_to": ["knn", "dt", "rf"]
+    },
+    {
+      "variable_name": "X_test",
+      "created_by": "train_test_split",
+      "flows_to": ["knn", "dt", "rf"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "K Nearest Neighbors (KNN)",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"n_neighbors": 3}
+    },
+    {
+      "model_name": "Decision Tree Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"random_state": 5}
+    },
+    {
+      "model_name": "Random Forest Classifier",
+      "input_features": "X_train",
+      "target_variable": "y_train",
+      "hyperparameters": {"random_state": 5}
+    }
+  ]
+}

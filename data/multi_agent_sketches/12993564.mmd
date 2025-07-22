@@ -1,0 +1,23 @@
+flowchart TD
+    %% Data Sources
+    A1["degrees-that-pay-back.csv"]
+    A2["salaries-by-college-type.csv"]
+    A3["salaries-by-region.csv"]
+
+    %% Data Import
+    B1[["deg"]] -->|pd.read_csv()| A1
+    B2[["sal_col"]] -->|pd.read_csv()| A2
+    B3[["sal_reg"]] -->|pd.read_csv()| A3
+
+    %% Data Preparation
+    B4[["selected_col"]] -->|Select relevant columns| B1
+    B5[["train_X"]] -->|train_test_split()| B4
+    B6[["train_y"]] -->|train_test_split()| B4
+    B7[["df_mod"]] -->|Modified for visualizations| B1
+
+    %% Modeling
+    C1(["Linear Regression Model"]) -->|Input: train_X, train_y| B5 & B6
+    C2(["Decision Tree Regressor"]) -->|Input: train_X, train_y| B5 & B6
+
+    %% Results
+    D1[["df_model_res"]] -->|Actual vs Predicted| C1 & C2

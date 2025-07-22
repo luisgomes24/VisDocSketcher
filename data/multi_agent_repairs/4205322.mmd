@@ -1,0 +1,25 @@
+```mermaid
+flowchart TD
+    %% Data source node
+    DS1["museum_visitors.csv"] -->|Read CSV into| D1["museum_data DataFrame"]
+    
+    %% Data Transformation and Loading
+    D1["museum_data DataFrame"] -- "Access July 2018 data" --> D2["ca_museum_jul18"]
+    D1["museum_data DataFrame"] -- "Calculate difference for October 2018" --> D3["avila_oct18"]
+    
+    %% Data usage
+    D1["museum_data DataFrame"] -->|"Used in visualizations"| VIZ["Visualizations"]
+    D2["ca_museum_jul18"] -->|"Used in question answering"| QA1["Question: CA Museum Visitors July 2018"]
+    D3["avila_oct18"] -->|"Used in question answering"| QA2["Question: Visitor Difference Oct 2018"]
+
+    %% Explanation of the main nodes
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef visualization fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class DS1 source;
+    class D1,D2,D3 data;
+    class VIZ visualization;
+    class QA1,QA2 process;
+```

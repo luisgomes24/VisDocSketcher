@@ -1,0 +1,9 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' />"] --> B["🗂️ Data Preprocessing"]
+    B --> C["🔍 View Data <img src='icons/table.svg' />"]
+    C --> D["🖼️ Load Images <img src='icons/image.svg' />"]
+    D --> E["🖼️ Process Images"]
+    E --> F["📊 Original Images <img src='dummy_plots/hist_template.svg' />"]
+    F --> G["🔄 Processed Images <img src='dummy_plots/hist_template.svg' />"]
+    G --> H["🔄 Shuffle Dataset"]
+    H --> I["💾 Save Data <img src='icons/database.svg' />"]

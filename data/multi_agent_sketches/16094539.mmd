@@ -1,0 +1,52 @@
+flowchart TD
+    %% Data Sources
+    A1["Training Data.csv"]
+    A2["Test Data.csv"]
+    
+    %% Variable Nodes
+    B1["train"] 
+    B2["test"]
+    B3["data"]
+    B4["data_y"]
+    B5["X"]
+    B6["Y"]
+    B7["oversample"]
+
+    %% Data Handling Processes
+    P1[Read CSV]
+    P2[Concatenate DataFrames]
+    P3[Extract Target Variable]
+    P4[Split Data]
+    P5[Resample Data]
+    P6[Train-Test Split]
+    P7[Train Model]
+    P8[Predict & Prepare Submission]
+
+    %% Model Nodes
+    M1{{RandomForestClassifier}}
+
+    %% Data Flows
+    A1 -->|reads| P1
+    A2 -->|reads| P1
+    P1 -->|creates| B1
+    P1 -->|creates| B2
+
+    B1 & B2 -->|concats| P2
+    P2 -->|creates| B3
+
+    B3 -->|extracts| P3
+    P3 -->|creates| B4
+    B3 -->|creates| B5
+    B3 -->|creates| B6
+
+    B1 & B2 -->|splits| P4
+    P4 -->|creates| B5
+
+    B5 -->|resamples| P5
+    P5 -->|creates| B7
+
+    B5 -->|splits| P6
+    B5 & B6 --> M1
+    M1 -->|trained| P7
+
+    M1 -->|predicts| P8

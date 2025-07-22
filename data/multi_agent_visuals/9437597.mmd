@@ -1,0 +1,34 @@
+flowchart TD
+    %% Data Sources
+    DS1["<img src='icons/file.svg' width=100 height=100/> <br/> Train Images Directory"]
+    DS2["<img src='icons/file.svg' width=100 height=100/> <br/> Validation Images Directory"]
+
+    %% Model and Data Generators
+    MG1["<img src='icons/column_split.svg' width=100 height=100/> <br/> train_generator"]
+    MG2["<img src='icons/column_split.svg' width=100 height=100/> <br/> validation_generator"]
+    M1["<img src='icons/brain.svg' width=100 height=100/> <br/> my_new_model: Sequential Model"]
+
+    %% Processes
+    P1["<img src='icons/brain.svg' width=100 height=100/> <br/> ResNet50 Pre-trained Model Loaded"]
+    P2["<img src='icons/table.svg' width=100 height=100/> <br/> Data Augmentation and Preprocessing"]
+    P3["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Compilation"]
+    P4["<img src='icons/brain.svg' width=100 height=100/> <br/> Model Training"]
+    P5["<img src='icons/brain.svg' width=100 height=100/> <br/> Result Evaluation"]
+
+    %% Data Flow and Transitions
+    %% Data is fed from directories into generators
+    DS1 --> |"generate data"| MG1
+    DS2 --> |"generate data"| MG2
+    MG1 & MG2 --> P2
+
+    %% Model Creation and Training Flow
+    P2 --> |"load as base"| P1
+    P1 --> |"build Sequential model"| M1
+    M1 --> |"compile using Adam, CCE, Accuracy"| P3
+    P3 --> |"train with generators output"| P4
+
+    %% Completion and Evaluation
+    P4 --> |"output fit statistics"| P5
+
+    %% Result Storage
+    P5 --> |"store results"| fit_stats

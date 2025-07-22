@@ -1,0 +1,34 @@
+%% This diagram represents the workflow of a data science project focused on heart attack prediction.
+flowchart TD
+    A[<img src='icons/database.svg' width=100 height=100/> <br/> heart.csv] -->|load data| B[<img src='icons/table.svg' width=100 height=100/> <br/> df]
+    %% Load the dataset
+    B -->|preprocess| C[<img src='icons/column_split.svg' width=100 height=100/> <br/> X, y]
+    %% Split data into features and target
+    C -->|train_test_split| D[<img src='icons/row_split.svg' width=100 height=100/> <br/> X_train, X_test, y_train, y_test]
+    %% Split into training and testing sets
+    D -->|train models| E[<img src='icons/brain.svg' width=100 height=100/> <br/> (Model Training)]
+    %% ML model training section
+    E -->|Logistic Regression CV| F1[<img src='icons/brain.svg' width=100 height=100/> <br/> LogisticRegressionCV]
+    E -->|Stochastic Gradient Descent| F2[<img src='icons/brain.svg' width=100 height=100/> <br/> SGDClassifier]
+    E -->|Support Vector Classifier| F3[<img src='icons/brain.svg' width=100 height=100/> <br/> SVC]
+    E -->|Decision Tree| F4[<img src='icons/brain.svg' width=100 height=100/> <br/> DecisionTreeClassifier]
+    E -->|Extra Tree| F5[<img src='icons/brain.svg' width=100 height=100/> <br/> ExtraTreeClassifier]
+    E -->|Random Forest| F6[<img src='icons/brain.svg' width=100 height=100/> <br/> RandomForestClassifier]
+    E -->|Gradient Boosting| F7[<img src='icons/brain.svg' width=100 height=100/> <br/> GradientBoostingClassifier]
+    E -->|AdaBoost| F8[<img src='icons/brain.svg' width=100 height=100/> <br/> AdaBoostClassifier]
+    E -->|XGBoost| F9[<img src='icons/brain.svg' width=100 height=100/> <br/> XGBClassifier]
+    E -->|LightGBM| F10[<img src='icons/brain.svg' width=100 height=100/> <br/> LGBMClassifier]
+    %% Each model receives training data and produces predictions.
+    F1 --> |evaluate| G[<img src='icons/table.svg' width=100 height=100/> <br/> score_dict]
+    F2 --> |evaluate| G
+    F3 --> |evaluate| G
+    F4 --> |evaluate| G
+    F5 --> |evaluate| G
+    F6 --> |evaluate| G
+    F7 --> |evaluate| G
+    F8 --> |evaluate| G
+    F9 --> |evaluate| G
+    F10 --> |evaluate| G
+    %% Performance evaluation
+    G -->|create DataFrame| H[<img src='icons/table.svg' width=100 height=100/> <br/> score_pd]
+    %% Consolidate scores for visualization

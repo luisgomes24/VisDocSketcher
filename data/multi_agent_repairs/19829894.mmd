@@ -1,0 +1,38 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    subgraph S1 [Data Sources]
+        DS1["Fish_Dataset"] %% Dataset containing images of various fish types
+    end
+
+    %% Data Variables
+    subgraph S2 [Data Variables]
+        DP[data_path] --> |"Path Setup"| ALL["all_images"] %% Collects all image paths
+        ALL --> |"Filtering"| IMGS["images"] & LAB["labels"] %% Separates image paths and labels
+        IMGS & LAB --> DF["dataframe"] %% Combines into a DataFrame
+        DF --> SDF["shuffled_dataframe"] %% Shuffling operation
+        SDF --> |"Splitting"| TR["train"] & VL["val"] & TE["test"] %% Creating splits
+    end
+
+    %% Data Flow
+    TR & VL & TE --> |"Data Generator Setup"| TG["training_generator"]
+    TG --> |"Training Input"| MLP["mlp_model"]
+    TG --> |"Training Input"| CNN["cnn_model"]
+
+    %% Models
+    subgraph S3 [ML Models]
+        MLP --> |"Validation"| VL
+        CNN --> |"Validation & Testing"| VL & TE
+    end
+
+    %% Model Descriptions
+    classDef mlp fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef cnn fill:#bbf,stroke:#333,stroke-width:2px;
+
+    class MLP mlp;
+    class CNN cnn;
+
+    classDef data fill:#bbf,stroke:#f66,stroke-width:2px;
+    class DP,ALL,IMGS,LAB,DF,SDF,TR,VL,TE data;
+
+```

@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_masks.csv",
+      "description": "Contains image file names used for training."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df_train",
+      "description": "DataFrame containing training image file names."
+    },
+    {
+      "variable_name": "img",
+      "description": "Numpy array for input image."
+    },
+    {
+      "variable_name": "mask",
+      "description": "Numpy array for mask corresponding to the input image."
+    },
+    {
+      "variable_name": "img_id",
+      "description": "Unique identifier for each image in the dataset."
+    },
+    {
+      "variable_name": "img_aug1, img_aug2, mask_aug1, mask_aug2",
+      "description": "Augmented images and masks obtained through transformations."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df_train",
+      "creation_method": "pd.read_csv",
+      "flow": "Used to obtain image IDs and read image files."
+    },
+    {
+      "variable_name": "img, mask",
+      "creation_method": "get_image_and_mask",
+      "flow": "Used for display and augmentation."
+    },
+    {
+      "variable_name": "img_aug1, mask_aug1, img_aug2, mask_aug2",
+      "creation_method": "random_augmentation",
+      "flow": "Used for plotting the transformed images and masks." 
+    }
+  ],
+  "models": []
+}

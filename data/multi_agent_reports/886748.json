@@ -1,0 +1,57 @@
+{
+    "data_sources": [
+        {
+            "path": "../input/wine-reviews/winemag-data_first150k.csv",
+            "description": "CSV dataset containing wine reviews."
+        },
+        {
+            "path": "../input/publicassistance/xls_files_all/WICAgencies2014ytd.xls",
+            "description": "Excel sheet containing data on Pregnant Women Participating."
+        },
+        {
+            "path": "../input/pitchfork-data/database.sqlite",
+            "description": "SQLite database with artists table."
+        }
+    ],
+    "data_variables": [
+        {
+            "name": "q6_df",
+            "description": "DataFrame containing the number of cows and goats for Year 1 and Year 2."
+        },
+        {
+            "name": "Wine Reviews DataFrame",
+            "description": "DataFrame created by reading the CSV file on wine reviews."
+        },
+        {
+            "name": "Excel DataFrame",
+            "description": "DataFrame created by reading the specified sheet from the Excel file."
+        },
+        {
+            "name": "artists DataFrame",
+            "description": "DataFrame created by reading the artists table from the SQLite database."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "q6_df",
+            "creation_method": "pd.DataFrame",
+            "flow": "Saved as CSV file named 'cows_and_goats.csv'."
+        },
+        {
+            "variable": "Wine Reviews DataFrame",
+            "creation_method": "pd.read_csv",
+            "flow": "Used for analysis of wine reviews."
+        },
+        {
+            "variable": "Excel DataFrame",
+            "creation_method": "pd.read_excel",
+            "flow": "Used for further analysis or processing, data not cleaned."
+        },
+        {
+            "variable": "artists DataFrame",
+            "creation_method": "pd.read_sql_query",
+            "flow": "Used for analysis of artist data."
+        }
+    ],
+    "models": []
+}

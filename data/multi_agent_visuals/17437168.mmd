@@ -1,0 +1,13 @@
+graph TD;
+    A["<img src='dummy_plots/barplot_template.svg'/> <br/> Data Collection"] --> B["Data Cleaning"];
+    B --> C["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Feature Engineering"];
+    C --> D["<img src='dummy_plots/boxplot_template.svg'/> <br/> Train Model"];
+    D --> E["<img src='dummy_plots/lineplot_template.svg'/> <br/> Validate Model"];
+    E --> F["<img src='dummy_plots/hist_template.svg'/> <br/> Hyperparameter Tuning"];
+    F --> G["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Final Model"];
+    G --> H["<img src='dummy_plots/hist_template.svg'/> <br/> Model Evaluation"];
+    H --> I["<img src='dummy_plots/lineplot_template.svg'/> <br/> Predictions"];
+    I --> J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Result Analysis"];
+    J --> K["<img src='dummy_plots/boxplot_template.svg'/> <br/> Reporting"];
+    K --> L["<img src='dummy_plots/barplot_template.svg'/> <br/> Archive"];
+    L --> M["End"].

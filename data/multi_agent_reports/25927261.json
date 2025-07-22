@@ -1,0 +1,28 @@
+{
+  "data_sources": [
+    {"source": "../input/tabular-playground-series-apr-2022/train.csv", "description": "Training data containing features for the model"},
+    {"source": "../input/tabular-playground-series-apr-2022/train_labels.csv", "description": "Labels for the training data"},
+    {"source": "../input/tabular-playground-series-apr-2022/test.csv", "description": "Test data containing features for prediction"},
+    {"source": "../input/tabular-playground-series-apr-2022/sample_submission.csv", "description": "Sample submission file format"}
+  ],
+  "data_variables": [
+    {"variable": "train", "description": "DataFrame containing the training features and labels"},
+    {"variable": "t_lbls", "description": "DataFrame containing the labels corresponding to the training data"},
+    {"variable": "test", "description": "DataFrame containing the features for the test data"},
+    {"variable": "ss", "description": "DataFrame for sample submission with predictions to be saved"},
+    {"variable": "features", "description": "List containing names of features used for modeling"},
+    {"variable": "groups", "description": "Groups for GroupKFold cross-validation"},
+    {"variable": "labels", "description": "Labels for training data extracted from t_lbls"}
+  ],
+  "data_flow": [
+    {"variable": "train", "created_by": "pd.read_csv", "flows_to": "feature engineering, modeling, and evaluation"},
+    {"variable": "t_lbls", "created_by": "pd.read_csv", "flows_to": "provides target labels for model training"},
+    {"variable": "test", "created_by": "pd.read_csv", "flows_to": "used for generating predictions"},
+    {"variable": "ss", "created_by": "pd.read_csv", "flows_to": "stores final predictions for submission"},
+    {"variable": "predictions", "created_by": "model.predict", "flows_to": "saved in ss for submission"}
+  ],
+  "models": [
+    {"model_type": "XGBoost", "input_features": "X", "target_variable": "y", "hyperparameters": {"n_estimators": 10000, "max_depth": 5, "learning_rate": 0.013, "min_child_weight": 11, "gamma": 0.251, "alpha": 0.000109, "lambda": 0.018, "colsample_bytree": 0.545, "subsample": 0.622}},
+    {"model_type": "Deep Neural Network (DNN)", "input_features": "shaped train data", "target_variable": "labels", "hyperparameters": {"layers": [{"type": "Bidirectional LSTM", "units": 768}, {"type": "Bidirectional LSTM", "units": 512}, {"type": "Dense", "units": 128}], "dropout": 0.2}}
+  ]
+}

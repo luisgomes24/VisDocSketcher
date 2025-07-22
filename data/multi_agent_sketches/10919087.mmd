@@ -1,0 +1,14 @@
+flowchart TD
+    %% Node for TMDb dataset
+    A[/TMDb Dataset/]
+    %% Node for DataFrame 'df'
+    B[df]
+    %% Node for grouped DataFrame 'df1'
+    C[df1]
+    %% Node for 'example_overview'
+    D[example_overview]
+
+    %% Data flow
+    A -->|Load with pd.read_csv| B
+    B -->|Group by 'original_language' and sum| C
+    B -->|Extract overview of first movie| D

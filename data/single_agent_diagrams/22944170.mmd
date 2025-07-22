@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <img src='file.svg' /> <br/> df = pd.read_csv()"] --> B["📊 Dataprep <img src='boxplot_template.svg'/> <br/> plot(df)"]
+    B --> C["📊 Create Report <img src='table.svg' /> <br/> create_report(df)"]
+    C --> D["📊 AutoViz <img src='scatter_plot_template.svg'/> <br/> AV.AutoViz()"]
+    D --> E["📊 Pandas Profiling <img src='barplot_template.svg'/> <br/> ProfileReport(df)"]
+    E --> F["📊 SweetViz <img src='hist_template.svg'/> <br/> sv.analyze()"]
+    F --> G["📊 Lux <img src='lineplot_template.svg'/> <br/> df"]
+    G --> H["📊 D-Tale <img src='boxplot_template.svg'/> <br/> !pip install -q dtale"]

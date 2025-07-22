@@ -1,0 +1,22 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["👀 Data Overview"]
+    B --> C["📊 Histograms <img src='hist_template.svg'/>"]
+    A --> D["📊 Scatter Plot <img src='scatter_plot_template.svg'/>"]
+
+    C --> E["📊 Correlations"]
+    E --> F["📊 Scatter Matrix"]
+    
+    F --> G["🔧 Data Preprocessing"]
+    G --> H["💾 One Hot Encoding"]
+    H --> I["🔍 Handle Missing Data"]
+    I --> J["📏 Data Scaling"]
+    J --> K["📊 Split Data"]
+    
+    K --> L["📉 Linear Regression"]
+    L --> M["📝 Model Evaluation"]
+
+    K --> N["🧠 Neural Network"]
+    N --> O["📝 NN Model Evaluation"]
+
+    K --> P["🌳 Decision Tree"]
+    P --> Q["📝 DT Model Evaluation"]

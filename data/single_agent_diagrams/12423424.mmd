@@ -1,0 +1,13 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/>"] --> B["🔍 Examine Data<BR/>data['diagnosis'].value_counts()"]
+    B --> C["🐍 Data Preprocessing"]
+    C --> D["🏷️ Create Dummy Variable <img src='column_split.svg'/>"]
+    D --> E["🚮 Replace Diagnosis Column"]
+    E --> F["📊 Visualize Distribution <img src='dummy_plots/pie_template.svg'/>"]
+    F --> G["🔄 Clean Data"]
+    G --> H["📊 Correlation Heatmap <img src='dummy_plots/heatmap_template.svg'/>"]
+    H --> I["✂️ Drop Unimportant Features"]
+    I --> J["📚 Model Training"]
+    J --> K["🤖 Train Model <img src='brain.svg'/>"]
+    K --> L["📈 Evaluate Model"]
+    L --> M["📊 Confusion Matrix & Scores"]

@@ -1,0 +1,14 @@
+flowchart TD
+    A[Actual Data] -->|Used for| B[Calculate AP@5]
+    B --> C[Calculate MAP@K]
+    D[Predicted Data 1] -->|Input for AP@5| B
+    E[Predicted Data 2] -->|Input for AP@5| B
+    F[Predicted Data 3] -->|Input for AP@5| B
+    G[Predicted Data 4] -->|Input for AP@5| B
+    H[Predicted Data 5] -->|Input for AP@5| B
+    
+    %% Node Descriptions
+    %% A: This node represents the actual correct answer data used as ground truth in calculations.
+    %% B: This node is where the calculation for Average Precision at 5 (AP@5) takes place using input from 'actual' and 'predicted'.
+    %% C: This node represents the Mean Average Precision at K (MAP@K) calculation, averaged over multiple AP@5 results.
+    %% D-H: These nodes are different prediction scenarios, each used as input to the AP@5 calculation to illustrate different prediction accuracy levels.

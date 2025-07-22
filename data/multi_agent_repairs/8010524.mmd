@@ -1,0 +1,39 @@
+flowchart TD
+    subgraph DataSources
+        D1["/kaggle/input/farm-ads-binary-classification/farm-ads"]
+        D2["/kaggle/input/farm-ads-binary-classification/farm-ads-vect"]
+    end
+    
+    subgraph DataPreparation
+        A1["farm_ads DataFrame"]
+        A2["farm_vect DataFrame"]
+        A3["Merge farm_ads and farm_vect"]
+        A4["Data: Combined DataFrame"]
+        A5["Drop target column from Data"]
+        A6["X: Features DataFrame"]
+        A7["y: Target variable from '0_x' and '0_y'"]
+    end
+
+    subgraph ModelPreparation
+        B1["Split X into X_train and X_test"]
+        B2["Split y into y_train and y_test"]
+        B3["RandomForestClassifier initialization"]
+        B4["Train model on X_train, y_train"]
+    end
+    
+    subgraph Predictions
+        C1["Predict using X_test"]
+        C2["Evaluate predictions with balanced_accuracy_score"]
+    end
+
+    D1 -->|"read_csv()"| A1 --> A3
+    D2 -->|"read_csv()"| A2 --> A3
+    A3 -->|"Creates"| A4
+    A4 --> A5 --> A6
+    A4 --> A7
+    A6 -->|"train_test_split()"| B1
+    A7 -->|"train_test_split()"| B2
+    B1 -->|"Used in"| B4
+    B2 -->|"Used in"| B4
+    B4 -->|"predict()"| C1
+    C1 --> C2

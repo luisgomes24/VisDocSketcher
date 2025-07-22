@@ -1,0 +1,8 @@
+flowchart TD
+    A["📁 Load Data <br/> <img src='file.svg' />"] --> B["🧪 Check for Nulls <br/> & Fill Missing Data"]
+    B --> C["🔢 Create Age Cut <br/> <img src='dummy_plots/hist_template.svg' />"]
+    C --> D["📊 Age Cut Frequencies <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    C --> E["🔢 Create Age QCut <br/> <img src='dummy_plots/hist_template.svg' />"]
+    E --> F["📊 Age QCut Frequencies <br/> <img src='dummy_plots/barplot_template.svg' />"]
+    E --> G["🔁 Apply Age Group Function <br/>"]
+    G --> H["📊 Age Generation Frequencies <br/> <img src='dummy_plots/barplot_template.svg' />"]

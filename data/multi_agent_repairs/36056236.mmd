@@ -1,0 +1,20 @@
+flowchart TD
+
+%% Data Source Node
+A1["/Mobile Vendor Market Share India.csv/"] 
+%% Represents the CSV data source containing mobile vendor market share data in India.
+
+%% Data Frame Creation
+B1["df"]
+%% Represents the DataFrame created by reading the CSV file, containing the mobile vendor market share data.
+A1 --> B1
+
+%% Data Aggregation Transformation
+B2["df_yearly"]
+%% Represents the yearly aggregated DataFrame.
+B1 --> B2
+
+%% Data Flow to Visualizations
+%% (Note: Visualization nodes are implied as part of the workflow but are not explicitly detailed within this context)
+B2 --> |"Time Series Plots"| C1
+%% Represents the flow of data used in generating various time series plots for analysis.

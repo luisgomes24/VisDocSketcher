@@ -1,0 +1,1 @@
+This notebook processes and visualizes data regarding the losses of Russian forces during the Ukraine War using two datasets: equipment and personnel losses. It generates bar plots to represent the losses over time, allowing for a daily-based understanding of the situation.

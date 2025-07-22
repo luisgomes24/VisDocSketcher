@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node representing the data source
+    A["<img src='icons/file.svg'  width=100 height=100/> <br/> trade-waste-hauler-licensees.csv"] -->|Load data| B["<img src='icons/table.svg'  width=100 height=100/> <br/> df1"]
+    
+    %% Node representing the DataFrame creation
+    B -->|Preview data| C["<img src='icons/column_split.svg'  width=100 height=100/> <br/> Data Head <img src='dummy_plots/hist_template.svg'/> <br/> "]
+    B -->|Create Visualizations| D["<img src='icons/column_split.svg'  width=100 height=100/> <br/> Histogram, PCA plots <img src='dummy_plots/pca_plot.svg'/> <br/> "]
+    
+    %% Comments for each node
+    %% A: Represents the CSV file data source containing trade waste hauler licensees.
+    %% B: Represents the DataFrame created from the CSV file, limited to first 100 rows.
+    %% C: Represents the action to preview the data by displaying its head.
+    %% D: Represents the visualizations created using the DataFrame, such as histograms and PCA plots.

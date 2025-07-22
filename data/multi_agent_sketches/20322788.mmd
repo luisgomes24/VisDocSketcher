@@ -1,0 +1,24 @@
+flowchart TD
+    %% Node for data source
+    A["Kidney Disease CSV"] --> |"load"| B["Data"]
+    
+    %% Nodes for data variables
+    B --> |"split features & target"| C["X (features)"]
+    B --> |"split features & target"| D["y (target)"]
+    C --> |"training split"| E["X_train"]
+    C --> |"test split"| F["X_test"]
+    D --> |"training split"| G["y_train"]
+    D --> |"test split"| H["y_test"]
+    
+    %% Random Forest Model
+    E --> |"train model"| I["RandomForestClassifier"]
+    G --> |"train model"| I
+    I --> |"make predictions"| J["predictions"]
+    
+    %% XGBoost Model
+    E --> |"train XGBoost"| K["XGBClassifier"]
+    G --> |"train XGBoost"| K
+
+    %% SVC Model
+    E --> |"train SVM"| L["SVC"]
+    G --> |"train SVM"| L

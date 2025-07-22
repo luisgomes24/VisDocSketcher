@@ -1,0 +1,40 @@
+{
+  "data_sources": [
+    {
+      "file_name": "No CSV files detected",
+      "description": "The current version of the dataset contains no CSV files."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "plotPerColumnDistribution",
+      "description": "A function that plots distribution graphs (histograms/bar graphs) for each column in the DataFrame."
+    },
+    {
+      "variable_name": "plotCorrelationMatrix",
+      "description": "A function that creates a correlation matrix plot for the DataFrame."
+    },
+    {
+      "variable_name": "plotScatterMatrix",
+      "description": "A function that generates scatter and density plots for the numerical columns in the DataFrame."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "plotPerColumnDistribution",
+      "creation": "Defined as a function in the notebook.",
+      "flow": "Called in exploratory analysis to visualize data distribution across columns."
+    },
+    {
+      "variable": "plotCorrelationMatrix",
+      "creation": "Defined as a function in the notebook.",
+      "flow": "Called in exploratory analysis to show correlation between numerical features."
+    },
+    {
+      "variable": "plotScatterMatrix",
+      "creation": "Defined as a function in the notebook.",
+      "flow": "Called in exploratory analysis to visualize relationships between numerical features."
+    }
+  ],
+  "models": []
+}

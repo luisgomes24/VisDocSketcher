@@ -1,0 +1,7 @@
+flowchart TD
+    df["DataFrame"] --> |"Used in plots"| nunique["Unique Count"]
+    df --> |"Correlation"| corr["Correlation Matrix"]
+    df --> |"Column Names"| columnNames["Column Names"]
+    corr --> |"Used for visualization"| plotCorrelationMatrix["Plot Correlation Matrix"]
+    nunique --> |"Filtered Columns"| plotPerColumnDistribution["Plot Per Column Distribution"]
+    columnNames --> |"Used in scatter"| plotScatterMatrix["Plot Scatter Matrix"]

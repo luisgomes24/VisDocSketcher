@@ -1,0 +1,11 @@
+flowchart TD
+  %% Node for Data Source
+  A["trade-waste-hauler-licensees.csv"] -->|Read CSV file| B["df1"]
+  B -->|Data for histogram| C["plotHistogram"]
+  B -->|Data for PCA| D["plotPCA"]
+
+  %% Comments
+  %% A: Represents the data source file containing trade waste hauler licensees data
+  %% B: Represents the DataFrame 'df1' where data is stored after being read from CSV
+  %% C: Represents the function used for plotting histograms
+  %% D: Represents the PCA analysis function

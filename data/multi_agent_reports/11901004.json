@@ -1,0 +1,54 @@
+{
+  "data_sources": [
+    {
+      "file_name": "task-dummy.csv",
+      "description": "Dummy submission file with fighter betting data"
+    },
+    {
+      "file_name": "mdabbert-9-19-20-submission.csv",
+      "description": "Submission by mdabbert with GaussianNB classifier predictions"
+    },
+    {
+      "file_name": "most-recent-event.csv",
+      "description": "Most recent UFC events dataset containing fighters, their odds, and results"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "score_list",
+      "description": "List of profits calculated from the submissions"
+    },
+    {
+      "variable_name": "sub_list",
+      "description": "List of DataFrames storing betting predictions from the submissions"
+    },
+    {
+      "variable_name": "results_df",
+      "description": "DataFrame containing the most recent fight results and associated data"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "sub_list",
+      "creation": "Reading from CSV files",
+      "flow": "Used to track the betting predictions made in the analysis"
+    },
+    {
+      "variable": "results_df",
+      "creation": "Reading from most recent event CSV file",
+      "flow": "Used to merge with submissions and evaluate profits"
+    },
+    {
+      "variable": "score_list",
+      "creation": "Initialized as an empty list",
+      "flow": "Stores the calculated profits for each submission after processing"
+    }
+  ],
+  "models": [
+    {
+      "model_name": "GaussianNB",
+      "features": ["B_Weight_lbs", "B_Flyweight_rank", "B_avg_TD_landed", "B_Light Heavyweight_rank", "B_Lightweight_rank", "R_avg_TD_landed", "R_Middleweight_rank", "R_Height_cms", "R_avg_SIG_STR_pct", "B_age", "R_longest_win_streak", "lose_streak_dif", "R_win_by_Decision_Majority", "longest_win_streak_dif", "avg_sub_att_dif", "sig_str_dif", "B_avg_SUB_ATT", "R_win_by_TKO_Doctor_Stoppage", "B_draw", "R_win_by_Decision_Split", "age_dif", "R_odds"],
+      "target": "Winning fighter based on predictions"
+    }
+  ]
+}

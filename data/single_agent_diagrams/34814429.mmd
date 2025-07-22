@@ -1,0 +1,23 @@
+```
+graph TD
+    A["📂 Load Data"]
+    B["🛠️ Preprocess Data"]
+    C["🧠 Build Model"]
+    D["🔄 Train Model"]
+    E["📊 Plot Losses"]
+    F["📸 Visualize Results"]
+    G["📉 Evaluate Model"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    E --> G
+    F --> G
+
+    B -->|Create Dataset| D["ImageFolder Dataset"]
+    B -->|Data Augmentation| D
+    D -->|Save Model Checkpoints| G
+    F -->|Real Images| F["<img src='dummy_plots/barplot_template.svg'/> <br/> Real vs Fake"]
+    F -->|Loss Plot| E["<img src='dummy_plots/hist_template.svg'/> <br/> Losses"]

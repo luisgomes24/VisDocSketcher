@@ -1,0 +1,6 @@
+flowchart TD
+    A["🗄️ Load Data <img src='icons/file.svg' /> <br/> df=pd.read_csv(...)"] --> B["👀 Preview Data <img src='icons/table.svg' /> <br/> df.head()"]
+    B --> C["🔍 Unique Items <br/> items= df.itemDescription.unique()"]
+    C --> D["📜 Grouped Data <br/> df_grouped=df.groupby(...)"]
+    D --> E["📊 DataFrame from Grouped Data <img src='icons/table.svg' /> <br/> df_grouped_df= pd.DataFrame(...)"]
+    E --> F["👥 Unique Customers <br/> len(df['Member_number'].unique())"]

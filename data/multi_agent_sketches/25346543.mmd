@@ -1,0 +1,31 @@
+flowchart TD
+    %% Data Sources
+    A1[train.csv]:::file --> C1
+    A2[features.csv]:::file --> C1
+    A3[patient_notes.csv]:::file --> C1
+    
+    %% Intermediate DataFrames
+    C1[train DataFrame]:::dataframe --> D1
+    C1 --> D2
+    C2[features DataFrame]:::dataframe --> C1
+    C3[patient_notes DataFrame]:::dataframe --> C1
+
+    %% Data Preparation
+    D1[train_data_X]:::data --> E1
+    D2[train_data_Y]:::data --> E1
+    D3[valid_data]:::data --> E1
+
+    %% Model Training
+    E1[DeBERTa Model Training]:::model
+
+    classDef file fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataframe fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef data fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef model fill:#f66,stroke:#333,stroke-width:2px;
+
+    %% Node Descriptions
+    C1:::dataframe -- Merged training, features, and notes data for model --;
+    D1:::data -- Array of input_ids and attention masks --;
+    D2:::data -- Array of labels for training --;
+    D3:::data -- Validation split data --;
+    E1:::model -- Trains the DeBERTa model with batch size 8, epochs 10 --;

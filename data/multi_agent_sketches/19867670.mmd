@@ -1,0 +1,35 @@
+flowchart TD
+
+A1["train_with_features.csv"]
+%% Input Data Source
+
+A2["train_df"]
+%% DataFrame containing the training data
+
+A3["test_df"]
+%% DataFrame generated for predictions
+
+A4["nn_preds"]
+%% Predictions generated from Neural Network
+
+A5["lgb_preds"]
+%% Predictions generated from LightGBM
+
+A6["Tabular Neural Network"]
+%% Neural Network Model
+
+A7["LightGBM Model"]
+%% LightGBM Model
+
+A8["Submission CSV"]
+%% Final output submission file
+
+A1 --> A2
+A2 --> |"Used for training"| A6
+A2 --> |"Used for training"| A7
+A3 --> |"Used for predictions"| A6
+A3 --> |"Used for predictions"| A7
+A6 --> |"Generate"| A4
+A7 --> |"Generate"| A5
+A4 --> |"Weighted sum"| A8
+A5 --> |"Weighted sum"| A8

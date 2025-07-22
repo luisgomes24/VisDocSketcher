@@ -1,0 +1,14 @@
+%% Mermaid flowchart for Jupyter Notebook 3764795
+
+flowchart TD
+
+    %% Data Source Node
+    A[Data Source]:::DataSource -->|No input CSV files detected.| B[Data Frame df]:::DataVariable
+      
+    %% Data Variable Node
+    B -->|Used for plotting and analysis| C[Prepared Data Flow]:::DataFlow
+    
+    %% Styling for the nodes
+    classDef DataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef DataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef DataFlow fill:#cfc,stroke:#333,stroke-width:2px;

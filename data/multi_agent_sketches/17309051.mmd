@@ -1,0 +1,69 @@
+%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground':'#ffffff'}}}%%
+flowchart TD
+    %%% Data Source Nodes %%%
+    DS1["Data Source: probability__swr_p_sequence.txt"]
+    
+    %%% Data Variable Nodes %%%
+    DV0["Data Variable: training_paths"]
+    DV1["Data Variable: interpolate_paths"]
+    DV2["Data Variable: extrapolate_paths"]
+    DV3["Data Variable: df"]
+    DV4["Data Variable: pairs"]
+    DV5["Data Variable: train_pairs"]
+    DV6["Data Variable: test_pairs"]
+    DV7["Data Variable: stats"]
+    
+    %%% ML Model Nodes %%%
+    M1["Model: EncoderSeq"]
+    M2["Model: Prediction"]
+    M3["Model: GenerateNode"]
+    M4["Model: Merge"]
+
+    %%% Data Flow %%%
+    DS1 --> DV3
+    DV3 --> DV4
+    DV4 --> DV5
+    DV4 --> DV6
+    DV5 --> M1
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> DV7
+
+    %%% Comments for Nodes %%%
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef variable fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:2px;
+
+    class DS1 source;
+    class DV0,DV1,DV2,DV3,DV4,DV5,DV6,DV7 variable;
+    class M1,M2,M3,M4 model;
+
+    DS1:::source
+    DV0:::variable
+    DV1:::variable
+    DV2:::variable
+    DV3:::variable
+    DV4:::variable
+    DV5:::variable
+    DV6:::variable
+    DV7:::variable
+    M1:::model
+    M2:::model
+    M3:::model
+    M4:::model
+
+    %% Explanation for each node %%
+    click DS1 "A dataset containing pairs of questions and answers."
+    click DV0 " Paths for training data files categorized into two domains."
+    click DV1 "Paths for interpolation data files, undergoing similar categorization."
+    click DV2 "Paths for extrapolation data file categorization."
+    click DV3 "DataFrame with the first 1000 parsed questions and answers."
+    click DV4 "List of tuples with questions, equations, and segmented text."
+    click DV5 "Training data pairs for k-fold cross-validation training."
+    click DV6 "Testing data pairs for model evaluation."
+    click DV7 "Accumulated statistics of the training process tracked."
+    click M1 "EncoderSeq Model processing with specified hyperparameters."
+    click M2 "Prediction Model using internal outputs from Encoder."
+    click M3 "GenerateNode Model producing final problem-solving equations."
+    click M4 "Merge Model that combines intermediary model outputs into answers."

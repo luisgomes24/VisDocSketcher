@@ -1,0 +1,7 @@
+%% The diagram represents the data processing and visualization workflow
+flowchart TD
+  %% Node for the data source.
+  A[tistene-knihy_2020_export.csv] --> |Reads CSV file| B[DataFrame df]
+  %% Node representing initial DataFrame
+  B --> |Visualizes data using| C[Plots]
+  B --> |Generates word clouds for| D[Word Clouds for 'N\'azev' and 'Autor']

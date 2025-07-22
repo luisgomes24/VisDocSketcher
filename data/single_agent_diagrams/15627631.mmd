@@ -1,0 +1,8 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> train.csv"] --> B["🔍 Exploratory Data Analysis"]
+    B --> C["🪴 Data Overview <img src='table.svg' /> <br/> df_orig.head()"]
+    B --> D["📏 Numeric Features <img src='column_split.svg' />"]
+    D --> E["📊 Histogram <img src='hist_template.svg' /> <br/> Histograms of Numeric Features"]
+    D --> F["📈 Bivariate Plots <img src='scatter_plot_template.svg' /> <br/> Scatter Plots with SalePrice"]
+    B --> G["📊 Categorical Features <img src='column_split.svg' />"]
+    G --> H["📊 Boxplots <img src='boxplot_template.svg' /> <br/> Boxplots with SalePrice"]

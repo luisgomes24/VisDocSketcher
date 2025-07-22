@@ -1,0 +1,10 @@
+flowchart TD
+    A["📁 Load Data <img src='icons/file.svg' /> <br/> Load CSV Metadata"] --> B["🗃️ Preprocess Data <img src='icons/table.svg' /> <br/> Rename Variables"]
+    B --> C["📷 Get Images <img src='icons/image.svg' /> <br/> Create Image Dictionary"]
+    C --> D["🛠️ DataBlock Setup <img src='icons/column_split.svg' /> <br/> Prepare DataLoaders"]
+    D --> E["🖼️ Visualize Images <img src='icons/image.svg' /> <br/> Display Image Samples"]
+    E --> F["⚙️ Model Training <img src='icons/brain.svg' /> <br/> Train Model"]
+    F --> G["🔍 Model Tuning <img src='icons/brain.svg' /> <br/> Fine-tune Model"]
+    G --> H["💾 Save Model <img src='icons/file.svg' /> <br/> Save to Disk"]
+    H --> I["📊 Model Evaluation <img src='icons/brain.svg' /> <br/> Interpret Results"]
+    I --> J["📈 Plot Loss <img src='icons/lineplot_template.svg' /> <br/> Visualize Loss"]

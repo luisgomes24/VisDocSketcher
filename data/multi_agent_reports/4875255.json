@@ -1,0 +1,58 @@
+{
+  "data_sources": [
+    {
+      "source": "chicago_taxi_trips dataset",
+      "description": "Contains data about taxi trips in Chicago, including timestamps, trip duration, and distances."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataset_ref",
+      "description": "Reference to the 'chicago_taxi_trips' dataset."
+    },
+    {
+      "name": "table_name",
+      "description": "Name of the specific table within the dataset that contains the taxi trips data."
+    },
+    {
+      "name": "rides_per_year_query",
+      "description": "SQL query to count the number of taxi trips per year."
+    },
+    {
+      "name": "rides_per_month_query",
+      "description": "SQL query to count the number of taxi trips per month for the year 2017."
+    },
+    {
+      "name": "speeds_query",
+      "description": "SQL query to calculate the number of trips and average speed by hour of the day."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset_ref",
+      "created": "bigquery.Client().dataset()",
+      "flows_to": "API request to fetch dataset and retrieve table."
+    },
+    {
+      "variable": "table_name",
+      "created": "set as string after listing tables",
+      "flows_to": "used in rides_per_year_query to access the taxi trip data."
+    },
+    {
+      "variable": "rides_per_year_query",
+      "created": "raw SQL query as string",
+      "flows_to": "executed, results stored in rides_per_year_result."
+    },
+    {
+      "variable": "rides_per_month_query",
+      "created": "raw SQL query as string", 
+      "flows_to": "executed, results stored in rides_per_month_result."
+    },
+    {
+      "variable": "speeds_query",
+      "created": "raw SQL query as string",
+      "flows_to": "executed, results stored in speeds_result."
+    }
+  ],
+  "models": []
+}

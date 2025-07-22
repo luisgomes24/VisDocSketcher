@@ -1,0 +1,23 @@
+flowchart TD
+  %% Node for data source
+  A[card_transdata.csv]:::source --> B[df]
+  %% Node for loading data
+  B[df]:::node --> C[df0]
+  %% Node for data resampling
+  C[df0]:::node --> D[X]:::variable & E[y]:::variable
+  %% Node for splitting data
+  D --> F[X_train]
+  D --> G[X_test]
+  E --> H[y_train]
+  E --> I[y_test]
+  %% Nodes for training models
+  F --> J[KNN]
+  H --> J
+  F --> K[Decision Tree]
+  H --> K
+  F --> L[Random Forest]
+  H --> L
+
+  classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef node fill:#bbf,stroke:#f66,stroke-width:2px;
+  classDef variable fill:#1c9,stroke:#333,stroke-width:2px;

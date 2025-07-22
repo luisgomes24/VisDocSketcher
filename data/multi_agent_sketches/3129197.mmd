@@ -1,0 +1,45 @@
+flowchart TD
+    %% Nodes
+    A["train.csv"] %% Training data source
+    B["test.csv"] %% Testing data source
+    C["sampleSubmission.csv"] %% Sample submission file
+    D["train DataFrame"] %% Loaded training data
+    E["test DataFrame"] %% Loaded testing data
+    F["X_train"] %% Features from train
+    G["Y_train"] %% Target from train
+    H["X_test"] %% Features from test
+    I["RandomForestRegressor"] %% ML Model for count prediction
+    J["predictions"] %% Model predictions
+    K["submission DataFrame"] %% Final submission data
+
+    %% Data Flow
+    A -->|load| D
+    B -->|load| E
+    C -->|load structure| K
+    D -->|extract features| F
+    D -->|extract target| G
+    E -->|extract features| H
+    F & G -->|train| I
+    H -->|predict| I
+    I -->|output| J
+    J -->|update| K
+    K -->|save to submission.csv| L["submission.csv"]
+
+    %% Models
+    subgraph Models
+    I["RandomForestRegressor"]
+    end
+
+    subgraph DataFrames
+    D
+    E
+    K
+    end
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef dataFrame fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef model fill:#bfb,stroke:#333,stroke-width:1px;
+
+    class A,B,C dataSource;
+    class D,E,K dataFrame;
+    class I model;

@@ -1,0 +1,15 @@
+flowchart TD
+
+%% Node for data source
+A[fb_sentiment.csv] -->|Data loaded into| B
+
+%% Node for data variable
+B[df1] -->|Used for visualization| C
+
+%% Node for data visualization
+C[plotPerColumnDistribution]
+
+%% Annotations
+%% A: Represents the CSV file containing raw sentiment data from Facebook posts.
+%% B: Represents the DataFrame 'df1' that holds the data after being read from the CSV.
+%% C: Represents the data visualization process applied using the df1 DataFrame.

@@ -1,0 +1,14 @@
+graph TD;
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Housing Data"] --> B["<img src='icons/column_split.svg' width=100 height=100/> <br/> DataFrame df"];
+    B --> C["<img src='icons/table.svg' width=100 height=100/> <br/> Data Cleaning"];
+    C --> E["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model Training"];
+    E --> F["<img src='icons/image.svg' width=100 height=100/> <br/> Predictions"];
+    B --> |
+    fig1["<img src='dummy_plots/hist_template.svg'/> <br/> Bedrooms Distribution"];
+    B --> |
+    fig2["<img src='dummy_plots/hist_template.svg'/> <br/> Bathrooms Distribution"];
+    B --> |
+    fig3["<img src='dummy_plots/hist_template.svg'/> <br/> Living Area Square Footage"];
+    fig1 --> D["<img src='icons/table.svg' width=100 height=100/> <br/> Visualizations"];
+    fig2 --> D;
+    fig3 --> D;

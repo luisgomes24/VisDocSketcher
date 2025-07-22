@@ -1,0 +1,28 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources[Data Sources]
+        DS["Flower Images Directory"]
+    end
+
+    %% Data Variables
+    subgraph DataVariables[Data Variables]
+        WORKINGDIR["WORKING_DIRECTORY"]
+    end
+
+    %% Data Flow
+    DS -->|"Load and Process Images"| dataset1["dataset1: Decode JPEG & Label"]
+    dataset1 -->|"Resize and Crop Images"| dataset2["dataset2"]
+    dataset2 -->|"Recompress Images"| dataset3["dataset3"]
+    dataset3 -->|"Write TFRecord"| TFRecord["TFRecord Files"]
+    TFRecord -->|"Load for Training/Validation"| dataset4["dataset4"]
+
+    %% Model
+    subgraph Model[Model Training]
+        TPUModel["TPU-based Model"]
+    end
+    dataset4 -->|"Train Model"| TPUModel
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+    class DS dataSource;
+    class WORKINGDIR dataVariable;

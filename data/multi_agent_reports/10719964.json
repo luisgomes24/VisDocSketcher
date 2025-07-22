@@ -1,0 +1,67 @@
+{
+  "data_sources": [
+    {
+      "file_name": "sb_blog.csv",
+      "description": "A dataset containing blog details including transcripts, intros, categories, and claps."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "blog_details",
+      "description": "DataFrame containing blog details loaded from the CSV."
+    },
+    {
+      "variable_name": "sorted_blog_details",
+      "description": "DataFrame sorted by the number of claps in descending order."
+    },
+    {
+      "variable_name": "script",
+      "description": "Processed text from the transcript of the blog."
+    },
+    {
+      "variable_name": "intro",
+      "description": "Processed text from the introduction of the blog."
+    },
+    {
+      "variable_name": "script_len",
+      "description": "Length of the script in number of words."
+    },
+    {
+      "variable_name": "intro_len",
+      "description": "Length of the introduction in number of words."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "blog_details",
+      "creation_method": "pd.read_csv",
+      "flow": "Used for analyses and visualizations, including calculating the number of claps by category."
+    },
+    {
+      "variable_name": "sorted_blog_details",
+      "creation_method": "sorting blog_details",
+      "flow": "Used for plotting claps vs heroes."
+    },
+    {
+      "variable_name": "script",
+      "creation_method": "applying text preprocessing",
+      "flow": "Used for measuring script length and frequency analysis."
+    },
+    {
+      "variable_name": "intro",
+      "creation_method": "applying text preprocessing",
+      "flow": "Used for analyzing guest introduction text frequency."
+    },
+    {
+      "variable_name": "script_len",
+      "creation_method": "calculating word lengths",
+      "flow": "Used for determining average and range of blog interview lengths."
+    },
+    {
+      "variable_name": "intro_len",
+      "creation_method": "calculating word lengths",
+      "flow": "Used in conjunction with intro for longitudinal textual analysis."
+    }
+  ],
+  "models": []
+}

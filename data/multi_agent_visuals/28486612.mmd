@@ -1,0 +1,18 @@
+graph TD
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> Top Ramen Ratings.csv"]
+    %% A node representing the source CSV file containing ramen ratings data
+    
+    B["<img src='icons/table.svg' width=100 height=100/> <br/> ramen_df"]
+    %% Node representing ramen_df, a DataFrame for cleaned and preprocessed data
+    
+    A -->|"pd.read_csv"| B
+    %% Transition showing that ramen_df is created by reading the CSV file
+    
+    B --> C["<img src='icons/column_split.svg' width=100 height=100/> <br/> Data Exploration <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    %% Data exploration activities performed on ramen_df
+    
+    B --> D["<img src='icons/row_split.svg' width=100 height=100/> <br/> Data Cleaning <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    %% Data cleaning activities performed on ramen_df such as renaming and dropping columns
+    
+    B --> E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Visualization <img src='dummy_plots/boxplot_template.svg'/> <br/>"]
+    %% Visualization activities performed on ramen_df

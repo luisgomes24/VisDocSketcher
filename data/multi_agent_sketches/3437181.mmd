@@ -1,0 +1,29 @@
+flowchart TD
+  %% Data Sources
+  SRC1["CSV: suicide-rates-overview-1985-to-2016/master.csv"]:::dataSource
+  SRC2["CSV: million-headlines/abcnews-date-text.csv"]:::dataSource
+
+  %% Definitions
+  style dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  style dataVar fill:#bbf,stroke:#333,stroke-width:2px;
+  
+  %% Data Loading
+  SRC1 -->|Read CSV| A[/"df"/]:::dataVar
+  SRC2 -->|Read CSV| B[/"headlines"/]:::dataVar
+  
+  %% Transformations and Relations
+  A -->|Filter Spain Data| C[/"df_es"/]:::dataVar
+  A -->|Aggregate by Gender/Age| D[/"df_es_gender_age"/]:::dataVar
+  D -->|Extract Female Data| E[/"df_female"/]:::dataVar
+  D -->|Extract Male Data| F[/"df_male"/]:::dataVar
+  
+  B -->|Filter for Spain| G[/"hds"/]:::dataVar
+  G -->|Extract Topics| H[/"topics"/]:::dataVar
+  H -->|Compile with Rates| I[/"summary_country"/]:::dataVar
+
+  %% Outputs
+  I -->|Display Results| J[/"results_country"/]:::dataVar
+
+  %% Comments
+  classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef dataVar fill:#bbf,stroke:#333,stroke-width:2px;

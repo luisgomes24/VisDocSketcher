@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    %% Node for Data Source
+    subgraph "Data Sources"
+        direction TB
+        A["Data Source 1"] --> A2["Data Source 2"]
+    end
+
+    %% Node for Variables
+    subgraph "Variables"
+        direction TB
+        B["Variable 1"] --> B2["Variable 2"]
+    end
+
+    %% Node for Data Flow
+    subgraph "Data Flow"
+        direction TB
+        C["Data Flow 1"] --> C2["Data Flow 2"]
+    end
+
+    %% Node for Models
+    subgraph "Models"
+        direction TB
+        D["Model 1"] --> D2["Model 2"]
+    end
+
+    %% Edges
+    A --> B
+    B --> C
+    C --> D
+```

@@ -1,0 +1,11 @@
+graph TD; 
+    A["<img src='icons/database.svg' width=100 height=100/><br/> Data Source: train.csv\n Contains annotations and metadata for training images."]
+        -->|"Reads data"| C["<img src='icons/table.svg' width=100 height=100/><br/> Node: train\n DataFrame from train.csv."];
+    B["<img src='icons/database.svg' width=100 height=100/><br/> Data Source: video_0\n Contains image frames for animations."]
+        -->|"Images"| F["<img src='icons/image.svg' width=100 height=100/><br/> Node: impaths\n List of image file paths."];
+    C --> D["<img src='icons/row_split.svg' width=100 height=100/><br/> Node: train0\n Filtered DataFrame for video_id 0."];
+    D -->|"Filter"| E["<img src='icons/column_split.svg' width=100 height=100/><br/> Node: DICT0\n Bounding box annotations in a list."];
+    E -->|"Annotations"| H["<img src='icons/image.svg' width=100 height=100/><br/> Node: images1\n Images with annotations drawn on them by the draw_box function."];
+    F --> G["<img src='icons/image.svg' width=100 height=100/><br/> Node: images0\n Images without annotations."];
+    G -->|"Display"| I["<img src='dummy_plots/hist_template.svg'/> <br/> Node: Data Processing Flow\n train -> train0"];
+    I -->|"Flow"| H;

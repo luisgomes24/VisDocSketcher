@@ -1,0 +1,60 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/telco-customer-churn/WA_Fn-UseC_-Telco-Customer-Churn.csv",
+      "description": "This CSV file contains data on telco customers, including their contract types, monthly charges, total charges, and churn status."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df",
+      "description": "DataFrame containing the imported dataset of telco customers with various features."
+    },
+    {
+      "name": "new_totalcharges",
+      "description": "Variable calculated as the product of MonthlyCharges and Contract duration. It estimates the total charges based on the customer's contract."
+    },
+    {
+      "name": "Transection",
+      "description": "Calculated variable representing the number of transactions made by the customer."
+    },
+    {
+      "name": "final_df",
+      "description": "DataFrame containing the calculated Customer Lifetime Value (CLTV) and other related metrics segmented by customer."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df",
+      "creation": "Created by reading the CSV file using pd.read_csv.",
+      "flow": "Used in various calculations and transformations to derive new variables and metrics."
+    },
+    {
+      "variable": "new_totalcharges",
+      "creation": "Calculated from MonthlyCharges and Contract.",
+      "flow": "Used to compare with the TotalCharges variable."
+    },
+    {
+      "variable": "Transection",
+      "creation": "Derived from TotalCharges and MonthlyCharges.",
+      "flow": "Used for calculating Customer Lifetime Value."
+    },
+    {
+      "variable": "final_df",
+      "creation": "Created by applying the cltv_c function on df.",
+      "flow": "Final output used for analysis of customer segments based on CLTV."
+    }
+  ],
+  "models": [
+    {
+      "model": "Customer Lifetime Value (CLTV) Calculation",
+      "input_features": ["MonthlyCharges", "Contract", "TotalCharges", "Transection"],
+      "target_variable": "CLTV",
+      "hyperparameters": {
+        "profit_margin": 0.10,
+        "scaler_range": [0, 1],
+        "segments": ["D", "C", "B", "A"]
+      }
+    }
+  ]
+}

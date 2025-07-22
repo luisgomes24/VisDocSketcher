@@ -1,0 +1,36 @@
+```mermaid
+flowchart TD
+    %% Data Sources
+    A["train.csv"] -->|read_csv| B["train DataFrame"]
+    C["test.csv"] -->|read_csv| D["test DataFrame"]
+    E["sample_submission.csv"] -->|read_csv| F["submission DataFrame"]
+
+    %% Feature Engineering on Train and Test Data
+    B -->|feature_eng| G["Train Features"]
+    D -->|feature_eng| H["Test Features"]
+
+    %% One-hot Encoding
+    G -->|get_dummies| I["Encoded Train Features"]
+    H -->|get_dummies| J["Encoded Test Features"]
+
+    %% Model Setup and Training
+    I -->|setup| K["PyCaret Setup"]
+    K -->|create_model| L["LightGBM Model"]
+
+    %% Predictions
+    L -->|predict_model| M["Predictions"]
+    M -->|assign prediction| F
+
+    %% Final Submission
+    F -->|to_csv| N["submission.csv"]
+
+    %% Comments for clarification
+    %% A, C, E: Data sources for train, test, and submission sample
+    %% B, D, F: DataFrames created from respective files
+    %% G, H: DataFrames after feature engineering
+    %% I, J: Encoded DataFrames after one-hot encoding
+    %% K: PyCaret setup for model training
+    %% L: The Light Gradient Boosting Model used for prediction
+    %% M: Predictions made by the model
+    %% N: Final submission file ready for submission
+```

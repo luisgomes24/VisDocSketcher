@@ -1,0 +1,27 @@
+flowchart TD
+    %% Data Sources
+    subgraph DataSources
+    DS1["Sarcasm_Headlines_Dataset_v2.json"]
+    end
+    
+    %% Data Variables
+    subgraph DataVariables
+    DF["DataFrame: df"]
+    XTrain["x_train"]
+    XTest["x_test"]
+    YTrain["y_train"]
+    YTest["y_test"]
+    Pred["pred"]
+    end
+    
+    %% Data Flow
+    DS1 -->|"Load JSON with pandas"| DF
+    DF -->|"Cleaned for analysis"| XTrain & XTest & YTrain & YTest
+    XTrain & YTrain & XTest & YTest -->|"Input to ML Model"| LSTMModel
+    LSTMModel -->|"Generate Predictions"| Pred
+    Pred -->|"Evaluation"| End["Confusion Matrix & Evaluation"]
+    
+    %% Models
+    subgraph Models
+    LSTMModel["Model: LSTM - Word2Vec & GloVe\nEmbedding Dim: 200\nEpochs: 3 & 2"]
+    end

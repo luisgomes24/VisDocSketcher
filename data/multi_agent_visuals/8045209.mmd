@@ -1,0 +1,13 @@
+graph TD
+  A["housetrain.csv"] --> B["df"]
+  B --> C["df_float"]
+  C --> D["lotFrontage"]
+  C --> E["masVnrAre"]
+  C --> F["garageYrBlt"]
+  B --> G["salePrice"]
+  D --> H["lr1"]
+  E --> I["lr2"]
+  F --> J["lr3"]
+  G --> H
+  G --> I
+  G --> J

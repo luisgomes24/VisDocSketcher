@@ -1,0 +1,10 @@
+graph TD <br/> 
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/file.svg' width=100 height=100/> <br/> Data Files"] <br/> 
+    B --> C["Data Processing"] <br/> 
+    C --> D["<img src='icons/table.svg' width=100 height=100/> <br/> Processed Data"] <br/> 
+    D --> E["<img src='icons/column_split.svg' width=100 height=100/> <br/> Select Features"] <br/> 
+    D --> F["<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"] <br/> 
+    E --> G["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"] <br/> 
+    F --> G <br/> 
+    G --> H["<img src='icons/image.svg' width=100 height=100/> <br/> Model Prediction"] <br/> 
+    H --> J["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Result Plot"] <br/> 

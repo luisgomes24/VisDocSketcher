@@ -1,0 +1,24 @@
+{"data_sources": [
+    {"file_name": "train.csv", "description": "Training dataset containing features and target for house prices."},
+    {"file_name": "test.csv", "description": "Test dataset containing features for predicting house prices."}
+],
+"data_variables": [
+    {"variable": "X_full", "description": "Complete dataset with all features and target."},
+    {"variable": "X_train", "description": "Training features for model fitting."},
+    {"variable": "X_valid", "description": "Validation features for performance evaluation."},
+    {"variable": "y_train", "description": "Training target variable (house prices)."},
+    {"variable": "y_valid", "description": "Validation target variable for model evaluation."},
+    {"variable": "X_test", "description": "Features from the test set for final predictions."},
+    {"variable": "features", "description": "List of features used for training (e.g., LotArea, YearBuilt)."},
+    {"variable": "best_model", "description": "The selected model based on validation performance."}
+],
+"data_flow": [
+    {"variable": "X_full", "creation_method": "read_csv", "flow": "Used to derive X, y, X_train, y_valid."},
+    {"variable": "X_train", "creation_method": "train_test_split", "flow": "Used for model training."},
+    {"variable": "X_valid", "creation_method": "train_test_split", "flow": "Used for model validation and scoring."},
+    {"variable": "my_model", "creation_method": "best_model assignment", "flow": "Fitted to X and y, generates preds_test for submission."},
+    {"variable": "preds_test", "creation_method": "my_model.predict", "flow": "Saved as 'submission.csv' for submission."}
+],
+"models": [
+    {"model": "RandomForestRegressor", "params": [{"n_estimators": 50}, {"n_estimators": 100}, {"n_estimators": 100, "criterion": "mae"}, {"n_estimators": 200, "min_samples_split": 20}, {"n_estimators": 100, "max_depth": 7}]}
+]}

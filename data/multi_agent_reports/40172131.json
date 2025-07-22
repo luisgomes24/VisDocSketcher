@@ -1,0 +1,92 @@
+{
+"data_sources": [
+    {
+        "file_name": "train.csv",
+        "description": "Contains training data for the model, including passenger details and the target variable 'Transported'."
+    },
+    {
+        "file_name": "test.csv",
+        "description": "Contains test data for making predictions, including passenger details without the target variable."
+    }
+],
+"data_variables": [
+    {"name": "df", "description": "DataFrame containing training data including features and target variable."},
+    {"name": "df_test", "description": "DataFrame containing test data for predictions."},
+    {"name": "df_preprocess", "description": "Preprocessed DataFrame used for feature engineering and imputation."},
+    {"name": "target", "description": "The target variable to predict, specifically 'Transported'."}
+],
+"data_flow": [
+    {
+        "variable": "df",
+        "created_by": "pd.read_csv('data/train.csv')",
+        "flows_to": "df_preprocess and model training via pipeline."
+    },
+    {
+        "variable": "df_test",
+        "created_by": "pd.read_csv('data/test.csv')",
+        "flows_to": "final predictions through models."
+    },
+    {
+        "variable": "df_preprocess",
+        "created_by": "Data cleaning and feature engineering steps on df.",
+        "flows_to": "Model fitting via pipeline steps including imputer and classifier."
+    },
+    {
+        "variable": "X_train",
+        "created_by": "df_preprocess transformations followed by train/test split.",
+        "flows_to": "Model fitting for various classifiers in ensemble method."
+    }
+],
+"models": [
+    {
+        "model_name": "RandomForestClassifier",
+        "input_features": "Preprocessed features from df_train.",
+        "target_variable": "Transported",
+        "hyperparameters": {
+            "n_estimators": [100],
+            "max_depth": "tuned using RandomizedSearchCV",
+            "min_samples_split": "tuned using RandomizedSearchCV",
+            "min_samples_leaf": "tuned using RandomizedSearchCV"
+        }
+    },
+    {
+        "model_name": "XGBClassifier",
+        "input_features": "Preprocessed features from df_train.",
+        "target_variable": "Transported",
+        "hyperparameters": "tuned in a similar manner as RandomForest"
+    },
+    {
+        "model_name": "LGBMClassifier",
+        "input_features": "Preprocessed features from df_train.",
+        "target_variable": "Transported",
+        "hyperparameters": "tuned in a similar manner as RandomForest"
+    },
+    {
+        "model_name": "GradientBoostingClassifier",
+        "input_features": "Preprocessed features from df_train.",
+        "target_variable": "Transported",
+        "hyperparameters": "using predefined grid for tuning"
+    },
+    {
+        "model_name": "HistGradientBoostingClassifier",
+        "input_features": "Preprocessed features from df_train.",
+        "target_variable": "Transported",
+        "hyperparameters": "using predefined grid for tuning"
+    },
+    {
+        "model_name": "StackingClassifier",
+        "input_features": "All preliminary models fitted as base estimators.",
+        "target_variable": "Transported",
+        "hyperparameters": {
+            "final_estimator": "LogisticRegression",
+            "n_jobs": -1
+        }
+    },
+    {
+        "model_name": "VotingClassifier",
+        "input_features": "All preliminary models fitted as base estimators.",
+        "target_variable": "Transported",
+        "hyperparameters": {"voting": "hard", "n_jobs": -1}
+    }
+]
+}

@@ -1,0 +1,26 @@
+flowchart TD
+    subgraph Data_Loading
+        direction TB
+        A["<img src='icons/file.svg' width=100 height=100/> <br/> Dataset\n(No CSV available)"]
+    end
+    
+    subgraph Data_Processing
+        direction TB
+        B["<img src='icons/database.svg' width=100 height=100/> <br/> DataFrame df\n(Assumed to be created) <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+        A --> B
+        C["Column Names\n(Extracted from df) <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+    end
+    
+    subgraph Exploratory_Data_Analysis
+        direction TB
+        B --> D["Distribution Graphs\n(Bar/Histogram) <img src='dummy_plots/lineplot_template.svg'/> <br/>"]
+        B --> E["Correlation Matrix\n(Used in plotCorrelationMatrix) <img src='dummy_plots/barplot_template.svg'/> <br/>"]
+        B --> F["Scatter and Density Plots\n(pd.plotting.scatter_matrix) <img src='dummy_plots/scatter_plot_template.svg'/> <br/>"]
+    end
+    
+    classDef dataSource fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef dataProcess fill:#F2C464,stroke:#333,stroke-width:2px;
+    class A dataSource;
+    class B,C dataVariable;
+    class D,E,F dataProcess;

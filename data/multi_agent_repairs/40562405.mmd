@@ -1,0 +1,25 @@
+```mermaid
+%% This diagram represents the data processing flow in the Jupyter Notebook
+flowchart TD
+    %% Data Sources
+    A1["/kaggle/input/asl-fingerspelling/supplemental_metadata.csv"]
+    A2["/kaggle/input/asl-fingerspelling/train.csv"]
+    A3["/kaggle/input/asl-fingerspelling/supplemental_landmarks/369584223.parquet"]
+    A4["/kaggle/input/asl-fingerspelling/train_landmarks/5414471.parquet"]
+    
+    %% Data Variables
+    B1["df_meta"]
+    B2["df_train"]
+    B3["df"]
+    B4["df_sample"]
+    B5["selected_columns"]
+    B6["correlation_matrix"]
+    
+    %% Data Processing Nodes
+    A1 -->|"Read CSV"| B1
+    A2 -->|"Read CSV"| B2
+    A3 -->|"Read Parquet"| B3
+    A4 -->|"Read Parquet"| B3
+    B3 -->|"Sample for EDA"| B4
+    B4 -->|"Calculate Correlation"| B6
+```

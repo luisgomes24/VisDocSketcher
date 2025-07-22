@@ -1,0 +1,42 @@
+```mermaid
+flowchart TD
+
+%% Data Sources
+A1["Training Data CSV"]:::source
+A2["Testing Data CSV"]:::source
+
+%% Preprocessing and Feature Engineering
+B1["Load Training Data"]:::process
+B2["Load Testing Data"]:::process
+B3["Preprocess Data"]:::process
+B4["Feature Engineering"]:::process
+
+%% Data Split
+C1["Train-Test Split"]:::process
+
+%% Model Training
+D1["Extract Features X"]:::process
+D2["Extract Target y"]:::process
+D3["AutoML Model Training"]:::model
+
+%% Prediction and Evaluation
+E1["Make Predictions"]:::process
+E2["Evaluate Model"]:::process
+
+%% Output
+F1["Save Predictions as CSV"]:::output
+
+%% Flow Connections
+A1 --> B1
+A2 --> B2
+B1 --> B3
+B2 --> B3
+B3 --> B4
+B4 --> C1
+C1 --> D1
+C1 --> D2
+D1 --> D3
+D2 --> D3
+D3 --> E1
+E1 --> F1
+```

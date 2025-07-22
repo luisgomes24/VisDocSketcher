@@ -1,0 +1,30 @@
+```mermaid
+flowchart TD
+    %% Node for NormalDistribution instance
+    n["NormalDistribution (1, 4)"]
+    class n internal
+    n -->|"Generate & Plot"| plots["Plots"]
+
+    %% Node for RectangularDistribution instance
+    r["RectangularDistribution (-1, 3)"]
+    class r internal
+    r -->|"Generate & Plot"| plots
+
+    %% Node for TriangularDistribution instance
+    t["TriangularDistribution (-1, 3)"]
+    class t internal
+    t -->|"Generate & Plot"| plots
+
+    %% Node for SymmetricTriangularDistribution instance
+    st["SymmetricTriangularDistribution (1, 2)"]
+    class st internal
+    st -->|"Generate & Plot"| plots
+
+    %% Node for ExponentialDistribution instance
+    e["ExponentialDistribution (0.6415)"]
+    class e internal
+    e -->|"Statistical Calculations & Plots"| stats{{"Statistics & Plots"}}
+
+    %% Graph Styles
+    classDef internal fill:#f9f,stroke:#333,stroke-width:2px;
+```

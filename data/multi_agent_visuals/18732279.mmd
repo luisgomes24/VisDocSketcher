@@ -1,0 +1,8 @@
+graph LR
+    A["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"] --> B["<img src='icons/table.svg' width=100 height=100/> <br/> Cleaned Data"]
+    B --> |"<img src='icons/row_split.svg' width=100 height=100/> <br/> Train-Test Split"| C["Data Splits"]
+    C --> |"Training Data"| D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"]
+    D --> |"Make Predictions"| E["<img src='icons/image.svg' width=100 height=100/> <br/> Output"]
+    D --> Y["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Performance Plot"]
+    D --> Z["<img src='dummy_plots/barplot_template.svg'/> <br/> Parameter Tuning Plot"]
+    D --> W["<img src='dummy_plots/lineplot_template.svg'/> <br/> Model Training Plot"]

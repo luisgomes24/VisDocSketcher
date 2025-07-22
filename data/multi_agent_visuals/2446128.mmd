@@ -1,0 +1,11 @@
+flowchart TD
+    A["Images of Blood Cells"]-->B
+    B["Path Object pointing to images"]
+    B-->C["DataLoaders with Training and Validation Sets"]
+    C-->D["Learner: XResNet34"]
+    D-->E["Trained Learner 'stage-1'"]
+    E-->F["Classification Interpretation"]
+    F-->G["Confusion Matrix"]
+    F-->H["Class Probabilities (Preds)"]
+    H-->I["Classification Report"]
+    I-->J["Evaluate Model Performance"]

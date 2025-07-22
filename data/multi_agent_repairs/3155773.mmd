@@ -1,0 +1,41 @@
+```mermaid
+flowchart TD
+    %% Node for MNIST dataset loading
+    A["MNIST Dataset"] -->|Load Data| B(("x_train, y_train, x_test, y_test"))
+    
+    %% Normalization of training and test images
+    B -->|Normalize| C[("x_train Normalized")]
+    B -->|Normalize| D[("x_test Normalized")]
+    
+    %% Sequential Model Definition
+    C -->|Train Model| E["Sequential Model"]
+    E -->|Uses| F["Flatten Layer"]
+    E -->|Uses| G["Dense Layer 128 ReLU"]
+    E -->|Uses| H["Dense Layer 512 ReLU"]
+    E -->|Uses| I["Dense Layer 1024 ReLU"]
+    E -->|Uses| J["Dense Layer 512 ReLU"]
+    E -->|Uses| K["Dense Layer 128 ReLU"]
+    E -->|Uses| L["Dense Layer 10 Softmax"]
+    
+    %% Model Compilation and Training
+    E -->|Compile: Adam Optimizer| M["Compilation"]
+    M -->|Train: 10 Epochs| N(("Trained Model"))
+    
+    %% Model Evaluation
+    D -->|Evaluate| O["Model Evaluation"]
+    N --> O
+    O -->|Prediction| P{"y_predict"}
+    
+    %% Confusion Matrix and Accuracy
+    P -->|Argmax| Q["y_pred"]
+    Q -->|Confusion Matrix| R["Confusion Matrix"]
+    Q -->|Accuracy Score| S["Accuracy Score"]
+    
+    %% Output Results
+    R --> T["Display Results"]
+    S --> T
+    
+    classDef dark fill:#333,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef model fill:#6A5ACD,stroke:#fff,stroke-width:2px,color:#fff;
+    class E,L,M,N model;
+```

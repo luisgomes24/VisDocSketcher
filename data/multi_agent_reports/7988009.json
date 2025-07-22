@@ -1,0 +1,30 @@
+{
+  "data_sources": [
+    {"file_name": "clients.csv", "description": "Contains client information, with potentially multiple attributes per client."},
+    {"file_name": "products.csv", "description": "Contains product information, including product attributes and identifiers."},
+    {"file_name": "purchases.csv", "description": "Contains records of purchases made by clients, linking clients to products."}
+  ],
+  "data_variables": [
+    {"variable_name": "df1", "description": "DataFrame containing data from clients.csv."},
+    {"variable_name": "df2", "description": "DataFrame containing data from products.csv."},
+    {"variable_name": "df3", "description": "DataFrame containing data from purchases.csv."}
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv()",
+      "usage": ["visualization", "data exploration"]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv()",
+      "usage": ["visualization", "data exploration"]
+    },
+    {
+      "variable": "df3",
+      "creation_method": "pd.read_csv()",
+      "usage": ["visualization", "data exploration"]
+    }
+  ],
+  "models": []
+}

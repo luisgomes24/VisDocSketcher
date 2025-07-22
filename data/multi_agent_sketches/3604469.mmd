@@ -1,0 +1,11 @@
+flowchart TD
+    %% Data source node
+    A[data.csv]:::dataSource -- Load Data --> B[df1]
+
+    %% DataFrame node
+    B[df1]:::dataFrame -- Analyze and Plot --> C[Distributions]
+    B[df1]:::dataFrame -- Correlation Analysis --> D[Correlation Matrix]
+    B[df1]:::dataFrame -- Scatter Analysis --> E[Scatter Matrix]
+
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataFrame fill:#f96,stroke:#333,stroke-width:2px;

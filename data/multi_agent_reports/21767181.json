@@ -1,0 +1,80 @@
+{
+  "data_sources": [
+    {
+      "file_name": "heart.csv",
+      "description": "Dataset containing features related to heart failure prediction."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "data",
+      "description": "DataFrame containing the features and target variable for heart disease prediction."
+    },
+    {
+      "variable_name": "X",
+      "description": "Features DataFrame excluding the target variable 'HeartDisease'."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable indicating heart disease presence (1) or absence (0)."
+    },
+    {
+      "variable_name": "cat",
+      "description": "CatBoostClassifier model used for training and prediction."
+    },
+    {
+      "variable_name": "pred",
+      "description": "Predictions made by the CatBoost model on the test set."
+    },
+    {
+      "variable_name": "df_importances",
+      "description": "DataFrame containing feature importances after model training."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "data",
+      "created_by": "pd.read_csv",
+      "flow": ["Used for exploratory data analysis", "Visualizations and model training"]
+    },
+    {
+      "variable_name": "X",
+      "created_by": "data.drop(['HeartDisease'], axis=1)",
+      "flow": ["Used as input for model training"]
+    },
+    {
+      "variable_name": "y",
+      "created_by": "data['HeartDisease']",
+      "flow": ["Used as target for model training"]
+    },
+    {
+      "variable_name": "cat",
+      "created_by": "CatBoostClassifier()",
+      "flow": ["Trained on X and y", "Used for predictions on test set"]
+    },
+    {
+      "variable_name": "pred",
+      "created_by": "cat.predict(X_test)",
+      "flow": ["Used for accuracy scoring and classification report"]
+    },
+    {
+      "variable_name": "df_importances",
+      "created_by": "pd.DataFrame({'Features':features,'Feature importance':feature_importance})",
+      "flow": ["Visualized for feature importance analysis"]
+    }
+  ],
+  "models": [
+    {
+      "model_name": "CatBoostClassifier",
+      "input_features": "['FastingBS', 'Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina','ST_Slope']",
+      "target_variable": "HeartDisease",
+      "hyperparameters": {
+        "objective": "[Logloss, CrossEntropy]",
+        "colsample_bylevel": "0.01 to 0.1",
+        "depth": "1 to 12",
+        "boosting_type": "[Ordered, Plain]",
+        "bootstrap_type": "[Bayesian, Bernoulli, MVS]"
+      }
+    }
+  ]
+}

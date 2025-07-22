@@ -1,0 +1,40 @@
+flowchart TD
+    %% Data Sources
+    subgraph data_sources [Data Sources]
+        train_csv[../input/petfinder-pawpularity-score/train.csv]
+        test_csv[../input/petfinder-pawpularity-score/test.csv]
+    end
+
+    %% Data Variables
+    subgraph data_variables [Data Variables]
+        train_df[train_df]
+        test_df[test_df]
+        model_path[model_path]
+        n_epochs[n_epochs]
+        BATCH_SIZE[BATCH_SIZE]
+        fold[fold]
+        pred[pred]
+    end
+
+    %% Model
+    subgraph models [Models]
+        swin_transformer[Swin Transformer\n(swin_large_patch4_window7_224)]
+    end
+
+    %% Data Flow
+    train_csv --> |"Read and process data"| train_df
+    train_df --> |"Load data into DataLoaders"| swin_transformer
+    swin_transformer --> |"Train model"| pred
+    test_csv --> |"Read test data"| test_df
+    
+    %% Comments
+    %% train_csv: Training data CSV file
+    %% test_csv: Test data CSV file
+    %% train_df: DataFrame containing training data
+    %% test_df: DataFrame containing test data
+    %% model_path: Model architecture
+    %% n_epochs: Number of training epochs
+    %% BATCH_SIZE: Batch size for training
+    %% fold: K-fold cross-validation indicator
+    %% pred: Predictions from the model
+    %% swin_transformer: Swin Transformer Model

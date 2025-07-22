@@ -1,0 +1,11 @@
+flowchart TD
+    A["📂 Load Data <img src='icons/file.svg' />"] --> B["🔍 Exploratory Data Analysis"]
+    B --> C["📊 Distribution Plots <img src='dummy_plots/hist_template.svg' />"]
+    B --> D["📈 Correlation Matrix <img src='dummy_plots/scatter_plot_template.svg' />"]
+    B --> E["🔗 Scatter Matrix <img src='dummy_plots/scatter_plot_template.svg' />"]
+    C --> F["📊 Bar Graphs and Histograms"]
+    D --> G["📊 Heatmap of Correlation"]
+    E --> H["📈 Scatter & Density Plots"]
+
+    A --> I["✏️ Preprocessing"]
+    I --> B

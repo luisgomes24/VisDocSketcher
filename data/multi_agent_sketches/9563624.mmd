@@ -1,0 +1,31 @@
+flowchart TD
+    %% Imports nodes
+    subgraph imports [Import Statements]
+        direction TB
+        A1[Axes3D]:::importStyle
+        A2[StandardScaler]:::importStyle
+        A3[plt]:::importStyle
+        A4[np]:::importStyle
+        A5[os]:::importStyle
+        A6[pd]:::importStyle
+    end
+
+    %% Description of imports
+    classDef importStyle fill:#f9f,stroke:#333,stroke-width:2px;
+    A1:::importStyle click A1 "Used for creating 3D plots."
+    A2:::importStyle click A2 "Scikit-learn's method for standardizing features by removing the mean and scaling to unit variance."
+    A3:::importStyle click A3 "Matplotlib's pyplot module for creating static, animated, and interactive visualizations in Python."
+    A4:::importStyle click A4 "NumPy's namespace for linear algebra operations and numerical computations."
+    A5:::importStyle click A5 "Python's standard library for interacting with the operating system; used for file path manipulations."
+    A6:::importStyle click A6 "Pandas' namespace for data processing and handling CSV file input/output."
+
+    %% Data Flow
+    subgraph data_flow [Data Flow]
+        direction TB
+        A1 --> |"3D plotting functions"| plot3D((3D Plots))
+        A2 --> |"Feature scaling (potential use)"| B2[(Scaled Features)]
+        A3 --> |"Histograms & Scatter Plots"| plot2D((2D Plots))
+        A4 --> |"Numerical Operations"| calc([Calculations])
+        A5 --> |"File Checking"| fileCheck("/CSV Directory")
+        A6 --> |"Data Processing"| dataProc([DataFrames])
+    end

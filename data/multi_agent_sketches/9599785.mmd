@@ -1,0 +1,17 @@
+flowchart TD
+    %% Nodes
+   
+    A[CSV File: 20200520_datamartlaw.csv]:::data_source
+    B[DataFrame: df]:::data_var
+    C[Visualizations]:::process
+
+    %% Data Sources
+    A --> |pd.read_csv()| B
+
+    %% Data Processing / Transformations
+    B --> |Data visualization using libraries like seaborn, plotly| C
+
+    %% Styles
+    classDef data_source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef data_var fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef process fill:#bfb,stroke:#333,stroke-width:2px;

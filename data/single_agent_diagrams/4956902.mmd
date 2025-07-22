@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> Data from books.csv"] --> B["📊 Explore Data <img src='table.svg'/> <br/> df1.head()"]
+    B --> C["📊 Distribution Plots <img src='hist_template.svg'/> <br/> plotPerColumnDistribution(df1, 10, 5)"]
+    B --> D["📉 Correlation Matrix <img src='barplot_template.svg'/> <br/> plotCorrelationMatrix(df1, 8)"]
+    B --> E["🔍 Scatter Matrix <img src='scatter_plot_template.svg'/> <br/> plotScatterMatrix(df1, 18, 10)"]
+    A --> F["📂 Preprocess Data <img src='column_split.svg'/> <br/> Clean/Filter Columns"]
+    F --> C
+    F --> D
+    F --> E

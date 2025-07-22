@@ -1,0 +1,48 @@
+{
+    "data_sources": [
+        {
+            "file_name": "train_files",
+            "description": "Files containing training data."
+        },
+        {
+            "file_name": "dev_files",
+            "description": "Files containing development data."
+        },
+        {
+            "file_name": "test_files",
+            "description": "Files containing test data."
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df_train",
+            "description": "DataFrame containing the combined training dataset."
+        },
+        {
+            "variable_name": "df_dev",
+            "description": "DataFrame containing the combined development dataset."
+        },
+        {
+            "variable_name": "df_test",
+            "description": "DataFrame containing the combined test dataset."
+        }
+    ],
+    "data_flow": [
+        {
+            "variable": "df_train",
+            "created_by": "create_dataset_from_files(train_files)",
+            "flows_to": "Used for EDA and plotting."
+        },
+        {
+            "variable": "df_dev",
+            "created_by": "create_dataset_from_files(dev_files)",
+            "flows_to": "Used for EDA and plotting."
+        },
+        {
+            "variable": "df_test",
+            "created_by": "create_dataset_from_files(test_files)",
+            "flows_to": "Used for EDA and plotting."
+        }
+    ],
+    "models": []
+}

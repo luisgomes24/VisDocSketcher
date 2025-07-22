@@ -1,0 +1,97 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train.csv",
+      "description": "Training data containing house prices and their features."
+    },
+    {
+      "file_name": "test.csv",
+      "description": "Testing data for house prices prediction, without target values."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Sample submission file format for predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df",
+      "description": "DataFrame containing features and target variable for the regression task."
+    },
+    {
+      "variable_name": "X",
+      "description": "Feature matrix created using make_regression."
+    },
+    {
+      "variable_name": "y",
+      "description": "Target variable created using make_regression."
+    },
+    {
+      "variable_name": "X_train",
+      "description": "Training features after splitting the dataset."
+    },
+    {
+      "variable_name": "X_test",
+      "description": "Testing features after splitting the dataset."
+    },
+    {
+      "variable_name": "y_train",
+      "description": "Training target variable after splitting the dataset."
+    },
+    {
+      "variable_name": "y_test",
+      "description": "Testing target variable after splitting the dataset."
+    },
+    {
+      "variable_name": "trees",
+      "description": "List of decision trees created during the boosting process."
+    },
+    {
+      "variable_name": "loss",
+      "description": "List holding the mean squared error for each iteration."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "X",
+      "creation_method": "make_regression",
+      "flow": "Used to split into training and testing datasets (X_train, X_test)."
+    },
+    {
+      "variable_name": "y",
+      "creation_method": "make_regression",
+      "flow": "Used to split into training and testing datasets (y_train, y_test)."
+    },
+    {
+      "variable_name": "train",
+      "creation_method": "pd.DataFrame",
+      "flow": "Contains training features and target values after data preparation."
+    },
+    {
+      "variable_name": "test",
+      "creation_method": "pd.DataFrame",
+      "flow": "Contains prepared test features from the original test set."
+    },
+    {
+      "variable_name": "loss",
+      "creation_method": "List Initialization",
+      "flow": "Used to track MSE for training iterations, plotted at the end."
+    },
+    {
+      "variable_name": "trees",
+      "creation_method": "List Initialization",
+      "flow": "Holds trained decision trees used to predict residuals for improvement in predictions."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "DecisionTreeRegressor",
+      "input_features": "x1, x2, x3",
+      "target_variable": "Residuals",
+      "hyperparameters": {
+        "max_depth": 1,
+        "random_state": 42
+      }
+    }
+  ]
+}

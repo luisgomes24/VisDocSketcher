@@ -1,0 +1,53 @@
+{
+  "data_sources": [
+    { 
+      "file_path": "../input/ballon-dor-2021-images",
+      "description": "Contains images for classifying players based on their performance."
+    }
+  ],
+  "data_variables": [
+    { 
+      "variable_name": "dls",
+      "description": "DataLoader containing training and validation sets for image classification."
+    },
+    { 
+      "variable_name": "learn",
+      "description": "Learner object encapsulating the model architecture, data, and training methods."
+    },
+    { 
+      "variable_name": "interp",
+      "description": "Interpretation object for visualizing the model's performance, losses, and predictions."
+    }
+  ],
+  "data_flow": [
+    { 
+      "variable_name": "dls",
+      "creation": "Created using the get_dls function to load images and labels.",
+      "flow": "Used to create the Learner object 'learn'."
+    },
+    { 
+      "variable_name": "learn",
+      "creation": "Created using cnn_learner with the model architecture ResNet34 and the data loaders 'dls'.",
+      "flow": "Fit to the model, showing results, and predictions. Also saved as a model file 'model.pkl'."
+    },
+    { 
+      "variable_name": "interp",
+      "creation": "Created using Interpretation.from_learner with the Learner object 'learn'.",
+      "flow": "Used to visualize the model's performance and to plot top losses."
+    }
+  ],
+  "models": [
+    { 
+      "model_type": "Convolutional Neural Network",
+      "architecture": "ResNet34",
+      "input_features": "Images from the dataset.",
+      "target_variable": "Player category.",
+      "hyperparameters": {
+        "batch_size": 16,
+        "image_size": [128, 224],
+        "epochs": [10, 5],
+        "learning_rate": [1e-3]
+      }
+    }
+  ]
+}

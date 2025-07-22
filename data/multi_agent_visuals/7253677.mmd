@@ -1,0 +1,18 @@
+flowchart TD
+
+%% Node for the data source
+A["<img src='icons/file.svg' width=100 height=100/> <br/> Weather Data in India from 1901 to 2017.csv"] %% CSV data source
+
+%% Node for loading data into DataFrame
+B["<img src='icons/table.svg' width=100 height=100/> <br/> df1"] %% DataFrame variable df1
+
+%% Nodes for data analysis steps
+C["<img src='icons/column_split.svg' width=100 height=100/> <br/> plotPerColumnDistribution  <br/> <img src='dummy_plots/hist_template.svg'/> "] %% Function to plot column distribution
+D["<img src='icons/column_split.svg' width=100 height=100/> <br/> plotCorrelationMatrix <br/> <img src='dummy_plots/scatter_plot_template.svg'/> "] %% Function to plot correlation matrix
+E["<img src='icons/column_split.svg' width=100 height=100/> <br/> plotScatterMatrix <br/> <img src='dummy_plots/boxplot_template.svg'/> "] %% Function to plot scatter matrix
+
+%% Data flow connections
+A -->|load data| B
+B -->|used for analysis| C
+B -->|used for analysis| D
+B -->|used for analysis| E

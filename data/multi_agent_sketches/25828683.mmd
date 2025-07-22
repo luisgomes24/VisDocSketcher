@@ -1,0 +1,11 @@
+flowchart TD
+    A[tesla_stocks.csv] %% This node represents the data source CSV file
+    A --> B[df] %% Represents loading CSV into DataFrame
+    B --> C[stocks_year] %% Data is grouped by year for mean stock prices
+    B --> D[stocks_month] %% Data is grouped by month for mean stock prices
+    B --> E[open_close] %% Data selection for open, close prices and changes
+    E --> F[open_close_2020] %% Filtered data for the year 2020
+    C --> G[Plotting yearly stock prices] %% Visualization of yearly data
+    D --> H[Plotting monthly stock prices] %% Visualization of monthly data
+    E --> I[Plotting Open vs Close price changes] %% Visualization for open vs close comparisons
+    F --> J[Plotting Open vs Close 2020] %% Visualization for 2020 open vs close

@@ -1,0 +1,11 @@
+flowchart TD
+    A["📁 Data Load <img src='file.svg'/>"] --> B["📊 Correlation Check"]
+    B --> C["📊 Data Preparation"]
+    C --> D["🔍 Analyze Cutoff Threshold"]
+    D --> E["📊 Mean Stacking"]
+    E --> F["📊 Median Stacking"]
+    F --> G["📊 PushOut + Median Stacking"]
+    G --> H["📊 MinMax + Mean Stacking"]
+    H --> I["📊 MinMax + Median Stacking"]
+    I --> J["📊 MinMax + BestBase Stacking"]
+    J --> K["📈 Final Evaluation"]

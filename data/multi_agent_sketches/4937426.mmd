@@ -1,0 +1,9 @@
+flowchart TD
+    A[funda_train.csv] -->|Read 1000 rows using pd.read_csv| B[df1]
+
+    %% df1: DataFrame containing a sample of 1000 rows from funda_train.csv
+    B -->|Used for visualization| C[Distribution Plots]
+    B -->|Used for visualization| D[Correlation Matrix]
+    B -->|Used for visualization| E[Scatter Matrix]
+
+    %% No ML models were used in this notebook

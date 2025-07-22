@@ -1,0 +1,28 @@
+```mermaid
+flowchart TD
+
+%% Data Sources
+A["/online_retail_final.csv/"]:::dataSource
+
+%% Data Variables
+B["df"]:::dataVariable
+C["customer_price"]:::dataVariable
+D["item_price"]:::dataVariable
+E["top_customers"]:::dataVariable
+F["products_for_top_customers"]:::dataVariable
+G["products_for_other_customers"]:::dataVariable
+
+%% Data Source to Variable
+A -->|Read CSV| B
+
+%% Data Flow
+B -->|Prepare Pareto Data (Customer)| C
+B -->|Prepare Pareto Data (Product)| D
+C -->|Identify Top Customers| E
+E -->|List Products for Top Customers| F
+E -->|List Products for Other Customers| G
+
+%% Classes Definitions
+classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+classDef dataVariable fill:#bbf,stroke:#f66,stroke-width:2px;
+```

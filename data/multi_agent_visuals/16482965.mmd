@@ -1,0 +1,9 @@
+graph TD;
+  A["<img src='icons/file.svg' width=100 height=100/> <br/> Input Data"] --> B["<img src='icons/database.svg' width=100 height=100/> <br/> Data Source"];
+  B --> |"Feature Selection"| C["<img src='dummy_plots/barplot_template.svg'/> <br/> Selected Features"];
+  C --> D["<img src='icons/brain.svg' width=100 height=100/> <br/> ML Model"];
+  D --> |"Training"| E["<img src='icons/table.svg' width=100 height=100/> <br/> Training Data"];
+  D --> |"Evaluation"| F["<img src='icons/column_split.svg' width=100 height=100/> <br/> Evaluated Metrics"];
+  D --> |"Testing"| G["<img src='icons/row_split.svg' width=100 height=100/> <br/> Test Data"];
+  G --> H["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> Model Predictions"];
+  F --> I["<img src='dummy_plots/hist_template.svg'/> <br/> Evaluation Results"];

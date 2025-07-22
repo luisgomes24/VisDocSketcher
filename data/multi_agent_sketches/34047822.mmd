@@ -1,0 +1,36 @@
+flowchart TD
+    %% Data Sources
+    DS1["combined_data_1.txt"]:::dataSource
+    DS2["combined_data_2.txt"]:::dataSource
+    DS3["combined_data_3.txt"]:::dataSource
+    DS4["combined_data_4.txt"]:::dataSource
+    DS5["probe.txt"]:::dataSource
+
+    %% Data Processing Nodes
+    P1["pd.concat([df1, df2, df3, df4])<br/>combined_data"]:::dataVariable
+    P2["pd.read_csv(probe.txt)<br/>probe"]:::dataVariable
+    P3["average_ratings<br/>Calculate average movie ratings"]:::dataVariable
+    P4["ratings_per_movie<br/>Calculate count of ratings per movie"]:::dataVariable
+
+    %% Data Source Links
+    DS1 -->|Read & Combine| P1
+    DS2 -->|Read & Combine| P1
+    DS3 -->|Read & Combine| P1
+    DS4 -->|Read & Combine| P1
+    DS5 -->|Read| P2
+
+    %% Data Flow
+    P1 -->|Group & Average| P3
+    P1 -->|Group & Count| P4
+    
+    %% Styling
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataVariable fill:#bbf,stroke:#333,stroke-width:2px;
+
+    %% Comments
+    %% DS1, DS2, DS3, DS4 - Individual files containing Netflix rating data
+    %% DS5 - Probe file for user ids
+    %% P1 - Combined Data from text files
+    %% P2 - Data processed from probe.txt
+    %% P3 - Computed average ratings per movie
+    %% P4 - Count of ratings per movie

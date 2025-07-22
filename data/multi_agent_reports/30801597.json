@@ -1,0 +1,76 @@
+{
+  "data_sources": [
+    {
+      "file": "../input/wine-reviews/winemag-data-130k-v2.csv",
+      "description": "Dataset containing wine reviews, including attributes such as taster names, points, prices, and wine varieties."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "reviews",
+      "description": "DataFrame containing the loaded wine reviews data."
+    },
+    {
+      "name": "reviews_written",
+      "description": "Series counting the number of reviews written by each taster."
+    },
+    {
+      "name": "best_rating_per_price",
+      "description": "Series mapping wine prices to the maximum rating given to wines at that price."
+    },
+    {
+      "name": "price_extremes",
+      "description": "DataFrame showing the minimum and maximum prices for each wine variety."
+    },
+    {
+      "name": "sorted_varieties",
+      "description": "DataFrame containing wine varieties sorted by minimum and maximum prices."
+    },
+    {
+      "name": "reviewer_mean_ratings",
+      "description": "Series indicating the average review score given by each wine reviewer."
+    },
+    {
+      "name": "country_variety_counts",
+      "description": "Series indicating counts of varieties for each country, indexed by country and variety."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "reviews",
+      "creation_method": "pd.read_csv",
+      "flow": "Used as the primary data source throughout the notebook for grouping and analysis."
+    },
+    {
+      "variable": "reviews_written",
+      "creation_method": "reviews.groupby('taster_twitter_handle').taster_twitter_handle.count()",
+      "flow": "Checked using q1.check() and provides insight into reviewer activity."
+    },
+    {
+      "variable": "best_rating_per_price",
+      "creation_method": "reviews.groupby('price')['points'].max().sort_index()",
+      "flow": "Checked using q2.check() and highlights the best wines by price."
+    },
+    {
+      "variable": "price_extremes",
+      "creation_method": "reviews.groupby('variety').price.agg([min, max])",
+      "flow": "Checked using q3.check() and used for further analysis."
+    },
+    {
+      "variable": "sorted_varieties",
+      "creation_method": "price_extremes.sort_values(by=['min', 'max'], ascending=False)",
+      "flow": "Checked using q4.check() and shows the most expensive varieties."
+    },
+    {
+      "variable": "reviewer_mean_ratings",
+      "creation_method": "reviews.groupby('taster_name').points.mean()",
+      "flow": "Checked using q5.check() and summarizes reviewer performance."
+    },
+    {
+      "variable": "country_variety_counts",
+      "creation_method": "reviews.groupby(['country', 'variety']).size().sort_values(ascending=False)",
+      "flow": "Checked using q6.check() to identify common wine types by country."
+    }
+  ],
+  "models": []
+}

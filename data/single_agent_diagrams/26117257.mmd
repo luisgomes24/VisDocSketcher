@@ -1,0 +1,15 @@
+graph TD;
+    A["📁 Load Image with OpenCV <img src='dummy_plots/boxplot_template.svg'/> <br/>"] --> B["🎨 Convert to RGB"];
+    B --> C["📊 Visualize Image with Matplotlib"];
+    
+    D["📁 Load Image with Torchvision <img src='dummy_plots/boxplot_template.svg'/> <br/>"] --> E["🎨 Convert to Tensor"];
+    
+    F["📁 Load Image with Kornia <img src='dummy_plots/boxplot_template.svg'/> <br/>"] --> G["🎨 Convert to Tensor"];
+    G --> H["🎨 Convert BGR to RGB"];
+    
+    C --> I["📊 Visualize Original and Transformed Images"];
+    E --> I;
+    H --> I;
+
+    A --> D;
+    D --> F;

@@ -1,0 +1,69 @@
+{
+"data_sources": [
+    {
+        "file": "https://raw.githubusercontent.com/GSri30/Datasets/main/NarrativeArc/Intent-Classification-Bert/train.csv",
+        "description": "Training data for intent classification"
+    },
+    {
+        "file": "https://raw.githubusercontent.com/GSri30/Datasets/main/NarrativeArc/Intent-Classification-Bert/valid.csv",
+        "description": "Validation data for intent classification"
+    },
+    {
+        "file": "https://raw.githubusercontent.com/GSri30/Datasets/main/NarrativeArc/Intent-Classification-Bert/test.csv",
+        "description": "Testing data for intent classification"
+    }
+],
+"data_variables": [
+    {
+        "variable_name": "train_data",
+        "description": "DataFrame containing the training data"
+    },
+    {
+        "variable_name": "val_data",
+        "description": "DataFrame containing the validation data"
+    },
+    {
+        "variable_name": "labels",
+        "description": "Dictionary mapping intent strings to numeric labels"
+    },
+    {
+        "variable_name": "Dataset",
+        "description": "Custom dataset class for handling inputs for the model"
+    }
+],
+"data_flow": [
+    {
+        "variable": "train_data",
+        "created_by": "pd.read_csv",
+        "used_in": "Used in training model"
+    },
+    {
+        "variable": "val_data",
+        "created_by": "pd.read_csv",
+        "used_in": "Used in validation of model"
+    },
+    {
+        "variable": "labels",
+        "created_by": "Iteration over unique intents in train_data",
+        "used_in": "To map target variable of datasets"
+    },
+    {
+        "variable": "Dataset",
+        "created_by": "Custom class defined",
+        "used_in": "Used to fetch and prepare data in DataLoader for training"
+    }
+],
+"models": [
+    {
+        "model_type": "BertClassifier",
+        "input_features": "Tokenized text",
+        "target_variable": "Intent labels",
+        "hyperparameters": {
+            "dropout": 0.5,
+            "epochs": 15,
+            "learning_rate": 2e-5,
+            "batch_size": 8
+        }
+    }
+]
+}

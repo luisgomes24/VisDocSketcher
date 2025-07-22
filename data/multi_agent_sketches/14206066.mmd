@@ -1,0 +1,40 @@
+flowchart TD
+  %% Data Sources
+  A[Training Images] -->|Use for Training| B[train_dataset]
+  A -->|Use for Validation| C[valid_dataset]
+  D[Test Images] -->|Use for Evaluation| E[test_dataset]
+
+  %% Model Building Stage
+  F[Build Model] -->|Create| G[model]
+  G -->|Used for Training| B
+  G -->|Used for Validation| C
+  G -->|Used for Evaluation| E
+
+  %% Model Training
+  B -->|Train| H[Sequential Model]
+  C -->|Validate| H
+  H -->|Produces| I[history]
+
+  %% Model Evaluation
+  E -->|Evaluate| H
+
+  %% Result Visualization
+  I -->|Visualize Results| J[Result Visualization]
+
+  %% Nodes description
+  A:::dataset
+  B:::datavar
+  C:::datavar
+  D:::dataset
+  E:::datavar
+  F:::process
+  G:::component
+  H:::model
+  I:::datavar
+  J:::process
+
+  classDef dataset fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef datavar fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef model fill:#afa,stroke:#333,stroke-width:2px;
+  classDef component fill:#fac,stroke:#333,stroke-width:2px;

@@ -1,0 +1,12 @@
+graph TD
+  A["📁 Load Data <img src='file.svg'/>"] --> B["🧹 Preprocess Data"]
+  B --> C["📊 Visualize Data <img src='scatter_plot_template.svg'/>"]
+  C --> D["🧠 Train Logistic Regression Model"]
+  D --> E["📈 Evaluate Model <img src='barplot_template.svg'/>"]
+  E --> F["📊 Visualize Results <img src='lineplot_template.svg'/>"]
+  
+  subgraph "Modeling Steps"
+    D --> D1["⚙️ Implement Logistic Regression"]
+    D --> D2["✍️ Define Loss Function"]
+    D --> D3["🔄 Perform Gradient Descent"]
+  end

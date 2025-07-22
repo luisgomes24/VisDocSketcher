@@ -1,0 +1,29 @@
+flowchart TD
+    %% Data Sources
+    A["<img src='icons/file.svg' width=100 height=100/> <br/> train.csv"] -->|Read CSV| B["<img src='icons/table.svg' width=100 height=100/> <br/> df"]
+    %% Data Preparation
+    B -->|Slicing| C["<img src='icons/column_split.svg' width=100 height=100/> <br/> train"]
+    B -->|Slicing| D["<img src='icons/column_split.svg' width=100 height=100/> <br/> test"]
+    C --> E["train_y"]
+    C --> F["train_X"]
+    D --> G["test_y"]
+    D --> H["test_X"]
+    B -->|Prepare Data| I["train_keras"]
+    B -->|Prepare Data| J["test_keras"]
+    %% Model Creation
+    K["<img src='icons/brain.svg' width=100 height=100/> <br/> Keras Model"]
+    K -->|Fit Model| I
+    K -->|Predict Model| J
+    %% Model Training and Prediction
+    I -->|Train| L["<img src='dummy_plots/barplot_template.svg'/> <br/> model_fit"]
+    J -->|Predict| M["<img src='dummy_plots/scatter_plot_template.svg'/> <br/> model_predict"]
+    L --> N["Model Output"]
+    M --> O["Predictions"]
+    
+    %% Node Descriptions
+    classDef dataNode fill:#87CEEB,stroke:#333,stroke-width:2px;
+    classDef modelNode fill:#C6F4D6,stroke:#333,stroke-width:2px;
+    classDef outputNode fill:#F2C464,stroke:#333,stroke-width:2px;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O dataNode;
+    class K modelNode;
+    class L,M outputNode;

@@ -1,0 +1,7 @@
+flowchart TD
+    %% Node for data source imdb_movie_data.csv
+    A["imdb_movie_data.csv"] --> |"Load data into DataFrame df1"| B["df1"]
+    %% Node for exploratory data analysis and plotting
+    B --> |"Exploratory Data Analysis and plotting"| C["EDA & Plotting"]
+    %% EDA and Plotting Usage
+    C --> |"Data Distributions, Correlations, Scatter Matrices"| D["Visual Analysis"]

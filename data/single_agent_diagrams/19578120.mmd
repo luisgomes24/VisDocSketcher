@@ -1,0 +1,15 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg' /> <br/> df = pd.read_csv(...)"] --> B["🔍 Explore Data <img src='table.svg' /> <br/> df.head()"]
+    B --> C["📈 Setup Pareto Analysis"]
+    C --> D["🧐 Prepare Pareto Data <img src='brain.svg' />"]
+    D --> E["📊 Create Pareto Chart for Customers"]
+    E --> F["📊 Create Pareto Chart for Products"]
+    F --> G["📈 Analyze Results"]
+    G --> H["🔍 Identify Top Customers & Products"]
+    
+    C --> D["🧐 Prepare Pareto Data <img src='brain.svg' />"]
+    D --> E1["📊 Customers Pareto Chart <img src='barplot_template.svg' />"]
+    D --> F1["📊 Products Pareto Chart <img src='barplot_template.svg' />"]
+    
+    E1 --> G
+    F1 --> G

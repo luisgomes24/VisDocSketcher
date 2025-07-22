@@ -1,0 +1,9 @@
+flowchart TD
+    A["📂 Load Data <img src='file.svg'/> <br/> data = pd.read_csv()"] --> B["🛠️ Preprocess Data <img src='column_split.svg'/> <br/> data['Date'] = pd.to_datetime()"]
+    B --> C["📊 Visualize Average Humidity <img src='dummy_plots/lineplot_template.svg'/> <br/> year_humi.plot()"]
+    C --> D["📊 Visualize Average Heat <img src='dummy_plots/lineplot_template.svg'/> <br/> year_heat.plot()"]
+    D --> E["📊 Visualize Average Rain <img src='dummy_plots/lineplot_template.svg'/> <br/> year_rain.plot()"]
+    E --> F["📊 Stripplot Heat <img src='dummy_plots/scatter_plot_template.svg'/> <br/> sns.stripplot()"]
+    F --> G["🗓️ Weather Calendar Heatmaps <img src='dummy_plots/heatmap_template.svg'/> <br/> weather_calendar()"]
+    G --> H["🗓️ Weather Calendar Rain <img src='dummy_plots/heatmap_template.svg'/> <br/> weather_calendar()"]
+    H --> I["🗓️ Weather Calendar Fog <img src='dummy_plots/heatmap_template.svg'/> <br/> weather_calendar()"]

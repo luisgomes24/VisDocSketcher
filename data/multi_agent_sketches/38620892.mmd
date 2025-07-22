@@ -1,0 +1,21 @@
+%% Mermaid.js Diagram of Jupyter Notebook Workflow
+%% This diagram represents the data flow and relationships between variables
+
+flowchart TD
+    %% Time Variable
+    t["t: Time values"] -->|"Calculate y"| y
+    t -->|"Plot variable"| PI["Plot t vs. y"]
+    
+    %% Gravitational Constant
+    g["g: Gravitational constant (9.81)"] -->|"Calculate y"| y
+    
+    %% Vertical Position
+    y["y: Vertical position as a function of t"] -->|"Dependent on t, g"| PI["Plot t vs. y"]
+
+    %% Random Data
+    data["data: Random data arrays for plot"] -->|"Scatter plotting"| SP["Scatter plot"]
+
+    %% Group Names and Values for Categorical Plotting
+    names["names: Group names"] -->|"Categorical plotting"| CP["Categorical plot"]
+    values["values: Corresponding group values"] -->|"Categorical plotting"| CP
+        

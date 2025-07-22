@@ -1,0 +1,12 @@
+```mermaid
+flowchart TD
+    %% Comment: Represents the training dataset source
+    A["TRAIN_PATH"] --> |Load data| B["train DataFrame"]
+    %% Comment: Represents the test dataset source
+    C["TEST_PATH"] --> |Load data| D["test DataFrame"]
+    
+    %% Comment: DataFrame for training data loaded for summary analysis
+    B --> |Summary Statistics| E["train skimpy.skim()"]
+    %% Comment: DataFrame for test data loaded for summary analysis
+    D --> |Summary Statistics| F["test skimpy.skim()"]
+```

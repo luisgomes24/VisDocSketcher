@@ -1,0 +1,32 @@
+flowchart TD
+    %% Data source node
+    A[Edge List CSV]:::datasource
+    %% DataFrame creation from CSV
+    A -->|Import CSV| B[df]:::dataframe
+    
+    %% Graph creation from DataFrame
+    B -->|Construct Graph| C[us_graph]:::graph
+    
+    %% Centrality calculations
+    C -->|Degree Centrality| D[most_inf]:::influence
+    C -->|Eigenvector Centrality| E[mil]:::importance
+    C -->|Betweenness Centrality| F[best_conn]:::bridging
+    
+    %% Subgraphs creation
+    C -->|BFS Subgraphs| G[group1, group2, group3]:::subgraphs
+    
+    %% Output actions
+    D -->|Print Results| H[Output Influential Nodes]:::output
+    E -->|Print Results| I[Output Important Nodes]:::output
+    F -->|Print Results| J[Output Bridging Nodes]:::output
+    G -->|Plot Subgraphs| K[Plot Network Subgraphs]:::plot
+
+    classDef datasource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef dataframe fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef graph fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef influence fill:#fbf,stroke:#333,stroke-width:2px;
+    classDef importance fill:#ffc,stroke:#333,stroke-width:2px;
+    classDef bridging fill:#cfc,stroke:#333,stroke-width:2px;
+    classDef subgraphs fill:#fc9,stroke:#333,stroke-width:2px;
+    classDef output fill:#ff9,stroke:#333,stroke-width:2px;
+    classDef plot fill:#9ff,stroke:#333,stroke-width:2px;

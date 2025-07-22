@@ -1,0 +1,23 @@
+flowchart TD
+    A["📥 Load Data <img src='file.svg' /> <br/> train_data, test_data"] --> B["🔍 Explore Data <img src='table.svg' />"]
+    B --> C["🔄 Preprocess Data"]
+    C --> D["📊 Visualize Data"]
+    D --> E["🤖 Model Training"]
+    E --> F["✅ Model Evaluation"]
+    C --> F
+
+    C --> |"🧽 Handle Missing Values"| G["💾 Clean Data"]
+    G --> |"📊 Visualize Embarked Distribution"| D1["📊 Embarked Visualization <img src='barplot_template.svg' />"]
+    D1 --> H["📊 Fare Distribution <img src='hist_template.svg' />"]
+    H --> I["📊 Age Distribution <img src='hist_template.svg' />"]
+    I --> J["📊 Family Status <img src='barplot_template.svg' />"]
+    J --> K["📊 Sex Distribution <img src='barplot_template.svg' />"]
+    K --> L["📊 Pclass Distribution <img src='barplot_template.svg' />"]
+
+    E --> |"🧠 Train Logistic Regression"| M["Logistic Regression Model"]
+    E --> |"🧠 Train SVM"| N["Support Vector Machine Model"]
+    E --> |"🧠 Train Random Forest"| O["Random Forest Model"]
+    E --> |"🧠 Train KNN"| P["K-Nearest Neighbors Model"]
+    E --> |"🧠 Train Naive Bayes"| Q["Naive Bayes Model"]
+
+    F --> R["📈 Generate Submission <img src='file.svg' />"]

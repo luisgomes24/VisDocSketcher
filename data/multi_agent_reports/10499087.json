@@ -1,0 +1,39 @@
+{
+  "data_sources": [
+    {
+      "file": "/kaggle/input/sensor_test.csv",
+      "description": "Contains test sensor data for analysis"
+    },
+    {
+      "file": "/kaggle/input/sensor_train.csv",
+      "description": "Contains training sensor data for analysis"
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame holding the first 1000 rows of sensor_test.csv"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame holding the first 1000 rows of sensor_train.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in visualizations: plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+      ]
+    },
+    {
+      "variable": "df2",
+      "creation_method": "pd.read_csv",
+      "flow": [
+        "Used in visualizations: plotPerColumnDistribution, plotCorrelationMatrix, plotScatterMatrix"
+      ]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,79 @@
+{
+  "data_sources": [
+    {
+      "file": "train.csv",
+      "description": "Contains training data with labels, some of which are NaN."
+    },
+    {
+      "file": "unicode_translation.csv",
+      "description": "Maps unicode character codes to their corresponding string representations."
+    },
+    {
+      "folder": "train_images",
+      "description": "Directory for training images."
+    },
+    {
+      "folder": "test_images",
+      "description": "Directory for test images."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df_train",
+      "description": "DataFrame containing training data from train.csv."
+    },
+    {
+      "name": "unicode_trans",
+      "description": "DataFrame containing unicode translations from unicode_translation.csv."
+    },
+    {
+      "name": "unicode_map",
+      "description": "Dictionary mapping unicode character codes to their respective strings."
+    },
+    {
+      "name": "nan_df",
+      "description": "DataFrame containing rows from df_train where 'labels' are NaN."
+    },
+    {
+      "name": "labels",
+      "description": "List of unique labels extracted from df_train."
+    },
+    {
+      "name": "unicode_trans_only_labels",
+      "description": "Set containing labels that are in unicode_translation.csv but not in df_train."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df_train",
+      "creation": "Created using pd.read_csv() to load train.csv.",
+      "flow": "Used for analyzing NaN values and extracting labels."
+    },
+    {
+      "variable": "unicode_trans",
+      "creation": "Created using pd.read_csv() to load unicode_translation.csv.",
+      "flow": "Used for mapping unicode character codes and checking label uniqueness."
+    },
+    {
+      "variable": "unicode_map",
+      "creation": "Dictionary created from unicode_trans DataFrame's values.",
+      "flow": "Used for converting unicode values to strings."
+    },
+    {
+      "variable": "nan_df",
+      "creation": "Created by filtering df_train for NaN values in labels.",
+      "flow": "Used for inspecting rows with missing labels."
+    },
+    {
+      "variable": "labels",
+      "creation": "Populated by splitting the 'labels' column in df_train.",
+      "flow": "Used for counting and visualizing label occurrences."
+    },
+    {
+      "variable": "unicode_trans_only_labels",
+      "creation": "Calculated as the difference between unicode_trans and labels.",
+      "flow": "Used to identify discrepancies in label translations."
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,6 @@
+flowchart TD
+    A["📥 Load Data\n<img src='icons/file.svg' /> <br/> Read CSV"] --> B["🧹 Preprocess Data\n<img src='icons/column_split.svg' /> <br/> Crop & Resize Images"]
+    B --> C["🧠 Model Definition\n<img src='icons/brain.svg' /> <br/> Define Custom Neural Network"]
+    C --> D["📦 Load Model\n<img src='icons/brain.svg' /> <br/> Load Pre-trained Weights"]
+    D --> E["🔍 Predict\n<img src='icons/table.svg' /> <br/> Iterate Through Test Set"]
+    E --> F["📋 Save Results\n<img src='icons/file.svg' /> <br/> Save Predictions to CSV"]

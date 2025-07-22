@@ -1,0 +1,28 @@
+%% Workflow Diagram for Jupyter Notebook 11218861
+flowchart TD
+    %% Data Sources
+    A["../input/recipes/briyani"] -->|"Images of Briyani"| B[Load Images]
+    A2["../input/recipes/burger"] -->|"Images of Burger"| B
+    A3["../input/recipes/dosa"] -->|"Images of Dosa"| B
+    A4["../input/recipes/idly"] -->|"Images of Idly"| B
+    A5["../input/recipes/pizza"] -->|"Images of Pizza"| B
+
+    %% Data Preparation
+    B -->|"Image Data"| C[X]
+    C -->|"Train-Test Split"| D[x_train & x_test]
+    Y["Labels Z"] -->|"Encode & Split"| E[y_train & y_test]
+
+    %% Model Training
+    D -->|"Training Data"| F["Train CNN Model"]
+    E -->|"Label Data"| F
+    F -->|"Model Output"| G[model]
+
+    %% Model Evaluation
+    G -->|"Evaluate Model with x_test & y_test"| H[history]
+    H -->|"Analyze Training History"| I
+    
+    %% Notes
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process fill:#bbf,stroke:#333,stroke-width:2px;
+    class A,A2,A3,A4,A5 dataSource;
+    class B,C,D,E,F,G,H,I process;

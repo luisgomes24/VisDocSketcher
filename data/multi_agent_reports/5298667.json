@@ -1,0 +1,54 @@
+{
+  "data_sources": [
+    {
+      "file_name": "submission-174.csv",
+      "description": "Contains data related to submissions, previewing the first 1000 rows."
+    },
+    {
+      "file_name": "submission-193.csv",
+      "description": "Contains data related to submissions, previewing the first 1000 rows."
+    },
+    {
+      "file_name": "submission-201.csv",
+      "description": "Contains data related to submissions, previewing the first 1000 rows."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "df1",
+      "description": "DataFrame for 'submission-174.csv', containing the first 1000 rows."
+    },
+    {
+      "name": "df2",
+      "description": "DataFrame for 'submission-193.csv', containing the first 1000 rows."
+    },
+    {
+      "name": "df3",
+      "description": "DataFrame for 'submission-201.csv', containing the first 1000 rows."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "df1",
+      "creation": "Created by reading 'submission-174.csv' with pd.read_csv.",
+      "flow": [
+        "Used in plotting functions (plotPerColumnDistribution)."
+      ]
+    },
+    {
+      "variable": "df2",
+      "creation": "Created by reading 'submission-193.csv' with pd.read_csv.",
+      "flow": [
+        "Used in plotting functions (plotPerColumnDistribution)."
+      ]
+    },
+    {
+      "variable": "df3",
+      "creation": "Created by reading 'submission-201.csv' with pd.read_csv.",
+      "flow": [
+        "Used in plotting functions (plotPerColumnDistribution)."
+      ]
+    }
+  ],
+  "models": []
+}

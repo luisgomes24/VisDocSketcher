@@ -1,0 +1,48 @@
+{
+  "data_sources": [
+    {
+      "file_name": "age-bias-wordparts.csv",
+      "description": "Contains data about age bias and word parts."
+    },
+    {
+      "file_name": "Female-Bias-wordparts.csv",
+      "description": "Contains data regarding female bias and associated word parts."
+    },
+    {
+      "file_name": "job_descriptions.csv",
+      "description": "Contains job descriptions that might relate to bias analysis."
+    }
+  ],
+  "data_variables": [
+    {
+      "variable_name": "df1",
+      "description": "DataFrame containing data from age-bias-wordparts.csv"
+    },
+    {
+      "variable_name": "df2",
+      "description": "DataFrame containing data from Female-Bias-wordparts.csv"
+    },
+    {
+      "variable_name": "df3",
+      "description": "DataFrame containing data from job_descriptions.csv"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable_name": "df1",
+      "created_by": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "df1.head"]
+    },
+    {
+      "variable_name": "df2",
+      "created_by": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "df2.head"]
+    },
+    {
+      "variable_name": "df3",
+      "created_by": "pd.read_csv",
+      "flows_to": ["plotPerColumnDistribution", "df3.head"]
+    }
+  ],
+  "models": []
+}

@@ -1,0 +1,13 @@
+flowchart TD
+    %% Node for the data source
+    A[lemonade_clean.csv] -->|Load CSV| B[dat DataFrame] 
+    B -->|Descriptive Statistics| C[Statistics Report]
+    B -->|Pair Plots| D[Visualize Relationships]
+    B -->|Line Plots| E[Visualize Trends]
+    
+    %% Comments explaining each node
+    %% lemonade_clean.csv: CSV file as the data source
+    %% dat DataFrame: Loaded data from CSV
+    %% Descriptive Statistics: Generating summary statistics for the data
+    %% Pair Plots: Plotting to show relationships between variables
+    %% Line Plots: Plotting to show trends over time

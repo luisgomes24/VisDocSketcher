@@ -1,0 +1,16 @@
+graph TD;
+A["winemag-data-130k-v2.csv"]
+B["reviews DataFrame"]
+C["review_points_mean"]
+D["review_price_mean"]
+
+A -->|"pd.read_csv()"| B
+B -->|"Calculate mean points"| C
+B -->|"Calculate mean price"| D
+C -->|"Used for normalization in reviews"| B
+D -->|"Used for normalization in reviews"| B
+
+click A href "#" "Contains wine reviews, including ratings, prices, taster names, and geographical information."
+click B href "#" "A DataFrame that holds the wine reviews data imported from the CSV file."
+click C href "#" "Mean value of the wine points (ratings) used for normalization."
+click D href "#" "Mean value of the wine prices used for normalization."

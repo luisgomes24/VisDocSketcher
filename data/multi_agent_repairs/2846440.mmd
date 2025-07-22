@@ -1,0 +1,29 @@
+```mermaid
+flowchart TD
+    subgraph "Data Sources"
+        train_labels["../input/train_labels.csv"]
+        sample_submission["../input/sample_submission.csv"]
+    end
+    subgraph "Variables"
+        df["df (DataFrame)"]
+        df_unique["df_unique (Unique Labels)"]
+        path["path (Dataset Directory)"]
+        data["data (Image and Labels)"]
+        learn["learn (Learner Object)"]
+        preds["preds (Model Predictions)"]
+        df_sub["df_sub (Submission DataFrame)"]
+        fname_cleaned["fname_cleaned (Cleaned Filenames)"]
+    end
+    train_labels --> |"read_csv"| df
+    df --> |"pd.unique"| df_unique
+    df --> |"ImageItemList.from_csv"| data
+    data --> |"create_cnn"| learn
+    learn --> |"get_preds"| preds
+    sample_submission --> |"read_csv"| df_sub
+    df_sub --> |"write submission"| fname_cleaned
+    subgraph "Model"
+        CNN["DenseNet161 CNN Model"]
+    end
+    data --> |"train with"| CNN
+    CNN --> |"evaluate, get_preds"| preds
+```

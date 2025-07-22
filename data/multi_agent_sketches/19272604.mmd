@@ -1,0 +1,41 @@
+flowchart TD
+    %% Nodes for Data Sources
+    A1["train.csv"]:::dataSource --> |"read_csv() and drop 'id'"| B1["train"]
+    A2["test.csv"]:::dataSource --> |"read_csv() and drop 'id'"| B2["test"]
+    A3["submission_sample.csv"]:::dataSource --> B3["sample_submission"]
+    A4["metadata.csv"]:::dataSource --> B4["meta"]
+
+    %% Nodes for Data Variables
+    B1 --> |"Extract features"| C1["X"]
+    B1 --> |"Extract target"| C2["y"]
+    
+    B2 --> |"Extract features"| C3["X_test"]
+    
+    %% Nodes for Metadata flow
+    B4 --> D1["cat_nom"]
+    B4 --> D2["cat_ord"]
+    B4 --> D3["num_dis"]
+    B4 --> D4["num_con"]
+
+    %% Model Training Nodes
+    C1 --> E1["RandomForestClassifier"]
+    C2 --> E1
+    C1 -.-> E2["LogisticRegression1"]
+    C2 -.-> E2
+    C1 -.-> E3["LogisticRegression2"]
+    C2 -.-> E3
+
+    %% Style Definitions
+    classDef dataSource fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef important fill:#ff9,stroke:#333,stroke-width:2px;
+
+    %% Commentary
+    click A1 callback "This node represents the source of training data required for building the ML models."
+    click A2 callback "This serves as the source of testing data, which we will use to evaluate model performance."
+    click C1 callback "Features used in training the models are extracted here."
+    click C2 callback "Target variable extracted for model training."
+    click E1 callback "RandomForestClassifier is a tree-based ensemble model used for classification based on majority voting scheme."
+    click E2 callback "Logistic Regression with L2 regularization for classification tasks."
+    click E3 callback "Logistic Regression with L1 regularization and liblinear solver.
+```
+

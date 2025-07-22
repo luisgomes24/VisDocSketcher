@@ -1,0 +1,15 @@
+flowchart TD
+    %% Data Sources
+    A["/apps.csv"]:::source -->|Load 1000 rows| B[df1]
+    C["/user_reviews.csv"]:::source -->|Load 1000 rows| D[df2]
+
+    %% Data Usage
+    B -->|Used in| E[plotPerColumnDistribution]
+    B -->|Used in| F[plotCorrelationMatrix]
+    B -->|Used in| G[plotScatterMatrix]
+    
+    D -->|Used in| E
+    D -->|Used in| F
+    D -->|Used in| G
+
+    classDef source fill:#f96,stroke:#333,stroke-width:2px;

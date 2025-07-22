@@ -1,0 +1,29 @@
+flowchart TD
+    A["ChineseMNIST.csv"] -->|"Load Data"| B["dataset"]
+    B -->|"Sample 80%"| C["data"]
+    B -->|"Extract Unseen Data"| D["data_unseen"]
+    C -->|"Select Numeric Features"| E["numeric_features"]
+    E -->|"PyCaret Setup"| F["Model Initialization"]
+    C -->|"PyCaret Setup"| F
+    F -->|"Train Models"| G["PyCaret Model Training"]  
+    D -->|"Prediction"| H["Model Evaluation"] 
+    
+    %% Node Comments
+    %% A: This node represents the CSV data source containing Chinese handwritten digits.
+    %% B: This node is the DataFrame that holds the entire dataset loaded from the CSV.
+    %% C: This node represents the 80% sample of the dataset used for training models.
+    %% D: This node represents the 20% of data reserved for testing model predictions.
+    %% E: This node lists extracted numeric features used in modeling.
+    %% F: This node represents the setup process in PyCaret where data preprocessing is configured.
+    %% G: This node represents the stage where PyCaret trains various models.
+    %% H: This node represents the final evaluation and prediction using the trained models on unseen data.
+    
+    %% Transition Comments
+    %% A to B: Load the dataset from CSV into a DataFrame.
+    %% B to C: Sample 80% of the data for model training.
+    %% B to D: Extract remaining 20% of the data for model evaluation.
+    %% C to E: Select and prepare numeric features for input to models.
+    %% E to F: Initialize PyCaret's setup with selected features.
+    %% C to F: Feed sampled training data into the PyCaret setup.
+    %% F to G: Train models using the configured setup.
+    %% D to H: Evaluate model performance on unseen data.

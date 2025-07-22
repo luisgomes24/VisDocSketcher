@@ -1,0 +1,24 @@
+```mermaid
+flowchart TD
+    A1["Data Source 1"]
+    A2["Data Source 2"]
+    A3["Data Source 3"]
+    B1["DataFrame 1"]
+    B2["Plot Distribution"]
+    B3["Head Displayed"]
+    C1["DataFrame 2"]
+    C2["Plot Distribution"]
+    C3["Head Displayed"]
+    D1["DataFrame 3"]
+    D2["Plot Distribution"]
+    D3["Head Displayed"]
+    A1 -->|"pd.read_csv"| B1
+    A1 --->|"Visualized"| B2
+    A1 -->|"Dataframe Head"| B3
+    A2 -->|"pd.read_csv"| C1
+    A2 --->|"Visualized"| C2
+    A2 -->|"Dataframe Head"| C3
+    A3 -->|"pd.read_csv"| D1
+    A3 --->|"Visualized"| D2
+    A3 -->|"Dataframe Head"| D3
+```

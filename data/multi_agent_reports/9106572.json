@@ -1,0 +1,124 @@
+{
+  "data_sources": [
+    {
+      "file_name": "train_scores.csv",
+      "description": "Contains training scores along with IDs."
+    },
+    {
+      "file_name": "reveal_ID_site2.csv",
+      "description": "Provides reveal IDs."
+    },
+    {
+      "file_name": "ICN_numbers.csv",
+      "description": "Includes ICN numbers."
+    },
+    {
+      "file_name": "loading.csv",
+      "description": "Holds loading data associated with each ID."
+    },
+    {
+      "file_name": "fnc.csv",
+      "description": "Contains additional function-related features for modeling."
+    },
+    {
+      "file_name": "sample_submission.csv",
+      "description": "Template for submitting predictions."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "train",
+      "description": "DataFrame containing training data after loading and preprocessing."
+    },
+    {
+      "name": "reveal_ID",
+      "description": "DataFrame for reveal IDs."
+    },
+    {
+      "name": "ICN_numbers",
+      "description": "DataFrame for ICN numbers."
+    },
+    {
+      "name": "loading",
+      "description": "DataFrame for loading features."
+    },
+    {
+      "name": "fnc",
+      "description": "DataFrame for FNC features."
+    },
+    {
+      "name": "test",
+      "description": "DataFrame for test cases prepared from sample submission."
+    },
+    {
+      "name": "X_train",
+      "description": "Features for training set, excluding target and ID columns."
+    },
+    {
+      "name": "y_train",
+      "description": "Target variables for training set."
+    },
+    {
+      "name": "X_test",
+      "description": "Features for test cases prepared for predictions."
+    },
+    {
+      "name": "prediction_dict",
+      "description": "DataFrame containing predicted values from the model."
+    },
+    {
+      "name": "submission",
+      "description": "Final DataFrame for submission containing IDs and predictions."
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "train",
+      "creation": "Read from train_scores.csv and merged with loading and fnc DataFrames.",
+      "flows_to": "X_train, y_train indicated for model training."
+    },
+    {
+      "variable": "X_train",
+      "creation": "Extracted from the train DataFrame.",
+      "flows_to": "Used as input features for model training."
+    },
+    {
+      "variable": "y_train",
+      "creation": "Extracted from the train DataFrame.",
+      "flows_to": "Target variable for model training."
+    },
+    {
+      "variable": "X_test",
+      "creation": "Created from test DataFrame after merging.",
+      "flows_to": "Used for making predictions with the model."
+    },
+    {
+      "variable": "prediction_dict",
+      "creation": "Predictions made by model_1.",
+      "flows_to": "Merged into pred_df for submission preparation."
+    },
+    {
+      "variable": "submission",
+      "creation": "Merged predicted values with sample_submission.",
+      "flows_to": "Saved as a CSV file named 'submission.csv'."
+    }
+  ],
+  "models": [
+    {
+      "model_name": "Sequential Neural Network (Keras)",
+      "input_features": "X_train",
+      "target_variables": "y_train",
+      "hyperparameters": {
+        "epochs": 16,
+        "batch_size": 128,
+        "input_dim": "Number of features in X_train",
+        "n_out": "Number of target variables (columns in y_train)",
+        "layers": [
+          {"units": 2048, "activation": "relu"},
+          {"units": 2048, "activation": "relu"},
+          {"units": "n_out", "activation": "relu"}
+        ]
+      }
+    }
+  ]
+}

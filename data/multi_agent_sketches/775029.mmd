@@ -1,0 +1,20 @@
+%% Diagram for Jupyter Notebook 775029
+%% This diagram shows the workflow of data handling and processing involved in the notebook.
+
+flowchart TD
+
+    %% Data Sources
+    A1[NFL Play by Play Data] -->|read_csv| B1((nfl_data))
+    %% A1: Node representing NFL play-by-play data source file.
+    A2[San Francisco Building Permits Data] -->|read_csv| B2((sf_permits))
+    %% A2: Node representing building permits data source file.
+
+    %% Data Processing
+    B1 --> C1{missing_values_count}
+    %% C1: Count missing values in each column of nfl_data
+    B1 --> C2[total_missing]
+    %% C2: Total missing values calculated in nfl_data
+    C1 --> C3[columns_with_na_dropped]
+    %% C3: Drop columns with any missing values in nfl_data
+    B1 --> C4[subset_nfl_data]
+    %% C4: Subset of nfl_data for specific analysis

@@ -1,0 +1,23 @@
+{
+    "data_sources": [
+        {
+            "file_name": "Weather Data in India from 1901 to 2017.csv",
+            "description": "Weather data from India spanning from 1901 to 2017"
+        }
+    ],
+    "data_variables": [
+        {
+            "variable_name": "df1",
+            "description": "DataFrame containing the weather data with 1000 rows loaded"
+        }
+    ],
+    "data_flow": [
+        {
+            "variable_name": "df1",
+            "creation_method": "pd.read_csv",
+            "file_used": "Weather Data in India from 1901 to 2017.csv",
+            "flow_destinations": ["plotPerColumnDistribution", "plotCorrelationMatrix", "plotScatterMatrix"]
+        }
+    ],
+    "models": []
+}

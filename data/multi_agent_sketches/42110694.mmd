@@ -1,0 +1,28 @@
+flowchart TD
+    %% Node representing the data source
+    A[loans_full_schema.csv] --> B
+
+    %% Node representing the data loading into a DataFrame
+    B[df] --> C
+
+    %% Placeholder for data analysis (no specific analysis details available)
+    C[Data Analysis] --> D
+
+    %% End node, showing that the process concludes with analysis
+    D[End of Data Flow]
+
+    %% Comments explaining each node
+    A:::comment1
+    B:::comment2
+    C:::comment3
+    D:::comment4
+
+    classDef comment1 fill:#f9f,stroke:#333,stroke-width:4px;
+    classDef comment2 fill:#bbf,stroke:#333,stroke-width:4px;
+    classDef comment3 fill:#bfb,stroke:#333,stroke-width:4px;
+    classDef comment4 fill:#ffb,stroke:#333,stroke-width:4px;
+    
+    %% (A) represents loading of the loan data from CSV file
+    %% (B) represents the DataFrame creation containing the dataset
+    %% (C) symbolizes the placeholder for data manipulation or analysis
+    %% (D) indicates the end of the workflow process

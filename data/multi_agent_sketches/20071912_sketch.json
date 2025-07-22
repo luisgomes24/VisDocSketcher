@@ -1,0 +1,17 @@
+{
+  "diagrams": [
+    {
+      "type": "Data Processing",
+      "description": "Shows how data is loaded, preprocessed, and visualized"
+    },
+    {
+      "type": "Model Training",
+      "description": "Highlights different models used and the workflow for training and evaluation"
+    }
+  ],
+  "features": [
+    "Heatmaps",
+    "Barplots",
+    "Regression Models"
+  ]
+}

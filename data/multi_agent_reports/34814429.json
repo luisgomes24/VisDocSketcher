@@ -1,0 +1,141 @@
+{
+  "data_sources": [
+    {
+      "file_path": "/kaggle/input/gc10detv0-single/GC10-DETv0 -single/train/crease",
+      "description": "Training images for the model, organized within directories suitable for loading by the ImageFolder structure."
+    }
+  ],
+  "data_variables": [
+    {
+      "name": "dataroot",
+      "description": "Root directory for the dataset containing training images"
+    },
+    {
+      "name": "num_workers",
+      "description": "Number of workers to load data in parallel"
+    },
+    {
+      "name": "batch_size",
+      "description": "Number of samples processed before the model is updated"
+    },
+    {
+      "name": "image_size",
+      "description": "Size to which training images will be resized"
+    },
+    {
+      "name": "nc",
+      "description": "Number of channels in the training image (1 for grayscale)"
+    },
+    {
+      "name": "nz",
+      "description": "Size of the input latent vector for the generator"
+    },
+    {
+      "name": "ngf",
+      "description": "Size of feature maps in the generator"
+    },
+    {
+      "name": "ndf",
+      "description": "Size of feature maps in the discriminator"
+    },
+    {
+      "name": "num_epochs",
+      "description": "Total number of training epochs"
+    },
+    {
+      "name": "lr",
+      "description": "Learning rate for optimizers"
+    },
+    {
+      "name": "beta1",
+      "description": "Beta hyperparameter for Adam optimizer"
+    },
+    {
+      "name": "device",
+      "description": "Device to run the model (CUDA or CPU)"
+    },
+    {
+      "name": "fixed_noise",
+      "description": "A batch of latent vectors for visualizing the generator output during training"
+    },
+    {
+      "name": "real_label",
+      "description": "Label for real images in training (1)"
+    },
+    {
+      "name": "fake_label",
+      "description": "Label for fake images in training (0)"
+    },
+    {
+      "name": "optimizerD",
+      "description": "Adam optimizer for the Discriminator"
+    },
+    {
+      "name": "optimizerG",
+      "description": "Adam optimizer for the Generator"
+    },
+    {
+      "name": "dataset",
+      "description": "Dataset of real images loaded from dataroot"
+    },
+    {
+      "name": "dataloader",
+      "description": "DataLoader for iterating through the dataset"
+    },
+    {
+      "name": "G_losses",
+      "description": "List to keep track of Generator loss during training"
+    },
+    {
+      "name": "D_losses",
+      "description": "List to keep track of Discriminator loss during training"
+    }
+  ],
+  "data_flow": [
+    {
+      "variable": "dataset",
+      "creation_method": "datasets.ImageFolder",
+      "flow": ["dataloader"]
+    },
+    {
+      "variable": "dataloader",
+      "creation_method": "DataLoader",
+      "flow": ["Training Loop"]
+    },
+    {
+      "variable": "fixed_noise",
+      "creation_method": "torch.randn",
+      "flow": ["Visualization during Training"]
+    },
+    {
+      "variable": "real_batch",
+      "creation_method": "next(iter(dataloader))",
+      "flow": ["Real and Fake Images Comparison"]
+    },
+    {
+      "variable": "img_list",
+      "creation_method": "vutils.make_grid",
+      "flow": ["Visualization of Generator Progress"]
+    }
+  ],
+  "models": [
+    {
+      "model_type": "Generator",
+      "input_features": "Latent vector (random noise)",
+      "output_features": "Generated images",
+      "hyperparameters": {
+        "ngpu": "Number of GPUs to use",
+        "architecture": "Convolutional layers definition"
+      }
+    },
+    {
+      "model_type": "Discriminator",
+      "input_features": "Real or fake images",
+      "output_features": "Probability of realness",
+      "hyperparameters": {
+        "ngpu": "Number of GPUs to use",
+        "architecture": "Convolutional layers definition"
+      }
+    }
+  ]
+}
